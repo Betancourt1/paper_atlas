@@ -1,11 +1,13 @@
 # Paper Atlas
 
 Paper Atlas is a trustworthy scientific index and interactive explainer
-platform. The repository is currently at **M0: contracts and skeleton**.
+platform. The repository contains the M0 platform contracts and the current
+reviewed-explainer slice for eight papers.
 
-This milestone proves one contract end to end: a canonical `PaperSummary`
-schema generates TypeScript and Python models, validates one fixture, is
-returned by FastAPI, and is rendered by Next.js.
+Canonical `PaperSummary` and `ExplainerDocument` schemas generate TypeScript and
+Python models, validate the editorial fixtures, are returned by FastAPI, and
+are rendered by Next.js. Reviewed explainers still await a human publication
+decision and are not labeled `Published`.
 
 ## Prerequisites
 
@@ -24,9 +26,10 @@ make dev
 
 Then open:
 
-- Web: <http://localhost:3000/papers/paper_attention_is_all_you_need>
+- Web: <http://localhost:3000/papers>
 - API health: <http://localhost:8000/health>
 - API fixture: <http://localhost:8000/v1/papers/paper_attention_is_all_you_need>
+- API explainer: <http://localhost:8000/v1/papers/paper_attention_is_all_you_need/explainer>
 - Temporal UI: <http://localhost:8080>
 - MinIO console: <http://localhost:9001>
 
@@ -54,3 +57,23 @@ boundary are documented in [`docs/agent-harness.md`](docs/agent-harness.md).
 The repository-scoped `paper-explainer` skill and custom agents are contributor
 workflows. They do not imply that the future Temporal-based production agent
 pipeline is already implemented.
+
+### Visual explanation standard
+
+Every difficult concept receives an explicit decision: reuse a permitted source
+figure, configure an artifact, create a custom static illustration, create a
+restrained explanatory animation, or use prose because no visual would help.
+There is no one-visual-per-paper quota.
+
+An illustration is necessary when removing it would force readers to mentally
+reconstruct an important relationship and materially increase cognitive load
+or misunderstanding. The form must match the relationship: process, feedback,
+architecture, hierarchy, quantitative comparison, uncertainty, evidence
+strength, spatial structure, or changing representation. Generic text boxes
+that merely repeat the exposition do not count.
+
+Every selected visual must name its pedagogical question and evidence, disclose
+its limitations, sit beside the relevant explanation, and include equivalent
+text plus appropriate mobile, keyboard, screen-reader, and reduced-motion
+behavior. Animation is reserved for concepts whose time, order, accumulation,
+feedback, or changing state cannot be explained as clearly in a static view.

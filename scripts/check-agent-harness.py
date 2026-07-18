@@ -69,6 +69,8 @@ def check_skill() -> None:
         "explainer_writer",
         "publication_reviewer",
         "Never substitute indexed metadata for an explanation",
+        "every difficult concept",
+        "Reject generic box sequences",
     )
     for phrase in required_phrases:
         if phrase not in text:
@@ -86,6 +88,15 @@ def check_routing_docs() -> None:
     for path in ("docs/agent-harness.md", ".agents/skills/paper-explainer"):
         if path not in root_agents:
             fail(f"AGENTS.md must route agents to {path}")
+
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    required_readme_phrases = (
+        "Visual explanation standard",
+        "There is no one-visual-per-paper quota",
+    )
+    for phrase in required_readme_phrases:
+        if phrase not in readme:
+            fail(f"README.md must retain {phrase!r}")
 
 
 def main() -> None:

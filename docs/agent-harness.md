@@ -91,6 +91,13 @@ silently becoming stale.
 2. Establish the exact paper version and evidence dossier.
 3. Approve, reject, or narrow claims before prose is written.
 4. Plan visuals from approved evidence.
+   - Enumerate every difficult concept; do not use a one-visual-per-paper quota.
+   - Require a visual when prose would force error-prone mental reconstruction.
+   - Match the form to the relationship: process, feedback, architecture,
+     hierarchy, quantitative comparison, uncertainty, evidence strength,
+     spatial structure, or changing representation.
+   - Record a reason when prose is the better treatment.
+   - Reject generic box sequences that only restate the prose.
 5. Draft the explanation without adding claims.
 6. Run independent publication review.
 7. Ask for the human publication decision.
@@ -111,6 +118,9 @@ description is not an explainer summary.
 - `.agents/skills/paper-explainer` provides the editorial workflow only when a
   matching task triggers it.
 - `.codex/agents/*.toml` defines role authority and read/write boundaries.
+- Visual review is concept-based: every difficult concept needs an explicit
+  treatment decision, evidence, limitations, accessibility behavior, and a
+  form that reduces cognitive load rather than decorating the page.
 - `scripts/check-agent-harness.py` validates the configuration through the
   project's locked Python environment and is part of
   `make check`.

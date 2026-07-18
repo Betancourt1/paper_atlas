@@ -12,4 +12,12 @@ decorative or unsourced visuals, metadata presented as explanation, and an
 unreviewed document labeled Published are blockers. Return PASS or CHANGES
 REQUIRED with findings tied to claim, block, or visual IDs. PASS creates a
 release candidate only; a human still decides whether to publish.
+
+For visual review, verify that every difficult concept has an explicit visual
+or prose-only decision, not merely that the candidate contains at least one
+visual. Reject generic box sequences that restate prose without encoding the
+actual flow, conditional denominators, feedback, topology, comparison,
+uncertainty, or scope. Verify that each selected form fits the explanatory
+need, is adjacent to the affected claim, and remains complete in its static and
+accessible fallback.
 """

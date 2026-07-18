@@ -50,6 +50,52 @@ Each difficult concept receives one explicit decision:
 - create a restrained explanatory animation;
 - use prose because no visual adds understanding.
 
+Do not use a fixed visual quota. The decision unit is the difficult concept,
+not the paper. A visual is necessary when removing it would force the reader to
+mentally reconstruct an important relationship and would materially increase
+cognitive load or the risk of misunderstanding. This commonly applies when:
+
+- several dependent stages determine an outcome;
+- components exchange information or affect one another;
+- state changes across time, iteration, or feedback;
+- hierarchy, nesting, branching, partitioning, or spatial structure matters;
+- quantitative meaning depends on magnitude, distribution, uncertainty, or
+  comparison;
+- the explanation moves between representations;
+- evidence, inference, contradictions, and scope boundaries must remain
+  visibly distinct;
+- a limitation applies to only one stage, measurement, or result.
+
+Match the form to the explanatory need:
+
+| Explanatory need | Preferred form |
+| --- | --- |
+| Ordered transformation | Process or pipeline diagram |
+| Feedback or repeated updating | Control-loop or state-transition diagram |
+| Components and connections | Architecture or system schematic |
+| Branching or decomposition | Decision tree, hierarchy, or partition map |
+| Change over time | Timeline, sequence diagram, or restrained animation |
+| Relative results | Bar chart, dot plot, slope chart, or small multiples |
+| Distribution and uncertainty | Distribution or interval plot |
+| Methods under shared criteria | Comparison matrix |
+| Claims with different support | Evidence matrix or claim map |
+| Spatial or geometric reasoning | Annotated geometric illustration |
+| Stepwise internal operation | Numbered mechanism walkthrough |
+| Change between representations | Parallel-view or before-and-after diagram |
+
+Use a source figure when it already answers the pedagogical question and its
+license permits reuse. Create a custom static illustration when the source
+figure is too dense, combines unrelated claims, or assumes expert context. Use
+an interactive artifact only when controls expose a meaningful comparison or
+state. Use animation only when time, order, accumulation, feedback, or changing
+state cannot be communicated as clearly in a static view.
+
+Do not add a visual when prose is already short and unambiguous, the visual
+would only repeat the prose, or the evidence cannot support the implied
+topology, scale, or causality. A generic sequence of labeled boxes is not an
+illustration merely because it validates against a visual schema. It must
+encode a real relationship that the prose alone makes harder to understand.
+
 For every proposed visual, record:
 
 - the pedagogical question it answers;
@@ -59,6 +105,12 @@ For every proposed visual, record:
 - attribution and license constraints;
 - static fallback and alt-text intent;
 - keyboard, screen-reader, mobile, and reduced-motion behavior as applicable.
+
+Place the visual adjacent to the mechanism, result, or limitation it explains.
+If the decision is prose-only, record why a visual would not reduce cognitive
+load. If animation is used, include pause or replay behavior when appropriate,
+respect reduced motion, and never make information available only through
+motion.
 
 Visuals may simplify presentation but may not invent topology, scale,
 quantities, causal relationships, or experimental outcomes.

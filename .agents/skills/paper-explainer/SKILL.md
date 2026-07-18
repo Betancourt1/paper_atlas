@@ -32,6 +32,26 @@ Do not ask the writer to research missing claims or the reviewer to repair the
 draft. Return failed stages to their owner. For a narrow revision, rerun only
 the affected upstream stages, but always rerun publication review.
 
+## Gate visuals deliberately
+
+Before writing, enumerate every difficult concept and record one decision for
+each: source figure, registered artifact, custom static illustration,
+restrained animation, or prose-only. Read the visual-plan section of
+`references/publication-contract.md` for the selection rules.
+
+Do not treat “one visual per paper” as a quality target. A visual is necessary
+when removing it would force readers to reconstruct an important relationship
+and materially increase cognitive load or misunderstanding.
+
+Reject generic box sequences that only restate prose. They qualify only when
+the concept is inherently linear and the visual encoding adds meaning beyond
+the prose.
+
+Place each approved visual beside the claim or mechanism it explains. Require
+equivalent text, evidence, limitations, and accessible static behavior. Use
+animation only when time, order, accumulation, feedback, or changing state is
+itself part of the concept.
+
 ## Preserve the site/editorial boundary
 
 Use `site_maintainer` only after editorial artifacts are ready when code or UI

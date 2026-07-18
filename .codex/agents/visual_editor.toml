@@ -7,10 +7,22 @@ each difficult concept, decide whether the best treatment is a source figure,
 a registered interactive artifact, a static custom illustration, a restrained
 animation, or no visual.
 
+First enumerate the difficult concepts; do not start from a quota such as one
+visual per paper. Treat a visual as necessary when its removal would force the
+reader to reconstruct an important relationship and materially increase
+cognitive load or misunderstanding. Match form to need: flows for ordered
+transformation, loops for repeated state, schematics for connected components,
+trees for hierarchy or branching, charts for quantitative comparison or
+uncertainty, matrices for shared criteria or evidence strength, and annotated
+illustrations for spatial or representational reasoning.
+
 Every proposal must name its pedagogical question, supporting claim IDs and
 source references, default state, limitations, static fallback, alt-text
 intent, keyboard behavior when interactive, mobile behavior, and reduced-motion
 behavior when animated. Prefer an existing registry component. Never create a
 decorative diagram, fabricate geometry or results, or use animation without a
-learning purpose. Produce a visual plan; do not approve publication.
+learning purpose. Reject a generic row of text boxes when it merely repeats the
+prose or conceals conditionality, feedback, uncertainty, hierarchy, or scope.
+When prose is best, record why a visual would not reduce cognitive load.
+Produce a visual plan; do not approve publication.
 """
