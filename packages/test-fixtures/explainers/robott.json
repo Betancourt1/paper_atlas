@@ -184,6 +184,7 @@
       ],
       "claim_ids": [
         "rttt_scaling",
+        "rttt_component_ablation",
         "rttt_memory_interpretation",
         "rttt_latency_limit",
         "rttt_generality"
@@ -300,6 +301,17 @@
       "verification_status": "VERIFIED"
     },
     {
+      "id": "rttt_component_ablation",
+      "text": "In Figure 12's component ablation, the TTT-Linear variant performs 27% worse than RoboTTT's two-layer MLP fast model.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "rttt_results_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
       "id": "rttt_memory_interpretation",
       "text": "The authors attribute the behavioral gains to fast weights retaining salient history and reducing ambiguity from partial observability.",
       "epistemic_status": "AUTHORS_INTERPRETATION",
@@ -339,7 +351,7 @@
       "source_kind": "PAPER",
       "label": "RoboTTT v1 — architecture and sequence training",
       "url": "https://arxiv.org/pdf/2607.15275v1",
-      "locator": "Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5"
+      "locator": "Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0"
     },
     {
       "id": "rttt_training_source",
@@ -357,7 +369,7 @@
     },
     {
       "id": "rttt_limits_source",
-      "source_kind": "SUPPLEMENT",
+      "source_kind": "PAPER",
       "label": "RoboTTT v1 — limitations, deployment, and evaluation details",
       "url": "https://arxiv.org/pdf/2607.15275v1",
       "locator": "Section 6 and Appendices A–B, PDF pages 12 and 20–22"
@@ -407,7 +419,8 @@
         "The architecture is demonstrated only with the GR00T N1.7 backbone.",
         "The diagram shows constant-size recurrent state, not a measured latency comparison with competing policies.",
         "It omits DAgger Distillation and human-video loss masking to keep the visual focused on the core TTT mechanism.",
-        "Fast weights begin from the learned initialization at each rollout; the visual does not imply permanent cross-rollout memory."
+        "Fast weights begin from the learned initialization at each rollout; the visual does not imply permanent cross-rollout memory.",
+        "This is an original Paper Atlas composition based on the cited paper, not a reproduction of a source figure; the CC BY 4.0 paper is attributed through the source references."
       ],
       "alt_text": "Six-step recurrent architecture: current robot tokens enter within-step attention, TTT layers update MLP fast weights, the updated memory is gated into the action head, an action chunk is generated, and the fast weights carry into the next timestep.",
       "fallback": "At each timestep, RoboTTT encodes the current observation and processes it with attention. TTT layers then update a small MLP's fast weights by gradient descent. The updated fast model contributes through a learned gate to the action prediction. After producing an action chunk, RoboTTT carries those fast weights into the next timestep. Training carries the state across TBPTT segments while stopping gradients at segment boundaries."
@@ -454,6 +467,7 @@
     "Initial explainer draft based on arXiv:2607.15275v1.",
     "Separated the recurrent fast-weight mechanism from task-specific context-learning procedures.",
     "Preserved the different experimental conditions for the context-scaling and main DAgger results.",
-    "Marked absolute latency and cross-backbone generality as not established."
+    "Marked absolute latency and cross-backbone generality as not established.",
+    "Added the Figure 12 TTT-Linear component ablation and verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition."
   ]
 }

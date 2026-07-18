@@ -166,10 +166,15 @@
       ],
       "claim_ids": [
         "sos_citation_truth",
+        "sos_budget_fairness",
+        "sos_middleware_causality",
+        "sos_schema_fit_inference",
         "sos_generality"
       ],
       "source_refs": [
+        "sos_middleware_source",
         "sos_results_source",
+        "sos_ablations_source",
         "sos_scope_source"
       ],
       "reading_depths": [
@@ -183,12 +188,14 @@
       "type": "CRITICAL_REVIEW",
       "question": "Which conclusions follow from the ablations, and which do not?",
       "paragraphs": [
-        "The paper provides strong engineering evidence for making research state explicit. The schema, evidence gate, progress sensors, and scheduler define inspectable responsibilities, while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets.",
+        "The paper provides bounded engineering evidence for making research state explicit. The schema, evidence gate, progress sensors, and scheduler define inspectable responsibilities, while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets.",
         "The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning, or skills individually. The authors connect the recall gains to coverage-aware dispatch; that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding."
       ],
       "claim_ids": [
         "sos_schedule_ablation",
         "sos_skill_ablation",
+        "sos_explicit_state_interpretation",
+        "sos_middleware_causality",
         "sos_recall_interpretation",
         "sos_generality"
       ],
@@ -328,6 +335,54 @@
       "verification_status": "UNRESOLVED"
     },
     {
+      "id": "sos_budget_fairness",
+      "text": "The paper does not document matched end-to-end search, model-call, time, and compute budgets for every baseline in enough detail to establish cost-fair main benchmark comparisons.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
+      "source_refs": [
+        "sos_results_source"
+      ],
+      "verification_status": "UNRESOLVED"
+    },
+    {
+      "id": "sos_middleware_causality",
+      "text": "The three representative middleware-intervention trajectories are not a controlled middleware-removal experiment and do not isolate middleware's causal contribution to benchmark performance.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "sos_middleware_source",
+        "sos_ablations_source"
+      ],
+      "verification_status": "UNRESOLVED"
+    },
+    {
+      "id": "sos_schema_fit_inference",
+      "text": "Because WideSearch and GISA score structured table, set, list, and item outputs, their formats may particularly suit SearchOS's relational schema-completion design.",
+      "epistemic_status": "EXPLAINER_INFERENCE",
+      "importance": "CAVEAT",
+      "confidence": 0.78,
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_results_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_explicit_state_interpretation",
+      "text": "The inspectable shared records, schema-bound evidence, progress sensors, and subset ablations provide bounded engineering evidence for externalizing research state in the tested SearchOS setup.",
+      "epistemic_status": "EXPLAINER_INFERENCE",
+      "importance": "SUPPORTING",
+      "confidence": 0.86,
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source",
+        "sos_ablations_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
       "id": "sos_generality",
       "text": "The evaluation does not establish the same reliability gains across other model backbones, multimodal sources, or unstructured task families.",
       "epistemic_status": "NOT_ESTABLISHED",
@@ -345,7 +400,7 @@
       "source_kind": "PAPER",
       "label": "SearchOS-V1 — relational formulation, SOCM, and orchestration",
       "url": "https://arxiv.org/pdf/2607.15257v1",
-      "locator": "Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6"
+      "locator": "Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0"
     },
     {
       "id": "sos_middleware_source",
@@ -413,11 +468,13 @@
         "sos_socm",
         "sos_middleware",
         "sos_scheduler",
-        "sos_skills"
+        "sos_skills",
+        "sos_middleware_causality"
       ],
       "source_refs": [
         "sos_formulation_source",
-        "sos_middleware_source"
+        "sos_middleware_source",
+        "sos_ablations_source"
       ],
       "interpretation": "The central design move is to make progress, provenance, gaps, and failures system-maintained state. Browsing does not automatically become evidence: middleware first requires a schema binding and anchored span, after which the updated coverage state determines the next scheduled work.",
       "limitations": [
@@ -425,7 +482,8 @@
         "Relational schemas may not represent every open-ended information-seeking task equally well.",
         "Coverage measures known materialized rows and cannot prove exhaustive discovery in open-set tasks.",
         "The paper does not independently ablate middleware's contribution to the main benchmark scores.",
-        "The diagram omits the internal structure and maintenance cost of the 280-skill library."
+        "The diagram omits the internal structure and maintenance cost of the 280-skill library.",
+        "This is an original Paper Atlas composition based on the cited paper, not a reproduction of a source figure; the CC BY 4.0 paper is attributed through the source references."
       ],
       "alt_text": "Six-step SearchOS loop: construct a relational schema, schedule a missing cell, give a worker scoped state and skills, require schema-bound anchored evidence, atomically update shared search state, then use progress and budget sensors to continue, redirect, stop, or synthesize.",
       "fallback": "SearchOS first expresses the request as a relational schema. Frontier Task schedules an unresolved cell to an available worker. The worker searches using role-specific state, known failures, and selected skills. Middleware accepts evidence only when it is tied to a schema cell and anchored to a source span. Accepted evidence updates the Evidence Graph and Coverage Map together. Sensors then use coverage, evidence growth, and budget pressure to choose the next action or end the search for synthesis."
@@ -479,6 +537,7 @@
     "Initial explainer draft based on arXiv:2607.15257v1.",
     "Centered the explanation on explicit shared state, evidence gating, and the scheduler control loop.",
     "Kept main benchmark results separate from scheduling and skill subset ablations.",
-    "Marked citation truth, middleware causality, and cross-model generality as unresolved."
+    "Marked citation truth, middleware causality, baseline budget fairness, structured-benchmark fit, and cross-model generality with explicit epistemic labels.",
+    "Verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition."
   ]
 }
