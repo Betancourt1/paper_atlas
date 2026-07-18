@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0.0",
+  "paper_id": "paper_trace",
+  "paper_version": "v1",
+  "language": "en",
+  "audience": "TECHNICAL_GENERALIST",
+  "title": "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
+  "central_claim": {
+    "text": "TRACE adds local credit to long tool-use trajectories by measuring how each tool interaction changes a frozen model's ability to predict a known answer, while retaining verified final correctness as the training anchor.",
+    "claim_id": "trace_claim_credit"
+  },
+  "editorial_status": "REVIEW_REQUIRED",
+  "reading_paths": {
+    "FIVE_MIN": ["trace_why", "trace_mechanism", "trace_evidence", "trace_limitations"],
+    "TWENTY_MIN": ["trace_why", "trace_change", "trace_mechanism", "trace_example", "trace_evidence", "trace_limitations", "trace_review"],
+    "DEEP": ["trace_why", "trace_change", "trace_mechanism", "trace_example", "trace_evidence", "trace_limitations", "trace_review"]
+  },
+  "tldr": [
+    "A final success or failure score cannot identify which of many tool calls helped, did nothing, or sent an agent off course.",
+    "TRACE scores the known answer after each tool observation with a frozen reference model, turns changes in that score into local temporal-difference credit, and combines it with the final outcome reward.",
+    "On BrowseComp-Plus, TRACE raised Qwen3-4B from 7.2 to 35.6 and Qwen3-30B-A3B from 8.4 to 42.6 in the reported setup.",
+    "The evidence is limited to search agents with short known answers; reliability for code, structured outputs, and open-ended tasks is not established."
+  ],
+  "blocks": [
+    {
+      "id": "trace_why",
+      "type": "WHY_IT_EXISTS",
+      "question": "Why is one final reward not enough for a long tool-use trajectory?",
+      "paragraphs": [
+        "A search agent may make dozens of dependent decisions before answering. A failed trajectory can contain useful searches and document openings before one late mistake, while a successful trajectory can contain redundant actions. An outcome-only objective attaches the same trajectory-level advantage to every action, so it cannot say which interaction changed the agent's prospects.",
+        "Process supervision can provide finer feedback, but commonly needs step labels, an LLM judge, a learned critic, or repeated rollouts. TRACE asks whether a known correct answer can supply a denser signal without adding those components."
+      ],
+      "claim_ids": ["trace_claim_outcome_blind", "trace_claim_credit"],
+      "source_refs": ["trace_source_intro", "trace_source_method"],
+      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_change",
+      "type": "WHAT_IT_CHANGES",
+      "question": "What does TRACE change in agent reinforcement learning?",
+      "paragraphs": [
+        "TRACE leaves final-answer verification in place but adds a trajectory-local signal at tool-call boundaries. Instead of treating every action in a rollout alike, it rewards an interaction when the following transcript makes the gold answer more predictable to a frozen reference model and penalizes it when predictability falls.",
+        "This is a change to credit assignment, not a new browser, backbone, training corpus, or final verifier. In the controlled comparisons, those parts are held fixed so the main variable is how the policy-gradient signal is constructed."
+      ],
+      "claim_ids": ["trace_claim_credit", "trace_claim_outcome_anchor", "trace_claim_controlled_setup"],
+      "source_refs": ["trace_source_method", "trace_source_experiments"],
+      "reading_depths": ["TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_mechanism",
+      "type": "HOW_IT_WORKS",
+      "question": "How does TRACE turn one tool interaction into credit?",
+      "paragraphs": [
+        "TRACE first splits a rollout after each tool action and returned observation. For every resulting prefix, a frozen copy of the initial policy computes the average log-probability of the known gold answer. The reference is a stable probe; it is not trained as a reward model.",
+        "The raw answer score is converted into a log-ratio value representing relative closure of the initial answer-likelihood gap. The difference between adjacent values is the one-step temporal-difference credit. Positive change means the new interaction made the answer easier to predict; zero means no measured progress; negative change means the prefix moved away from the answer.",
+        "One-step credits telescope, so inserting redundant intermediate steps cannot increase their endpoint sum. The reported objective also uses a short look-ahead for delayed effects and combines local credit with the standard GRPO outcome advantage. The exact telescoping guarantee belongs to the one-step component, not the full propagated signal."
+      ],
+      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_telescope", "trace_claim_outcome_anchor"],
+      "source_refs": ["trace_source_method"],
+      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_example",
+      "type": "WORKED_EXAMPLE",
+      "question": "What would TRACE do with a useful search followed by a bad branch?",
+      "paragraphs": [
+        "Consider a trajectory that searches for a relevant source, opens a page containing decisive evidence, then follows an unrelated branch and submits the wrong final answer. Outcome-only training gives the whole failed rollout a poor signal. TRACE instead compares the frozen reference model's gold-answer readiness after each tool observation.",
+        "The useful search and page opening can receive positive local credit if they make the gold answer more predictable. The unrelated branch can receive near-zero or negative credit. The final wrong answer still contributes a negative outcome signal, so local progress does not redefine failure as success. This example illustrates the paper's reward construction; it is not a separately reported quantitative experiment."
+      ],
+      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_outcome_anchor"],
+      "source_refs": ["trace_source_intro", "trace_source_method"],
+      "reading_depths": ["TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_evidence",
+      "type": "EVIDENCE",
+      "question": "What evidence supports the reported improvement?",
+      "paragraphs": [
+        "The authors train Qwen3-4B-Thinking-2507 and Qwen3-30B-A3B-Thinking-2507 in the same ReAct-style search harness. The training questions use an offline OpenResearcher corpus, trajectories allow up to 60 tool turns, and the controlled GRPO, GSPO, GiGRPO, and TRACE runs share the browser actions, data, terminal reward, and evaluation interface.",
+        "On closed-web BrowseComp-Plus, TRACE moves the 4B base from 7.2 to 35.6 and the 30B-A3B base from 8.4 to 42.6. Relative to outcome-only GRPO, its unweighted four-benchmark average is 34.0 versus 29.5 for 4B and 38.1 versus 32.5 for 30B-A3B.",
+        "In one 4B BrowseComp-Plus ablation, GRPO scores 30.0, raw log-probability delta 32.4, remaining-gap normalization 34.6, and log-ratio credit 35.5. The learning curves also rise earlier for TRACE, but the ablations are single runs, so small differences are directional rather than variance-adjusted conclusions."
+      ],
+      "claim_ids": ["trace_claim_controlled_setup", "trace_claim_browsecomp_gain", "trace_claim_grpo_gain", "trace_claim_ablation"],
+      "source_refs": ["trace_source_experiments", "trace_source_results"],
+      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_limitations",
+      "type": "LIMITATIONS",
+      "question": "Where does the current evidence stop?",
+      "paragraphs": [
+        "The experiments cover long-horizon search with short answers that can be compared with known ground truth. The authors explicitly leave open whether gold-output probability is a reliable progress proxy for a code patch, a long structured response, or an underspecified assistant task.",
+        "Only two related Qwen3 backbones and one interaction domain are evaluated. A higher frozen-model probability is evidence about that model's readiness to emit the answer, not proof that the preceding tool call was causally necessary. External-agent numbers also use different systems and training pipelines, so they are context rather than controlled comparisons."
+      ],
+      "claim_ids": ["trace_claim_scope", "trace_claim_proxy_not_causal"],
+      "source_refs": ["trace_source_results", "trace_source_limitations"],
+      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+    },
+    {
+      "id": "trace_review",
+      "type": "CRITICAL_REVIEW",
+      "question": "What is the strongest justified reading of TRACE?",
+      "paragraphs": [
+        "The controlled result supports a narrow conclusion: in the authors' search setup, adding their reference-model-based turn credit to outcome training improves both tested backbones and several related benchmarks. The mechanism is attractive because it avoids a separately trained critic and keeps final correctness in the objective.",
+        "The paper does not establish a general solution to agent credit assignment. The proxy depends on a known answer, the central ablations lack replicated uncertainty estimates, and transfer is demonstrated only across search benchmarks. Applying TRACE to coding or open-ended agents would require new progress targets and new evidence."
+      ],
+      "claim_ids": ["trace_claim_credit", "trace_claim_grpo_gain", "trace_claim_scope", "trace_claim_proxy_not_causal"],
+      "source_refs": ["trace_source_method", "trace_source_results", "trace_source_limitations"],
+      "reading_depths": ["TWENTY_MIN", "DEEP"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "trace_claim_outcome_blind",
+      "text": "A terminal outcome reward does not identify which intermediate tool interactions helped, were redundant, or derailed a long trajectory.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "CORE",
+      "confidence": 0.98,
+      "source_refs": ["trace_source_intro"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_credit",
+      "text": "TRACE adds turn-level temporal-difference credit derived from frozen-reference answer predictability while retaining the outcome reward.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_method"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_prefix_probe",
+      "text": "TRACE scores the known gold answer at tool-boundary trajectory prefixes with a frozen copy of the initial policy.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_method"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_td",
+      "text": "The one-step local credit is the difference between adjacent log-ratio prefix values.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_method"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_telescope",
+      "text": "The one-step credit telescopes, so redundant intermediate turns cannot increase its endpoint sum.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": ["trace_source_method"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_outcome_anchor",
+      "text": "The reported training objective combines local turn credit with GRPO's final outcome advantage.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_method"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_controlled_setup",
+      "text": "The controlled RL variants share the tested backbones, browser interface, training data, terminal reward, and evaluation protocol.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.99,
+      "source_refs": ["trace_source_experiments"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_browsecomp_gain",
+      "text": "On BrowseComp-Plus, TRACE scores 35.6 for Qwen3-4B and 42.6 for Qwen3-30B-A3B, compared with base scores of 7.2 and 8.4.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_results"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_grpo_gain",
+      "text": "TRACE exceeds outcome-only GRPO in the unweighted four-benchmark average at both evaluated model scales.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": ["trace_source_results"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_ablation",
+      "text": "In one Qwen3-4B BrowseComp-Plus ablation run, log-ratio credit scores 35.5, above raw-delta credit at 32.4 and remaining-gap credit at 34.6.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": ["trace_source_results"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_scope",
+      "text": "The paper does not establish that gold-output log-probability is a reliable progress proxy for long, structured, or open-ended agent outputs.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": ["trace_source_limitations"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "trace_claim_proxy_not_causal",
+      "text": "The frozen reference score is not established as a causal measure of a tool call's contribution.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.96,
+      "source_refs": ["trace_source_method", "trace_source_limitations"],
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "trace_source_intro",
+      "source_kind": "PAPER",
+      "label": "TRACE v1 introduction",
+      "url": "https://arxiv.org/pdf/2607.13988v1",
+      "locator": "Pages 1–3, Abstract and Section 1"
+    },
+    {
+      "id": "trace_source_method",
+      "source_kind": "PAPER",
+      "label": "TRACE v1 method",
+      "url": "https://arxiv.org/pdf/2607.13988v1",
+      "locator": "Sections 3.1–3.3, Equations 4–12, Algorithm 1"
+    },
+    {
+      "id": "trace_source_experiments",
+      "source_kind": "PAPER",
+      "label": "TRACE v1 experimental setup",
+      "url": "https://arxiv.org/pdf/2607.13988v1",
+      "locator": "Pages 7–8, Section 4.1"
+    },
+    {
+      "id": "trace_source_results",
+      "source_kind": "PAPER",
+      "label": "TRACE v1 results and ablations",
+      "url": "https://arxiv.org/pdf/2607.13988v1",
+      "locator": "Pages 8–10, Sections 4.2–4.4, Tables 1–2, Figures 3–5"
+    },
+    {
+      "id": "trace_source_limitations",
+      "source_kind": "PAPER",
+      "label": "TRACE v1 limitations",
+      "url": "https://arxiv.org/pdf/2607.13988v1",
+      "locator": "Page 12, Section 6"
+    }
+  ],
+  "visuals": [
+    {
+      "id": "trace_visual_credit_flow",
+      "type": "PIPELINE_FLOW",
+      "title": "How TRACE turns a tool interaction into training credit",
+      "question": "How does TRACE decide whether one tool call helped a long-horizon agent?",
+      "items": [
+        {
+          "label": "1. Tool-boundary prefix",
+          "detail": "Split the rollout immediately after each tool action and returned observation."
+        },
+        {
+          "label": "2. Frozen answer probe",
+          "detail": "A frozen copy of the initial policy scores how predictable the known gold answer is from each prefix."
+        },
+        {
+          "label": "3. Log-ratio state value",
+          "detail": "Convert answer log-probability into relative closure of the initial answer-likelihood gap."
+        },
+        {
+          "label": "4. Temporal-difference credit",
+          "detail": "The change between adjacent state values gives local credit; a short look-ahead propagates delayed evidence."
+        },
+        {
+          "label": "5. Outcome-anchored update",
+          "detail": "Mix local turn credit with the GRPO final-answer advantage before updating policy-generated tokens."
+        }
+      ],
+      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_telescope", "trace_claim_outcome_anchor"],
+      "source_refs": ["trace_source_method"],
+      "interpretation": "TRACE uses changes in a frozen model's readiness to produce the known answer as local feedback, while verified final correctness remains the global objective.",
+      "limitations": [
+        "Answer predictability is a proxy for progress, not a causal measurement of the tool call's contribution.",
+        "The method assumes a compact known gold answer and is not validated for long, structured, or open-ended outputs.",
+        "The exact one-step telescoping property does not apply unchanged to the look-ahead and terminal-fill components."
+      ],
+      "alt_text": "Five-step flow: split a rollout at a tool boundary, score the gold answer with a frozen reference model, convert the score into a log-ratio state value, calculate temporal-difference credit, and combine that credit with the final outcome advantage.",
+      "fallback": "After each tool observation, TRACE creates a trajectory prefix. A frozen initial model measures the known answer's log-probability, which TRACE converts into relative closure of the initial answer-likelihood gap. The change from the preceding prefix supplies local temporal-difference credit, with limited look-ahead for delayed effects. That signal is combined with GRPO's final-answer advantage. The score is a progress proxy validated primarily for short-answer search."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Credit assignment",
+      "definition": "Determining which decisions in a trajectory should receive responsibility for a later outcome.",
+      "source_refs": ["trace_source_intro"]
+    },
+    {
+      "term": "Tool-call boundary",
+      "definition": "The point after an agent action and its environment observation, used by TRACE to define a trajectory state.",
+      "source_refs": ["trace_source_method"]
+    },
+    {
+      "term": "Temporal-difference credit",
+      "definition": "A local signal computed from the change in estimated value between adjacent states.",
+      "source_refs": ["trace_source_method"]
+    },
+    {
+      "term": "Frozen reference model",
+      "definition": "An unchanged copy of the initial policy used to measure gold-answer predictability at each prefix.",
+      "source_refs": ["trace_source_method"]
+    },
+    {
+      "term": "GRPO",
+      "definition": "Group Relative Policy Optimization, an outcome-based reinforcement-learning method used as TRACE's training base and comparison.",
+      "source_refs": ["trace_source_method", "trace_source_experiments"]
+    }
+  ],
+  "revision_notes": [
+    "Initial evidence-backed explainer fixture for arXiv:2607.13988v1.",
+    "Mechanism is presented before results; single-run ablations and short-answer scope are explicit.",
+    "Editorial review and human publication approval remain required."
+  ]
+}
