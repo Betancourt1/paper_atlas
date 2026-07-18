@@ -1,0 +1,26 @@
+{
+  "name": "paper-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "check": "pnpm run check:generated && pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build",
+    "check:generated": "bash scripts/check-generated.sh",
+    "dev": "turbo run dev --parallel",
+    "e2e": "pnpm --filter @paper-atlas/web test:e2e",
+    "generate": "bash scripts/generate-schema.sh",
+    "lint": "turbo run lint && uv run ruff check apps/api/src apps/api/tests apps/worker/src",
+    "test": "turbo run test && uv run pytest",
+    "typecheck": "turbo run typecheck && uv run mypy apps/api/src apps/worker/src",
+    "visual": "pnpm --filter @paper-atlas/web test:visual"
+  },
+  "devDependencies": {
+    "turbo": "2.10.5",
+    "typescript": "7.0.2"
+  }
+}
+
