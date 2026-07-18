@@ -2,6 +2,7 @@
 .env
 .env.local
 .next/
+.pnpm-store/
 .turbo/
 dist/
 node_modules/

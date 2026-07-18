@@ -1,0 +1,9 @@
+{
+  "name": "@paper-atlas/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "UV_CACHE_DIR=../../.uv-cache uv run --project ../.. uvicorn --app-dir src paper_atlas_api.main:app --reload --port 8000"
+  }
+}
+
