@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: 0.11.21
+          enable-cache: true
+
+      - name: Install locked dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          uv sync --frozen
+
+      - name: Validate local infrastructure contract
+        run: docker compose -f compose.yaml config --quiet
+
+      - name: Run M0 checks
+        run: make check
+
+      - name: Install Chromium
+        run: pnpm --filter @paper-atlas/web exec playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: make e2e
+
+      - name: Upload browser report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          if-no-files-found: ignore
+          retention-days: 7
+
