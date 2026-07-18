@@ -19,8 +19,9 @@ export default function PapersPage() {
         <p className="paper-index__eyeline">July 11–17, 2026</p>
         <h1>Research digest</h1>
         <p>
-          Seven supplied research entries, plus the original M0 baseline. Each
-          record is validated against the same PaperSummary contract.
+          Eight source-backed explainers with mechanism, evidence, limitations,
+          and a paper-specific visual. These are reviewed drafts awaiting human
+          publication approval.
         </p>
       </header>
 
@@ -31,6 +32,7 @@ export default function PapersPage() {
               <span>{String(index + 1).padStart(2, "0")}</span>
               <span>{paper.published_year}</span>
               <span>{paper.source.type === "ARXIV" ? "arXiv" : "Release"}</span>
+              <span>{paper.status === "REVIEWED" ? "Reviewed" : "Draft"}</span>
             </p>
             <div className="paper-list__content">
               <h2>

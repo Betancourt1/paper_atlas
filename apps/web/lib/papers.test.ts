@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getPaperById, listPapers } from "./papers";
+import { getExplainerByPaperId, getPaperById, listPapers } from "./papers";
 
 describe("getPaperById", () => {
   it("returns the canonical fixture", () => {
@@ -21,5 +21,19 @@ describe("listPapers", () => {
     expect(listPapers().at(-1)?.id).toBe(
       "paper_attention_is_all_you_need",
     );
+  });
+});
+
+describe("getExplainerByPaperId", () => {
+  it("returns each source-backed explainer", () => {
+    const explainer = getExplainerByPaperId("paper_trace");
+
+    expect(explainer?.paper_version).toBe("v1");
+    expect(explainer?.blocks).toHaveLength(7);
+    expect(explainer?.editorial_status).toBe("REVIEWED");
+  });
+
+  it("returns undefined for an unknown paper", () => {
+    expect(getExplainerByPaperId("paper_missing")).toBeUndefined();
   });
 });

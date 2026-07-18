@@ -1,4 +1,4 @@
-"""FastAPI application for the Paper Atlas M0 contract."""
+"""FastAPI application for the Paper Atlas read-only contract."""
 
 from typing import Literal
 
@@ -7,7 +7,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict
 
 from paper_atlas_api import __version__
-from paper_atlas_api.fixtures import PAPERS_BY_ID
+from paper_atlas_api.fixtures import EXPLAINERS_BY_PAPER_ID, PAPERS_BY_ID
+from paper_atlas_api.generated.explainer_document import ExplainerDocument
 from paper_atlas_api.generated.paper_summary import PaperSummary
 
 
@@ -27,7 +28,9 @@ class PaperNotFoundError(Exception):
 app = FastAPI(
     title="Paper Atlas API",
     version=__version__,
-    description="Read-only M0 API contract backed by a validated fixture.",
+    description=(
+        "Read-only API contract backed by validated paper and explainer fixtures."
+    ),
 )
 
 
@@ -59,3 +62,16 @@ async def get_paper(paper_id: str) -> PaperSummary:
     if paper is None:
         raise PaperNotFoundError(paper_id)
     return paper
+
+
+@app.get(
+    "/v1/papers/{paper_id}/explainer",
+    response_model=ExplainerDocument,
+    response_model_exclude_none=True,
+    tags=["papers"],
+)
+async def get_paper_explainer(paper_id: str) -> ExplainerDocument:
+    explainer = EXPLAINERS_BY_PAPER_ID.get(paper_id)
+    if explainer is None:
+        raise PaperNotFoundError(paper_id)
+    return explainer

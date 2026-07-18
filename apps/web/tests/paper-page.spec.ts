@@ -6,13 +6,17 @@ const screenshotDirectory = fileURLToPath(
   new URL("../../../artifacts/qa/current/", import.meta.url),
 );
 
-test("digest entry opens as a traceable paper @visual", async ({ page }, testInfo) => {
+test("reviewed digest entry opens as a source-backed explainer @visual", async ({
+  page,
+}, testInfo) => {
   await page.goto("/papers");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Research digest",
   );
   await expect(page.getByRole("listitem")).toHaveCount(8);
+  await expect(page.getByText("Reviewed", { exact: true })).toHaveCount(8);
+
   await page
     .getByRole("link", {
       name: "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
@@ -20,15 +24,46 @@ test("digest entry opens as a traceable paper @visual", async ({ page }, testInf
     .click();
 
   await expect(page).toHaveURL(/\/papers\/paper_trace$/);
-
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
   );
   await expect(
-    page.getByText(/TRACE assigns dense rewards at tool-call boundaries/),
+    page.getByText("Reviewed draft · awaiting publication approval"),
   ).toBeVisible();
-  await expect(page.getByText("arXiv:2607.13988")).toBeVisible();
-  await expect(page.getByText("PaperSummary v1")).toBeVisible();
+  await expect(page.getByText("Published", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("Central claim", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText(/TRACE adds local credit to long tool-use trajectories/),
+  ).toBeVisible();
+
+  const readingGuide = page.getByRole("navigation", {
+    name: "Choose your reading depth",
+  });
+  await expect(readingGuide.getByRole("link")).toHaveCount(4);
+  await expect(readingGuide.getByRole("link", { name: "5 minutes" })).toBeVisible();
+  await expect(readingGuide.getByRole("link", { name: "Original paper" })).toHaveAttribute(
+    "href",
+    "https://arxiv.org/abs/2607.13988",
+  );
+
+  await expect(
+    page.getByRole("heading", {
+      name: "How does TRACE turn one tool interaction into credit?",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "How TRACE turns a tool interaction into training credit",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("What this illustration does not establish"),
+  ).toBeVisible();
+  await expect(page.getByText("Not established", { exact: true }).first()).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Sources and exact locators" }),
+  ).toBeVisible();
+  await expect(page.getByText("Sections 3.1–3.3, Equations 4–12, Algorithm 1").first()).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > window.innerWidth,
@@ -41,17 +76,44 @@ test("digest entry opens as a traceable paper @visual", async ({ page }, testInf
     await menu.focus();
     await page.keyboard.press("Enter");
     await expect(menuContainer).toHaveAttribute("open", "");
-    await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible();
+    await expect(
+      page.getByRole("navigation", { name: "Mobile navigation" }),
+    ).toBeVisible();
     await page.keyboard.press("Enter");
     await expect(menuContainer).not.toHaveAttribute("open", "");
-    await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+    await page.evaluate(() =>
+      (document.activeElement as HTMLElement | null)?.blur(),
+    );
   }
 
   mkdirSync(screenshotDirectory, { recursive: true });
   await page.screenshot({
-    path: `${screenshotDirectory}/digest-paper-${testInfo.project.name}.png`,
+    path: `${screenshotDirectory}/reviewed-explainer-${testInfo.project.name}.png`,
     fullPage: true,
   });
+});
+
+test("every digest paper exposes explanation, caveats, and provenance", async ({
+  page,
+}) => {
+  await page.goto("/papers");
+  const paperLinks = await page.locator(".paper-list__content h2 a").evaluateAll((links) =>
+    links.map((link) => (link as HTMLAnchorElement).getAttribute("href")),
+  );
+
+  expect(paperLinks).toHaveLength(8);
+
+  for (const paperLink of paperLinks) {
+    expect(paperLink).not.toBeNull();
+    await page.goto(paperLink!);
+    await expect(page.getByText("Central claim", { exact: true })).toBeVisible();
+    await expect(page.getByText("Limitations", { exact: true }).first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Claim ledger" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Sources and exact locators" }),
+    ).toBeVisible();
+    await expect(page.getByText("Published", { exact: true })).toHaveCount(0);
+  }
 });
 
 test("unknown paper uses the explicit empty state", async ({ page }) => {
