@@ -3,11 +3,15 @@ import { notFound } from "next/navigation";
 
 import { formatAuthorLine } from "@paper-atlas/ui";
 
-import { getPaperById } from "../../../lib/papers";
+import { getPaperById, listPapers } from "../../../lib/papers";
 
 type PaperPageProps = {
   params: Promise<{ id: string }>;
 };
+
+export function generateStaticParams() {
+  return listPapers().map((paper) => ({ id: paper.id }));
+}
 
 export async function generateMetadata({ params }: PaperPageProps): Promise<Metadata> {
   const { id } = await params;
@@ -69,4 +73,3 @@ export default async function PaperPage({ params }: PaperPageProps) {
     </main>
   );
 }
-

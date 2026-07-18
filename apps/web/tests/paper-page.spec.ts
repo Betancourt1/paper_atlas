@@ -2,23 +2,32 @@ import { expect, test } from "@playwright/test";
 import { mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const paperPath = "/papers/paper_attention_is_all_you_need";
 const screenshotDirectory = fileURLToPath(
   new URL("../../../artifacts/qa/current/", import.meta.url),
 );
 
-test("paper fixture is readable and traceable @visual", async ({ page }, testInfo) => {
-  await page.goto(paperPath);
+test("digest entry opens as a traceable paper @visual", async ({ page }, testInfo) => {
+  await page.goto("/papers");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Attention Is All You Need",
+    "Research digest",
+  );
+  await expect(page.getByRole("listitem")).toHaveCount(8);
+  await page
+    .getByRole("link", {
+      name: "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
+    })
+    .click();
+
+  await expect(page).toHaveURL(/\/papers\/paper_trace$/);
+
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
   );
   await expect(
-    page.getByText(
-      "A sequence transduction architecture based entirely on attention, without recurrence or convolution.",
-    ),
+    page.getByText(/TRACE assigns dense rewards at tool-call boundaries/),
   ).toBeVisible();
-  await expect(page.getByText("arXiv:1706.03762")).toBeVisible();
+  await expect(page.getByText("arXiv:2607.13988")).toBeVisible();
   await expect(page.getByText("PaperSummary v1")).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
@@ -40,7 +49,7 @@ test("paper fixture is readable and traceable @visual", async ({ page }, testInf
 
   mkdirSync(screenshotDirectory, { recursive: true });
   await page.screenshot({
-    path: `${screenshotDirectory}/paper-${testInfo.project.name}.png`,
+    path: `${screenshotDirectory}/digest-paper-${testInfo.project.name}.png`,
     fullPage: true,
   });
 });

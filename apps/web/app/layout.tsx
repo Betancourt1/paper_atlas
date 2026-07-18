@@ -36,14 +36,14 @@ function SiteHeader() {
           Paper Atlas
         </Link>
         <nav className="desktop-navigation" aria-label="Primary navigation">
-          <Link href="/papers/paper_attention_is_all_you_need">Papers</Link>
+          <Link href="/papers">Papers</Link>
           <span aria-disabled="true">Methods</span>
           <span aria-disabled="true">Benchmarks</span>
         </nav>
         <details className="mobile-navigation">
           <summary>Menu</summary>
           <nav aria-label="Mobile navigation">
-            <Link href="/papers/paper_attention_is_all_you_need">Papers</Link>
+            <Link href="/papers">Papers</Link>
             <span aria-disabled="true">Methods</span>
             <span aria-disabled="true">Benchmarks</span>
           </nav>
@@ -52,4 +52,3 @@ function SiteHeader() {
     </header>
   );
 }
-

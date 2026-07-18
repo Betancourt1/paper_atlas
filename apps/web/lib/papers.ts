@@ -1,7 +1,14 @@
 import type { PaperSummary } from "@paper-atlas/content-schema";
-import { paperSummaryFixture } from "@paper-atlas/test-fixtures";
+import { paperSummaryFixtures } from "@paper-atlas/test-fixtures";
+
+const papersById = new Map(
+  paperSummaryFixtures.map((paper) => [paper.id, paper]),
+);
 
 export function getPaperById(id: string): PaperSummary | undefined {
-  return id === paperSummaryFixture.id ? paperSummaryFixture : undefined;
+  return papersById.get(id);
 }
 
+export function listPapers(): readonly PaperSummary[] {
+  return paperSummaryFixtures;
+}

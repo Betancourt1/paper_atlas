@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { getPaperById } from "./papers";
+import { getPaperById, listPapers } from "./papers";
 
 describe("getPaperById", () => {
   it("returns the canonical fixture", () => {
@@ -14,3 +14,12 @@ describe("getPaperById", () => {
   });
 });
 
+describe("listPapers", () => {
+  it("returns the digest first and keeps the baseline fixture", () => {
+    expect(listPapers()).toHaveLength(8);
+    expect(listPapers()[0]?.id).toBe("paper_trace");
+    expect(listPapers().at(-1)?.id).toBe(
+      "paper_attention_is_all_you_need",
+    );
+  });
+});

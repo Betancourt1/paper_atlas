@@ -103,6 +103,93 @@ summary:focus-visible {
   display: none;
 }
 
+.paper-index {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 72px 32px 128px;
+}
+
+.paper-index__header {
+  max-width: 780px;
+  margin-left: 8.33%;
+}
+
+.paper-index__eyeline {
+  margin: 0 0 18px;
+  color: var(--evidence);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.paper-index__header h1 {
+  margin: 0;
+  font-family: "Source Serif 4 Variable", "Source Serif 4", serif;
+  font-size: clamp(3.2rem, 6vw, 5.8rem);
+  font-weight: 610;
+  line-height: 1;
+}
+
+.paper-index__header > p:last-child {
+  max-width: 62ch;
+  margin: 28px 0 0;
+  color: var(--ink-muted);
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.paper-list {
+  margin: 72px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line-strong);
+  list-style: none;
+}
+
+.paper-list__item {
+  display: grid;
+  grid-template-columns: 16.66% minmax(0, 760px);
+  padding: 36px 0 42px;
+  border-bottom: 1px solid var(--line);
+}
+
+.paper-list__metadata {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  margin: 3px 32px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.paper-list__content h2 {
+  margin: 0;
+  font-family: "Source Serif 4 Variable", "Source Serif 4", serif;
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-weight: 610;
+  line-height: 1.16;
+}
+
+.paper-list__content h2 a {
+  color: var(--ink);
+  text-decoration-color: var(--line-strong);
+}
+
+.paper-list__summary {
+  max-width: 68ch;
+  margin: 18px 0 0;
+  font-family: "Source Serif 4 Variable", "Source Serif 4", serif;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.paper-list__authors {
+  margin: 16px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
 .paper-page {
   width: min(100%, 1280px);
   margin: 0 auto;
@@ -270,6 +357,37 @@ summary:focus-visible {
     padding: 11px 12px;
   }
 
+  .paper-index {
+    padding: 48px 18px 88px;
+  }
+
+  .paper-index__header {
+    margin: 0;
+  }
+
+  .paper-index__header h1 {
+    font-size: clamp(3rem, 16vw, 4.6rem);
+  }
+
+  .paper-list {
+    margin-top: 52px;
+  }
+
+  .paper-list__item {
+    display: block;
+    padding: 28px 0 34px;
+  }
+
+  .paper-list__metadata {
+    display: flex;
+    gap: 14px;
+    margin: 0 0 16px;
+  }
+
+  .paper-list__content h2 {
+    font-size: 1.8rem;
+  }
+
   .paper-page {
     padding: 54px 18px 88px;
   }
@@ -284,9 +402,9 @@ summary:focus-visible {
   }
 
   .paper-summary h1 {
-    max-width: 12ch;
-    font-size: clamp(2.7rem, 13vw, 4rem);
-    line-height: 1.02;
+    max-width: none;
+    font-size: clamp(2.3rem, 10.5vw, 3.2rem);
+    line-height: 1.05;
   }
 
   .paper-abstract {
