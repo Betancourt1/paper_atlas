@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "generate": "json2ts --input schema/paper-summary.schema.json --output src/generated/paper-summary.ts --bannerComment \"/* Generated from paper-summary.schema.json. Do not edit directly. */\"",
+    "generate": "bash ../../scripts/generate-schema.sh",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
@@ -24,4 +24,3 @@
     "vitest": "4.1.10"
   }
 }
-

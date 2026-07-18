@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paper-atlas.local/schemas/explainer-document.schema.json",
+  "title": "ExplainerDocument",
+  "description": "A source-backed, reviewable Paper Atlas explainer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "paper_id",
+    "paper_version",
+    "language",
+    "audience",
+    "title",
+    "central_claim",
+    "editorial_status",
+    "reading_paths",
+    "tldr",
+    "blocks",
+    "claims",
+    "source_refs",
+    "visuals",
+    "glossary",
+    "revision_notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "paper_id": {
+      "type": "string",
+      "pattern": "^paper_[a-z0-9_]+$"
+    },
+    "paper_version": {
+      "type": "string",
+      "pattern": "^v[1-9][0-9]*$"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["en"]
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["TECHNICAL_GENERALIST"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "central_claim": {
+      "$ref": "#/$defs/centralClaim"
+    },
+    "editorial_status": {
+      "type": "string",
+      "enum": ["REVIEW_REQUIRED", "CHANGES_REQUESTED", "REVIEWED"]
+    },
+    "reading_paths": {
+      "$ref": "#/$defs/readingPaths"
+    },
+    "tldr": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "$ref": "#/$defs/block"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sourceRef"
+      }
+    },
+    "visuals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/visual"
+      }
+    },
+    "glossary": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/glossaryTerm"
+      }
+    },
+    "revision_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "referenceList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "centralClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "claim_id"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 700
+        },
+        "claim_id": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "readingPaths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["FIVE_MIN", "TWENTY_MIN", "DEEP"],
+      "properties": {
+        "FIVE_MIN": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "TWENTY_MIN": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "DEEP": {
+          "$ref": "#/$defs/referenceList"
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "question",
+        "paragraphs",
+        "claim_ids",
+        "source_refs",
+        "reading_depths"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "WHY_IT_EXISTS",
+            "WHAT_IT_CHANGES",
+            "HOW_IT_WORKS",
+            "WORKED_EXAMPLE",
+            "EVIDENCE",
+            "LIMITATIONS",
+            "CRITICAL_REVIEW"
+          ]
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          }
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "reading_depths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+          }
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text",
+        "epistemic_status",
+        "importance",
+        "confidence",
+        "source_refs",
+        "verification_status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "epistemic_status": {
+          "type": "string",
+          "enum": [
+            "OBSERVED",
+            "AUTHORS_INTERPRETATION",
+            "EXPLAINER_INFERENCE",
+            "NOT_ESTABLISHED",
+            "DISPUTED"
+          ]
+        },
+        "importance": {
+          "type": "string",
+          "enum": ["CORE", "SUPPORTING", "CAVEAT"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source_refs": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": ["VERIFIED", "UNRESOLVED"]
+        }
+      }
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_kind", "label", "url", "locator"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_kind": {
+          "type": "string",
+          "enum": [
+            "PAPER",
+            "SUPPLEMENT",
+            "MODEL_CARD",
+            "RELEASE_NOTE",
+            "REPOSITORY"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title",
+        "question",
+        "items",
+        "claim_ids",
+        "source_refs",
+        "interpretation",
+        "limitations",
+        "alt_text",
+        "fallback"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "PIPELINE_FLOW",
+            "ARCHITECTURE_STEPPER",
+            "RESULT_COMPARISON",
+            "EVIDENCE_MATRIX",
+            "METHOD_COMPARISON"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/visualItem"
+          }
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/referenceList"
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "alt_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "visualItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "detail"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "value": {
+          "type": "number"
+        }
+      }
+    },
+    "glossaryTerm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "definition", "source_refs"],
+      "properties": {
+        "term": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "source_refs": {
+          "$ref": "#/$defs/referenceList"
+        }
+      }
+    }
+  }
+}

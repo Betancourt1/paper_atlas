@@ -34,7 +34,7 @@ Use these epistemic labels:
 
 - `OBSERVED`: directly present in source text, a table, figure, or equation;
 - `AUTHORS_INTERPRETATION`: the authors' stated explanation or conclusion;
-- `ANALYST_INFERENCE`: a bounded inference that is not directly claimed;
+- `EXPLAINER_INFERENCE`: a bounded inference that is not directly claimed;
 - `NOT_ESTABLISHED`: a tempting conclusion the evidence does not support.
 
 An unsupported claim is removed, narrowed, or marked unresolved. It is never

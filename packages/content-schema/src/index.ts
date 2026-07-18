@@ -1,3 +1,15 @@
+export type {
+  Block,
+  Claim,
+  ExplainerDocument,
+  GlossaryTerm,
+  SourceRef,
+  Visual,
+} from "./generated/explainer-document.js";
 export type { Author, PaperSummary, Source } from "./generated/paper-summary.js";
-export { parsePaperSummary, validatePaperSummary } from "./validate.js";
-
+export {
+  parseExplainerDocument,
+  parsePaperSummary,
+  validateExplainerDocument,
+  validatePaperSummary,
+} from "./validate.js";
