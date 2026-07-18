@@ -70,11 +70,18 @@ services:
 
   grobid:
     image: lfoppiano/grobid:0.8.2
+    platform: linux/amd64
+    entrypoint: ["/tini", "--"]
+    command: ["./grobid-service/bin/grobid-service"]
     ports:
       - "8070:8070"
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/8070'"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
     restart: unless-stopped
 
 volumes:
   minio-data:
   postgres-data:
-
