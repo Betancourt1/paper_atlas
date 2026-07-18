@@ -10,6 +10,10 @@ from pydantic import AnyUrl, BaseModel, ConfigDict, Field
 
 
 class Status(StrEnum):
+    INDEXED = 'INDEXED'
+    EXPLAINER_PENDING = 'EXPLAINER_PENDING'
+    DRAFT = 'DRAFT'
+    REVIEWED = 'REVIEWED'
     PUBLISHED = 'PUBLISHED'
 
 

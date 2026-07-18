@@ -16,7 +16,7 @@ export interface PaperSummary {
   published_year: number;
   source: Source;
   version: string;
-  status: "PUBLISHED";
+  status: "INDEXED" | "EXPLAINER_PENDING" | "DRAFT" | "REVIEWED" | "PUBLISHED";
 }
 export interface Author {
   id: string;

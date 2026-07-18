@@ -61,7 +61,13 @@
     },
     "status": {
       "type": "string",
-      "enum": ["PUBLISHED"]
+      "enum": [
+        "INDEXED",
+        "EXPLAINER_PENDING",
+        "DRAFT",
+        "REVIEWED",
+        "PUBLISHED"
+      ]
     }
   },
   "$defs": {
@@ -103,4 +109,3 @@
     }
   }
 }
-

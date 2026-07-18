@@ -18,9 +18,8 @@
   "source": {
     "type": "ARXIV",
     "identifier": "1706.03762",
-    "url": "https://arxiv.org/abs/1706.03762"
+    "url": "https://arxiv.org/abs/1706.03762v7"
   },
-  "version": "v1",
-  "status": "PUBLISHED"
+  "version": "v7",
+  "status": "DRAFT"
 }
-
