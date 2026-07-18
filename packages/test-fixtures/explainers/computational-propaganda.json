@@ -7,7 +7,7 @@
   "title": "Pretraining Data Can Be Poisoned through Computational Propaganda",
   "central_claim": {
     "text": "Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences.",
-    "claim_id": "propaganda_claim_halflife"
+    "claim_id": "propaganda_claim_central"
   },
   "editorial_status": "REVIEW_REQUIRED",
   "reading_paths": {
@@ -18,7 +18,7 @@
   "tldr": [
     "Posting malicious text on the web is not enough to poison a model: the text must also be crawled, extracted, retained by curation, and influential during training.",
     "The paper introduces HalfLife, which estimates those stages separately for public comment interfaces instead of assuming every injection reaches a corpus.",
-    "In the studied setup, comment signatures appeared on 3.4% of sampled pages, 71.9% of simulated injected comments survived extraction, and the derived end-to-end document inclusion estimate was 0.13%.",
+    "In the studied setup, comment signatures appeared on 3.4% of sampled pages and 71.9% of simulated injected comments survived extraction. The v1 Introduction states a 0.15% end-to-end inclusion probability, while Section 4.4 and the rounded stage product report about 0.13%; the paper does not reconcile the discrepancy.",
     "Controlled pretraining shifted model entity preferences, but no live attack or production frontier-model compromise was demonstrated."
   ],
   "blocks": [
@@ -65,10 +65,10 @@
       "question": "What happens to a simulated poisoned comment in the reported pipeline?",
       "paragraphs": [
         "Start with a page identified as having a comment interface. In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words. Resiliparse converts the HTML to plaintext; 71.9% of those simulated injections remain visible after this extraction step.",
-        "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters. The combined curation survival among captured injections is 5.5%. Together with the measured 3.4% page prevalence, the authors derive a 0.13% document inclusion estimate. This is a probabilistic model assembled from controlled stages, not an observed live poisoning campaign."
+        "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters. The combined curation survival among captured injections is 5.5%. Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product. The v1 Introduction instead says 0.15%, without reconciling the difference. This is a probabilistic model assembled from controlled stages, not an observed live poisoning campaign."
       ],
       "claim_ids": ["propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion"],
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion"],
       "reading_depths": ["TWENTY_MIN", "DEEP"]
     },
     {
@@ -76,12 +76,12 @@
       "type": "EVIDENCE",
       "question": "What evidence connects public comments to model behavior?",
       "paragraphs": [
-        "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51. Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path, yielding the paper's 0.13% estimate.",
+        "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51. Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path. Their rounded product is about 0.13%, matching Section 4.4; the v1 Introduction separately states 0.15%, an unresolved internal discrepancy.",
         "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%. At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls.",
         "Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points. Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."
       ],
       "claim_ids": ["propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion", "propaganda_claim_model_shift", "propaganda_claim_sft", "propaganda_claim_formats"],
-      "source_refs": ["propaganda_source_inclusion", "propaganda_source_models"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_models"],
       "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
     },
     {
@@ -90,10 +90,10 @@
       "question": "What does this study not demonstrate?",
       "paragraphs": [
         "Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline. Proprietary crawlers may differ in scope, rendering, frequency, extraction, and filtering. Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present.",
-        "The authors avoid live injection and validate the vector in sandboxes. The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters. The paper therefore does not show that a deployed model was poisoned through comments, that 0.13% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."
+        "The authors avoid live injection and validate the vector in sandboxes. The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters. The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."
       ],
-      "claim_ids": ["propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_limitations"],
+      "claim_ids": ["propaganda_claim_inclusion", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_limitations"],
       "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
     },
     {
@@ -102,14 +102,23 @@
       "question": "What is the strongest defensible conclusion?",
       "paragraphs": [
         "The paper supports treating third-party page fragments as a real data-provenance concern. Its strongest contribution is methodological: a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone. The negative advertisement result reinforces that point.",
-        "The phrase 'can be poisoned at scale' should remain bounded by the threat model. Inclusion is estimated from a sampled, sandboxed, open pipeline, and model influence is shown in a separate controlled experiment. Connecting those stages into a reliable live attack against a production system remains unestablished."
+        "The phrase 'can be poisoned at scale' should remain bounded by the threat model. Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%. Model influence is shown in a separate controlled experiment. Connecting those stages into a reliable live attack against a production system remains unestablished."
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_ads", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_limitations"],
+      "claim_ids": ["propaganda_claim_central", "propaganda_claim_halflife", "propaganda_claim_inclusion", "propaganda_claim_ads", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_limitations"],
       "reading_depths": ["TWENTY_MIN", "DEEP"]
     }
   ],
   "claims": [
+    {
+      "id": "propaganda_claim_central",
+      "text": "Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences.",
+      "epistemic_status": "EXPLAINER_INFERENCE",
+      "importance": "CORE",
+      "confidence": 0.95,
+      "source_refs": ["propaganda_source_inclusion", "propaganda_source_models", "propaganda_source_limitations"],
+      "verification_status": "VERIFIED"
+    },
     {
       "id": "propaganda_claim_halflife",
       "text": "HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival.",
@@ -148,11 +157,11 @@
     },
     {
       "id": "propaganda_claim_inclusion",
-      "text": "Combining the measured stages produced a 0.13% document-level inclusion estimate in the studied setup.",
+      "text": "Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference.",
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion"],
       "verification_status": "VERIFIED"
     },
     {
@@ -193,11 +202,11 @@
     },
     {
       "id": "propaganda_claim_scope_pipeline",
-      "text": "The 0.13% inclusion estimate is not established for proprietary crawlers or curation pipelines.",
+      "text": "Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines.",
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 1,
-      "source_refs": ["propaganda_source_limitations"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_limitations"],
       "verification_status": "VERIFIED"
     },
     {
@@ -214,9 +223,9 @@
     {
       "id": "propaganda_source_threat",
       "source_kind": "PAPER",
-      "label": "Computational Propaganda v1 threat model",
+      "label": "Computational Propaganda v1 threat model and Introduction inclusion summary",
       "url": "https://arxiv.org/pdf/2607.15267v1",
-      "locator": "Pages 1–3, Sections 1–2.2"
+      "locator": "Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"
     },
     {
       "id": "propaganda_source_halflife",
@@ -228,9 +237,9 @@
     {
       "id": "propaganda_source_inclusion",
       "source_kind": "PAPER",
-      "label": "Computational Propaganda v1 inclusion analysis",
+      "label": "Computational Propaganda v1 stage results and Section 4.4 inclusion estimate",
       "url": "https://arxiv.org/pdf/2607.15267v1",
-      "locator": "Pages 4–6, Sections 4.1–4.6, Figures 1–2"
+      "locator": "Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"
     },
     {
       "id": "propaganda_source_models",
@@ -270,9 +279,8 @@
           "value": 5.5
         },
         {
-          "label": "Estimated corpus inclusion",
-          "detail": "Combining the measured stages produced a 0.13% document-level inclusion estimate.",
-          "value": 0.13
+          "label": "Conflicting inclusion summaries",
+          "detail": "Section 4.4 and the rounded stage product give about 0.13% document-level inclusion, while the v1 Introduction states 0.15%; the source does not reconcile them."
         },
         {
           "label": "Controlled model effect",
@@ -280,15 +288,16 @@
         }
       ],
       "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion", "propaganda_claim_model_shift"],
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_models"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_models"],
       "interpretation": "HalfLife makes the attack conditional: posting content is insufficient unless the page is crawlable, the fragment is extracted, the document survives curation, and repeated poison ultimately affects training.",
       "limitations": [
         "The percentages use different conditional denominators and are not five independent population rates.",
+        "The v1 paper contains an unresolved numerical discrepancy: 0.15% in the Introduction versus approximately 0.13% in Section 4.4 and the rounded stage product.",
         "The inclusion estimate combines sandboxed injection with one Common Crawl sample and one open curation pipeline.",
         "The downstream experiment used controlled poison mixtures and models up to 1.3B parameters, not a live end-to-end attack."
       ],
-      "alt_text": "Five-stage pipeline from a public comment to model behavior: 3.4% of sampled pages had detected comment interfaces, 71.9% of simulated comments survived extraction, 5.5% of captured injections survived the combined curation path, the derived inclusion estimate was 0.13%, and a separate controlled pretraining experiment shifted base-model entity preferences.",
-      "fallback": "HalfLife separates the vector into stages. Comment signatures appeared on 3.4% of 181,857 sampled pages. Of simulated replacement comments, 71.9% survived extraction, and 5.5% of captured injections passed the combined curation path. These stages yielded a 0.13% estimated document inclusion rate. Separately, a 0.1% poison-token mixture shifted five base models by 18.6 to 20.7 percentage points. These results are not a live attack or a universal production-pipeline estimate."
+      "alt_text": "Five-stage pipeline from a public comment to model behavior: 3.4% of sampled pages had detected comment interfaces, 71.9% of simulated comments survived extraction, and 5.5% of captured injections survived the combined curation path. Section 4.4 and the rounded stage product give about 0.13% inclusion, while the v1 Introduction says 0.15%. A separate controlled pretraining experiment shifted base-model entity preferences.",
+      "fallback": "HalfLife separates the vector into stages. Comment signatures appeared on 3.4% of 181,857 sampled pages. Of simulated replacement comments, 71.9% survived extraction, and 5.5% of captured injections passed the combined curation path. Multiplying those rounded stages gives about 0.13%, matching Section 4.4, but the v1 Introduction states 0.15%; the paper does not reconcile the discrepancy. Separately, a 0.1% poison-token mixture shifted five base models by 18.6 to 20.7 percentage points. These results are not a live attack or a universal production-pipeline estimate."
     }
   ],
   "glossary": [
@@ -321,6 +330,7 @@
   "revision_notes": [
     "Initial evidence-backed explainer fixture for arXiv:2607.15267v1.",
     "The inclusion analysis and controlled model-effect experiment remain explicitly separate.",
+    "Exposed the unresolved v1 discrepancy between the Introduction's 0.15% inclusion summary and Section 4.4's stage-derived approximately 0.13% value.",
     "Editorial review and human publication approval remain required."
   ]
 }

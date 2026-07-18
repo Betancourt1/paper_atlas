@@ -18,7 +18,7 @@
   "tldr": [
     "Pairwise accuracy checks which response ranks higher, not whether absolute scores use the same scale across languages.",
     "Across aligned content in 23 languages, all eight core evaluators show statistically significant language-dependent score shifts, with higher scores associated with lower Common Crawl representation.",
-    "A shared median threshold produces reward-model acceptance gaps up to 43 percentage points even though pairwise accuracy is often above 90%.",
+    "Across reward-model and benchmark aggregates, a shared median threshold produces a maximum acceptance gap of 43.0 percentage points even though pairwise accuracy is often above 90%. A separate English-versus-Ukrainian example uses rounded 23% and 67% acceptance rates and calls their difference 44 points; this apparent rounding/source discrepancy is not the aggregate maximum.",
     "Uncertainty correlates with the shift but does not fully explain it; language-specific offsets reduce the gap by 60.9% on average but leave important residual differences."
   ],
   "blocks": [
@@ -64,10 +64,10 @@
       "type": "WORKED_EXAMPLE",
       "question": "What does the hidden shift look like in a thresholded safety example?",
       "paragraphs": [
-        "For Skywork-LLaMA-8B, English reaches 93% pairwise accuracy with a 23% acceptance rate, while Ukrainian reaches 87% pairwise accuracy with a 67% acceptance rate. Both languages look reliable by ranking accuracy, yet the same global threshold produces a 44-percentage-point acceptance difference.",
+        "For Skywork-LLaMA-8B, the paper rounds English to 93% pairwise accuracy and 23% acceptance, and Ukrainian to 87% pairwise accuracy and 67% acceptance. It calls this a 44-percentage-point difference. That worked example appears to subtract rounded display values; it is distinct from the aggregate maximum of 43.0 points reported across reward-model and benchmark combinations.",
         "The paper also wraps Hindi Safety content in an English frame. An off-the-shelf language identifier labels 44% of these code-switched prompts as English, causing the more lenient English threshold to be applied to content scored against the higher Hindi reference. Acceptance rises from the calibrated 50% to 75%. This is a constructed demonstration of the attack surface, not evidence of exploitation in a production system."
       ],
-      "claim_ids": ["language_claim_gap", "language_claim_code_switch", "language_claim_production_notshown"],
+      "claim_ids": ["language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_code_switch", "language_claim_production_notshown"],
       "source_refs": ["language_source_thresholds"],
       "reading_depths": ["TWENTY_MIN", "DEEP"]
     },
@@ -77,10 +77,10 @@
       "question": "How large and consistent are the measured language effects?",
       "paragraphs": [
         "All eight core evaluators show statistically significant differences in mean scores across languages by one-way ANOVA. For the aggregated reward models, Common Crawl prevalence correlates with mean score at Pearson r = -0.58 and Spearman rho = -0.81: languages with lower representation tend to receive higher scores.",
-        "Under one global median threshold, reward-model acceptance gaps reach 43.0 percentage points. Even within observations above 95% pairwise accuracy, acceptance can differ by 34.0 points. GPT-4.1-mini shows gaps of 19.6 and 14.0 points on Safety and Chat-Hard; Qwen3-32B-thinking shows 32.7 and 29.7 points.",
+        "Under one global median threshold, the aggregate reward-model analysis reports a maximum acceptance gap of 43.0 percentage points. Separately, the Skywork-LLaMA-8B English/Ukrainian example reports rounded acceptance rates of 23% and 67% and describes them as a 44-point gap; the apparent one-point difference reflects the source's rounded example rather than a second aggregate maximum. Even within observations above 95% pairwise accuracy, acceptance can differ by 34.0 points. GPT-4.1-mini shows gaps of 19.6 and 14.0 points on Safety and Chat-Hard; Qwen3-32B-thinking shows 32.7 and 29.7 points.",
         "Uncertainty measures correlate positively with score at the language level, but nested regressions retain significant language effects after controlling for negative log-likelihood. A per-language mean-offset correction reduces the average acceptance gap from 33.4 to 11.6 points, or 60.9%, without eliminating differences in distribution shape or language-item interaction."
       ],
-      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_gap", "language_claim_high_accuracy_gap", "language_claim_additional_judges", "language_claim_uncertainty", "language_claim_language_after_nll", "language_claim_calibration"],
+      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_high_accuracy_gap", "language_claim_additional_judges", "language_claim_uncertainty", "language_claim_language_after_nll", "language_claim_calibration"],
       "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_uncertainty", "language_source_regressions", "language_source_calibration"],
       "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
     },
@@ -143,6 +143,15 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
+      "source_refs": ["language_source_thresholds"],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "language_claim_english_ukrainian_rounding",
+      "text": "The paper's Skywork-LLaMA-8B example rounds English and Ukrainian acceptance to 23% and 67% and calls the difference 44 percentage points; this worked-example value is distinct from the aggregate maximum of 43.0 points and appears to reflect rounded display values.",
+      "epistemic_status": "EXPLAINER_INFERENCE",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
       "source_refs": ["language_source_thresholds"],
       "verification_status": "VERIFIED"
     },
@@ -237,9 +246,9 @@
     {
       "id": "language_source_thresholds",
       "source_kind": "PAPER",
-      "label": "LLM Evaluators v1 threshold analysis",
+      "label": "LLM Evaluators v1 threshold analysis and rounded worked example",
       "url": "https://arxiv.org/pdf/2607.14480v1",
-      "locator": "Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15"
+      "locator": "Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example"
     },
     {
       "id": "language_source_uncertainty",
@@ -286,7 +295,7 @@
         },
         {
           "label": "Shared-threshold consequence",
-          "detail": "Applying one global median threshold produces acceptance-rate gaps of up to 43 percentage points.",
+          "detail": "The aggregate analysis reports gaps up to 43.0 percentage points. A separate rounded English/Ukrainian example uses 23% versus 67% and is described by the paper as 44 points; it is not the aggregate maximum.",
           "value": 43
         },
         {
@@ -295,17 +304,18 @@
           "value": 60.9
         }
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_effect", "language_claim_gap", "language_claim_high_accuracy_gap", "language_claim_calibration"],
+      "claim_ids": ["language_claim_pairwise_blind", "language_claim_effect", "language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_high_accuracy_gap", "language_claim_calibration"],
       "source_refs": ["language_source_intro", "language_source_effects", "language_source_thresholds", "language_source_calibration"],
       "interpretation": "A language-conditioned score shift can cancel when comparing two responses within one language, preserving pairwise rankings, while still changing which responses cross one shared absolute threshold.",
       "limitations": [
         "The inputs are translated benchmark items, not naturally authored or culturally specific multilingual conversations.",
         "The 43-point result uses a global median threshold as an illustrative rule; production policies may differ.",
+        "The paper's 44-point English/Ukrainian example is computed from rounded 23% and 67% display values and should not replace the 43.0-point aggregate maximum.",
         "Per-language offsets require language identification and cannot correct differing score dispersion or language-item interactions.",
         "The comparison explains the measured statistical blind spot; it does not establish a causal mechanism."
       ],
-      "alt_text": "Comparison of pairwise and pointwise evaluation across 23 languages. Pairwise accuracy often remains above 90%, but eight evaluators assign significantly shifted absolute scores. A shared threshold creates acceptance gaps up to 43 percentage points. Per-language offsets reduce the average gap by 60.9% but leave an 11.6-point residual.",
-      "fallback": "The study evaluates aligned response pairs in 23 languages. Pairwise accuracy asks only whether the preferred response scores above the rejected response, so a language-wide shift can leave ordering unchanged. Pointwise analysis finds significant score differences in all eight core evaluators. Under one global median threshold, acceptance rates differ by as much as 43 percentage points. Subtracting a per-language mean offset reduces the average gap from 33.4 to 11.6 points, but distribution-shape and language-item differences remain."
+      "alt_text": "Comparison of pairwise and pointwise evaluation across 23 languages. Pairwise accuracy often remains above 90%, but eight evaluators assign significantly shifted absolute scores. The aggregate shared-threshold maximum is 43.0 percentage points; a separate rounded English/Ukrainian example is described as 44 points from 23% versus 67%. Per-language offsets reduce the average gap by 60.9% but leave an 11.6-point residual.",
+      "fallback": "The study evaluates aligned response pairs in 23 languages. Pairwise accuracy asks only whether the preferred response scores above the rejected response, so a language-wide shift can leave ordering unchanged. Pointwise analysis finds significant score differences in all eight core evaluators. Under one global median threshold, the aggregate analysis reports acceptance-rate gaps up to 43.0 percentage points. Separately, the paper rounds the Skywork-LLaMA-8B English and Ukrainian rates to 23% and 67% and calls that example a 44-point gap; this apparent rounding discrepancy is not a different aggregate maximum. Subtracting a per-language mean offset reduces the average gap from 33.4 to 11.6 points, but distribution-shape and language-item differences remain."
     }
   ],
   "glossary": [
@@ -338,6 +348,7 @@
   "revision_notes": [
     "Initial evidence-backed explainer fixture for arXiv:2607.14480v1.",
     "Pairwise ranking, pointwise calibration, uncertainty correlation, and causal uncertainty remain separated.",
+    "Distinguished the 43.0-point aggregate maximum from the paper's 44-point English/Ukrainian example based on rounded 23% and 67% display values.",
     "Editorial review and human publication approval remain required."
   ]
 }
