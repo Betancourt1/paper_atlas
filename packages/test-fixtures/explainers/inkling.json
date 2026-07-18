@@ -9,7 +9,7 @@
     "text": "Inkling is a 66-layer sparse mixture-of-experts multimodal Transformer whose architecture, access options, checkpoints, and evaluation claims must be kept separate to understand what the release evidence actually supports.",
     "claim_id": "ink_002"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": [
       "ink_why",

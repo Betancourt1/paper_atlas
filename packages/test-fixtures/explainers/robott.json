@@ -9,7 +9,7 @@
     "text": "RoboTTT turns a robot's long visuomotor history into fast weights updated during inference, and the paper reports stronger performance than short-context baselines on three controlled real-robot assembly tasks.",
     "claim_id": "rttt_core"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": [
       "rttt_why",

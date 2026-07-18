@@ -9,7 +9,7 @@
     "text": "TRACE adds local credit to long tool-use trajectories by measuring how each tool interaction changes a frozen model's ability to predict a known answer, while retaining verified final correctness as the training anchor.",
     "claim_id": "trace_claim_credit"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": ["trace_why", "trace_mechanism", "trace_evidence", "trace_limitations"],
     "TWENTY_MIN": ["trace_why", "trace_change", "trace_mechanism", "trace_example", "trace_evidence", "trace_limitations", "trace_review"],

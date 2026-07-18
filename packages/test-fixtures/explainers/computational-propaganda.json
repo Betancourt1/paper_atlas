@@ -9,7 +9,7 @@
     "text": "Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences.",
     "claim_id": "propaganda_claim_central"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": ["propaganda_why", "propaganda_mechanism", "propaganda_evidence", "propaganda_limitations"],
     "TWENTY_MIN": ["propaganda_why", "propaganda_change", "propaganda_mechanism", "propaganda_example", "propaganda_evidence", "propaganda_limitations", "propaganda_review"],

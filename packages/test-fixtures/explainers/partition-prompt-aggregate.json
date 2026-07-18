@@ -9,7 +9,7 @@
     "text": "Across the paper's survey-based and synthetic tests, language-model estimates often fail to compose according to the law of total probability, and ACS population estimates reconstructed from subgroup prompts are often better aligned than direct population-level estimates.",
     "claim_id": "ppa_core"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": [
       "ppa_why",

@@ -9,7 +9,7 @@
     "text": "Multilingual evaluators can preserve high pairwise ranking accuracy while shifting absolute score scales by language, creating large cross-language differences when one global decision threshold is applied.",
     "claim_id": "language_claim_pairwise_blind"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": ["language_why", "language_mechanism", "language_evidence", "language_limitations"],
     "TWENTY_MIN": ["language_why", "language_change", "language_mechanism", "language_example", "language_evidence", "language_limitations", "language_review"],

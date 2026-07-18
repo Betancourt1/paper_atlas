@@ -9,7 +9,7 @@
     "text": "The original Transformer replaces sequence-aligned recurrence and convolution with stacked self-attention and feed-forward processing, enabling more parallel training while retaining autoregressive decoding.",
     "claim_id": "attn_002"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": [
       "attn_why",

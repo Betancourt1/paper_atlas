@@ -9,7 +9,7 @@
     "text": "SearchOS makes search tasks, evidence, coverage, and failures explicit shared state, then uses middleware and continuous scheduling to coordinate agents around unresolved information gaps.",
     "claim_id": "sos_core"
   },
-  "editorial_status": "REVIEW_REQUIRED",
+  "editorial_status": "REVIEWED",
   "reading_paths": {
     "FIVE_MIN": [
       "sos_why",
