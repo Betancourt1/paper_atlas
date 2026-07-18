@@ -1,4 +1,4 @@
-.PHONY: bootstrap check dev e2e reset-local test visual
+.PHONY: bootstrap check dev e2e harness-check reset-local test visual
 
 bootstrap:
 	pnpm install --frozen-lockfile
@@ -12,6 +12,9 @@ dev:
 
 check:
 	pnpm check
+
+harness-check:
+	UV_CACHE_DIR=.uv-cache uv run python scripts/check-agent-harness.py
 
 test:
 	pnpm test

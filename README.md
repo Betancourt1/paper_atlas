@@ -37,6 +37,7 @@ make check
 make test
 make e2e
 make visual
+make harness-check
 make reset-local CONFIRM=1
 ```
 
@@ -44,3 +45,12 @@ make reset-local CONFIRM=1
 volumes. M1 ingestion, parsing, workflows, agents, auth, and persistence are
 explicitly outside this milestone.
 
+## Agent harness
+
+The repository's Codex harness separates site engineering from scientific
+editorial production. Its routing, roles, evidence handoffs, and publication
+boundary are documented in [`docs/agent-harness.md`](docs/agent-harness.md).
+
+The repository-scoped `paper-explainer` skill and custom agents are contributor
+workflows. They do not imply that the future Temporal-based production agent
+pipeline is already implemented.

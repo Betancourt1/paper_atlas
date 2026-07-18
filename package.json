@@ -8,8 +8,9 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "check": "pnpm run check:generated && pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build",
+    "check": "pnpm run check:harness && pnpm run check:generated && pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build",
     "check:generated": "bash scripts/check-generated.sh",
+    "check:harness": "UV_CACHE_DIR=.uv-cache uv run python scripts/check-agent-harness.py",
     "dev": "turbo run dev --parallel",
     "e2e": "pnpm --filter @paper-atlas/web test:e2e",
     "generate": "bash scripts/generate-schema.sh",

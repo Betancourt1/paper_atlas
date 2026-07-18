@@ -26,6 +26,20 @@ visual novelty.
 Before implementation, read the closest `AGENTS.md`, the relevant specification,
 and `design.md` for UI work. Define a narrow vertical slice and its tests.
 
+Classify the task using `docs/agent-harness.md` before changing files:
+
+- Site engineering uses the `site_maintainer` contract. User-visible,
+  cross-boundary, and release-sensitive work also receives `site_reviewer`.
+- Any task that adds, summarizes, explains, illustrates, animates, reviews, or
+  publishes a paper must load `.agents/skills/paper-explainer/SKILL.md` and use
+  its evidence-first editorial sequence.
+- Mixed work completes the editorial contract before site integration, then
+  passes both review gates.
+
+Metadata or an abstract is never a published explainer. If the requested
+product outcome exceeds the current milestone, state the gap before changing
+files rather than silently reducing scope.
+
 After implementation, run targeted tests and `make check`. UI changes also
 require desktop and mobile browser QA. Contract changes update generated models,
 fixtures, and documentation in the same commit.
@@ -38,6 +52,7 @@ fixtures, and documentation in the same commit.
 - `make test`
 - `make e2e`
 - `make visual`
+- `make harness-check`
 - `make reset-local CONFIRM=1`
 
 ## Architecture boundaries
@@ -54,4 +69,3 @@ fixtures, and documentation in the same commit.
 
 Code, tests, docs, accessibility, security, observability, and rollback coverage
 appropriate to the slice are complete. A passing build alone is not enough.
-
