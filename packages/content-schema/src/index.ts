@@ -8,6 +8,7 @@ export type {
 } from "./generated/explainer-document.js";
 export type { Author, PaperSummary, Source } from "./generated/paper-summary.js";
 export {
+  getExplainerIntegrityErrors,
   parseExplainerDocument,
   parsePaperSummary,
   validateExplainerDocument,

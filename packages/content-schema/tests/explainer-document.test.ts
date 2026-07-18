@@ -15,7 +15,7 @@ const validExplainer = {
   central_claim: { text: "A source-backed test claim.", claim_id: "claim_core" },
   editorial_status: "REVIEW_REQUIRED",
   reading_paths: {
-    FIVE_MIN: ["why", "mechanism", "limitations"],
+    FIVE_MIN: ["why", "mechanism", "evidence", "limitations"],
     TWENTY_MIN: ["why", "change", "mechanism", "example", "evidence", "limitations"],
     DEEP: ["why", "change", "mechanism", "example", "evidence", "limitations", "review"],
   },
@@ -35,7 +35,11 @@ const validExplainer = {
     paragraphs: [`Source-backed ${id} explanation.`],
     claim_ids: ["claim_core"],
     source_refs: ["source_paper"],
-    reading_depths: ["DEEP"],
+    reading_depths: [
+      ...(validPathIncludes("FIVE_MIN", id) ? ["FIVE_MIN"] : []),
+      ...(validPathIncludes("TWENTY_MIN", id) ? ["TWENTY_MIN"] : []),
+      "DEEP",
+    ],
   })),
   claims: Array.from({ length: 6 }, (_, index) => ({
     id: index === 0 ? "claim_core" : `claim_${index}`,
@@ -93,4 +97,32 @@ describe("ExplainerDocument schema", () => {
     expect(validateExplainerDocument(invalid)).toBe(false);
     expect(() => parseExplainerDocument(invalid)).toThrow("Invalid ExplainerDocument");
   });
+
+  it("rejects dangling claim references", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.blocks[0].claim_ids = ["missing_claim"];
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "block why claim references unknown id missing_claim",
+    );
+  });
+
+  it("rejects reading paths without mechanism and caveats", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.reading_paths.FIVE_MIN = ["why", "evidence"];
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "FIVE_MIN reading path omits HOW_IT_WORKS",
+    );
+  });
 });
+
+function validPathIncludes(depth: "FIVE_MIN" | "TWENTY_MIN", blockId: string): boolean {
+  const paths = {
+    FIVE_MIN: ["why", "mechanism", "evidence", "limitations"],
+    TWENTY_MIN: ["why", "change", "mechanism", "example", "evidence", "limitations"],
+  };
+  return paths[depth].includes(blockId);
+}
