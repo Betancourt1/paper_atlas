@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_attention_is_all_you_need",
+  "slug": "attention-is-all-you-need",
+  "title": "Attention Is All You Need",
+  "summary": "A sequence transduction architecture based entirely on attention, without recurrence or convolution.",
+  "authors": [
+    { "id": "author_ashish_vaswani", "name": "Ashish Vaswani" },
+    { "id": "author_noam_shazeer", "name": "Noam Shazeer" },
+    { "id": "author_niki_parmar", "name": "Niki Parmar" },
+    { "id": "author_jakob_uszkoreit", "name": "Jakob Uszkoreit" },
+    { "id": "author_llion_jones", "name": "Llion Jones" },
+    { "id": "author_aidan_gomez", "name": "Aidan N. Gomez" },
+    { "id": "author_lukasz_kaiser", "name": "Łukasz Kaiser" },
+    { "id": "author_illia_polosukhin", "name": "Illia Polosukhin" }
+  ],
+  "published_year": 2017,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "1706.03762",
+    "url": "https://arxiv.org/abs/1706.03762"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}
+

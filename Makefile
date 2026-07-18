@@ -2,7 +2,7 @@
 
 bootstrap:
 	pnpm install --frozen-lockfile
-	uv sync --frozen
+	UV_CACHE_DIR=.uv-cache uv sync --frozen
 	pnpm generate
 
 dev:
@@ -25,4 +25,3 @@ visual:
 reset-local:
 	@test "$(CONFIRM)" = "1" || (echo "Run make reset-local CONFIRM=1 to remove Paper Atlas containers and named volumes."; exit 1)
 	docker compose down --volumes --remove-orphans
-

@@ -1,0 +1,27 @@
+{
+  "name": "@paper-atlas/content-schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "generate": "json2ts --input schema/paper-summary.schema.json --output src/generated/paper-summary.ts --bannerComment \"/* Generated from paper-summary.schema.json. Do not edit directly. */\"",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "15.0.4",
+    "vitest": "4.1.10"
+  }
+}
+

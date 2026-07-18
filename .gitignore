@@ -3,6 +3,7 @@
 .env.local
 .next/
 .turbo/
+dist/
 node_modules/
 playwright-report/
 test-results/
@@ -12,5 +13,5 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .venv/
+.uv-cache/
 *.pyc
-

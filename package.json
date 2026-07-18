@@ -13,9 +13,9 @@
     "dev": "turbo run dev --parallel",
     "e2e": "pnpm --filter @paper-atlas/web test:e2e",
     "generate": "bash scripts/generate-schema.sh",
-    "lint": "turbo run lint && uv run ruff check apps/api/src apps/api/tests apps/worker/src",
-    "test": "turbo run test && uv run pytest",
-    "typecheck": "turbo run typecheck && uv run mypy apps/api/src apps/worker/src",
+    "lint": "turbo run lint && UV_CACHE_DIR=.uv-cache uv run ruff check apps/api/src apps/api/tests apps/worker/src",
+    "test": "turbo run test && UV_CACHE_DIR=.uv-cache uv run pytest",
+    "typecheck": "turbo run typecheck && UV_CACHE_DIR=.uv-cache uv run mypy apps/api/src apps/worker/src",
     "visual": "pnpm --filter @paper-atlas/web test:visual"
   },
   "devDependencies": {
@@ -23,4 +23,3 @@
     "typescript": "7.0.2"
   }
 }
-
