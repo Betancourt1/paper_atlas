@@ -1,0 +1,512 @@
+{
+  "schema_version": "1.0.0",
+  "paper_id": "paper_inkling",
+  "paper_version": "v1",
+  "language": "en",
+  "audience": "TECHNICAL_GENERALIST",
+  "title": "Inkling: Reading the Model Card Across Checkpoints and Claims",
+  "central_claim": {
+    "text": "Inkling is a 66-layer sparse mixture-of-experts multimodal Transformer whose architecture, access options, checkpoints, and evaluation claims must be kept separate to understand what the release evidence actually supports.",
+    "claim_id": "ink_002"
+  },
+  "editorial_status": "REVIEW_REQUIRED",
+  "reading_paths": {
+    "FIVE_MIN": [
+      "ink_why",
+      "ink_mechanism",
+      "ink_evidence",
+      "ink_limitations"
+    ],
+    "TWENTY_MIN": [
+      "ink_why",
+      "ink_change",
+      "ink_mechanism",
+      "ink_example",
+      "ink_evidence",
+      "ink_limitations",
+      "ink_review"
+    ],
+    "DEEP": [
+      "ink_why",
+      "ink_change",
+      "ink_mechanism",
+      "ink_example",
+      "ink_evidence",
+      "ink_limitations",
+      "ink_review"
+    ]
+  },
+  "tldr": [
+    "Inkling is a 66-layer decoder-only sparse mixture-of-experts model with 975 billion total parameters and 41 billion active parameters per token path.",
+    "It accepts text, images, and audio, produces text, and advertises up to a one-million-token context window, while Tinker exposes smaller 64K and 256K options.",
+    "The release reports broad benchmark coverage and adjustable reasoning effort, but some results use internal harnesses or a checkpoint different from the released weights.",
+    "Open weights do not mean consumer-scale deployment: the listed minimum is 2 TB of aggregate VRAM for BF16 or 600 GB for NVFP4, and benchmark parity between those checkpoints is not established."
+  ],
+  "blocks": [
+    {
+      "id": "ink_why",
+      "type": "WHY_IT_EXISTS",
+      "question": "Why did Thinking Machines Lab release Inkling?",
+      "paragraphs": [
+        "The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark. Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following, and multimodal applications.",
+        "That positioning matters because the provider explicitly says Inkling is not the strongest model overall. The proposed value is the combination of open weights, multimodal input, controllable reasoning effort, and availability for fine-tuning."
+      ],
+      "claim_ids": [
+        "ink_005"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_change",
+      "type": "WHAT_IT_CHANGES",
+      "question": "What is materially different about the release?",
+      "paragraphs": [
+        "Inkling combines a large sparse model with native text, image, and audio input and makes the weights available in original and quantized forms. Only a subset of the 975 billion parameters is active for a token, which separates total model capacity from the 41-billion-parameter active path.",
+        "The release also exposes an effort control intended to trade generated tokens for performance. This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task."
+      ],
+      "claim_ids": [
+        "ink_001",
+        "ink_002",
+        "ink_003",
+        "ink_005",
+        "ink_008"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_aup"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_mechanism",
+      "type": "HOW_IT_WORKS",
+      "question": "How does Inkling process a token and multiple input modalities?",
+      "paragraphs": [
+        "Inkling is a decoder-only autoregressive Transformer with 66 layers. Its feed-forward backbone is a sparse mixture of experts: each token is routed to 6 of 256 routed experts, while 2 shared experts are always active. The selected and shared expert outputs are combined before the token continues through the network.",
+        "The release says local and global attention layers are interleaved at a 5-to-1 ratio with 8 key-value heads. Images and audio are converted into representations, projected into the same hidden space as text, and processed jointly by the decoder. The release describes 40-by-40 image patches through a four-layer hierarchical MLP and dMel spectrograms for audio; the website model card describes the same path more generally as a hierarchical patch encoder and discrete audio-token encoding.",
+        "The provider reports pretraining on 45 trillion tokens across text, images, audio, and video, followed by synthetic supervised fine-tuning and large-scale reinforcement learning. These are provider release claims; the model card discloses only broad data categories and provenance rather than a reproducible dataset inventory."
+      ],
+      "claim_ids": [
+        "ink_002",
+        "ink_003",
+        "ink_006"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_example",
+      "type": "WORKED_EXAMPLE",
+      "question": "What would a local deployment decision look like?",
+      "paragraphs": [
+        "Start by choosing a checkpoint, not by reading the phrase open weights as a hardware promise. The BF16 checkpoint requires at least 2 TB of aggregate VRAM; the listed examples are 8 NVIDIA B300 GPUs or 16 H200 GPUs. The NVFP4 checkpoint lowers the stated minimum to 600 GB: W4A4 can use 4 B300 GPUs but requires SM100-or-newer architecture, while W4A16 can use 8 H200 GPUs.",
+        "The quantized option reduces memory requirements, but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison. A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint."
+      ],
+      "claim_ids": [
+        "ink_004",
+        "ink_012"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_evidence",
+      "type": "EVIDENCE",
+      "question": "What evidence does the release provide?",
+      "paragraphs": [
+        "The main benchmark table reports Inkling at effort 0.99. Selected values include 29.7 percent on Humanity's Last Exam without tools, 46.0 percent with tools, 77.6 percent on SWE-bench Verified, 79.8 percent on IFBench, 73.5 percent on MMMU Pro Standard 10, 91.4 percent on VoiceBench, and 98.6 percent on StrongREJECT. These are vendor-published results across different benchmark families, not one common measurement scale.",
+        "The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens. Some comparisons use externally reported scores; otherwise the provider uses internal harnesses. Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero, and VoiceBench required a formatting instruction because its grader is sensitive to output format.",
+        "The effort-sweep chart supports the narrower provider interpretation that performance can be traded against generated tokens. Its Humanity's Last Exam points came from an earlier checkpoint, and the release separately says its forecasting results came from testing on a checkpoint different from the released one."
+      ],
+      "claim_ids": [
+        "ink_007",
+        "ink_008",
+        "ink_009",
+        "ink_011"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_limitations",
+      "type": "LIMITATIONS",
+      "question": "Where should the claims be narrowed?",
+      "paragraphs": [
+        "The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases, and perform unevenly across languages and subject domains. It recommends independent evaluation, application-level safeguards, and human oversight for high-stakes uses.",
+        "The one-million-token statement describes supported capacity, not demonstrated accuracy throughout that window. Tinker currently exposes 64K and 256K context options. The release also does not establish that the NVFP4 checkpoint matches BF16 benchmark quality or that base-checkpoint safety behavior survives downstream fine-tuning.",
+        "Training disclosure remains high level. The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution, or training cutoff needed for a complete independent audit."
+      ],
+      "claim_ids": [
+        "ink_003",
+        "ink_009",
+        "ink_010",
+        "ink_012"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ink_review",
+      "type": "CRITICAL_REVIEW",
+      "question": "What should a careful reader conclude?",
+      "paragraphs": [
+        "The release supports a strong descriptive conclusion: Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage. It does not support calling the model best overall, consumer-deployable, fully open source, or proven at full quality across a one-million-token context.",
+        "Source boundaries are part of the evidence. The website model card, release page, and checkpoint card disagree on a few values, including GDPVal-AA and MMMU Pro, and the web card has no immutable revision identifier. The initial BF16 weight commit is therefore a better reproducibility anchor than a mutable branch, while claims from the release page must remain labeled as release claims.",
+        "The provider labels the model Apache 2.0, but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy. This explainer records both statements rather than treating open weights as a synonym for unrestricted use."
+      ],
+      "claim_ids": [
+        "ink_001",
+        "ink_005",
+        "ink_011",
+        "ink_012"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16",
+        "source_inkling_aup"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "ink_001",
+      "text": "Thinking Machines Lab dates the initial Inkling release to July 15, 2026, labels the model Apache 2.0, and links an Acceptable Use Policy that says it also conditions use of the model materials.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_aup"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_002",
+      "text": "Inkling is a 66-layer decoder-only sparse mixture-of-experts Transformer with 975 billion total parameters, 41 billion active parameters, 6 of 256 routed experts per token, and 2 shared experts.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_003",
+      "text": "Inkling accepts text, image, and audio inputs, produces text output, and advertises support for a context window up to one million tokens.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_004",
+      "text": "The provider lists a minimum of 2 TB aggregate VRAM for BF16 and 600 GB for NVFP4, with distinct GPU and numeric-mode requirements for each checkpoint.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_005",
+      "text": "The provider positions Inkling as a broad customizable open-weights base with multimodal input and controllable effort, while explicitly stating that it is not the strongest model overall.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_006",
+      "text": "The release reports pretraining on 45 trillion multimodal tokens and more than 30 million asynchronous reinforcement-learning rollouts after an initial synthetic supervised-fine-tuning stage.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.99,
+      "source_refs": [
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_007",
+      "text": "At effort 0.99, the provider table reports 29.7 percent on Humanity's Last Exam without tools, 77.6 percent on SWE-bench Verified, 79.8 percent on IFBench, 73.5 percent on MMMU Pro Standard 10, 91.4 percent on VoiceBench, and 98.6 percent on StrongREJECT.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.99,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_008",
+      "text": "The provider interprets its effort sweep as evidence that Inkling can exchange generated tokens for performance and says it matches Nemotron 3 Ultra on Terminal Bench at roughly one-third of the generated tokens.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "SUPPORTING",
+      "confidence": 0.95,
+      "source_refs": [
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_009",
+      "text": "The release says the forecasting results came from a checkpoint different from the released one and that the effort chart's Humanity's Last Exam points came from an earlier checkpoint.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_release"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_010",
+      "text": "The official checkpoint card warns about hallucinations, instruction-following failures, degraded long-conversation performance, uneven language or domain performance, and the need for independent evaluation and human oversight.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_hf_bf16"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ink_011",
+      "text": "The provider's website and checkpoint cards disagree on some published values, including GDPVal-AA and MMMU Pro, and the web model card provides no immutable revision identifier that resolves the difference.",
+      "epistemic_status": "DISPUTED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_hf_bf16"
+      ],
+      "verification_status": "UNRESOLVED"
+    },
+    {
+      "id": "ink_012",
+      "text": "The sources do not establish that NVFP4 preserves BF16 benchmark quality, that useful accuracy holds throughout a one-million-token prompt, or that base-model safety transfers unchanged to fine-tuned checkpoints.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.98,
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ],
+      "verification_status": "UNRESOLVED"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "source_inkling_model_card",
+      "source_kind": "MODEL_CARD",
+      "label": "Thinking Machines Lab: Inkling Model Card",
+      "url": "https://thinkingmachines.ai/model-card/inkling/",
+      "locator": "Sections 1-6: identity, architecture, modalities, distribution hardware, training disclosure, evaluations, and safety"
+    },
+    {
+      "id": "source_inkling_release",
+      "source_kind": "RELEASE_NOTE",
+      "label": "Thinking Machines Lab: Inkling, Our Open-Weights Model",
+      "url": "https://thinkingmachines.ai/news/introducing-inkling/",
+      "locator": "July 15, 2026; Controllable thinking effort, Multimodality, Epistemics, Benchmarking, Architecture, Training, RL at scale, Availability"
+    },
+    {
+      "id": "source_inkling_hf_bf16",
+      "source_kind": "REPOSITORY",
+      "label": "Thinking Machines Lab: Inkling BF16 initial weight release",
+      "url": "https://huggingface.co/thinkingmachines/Inkling/commit/91b051f1ec836e6d56596c624c3775b495d797b1",
+      "locator": "Initial Model release commit 91b051f; README sections 1, 3, 5-7 and BF16 weight files"
+    },
+    {
+      "id": "source_inkling_hf_nvfp4",
+      "source_kind": "REPOSITORY",
+      "label": "Thinking Machines Lab: Inkling NVFP4 checkpoint",
+      "url": "https://huggingface.co/thinkingmachines/Inkling-NVFP4",
+      "locator": "Official NVFP4 checkpoint repository; model card and files"
+    },
+    {
+      "id": "source_inkling_aup",
+      "source_kind": "MODEL_CARD",
+      "label": "Thinking Machines Lab: Model Acceptable Use Policy",
+      "url": "https://thinkingmachines.ai/model-acceptable-use-policy/",
+      "locator": "Last updated July 15, 2026; introduction, restrictions, disclosure, and updates"
+    }
+  ],
+  "visuals": [
+    {
+      "id": "visual_inkling_evidence_boundaries",
+      "type": "EVIDENCE_MATRIX",
+      "title": "What does each Inkling number actually describe?",
+      "question": "Which facts describe the model design, an access surface, a downloadable checkpoint, or a different evaluation checkpoint?",
+      "items": [
+        {
+          "label": "Release identity",
+          "detail": "The provider dates the initial Inkling release to July 15, 2026, but the web model card exposes no semantic version or immutable revision identifier."
+        },
+        {
+          "label": "Core model",
+          "detail": "The model card describes a 66-layer decoder-only sparse-MoE Transformer with 975 billion total and 41 billion active parameters; each token uses 6 of 256 routed experts plus 2 shared experts."
+        },
+        {
+          "label": "Context access",
+          "detail": "The model card advertises up to 1 million tokens, while the release page offers 64K and 256K contexts on Tinker. Neither statement establishes useful quality across the entire 1-million-token window."
+        },
+        {
+          "label": "BF16 checkpoint",
+          "detail": "The original checkpoint requires at least 2 TB aggregate VRAM, with 8 NVIDIA B300 or 16 H200 GPUs listed; the initial weight release is pinned to commit 91b051f1ec836e6d56596c624c3775b495d797b1."
+        },
+        {
+          "label": "NVFP4 checkpoint",
+          "detail": "The quantized checkpoint requires at least 600 GB aggregate VRAM: W4A4 on 4 B300 GPUs with SM100-or-newer architecture or W4A16 on 8 H200 GPUs. Published benchmark parity with BF16 is not established."
+        },
+        {
+          "label": "Evaluation checkpoint",
+          "detail": "The main benchmark table uses effort 0.99 and temperature 1.0, but the forecasting results explicitly came from a different checkpoint; the table does not identify the evaluated weight precision."
+        }
+      ],
+      "claim_ids": [
+        "ink_001",
+        "ink_002",
+        "ink_003",
+        "ink_004",
+        "ink_007",
+        "ink_009",
+        "ink_010",
+        "ink_012"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ],
+      "interpretation": "Inkling is presented through several non-equivalent evidence surfaces. Architecture and capacity describe the model; Tinker limits describe hosted access; BF16 and NVFP4 describe distinct weight formats; and some evaluation claims describe another checkpoint. These boundaries must remain visible before comparing numbers or making deployment claims.",
+      "limitations": [
+        "This matrix does not imply that BF16 and NVFP4 have equal quality; no quantization comparison is supplied.",
+        "The mutable web model card has no public revision identifier, so the retrieval date and immutable weight commit must accompany the visual.",
+        "The one-million-token capacity statement is not a long-context accuracy result, and Tinker exposes smaller context options.",
+        "The visual intentionally does not merge small value discrepancies between the website card and the checkpoint card."
+      ],
+      "alt_text": "Six-row evidence matrix for Inkling. It separates the July 15, 2026 release identity; the 66-layer, 975-billion-total and 41-billion-active parameter architecture; the advertised one-million-token model context versus Tinker's 64K and 256K options; the BF16 checkpoint requiring at least 2 TB of VRAM; the NVFP4 checkpoint requiring at least 600 GB; and evaluations run at effort 0.99, including forecasting results from a different checkpoint. The matrix warns that benchmark parity between checkpoints and quality at the full context length are not established.",
+      "fallback": "Release identity: July 15, 2026; no web-card revision ID. Core model: 66 layers, 975B total parameters, 41B active, 6 of 256 routed experts plus 2 shared. Context: up to 1M advertised; Tinker offers 64K and 256K; full-window quality is untested. BF16: at least 2 TB VRAM, pinned to release commit 91b051f. NVFP4: at least 600 GB VRAM; quality parity is unestablished. Evaluation: effort 0.99 and temperature 1.0; forecasting used another checkpoint and benchmark precision is unspecified."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Mixture of experts",
+      "definition": "A model design that routes each token through a selected subset of feed-forward expert networks rather than activating every expert.",
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release"
+      ]
+    },
+    {
+      "term": "Active parameters",
+      "definition": "The parameters used along a token's routed computation path. This differs from the total parameters stored in all experts.",
+      "source_refs": [
+        "source_inkling_model_card"
+      ]
+    },
+    {
+      "term": "Checkpoint",
+      "definition": "A specific saved set of model weights. Results from one checkpoint do not automatically describe another checkpoint or a later fine-tuned derivative.",
+      "source_refs": [
+        "source_inkling_release",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ]
+    },
+    {
+      "term": "NVFP4",
+      "definition": "The low-precision checkpoint format offered for Inkling to reduce aggregate VRAM requirements relative to BF16.",
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_hf_nvfp4"
+      ]
+    },
+    {
+      "term": "Effort setting",
+      "definition": "A control that changes how many generated reasoning tokens the model tends to use, allowing a trade between token use and measured performance.",
+      "source_refs": [
+        "source_inkling_release"
+      ]
+    },
+    {
+      "term": "Benchmark harness",
+      "definition": "The prompts, tools, execution environment, grading rules, and limits used to run an evaluation. Different harnesses can make nominally similar scores difficult to compare directly.",
+      "source_refs": [
+        "source_inkling_release"
+      ]
+    }
+  ],
+  "revision_notes": [
+    "Initial review-required explainer fixture for the July 15, 2026 Inkling release.",
+    "paper_version v1 is a local Paper Atlas record for the initial release; the provider page exposes no immutable semantic version or revision identifier.",
+    "The BF16 repository is pinned to its initial model-release commit; the website model card and mutable checkpoint card contain small unresolved benchmark-value differences.",
+    "Apache 2.0 is recorded together with the provider's linked Acceptable Use Policy rather than presented as unrestricted use.",
+    "The visual is an original evidence matrix; no provider figure is reproduced."
+  ]
+}

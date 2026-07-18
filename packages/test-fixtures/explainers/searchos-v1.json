@@ -1,0 +1,484 @@
+{
+  "schema_version": "1.0.0",
+  "paper_id": "paper_searchos_v1",
+  "paper_version": "v1",
+  "language": "en",
+  "audience": "TECHNICAL_GENERALIST",
+  "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+  "central_claim": {
+    "text": "SearchOS makes search tasks, evidence, coverage, and failures explicit shared state, then uses middleware and continuous scheduling to coordinate agents around unresolved information gaps.",
+    "claim_id": "sos_core"
+  },
+  "editorial_status": "REVIEW_REQUIRED",
+  "reading_paths": {
+    "FIVE_MIN": [
+      "sos_why",
+      "sos_mechanism",
+      "sos_evidence",
+      "sos_limitations"
+    ],
+    "TWENTY_MIN": [
+      "sos_why",
+      "sos_change",
+      "sos_mechanism",
+      "sos_example",
+      "sos_evidence",
+      "sos_limitations",
+      "sos_review"
+    ],
+    "DEEP": [
+      "sos_why",
+      "sos_change",
+      "sos_mechanism",
+      "sos_example",
+      "sos_evidence",
+      "sos_limitations",
+      "sos_review"
+    ]
+  },
+  "tldr": [
+    "Long search conversations can hide what has been verified, what remains missing, and which approaches have already failed.",
+    "SearchOS reformulates an information request as relational schema completion and stores tasks, evidence, coverage, and failures outside agent conversations.",
+    "Middleware accepts evidence only when it binds to a schema cell and an anchored source span; sensors use progress and budget signals to continue, redirect, or stop work.",
+    "The system leads reported F1 metrics on WideSearch and GISA, but results use one model configuration and best-of-three reporting, while citation truth is not evaluated separately."
+  ],
+  "blocks": [
+    {
+      "id": "sos_why",
+      "type": "WHY_IT_EXISTS",
+      "question": "Why do capable search agents still repeat work and miss evidence?",
+      "paragraphs": [
+        "A long-horizon research task requires more than issuing good queries. The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions, and avoid retrying search paths that another worker has already exhausted.",
+        "Conventional agents often keep this state in growing conversation histories. As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps, or leave parallel slots idle while a slow branch finishes."
+      ],
+      "claim_ids": [
+        "sos_core",
+        "sos_socm"
+      ],
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_change",
+      "type": "WHAT_IT_CHANGES",
+      "question": "What becomes explicit when search is treated as schema completion?",
+      "paragraphs": [
+        "SearchOS converts a natural-language request into one or more related tables. Rows represent entities, columns represent requested attributes, and a citation matrix connects every populated value to a source URL and supporting excerpt. Missing cells become concrete search targets rather than vague reminders in a plan.",
+        "The system then separates global coordination from local search. An orchestrator owns schema and task mutation, explore and search agents browse, and a writer reads accumulated state. Their coordination passes through shared records rather than free-form agent-to-agent conversation."
+      ],
+      "claim_ids": [
+        "sos_schema",
+        "sos_socm"
+      ],
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_mechanism",
+      "type": "HOW_IT_WORKS",
+      "question": "How does a browser observation become shared, grounded progress?",
+      "paragraphs": [
+        "Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Evidence Graph stores atomic findings with values, sources, anchored spans, schema bindings, and provenance. The Coverage Map materializes the status of each known cell. Failure Memory records unsuccessful queries, inaccessible sources, rejected claims, and corrective guidance.",
+        "Before a model call, context middleware projects only the role-relevant portion of that state and adds selected skills. After browsing, evidence middleware accepts a candidate only if it binds to a schema cell and can be anchored to the observed source span. It then updates the Evidence Graph and Coverage Map atomically.",
+        "Sensor middleware measures changes in grounded coverage and evidence count, along with iteration, search, and time budgets. It can continue execution, request backfill, inject a correction, enter drain-only mode, or stop a branch. Continuous dispatch assigns newly available slots to ready gaps instead of waiting for a synchronized batch."
+      ],
+      "claim_ids": [
+        "sos_socm",
+        "sos_middleware",
+        "sos_scheduler"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_example",
+      "type": "WORKED_EXAMPLE",
+      "question": "What happens when one requested table cell is still missing?",
+      "paragraphs": [
+        "Suppose a comparison request has a known company row but no verified value for one attribute. The Coverage Map marks that cell missing. Frontier Task creates or selects a scoped job for the cell, and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills.",
+        "A page visit alone does not fill the cell. Evidence middleware must extract a candidate value, bind it to the correct row and attribute, and anchor it to a supporting span. Once accepted, the evidence and coverage records update together. If repeated calls produce no new evidence or coverage, the sensor can redirect or stop the branch rather than letting the model repeat the same search."
+      ],
+      "claim_ids": [
+        "sos_schema",
+        "sos_middleware",
+        "sos_scheduler",
+        "sos_skills"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_evidence",
+      "type": "EVIDENCE",
+      "question": "How well does the complete system perform?",
+      "paragraphs": [
+        "On WideSearch, SearchOS reports 80.3 item F1 and 56.5 row F1, compared with 76.0 and 54.5 for the strongest baseline on each metric. On GISA, the largest gain is set F1: 76.5 versus 63.1 for the strongest baseline. The system also leads the reported table and list F1 metrics.",
+        "A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 to 476.34 seconds, raises slot utilization from 34.6% to 41.7%, and raises item F1 from 79.66 to 86.75. This is a subset experiment, not the main benchmark result.",
+        "A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to 78.3 and row F1 from 56.5 to 53.1. The same study reports lower session time and fewer search and page calls with skills enabled, but it does not isolate which skill layer supplies the benefit."
+      ],
+      "claim_ids": [
+        "sos_main_results",
+        "sos_schedule_ablation",
+        "sos_skill_ablation"
+      ],
+      "source_refs": [
+        "sos_results_source",
+        "sos_ablations_source"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_limitations",
+      "type": "LIMITATIONS",
+      "question": "What does the evaluation leave unresolved?",
+      "paragraphs": [
+        "The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports the best of three runs for each case. It does not report mean performance or variance across those runs, and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness.",
+        "A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true. Citation correctness is not reported as a separate metric. The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment, and the benchmarks' structured answer formats may particularly suit relational schema completion.",
+        "The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search, and improved adaptation for future work."
+      ],
+      "claim_ids": [
+        "sos_citation_truth",
+        "sos_generality"
+      ],
+      "source_refs": [
+        "sos_results_source",
+        "sos_scope_source"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "sos_review",
+      "type": "CRITICAL_REVIEW",
+      "question": "Which conclusions follow from the ablations, and which do not?",
+      "paragraphs": [
+        "The paper provides strong engineering evidence for making research state explicit. The schema, evidence gate, progress sensors, and scheduler define inspectable responsibilities, while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets.",
+        "The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning, or skills individually. The authors connect the recall gains to coverage-aware dispatch; that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding."
+      ],
+      "claim_ids": [
+        "sos_schedule_ablation",
+        "sos_skill_ablation",
+        "sos_recall_interpretation",
+        "sos_generality"
+      ],
+      "source_refs": [
+        "sos_results_source",
+        "sos_ablations_source",
+        "sos_scope_source"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "sos_core",
+      "text": "SearchOS externalizes tasks, evidence, coverage, and failures as shared system state used to coordinate long-horizon information seeking.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_schema",
+      "text": "SearchOS represents a request as relational schema completion and associates each populated value with a source URL and anchored excerpt.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_socm",
+      "text": "SOCM consists of Frontier Task, an Evidence Graph, a Coverage Map, and Failure Memory with role-specific projections.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_middleware",
+      "text": "Evidence middleware accepts a browsing candidate only when it binds to a schema cell and anchors to a source span, then updates evidence and coverage atomically.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_middleware_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_scheduler",
+      "text": "Pipeline-parallel orchestration immediately assigns released execution slots to ready unresolved gaps instead of waiting for synchronized batches.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_skills",
+      "text": "SearchOS-V1 contains 280 orchestrator, strategy, and access skills selected according to task and source.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "sos_middleware_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_main_results",
+      "text": "SearchOS reports 80.3 item F1 on WideSearch and 76.5 set F1 on GISA, leading the evaluated baselines on those metrics.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "sos_results_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_schedule_ablation",
+      "text": "On the scheduling subset, continuous dispatch reduces average time from 629.13 to 476.34 seconds and raises item F1 from 79.66 to 86.75 relative to batch scheduling.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "sos_ablations_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_skill_ablation",
+      "text": "Enabling the complete hierarchical skill system raises item F1 by 2.0 points and row F1 by 3.4 points in the reported Max@3 ablation.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "sos_ablations_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_recall_interpretation",
+      "text": "The authors attribute the main WideSearch recall gain to coverage-aware dispatch reducing missing cells.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "CAVEAT",
+      "confidence": 0.72,
+      "source_refs": [
+        "sos_results_source"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "sos_citation_truth",
+      "text": "The experiments do not separately establish that every schema-bound anchored excerpt supports a factually correct extracted value.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
+      "source_refs": [
+        "sos_middleware_source",
+        "sos_results_source"
+      ],
+      "verification_status": "UNRESOLVED"
+    },
+    {
+      "id": "sos_generality",
+      "text": "The evaluation does not establish the same reliability gains across other model backbones, multimodal sources, or unstructured task families.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
+      "source_refs": [
+        "sos_scope_source"
+      ],
+      "verification_status": "UNRESOLVED"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "sos_formulation_source",
+      "source_kind": "PAPER",
+      "label": "SearchOS-V1 — relational formulation, SOCM, and orchestration",
+      "url": "https://arxiv.org/pdf/2607.15257v1",
+      "locator": "Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6"
+    },
+    {
+      "id": "sos_middleware_source",
+      "source_kind": "PAPER",
+      "label": "SearchOS-V1 — middleware and hierarchical skills",
+      "url": "https://arxiv.org/pdf/2607.15257v1",
+      "locator": "Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9"
+    },
+    {
+      "id": "sos_results_source",
+      "source_kind": "PAPER",
+      "label": "SearchOS-V1 — benchmark protocol and main results",
+      "url": "https://arxiv.org/pdf/2607.15257v1",
+      "locator": "Section 4, Table 2, PDF pages 9–11"
+    },
+    {
+      "id": "sos_ablations_source",
+      "source_kind": "PAPER",
+      "label": "SearchOS-V1 — scheduling, middleware, and skill analyses",
+      "url": "https://arxiv.org/pdf/2607.15257v1",
+      "locator": "Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13"
+    },
+    {
+      "id": "sos_scope_source",
+      "source_kind": "PAPER",
+      "label": "SearchOS-V1 — declared scope and future work",
+      "url": "https://arxiv.org/pdf/2607.15257v1",
+      "locator": "Scope note in Section 3.4 and Section 7, PDF pages 9 and 15"
+    }
+  ],
+  "visuals": [
+    {
+      "id": "visual_searchos_control_loop",
+      "type": "PIPELINE_FLOW",
+      "title": "The SearchOS evidence-and-control loop",
+      "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",
+      "items": [
+        {
+          "label": "Define the relational target",
+          "detail": "Convert the request into tables, entity keys, attributes, relations, and citation cells so missing work becomes explicit."
+        },
+        {
+          "label": "Schedule an unresolved gap",
+          "detail": "Frontier Task selects a ready schema gap, assigns it to an available role, and continuously refills released execution slots."
+        },
+        {
+          "label": "Search with scoped context",
+          "detail": "The worker receives its assignment, relevant shared state, prior failures, and selected strategy or access skills rather than the full global history."
+        },
+        {
+          "label": "Gate the observation",
+          "detail": "Evidence middleware accepts a candidate only when it binds to a schema cell and includes an anchored source span."
+        },
+        {
+          "label": "Commit shared state atomically",
+          "detail": "Accepted evidence updates the Evidence Graph and Coverage Map together; task outcomes and failed attempts update Frontier Task and Failure Memory."
+        },
+        {
+          "label": "Measure, redirect, or finish",
+          "detail": "Sensors inspect coverage growth, evidence growth, and budgets, then continue, correct, backfill, stop a branch, or allow synthesis from accumulated evidence."
+        }
+      ],
+      "claim_ids": [
+        "sos_schema",
+        "sos_socm",
+        "sos_middleware",
+        "sos_scheduler",
+        "sos_skills"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "interpretation": "The central design move is to make progress, provenance, gaps, and failures system-maintained state. Browsing does not automatically become evidence: middleware first requires a schema binding and anchored span, after which the updated coverage state determines the next scheduled work.",
+      "limitations": [
+        "An anchored excerpt and URL preserve provenance but do not independently establish that the extracted value is true.",
+        "Relational schemas may not represent every open-ended information-seeking task equally well.",
+        "Coverage measures known materialized rows and cannot prove exhaustive discovery in open-set tasks.",
+        "The paper does not independently ablate middleware's contribution to the main benchmark scores.",
+        "The diagram omits the internal structure and maintenance cost of the 280-skill library."
+      ],
+      "alt_text": "Six-step SearchOS loop: construct a relational schema, schedule a missing cell, give a worker scoped state and skills, require schema-bound anchored evidence, atomically update shared search state, then use progress and budget sensors to continue, redirect, stop, or synthesize.",
+      "fallback": "SearchOS first expresses the request as a relational schema. Frontier Task schedules an unresolved cell to an available worker. The worker searches using role-specific state, known failures, and selected skills. Middleware accepts evidence only when it is tied to a schema cell and anchored to a source span. Accepted evidence updates the Evidence Graph and Coverage Map together. Sensors then use coverage, evidence growth, and budget pressure to choose the next action or end the search for synthesis."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Relational schema completion",
+      "definition": "Representing a search request as linked tables whose entity rows, attribute values, and citation cells must be completed.",
+      "source_refs": [
+        "sos_formulation_source"
+      ]
+    },
+    {
+      "term": "Frontier Task",
+      "definition": "A dependency-aware pool of pending, running, and terminal search jobs tied to unresolved schema cells.",
+      "source_refs": [
+        "sos_formulation_source"
+      ]
+    },
+    {
+      "term": "Evidence Graph",
+      "definition": "A store of atomic values, sources, anchored excerpts, schema bindings, confidence, provenance, and support or conflict relations.",
+      "source_refs": [
+        "sos_formulation_source"
+      ]
+    },
+    {
+      "term": "Coverage Map",
+      "definition": "The materialized fill state of known schema cells, including missing, filled, uncertain, unreachable, and conflicting values.",
+      "source_refs": [
+        "sos_formulation_source"
+      ]
+    },
+    {
+      "term": "Search Tool Middleware Harness",
+      "definition": "The system layer that prepares role-specific context, validates evidence-producing observations, and monitors progress and budgets around model and tool calls.",
+      "source_refs": [
+        "sos_middleware_source"
+      ]
+    },
+    {
+      "term": "Continuous dispatch",
+      "definition": "Assigning a ready task to each released execution slot immediately instead of waiting for every worker in a synchronized batch.",
+      "source_refs": [
+        "sos_formulation_source"
+      ]
+    }
+  ],
+  "revision_notes": [
+    "Initial explainer draft based on arXiv:2607.15257v1.",
+    "Centered the explanation on explicit shared state, evidence gating, and the scheduler control loop.",
+    "Kept main benchmark results separate from scheduling and skill subset ablations.",
+    "Marked citation truth, middleware causality, and cross-model generality as unresolved."
+  ]
+}

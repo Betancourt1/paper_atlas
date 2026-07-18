@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0.0",
+  "paper_id": "paper_attention_is_all_you_need",
+  "paper_version": "v7",
+  "language": "en",
+  "audience": "TECHNICAL_GENERALIST",
+  "title": "Attention Is All You Need: What the Original Transformer Actually Changed",
+  "central_claim": {
+    "text": "The original Transformer replaces sequence-aligned recurrence and convolution with stacked self-attention and feed-forward processing, enabling more parallel training while retaining autoregressive decoding.",
+    "claim_id": "attn_002"
+  },
+  "editorial_status": "REVIEW_REQUIRED",
+  "reading_paths": {
+    "FIVE_MIN": [
+      "attn_why",
+      "attn_mechanism",
+      "attn_evidence",
+      "attn_limitations"
+    ],
+    "TWENTY_MIN": [
+      "attn_why",
+      "attn_change",
+      "attn_mechanism",
+      "attn_example",
+      "attn_evidence",
+      "attn_limitations",
+      "attn_review"
+    ],
+    "DEEP": [
+      "attn_why",
+      "attn_change",
+      "attn_mechanism",
+      "attn_example",
+      "attn_evidence",
+      "attn_limitations",
+      "attn_review"
+    ]
+  },
+  "tldr": [
+    "The Transformer removes sequence-aligned recurrent and convolutional layers from the encoder-decoder and uses self-attention to connect token positions directly.",
+    "Scaled dot-product attention compares queries with keys, normalizes the scores, and mixes values; multiple heads repeat that operation in learned representation subspaces.",
+    "The model trained faster than the cited recurrent and convolutional systems on 2017 translation benchmarks, but full self-attention has quadratic sequence-length cost and target generation remains autoregressive.",
+    "Primary sources disagree on the English-to-French BLEU result: arXiv v7 reports 41.8 in its abstract and Table 2, while its prose and the proceedings PDF say 41.0 and the NeurIPS landing page says 41.1."
+  ],
+  "blocks": [
+    {
+      "id": "attn_why",
+      "type": "WHY_IT_EXISTS",
+      "question": "Why was a different sequence model needed?",
+      "paragraphs": [
+        "Recurrent sequence models process positions through a chain of hidden states. That dependency makes computation within a training example inherently sequential, which limits parallelization as sequences grow. Convolutional sequence models can compute positions in parallel, but connecting distant positions requires paths that grow with their separation.",
+        "Attention already helped encoder-decoder systems retrieve information across a sequence, but it was usually combined with recurrence. The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them."
+      ],
+      "claim_ids": [
+        "attn_002"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_change",
+      "type": "WHAT_IT_CHANGES",
+      "question": "What did the Transformer change in the encoder-decoder pattern?",
+      "paragraphs": [
+        "The Transformer keeps an encoder-decoder structure but changes the operation used to exchange information between positions. Encoder positions use self-attention, decoder positions use masked self-attention over the known target prefix, and decoder queries attend to the encoder output.",
+        "This shortens the maximum path between positions to a constant number of sequential operations per self-attention layer. It does not make every part of the model attention: each layer also contains position-wise feed-forward networks, residual connections, layer normalization, embeddings, positional encodings, and an output projection with softmax."
+      ],
+      "claim_ids": [
+        "attn_002",
+        "attn_003",
+        "attn_006",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_mechanism",
+      "type": "HOW_IT_WORKS",
+      "question": "How does one Transformer prediction work?",
+      "paragraphs": [
+        "Tokens first become learned vectors, and sinusoidal position encodings are added so the model receives order information. The base encoder repeats 6 layers, each containing multi-head self-attention followed by a position-wise feed-forward network. Residual connections and layer normalization surround both sublayers.",
+        "For scaled dot-product attention, the model compares a query with every key using Q times K-transpose, divides by the square root of the key dimension, applies softmax, and uses the resulting weights to mix the values. The base model performs this calculation in 8 learned heads, concatenates their outputs, and projects the result.",
+        "The decoder also repeats 6 layers. Its self-attention masks future target positions, then encoder-decoder attention uses decoder queries with encoder keys and values. The final decoder representation passes through a linear projection and softmax to produce probabilities for one next token. The selected token is appended and decoding repeats."
+      ],
+      "claim_ids": [
+        "attn_003",
+        "attn_004",
+        "attn_005"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_example",
+      "type": "WORKED_EXAMPLE",
+      "question": "What happens at one target position?",
+      "paragraphs": [
+        "Take a decoder position whose preceding target tokens are known. Its query is compared with keys from the known target prefix. Future positions are masked before softmax, so they receive no attention weight. Dividing the query-key scores by the square root of the key dimension keeps large dot products from pushing softmax into regions with very small gradients.",
+        "After masked self-attention, the decoder position forms another query and compares it with keys from every encoded source position. The weighted source values provide input context. The decoder's feed-forward path and output projection then produce a next-token distribution. During training, known target positions can be evaluated in parallel under the mask; during generation, the model must append one selected token before predicting the next."
+      ],
+      "claim_ids": [
+        "attn_003",
+        "attn_004",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_evidence",
+      "type": "EVIDENCE",
+      "question": "What did the authors test, and what were the critical results?",
+      "paragraphs": [
+        "For WMT 2014 translation, the authors used about 4.5 million English-German sentence pairs with a shared 37,000-token byte-pair vocabulary and 36 million English-French sentences with a 32,000-token word-piece vocabulary. Training used one machine with 8 NVIDIA P100 GPUs. The base model trained for 100,000 steps or 12 hours; the big model trained for 300,000 steps or 3.5 days.",
+        "ArXiv v7 Table 2 reports 28.4 BLEU for the big English-German model and 41.8 for English-French. The 28.4 result exceeds the comparison ensembles in that table. The English-French value is internally inconsistent: v7 Section 6.1 says 41.0, as does the official proceedings PDF, while the NeurIPS landing abstract says 41.1. The result must therefore be cited by exact source version rather than flattened into one number.",
+        "The newstest2013 development ablation reports 25.8 BLEU for the base configuration, 24.9 with one attention head, 25.4 with 32 heads, and 25.7 when learned positional embeddings replace sinusoids. The v7 parsing extension reports F1 scores of 91.3 with the WSJ-only data and 92.7 with semi-supervised data, below the best listed result of 93.3."
+      ],
+      "claim_ids": [
+        "attn_007",
+        "attn_008",
+        "attn_009",
+        "attn_010"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper",
+        "source_attention_neurips_landing"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_limitations",
+      "type": "LIMITATIONS",
+      "question": "What does the paper leave unresolved?",
+      "paragraphs": [
+        "Full self-attention costs O(n squared times d) per layer. The paper argues it is faster than recurrence when sequence length n is smaller than representation dimension d, but that condition is not universal. For very long inputs, the authors propose restricted attention as future work, which would increase the maximum path length to O(n divided by r).",
+        "The experiments cover WMT translation and, in arXiv v7, English constituency parsing. They do not establish superiority across all language tasks, modalities, sequence lengths, or hardware. The paper reports no repeated-seed uncertainty, and its decoding hyperparameters were selected on development data.",
+        "Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences, but the reported comparison only shows near-equal in-distribution development performance against learned positions. Attention examples may show patterns, but the paper does not establish that attention weights are faithful causal explanations."
+      ],
+      "claim_ids": [
+        "attn_006",
+        "attn_009",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "attn_review",
+      "type": "CRITICAL_REVIEW",
+      "question": "How should the title and historical claim be read?",
+      "paragraphs": [
+        "The durable contribution is narrower and clearer than the title: the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks. Attention supplies the cross-position routing, while feed-forward transformations, normalization, residual paths, embeddings, positions, and autoregressive output generation remain essential.",
+        "Training parallelism should not be confused with fully parallel generation. The decoder mask allows known target positions to be trained together, but generation still predicts one target token at a time. The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size, or hardware regime.",
+        "This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources. Its visual is newly composed rather than copied: the arXiv record carries a non-exclusive distribution license, and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work."
+      ],
+      "claim_ids": [
+        "attn_001",
+        "attn_008",
+        "attn_011",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_record",
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper",
+        "source_attention_neurips_landing",
+        "source_attention_arxiv_license"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "attn_001",
+      "text": "Attention Is All You Need was submitted to arXiv on June 12, 2017, appeared in NIPS 2017, and was last revised as arXiv v7 on August 2, 2023.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_record",
+        "source_attention_neurips_landing"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_002",
+      "text": "The Transformer replaces sequence-aligned recurrence and convolution with stacked self-attention and position-wise feed-forward processing in an encoder-decoder architecture, enabling more parallel training while retaining autoregressive decoding.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_003",
+      "text": "The base encoder and decoder each contain 6 layers; the decoder masks future target positions and adds encoder-decoder attention over the encoded source.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_004",
+      "text": "Scaled dot-product attention computes softmax of Q times K-transpose divided by the square root of the key dimension, then multiplies those weights by V.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_005",
+      "text": "The authors interpret multi-head attention as a way to attend jointly to different representation subspaces and positions instead of collapsing them through one attention average.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_006",
+      "text": "Table 1 gives full self-attention O(n squared times d) per-layer complexity, O(1) sequential operations, and O(1) maximum path length, while noting that restricted attention changes the path length to O(n divided by r).",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_007",
+      "text": "The translation evaluation used about 4.5 million English-German and 36 million English-French sentence pairs on 8 P100 GPUs; the big model trained for 300,000 steps or 3.5 days.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_008",
+      "text": "ArXiv v7 reports 28.4 English-German BLEU and 41.8 English-French BLEU in its abstract and Table 2, but v7 prose and the proceedings PDF report 41.0 English-French BLEU while the NeurIPS landing abstract reports 41.1.",
+      "epistemic_status": "DISPUTED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper",
+        "source_attention_neurips_landing"
+      ],
+      "verification_status": "UNRESOLVED"
+    },
+    {
+      "id": "attn_009",
+      "text": "On newstest2013 development data, the base model reports 25.8 BLEU, the one-head variant 24.9, the 32-head variant 25.4, and the learned-position variant 25.7.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_010",
+      "text": "ArXiv v7 reports WSJ Section 23 parsing F1 of 91.3 with WSJ-only data and 92.7 with semi-supervised data, below the best listed result of 93.3.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_011",
+      "text": "The arXiv record uses a non-exclusive distribution license, while the v7 PDF separately permits attributed reproduction of its tables and figures solely for journalistic or scholarly works.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CAVEAT",
+      "confidence": 1,
+      "source_refs": [
+        "source_attention_arxiv_record",
+        "source_attention_arxiv_v7",
+        "source_attention_arxiv_license"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "attn_012",
+      "text": "The paper does not establish fully parallel autoregressive generation, universal task superiority, reliable extrapolation of sinusoidal positions beyond training lengths, or attention weights as faithful causal explanations.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "verification_status": "UNRESOLVED"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "source_attention_arxiv_record",
+      "source_kind": "PAPER",
+      "label": "arXiv record for Attention Is All You Need v7",
+      "url": "https://arxiv.org/abs/1706.03762v7",
+      "locator": "Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023"
+    },
+    {
+      "id": "source_attention_arxiv_v7",
+      "source_kind": "PAPER",
+      "label": "Attention Is All You Need, arXiv v7 PDF",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "locator": "Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice"
+    },
+    {
+      "id": "source_attention_neurips_paper",
+      "source_kind": "PAPER",
+      "label": "Attention Is All You Need, official NIPS 2017 proceedings PDF",
+      "url": "https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf",
+      "locator": "Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1"
+    },
+    {
+      "id": "source_attention_neurips_landing",
+      "source_kind": "PAPER",
+      "label": "NIPS 2017 proceedings landing page for Attention Is All You Need",
+      "url": "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+      "locator": "Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values"
+    },
+    {
+      "id": "source_attention_arxiv_license",
+      "source_kind": "SUPPLEMENT",
+      "label": "arXiv non-exclusive license to distribute",
+      "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+      "locator": "License terms granting arXiv a perpetual non-exclusive distribution right"
+    }
+  ],
+  "visuals": [
+    {
+      "id": "visual_attention_prediction_sequence",
+      "type": "ARCHITECTURE_STEPPER",
+      "title": "From a source sequence to one next token",
+      "question": "What does the original Transformer compute before it predicts the next target token?",
+      "items": [
+        {
+          "label": "1. Represent tokens and order",
+          "detail": "Source and known target tokens become learned vectors. Sinusoidal positional encodings are added because the architecture contains no sequence-aligned recurrence or convolution to supply order."
+        },
+        {
+          "label": "2. Build source representations",
+          "detail": "The encoder repeats 6 layers. Each layer applies multi-head self-attention, then a position-wise feed-forward network, with residual connections and layer normalization around both sublayers; the base model uses 8 heads."
+        },
+        {
+          "label": "3. Mix only the known target prefix",
+          "detail": "Masked decoder self-attention sets future-token connections to negative infinity before softmax. Each head uses scaled dot-product attention: softmax of Q times K-transpose divided by the square root of the key dimension, multiplied by V."
+        },
+        {
+          "label": "4. Read from the encoded source",
+          "detail": "Encoder-decoder attention takes queries from the decoder and keys and values from the encoder output, allowing each decoder position to retrieve information from every source position."
+        },
+        {
+          "label": "5. Predict, append, and repeat",
+          "detail": "After the decoder feed-forward path, a learned linear projection and softmax produce next-token probabilities. One token is selected, appended to the known prefix, and the autoregressive decoding process repeats."
+        }
+      ],
+      "claim_ids": [
+        "attn_002",
+        "attn_003",
+        "attn_004",
+        "attn_005",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "interpretation": "Attention is the model's information-routing mechanism, not its entire computation. The encoder can mix known source positions without recurrence, while the decoder combines masked target self-attention with source attention and still emits target tokens autoregressively. Feed-forward layers, residual paths, normalization, embeddings, positions, and output softmax remain essential.",
+      "limitations": [
+        "This is a newly composed conceptual sequence, not a reproduction or close tracing of Figures 1 or 2.",
+        "The stepper collapses 6 repeated encoder and decoder layers and omits most tensor shapes; the 6-layer and 8-head values describe the base configuration.",
+        "The visual explains one prediction step and does not imply that training or all internal operations execute serially.",
+        "It does not treat attention weights as faithful causal explanations and does not depict benchmark results."
+      ],
+      "alt_text": "Five-step conceptual sequence of the original Transformer. Tokens receive positional encodings. A six-layer encoder repeatedly applies eight-head self-attention and feed-forward processing with residual connections and normalization. The decoder applies masked scaled dot-product self-attention so it cannot see future target tokens, then attends to all encoded source positions. A feed-forward path, projection, and softmax predict one next token, which is appended before autoregressive decoding repeats. The sequence emphasizes that the Transformer contains important non-attention components.",
+      "fallback": "1. Add sinusoidal position information to source and known target token embeddings. 2. Encode the source through 6 self-attention-plus-feed-forward layers with residual connections and normalization; the base model uses 8 heads. 3. Apply scaled dot-product self-attention to the known target prefix while masking future positions. 4. Use decoder queries to attend to encoder keys and values. 5. Apply the decoder feed-forward path, projection, and softmax to predict one token; append it and repeat. Attention replaces sequence-aligned recurrence, but the full model also depends on feed-forward, normalization, residual, position, embedding, and output layers."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Sequence transduction",
+      "definition": "Mapping one sequence to another, such as translating a sentence from one language to another.",
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ]
+    },
+    {
+      "term": "Self-attention",
+      "definition": "Attention in which queries, keys, and values come from representations of the same sequence, allowing positions in that sequence to exchange information.",
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ]
+    },
+    {
+      "term": "Query, key, and value",
+      "definition": "Learned vector roles used by attention: a query requests information, keys determine compatibility with that request, and values carry the information that is mixed.",
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ]
+    },
+    {
+      "term": "Causal mask",
+      "definition": "A restriction that prevents a decoder position from attending to future target positions, preserving autoregressive prediction.",
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ]
+    },
+    {
+      "term": "Positional encoding",
+      "definition": "A vector added to token embeddings to provide order information that the attention-only position-mixing mechanism does not supply by itself.",
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ]
+    },
+    {
+      "term": "BLEU",
+      "definition": "The translation-quality metric used by the paper for its WMT benchmark comparisons; values must be tied to the exact dataset, preprocessing, and source version.",
+      "source_refs": [
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper"
+      ]
+    }
+  ],
+  "revision_notes": [
+    "Initial review-required explainer fixture based on arXiv 1706.03762 v7 dated August 2, 2023.",
+    "The explainer preserves the 41.8, 41.0, and 41.1 English-French BLEU contradiction across the arXiv v7 abstract and table, v7 prose, proceedings PDF, and proceedings landing page.",
+    "The mechanism appears before results in every reading path, and the review distinguishes parallel training from autoregressive generation.",
+    "The visual is an original source-grounded conceptual sequence and does not reproduce Figures 1 or 2; the arXiv distribution license and the PDF's narrower table-and-figure permission are recorded.",
+    "No claim of universal task superiority, reliable out-of-range positional extrapolation, or causal interpretability of attention weights is made."
+  ]
+}

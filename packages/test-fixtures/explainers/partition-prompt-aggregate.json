@@ -1,0 +1,456 @@
+{
+  "schema_version": "1.0.0",
+  "paper_id": "paper_partition_prompt_aggregate",
+  "paper_version": "v1",
+  "language": "en",
+  "audience": "TECHNICAL_GENERALIST",
+  "title": "Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models",
+  "central_claim": {
+    "text": "Across the paper's survey-based and synthetic tests, language-model estimates often fail to compose according to the law of total probability, and ACS population estimates reconstructed from subgroup prompts are often better aligned than direct population-level estimates.",
+    "claim_id": "ppa_core"
+  },
+  "editorial_status": "REVIEW_REQUIRED",
+  "reading_paths": {
+    "FIVE_MIN": [
+      "ppa_why",
+      "ppa_mechanism",
+      "ppa_evidence",
+      "ppa_limitations"
+    ],
+    "TWENTY_MIN": [
+      "ppa_why",
+      "ppa_change",
+      "ppa_mechanism",
+      "ppa_example",
+      "ppa_evidence",
+      "ppa_limitations",
+      "ppa_review"
+    ],
+    "DEEP": [
+      "ppa_why",
+      "ppa_change",
+      "ppa_mechanism",
+      "ppa_example",
+      "ppa_evidence",
+      "ppa_limitations",
+      "ppa_review"
+    ]
+  },
+  "tldr": [
+    "If an LLM behaves like a conditional probability estimator, its direct population estimate should match the weighted sum of its estimates for any valid partition of that population.",
+    "The paper builds binary conditioning trees, prompts the model at every node, and tests both aggregation across splits and invariance to the order of equivalent conditions.",
+    "On the ACS income task, reconstructed population estimates are often closer to survey data than direct prompts, although the benefit is not monotonic as partitions become finer.",
+    "Self-consistency is a useful reference-free diagnostic, but it is necessary rather than sufficient for accuracy and does not establish that the model contains a correct internal distribution."
+  ],
+  "blocks": [
+    {
+      "id": "ppa_why",
+      "type": "WHY_IT_EXISTS",
+      "question": "Why test language models with the law of total probability?",
+      "paragraphs": [
+        "Many uses of in-context learning treat a prompt as a condition and the model's answer as an estimate of the corresponding conditional distribution. That interpretation carries a basic requirement: estimates for a population and for a complete partition of that population must agree after weighting the subgroup estimates by their population shares.",
+        "A model can give locally plausible answers while violating this requirement. Two statistically equivalent prompts can then produce incompatible estimates, so conclusions may depend on an arbitrary choice of prompt granularity or condition order."
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_core"
+      ],
+      "source_refs": [
+        "ppa_method"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_change",
+      "type": "WHAT_IT_CHANGES",
+      "question": "What does this framework add to ordinary accuracy evaluation?",
+      "paragraphs": [
+        "The framework separates alignment from self-consistency. Alignment asks whether an estimate matches external reference data. Self-consistency asks whether the model's own estimates obey probability identities, so it can be measured even when a trustworthy target distribution is unavailable.",
+        "The paper turns this idea into split-consistency and order-consistency scores. It also identifies the macro fallacy: in the ACS study, direct population prompting is often less accurate than explicitly eliciting and recombining finer subgroup estimates."
+      ],
+      "claim_ids": [
+        "ppa_reconstruction",
+        "ppa_macro"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_macro_results"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_mechanism",
+      "type": "HOW_IT_WORKS",
+      "question": "How does a binary conditioning tree expose inconsistent estimates?",
+      "paragraphs": [
+        "Start with a base population at the root. Each binary attribute splits every node at a level into two non-overlapping children, so all nodes at that level remain a complete partition of the root population. The model receives a verbal description of each node's subgroup and estimates the target quantity for that subgroup.",
+        "For each level, the method also elicits subgroup population shares, normalizes them, and calculates their weighted sum. In the ACS prior protocol, each level's prior distribution is elicited 50 times and the normalized responses are averaged. A coherent estimator should give the same aggregate at every level.",
+        "Split consistency checks a node against the weighted sum of its immediate children. Order consistency asks whether the same subgroup receives the same estimate when its conditions are verbalized in a different order."
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_reconstruction",
+        "ppa_acs_protocol"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_protocol"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_example",
+      "type": "WORKED_EXAMPLE",
+      "question": "What does one population reconstruction look like?",
+      "paragraphs": [
+        "Consider the probability that a person in the United States earns above a chosen threshold. One prompt asks for the probability over the whole population. A first tree level divides the population into people aged 31 to 68 and everyone else. A second level divides both groups by employment status.",
+        "The model estimates the income probability and population share for each subgroup. The explainer then multiplies each subgroup probability by its share and adds the products. That reconstruction and the direct root estimate refer to the same population quantity; disagreement is a self-consistency failure. Comparing each estimate with the ACS reference adds a separate alignment test."
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_reconstruction",
+        "ppa_macro"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_macro_results"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_evidence",
+      "type": "EVIDENCE",
+      "question": "What evidence supports the paper's conclusions?",
+      "paragraphs": [
+        "In the ACS income experiment, Figure 3 reports that reconstructed aggregate estimates generally reduce alignment error relative to direct prompting. The average gain is positive at deeper levels but eventually declines, which is consistent with a trade-off: subgroup conditionals initially improve while increasingly specific population shares become harder to estimate.",
+        "The reference-free checks also reveal failures. In the two-attribute ACS tasks, the reported split-consistency scores at tolerance 0.02 range from 0 to 0.33 across the four displayed frontier models. On five World Values Survey questions in Canada and Indonesia, no model is uniformly consistent across questions and countries. Synthetic tennis and fantasy tasks show that the checks still operate where no external reference distribution is defined.",
+        "A one-prompt micro-to-macro instruction often improves ACS estimates, but its effect is less systematic and more model-dependent than explicit aggregation."
+      ],
+      "claim_ids": [
+        "ppa_macro",
+        "ppa_error_tradeoff",
+        "ppa_micro_to_macro",
+        "ppa_acs_consistency",
+        "ppa_wvs_consistency"
+      ],
+      "source_refs": [
+        "ppa_macro_results",
+        "ppa_consistency_results"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_limitations",
+      "type": "LIMITATIONS",
+      "question": "Where should these findings not be generalized?",
+      "paragraphs": [
+        "The macro-fallacy alignment analysis relies primarily on ACS data. Its magnitude depends on the chosen demographic splits, probability wording, and post-hoc normalization. Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate.",
+        "Self-consistency is only a necessary condition for faithful conditional inference. A model can be internally coherent and still wrong about the target distribution. The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy, and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions."
+      ],
+      "claim_ids": [
+        "ppa_error_tradeoff",
+        "ppa_generalization"
+      ],
+      "source_refs": [
+        "ppa_discussion"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    },
+    {
+      "id": "ppa_review",
+      "type": "CRITICAL_REVIEW",
+      "question": "What is the strongest conclusion a careful reader should keep?",
+      "paragraphs": [
+        "The strongest contribution is a simple, reference-free test of whether conditional estimates compose. It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern.",
+        "The macro fallacy is more bounded: it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer. The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition, but the experiments do not directly reveal what distributions the models internally represent."
+      ],
+      "claim_ids": [
+        "ppa_core",
+        "ppa_knowledge_interpretation",
+        "ppa_generalization"
+      ],
+      "source_refs": [
+        "ppa_macro_results",
+        "ppa_discussion"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "ppa_core",
+      "text": "Across the evaluated ACS, WVS, and synthetic tasks, language-model estimates frequently violate partition-based statistical self-consistency checks.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 0.98,
+      "source_refs": [
+        "ppa_consistency_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_partition",
+      "text": "Each level of a valid binary conditioning tree forms a mutually exclusive and collectively exhaustive partition of the base population.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "ppa_method"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_reconstruction",
+      "text": "The method reconstructs a population estimate by weighting subgroup conditional estimates by their elicited subgroup priors and summing them.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 1,
+      "source_refs": [
+        "ppa_method"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_acs_protocol",
+      "text": "For each ACS tree level, the subgroup prior is estimated from 50 model responses after each response is normalized.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "ppa_protocol"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_macro",
+      "text": "In the ACS income experiments, aggregates reconstructed from subgroup estimates are often better aligned with survey data than direct population-level estimates.",
+      "epistemic_status": "OBSERVED",
+      "importance": "CORE",
+      "confidence": 0.97,
+      "source_refs": [
+        "ppa_macro_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_error_tradeoff",
+      "text": "Increasing subgroup specificity initially improves conditional alignment while making subgroup priors harder to estimate, so aggregation gains are not monotonic with depth.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.95,
+      "source_refs": [
+        "ppa_macro_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_micro_to_macro",
+      "text": "Micro-to-macro prompting often recovers part of the ACS aggregation benefit, but less systematically than explicit tree-based aggregation.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.94,
+      "source_refs": [
+        "ppa_macro_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_acs_consistency",
+      "text": "At tolerance 0.02, the ACS split-consistency scores shown in Table 1 range from 0 to 0.33 across the four displayed models and two prediction targets.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 1,
+      "source_refs": [
+        "ppa_consistency_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_wvs_consistency",
+      "text": "In the WVS evaluation, no reported model is uniformly self-consistent across the selected questions, countries, and checks.",
+      "epistemic_status": "OBSERVED",
+      "importance": "SUPPORTING",
+      "confidence": 0.98,
+      "source_refs": [
+        "ppa_consistency_results"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_knowledge_interpretation",
+      "text": "The authors interpret the subgroup gains as suggesting that models contain useful subgroup-level information that direct aggregate prompts do not reliably elicit.",
+      "epistemic_status": "AUTHORS_INTERPRETATION",
+      "importance": "CAVEAT",
+      "confidence": 0.75,
+      "source_refs": [
+        "ppa_discussion"
+      ],
+      "verification_status": "VERIFIED"
+    },
+    {
+      "id": "ppa_generalization",
+      "text": "The evidence does not establish that the macro fallacy holds across arbitrary domains or that improving self-consistency will improve real-world accuracy.",
+      "epistemic_status": "NOT_ESTABLISHED",
+      "importance": "CAVEAT",
+      "confidence": 0.99,
+      "source_refs": [
+        "ppa_discussion"
+      ],
+      "verification_status": "UNRESOLVED"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "ppa_method",
+      "source_kind": "PAPER",
+      "label": "Partition, Prompt, Aggregate v1 — partition and reconstruction method",
+      "url": "https://arxiv.org/pdf/2607.15277v1",
+      "locator": "Sections 3.1–3.4, Equations 2–3, PDF pages 5–7"
+    },
+    {
+      "id": "ppa_macro_results",
+      "source_kind": "PAPER",
+      "label": "Partition, Prompt, Aggregate v1 — macro fallacy and prompting results",
+      "url": "https://arxiv.org/pdf/2607.15277v1",
+      "locator": "Section 4, Figures 3–5, PDF pages 7–11"
+    },
+    {
+      "id": "ppa_consistency_results",
+      "source_kind": "PAPER",
+      "label": "Partition, Prompt, Aggregate v1 — self-consistency definitions and evaluation",
+      "url": "https://arxiv.org/pdf/2607.15277v1",
+      "locator": "Sections 5–6, Tables 1–3, PDF pages 11–18"
+    },
+    {
+      "id": "ppa_discussion",
+      "source_kind": "PAPER",
+      "label": "Partition, Prompt, Aggregate v1 — discussion and limitations",
+      "url": "https://arxiv.org/pdf/2607.15277v1",
+      "locator": "Section 7 and Limitations, PDF pages 18–19"
+    },
+    {
+      "id": "ppa_protocol",
+      "source_kind": "SUPPLEMENT",
+      "label": "Partition, Prompt, Aggregate v1 — ACS prior elicitation details",
+      "url": "https://arxiv.org/pdf/2607.15277v1",
+      "locator": "Appendix E.2, PDF pages 34–35"
+    }
+  ],
+  "visuals": [
+    {
+      "id": "visual_ppa_partition_flow",
+      "type": "PIPELINE_FLOW",
+      "title": "From one population estimate to a consistency test",
+      "question": "How does partitioning the same population reveal statistically inconsistent model estimates?",
+      "items": [
+        {
+          "label": "Direct population estimate",
+          "detail": "Ask the model for the target probability or distribution over the complete base population. This is the level-zero estimate."
+        },
+        {
+          "label": "Construct a valid partition",
+          "detail": "Apply binary attributes so each level contains mutually exclusive subgroups that collectively cover the base population."
+        },
+        {
+          "label": "Elicit subgroup components",
+          "detail": "For every subgroup, elicit its conditional target estimate and its relative population weight."
+        },
+        {
+          "label": "Reconstruct the aggregate",
+          "detail": "Multiply each subgroup estimate by its weight and sum the components according to the law of total probability."
+        },
+        {
+          "label": "Compare equivalent estimates",
+          "detail": "Compare the reconstruction with the direct estimate for self-consistency; where survey data exists, compare both with the human reference for alignment."
+        }
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_reconstruction",
+        "ppa_macro",
+        "ppa_error_tradeoff"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_macro_results"
+      ],
+      "interpretation": "Every tree level describes the same population quantity, so a coherent conditional estimator should return compatible aggregates. The reported discrepancies expose failures of probabilistic composition; better ACS alignment at some deeper levels is a separate empirical observation, not a guarantee that finer partitions always help.",
+      "limitations": [
+        "The flow requires partitions that are mutually exclusive and collectively exhaustive.",
+        "Self-consistency does not establish that any estimate is accurate.",
+        "The observed alignment improvement is primarily supported by the ACS experiments and is non-monotonic with depth.",
+        "This schematic does not encode subgroup sizes or imply that every individual model-threshold combination improves."
+      ],
+      "alt_text": "Five-step flow: direct population estimate, valid subgroup partition, subgroup conditional and prior elicitation, weighted reconstruction, then comparison with the direct estimate and optional survey reference.",
+      "fallback": "Start with a direct model estimate for the whole population. Split that population into non-overlapping, exhaustive subgroups. Ask the model for each subgroup's conditional estimate and relative weight. Recombine the components with the law of total probability. Compare the reconstructed and direct estimates to measure self-consistency; compare with survey data only when evaluating alignment."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Binary conditioning tree",
+      "definition": "A recursive set of binary splits whose nodes at every depth form a partition of the base population.",
+      "source_refs": [
+        "ppa_method"
+      ]
+    },
+    {
+      "term": "Reconstructed aggregate",
+      "definition": "A population-level estimate produced by weighting and summing subgroup conditional estimates.",
+      "source_refs": [
+        "ppa_method"
+      ]
+    },
+    {
+      "term": "Macro fallacy",
+      "definition": "The paper's name for the observed pattern in which direct population prompting is less aligned than explicit subgroup elicitation and aggregation.",
+      "source_refs": [
+        "ppa_macro_results"
+      ]
+    },
+    {
+      "term": "Split consistency",
+      "definition": "Agreement between a direct estimate for one node and the prior-weighted aggregate of estimates for its child partition.",
+      "source_refs": [
+        "ppa_consistency_results"
+      ]
+    },
+    {
+      "term": "Order consistency",
+      "definition": "Invariance of an estimate when equivalent conditioning constraints are verbalized in different orders.",
+      "source_refs": [
+        "ppa_consistency_results"
+      ]
+    }
+  ],
+  "revision_notes": [
+    "Initial explainer draft based on arXiv:2607.15277v1.",
+    "Kept the macro-fallacy claim scoped to the ACS alignment experiments.",
+    "Marked broader accuracy and internal-knowledge conclusions as not established.",
+    "Uses an original static mechanism diagram because the source license is CC BY-NC-ND 4.0."
+  ]
+}
