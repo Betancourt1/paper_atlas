@@ -1,27 +1,31 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
 import { parsePaperSummary, validatePaperSummary } from "../src/index.js";
 
-const fixturePath = fileURLToPath(
-  new URL("../../test-fixtures/papers/paper-summary.json", import.meta.url),
+const fixtureDirectory = fileURLToPath(
+  new URL("../../test-fixtures/papers/", import.meta.url),
 );
-const fixture: unknown = JSON.parse(readFileSync(fixturePath, "utf8"));
+const fixtures: unknown[] = readdirSync(fixtureDirectory)
+  .filter((filename) => filename.endsWith(".json"))
+  .map((filename) =>
+    JSON.parse(readFileSync(`${fixtureDirectory}/${filename}`, "utf8")),
+  );
 
 describe("PaperSummary", () => {
-  it("validates the canonical fixture", () => {
-    expect(validatePaperSummary(fixture)).toBe(true);
-    expect(parsePaperSummary(fixture).id).toBe(
-      "paper_attention_is_all_you_need",
+  it("validates every fixture", () => {
+    expect(fixtures).toHaveLength(8);
+    expect(fixtures.every(validatePaperSummary)).toBe(true);
+    expect(fixtures.map((fixture) => parsePaperSummary(fixture).id)).toContain(
+      "paper_trace",
     );
   });
 
   it("rejects unknown fields", () => {
-    expect(validatePaperSummary({ ...parsePaperSummary(fixture), extra: true })).toBe(
-      false,
-    );
+    expect(
+      validatePaperSummary({ ...parsePaperSummary(fixtures[0]), extra: true }),
+    ).toBe(false);
   });
 });
-

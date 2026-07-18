@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_trace",
+  "slug": "trace",
+  "title": "TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents",
+  "summary": "TRACE assigns dense rewards at tool-call boundaries by tracking how each action changes a frozen reference model's confidence in the correct answer. The method improves long-horizon search agents without a learned critic or manually labeled intermediate steps, though it assumes known answers that the reference model can score.",
+  "authors": [
+    { "id": "author_leitian_tao", "name": "Leitian Tao" },
+    { "id": "author_baolin_peng", "name": "Baolin Peng" },
+    { "id": "author_wenlin_yao", "name": "Wenlin Yao" },
+    { "id": "author_tao_ge", "name": "Tao Ge" },
+    { "id": "author_hao_cheng", "name": "Hao Cheng" },
+    { "id": "author_mike_hang_wang", "name": "Mike Hang Wang" },
+    { "id": "author_jianfeng_gao", "name": "Jianfeng Gao" },
+    { "id": "author_sharon_li", "name": "Sharon Li" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.13988",
+    "url": "https://arxiv.org/abs/2607.13988"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

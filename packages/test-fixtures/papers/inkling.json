@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_inkling",
+  "slug": "inkling-model-card",
+  "title": "Inkling Model Card",
+  "summary": "Inkling is an Apache-2.0 open-weights multimodal model with 975 billion total parameters, 41 billion active parameters, and a one-million-token context window. It accepts text, images, and audio; local deployment still requires roughly 600 GB of aggregated VRAM for the quantized checkpoint.",
+  "authors": [
+    { "id": "author_thinking_machines_lab", "name": "Thinking Machines Lab" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "URL",
+    "identifier": "thinkingmachines.ai/model-card/inkling",
+    "url": "https://thinkingmachines.ai/model-card/inkling/"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

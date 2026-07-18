@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_partition_prompt_aggregate",
+  "slug": "partition-prompt-aggregate",
+  "title": "Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models",
+  "summary": "The paper tests whether model estimates obey the law of total probability when subgroup answers are aggregated. Frontier models often contradict their population-level estimates, while finer subgroup prompts can align better with human data—a pattern the authors call the macro fallacy.",
+  "authors": [
+    { "id": "author_patrik_wolf", "name": "Patrik Wolf" },
+    { "id": "author_thomas_kleine_buening", "name": "Thomas Kleine Buening" },
+    { "id": "author_andreas_krause", "name": "Andreas Krause" },
+    { "id": "author_celestine_mendler_duenner", "name": "Celestine Mendler-Dünner" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.15277",
+    "url": "https://arxiv.org/abs/2607.15277"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_robott",
+  "slug": "robott-context-scaling",
+  "title": "RoboTTT: Context Scaling for Robot Policies",
+  "summary": "RoboTTT uses test-time training to compress up to 8,000 visuomotor timesteps into fast weights without increasing inference latency with context length. The reported real-robot gains suggest execution history can become adaptive model state, though the evaluation covers controlled manipulation tasks.",
+  "authors": [
+    { "id": "author_yunfan_jiang", "name": "Yunfan Jiang" },
+    { "id": "author_yevgen_chebotar", "name": "Yevgen Chebotar" },
+    { "id": "author_ruijie_zheng", "name": "Ruijie Zheng" },
+    { "id": "author_fengyuan_hu", "name": "Fengyuan Hu" },
+    { "id": "author_yunhao_ge", "name": "Yunhao Ge" },
+    { "id": "author_jimmy_wu", "name": "Jimmy Wu" },
+    { "id": "author_tianyuan_dai", "name": "Tianyuan Dai" },
+    { "id": "author_scott_reed", "name": "Scott Reed" },
+    { "id": "author_li_fei_fei", "name": "Li Fei-Fei" },
+    { "id": "author_yuke_zhu", "name": "Yuke Zhu" },
+    { "id": "author_linxi_jim_fan", "name": "Linxi \"Jim\" Fan" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.15275",
+    "url": "https://arxiv.org/abs/2607.15275"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

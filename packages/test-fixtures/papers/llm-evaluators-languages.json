@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_llm_evaluators_languages",
+  "slug": "llm-evaluators-biased-languages",
+  "title": "LLM Evaluators are Biased across Languages",
+  "summary": "Semantically equivalent examples across 23 languages receive systematically different scores from reward models and LLM judges. High pairwise accuracy can conceal large acceptance-rate gaps, especially for lower-resource languages, exposing a weakness in multilingual safety and evaluation pipelines.",
+  "authors": [
+    { "id": "author_ej_zhou", "name": "Ej Zhou" },
+    { "id": "author_lucas_resck", "name": "Lucas Resck" },
+    { "id": "author_zheng_hui", "name": "Zheng Hui" },
+    { "id": "author_anna_korhonen", "name": "Anna Korhonen" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.14480",
+    "url": "https://arxiv.org/abs/2607.14480"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

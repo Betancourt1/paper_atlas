@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_searchos_v1",
+  "slug": "searchos-v1",
+  "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+  "summary": "SearchOS externalizes multi-agent research state into a task frontier, evidence graph, coverage map, and failure memory. Its scheduler and middleware use those structures to reduce repeated searches and detect stalls, treating research reliability as a state-management problem.",
+  "authors": [
+    { "id": "author_yuyao_zhang", "name": "Yuyao Zhang" },
+    { "id": "author_junjie_gao", "name": "Junjie Gao" },
+    { "id": "author_zhengxian_wu", "name": "Zhengxian Wu" },
+    { "id": "author_jiaming_fan", "name": "Jiaming Fan" },
+    { "id": "author_jin_zhang", "name": "Jin Zhang" },
+    { "id": "author_shihan_ma", "name": "Shihan Ma" },
+    { "id": "author_yao_yao", "name": "Yao Yao" },
+    { "id": "author_weiran_qi", "name": "Weiran Qi" },
+    { "id": "author_chuyan_jin", "name": "Chuyan Jin" },
+    { "id": "author_guiyu_ma", "name": "Guiyu Ma" },
+    { "id": "author_xingzhong_xu", "name": "Xingzhong Xu" },
+    { "id": "author_kai_yang", "name": "Kai Yang" },
+    { "id": "author_ji_rong_wen", "name": "Ji-Rong Wen" },
+    { "id": "author_zhicheng_dou", "name": "Zhicheng Dou" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.15257",
+    "url": "https://arxiv.org/abs/2607.15257"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}

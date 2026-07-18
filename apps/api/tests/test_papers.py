@@ -1,13 +1,26 @@
 import json
 
 from fastapi.testclient import TestClient
-from paper_atlas_api.fixtures import PAPER_SUMMARY_FIXTURE_PATH
+from paper_atlas_api.fixtures import (
+    PAPER_SUMMARY_FIXTURE_DIRECTORY,
+    PAPER_SUMMARY_FIXTURE_PATH,
+)
 
 
 def test_get_known_paper_returns_canonical_fixture(client: TestClient) -> None:
     expected = json.loads(PAPER_SUMMARY_FIXTURE_PATH.read_text(encoding="utf-8"))
 
     response = client.get("/v1/papers/paper_attention_is_all_you_need")
+
+    assert response.status_code == 200
+    assert response.json() == expected
+
+
+def test_get_digest_paper_returns_its_fixture(client: TestClient) -> None:
+    fixture_path = PAPER_SUMMARY_FIXTURE_DIRECTORY / "trace.json"
+    expected = json.loads(fixture_path.read_text(encoding="utf-8"))
+
+    response = client.get("/v1/papers/paper_trace")
 
     assert response.status_code == 200
     assert response.json() == expected

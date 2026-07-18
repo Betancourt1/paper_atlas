@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "id": "paper_computational_propaganda",
+  "slug": "pretraining-data-computational-propaganda",
+  "title": "Pretraining Data Can Be Poisoned through Computational Propaganda",
+  "summary": "Public discussion interfaces can inject adversarial content into web-scale pretraining corpora. The paper introduces HalfLife to estimate whether injected material survives crawling and curation, framing data filtering and source controls as part of model security rather than only data quality.",
+  "authors": [
+    { "id": "author_victoria_graf", "name": "Victoria Graf" },
+    { "id": "author_hannaneh_hajishirzi", "name": "Hannaneh Hajishirzi" },
+    { "id": "author_noah_a_smith", "name": "Noah A. Smith" },
+    { "id": "author_david_kohlbrenner", "name": "David Kohlbrenner" },
+    { "id": "author_kyle_lo", "name": "Kyle Lo" }
+  ],
+  "published_year": 2026,
+  "source": {
+    "type": "ARXIV",
+    "identifier": "2607.15267",
+    "url": "https://arxiv.org/abs/2607.15267"
+  },
+  "version": "v1",
+  "status": "PUBLISHED"
+}
