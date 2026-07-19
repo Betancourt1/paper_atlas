@@ -17,7 +17,6 @@ const expectedSourceAssets: Record<string, Array<[string, string]>> = {
     ["visual_attention_decoder_dependencies", "attn_mechanism_p3"],
   ],
   "/papers/paper_computational_propaganda": [
-    ["propaganda_visual_source_figure_7", "propaganda_change_p2"],
     ["propaganda_visual_source_figure_3", "propaganda_example_p1"],
   ],
   "/papers/paper_llm_evaluators_languages": [
@@ -162,9 +161,10 @@ test("custom SVG visuals render only at approved revision-7 paragraphs @visual",
         await expect(svg.getByText("250 inactive", { exact: true })).toBeVisible();
       }
       if (visualId === "visual_ppa_weighted_reconstruction_graph") {
-        await expect(svg.locator(".v-multiply")).toHaveCount(3);
-        await expect(svg.locator(".v-prior-input")).toHaveCount(3);
-        await expect(svg.locator(".v-estimate-input")).toHaveCount(3);
+        await expect(svg.locator('[data-hierarchy-depth="1"] .v-weighted-child')).toHaveCount(2);
+        await expect(svg.locator('[data-hierarchy-depth="2"] .v-weighted-grandchild')).toHaveCount(4);
+        await expect(svg.locator(".v-depth-aggregate")).toHaveCount(2);
+        await expect(svg.locator('[data-invariance="root-d1-d2"]')).toContainText("q = D1 = D2");
       }
       if (visualId === "visual_robottt_fast_weight_architecture") {
         await expect(svg.locator('[data-fast-weight-state="next-timestep"]')).toHaveCount(1);
@@ -265,7 +265,7 @@ test("original paper figures render at every approved source-asset paragraph @vi
     const viewports = figures.getByRole("region", { name: "Scrollable original paper figure" });
     await expect(viewports).toHaveCount(expected.length);
     await expect(
-      figures.getByText("Scroll or use arrow keys to inspect the original figure.", { exact: true }),
+      figures.getByText("Scroll if needed or use arrow keys to inspect the original figure.", { exact: true }),
     ).toHaveCount(expected.length);
     expect(
       await viewports.evaluateAll((elements) =>
@@ -274,7 +274,6 @@ test("original paper figures render at every approved source-asset paragraph @vi
           const images = [...scroller.querySelectorAll<HTMLImageElement>("img")];
           return (
             scroller.tabIndex === 0 &&
-            scroller.scrollWidth > scroller.clientWidth &&
             scroller.getBoundingClientRect().right <= window.innerWidth + 1 &&
             images.every((image) => Math.abs(image.clientWidth - image.naturalWidth) <= 1)
           );
@@ -290,8 +289,15 @@ test("original paper figures render at every approved source-asset paragraph @vi
         return style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) >= 3;
       }),
     ).toBe(true);
-    await page.keyboard.press("ArrowRight");
-    await expect.poll(() => firstViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+    const scrollableIndex = await viewports.evaluateAll((elements) =>
+      elements.findIndex((element) => element.scrollWidth > element.clientWidth),
+    );
+    if (scrollableIndex >= 0) {
+      const scrollableViewport = viewports.nth(scrollableIndex);
+      await scrollableViewport.focus();
+      await page.keyboard.press("ArrowRight");
+      await expect.poll(() => scrollableViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   }
 });

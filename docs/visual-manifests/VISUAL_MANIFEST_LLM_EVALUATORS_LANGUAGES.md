@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
 - Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -652,16 +652,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
-- Selected treatment: `NONE`
-- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: The original Figure 4 is preserved, with title, alt text, and fallback limited to its visible scatter-plot encoding.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE` — pending visual implementer rework.
-- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.” No comparator, threshold node, or causal edge may be added.
-- Desktop and mobile verification: `PENDING`
-- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — “Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.” No comparator, threshold node, or causal edge was added.
+- Desktop and mobile verification: `VERIFIED` — intrinsic-width viewport is contained and focusable; horizontal keyboard inspection is tested only when overflow exists.
+- Evidence deviations: `NONE`
 
 ## `language_mechanism_p3`
 

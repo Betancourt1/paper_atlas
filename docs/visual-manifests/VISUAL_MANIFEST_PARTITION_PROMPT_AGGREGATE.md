@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
 - Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -341,16 +341,16 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
-- Selected treatment: `NONE`
-- Selection rationale: The implementer must rebuild the SVG so depth 1 and depth 2 each show weighted-child aggregation and both are compared for equality with the direct root estimate.
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: The SVG now branches into explicit depth-1 and depth-2 hierarchies, aggregates weighted children at each depth, and converges on the root invariance comparison.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_ppa_weighted_reconstruction_graph` — rendered immediately after `ppa_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE` — pending visual implementer rework.
-- Accessibility and fallback verification: `PENDING` — alt text and fallback must describe only the visible source pixels named in revision 11.
-- Desktop and mobile verification: `PENDING`
-- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
+- Changed files: `apps/web/app/papers/[id]/explainer-svg.tsx`; `packages/test-fixtures/explainers/partition-prompt-aggregate.json`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — fallback names both hierarchy depths, their weighted aggregates, the direct root, and `q = D1 = D2`.
+- Desktop and mobile verification: `VERIFIED` — the responsive SVG keeps both branching depths and the invariance comparison visible.
+- Evidence deviations: `NONE`
 
 ## `ppa_mechanism_p3`
 

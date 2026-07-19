@@ -371,7 +371,7 @@
       "items": [
         {
           "label": "Visual specification",
-          "detail": "Parallel prior-estimate products sum to a reconstructed result; a separate normalization constraint spans the priors, and a comparator tests the reconstruction against the direct root estimate."
+          "detail": "Depth 1 aggregates two weighted children into D1. Depth 2 aggregates four weighted grandchildren into D2. Both branch into the explicit invariance comparison q = D1 = D2 with the direct root estimate."
         },
         {
           "label": "Evidence boundary",
@@ -388,12 +388,12 @@
         "ppa_method",
         "ppa_protocol"
       ],
-      "interpretation": "Parallel prior-estimate products sum to a reconstructed result; a separate normalization constraint spans the priors, and a comparator tests the reconstruction against the direct root estimate.",
+      "interpretation": "Depth 1 aggregates two weighted children into D1, while depth 2 aggregates four weighted grandchildren into D2; both are compared with the direct root estimate as q = D1 = D2.",
       "limitations": [
         "Symbols explain the reported identity and protocol, not empirical ACS values."
       ],
-      "alt_text": "Parallel prior-estimate products sum to a reconstructed result; a separate normalization constraint spans the priors, and a comparator tests the reconstruction against the direct root estimate.",
-      "fallback": "Parallel prior-estimate products sum to a reconstructed result; a separate normalization constraint spans the priors, and a comparator tests the reconstruction against the direct root estimate. Symbols explain the reported identity and protocol, not empirical ACS values."
+      "alt_text": "A branching diagram shows depth 1 aggregating two weighted children into D1 and depth 2 aggregating four weighted grandchildren into D2, with both compared to the direct root as q equals D1 equals D2.",
+      "fallback": "Depth 1 aggregates two weighted children into D1. Depth 2 aggregates four weighted grandchildren into D2. Both branch into the explicit invariance comparison q = D1 = D2 with the direct root estimate. Symbols explain the reported identity and protocol, not empirical ACS values."
     }
   ],
   "glossary": [

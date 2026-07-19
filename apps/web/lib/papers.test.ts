@@ -37,14 +37,13 @@ describe("getExplainerByPaperId", () => {
     expect(getExplainerByPaperId("paper_missing")).toBeUndefined();
   });
 
-  it("keeps the approved revision-10 placements and delivery media", () => {
+  it("keeps the approved revision-11 placements and delivery media", () => {
     const expectedVisuals = {
       paper_attention_is_all_you_need: [
         ["visual_attention_query_key_field", "attn_mechanism_p2", "source asset"],
         ["visual_attention_decoder_dependencies", "attn_mechanism_p3", "source asset"],
       ],
       paper_computational_propaganda: [
-        ["propaganda_visual_source_figure_7", "propaganda_change_p2", "source asset"],
         ["propaganda_visual_source_figure_3", "propaganda_example_p1", "source asset"],
         ["propaganda_visual_halflife_tree", "propaganda_example_p2", "SVG"],
       ],

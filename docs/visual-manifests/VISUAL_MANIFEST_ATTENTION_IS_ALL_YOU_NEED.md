@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
 - Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `18 / 18` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -329,16 +329,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
-- Selected treatment: `NONE`
-- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: The original Figure 2 is preserved, with title, alt text, and fallback limited to its visible labeled operations.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_query_key_field` — rendered immediately after `attn_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE` — pending visual implementer rework.
-- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.”
-- Desktop and mobile verification: `PENDING`
-- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — “Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.”
+- Desktop and mobile verification: `VERIFIED` — intrinsic-width viewport is contained and focusable; horizontal keyboard inspection is tested only when overflow exists.
+- Evidence deviations: `NONE`
 
 ## `attn_mechanism_p3`
 
@@ -517,16 +517,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
-- Selected treatment: `NONE`
-- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: The original Figure 1 is preserved, with title, alt text, and fallback limited to its visible architecture blocks and paths.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_decoder_dependencies` — rendered immediately after `attn_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE` — pending visual implementer rework.
-- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.”
-- Desktop and mobile verification: `PENDING`
-- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — “Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.”
+- Desktop and mobile verification: `VERIFIED` — intrinsic-width viewport is contained and focusable; horizontal keyboard inspection is tested only when overflow exists.
+- Evidence deviations: `NONE`
 
 ## `attn_example_p1`
 

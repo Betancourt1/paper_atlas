@@ -140,16 +140,34 @@ function RankingAcceptanceGraph() {
 
 function WeightedReconstruction() {
   return <>
-    {[0,1,2].map(i => { const y = 90 + i * 115; return <g key={i}>
-      <Node x={85} y={y - 25}>prior p{i + 1}</Node><Node x={245} y={y + 25}>estimate q{i + 1}</Node>
-      <line className="v-edge v-prior-input" x1={120} y1={y - 20} x2={340} y2={y - 5} />
-      <line className="v-edge v-estimate-input" x1={281} y1={y + 20} x2={340} y2={y + 5} />
-      <circle className="v-operator v-multiply" cx={365} cy={y} r={25} /><Text x={365} y={y + 5}>×</Text>
-    </g>; })}
-    <Bracket x={35} y={395} width={120} label="Σ priors = 1" />
-    {[0,1,2].map(i => <line className="v-edge" x1={390} y1={90+i*115} x2={495} y2={205} key={i} />)}
-    <circle className="v-operator" cx={525} cy={205} r={30} /><Text x={525} y={211}>Σ</Text><line className="v-edge" x1={555} y1={205} x2={625} y2={205} /><Node x={675} y={205} wide>reconstructed root</Node>
-    <Node x={525} y={350} wide>direct root estimate</Node><line className="v-compare" x1={575} y1={320} x2={650} y2={245} /><Label x={600} y={310}>consistency comparator</Label>
+    <g data-hierarchy-depth="1">
+      <Label x={35} y={35}>depth 1</Label>
+      <Node x={90} y={105}>A: w₁q₁</Node><Node x={90} y={205}>¬A: w₂q₂</Node>
+      <line className="v-edge v-weighted-child" x1={126} y1={105} x2={210} y2={145} />
+      <line className="v-edge v-weighted-child" x1={126} y1={205} x2={210} y2={165} />
+      <circle className="v-operator v-depth-aggregate" cx={240} cy={155} r={28} /><Text x={240} y={161}>Σ</Text>
+      <Node x={350} y={155} accent wide>D1 = Σ₂ wᵢqᵢ</Node>
+      <line className="v-edge" x1={268} y1={155} x2={292} y2={155} />
+    </g>
+    <g data-hierarchy-depth="2">
+      <Label x={35} y={270}>depth 2</Label>
+      <Node x={80} y={325}>A∩B</Node><Node x={80} y={410}>A∩¬B</Node>
+      <Node x={230} y={325}>¬A∩B</Node><Node x={230} y={410}>¬A∩¬B</Node>
+      <line className="v-edge v-weighted-grandchild" x1={116} y1={325} x2={340} y2={350} />
+      <line className="v-edge v-weighted-grandchild" x1={116} y1={410} x2={340} y2={370} />
+      <line className="v-edge v-weighted-grandchild" x1={266} y1={325} x2={340} y2={350} />
+      <line className="v-edge v-weighted-grandchild" x1={266} y1={410} x2={340} y2={370} />
+      <circle className="v-operator v-depth-aggregate" cx={370} cy={360} r={28} /><Text x={370} y={366}>Σ</Text>
+      <Node x={490} y={360} accent wide>D2 = Σ₄ wⱼqⱼ</Node>
+      <line className="v-edge" x1={398} y1={360} x2={432} y2={360} />
+    </g>
+    <g data-invariance="root-d1-d2">
+      <Node x={610} y={255} wide>direct root q</Node>
+      <path className="v-compare" d="M408 155 C500 155 515 215 552 240" />
+      <path className="v-compare" d="M548 360 C575 340 590 310 600 285" />
+      <Node x={710} y={255} accent wide>q = D1 = D2</Node>
+      <line className="v-edge" x1={668} y1={255} x2={652} y2={255} />
+    </g>
   </>;
 }
 

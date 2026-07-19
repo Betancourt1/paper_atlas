@@ -389,16 +389,16 @@
       "after_paragraph_id": "attn_mechanism_p2",
       "delivery_medium": "source asset",
       "type": "OPERATION_DIAGRAM",
-      "title": "Every query relates to every key before values mix",
-      "question": "How do queries, keys, values, and eight parallel heads form one attention output?",
+      "title": "Scaled dot-product and multi-head attention",
+      "question": "What components are visible in the paper's two attention diagrams?",
       "items": [
         {
           "label": "Visual specification",
-          "detail": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output."
+          "detail": "Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer."
         },
         {
           "label": "Evidence boundary",
-          "detail": "The marks show topology, not measured attention weights or learned head semantics.",
+          "detail": "The figure shows the architecture's labeled operations, not measured attention weights or learned head semantics.",
           "role": "BOUNDARY"
         }
       ],
@@ -409,12 +409,12 @@
       "source_refs": [
         "source_attention_arxiv_v7"
       ],
-      "interpretation": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output.",
+      "interpretation": "Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.",
       "limitations": [
-        "The marks show topology, not measured attention weights or learned head semantics."
+        "The figure shows the architecture's labeled operations, not measured attention weights or learned head semantics."
       ],
-      "alt_text": "Detailed head 1 contains exactly one query q_i branching to three explicit key-value pairs whose weighted values converge only on z_i^(1). That output and distinct z_i^(2) through z_i^(8) nodes form an eight-way fan into Concat, followed by W_O and the multi-head output.",
-      "fallback": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output. The marks show topology, not measured attention weights or learned head semantics.",
+      "alt_text": "Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.",
+      "fallback": "Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.",
       "source_asset": {
         "images": [
           {
@@ -439,16 +439,16 @@
       "after_paragraph_id": "attn_mechanism_p3",
       "delivery_medium": "source asset",
       "type": "OPERATION_DIAGRAM",
-      "title": "The decoder combines permitted prefix and source dependencies",
-      "question": "Which target and source positions may influence the current prediction?",
+      "title": "The Transformer encoder-decoder architecture",
+      "question": "Which stacked blocks and attention paths are visible in Figure 1?",
       "items": [
         {
           "label": "Visual specification",
-          "detail": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state."
+          "detail": "Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention."
         },
         {
           "label": "Evidence boundary",
-          "detail": "The dependency map does not specify a decoding search algorithm or learned attention magnitudes.",
+          "detail": "The architecture diagram does not specify a decoding search algorithm or learned attention magnitudes.",
           "role": "BOUNDARY"
         }
       ],
@@ -459,12 +459,12 @@
       "source_refs": [
         "source_attention_arxiv_v7"
       ],
-      "interpretation": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state.",
+      "interpretation": "Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.",
       "limitations": [
-        "The dependency map does not specify a decoding search algorithm or learned attention magnitudes."
+        "The architecture diagram does not specify a decoding search algorithm or learned attention magnitudes."
       ],
-      "alt_text": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state.",
-      "fallback": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state. The dependency map does not specify a decoding search algorithm or learned attention magnitudes.",
+      "alt_text": "Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.",
+      "fallback": "Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.",
       "source_asset": {
         "images": [
           {

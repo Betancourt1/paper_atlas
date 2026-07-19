@@ -512,16 +512,16 @@
       "after_paragraph_id": "language_mechanism_p2",
       "delivery_medium": "source asset",
       "type": "PARALLEL_VIEW",
-      "title": "The same scores feed two different decisions",
-      "question": "Why can a pairwise comparator agree across languages while a global threshold disagrees?",
+      "title": "Pairwise accuracy and acceptance rate by language",
+      "question": "What relationship does Figure 4 plot for each evaluator model?",
       "items": [
         {
           "label": "Visual specification",
-          "detail": "Two responses retain the same within-language score gap after a shared translation, but their translated absolute positions can cross a fixed global threshold."
+          "detail": "Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model."
         },
         {
           "label": "Evidence boundary",
-          "detail": "Coordinates are illustrative; only the invariance and threshold-crossing relationship is asserted.",
+          "detail": "The original figure shows plotted associations; it does not by itself establish a causal relationship.",
           "role": "BOUNDARY"
         }
       ],
@@ -533,12 +533,12 @@
         "language_source_intro",
         "language_source_thresholds"
       ],
-      "interpretation": "Each language-specific score pair branches to a difference comparator and a fixed global threshold: the comparator can preserve the same ordering while the threshold produces a different acceptance result after a shared offset.",
+      "interpretation": "Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.",
       "limitations": [
-        "Coordinates are illustrative; only the invariance and threshold-crossing relationship is asserted."
+        "The original figure shows plotted associations; it does not by itself establish a causal relationship."
       ],
-      "alt_text": "Two language-specific score pairs each branch to a pairwise difference comparator and a fixed global threshold. Both comparator branches preserve the preferred response, while one threshold branch changes acceptance after the language offset.",
-      "fallback": "Each language-specific score pair branches to a difference comparator and a fixed global threshold: the comparator can preserve the same ordering while the threshold produces a different acceptance result after a shared offset. Coordinates are illustrative; only the invariance and threshold-crossing relationship is asserted.",
+      "alt_text": "Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.",
+      "fallback": "Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.",
       "source_asset": {
         "images": [
           {

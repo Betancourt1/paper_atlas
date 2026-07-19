@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
 - Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
