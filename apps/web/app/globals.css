@@ -8,7 +8,9 @@
   --line-strong: #aaa69d;
   --accent: #2f5ea8;
   --evidence: #4f6b4a;
+  --evidence-surface: #edf3eb;
   --warning: #a44e36;
+  --warning-surface: #f7e9e4;
   --focus: #2459b3;
   --selection: #cdddf5;
 }
@@ -23,7 +25,9 @@
   --line-strong: #6d695f;
   --accent: #8eb6f2;
   --evidence: #9fbd99;
+  --evidence-surface: oklch(0.30 0.025 142);
   --warning: #df9178;
+  --warning-surface: oklch(0.30 0.035 35);
   --focus: #a9c8ff;
   --selection: #294c78;
 }
@@ -836,13 +840,13 @@ summary:focus-visible {
 
 .v-node--accent,
 .v-zone--shared {
-  fill: #edf3eb;
+  fill: var(--evidence-surface);
   stroke: var(--evidence);
 }
 
 .v-node--boundary,
 .v-note {
-  fill: #f7e9e4;
+  fill: var(--warning-surface);
   stroke: var(--warning);
 }
 

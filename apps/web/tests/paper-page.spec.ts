@@ -299,6 +299,69 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
   }
 });
 
+test("custom SVG text keeps readable contrast in dark mode @visual", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  const mobile = page.viewportSize()?.width === 390;
+
+  for (const [paperPath, expected] of Object.entries(expectedVisuals)) {
+    if (expected.length === 0) continue;
+
+    await page.goto(paperPath);
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+
+    for (const [visualId, paragraphId] of expected) {
+      const renderedVisualId = mobile ? `${visualId}-mobile` : visualId;
+      const svg = page.locator(
+        `#${paragraphId} svg[data-visual-id="${renderedVisualId}"]`,
+      );
+      await expect(svg).toBeVisible();
+
+      const contrastRatios = await svg.evaluate((element) => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1;
+        canvas.height = 1;
+        const context = canvas.getContext("2d", { willReadFrequently: true })!;
+        const parseColor = (color: string) => {
+          context.clearRect(0, 0, 1, 1);
+          context.fillStyle = color;
+          context.fillRect(0, 0, 1, 1);
+          return [...context.getImageData(0, 0, 1, 1).data].slice(0, 3);
+        };
+        const luminance = (color: number[]) => color
+          .map((channel) => channel / 255)
+          .map((channel) => channel <= 0.04045
+            ? channel / 12.92
+            : ((channel + 0.055) / 1.055) ** 2.4)
+          .reduce((sum, channel, index) => (
+            sum + channel * [0.2126, 0.7152, 0.0722][index]
+          ), 0);
+        const contrast = (foreground: string, background: string) => {
+          const foregroundLuminance = luminance(parseColor(foreground));
+          const backgroundLuminance = luminance(parseColor(background));
+          return (
+            (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) /
+            (Math.min(foregroundLuminance, backgroundLuminance) + 0.05)
+          );
+        };
+
+        const textFills = [...new Set(
+          [...element.querySelectorAll(".v-text, .v-label")]
+            .map((text) => getComputedStyle(text).fill),
+        )];
+        const surfaceFills = [...new Set(
+          [...element.querySelectorAll(".v-node, .v-zone, .v-note")]
+            .map((surface) => getComputedStyle(surface).fill),
+        )];
+        return textFills.flatMap((textFill) => surfaceFills
+          .map((surfaceFill) => contrast(textFill, surfaceFill)));
+      });
+
+      expect(contrastRatios.length).toBeGreaterThan(0);
+      expect(Math.min(...contrastRatios)).toBeGreaterThanOrEqual(4.5);
+    }
+  }
+});
+
 test("original paper figures render at every approved source-asset paragraph @visual", async ({ page }) => {
   const mobile = page.viewportSize()?.width === 390;
   for (const [paperPath, expected] of Object.entries(expectedSourceAssets)) {
