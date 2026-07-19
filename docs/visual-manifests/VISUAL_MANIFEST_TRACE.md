@@ -255,9 +255,9 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`; `apps/web/public/paper-assets/trace/mobile/`; `apps/web/app/papers/[id]/explainer-svg.tsx`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING` — verify complete outer borders, clean neutral padding on every derived edge, precise alt text and provenance, and no clipped or neighboring fragment.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every padded mobile block is legible, clean-edged, contained, and scrollbar-free.
-- Evidence deviations: `REVISION_15_REJECTED` — replace the stroke-clipped branch composites; do not alter the complete desktop original.
+- Accessibility and fallback verification: `VERIFIED` — each source row receives 32 px neutral padding before assembly, block-specific alt text and provenance remain explicit, and no neighboring branch or plot fragment is introduced.
+- Desktop and mobile verification: `VERIFIED` — the complete desktop original remains unchanged; at 1440 × 1000 and 390 × 844 the vertically reflowed mobile blocks are contained and scrollbar-free.
+- Evidence deviations: `NONE` — revision 16 changes only crop bounds, neutral padding, centering, and vertical assembly; source pixels remain unscaled and unaltered.
 
 ## `trace_change_p2`
 

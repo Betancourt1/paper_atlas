@@ -336,9 +336,9 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`; `apps/web/public/paper-assets/searchos/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING` — verify complete outer borders, clean neutral padding on every derived edge, precise alt text and provenance, and no clipped or neighboring fragment.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every padded mobile block is legible, clean-edged, contained, and scrollbar-free.
-- Evidence deviations: `REVISION_14_REJECTED` — replace the edge-clipped derived assets; do not alter the complete desktop originals.
+- Accessibility and fallback verification: `VERIFIED` — the SOCM crop includes its complete dashed boundary, 24 px neutral padding separates every source stroke from the derived edge, and the crop-specific alt text and provenance remain explicit.
+- Desktop and mobile verification: `VERIFIED` — the complete desktop original remains unchanged; at 1440 × 1000 and 390 × 844 the padded mobile block is legible, contained, and scrollbar-free.
+- Evidence deviations: `NONE` — revision 15 changes only the inspected crop bounds and neutral padding; source pixels remain unscaled and unaltered.
 
 ## `sos_mechanism_p3`
 

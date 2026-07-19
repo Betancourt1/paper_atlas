@@ -481,8 +481,8 @@
             "alt_text": "Complete original-pixel Context Middleware box from SearchOS Figure 2, including Search Agent Context Register and Manager and the Pre LLM Call Wrapper label, with no neighboring middleware boxes."
           },
           {
-            "path": "/paper-assets/searchos/mobile/figure-2-socm-clean.png",
-            "alt_text": "Complete original-pixel Search-Oriented Context Management region from SearchOS Figure 2, including Frontier Tasks, Evidence Graph, Coverage Map, and Failure Memory."
+            "path": "/paper-assets/searchos/mobile/figure-2-socm-padded.png",
+            "alt_text": "Complete original-pixel Search-Oriented Context Management region from SearchOS Figure 2, including its full dashed boundary, Frontier Tasks, Evidence Graph, Coverage Map, and Failure Memory, with neutral padding around every edge."
           },
           {
             "path": "/paper-assets/searchos/mobile/figure-2-search-agent-skills-clean.png",
@@ -493,7 +493,7 @@
         "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses exactly three original-pixel crops: Context Middleware at x=46..637, y=884..1159; Search-Oriented Context Management at x=18..1835, y=1167..1639; and Search Agent Skills at x=1928..2523, y=817..1618. No neighboring module, connector fragment, redraw, or resampling is included."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses exactly three original-pixel crops: Context Middleware at x=46..637, y=884..1159; Search-Oriented Context Management at x=19..1884, y=1206..1642 with 24 px neutral padding on every side; and Search Agent Skills at x=1928..2523, y=817..1618. Source pixels remain unscaled and unaltered; no neighboring module, connector fragment, redraw, or resampling is included."
       }
     },
     {

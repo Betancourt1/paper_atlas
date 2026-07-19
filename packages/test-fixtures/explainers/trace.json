@@ -421,12 +421,12 @@
         ],
         "mobile_images": [
           {
-            "path": "/paper-assets/trace/mobile/figure-1-success-clean.png",
-            "alt_text": "Clean original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete successful orange branch ending in Answer: Dublin."
+            "path": "/paper-assets/trace/mobile/figure-1-success-padded.png",
+            "alt_text": "Padded original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete successful orange branch ending in Answer: Dublin."
           },
           {
-            "path": "/paper-assets/trace/mobile/figure-1-failure-clean.png",
-            "alt_text": "Clean original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete failed blue branch ending in Answer: Lisbon."
+            "path": "/paper-assets/trace/mobile/figure-1-failure-padded.png",
+            "alt_text": "Padded original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete failed blue branch ending in Answer: Lisbon."
           },
           {
             "path": "/paper-assets/trace/mobile/figure-1-trajectory-plot.png",
@@ -437,7 +437,7 @@
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Desktop is the complete 200-DPI raster. Mobile vertically assembles exact original-pixel question (x=12..2095, y=16..139), shared prefix (x=640..1469, y=205..524), and success or failure branch rows (x=12..831 or x=1264..2083, y=644..1148), then shows the complete trajectory plot crop (x=2335..3184, y=145..1074). No branch fragment, neighboring box, redraw, or resampling is included."
+        "modifications": "Desktop keeps the complete 200-DPI raster. Mobile vertically centers original-pixel rows: question x=0..2125, y=0..165; shared prefix x=560..1500, y=145..550; success x=0..880, y=520..1175; or failure x=1150..2130, y=520..1175. Each row has 32 px neutral padding. The trajectory plot is unchanged. Source pixels remain unscaled and unaltered; no redraw, interpolation, clipping, or source-derived blank strip is included."
       }
     },
     {
