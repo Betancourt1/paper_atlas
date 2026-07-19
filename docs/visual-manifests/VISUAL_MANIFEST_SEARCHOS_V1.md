@@ -3,9 +3,9 @@
 - Paper ID: `paper_searchos_v1`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
-- Manifest revision: `13`
+- Manifest revision: `14`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `17 / 17` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -28,7 +28,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: A long-horizon research task requires more than issuing good queries. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Entity/attribute completion, missing cells, and provenance motivate the system but do not form a separate dependency or quantitative structure. Figure 2 later supplies the actual schema-to-evidence architecture, so another visual here would duplicate that topology rather than reduce a paragraph-specific reconstruction.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -55,7 +55,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: Conventional agents often keep this state in growing conversation histories. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Buried evidence, duplicate work, and idle worker slots are three qualitative failure modes with no reported shared scale, transition data, or causal ordering. Rendering them would produce forbidden repeated cards or an item list; prose preserves their distinct meanings without implying comparability.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -82,7 +82,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: SearchOS converts a natural-language request into one or more related tables. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Rows, attribute columns, citation cells, and missing values are already visible inside Figure 2 at the mechanism placement. This paragraph adds no new relation beyond defining those table semantics, so a second schema drawing would repeat the same evidence-bearing structure.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -109,7 +109,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: The system then separates global coordination from local search. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Global orchestration versus local search is completely encoded by Figure 2 through the orchestrator and agent regions. The paragraph only names that responsibility boundary; another diagram would duplicate the same modules without adding a new dependency, state change, or failure condition.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -136,7 +136,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: This paragraph states "Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Evidence". The original figure is already assigned at `sos_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
+- Decision rationale: Frontier Tasks, Evidence Graph, Coverage Map, and Failure Memory appear together in the complete Search-Oriented Context Management crop used by the next paragraph. Re-rendering the four stores here would reduce them to a forbidden component inventory and obscure their actual connections in the original architecture.
 - Explanatory job: Shared-state architecture and provenance topology.
 
 ### Implementation record
@@ -173,7 +173,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -222,7 +222,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -282,7 +282,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -329,16 +329,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
+- Selection rationale: Treatment A remains evidence-correct, but revision 14 requires the exact clean source-pixel crops and assemblies specified above; the revision-13 assets with clipped neighbors or branch fragments must not be retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`; `apps/web/public/paper-assets/searchos/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
-- Evidence deviations: `NONE`
+- Accessibility and fallback verification: `PENDING` — verify every specified crop is complete, excludes adjacent fragments, retains precise alt text and provenance, and matches the recorded source-pixel modification.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every mobile block is legible, fragment-free, blank-free, contained, and scrollbar-free.
+- Evidence deviations: `REVISION_13_REJECTED` — replace the failed mobile crop assets; do not alter the complete desktop original.
 
 ## `sos_mechanism_p3`
 
@@ -539,7 +539,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The worked example is short enough to follow in prose: Suppose a comparison request has a known company row but no verified value for one attribute. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Decision rationale: The missing-cell example instantiates the schema, orchestrator, and middleware relations already visible in Figure 2. Its remaining steps are a single ordered dispatch walkthrough, so a standalone rendering would be a forbidden chain rather than a new explanatory topology.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -566,7 +566,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The worked example is short enough to follow in prose: A page visit alone does not fill the cell. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Decision rationale: Evidence acceptance, atomic cell update, and branch stopping apply the architecture in Figure 2 and the intervention behavior in Figure 5. The paragraph introduces no additional branching beyond that covered evidence; another flow would merely serialize the prose into a forbidden chain.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -593,7 +593,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: SearchOS and baselines can be compared within each F1 metric, but item, row, set, table, and list F1 are distinct aggregations across two benchmarks, and the strongest comparator can differ by metric. A normalized multimetric chart would hide those identities; separate metric tracks would be forbidden repeated panels. With no run variance reported, prose is the least misleading complete account.
+- Decision rationale: Item, row, set, table, and list F1 are different aggregations across two benchmarks, and the strongest comparator changes by metric. A normalized chart would erase those identities, while separate tracks would be forbidden repeated panels; absent run variance, prose is the least misleading complete account.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -620,7 +620,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: Runtime, utilization, and item F1 form a meaningful joint trade-off, but their units and directions differ and the fixture exposes only two aggregate conditions over ten cases, without case-level points or intervals. Normalizing three two-point changes would invent a weighting; parallel metric tracks would be a repeated item-plus-value treatment. Prose preserves all three paired changes and the subset-study caveat.
+- Decision rationale: The scheduling study exposes only two aggregate conditions over ten cases for runtime, utilization, and item F1, with different units and no case-level points or intervals. Normalization would invent a weighting, while parallel value tracks would be a forbidden item-plus-metric display.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -647,7 +647,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph already reports the bounded evidence directly: A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to 78.3 and row F1 from 56.5 to 53.1. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
+- Decision rationale: The experiment removes all hierarchical skill layers jointly, so the item- and row-F1 changes cannot identify a contribution from any individual layer. A component chart would imply unsupported attribution; two before/after values would otherwise collapse to a forbidden metric display.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -674,7 +674,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports the best of three runs for each case. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: The GLM-5 and Qwen setup, best-of-three reporting, missing variance, and budget conditions are heterogeneous qualifications on the evaluation protocol. They have no common scale or dependency to reconstruct, and cards would falsely present them as comparable findings.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
@@ -701,7 +701,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: This paragraph states "A URL and anchored excerpt preserve provenance but do not independently prove that the". The original figure is already assigned at `sos_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
+- Decision rationale: A URL and anchored excerpt preserve provenance but do not establish truth; that is an epistemic boundary, not a process or measured relationship. Visualizing it would imply a verification transition that the paper does not provide, so the qualification must remain explicit prose.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
@@ -728,7 +728,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search, and improved adaptation for future work. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: Skill synthesis, broader domains, multimodal search, and improved adaptation are independent future-work categories without dates, dependencies, or ordered milestones. A roadmap would invent sequence and a card set would be forbidden, so prose preserves their noncommittal status.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
@@ -755,7 +755,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The paper provides bounded engineering evidence for making research state explicit. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: The synthesis combines explicit research state with coverage-aware intervention, both already grounded by Figures 2 and 5. It adds no third mechanism or quantitative relation, so another summary visual would only repeat the two accepted originals.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
@@ -782,7 +782,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning, or skills individually. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: The benchmark evaluates the complete system and cannot assign gains to middleware, scheduling, schema planning, or skills individually. Any component-effect diagram or segmented metric view would fabricate causal attribution absent an isolating experiment; prose states that boundary directly.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record

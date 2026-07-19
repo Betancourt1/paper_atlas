@@ -3,9 +3,9 @@
 - Paper ID: `paper_trace`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
-- Manifest revision: `13`
+- Manifest revision: `14`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -28,7 +28,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: This paragraph states "A search agent may make dozens of dependent decisions before answering. A failed trajectory". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
+- Decision rationale: Outcome-only credit ambiguity is motivation, while Figure 1 at the change paragraph supplies the concrete successful-versus-failed trajectory contrast. Reusing it here would not add a distinct dependency or quantitative question, so prose introduces the problem without duplicating the evidence.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -55,7 +55,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: Process supervision can provide finer feedback, but commonly needs step labels, an LLM judge, a learned critic, or repeated rollouts. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Step labels, LLM judges, learned critics, and repeated rollouts are alternative supervision requirements, not stages or comparable measurements. Their only honest rendering is a forbidden categorical list or repeated cards; prose keeps the alternatives non-ordered.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -92,7 +92,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, build two clean source-pixel composites from the 3200 × 1200 original Figure 1, then show the complete trajectory plot as a third block. For both branch composites, vertically assemble the complete question crop x=12..2095, y=16..139 (2084 × 124 px) above the complete shared Search/Open prefix crop x=640..1469, y=205..524 (830 × 320 px). Append either the complete success branch crop x=12..831, y=644..1148 (820 × 505 px) or the complete failure branch crop x=1264..2083, y=644..1148 (820 × 505 px), centering each source crop as an independent row so no fragment is clipped or padded with sampled blank source area. Add the complete right-side trajectory plot as block three, bounds x=2335..3184, y=145..1074 (850 × 930 px). Modification record: the question and shared prefix pixels are duplicated once per branch composite; crop and vertical assembly only, with no redraw, relabeling, interpolation, clipped box, mixed branch fragment, or blank crop. Retain block-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -141,7 +141,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, build two clean source-pixel composites from the 3200 × 1200 original Figure 1, then show the complete trajectory plot as a third block. For both branch composites, vertically assemble the complete question crop x=12..2095, y=16..139 (2084 × 124 px) above the complete shared Search/Open prefix crop x=640..1469, y=205..524 (830 × 320 px). Append either the complete success branch crop x=12..831, y=644..1148 (820 × 505 px) or the complete failure branch crop x=1264..2083, y=644..1148 (820 × 505 px), centering each source crop as an independent row so no fragment is clipped or padded with sampled blank source area. Add the complete right-side trajectory plot as block three, bounds x=2335..3184, y=145..1074 (850 × 930 px). Modification record: the question and shared prefix pixels are duplicated once per branch composite; crop and vertical assembly only, with no redraw, relabeling, interpolation, clipped box, mixed branch fragment, or blank crop. Retain block-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -201,7 +201,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, build two clean source-pixel composites from the 3200 × 1200 original Figure 1, then show the complete trajectory plot as a third block. For both branch composites, vertically assemble the complete question crop x=12..2095, y=16..139 (2084 × 124 px) above the complete shared Search/Open prefix crop x=640..1469, y=205..524 (830 × 320 px). Append either the complete success branch crop x=12..831, y=644..1148 (820 × 505 px) or the complete failure branch crop x=1264..2083, y=644..1148 (820 × 505 px), centering each source crop as an independent row so no fragment is clipped or padded with sampled blank source area. Add the complete right-side trajectory plot as block three, bounds x=2335..3184, y=145..1074 (850 × 930 px). Modification record: the question and shared prefix pixels are duplicated once per branch composite; crop and vertical assembly only, with no redraw, relabeling, interpolation, clipped box, mixed branch fragment, or blank crop. Retain block-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -248,16 +248,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
+- Selection rationale: Treatment A remains evidence-correct, but revision 14 requires the exact clean source-pixel crops and assemblies specified above; the revision-13 assets with clipped neighbors or branch fragments must not be retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`; `apps/web/public/paper-assets/trace/mobile/`; `apps/web/app/papers/[id]/explainer-svg.tsx`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
-- Evidence deviations: `NONE`
+- Accessibility and fallback verification: `PENDING` — verify every specified crop is complete, excludes adjacent fragments, retains precise alt text and provenance, and matches the recorded source-pixel modification.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every mobile block is legible, fragment-free, blank-free, contained, and scrollbar-free.
+- Evidence deviations: `REVISION_13_REJECTED` — replace the failed mobile crop assets; do not alter the complete desktop original.
 
 ## `trace_change_p2`
 
@@ -270,7 +270,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph makes one bounded distinction in plain language: This is a change to credit assignment, not a new browser, backbone, training corpus, or final verifier. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Decision rationale: Credit assignment changes while browser, backbone, corpus, and verifier remain outside the contribution. This is a scope exclusion with no supported topology among the excluded systems; a diagram would imply relations or architecture changes that TRACE does not claim.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -297,7 +297,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph's bounded operation is already explicit: TRACE first splits a rollout after each tool action and returned observation. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
+- Decision rationale: Splitting after tool observations and scoring prefixes with a frozen reference are prerequisites for the multi-scale dependency graphic in the third mechanism paragraph. Rendered alone they form only a sequential chain, while the actual branching credit relations are already reserved for the DAG.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -324,7 +324,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph's bounded operation is already explicit: The raw answer score is converted into a log-ratio value representing relative closure of the initial answer-likelihood gap. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
+- Decision rationale: The log-ratio value and adjacent temporal difference are exact definitions needed to read the following DAG. The paragraph reports no distribution or additional state topology; an equation-to-equation flow would be a forbidden single chain and add no reconstruction benefit.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -610,7 +610,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: This paragraph states "Consider a trajectory that searches for a relevant source, opens a page containing decisive". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
+- Decision rationale: The hypothetical search, page opening, and later wrong turn are the narrative instance already depicted by Figure 1. A second rendering would repeat the same success/failure branches without new evidence, while a step-only cartoon would collapse into a forbidden chain.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -637,7 +637,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: This paragraph states "The useful search and page opening can receive positive local credit if they make". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
+- Decision rationale: Positive local credit, zero or negative later credit, and terminal failure are interpretive assignments in the Figure 1 example, not separately measured values. Plotting them would invent magnitudes; cards or a sequence would use forbidden stock structures.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -664,7 +664,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: The paragraph already reports the bounded evidence directly: The authors train Qwen3-4B-Thinking-2507 and Qwen3-30B-A3B-Thinking-2507 in the same ReAct-style search harness. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
+- Decision rationale: The two Qwen backbones, shared ReAct harness, and controlled training conditions are heterogeneous setup facts rather than a measured joint relationship. A visual would reduce them to an inventory and imply comparability across unlike controls, so exact prose is clearer.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -691,7 +691,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: Base-to-TRACE changes for two backbones and GRPO-to-TRACE four-benchmark averages are quantitative, but they refer to different comparison baselines and scopes. One slope chart would imply exchangeability; separate backbone/comparator tracks would be repeated one-axis panels, and no uncertainty is reported. Prose keeps the controlled BrowseComp-Plus gains distinct from unweighted cross-benchmark averages.
+- Decision rationale: BrowseComp-Plus base-to-TRACE gains and GRPO-to-TRACE four-benchmark averages use different baselines and scopes. One chart would imply exchangeability, separate tracks would be forbidden repeated panels, and no uncertainty is reported; prose keeps the comparisons distinct.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -906,7 +906,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The experiments cover long-horizon search with short answers that can be compared with known ground truth. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: Known-answer grading, short outputs, and long-horizon search define categorical evaluation boundaries without an ordering, scale, or dependency. A visual would become a limitation card set and add no structure beyond the explicit prose.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
@@ -933,7 +933,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Only two related Qwen3 backbones and one interaction domain are evaluated. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: Two related Qwen backbones, one interaction domain, proxy sensitivity, and missing causal identification qualify different parts of the claim. Combining them visually would imply one common failure mechanism that the evidence does not establish.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
@@ -960,7 +960,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The controlled result supports a narrow conclusion: in the authors' search setup, adding their reference-model-based turn credit to outcome training improves both tested backbones and several related benchmarks. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: The conclusion integrates the accepted credit-dependency DAG with Figures 3 and 4 under the controlled search setup. It introduces no new mechanism or result structure, so a summary visual would duplicate already placed evidence rather than improve reconstruction.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
@@ -987,7 +987,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
-- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The paper does not establish a general solution to agent credit assignment. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Decision rationale: Generalization beyond the tested domain and the need for new progress targets are explicit non-established claims, not observed transitions or measurements. A diagram would turn open requirements into apparent results, so prose preserves their epistemic status.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
