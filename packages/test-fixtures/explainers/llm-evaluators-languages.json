@@ -68,7 +68,7 @@
         "The paper also wraps Hindi Safety content in an English frame. An off-the-shelf language identifier labels 44% of these code-switched prompts as English, causing the more lenient English threshold to be applied to content scored against the higher Hindi reference. Acceptance rises from the calibrated 50% to 75%. This is a constructed demonstration of the attack surface, not evidence of exploitation in a production system."
       ],
       "claim_ids": ["language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_code_switch", "language_claim_production_notshown"],
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": ["language_source_intro", "language_source_thresholds"],
       "reading_depths": ["TWENTY_MIN", "DEEP"]
     },
     {
@@ -215,7 +215,7 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 0.98,
-      "source_refs": ["language_source_uncertainty", "language_source_regressions"],
+      "source_refs": ["language_source_intro", "language_source_uncertainty", "language_source_regressions"],
       "verification_status": "VERIFIED"
     },
     {
@@ -276,47 +276,190 @@
     {
       "id": "language_visual_pairwise_threshold",
       "after_block_id": "language_mechanism",
-      "type": "METHOD_COMPARISON",
-      "title": "The bias that pairwise accuracy cannot see",
+      "type": "PARALLEL_VIEW",
+      "title": "The same score offset is invisible to ranking but visible to a threshold",
       "question": "How can an evaluator rank responses correctly yet make different accept-or-reject decisions across languages?",
       "items": [
         {
-          "label": "Matched multilingual input",
-          "detail": "Professionally translated and human-validated benchmark pairs express aligned content across 23 languages.",
+          "label": "Within-language pairwise view",
+          "detail": "Adding the same language-conditioned offset to a preferred and rejected response leaves their ordering unchanged because the shared offset cancels in the comparison."
+        },
+        {
+          "label": "Across-language pointwise view",
+          "detail": "The same offset moves the absolute score scale for that language, so equal raw scores no longer necessarily carry comparable meaning across languages."
+        },
+        {
+          "label": "One shared decision threshold",
+          "detail": "When the shifted score distributions meet one global cutoff, different proportions can cross the line even while pairwise ranking accuracy remains high."
+        }
+      ],
+      "claim_ids": ["language_claim_pairwise_blind", "language_claim_gap"],
+      "source_refs": ["language_source_thresholds"],
+      "interpretation": "Pairwise ranking and pointwise calibration test different properties. A language-wide shift can preserve the first while changing the decisions produced by the second.",
+      "limitations": [
+        "This is a schematic comparison and assigns no invented score coordinates, distribution shapes, or threshold values.",
+        "The study uses aligned translated benchmark items; naturally authored or culturally specific conversations may behave differently.",
+        "A global median threshold is an analytical rule in the study, not evidence that production systems use the same policy.",
+        "The comparison describes a statistical blind spot and does not establish the cause of the language-conditioned shifts."
+      ],
+      "alt_text": "Parallel comparison: a language-conditioned offset added to both responses cancels in a within-language ranking, but it shifts that language's absolute score scale and changes how many responses cross one shared threshold.",
+      "fallback": "Within one language, adding the same baseline offset to both responses preserves which response ranks higher. Across languages, the offset shifts absolute scores onto different baselines. Applying one global threshold to those shifted scales can therefore produce different acceptance rates even when pairwise accuracy remains high."
+    },
+    {
+      "id": "language_visual_score_decomposition",
+      "after_block_id": "language_mechanism",
+      "type": "OPERATION_DIAGRAM",
+      "title": "The regressions separate uncertainty from a residual language effect",
+      "question": "What does the paper test after finding that uncertainty and evaluator scores move together?",
+      "items": [
+        {
+          "label": "Semantic content contribution",
+          "detail": "Aligned translated items are intended to hold response meaning comparable while the analysis examines score variation across languages."
+        },
+        {
+          "label": "Uncertainty-related contribution",
+          "detail": "Summed response negative log-likelihood is the main uncertainty proxy, with attribute-head disagreement, predictive variance, and semantic entropy as alternatives."
+        },
+        {
+          "label": "Language-conditioned baseline",
+          "detail": "The model allows a language-specific score component that can shift the absolute scale without changing within-language ordering."
+        },
+        {
+          "label": "Noise and unexplained variation",
+          "detail": "Remaining variation is not assigned a causal interpretation by the score decomposition."
+        },
+        {
+          "label": "Nested-regression test",
+          "detail": "Language identity adds significant predictive power in every evaluated reward-model regression after negative log-likelihood is included."
+        }
+      ],
+      "claim_ids": ["language_claim_uncertainty", "language_claim_language_after_nll", "language_claim_cause_notshown"],
+      "source_refs": ["language_source_uncertainty", "language_source_regressions"],
+      "interpretation": "Uncertainty proxies explain part of the observed score variation, but the nested regressions retain a statistically significant language contribution. That residual association narrows explanations; it does not identify a causal mechanism.",
+      "limitations": [
+        "The components summarize the paper's statistical model and should not be read as known causal parts of an evaluator.",
+        "Negative log-likelihood and the token-free alternatives are proxies rather than direct measurements of one latent uncertainty quantity.",
+        "Significant added predictive power for language does not identify whether data prevalence, script, tokenization, language family, or another factor caused the effect."
+      ],
+      "alt_text": "Operation diagram decomposing evaluator score variation into semantic content, uncertainty-related contribution, language-conditioned baseline, and noise, followed by a nested-regression test in which language remains significant after negative log-likelihood is included.",
+      "fallback": "The paper models evaluator scores using semantic content, an uncertainty-related component, a language-specific baseline, and noise. It first measures positive associations between uncertainty proxies and scores, then adds language identity in nested regressions. Language contributes significant predictive power after negative log-likelihood is included in every evaluated reward-model regression, but the association is not causal evidence."
+    },
+    {
+      "id": "language_visual_threshold_failures",
+      "after_block_id": "language_example",
+      "type": "PARALLEL_VIEW",
+      "title": "Two examples expose different threshold failure modes",
+      "question": "What do the English-Ukrainian comparison and the code-switch construction each demonstrate?",
+      "items": [
+        {
+          "label": "English pairwise accuracy",
+          "detail": "Rounded Skywork-LLaMA-8B pairwise accuracy in the worked example.",
+          "value": 93
+        },
+        {
+          "label": "Ukrainian pairwise accuracy",
+          "detail": "Rounded Skywork-LLaMA-8B pairwise accuracy in the worked example.",
+          "value": 87
+        },
+        {
+          "label": "English acceptance",
+          "detail": "Rounded acceptance rate under the shared threshold in the worked example.",
           "value": 23
         },
         {
-          "label": "Pairwise lens",
-          "detail": "Pairwise accuracy checks only whether the preferred response outranks the rejected response; results often exceed 90%."
+          "label": "Ukrainian acceptance",
+          "detail": "Rounded acceptance rate under the shared threshold; the paper calls the 23-to-67 difference 44 points.",
+          "value": 67
         },
         {
-          "label": "Pointwise lens",
-          "detail": "All eight core evaluators show statistically significant language-dependent shifts in absolute scores.",
-          "value": 8
-        },
-        {
-          "label": "Shared-threshold consequence",
-          "detail": "The aggregate analysis reports gaps up to 43.0 percentage points. A separate rounded English/Ukrainian example uses 23% versus 67% and is described by the paper as 44 points; it is not the aggregate maximum.",
+          "label": "Separate aggregate maximum",
+          "detail": "Maximum acceptance gap in the aggregate reward-model analysis, not the rounded English-Ukrainian worked example.",
           "value": 43
         },
         {
-          "label": "Partial calibration",
-          "detail": "A per-language mean offset reduces the average gap by 60.9%, from 33.4 to 11.6 percentage points, but does not remove it.",
-          "value": 60.9
+          "label": "Code-switched prompts labeled English",
+          "detail": "Share of English-wrapped Hindi prompts assigned the English language label by the off-the-shelf identifier.",
+          "value": 44
+        },
+        {
+          "label": "Hindi-calibrated acceptance",
+          "detail": "Acceptance rate under the calibrated Hindi reference in the constructed test.",
+          "value": 50
+        },
+        {
+          "label": "Acceptance with English threshold",
+          "detail": "Acceptance rate after the more lenient English threshold is applied in the constructed test.",
+          "value": 75
         }
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_effect", "language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_high_accuracy_gap", "language_claim_calibration"],
-      "source_refs": ["language_source_intro", "language_source_effects", "language_source_thresholds", "language_source_calibration"],
-      "interpretation": "A language-conditioned score shift can cancel when comparing two responses within one language, preserving pairwise rankings, while still changing which responses cross one shared absolute threshold.",
+      "claim_ids": ["language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_code_switch", "language_claim_production_notshown"],
+      "source_refs": ["language_source_thresholds"],
+      "interpretation": "The first comparison shows that similar pairwise accuracy can coexist with very different acceptance rates. The second shows how language identification can route code-switched content to a different calibrated threshold.",
       "limitations": [
-        "The inputs are translated benchmark items, not naturally authored or culturally specific multilingual conversations.",
-        "The 43-point result uses a global median threshold as an illustrative rule; production policies may differ.",
-        "The paper's 44-point English/Ukrainian example is computed from rounded 23% and 67% display values and should not replace the 43.0-point aggregate maximum.",
-        "Per-language offsets require language identification and cannot correct differing score dispersion or language-item interactions.",
-        "The comparison explains the measured statistical blind spot; it does not establish a causal mechanism."
+        "The English-Ukrainian values are rounded display values; their paper-described 44-point difference is distinct from the 43.0-point aggregate maximum.",
+        "The code-switch result is a constructed benchmark demonstration, not observed exploitation of a deployed safety system.",
+        "The acceptance values depend on the study's thresholding choices and should not be treated as universal production rates."
       ],
-      "alt_text": "Comparison of pairwise and pointwise evaluation across 23 languages. Pairwise accuracy often remains above 90%, but eight evaluators assign significantly shifted absolute scores. The aggregate shared-threshold maximum is 43.0 percentage points; a separate rounded English/Ukrainian example is described as 44 points from 23% versus 67%. Per-language offsets reduce the average gap by 60.9% but leave an 11.6-point residual.",
-      "fallback": "The study evaluates aligned response pairs in 23 languages. Pairwise accuracy asks only whether the preferred response scores above the rejected response, so a language-wide shift can leave ordering unchanged. Pointwise analysis finds significant score differences in all eight core evaluators. Under one global median threshold, the aggregate analysis reports acceptance-rate gaps up to 43.0 percentage points. Separately, the paper rounds the Skywork-LLaMA-8B English and Ukrainian rates to 23% and 67% and calls that example a 44-point gap; this apparent rounding discrepancy is not a different aggregate maximum. Subtracting a per-language mean offset reduces the average gap from 33.4 to 11.6 points, but distribution-shape and language-item differences remain."
+      "alt_text": "Parallel threshold examples: English and Ukrainian pairwise accuracies are 93% and 87%, but acceptance rates are 23% and 67%; this rounded 44-point example is distinct from the 43-point aggregate maximum. Separately, 44% of English-wrapped Hindi prompts are labeled English, and applying the English threshold raises acceptance from 50% to 75%.",
+      "fallback": "Skywork-LLaMA-8B has rounded pairwise accuracies of 93% for English and 87% for Ukrainian, while rounded acceptance rates are 23% and 67%. The paper calls that worked-example difference 44 points; the aggregate maximum is separately 43.0 points. In the constructed code-switch test, 44% of English-wrapped Hindi prompts are labeled English, and applying the English threshold raises acceptance from 50% to 75%. Neither example is a measured production bypass."
+    },
+    {
+      "id": "language_visual_evidence_matrix",
+      "after_block_id": "language_evidence",
+      "type": "EVIDENCE_MATRIX",
+      "title": "The evidence spans several non-equivalent comparisons",
+      "question": "Which measurements support the language-shift finding, and which conditions belong to each number?",
+      "items": [
+        {
+          "label": "Core evaluators with significant language effects",
+          "detail": "All four prompted judges and four trained reward models show significant mean-score differences across languages.",
+          "value": 8
+        },
+        {
+          "label": "Resource-score Pearson correlation",
+          "detail": "Aggregated reward-model mean score versus Common Crawl language prevalence.",
+          "value": -0.58
+        },
+        {
+          "label": "Resource-score Spearman correlation",
+          "detail": "Rank correlation for the same aggregated reward-model language-level relationship.",
+          "value": -0.81
+        },
+        {
+          "label": "Gap above 95% pairwise accuracy",
+          "detail": "Maximum acceptance-rate difference among observations whose pairwise accuracy exceeds 95%.",
+          "value": 34
+        },
+        {
+          "label": "GPT-4.1-mini threshold gaps",
+          "detail": "Safety and Chat-Hard gaps are 19.6 and 14.0 percentage points, respectively."
+        },
+        {
+          "label": "Qwen3-32B-thinking threshold gaps",
+          "detail": "Safety and Chat-Hard gaps are 32.7 and 29.7 percentage points, respectively."
+        },
+        {
+          "label": "Average gap before mean-offset correction",
+          "detail": "Average acceptance gap before per-language centering.",
+          "value": 33.4
+        },
+        {
+          "label": "Average residual gap after correction",
+          "detail": "Average acceptance gap after per-language mean offsets, a reported 60.9% reduction.",
+          "value": 11.6
+        }
+      ],
+      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_high_accuracy_gap", "language_claim_additional_judges", "language_claim_language_after_nll", "language_claim_calibration"],
+      "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_regressions", "language_source_calibration"],
+      "interpretation": "The study finds language effects across all core evaluators, reproduces nontrivial threshold gaps in additional judges, and shows that simple mean-offset correction reduces but does not eliminate the decision disparity.",
+      "limitations": [
+        "The rows summarize different evaluators, benchmark subsets, metrics, and aggregation levels; they must not be read as one common ranked series.",
+        "The negative resource-score correlations use Common Crawl prevalence as a proxy for training exposure and do not establish causality.",
+        "Mean-offset correction cannot remove distribution-shape differences or language-item interactions and requires a language label.",
+        "The evaluation data are translated benchmark items rather than naturally authored multilingual conversations."
+      ],
+      "alt_text": "Evidence matrix: all eight core evaluators show significant language effects; resource-score correlations are Pearson minus 0.58 and Spearman minus 0.81; acceptance gaps reach 34 points even above 95% pairwise accuracy; additional judges show dataset-specific gaps; and mean-offset correction reduces the average gap from 33.4 to 11.6 points.",
+      "fallback": "All eight core evaluators show significant mean-score differences across languages. Aggregated reward-model scores correlate with Common Crawl prevalence at Pearson -0.58 and Spearman -0.81. Acceptance differences reach 34.0 points among observations above 95% pairwise accuracy. GPT-4.1-mini gaps are 19.6 and 14.0 points on Safety and Chat-Hard; Qwen3-32B-thinking gaps are 32.7 and 29.7. Per-language mean offsets reduce the average gap from 33.4 to 11.6 points, or 60.9%, without eliminating it. These rows describe different conditions and are not one ranked scale."
     }
   ],
   "glossary": [

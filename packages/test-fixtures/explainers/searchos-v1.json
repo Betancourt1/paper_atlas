@@ -365,6 +365,7 @@
       "confidence": 0.78,
       "source_refs": [
         "sos_formulation_source",
+        "sos_middleware_source",
         "sos_results_source"
       ],
       "verification_status": "VERIFIED"
@@ -378,6 +379,7 @@
       "source_refs": [
         "sos_formulation_source",
         "sos_middleware_source",
+        "sos_results_source",
         "sos_ablations_source"
       ],
       "verification_status": "VERIFIED"
@@ -433,43 +435,85 @@
   ],
   "visuals": [
     {
-      "id": "visual_searchos_control_loop",
-      "after_block_id": "sos_mechanism",
-      "type": "PIPELINE_FLOW",
-      "title": "The SearchOS evidence-and-control loop",
-      "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",
+      "id": "visual_searchos_schema_completion",
+      "after_block_id": "sos_change",
+      "type": "PARALLEL_VIEW",
+      "title": "From an open request to inspectable missing cells",
+      "question": "What becomes explicit when a natural-language search request is represented as relational schema completion?",
       "items": [
         {
-          "label": "Define the relational target",
-          "detail": "Convert the request into tables, entity keys, attributes, relations, and citation cells so missing work becomes explicit."
+          "label": "Natural-language request",
+          "detail": "The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."
         },
         {
-          "label": "Schedule an unresolved gap",
-          "detail": "Frontier Task selects a ready schema gap, assigns it to an available role, and continuously refills released execution slots."
+          "label": "Related tables",
+          "detail": "Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."
         },
         {
-          "label": "Search with scoped context",
-          "detail": "The worker receives its assignment, relevant shared state, prior failures, and selected strategy or access skills rather than the full global history."
+          "label": "Materialized coverage",
+          "detail": "Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."
         },
         {
-          "label": "Gate the observation",
-          "detail": "Evidence middleware accepts a candidate only when it binds to a schema cell and includes an anchored source span."
-        },
-        {
-          "label": "Commit shared state atomically",
-          "detail": "Accepted evidence updates the Evidence Graph and Coverage Map together; task outcomes and failed attempts update Frontier Task and Failure Memory."
-        },
-        {
-          "label": "Measure, redirect, or finish",
-          "detail": "Sensors inspect coverage growth, evidence growth, and budgets, then continue, correct, backfill, stop a branch, or allow synthesis from accumulated evidence."
+          "label": "Citation binding",
+          "detail": "A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."
         }
       ],
       "claim_ids": [
         "sos_schema",
+        "sos_citation_truth",
+        "sos_schema_fit_inference"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_results_source"
+      ],
+      "interpretation": "The representation change turns vague remaining work into addressable cells and keeps provenance next to each accepted value. It gives the scheduler a shared target outside any one agent's conversation.",
+      "limitations": [
+        "A source URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true.",
+        "Coverage of materialized rows cannot prove exhaustive discovery in an open-set task.",
+        "Structured benchmark formats may particularly suit this relational representation."
+      ],
+      "alt_text": "Parallel view of a natural-language request becoming related entity-attribute tables, explicit cell coverage states, and value-to-citation bindings.",
+      "fallback": "SearchOS converts a natural-language request into related tables whose rows are entities and columns are requested attributes. Every known cell receives a coverage status, and each accepted value is associated with a source URL and anchored excerpt. This makes missing work and provenance explicit, although it does not prove exhaustive discovery or factual truth."
+    },
+    {
+      "id": "visual_searchos_control_loop",
+      "after_block_id": "sos_mechanism",
+      "type": "CONTROL_LOOP",
+      "title": "The SearchOS evidence-and-control loop",
+      "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",
+      "items": [
+        {
+          "label": "Frontier Task schedules a gap",
+          "detail": "Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."
+        },
+        {
+          "label": "Context middleware projects state",
+          "detail": "The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."
+        },
+        {
+          "label": "Worker searches",
+          "detail": "An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."
+        },
+        {
+          "label": "Evidence middleware gates",
+          "detail": "A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."
+        },
+        {
+          "label": "Shared stores update",
+          "detail": "Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."
+        },
+        {
+          "label": "Sensors choose the next transition",
+          "detail": "Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."
+        }
+      ],
+      "claim_ids": [
         "sos_socm",
         "sos_middleware",
         "sos_scheduler",
         "sos_skills",
+        "sos_citation_truth",
         "sos_middleware_causality"
       ],
       "source_refs": [
@@ -477,7 +521,7 @@
         "sos_middleware_source",
         "sos_ablations_source"
       ],
-      "interpretation": "The central design move is to make progress, provenance, gaps, and failures system-maintained state. Browsing does not automatically become evidence: middleware first requires a schema binding and anchored span, after which the updated coverage state determines the next scheduled work.",
+      "interpretation": "The stores and middleware form a feedback loop rather than a one-way pipeline. Browsing does not automatically become evidence: accepted or rejected observations change shared state, and sensors use that new state to schedule, redirect, stop, or synthesize.",
       "limitations": [
         "An anchored excerpt and URL preserve provenance but do not independently establish that the extracted value is true.",
         "Relational schemas may not represent every open-ended information-seeking task equally well.",
@@ -486,8 +530,97 @@
         "The diagram omits the internal structure and maintenance cost of the 280-skill library.",
         "This is an original Paper Atlas composition based on the cited paper, not a reproduction of a source figure; the CC BY 4.0 paper is attributed through the source references."
       ],
-      "alt_text": "Six-step SearchOS loop: construct a relational schema, schedule a missing cell, give a worker scoped state and skills, require schema-bound anchored evidence, atomically update shared search state, then use progress and budget sensors to continue, redirect, stop, or synthesize.",
-      "fallback": "SearchOS first expresses the request as a relational schema. Frontier Task schedules an unresolved cell to an available worker. The worker searches using role-specific state, known failures, and selected skills. Middleware accepts evidence only when it is tied to a schema cell and anchored to a source span. Accepted evidence updates the Evidence Graph and Coverage Map together. Sensors then use coverage, evidence growth, and budget pressure to choose the next action or end the search for synthesis."
+      "alt_text": "Feedback loop connecting Frontier Task scheduling, role-scoped context, worker search, an evidence acceptance gate, atomic Evidence Graph and Coverage Map updates, Failure Memory, and progress sensors that return work to scheduling or stop it.",
+      "fallback": "Frontier Task schedules a ready unresolved cell. Context middleware gives the worker relevant shared state, failures, and skills. After search, evidence middleware accepts a candidate only when it binds to the cell and an anchored source span. Accepted evidence updates the Evidence Graph and Coverage Map together, while failures update task and failure records. Sensors inspect progress and budgets, then continue, correct, backfill, stop, or allow synthesis."
+    },
+    {
+      "id": "visual_searchos_benchmark_results",
+      "after_block_id": "sos_evidence",
+      "type": "DOT_PLOT",
+      "title": "SearchOS leads the reported comparison metrics",
+      "question": "How large are the reported SearchOS gains over the strongest baseline on the highlighted WideSearch and GISA metrics?",
+      "items": [
+        {
+          "label": "WideSearch item F1 · strongest baseline",
+          "value": 76,
+          "detail": "Strongest reported baseline value for item F1."
+        },
+        {
+          "label": "WideSearch item F1 · SearchOS",
+          "value": 80.3,
+          "detail": "SearchOS value for item F1."
+        },
+        {
+          "label": "WideSearch row F1 · strongest baseline",
+          "value": 54.5,
+          "detail": "Strongest reported baseline value for row F1."
+        },
+        {
+          "label": "WideSearch row F1 · SearchOS",
+          "value": 56.5,
+          "detail": "SearchOS value for row F1."
+        },
+        {
+          "label": "GISA set F1 · strongest baseline",
+          "value": 63.1,
+          "detail": "Strongest reported baseline value for set F1."
+        },
+        {
+          "label": "GISA set F1 · SearchOS",
+          "value": 76.5,
+          "detail": "SearchOS value for set F1."
+        }
+      ],
+      "claim_ids": [
+        "sos_main_results",
+        "sos_budget_fairness",
+        "sos_generality"
+      ],
+      "source_refs": [
+        "sos_results_source",
+        "sos_scope_source"
+      ],
+      "interpretation": "SearchOS leads the strongest reported baseline on each highlighted metric, with the largest displayed gap on GISA set F1. The comparison evaluates the complete system and does not identify which component causes the gain.",
+      "limitations": [
+        "The paper reports the best of three runs for each case rather than means and variance.",
+        "Matched end-to-end budgets are not documented in enough detail to settle cost fairness for every baseline.",
+        "The evaluation uses one model configuration and does not establish the same gains across other backbones or task families."
+      ],
+      "alt_text": "Three paired dot comparisons: WideSearch item F1 is 76.0 for the strongest baseline and 80.3 for SearchOS; WideSearch row F1 is 54.5 and 56.5; GISA set F1 is 63.1 and 76.5.",
+      "fallback": "On WideSearch, the strongest baseline and SearchOS score 76.0 and 80.3 item F1, and 54.5 and 56.5 row F1. On GISA, they score 63.1 and 76.5 set F1. These are complete-system, best-of-three comparisons under one model configuration."
+    },
+    {
+      "id": "visual_searchos_dispatch_comparison",
+      "after_block_id": "sos_evidence",
+      "type": "METHOD_COMPARISON",
+      "title": "Batch waiting versus continuous dispatch",
+      "question": "What changes when released execution slots receive ready work immediately instead of waiting for a synchronized batch?",
+      "items": [
+        {
+          "label": "Batch scheduling",
+          "detail": "A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."
+        },
+        {
+          "label": "Continuous dispatch",
+          "detail": "Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."
+        }
+      ],
+      "claim_ids": [
+        "sos_scheduler",
+        "sos_schedule_ablation"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_ablations_source"
+      ],
+      "interpretation": "Continuous dispatch reduces idle waiting in the paired subset and is associated there with lower runtime, higher slot utilization, and higher item F1. The experiment supports this scheduling comparison, not every component of SearchOS.",
+      "limitations": [
+        "The scheduling study covers 10 WideSearch cases and is not the main benchmark evaluation.",
+        "The comparison does not isolate middleware, schema planning, or skills.",
+        "Subset item F1 values should not replace the main WideSearch benchmark values."
+      ],
+      "alt_text": "Side-by-side comparison: batch scheduling waits for synchronized completion and reports 629.13 seconds, 34.6 percent utilization, and 79.66 item F1; continuous dispatch refills released slots and reports 476.34 seconds, 41.7 percent utilization, and 86.75 item F1 on the same 10-case subset.",
+      "fallback": "In the 10-case scheduling subset, batch scheduling waits for a synchronized group to finish and reports 629.13 seconds average runtime, 34.6% slot utilization, and 79.66 item F1. Continuous dispatch immediately refills released slots and reports 476.34 seconds, 41.7% utilization, and 86.75 item F1. This subset comparison does not isolate the other SearchOS components."
     }
   ],
   "glossary": [

@@ -258,47 +258,161 @@
   ],
   "visuals": [
     {
-      "id": "propaganda_visual_halflife_flow",
-      "after_block_id": "propaganda_mechanism",
-      "type": "PIPELINE_FLOW",
-      "title": "HalfLife follows poison through the data pipeline",
-      "question": "What must happen between posting a malicious comment and changing a trained model?",
+      "id": "propaganda_visual_comments_vs_ads",
+      "after_block_id": "propaganda_change",
+      "type": "PARALLEL_VIEW",
+      "title": "Visible web content does not follow one extraction path",
+      "question": "Why did public comments remain plausible poison carriers while programmatic advertisements did not in the tested crawl path?",
       "items": [
         {
-          "label": "S1. Injectable page",
-          "detail": "Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages.",
-          "value": 3.4
-        },
-        {
-          "label": "S2. Captured as text",
-          "detail": "In sandboxed replacements, 71.9% of injected comments survived HTML text extraction.",
+          "label": "Public comment lane",
+          "detail": "The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext.",
           "value": 71.9
         },
         {
-          "label": "S3. Survives curation",
-          "detail": "The combined Dolma 3-style curation path retained 5.5% of captured injections.",
+          "label": "Programmatic advertisement lane",
+          "detail": "Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."
+        }
+      ],
+      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_extraction", "propaganda_claim_ads"],
+      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion"],
+      "interpretation": "The relevant question is not only whether content appears to a visitor, but whether the tested crawler and extractor preserve that fragment in the representation passed to curation.",
+      "limitations": [
+        "The two lanes summarize results from the paper's tested DOM-based collection architecture; they are not universal properties of comments or advertisements.",
+        "The 71.9% comment value is conditional on sandboxed simulated replacements, not on all web pages or all attempted live posts.",
+        "The negative advertisement result does not rule out other crawler, rendering, or injection paths."
+      ],
+      "alt_text": "Parallel comparison: 71.9% of sandboxed replacement comments survived HTML-to-plaintext extraction, while programmatic advertisement content did not appear in plaintext in the tested DOM-based crawl path.",
+      "fallback": "In sandboxed replacements, 71.9% of injected comment fragments survived the tested HTML-to-plaintext extraction. Programmatic advertisement content did not appear in extracted plaintext in that DOM-based path. The contrast is specific to the tested collection architecture and does not generalize to every crawler."
+    },
+    {
+      "id": "propaganda_visual_halflife_flow",
+      "after_block_id": "propaganda_mechanism",
+      "type": "OPERATION_DIAGRAM",
+      "title": "HalfLife multiplies three conditional inclusion gates",
+      "question": "Which measured conditions contribute to the document-level inclusion estimate?",
+      "items": [
+        {
+          "label": "S1 · Page prevalence",
+          "detail": "Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population.",
+          "value": 3.4
+        },
+        {
+          "label": "S2 · Extraction survival",
+          "detail": "Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set.",
+          "value": 71.9
+        },
+        {
+          "label": "S3 · Curation survival",
+          "detail": "Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path.",
           "value": 5.5
         },
         {
-          "label": "Conflicting inclusion summaries",
-          "detail": "Section 4.4 and the rounded stage product give about 0.13% document-level inclusion, while the v1 Introduction states 0.15%; the source does not reconcile them."
+          "label": "Section 4.4 and rounded product",
+          "detail": "Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4.",
+          "value": 0.13
         },
         {
-          "label": "Controlled model effect",
-          "detail": "At a 0.1% token poison rate, five base models shifted 18.6–20.7 percentage points toward the attacker-favored entity."
+          "label": "Conflicting Introduction summary",
+          "detail": "The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product.",
+          "value": 0.15
         }
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion", "propaganda_claim_model_shift"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_models"],
-      "interpretation": "HalfLife makes the attack conditional: posting content is insufficient unless the page is crawlable, the fragment is extracted, the document survives curation, and repeated poison ultimately affects training.",
+      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion"],
+      "interpretation": "Posting access is insufficient. HalfLife estimates whether a relevant page exists, whether a simulated fragment survives extraction, and whether the resulting captured document survives one curation path, while preserving the source's unresolved 0.13% versus 0.15% discrepancy.",
       "limitations": [
-        "The percentages use different conditional denominators and are not five independent population rates.",
+        "The stage percentages use different conditional denominators and are not independent population rates drawn from one sample.",
         "The v1 paper contains an unresolved numerical discrepancy: 0.15% in the Introduction versus approximately 0.13% in Section 4.4 and the rounded stage product.",
         "The inclusion estimate combines sandboxed injection with one Common Crawl sample and one open curation pipeline.",
-        "The downstream experiment used controlled poison mixtures and models up to 1.3B parameters, not a live end-to-end attack."
+        "Document inclusion remains an intermediate estimate; this operation diagram does not depict or establish a live end-to-end poisoning attack."
       ],
-      "alt_text": "Five-stage pipeline from a public comment to model behavior: 3.4% of sampled pages had detected comment interfaces, 71.9% of simulated comments survived extraction, and 5.5% of captured injections survived the combined curation path. Section 4.4 and the rounded stage product give about 0.13% inclusion, while the v1 Introduction says 0.15%. A separate controlled pretraining experiment shifted base-model entity preferences.",
-      "fallback": "HalfLife separates the vector into stages. Comment signatures appeared on 3.4% of 181,857 sampled pages. Of simulated replacement comments, 71.9% survived extraction, and 5.5% of captured injections passed the combined curation path. Multiplying those rounded stages gives about 0.13%, matching Section 4.4, but the v1 Introduction states 0.15%; the paper does not reconcile the discrepancy. Separately, a 0.1% poison-token mixture shifted five base models by 18.6 to 20.7 percentage points. These results are not a live attack or a universal production-pipeline estimate."
+      "alt_text": "Conditional operation with three denominators: comment signatures on 3.4% of 181,857 sampled pages, extraction survival for 71.9% of sandboxed simulated comments, and curation survival for 5.5% of captured injected-comment documents. Their rounded product and Section 4.4 give about 0.13%, while the Introduction states an unreconciled 0.15%.",
+      "fallback": "HalfLife uses three conditional stages. Comment signatures appeared on 3.4% of 181,857 sampled pages. Among sandboxed replacement comments, 71.9% survived extraction. Among captured injected-comment documents, 5.5% survived the combined curation path. The rounded product is about 0.13%, matching Section 4.4; the Introduction separately states 0.15% without reconciliation. The stages do not constitute a live end-to-end attack."
+    },
+    {
+      "id": "propaganda_visual_model_effects",
+      "after_block_id": "propaganda_evidence",
+      "type": "RESULT_COMPARISON",
+      "title": "Clean supervised fine-tuning attenuates the controlled preference shift",
+      "question": "What range of preference shifts did the controlled 0.1% poison condition produce before and after supervised fine-tuning?",
+      "items": [
+        {
+          "label": "Base-model shift · lower end",
+          "detail": "Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales.",
+          "value": 18.6
+        },
+        {
+          "label": "Base-model shift · upper end",
+          "detail": "Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales.",
+          "value": 20.7
+        },
+        {
+          "label": "Post-SFT shift · lower end",
+          "detail": "Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning.",
+          "value": 0.9
+        },
+        {
+          "label": "Post-SFT shift · upper end",
+          "detail": "Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning.",
+          "value": 7.4
+        },
+        {
+          "label": "No-label post-SFT · 709M",
+          "detail": "Reported remaining shift for the 709M model under the no-label poison format.",
+          "value": 0.1
+        },
+        {
+          "label": "No-label post-SFT · 1.3B",
+          "detail": "Reported remaining shift for the 1.3B model under the no-label poison format.",
+          "value": 0.3
+        }
+      ],
+      "claim_ids": ["propaganda_claim_model_shift", "propaganda_claim_sft", "propaganda_claim_formats"],
+      "source_refs": ["propaganda_source_models"],
+      "interpretation": "The controlled poison mixture shifts every tested base-model scale at the reported 0.1% rate, while clean supervised fine-tuning reduces the measured effect substantially and unevenly rather than guaranteeing removal.",
+      "limitations": [
+        "The range endpoints summarize five model scales; lower and upper endpoints are not presented as a matched before-and-after pair for one model.",
+        "The no-label values apply only to the identified 709M and 1.3B post-SFT conditions.",
+        "These are controlled synthetic entity-preference experiments on models up to 1.3B parameters, not observations from a live web-to-model attack."
+      ],
+      "alt_text": "Result comparison showing a controlled 0.1% poison condition shifting five base models by 18.6 to 20.7 percentage points and post-SFT models by 0.9 to 7.4 points; no-label post-SFT shifts are 0.1 for 709M and 0.3 for 1.3B.",
+      "fallback": "At a 0.1% poison-token rate, five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity. After clean supervised fine-tuning, shifts range from 0.9 to 7.4 points. Under the no-label format, the post-SFT 709M and 1.3B shifts are 0.1 and 0.3 points. The endpoints summarize different model conditions and do not establish a live attack."
+    },
+    {
+      "id": "propaganda_visual_evidence_boundaries",
+      "after_block_id": "propaganda_limitations",
+      "type": "EVIDENCE_MATRIX",
+      "title": "The paper tests four different evidence boundaries",
+      "question": "Which parts of the poisoning argument are sampled, simulated, controlled, or not established?",
+      "items": [
+        {
+          "label": "Sampled open-web prevalence",
+          "detail": "Comment signatures were observed on 3.4% of 181,857 pages from one Common Crawl sample; practical posting access was not verified for every detected interface."
+        },
+        {
+          "label": "Sandboxed extraction and curation",
+          "detail": "Replacement comments were tested in sandboxed copies and passed through Resiliparse plus one Dolma 3-style curation path."
+        },
+        {
+          "label": "Controlled model influence",
+          "detail": "Separately constructed poison mixtures shifted synthetic entity preferences in OLMo-3-like models from 65M to 1.3B parameters."
+        },
+        {
+          "label": "Not established in production",
+          "detail": "The study did not inject live comments into a production corpus or demonstrate compromise of a deployed or frontier-scale model."
+        }
+      ],
+      "claim_ids": ["propaganda_claim_central", "propaganda_claim_inclusion", "propaganda_claim_model_shift", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
+      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_models", "propaganda_source_limitations"],
+      "interpretation": "The central risk assessment combines evidence from different settings. The sampled and sandboxed inclusion estimate and the controlled model experiment jointly support plausibility, but they do not become an observed live attack when placed next to one another.",
+      "limitations": [
+        "The matrix classifies the evidence already reported in the explainer; it does not estimate a probability of production compromise.",
+        "Common Crawl and the Dolma 3-style path are proxies whose behavior may differ from proprietary collection and curation systems.",
+        "The model experiment uses synthetic preferences and smaller models, so its effect sizes cannot be transferred to frontier systems."
+      ],
+      "alt_text": "Evidence matrix separating observed comment-interface prevalence in one Common Crawl sample, sandboxed extraction and curation, a separate controlled model-pretraining experiment, and the unestablished claim of live production-model poisoning.",
+      "fallback": "Sampled evidence: comment signatures on one Common Crawl sample. Sandboxed evidence: simulated replacement comments passed through one extraction and curation path. Controlled evidence: synthetic poison mixtures shifted preferences in models from 65M to 1.3B parameters. Not established: live comment poisoning of a deployed or frontier-scale model."
     }
   ],
   "glossary": [

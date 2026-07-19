@@ -96,12 +96,10 @@
       ],
       "claim_ids": [
         "ppa_partition",
-        "ppa_reconstruction",
-        "ppa_acs_protocol"
+        "ppa_reconstruction"
       ],
       "source_refs": [
-        "ppa_method",
-        "ppa_protocol"
+        "ppa_method"
       ],
       "reading_depths": [
         "FIVE_MIN",
@@ -363,52 +361,135 @@
   ],
   "visuals": [
     {
-      "id": "visual_ppa_partition_flow",
+      "id": "visual_ppa_partition_tree",
       "after_block_id": "ppa_mechanism",
-      "type": "PIPELINE_FLOW",
-      "title": "From one population estimate to a consistency test",
-      "question": "How does partitioning the same population reveal statistically inconsistent model estimates?",
+      "type": "PARTITION_TREE",
+      "title": "One population, several equivalent estimates",
+      "question": "Why should the direct root estimate agree with every weighted reconstruction from a valid partition?",
       "items": [
         {
-          "label": "Direct population estimate",
-          "detail": "Ask the model for the target probability or distribution over the complete base population. This is the level-zero estimate."
+          "label": "Root population",
+          "detail": "A direct prompt asks for the target probability over the complete base population. Call this estimate p(root)."
         },
         {
-          "label": "Construct a valid partition",
-          "detail": "Apply binary attributes so each level contains mutually exclusive subgroups that collectively cover the base population."
+          "label": "First binary split",
+          "detail": "One attribute divides the root into two mutually exclusive children whose population shares sum to one."
         },
         {
-          "label": "Elicit subgroup components",
-          "detail": "For every subgroup, elicit its conditional target estimate and its relative population weight."
+          "label": "Finer partition",
+          "detail": "A second attribute can split both children again. Every node at this depth still belongs to one complete partition of the original population."
         },
         {
-          "label": "Reconstruct the aggregate",
-          "detail": "Multiply each subgroup estimate by its weight and sum the components according to the law of total probability."
+          "label": "Weighted reconstruction",
+          "detail": "For one level, multiply every subgroup estimate by its normalized population share and sum the products."
         },
         {
-          "label": "Compare equivalent estimates",
-          "detail": "Compare the reconstruction with the direct estimate for self-consistency; where survey data exists, compare both with the human reference for alignment."
+          "label": "Consistency requirement",
+          "detail": "The root estimate and each level's weighted reconstruction refer to the same quantity, so a coherent conditional estimator should make them agree."
         }
       ],
       "claim_ids": [
         "ppa_partition",
         "ppa_reconstruction",
-        "ppa_macro",
-        "ppa_error_tradeoff"
+        "ppa_acs_protocol"
       ],
       "source_refs": [
         "ppa_method",
-        "ppa_macro_results"
+        "ppa_protocol"
       ],
-      "interpretation": "Every tree level describes the same population quantity, so a coherent conditional estimator should return compatible aggregates. The reported discrepancies expose failures of probabilistic composition; better ACS alignment at some deeper levels is a separate empirical observation, not a guarantee that finer partitions always help.",
+      "interpretation": "The tree is not a sequence of different prediction targets. Its root and every complete level are alternative decompositions of the same population quantity. Disagreement between the direct root estimate and a correctly weighted level therefore exposes a failure of probabilistic composition.",
       "limitations": [
-        "The flow requires partitions that are mutually exclusive and collectively exhaustive.",
+        "The relationship holds only for mutually exclusive and collectively exhaustive partitions with normalized subgroup shares.",
         "Self-consistency does not establish that any estimate is accurate.",
-        "The observed alignment improvement is primarily supported by the ACS experiments and is non-monotonic with depth.",
-        "This schematic does not encode subgroup sizes or imply that every individual model-threshold combination improves."
+        "The tree is symbolic and does not encode subgroup sizes or measured ACS results.",
+        "This is an original static composition because the paper's CC BY-NC-ND 4.0 license does not permit an adapted source figure."
       ],
-      "alt_text": "Five-step flow: direct population estimate, valid subgroup partition, subgroup conditional and prior elicitation, weighted reconstruction, then comparison with the direct estimate and optional survey reference.",
-      "fallback": "Start with a direct model estimate for the whole population. Split that population into non-overlapping, exhaustive subgroups. Ask the model for each subgroup's conditional estimate and relative weight. Recombine the components with the law of total probability. Compare the reconstructed and direct estimates to measure self-consistency; compare with survey data only when evaluating alignment."
+      "alt_text": "Partition tree with a root population, two successive binary splits, and a weighted sum of one complete level returning to the same root quantity.",
+      "fallback": "A direct prompt estimates the target for the root population. Binary attributes split that population into mutually exclusive, exhaustive subgroups. At any complete level, multiply each subgroup estimate by its normalized population share and sum the products. That reconstruction and the direct root estimate describe the same population quantity and should agree for a self-consistent estimator."
+    },
+    {
+      "id": "visual_ppa_consistency_checks",
+      "after_block_id": "ppa_mechanism",
+      "type": "METHOD_COMPARISON",
+      "title": "Two ways equivalent conditions can disagree",
+      "question": "What different failure does each self-consistency check expose?",
+      "items": [
+        {
+          "label": "Split consistency",
+          "detail": "Compare a node's direct estimate with the prior-weighted aggregate of its immediate children. A mismatch means the estimate does not compose across a valid split."
+        },
+        {
+          "label": "Order consistency",
+          "detail": "Describe the same subgroup with equivalent conditions in a different order. A mismatch means the estimate depends on wording order rather than the conditioned population."
+        },
+        {
+          "label": "Alignment",
+          "detail": "When an external reference such as ACS exists, compare an estimate with that reference. Alignment is separate from both internal consistency checks."
+        }
+      ],
+      "claim_ids": [
+        "ppa_core",
+        "ppa_partition",
+        "ppa_acs_consistency",
+        "ppa_wvs_consistency"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_consistency_results"
+      ],
+      "interpretation": "Split consistency tests whether estimates compose across a partition, while order consistency tests whether equivalent verbalizations preserve an estimate. Neither check requires a ground-truth distribution; alignment does.",
+      "limitations": [
+        "Passing either consistency check is necessary for coherent conditional estimation but is not evidence of accuracy.",
+        "Reported scores depend on the paper's chosen tolerance and prompting protocol.",
+        "The comparison describes the tests and does not reproduce per-model results."
+      ],
+      "alt_text": "Three-column comparison of split consistency, order consistency, and external alignment, emphasizing that the first two are reference-free checks of different invariances.",
+      "fallback": "Split consistency compares a parent estimate with the weighted estimates of its children. Order consistency compares estimates for the same subgroup when equivalent conditions are reordered. Alignment instead compares an estimate with external reference data."
+    },
+    {
+      "id": "visual_ppa_evidence_scope",
+      "after_block_id": "ppa_evidence",
+      "type": "EVIDENCE_MATRIX",
+      "title": "What each evaluation can establish",
+      "question": "Which findings concern external alignment, internal consistency, or only reference-free operation?",
+      "items": [
+        {
+          "label": "ACS alignment",
+          "detail": "Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."
+        },
+        {
+          "label": "ACS consistency",
+          "detail": "At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."
+        },
+        {
+          "label": "WVS consistency",
+          "detail": "Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."
+        },
+        {
+          "label": "Synthetic tasks",
+          "detail": "Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."
+        }
+      ],
+      "claim_ids": [
+        "ppa_macro",
+        "ppa_error_tradeoff",
+        "ppa_acs_consistency",
+        "ppa_wvs_consistency",
+        "ppa_generalization"
+      ],
+      "source_refs": [
+        "ppa_macro_results",
+        "ppa_consistency_results",
+        "ppa_discussion"
+      ],
+      "interpretation": "The evidence has different scopes: ACS supports both an alignment comparison and consistency checks, WVS supports consistency findings, and the synthetic tasks demonstrate reference-free use. These results should not be collapsed into a universal accuracy claim.",
+      "limitations": [
+        "The matrix summarizes reported ranges and conclusions rather than every model-by-task value.",
+        "The macro-fallacy alignment finding is primarily supported by ACS.",
+        "Synthetic inconsistency does not establish real-world forecasting accuracy."
+      ],
+      "alt_text": "Evidence matrix distinguishing ACS alignment and consistency results, WVS consistency findings, and synthetic reference-free checks.",
+      "fallback": "ACS provides an external reference and shows that subgroup reconstruction often improves alignment, though not monotonically, while displayed split-consistency scores range from 0 to 0.33 at tolerance 0.02. WVS shows no uniformly consistent model across the selected questions and countries. Synthetic tasks show that the checks can operate without an external target but do not establish forecasting accuracy."
     }
   ],
   "glossary": [

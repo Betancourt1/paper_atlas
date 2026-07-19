@@ -405,35 +405,122 @@
   ],
   "visuals": [
     {
-      "id": "visual_inkling_evidence_boundaries",
+      "id": "visual_inkling_moe_routing",
       "after_block_id": "ink_mechanism",
-      "type": "EVIDENCE_MATRIX",
-      "title": "What does each Inkling number actually describe?",
-      "question": "Which facts describe the model design, an access surface, a downloadable checkpoint, or a different evaluation checkpoint?",
+      "type": "PARTITION_TREE",
+      "title": "One token activates only part of Inkling",
+      "question": "How can Inkling store 975 billion parameters while using 41 billion on one token path?",
       "items": [
         {
-          "label": "Release identity",
-          "detail": "The provider pages retrieved on 2026-07-18 date the initial Inkling release to July 15, 2026. Their exact HTML is content-addressed with SHA-256 and byte counts in the source records, while the live URLs remain mutable."
+          "label": "Stored model",
+          "detail": "Inkling has 975 billion total parameters across its sparse mixture-of-experts architecture."
         },
         {
-          "label": "Core model",
-          "detail": "The model card describes a 66-layer decoder-only sparse-MoE Transformer with 975 billion total and 41 billion active parameters; each token uses 6 of 256 routed experts plus 2 shared experts."
+          "label": "Routed branch",
+          "detail": "For each token, the sparse feed-forward path selects 6 of 256 routed experts rather than activating every routed expert."
         },
         {
-          "label": "Context access",
-          "detail": "The model card advertises up to 1 million tokens, while the release page offers 64K and 256K contexts on Tinker. Neither statement establishes useful quality across the entire 1-million-token window."
+          "label": "Shared branch",
+          "detail": "The same token also uses 2 shared experts that are always active."
         },
+        {
+          "label": "Active token path",
+          "detail": "The selected routed experts and the 2 shared experts make up a 41-billion-parameter active path for that token."
+        }
+      ],
+      "claim_ids": [
+        "ink_002"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_release",
+        "source_inkling_hf_bf16"
+      ],
+      "interpretation": "Total parameters describe everything stored in the sparse model, while active parameters describe the much smaller expert subset used along one token's route. The two numbers answer different capacity questions and should not be treated as interchangeable.",
+      "limitations": [
+        "This partition is conceptual and does not draw the physical layout, size, or specialization of individual experts.",
+        "The 41-billion figure describes active parameters on a token path, not the memory needed to store the full checkpoint.",
+        "The visual does not show attention layers, modality encoders, training, or expert-routing quality."
+      ],
+      "alt_text": "Partition of one Inkling token path. The full sparse model stores 975 billion parameters. A token uses 6 selected experts from a pool of 256 routed experts and also uses 2 shared experts, producing a 41-billion-parameter active path.",
+      "fallback": "Inkling stores 975 billion total parameters. For one token, its sparse feed-forward path selects 6 of 256 routed experts and also uses 2 shared experts. Those active components account for the reported 41-billion-parameter token path. Total and active parameters therefore describe different parts of the architecture."
+    },
+    {
+      "id": "visual_inkling_checkpoint_hardware",
+      "after_block_id": "ink_example",
+      "type": "METHOD_COMPARISON",
+      "title": "BF16 and NVFP4 require different deployment plans",
+      "question": "What changes when a local deployment chooses the BF16 or NVFP4 checkpoint?",
+      "items": [
         {
           "label": "BF16 checkpoint",
-          "detail": "The original checkpoint requires at least 2 TB aggregate VRAM, with 8 NVIDIA B300 or 16 H200 GPUs listed; the initial weight release is pinned to commit 91b051f1ec836e6d56596c624c3775b495d797b1."
+          "detail": "The content-addressed model-card snapshot lists at least 2 TB of aggregate VRAM and gives 8 NVIDIA B300 or 16 H200 GPUs as examples. The initial release is pinned to commit 91b051f1ec836e6d56596c624c3775b495d797b1."
         },
         {
-          "label": "NVFP4 checkpoint",
-          "detail": "The NVFP4 checkpoint is pinned to initial release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e. The mutable model card retrieved on 2026-07-18 lists at least 600 GB aggregate VRAM: W4A4 on 4 B300 GPUs with SM100-or-newer architecture or W4A16 on 8 H200 GPUs. Published benchmark parity with BF16 is not established."
+          "label": "NVFP4 with W4A4",
+          "detail": "The snapshot lists a 600 GB aggregate minimum and 4 B300 GPUs, with SM100-or-newer architecture required. The NVFP4 release is pinned to commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e."
         },
         {
-          "label": "Evaluation checkpoint",
-          "detail": "The main benchmark table uses effort 0.99 and temperature 1.0, but the forecasting results explicitly came from a different checkpoint; the table does not identify the evaluated weight precision."
+          "label": "NVFP4 with W4A16",
+          "detail": "The same 600 GB aggregate minimum is paired with 8 H200 GPUs for this numeric mode, using the same pinned NVFP4 checkpoint."
+        },
+        {
+          "label": "Quality comparison",
+          "detail": "The release does not establish that NVFP4 preserves BF16 benchmark quality, and the main benchmark table does not identify its evaluated weight precision."
+        }
+      ],
+      "claim_ids": [
+        "ink_004",
+        "ink_012"
+      ],
+      "source_refs": [
+        "source_inkling_model_card",
+        "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4"
+      ],
+      "interpretation": "Quantization lowers the reported aggregate-memory requirement, but it also introduces hardware- and numeric-mode-specific constraints. Memory fit alone cannot establish that the quantized checkpoint reproduces the published quality claims.",
+      "limitations": [
+        "The GPU configurations are provider-listed examples from the content-addressed 2026-07-18 model-card retrieval, not independently benchmarked recommendations.",
+        "The live model card remains mutable; the checkpoint identities are pinned to their initial release commits.",
+        "No BF16-versus-NVFP4 quality, throughput, latency, or cost comparison is available in the cited sources."
+      ],
+      "alt_text": "Checkpoint comparison for local Inkling deployment. BF16 is listed at a 2-terabyte aggregate VRAM minimum with 8 B300 or 16 H200 GPUs. NVFP4 is listed at 600 gigabytes: W4A4 on 4 B300 GPUs with SM100-or-newer architecture, or W4A16 on 8 H200 GPUs. Quality parity is not established.",
+      "fallback": "The model-card snapshot lists BF16 at a minimum of 2 TB aggregate VRAM, with 8 B300 or 16 H200 GPUs, and pins the release to commit 91b051f1ec836e6d56596c624c3775b495d797b1. It lists NVFP4 at 600 GB: W4A4 on 4 B300 GPUs with SM100-or-newer architecture, or W4A16 on 8 H200 GPUs, pinned to commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e. The sources do not establish benchmark parity."
+    },
+    {
+      "id": "visual_inkling_evidence_boundaries",
+      "after_block_id": "ink_evidence",
+      "type": "EVIDENCE_MATRIX",
+      "title": "Inkling's claims come from non-equivalent evidence surfaces",
+      "question": "Which source and checkpoint does each major Inkling claim actually describe?",
+      "items": [
+        {
+          "label": "Provider pages and use terms",
+          "detail": "Content-addressed HTML retrieved on 2026-07-18 dates the release to July 15, labels the model Apache 2.0, and links an Acceptable Use Policy that also conditions use. The live pages remain mutable."
+        },
+        {
+          "label": "Core architecture",
+          "detail": "The model card and release describe 66 layers, 975 billion total parameters, 41 billion active parameters, 6 of 256 routed experts per token, and 2 shared experts."
+        },
+        {
+          "label": "Context claim and hosted access",
+          "detail": "The provider advertises up to 1 million tokens, while Tinker offers 64K and 256K options. Neither statement establishes useful accuracy throughout a 1-million-token prompt."
+        },
+        {
+          "label": "Released checkpoints",
+          "detail": "BF16 and NVFP4 are separate initial-release commits with different storage formats and hardware requirements. The sources do not establish quality parity between them."
+        },
+        {
+          "label": "Main benchmark table",
+          "detail": "The reported scores use effort 0.99, but the table does not identify the evaluated weight precision and combines benchmark families that are not one common measurement scale."
+        },
+        {
+          "label": "Other evaluation checkpoints",
+          "detail": "The effort chart's Humanity's Last Exam points came from an earlier checkpoint, and forecasting used a checkpoint different from the released one."
+        },
+        {
+          "label": "Unresolved source disagreement",
+          "detail": "The content-addressed website snapshot and immutable initial checkpoint cards disagree on some values, including GDPVal-AA and MMMU Pro, without identifying one canonical set."
         }
       ],
       "claim_ids": [
@@ -443,7 +530,7 @@
         "ink_004",
         "ink_007",
         "ink_009",
-        "ink_010",
+        "ink_011",
         "ink_012"
       ],
       "source_refs": [
@@ -453,15 +540,15 @@
         "source_inkling_hf_nvfp4",
         "source_inkling_aup"
       ],
-      "interpretation": "Inkling is presented through several non-equivalent evidence surfaces. Architecture and capacity describe the model; Tinker limits describe hosted access; BF16 and NVFP4 describe distinct weight formats; and some evaluation claims describe another checkpoint. Checkpoint identities are pinned to initial-release commits, and provider-page claims are tied to content-addressed 2026-07-18 HTML retrievals.",
+      "interpretation": "Architecture, hosted context, downloadable weight formats, benchmark tables, and other evaluation checkpoints describe different objects. The evidence remains reproducible only when each claim stays attached to its content-addressed page or pinned checkpoint identity.",
       "limitations": [
-        "This matrix does not imply that BF16 and NVFP4 have equal quality; no quantization comparison is supplied.",
-        "The model card, release page, and Acceptable Use Policy remain mutable live pages; this visual refers only to the SHA-256-identified HTML retrieved on 2026-07-18.",
-        "The one-million-token capacity statement is not a long-context accuracy result, and Tinker exposes smaller context options.",
-        "The visual intentionally does not merge small value discrepancies between the website card and the checkpoint card."
+        "The matrix does not rank the sources or resolve their benchmark-value disagreement.",
+        "It does not imply that BF16 and NVFP4 have equal quality or that advertised context capacity demonstrates full-window accuracy.",
+        "The benchmark rows preserve checkpoint and precision uncertainty instead of treating all vendor-reported scores as properties of one released artifact.",
+        "Provider-page claims refer only to the SHA-256-identified HTML retrieved on 2026-07-18; later live-page changes require new review."
       ],
-      "alt_text": "Six-row evidence matrix for Inkling. Content-addressed provider HTML retrieved on July 18, 2026 dates the release to July 15. The matrix separates the 66-layer, 975-billion-total and 41-billion-active parameter architecture; the advertised one-million-token context versus Tinker's 64K and 256K options; the BF16 checkpoint pinned to commit 91b051f1ec836e6d56596c624c3775b495d797b1; the NVFP4 checkpoint pinned to commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; and evaluations run at effort 0.99, including forecasting results from a different checkpoint. Benchmark parity and full-context quality are not established.",
-      "fallback": "Release identity: SHA-256-identified provider HTML retrieved 2026-07-18 dates the release to July 15, 2026; live pages remain mutable. Core model: 66 layers, 975B total parameters, 41B active, 6 of 256 routed experts plus 2 shared. Context: up to 1M advertised; Tinker offers 64K and 256K; full-window quality is untested. BF16: initial release commit 91b051f1ec836e6d56596c624c3775b495d797b1; the model-card snapshot lists at least 2 TB VRAM. NVFP4: initial release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; the snapshot lists at least 600 GB VRAM; quality parity is unestablished. Evaluation: effort 0.99 and temperature 1.0; forecasting used another checkpoint and benchmark precision is unspecified."
+      "alt_text": "Evidence matrix separating Inkling's mutable provider pages, core architecture, advertised and hosted context limits, pinned BF16 and NVFP4 checkpoints, main effort-0.99 benchmark table, earlier or different evaluation checkpoints, and unresolved website-versus-checkpoint-card value discrepancies.",
+      "fallback": "Inkling's evidence surfaces are not interchangeable. Content-addressed provider pages support the release, architecture, context, license label, and linked use-policy statements. BF16 and NVFP4 are separate pinned commits with unestablished quality parity. The main benchmark table uses effort 0.99 but does not identify precision. Some effort and forecasting results use earlier or different checkpoints, and the website snapshot disagrees with initial checkpoint cards on some published values."
     }
   ],
   "glossary": [

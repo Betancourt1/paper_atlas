@@ -386,50 +386,177 @@
     {
       "id": "visual_attention_prediction_sequence",
       "after_block_id": "attn_mechanism",
-      "type": "ARCHITECTURE_STEPPER",
-      "title": "From a source sequence to one next token",
-      "question": "What does the original Transformer compute before it predicts the next target token?",
+      "type": "PARALLEL_VIEW",
+      "title": "The encoder and decoder do different attention work",
+      "question": "How do the source sequence, known target prefix, and autoregressive output interact?",
       "items": [
         {
-          "label": "1. Represent tokens and order",
-          "detail": "Source and known target tokens become learned vectors. Sinusoidal positional encodings are added because the architecture contains no sequence-aligned recurrence or convolution to supply order."
+          "label": "Source lane: encode known input",
+          "detail": "The base encoder repeats 6 layers of multi-head self-attention and position-wise feed-forward processing over the source representations."
         },
         {
-          "label": "2. Build source representations",
-          "detail": "The encoder repeats 6 layers. Each layer applies multi-head self-attention, then a position-wise feed-forward network, with residual connections and layer normalization around both sublayers; the base model uses 8 heads."
+          "label": "Target lane: hide the future",
+          "detail": "The 6-layer decoder applies masked self-attention to the known target prefix so a target position cannot use later target positions."
         },
         {
-          "label": "3. Mix only the known target prefix",
-          "detail": "Masked decoder self-attention sets future-token connections to negative infinity before softmax. Each head uses scaled dot-product attention: softmax of Q times K-transpose divided by the square root of the key dimension, multiplied by V."
+          "label": "Cross-lane retrieval",
+          "detail": "Encoder-decoder attention uses decoder queries with keys and values from the encoded source, connecting each decoder position to source information."
         },
         {
-          "label": "4. Read from the encoded source",
-          "detail": "Encoder-decoder attention takes queries from the decoder and keys and values from the encoder output, allowing each decoder position to retrieve information from every source position."
-        },
-        {
-          "label": "5. Predict, append, and repeat",
-          "detail": "After the decoder feed-forward path, a learned linear projection and softmax produce next-token probabilities. One token is selected, appended to the known prefix, and the autoregressive decoding process repeats."
+          "label": "Generation boundary",
+          "detail": "Training can process known positions more parallelly under the mask, but generation remains autoregressive: one selected target token becomes part of the prefix before the next prediction."
         }
       ],
       "claim_ids": [
         "attn_002",
         "attn_003",
-        "attn_004",
         "attn_005",
         "attn_012"
       ],
       "source_refs": [
         "source_attention_arxiv_v7"
       ],
-      "interpretation": "Attention is the model's information-routing mechanism, not its entire computation. The encoder can mix known source positions without recurrence, while the decoder combines masked target self-attention with source attention and still emits target tokens autoregressively. Feed-forward layers, residual paths, normalization, embeddings, positions, and output softmax remain essential.",
+      "interpretation": "The Transformer removes sequence-aligned recurrence from the encoder-decoder's internal position mixing, but it does not erase the distinction between source encoding, masked target processing, and serial target generation. Attention routes information within and between the two lanes while feed-forward processing remains part of each stack.",
       "limitations": [
-        "This is a newly composed conceptual sequence, not a reproduction or close tracing of Figures 1 or 2.",
-        "The stepper collapses 6 repeated encoder and decoder layers and omits most tensor shapes; the 6-layer and 8-head values describe the base configuration.",
-        "The visual explains one prediction step and does not imply that training or all internal operations execute serially.",
-        "It does not treat attention weights as faithful causal explanations and does not depict benchmark results."
+        "This is a newly composed conceptual view, not a reproduction or close tracing of Figures 1 or 2.",
+        "The view collapses 6 repeated encoder and decoder layers and omits tensor shapes, residual paths, normalization, embeddings, positions, and the output projection.",
+        "It distinguishes training parallelism from autoregressive generation without claiming that every training operation is simultaneous.",
+        "It does not treat attention weights as faithful causal explanations or depict benchmark results."
       ],
-      "alt_text": "Five-step conceptual sequence of the original Transformer. Tokens receive positional encodings. A six-layer encoder repeatedly applies eight-head self-attention and feed-forward processing with residual connections and normalization. The decoder applies masked scaled dot-product self-attention so it cannot see future target tokens, then attends to all encoded source positions. A feed-forward path, projection, and softmax predict one next token, which is appended before autoregressive decoding repeats. The sequence emphasizes that the Transformer contains important non-attention components.",
-      "fallback": "1. Add sinusoidal position information to source and known target token embeddings. 2. Encode the source through 6 self-attention-plus-feed-forward layers with residual connections and normalization; the base model uses 8 heads. 3. Apply scaled dot-product self-attention to the known target prefix while masking future positions. 4. Use decoder queries to attend to encoder keys and values. 5. Apply the decoder feed-forward path, projection, and softmax to predict one token; append it and repeat. Attention replaces sequence-aligned recurrence, but the full model also depends on feed-forward, normalization, residual, position, embedding, and output layers."
+      "alt_text": "Parallel view of the original Transformer. A six-layer encoder uses self-attention and feed-forward processing over the source. A six-layer decoder masks future target positions, then uses decoder queries to attend to encoded-source keys and values. Known target positions can be processed in parallel during training, but generation appends one predicted token before predicting the next.",
+      "fallback": "The encoder and decoder form related but distinct lanes. The 6-layer encoder processes the known source with self-attention and feed-forward layers. The 6-layer decoder masks future target positions and then attends to the encoded source. During training, known target positions can be evaluated in parallel under the mask. During generation, the selected target token must be appended before the next token is predicted."
+    },
+    {
+      "id": "visual_attention_scaled_dot_product",
+      "after_block_id": "attn_mechanism",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Scaled dot-product attention is a sequence of four operations",
+      "question": "How do queries, keys, and values become an attention output?",
+      "items": [
+        {
+          "label": "1. Compare queries and keys",
+          "detail": "Multiply Q by K-transpose to produce compatibility scores between each query and the available keys."
+        },
+        {
+          "label": "2. Scale the scores",
+          "detail": "Divide by the square root of the key dimension before normalization."
+        },
+        {
+          "label": "3. Normalize with softmax",
+          "detail": "Softmax converts the scaled compatibility scores into weights over the available positions."
+        },
+        {
+          "label": "4. Mix the values",
+          "detail": "Multiply the weights by V so the query receives a weighted mixture of value vectors."
+        },
+        {
+          "label": "Repeat in multiple heads",
+          "detail": "Multi-head attention performs the operation in learned representation subspaces so the model can attend jointly to different positions and representations."
+        }
+      ],
+      "claim_ids": [
+        "attn_004",
+        "attn_005"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "interpretation": "Attention first measures query-key compatibility, controls its scale, turns scores into weights, and uses those weights to retrieve information from values. Multiple heads preserve several learned attention views instead of relying on one attention average.",
+      "limitations": [
+        "The operation diagram omits tensor shapes, learned projection matrices, concatenation, and the final output projection.",
+        "A decoder causal mask restricts which positions are available before softmax; this diagram states the common core operation rather than drawing a specific mask.",
+        "Attention weights describe the model's computation but are not established as faithful causal explanations."
+      ],
+      "alt_text": "Operation diagram for scaled dot-product attention: multiply queries by transposed keys, divide by the square root of the key dimension, apply softmax, and use the resulting weights to mix values. Multi-head attention repeats the operation in learned representation subspaces.",
+      "fallback": "Scaled dot-product attention computes compatibility with Q times K-transpose, divides those scores by the square root of the key dimension, applies softmax, and multiplies the resulting weights by V. Multi-head attention repeats this calculation in learned representation subspaces so different positions and representations can be attended to jointly."
+    },
+    {
+      "id": "visual_attention_bleu_source_conflict",
+      "after_block_id": "attn_evidence",
+      "type": "EVIDENCE_MATRIX",
+      "title": "The English-French BLEU value depends on the source location",
+      "question": "Which primary source reports 41.8, 41.0, or 41.1 BLEU?",
+      "items": [
+        {
+          "label": "arXiv v7 abstract",
+          "detail": "Reports 41.8 English-French BLEU."
+        },
+        {
+          "label": "arXiv v7 Table 2",
+          "detail": "Also reports 41.8 English-French BLEU."
+        },
+        {
+          "label": "arXiv v7 Section 6.1",
+          "detail": "Reports 41.0 English-French BLEU in the prose."
+        },
+        {
+          "label": "Official proceedings PDF",
+          "detail": "Reports 41.0 English-French BLEU."
+        },
+        {
+          "label": "NeurIPS proceedings landing page",
+          "detail": "Reports 41.1 English-French BLEU in its abstract."
+        }
+      ],
+      "claim_ids": [
+        "attn_008"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper",
+        "source_attention_neurips_landing"
+      ],
+      "interpretation": "There is no single source-independent English-French headline value in the cited primary record. A responsible citation must identify both the version and the exact location that supplies the number.",
+      "limitations": [
+        "The matrix records the primary-source disagreement but does not determine which value the authors intended as canonical.",
+        "It does not compare preprocessing, decoding, or evaluation implementations beyond what the cited sources report.",
+        "The values should not be averaged or treated as independent experimental runs."
+      ],
+      "alt_text": "Evidence matrix for conflicting English-French BLEU values. The arXiv v7 abstract and Table 2 report 41.8, arXiv v7 Section 6.1 and the official proceedings PDF report 41.0, and the NeurIPS proceedings landing-page abstract reports 41.1.",
+      "fallback": "The English-French result differs across primary-source locations. ArXiv v7 reports 41.8 in its abstract and Table 2 but 41.0 in Section 6.1. The official proceedings PDF reports 41.0, while the NeurIPS landing-page abstract reports 41.1. The disagreement is unresolved, so citations must name the exact source and location."
+    },
+    {
+      "id": "visual_attention_ablation_dot_plot",
+      "after_block_id": "attn_evidence",
+      "type": "DOT_PLOT",
+      "title": "The reported ablations cluster within one BLEU point",
+      "question": "How do head count and learned positional embeddings compare with the base configuration on newstest2013?",
+      "items": [
+        {
+          "label": "Base configuration",
+          "detail": "newstest2013 development BLEU",
+          "value": 25.8
+        },
+        {
+          "label": "One attention head",
+          "detail": "newstest2013 development BLEU",
+          "value": 24.9
+        },
+        {
+          "label": "32 attention heads",
+          "detail": "newstest2013 development BLEU",
+          "value": 25.4
+        },
+        {
+          "label": "Learned positional embeddings",
+          "detail": "newstest2013 development BLEU",
+          "value": 25.7
+        }
+      ],
+      "claim_ids": [
+        "attn_009"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "interpretation": "In this development-set ablation, the base configuration reports the highest of the four listed values. Learned positional embeddings are close to the base result, while both the one-head and 32-head variants are lower.",
+      "limitations": [
+        "The paper reports these values without repeated-seed uncertainty, so small differences should not be treated as variance-adjusted effects.",
+        "This plot compares only the four newstest2013 development results in the claim and does not generalize across tasks, datasets, or model sizes.",
+        "The learned-position result does not test reliable extrapolation beyond training sequence lengths."
+      ],
+      "alt_text": "Dot plot of newstest2013 development BLEU: base configuration 25.8, one attention head 24.9, 32 attention heads 25.4, and learned positional embeddings 25.7. No repeated-seed uncertainty is reported.",
+      "fallback": "On newstest2013 development data, the base configuration reports 25.8 BLEU. The one-head variant reports 24.9, the 32-head variant 25.4, and learned positional embeddings 25.7. These are single reported values without repeated-seed uncertainty."
     }
   ],
   "glossary": [
