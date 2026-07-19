@@ -97,6 +97,7 @@ export interface Visual {
   id: Identifier;
   after_block_id: Identifier;
   after_paragraph_id: Identifier;
+  delivery_medium: "HTML/CSS" | "SVG" | "JavaScript" | "source asset" | "generated asset";
   type:
     | "PIPELINE_FLOW"
     | "ARCHITECTURE_STEPPER"

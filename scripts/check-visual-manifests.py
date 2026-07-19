@@ -182,9 +182,13 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
         require_once(record, "- Complexity warrant:", paragraph_id)
         require_once(record, "- Forbidden-structure audit:", paragraph_id)
         complexity = implementation_field(record, "Complexity warrant", paragraph_id)
-        stock_audit = implementation_field(
+        stock_audit_field = implementation_field(
             record, "Forbidden-structure audit", paragraph_id
-        ).strip().strip("`")
+        ).strip()
+        stock_audit_match = re.match(r"`(PASS|NO_VISUAL)`", stock_audit_field)
+        if stock_audit_match is None:
+            fail(f"{paragraph_id} has an invalid forbidden-form audit")
+        stock_audit = stock_audit_match.group(1)
         if decision == "YES":
             if complexity.strip().upper().startswith("NONE"):
                 fail(f"{paragraph_id} is YES and requires a complexity warrant")
@@ -236,7 +240,10 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
         "decision": decision,
         "status": status,
         "visual_id": visual_id,
-        "shared_scope": re.findall(r"`([^`]+)`", shared_scope),
+        "shared_scope": (
+            [] if shared_scope.strip() == "`NONE`"
+            else re.findall(r"`([^`]+)`", shared_scope)
+        ),
         "placement": placement,
         "delivery_medium": delivery_medium,
         "proposal_media": proposal_media,
@@ -319,6 +326,13 @@ def check_manifest(fixture_path: Path) -> dict[str, int | bool]:
         if implementations[placement]["decision"] != "YES":
             fail(f"fixture visual {visual_id} is placed after NO paragraph {placement}")
         records = visual_records[visual_id]
+        fixture_medium = visual.get("delivery_medium")
+        manifest_medium = visual_media[visual_id]
+        if fixture_medium != manifest_medium:
+            fail(
+                f"fixture visual {visual_id} uses {fixture_medium!r} but its "
+                f"manifest selection uses {manifest_medium!r}"
+            )
         if placement not in records:
             fail(f"fixture visual {visual_id} is not placed inside its shared scope")
         for paragraph_id in records:

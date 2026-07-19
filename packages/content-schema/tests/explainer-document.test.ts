@@ -64,6 +64,7 @@ const validExplainer = {
       id: "visual_flow",
       after_block_id: "mechanism",
       after_paragraph_id: "mechanism_p1",
+      delivery_medium: "SVG",
       type: "PIPELINE_FLOW",
       title: "Test flow",
       question: "How does the test flow work?",
@@ -95,6 +96,14 @@ describe("ExplainerDocument schema", () => {
   it("rejects a document without visual limitations", () => {
     const invalid = structuredClone(validExplainer);
     invalid.visuals[0].limitations = [];
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow("Invalid ExplainerDocument");
+  });
+
+  it("rejects a visual without an explicit delivery medium", () => {
+    const invalid = structuredClone(validExplainer);
+    Reflect.deleteProperty(invalid.visuals[0], "delivery_medium");
 
     expect(validateExplainerDocument(invalid)).toBe(false);
     expect(() => parseExplainerDocument(invalid)).toThrow("Invalid ExplainerDocument");

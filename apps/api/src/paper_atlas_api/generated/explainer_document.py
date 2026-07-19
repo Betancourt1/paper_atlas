@@ -140,6 +140,14 @@ class SourceRef(BaseModel):
     locator: Annotated[str, Field(max_length=300, min_length=1)]
 
 
+class DeliveryMedium(StrEnum):
+    HTML_CSS = 'HTML/CSS'
+    SVG = 'SVG'
+    JavaScript = 'JavaScript'
+    source_asset = 'source asset'
+    generated_asset = 'generated asset'
+
+
 class Type1(StrEnum):
     PIPELINE_FLOW = 'PIPELINE_FLOW'
     ARCHITECTURE_STEPPER = 'ARCHITECTURE_STEPPER'
@@ -211,6 +219,7 @@ class Visual(BaseModel):
     id: Identifier
     after_block_id: Identifier
     after_paragraph_id: Identifier
+    delivery_medium: DeliveryMedium
     type: Type1
     title: Annotated[str, Field(max_length=300, min_length=1)]
     question: Annotated[str, Field(max_length=300, min_length=1)]

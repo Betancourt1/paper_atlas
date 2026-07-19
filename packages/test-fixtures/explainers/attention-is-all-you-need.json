@@ -384,657 +384,70 @@
   ],
   "visuals": [
     {
-      "id": "visual_attention_path_length",
-      "after_block_id": "attn_why",
-      "after_paragraph_id": "attn_why_p1",
-      "type": "PARALLEL_VIEW",
-      "title": "Long-range information takes different routes",
-      "question": "How many sequential handoffs connect distant positions?",
-      "items": [
-        {
-          "label": "Recurrent route",
-          "detail": "A distant dependency crosses a chain of hidden states; sequential handoffs grow with position distance.",
-          "group": "Recurrent sequence model",
-          "value_label": "sequential handoffs grow with separation"
-        },
-        {
-          "label": "Convolutional route",
-          "detail": "Positions can be computed in parallel, but the route between distant positions grows with their separation.",
-          "group": "Convolutional sequence model",
-          "value_label": "hop count grows with separation"
-        },
-        {
-          "label": "Self-attention route",
-          "detail": "Within one layer, any available position can exchange information with any other in one attention operation.",
-          "group": "Self-attention",
-          "value_label": "1 direct within-layer edge"
-        },
-        {
-          "label": "Generation boundary",
-          "detail": "This is a computational-path comparison, not measured wall-clock latency; autoregressive generation remains sequential.",
-          "group": "Scope",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "attn_002"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "Self-attention makes the within-layer maximum route between positions constant, unlike recurrent and convolutional alternatives.",
-      "limitations": [
-        "The topology does not compare measured latency or claim parallel next-token generation."
-      ],
-      "alt_text": "Three actual route topologies connect x1 to xn: recurrence uses sequential hidden-state handoffs, convolution uses repeated local hops whose count grows with separation, and self-attention uses one direct within-layer edge. Autoregressive generation remains sequential.",
-      "fallback": "Three actual route topologies connect x1 to xn: recurrence uses sequential hidden-state handoffs, convolution uses repeated local hops whose count grows with separation, and self-attention uses one direct within-layer edge. Autoregressive generation remains sequential."
-    },
-    {
-      "id": "visual_attention_routing",
-      "after_block_id": "attn_change",
-      "after_paragraph_id": "attn_change_p1",
-      "type": "PARTITION_TREE",
-      "title": "Three attention routes connect encoder and decoder",
-      "question": "Which representations can each attention operation read?",
-      "items": [
-        {
-          "label": "Source tokens",
-          "detail": "Known source positions enter the encoder.",
-          "group": "Inputs",
-          "node_id": "source_tokens"
-        },
-        {
-          "label": "Known target prefix",
-          "detail": "Only target tokens already available enter decoder self-attention.",
-          "group": "Inputs",
-          "node_id": "target_prefix"
-        },
-        {
-          "label": "Encoder self-attention",
-          "detail": "Every encoder position can read every source position.",
-          "group": "Position routing",
-          "node_id": "encoder_self",
-          "input_ids": [
-            "source_tokens"
-          ]
-        },
-        {
-          "label": "Masked decoder self-attention",
-          "detail": "A decoder position can read the known prefix but not future target positions.",
-          "group": "Position routing",
-          "node_id": "decoder_self",
-          "input_ids": [
-            "target_prefix"
-          ]
-        },
-        {
-          "label": "Encoded source",
-          "detail": "The encoder produces source keys and values.",
-          "group": "Representations",
-          "node_id": "encoded_source",
-          "input_ids": [
-            "encoder_self"
-          ]
-        },
-        {
-          "label": "Decoder query",
-          "detail": "The masked target representation supplies the query.",
-          "group": "Representations",
-          "node_id": "decoder_query",
-          "input_ids": [
-            "decoder_self"
-          ]
-        },
-        {
-          "label": "Encoder–decoder attention",
-          "detail": "Decoder queries retrieve from encoder keys and values.",
-          "group": "Cross-attention",
-          "node_id": "cross_attention",
-          "input_ids": [
-            "encoded_source",
-            "decoder_query"
-          ]
-        },
-        {
-          "label": "Next target representation",
-          "detail": "The cross-attended decoder state continues toward prediction.",
-          "group": "Output",
-          "node_id": "target_state",
-          "input_ids": [
-            "cross_attention"
-          ]
-        }
-      ],
-      "claim_ids": [
-        "attn_002",
-        "attn_003",
-        "attn_006",
-        "attn_012"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "The architecture uses encoder self-attention, masked decoder self-attention, and decoder-to-encoder cross-attention for distinct routing jobs.",
-      "limitations": [
-        "The diagram isolates routing and does not imply that attention is the model's only computation."
-      ],
-      "alt_text": "Three attention routes connect encoder and decoder. Source tokens; Known target prefix; Encoder self-attention; Masked decoder self-attention; Encoded source; Decoder query; Encoder–decoder attention; Next target representation.",
-      "fallback": "The architecture uses encoder self-attention, masked decoder self-attention, and decoder-to-encoder cross-attention for distinct routing jobs. Source tokens; Known target prefix; Encoder self-attention; Masked decoder self-attention; Encoded source; Decoder query; Encoder–decoder attention; Next target representation."
-    },
-    {
-      "id": "visual_attention_retained_components",
-      "after_block_id": "attn_change",
-      "after_paragraph_id": "attn_change_p2",
-      "type": "PARALLEL_VIEW",
-      "title": "The route shortens, while non-attention components remain",
-      "question": "What changed and what stayed essential?",
-      "items": [
-        {
-          "label": "Constant within-layer route",
-          "detail": "One self-attention operation connects any two available positions within a layer.",
-          "group": "Changed position mixing"
-        },
-        {
-          "label": "Position-wise feed-forward network",
-          "detail": "Each layer retains an independent per-position transformation.",
-          "group": "Retained components"
-        },
-        {
-          "label": "Residual connections and normalization",
-          "detail": "Both sublayers remain wrapped by residual paths and layer normalization.",
-          "group": "Retained components"
-        },
-        {
-          "label": "Embeddings and positions",
-          "detail": "Token embeddings and positional encodings still construct the input representation.",
-          "group": "Retained components"
-        },
-        {
-          "label": "Output projection and softmax",
-          "detail": "The decoder state is still projected into next-token probabilities.",
-          "group": "Retained components"
-        }
-      ],
-      "claim_ids": [
-        "attn_002",
-        "attn_003",
-        "attn_006",
-        "attn_012"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "Attention replaces sequence-aligned position mixing, not the feed-forward, normalization, representation, or prediction machinery.",
-      "limitations": [
-        "This figure explains the cited paper's reported mechanism or evidence; it does not extend the claim beyond the stated conditions."
-      ],
-      "alt_text": "The route shortens, while non-attention components remain. Constant within-layer route; Position-wise feed-forward network; Residual connections and normalization; Embeddings and positions; Output projection and softmax.",
-      "fallback": "Attention replaces sequence-aligned position mixing, not the feed-forward, normalization, representation, or prediction machinery. Constant within-layer route; Position-wise feed-forward network; Residual connections and normalization; Embeddings and positions; Output projection and softmax."
-    },
-    {
-      "id": "visual_attention_encoder_layer",
-      "after_block_id": "attn_mechanism",
-      "after_paragraph_id": "attn_mechanism_p1",
-      "type": "ARCHITECTURE_STEPPER",
-      "title": "One encoder layer repeats six times",
-      "question": "What is the complete encoder-layer path?",
-      "items": [
-        {
-          "label": "Token vectors plus sinusoidal positions",
-          "detail": "Order information is added before the encoder stack."
-        },
-        {
-          "label": "Multi-head self-attention",
-          "detail": "Each position retrieves from all encoder positions."
-        },
-        {
-          "label": "Residual connection and layer normalization",
-          "detail": "The first sublayer is wrapped by a residual path and normalization."
-        },
-        {
-          "label": "Position-wise feed-forward network",
-          "detail": "The same two-layer transformation is applied independently at each position."
-        },
-        {
-          "label": "Residual connection and layer normalization",
-          "detail": "A second residual and normalization wraps the feed-forward sublayer."
-        },
-        {
-          "label": "Repeat ×6",
-          "detail": "The base encoder repeats this complete layer six times.",
-          "value": 6,
-          "value_label": "6 layers"
-        }
-      ],
-      "claim_ids": [
-        "attn_003",
-        "attn_004",
-        "attn_005"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "The encoder alternates position mixing and per-position transformation, with residual and normalization stages around both.",
-      "limitations": [
-        "This figure explains the cited paper's reported mechanism or evidence; it does not extend the claim beyond the stated conditions."
-      ],
-      "alt_text": "One encoder layer repeats six times. Token vectors plus sinusoidal positions; Multi-head self-attention; Residual connection and layer normalization; Position-wise feed-forward network; Residual connection and layer normalization; Repeat ×6: 6 layers.",
-      "fallback": "The encoder alternates position mixing and per-position transformation, with residual and normalization stages around both. Token vectors plus sinusoidal positions; Multi-head self-attention; Residual connection and layer normalization; Position-wise feed-forward network; Residual connection and layer normalization; Repeat ×6: 6 layers."
-    },
-    {
-      "id": "visual_attention_scaled_dot_product",
+      "id": "visual_attention_query_key_field",
       "after_block_id": "attn_mechanism",
       "after_paragraph_id": "attn_mechanism_p2",
+      "delivery_medium": "SVG",
       "type": "OPERATION_DIAGRAM",
-      "title": "Scaled attention becomes multi-head output",
-      "question": "How do scores become one projected representation?",
+      "title": "Every query relates to every key before values mix",
+      "question": "How do queries, keys, values, and eight parallel heads form one attention output?",
       "items": [
         {
-          "label": "Compare Q with Kᵀ",
-          "detail": "Query–key dot products produce compatibility scores."
+          "label": "Visual specification",
+        "detail": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output."
         },
         {
-          "label": "Scale by √dₖ",
-          "detail": "Dividing by the square root of key dimension controls score magnitude."
-        },
-        {
-          "label": "Apply softmax",
-          "detail": "Scores become weights over available positions."
-        },
-        {
-          "label": "Mix V",
-          "detail": "The weights form a weighted mixture of value vectors."
-        },
-        {
-          "label": "Run 8 learned heads",
-          "detail": "The base model repeats the operation in eight representation subspaces.",
-          "value": 8,
-          "value_label": "8 heads"
-        },
-        {
-          "label": "Concatenate and project",
-          "detail": "Head outputs are concatenated and passed through a learned output projection."
+          "label": "Evidence boundary",
+          "detail": "The marks show topology, not measured attention weights or learned head semantics.",
+          "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
-        "attn_003",
         "attn_004",
         "attn_005"
       ],
       "source_refs": [
         "source_attention_arxiv_v7"
       ],
-      "interpretation": "Multi-head attention includes both per-head value mixing and a final concatenation-and-projection stage.",
+      "interpretation": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output.",
       "limitations": [
-        "This figure explains the cited paper's reported mechanism or evidence; it does not extend the claim beyond the stated conditions."
+        "The marks show topology, not measured attention weights or learned head semantics."
       ],
-      "alt_text": "Scaled attention becomes multi-head output. Compare Q with Kᵀ; Scale by √dₖ; Apply softmax; Mix V; Run 8 learned heads: 8 heads; Concatenate and project.",
-      "fallback": "Multi-head attention includes both per-head value mixing and a final concatenation-and-projection stage. Compare Q with Kᵀ; Scale by √dₖ; Apply softmax; Mix V; Run 8 learned heads: 8 heads; Concatenate and project."
+      "alt_text": "Detailed head 1 contains exactly one query q_i branching to three explicit key-value pairs whose weighted values converge only on z_i^(1). That output and distinct z_i^(2) through z_i^(8) nodes form an eight-way fan into Concat, followed by W_O and the multi-head output.",
+      "fallback": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output. The marks show topology, not measured attention weights or learned head semantics."
     },
     {
-      "id": "visual_attention_generation_loop",
+      "id": "visual_attention_decoder_dependencies",
       "after_block_id": "attn_mechanism",
       "after_paragraph_id": "attn_mechanism_p3",
-      "type": "CONTROL_LOOP",
-      "title": "The decoder predicts, appends, and repeats",
-      "question": "How does one decoder state become the next target token?",
-      "items": [
-        {
-          "label": "Masked self-attention",
-          "detail": "Each of six decoder layers hides future target positions."
-        },
-        {
-          "label": "Encoder–decoder attention",
-          "detail": "Decoder queries retrieve from encoder keys and values."
-        },
-        {
-          "label": "Feed-forward path",
-          "detail": "The position-wise network transforms the attended state."
-        },
-        {
-          "label": "Linear projection and softmax",
-          "detail": "The final decoder representation becomes a probability distribution over next tokens."
-        },
-        {
-          "label": "Select and append one token",
-          "detail": "One selected target token extends the known prefix."
-        },
-        {
-          "label": "Repeat decoding",
-          "detail": "The extended prefix becomes the input to the next autoregressive cycle."
-        }
-      ],
-      "claim_ids": [
-        "attn_003",
-        "attn_004",
-        "attn_005"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "Masked and cross-attention feed a conventional projection and softmax before autoregressive repetition.",
-      "limitations": [
-        "Training can evaluate known target positions in parallel under the mask; generation still appends one token per cycle."
-      ],
-      "alt_text": "The decoder predicts, appends, and repeats. Masked self-attention; Encoder–decoder attention; Feed-forward path; Linear projection and softmax; Select and append one token; Repeat decoding.",
-      "fallback": "Masked and cross-attention feed a conventional projection and softmax before autoregressive repetition. Masked self-attention; Encoder–decoder attention; Feed-forward path; Linear projection and softmax; Select and append one token; Repeat decoding."
-    },
-    {
-      "id": "visual_attention_worked_decoder",
-      "after_block_id": "attn_example",
-      "after_paragraph_id": "attn_example_p2",
+      "delivery_medium": "SVG",
       "type": "OPERATION_DIAGRAM",
-      "title": "One decoder position crosses two attention stages",
-      "question": "What happens from the known prefix to one next-token choice?",
+      "title": "The decoder combines permitted prefix and source dependencies",
+      "question": "Which target and source positions may influence the current prediction?",
       "items": [
         {
-          "label": "Known target prefix",
-          "detail": "The decoder position starts from target tokens already available.",
-          "group": "Masked self-attention"
+          "label": "Visual specification",
+          "detail": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state."
         },
         {
-          "label": "Compare and scale",
-          "detail": "Its query is compared with prefix keys and divided by √dₖ.",
-          "group": "Masked self-attention"
-        },
-        {
-          "label": "Mask future positions",
-          "detail": "Unavailable future targets receive no softmax weight.",
-          "group": "Masked self-attention"
-        },
-        {
-          "label": "Mix prefix values",
-          "detail": "Softmax weights combine the known target values.",
-          "group": "Masked self-attention"
-        },
-        {
-          "label": "Query the encoded source",
-          "detail": "A second query compares with keys from every encoded source position.",
-          "group": "Cross-attention"
-        },
-        {
-          "label": "Mix source values",
-          "detail": "Weighted source values provide input context.",
-          "group": "Cross-attention"
-        },
-        {
-          "label": "Feed-forward, project, softmax",
-          "detail": "The transformed decoder state becomes a next-token distribution.",
-          "group": "Prediction"
-        },
-        {
-          "label": "Training versus generation",
-          "detail": "Known positions train in parallel under the mask; generation appends one selected token before the next prediction.",
-          "group": "Boundary",
+          "label": "Evidence boundary",
+          "detail": "The dependency map does not specify a decoding search algorithm or learned attention magnitudes.",
           "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
         "attn_003",
-        "attn_004",
-        "attn_012"
+        "attn_004"
       ],
       "source_refs": [
         "source_attention_arxiv_v7"
       ],
-      "interpretation": "The worked path preserves mask, scaling, source-value mixing, feed-forward transformation, projection, softmax, and the generation boundary.",
+      "interpretation": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state.",
       "limitations": [
-        "This schematic explains one position and does not display learned attention weights from an experiment."
+        "The dependency map does not specify a decoding search algorithm or learned attention magnitudes."
       ],
-      "alt_text": "One decoder position crosses two attention stages. Known target prefix; Compare and scale; Mask future positions; Mix prefix values; Query the encoded source; Mix source values; Feed-forward, project, softmax; Training versus generation.",
-      "fallback": "The worked path preserves mask, scaling, source-value mixing, feed-forward transformation, projection, softmax, and the generation boundary. Known target prefix; Compare and scale; Mask future positions; Mix prefix values; Query the encoded source; Mix source values; Feed-forward, project, softmax; Training versus generation."
-    },
-    {
-      "id": "visual_attention_training_conditions",
-      "after_block_id": "attn_evidence",
-      "after_paragraph_id": "attn_evidence_p1",
-      "type": "EVIDENCE_MATRIX",
-      "title": "Translation results depend on distinct training conditions",
-      "question": "Which corpus, vocabulary, hardware, and run length belong together?",
-      "items": [
-        {
-          "label": "English–German corpus",
-          "detail": "WMT 2014 sentence pairs; shared byte-pair vocabulary.",
-          "value": 4.5,
-          "value_label": "≈4.5M pairs · 37K vocab",
-          "group": "English–German"
-        },
-        {
-          "label": "English–French corpus",
-          "detail": "WMT 2014 sentences; word-piece vocabulary.",
-          "value": 36,
-          "value_label": "36M pairs · 32K vocab",
-          "group": "English–French"
-        },
-        {
-          "label": "Shared hardware",
-          "detail": "One machine with eight NVIDIA P100 GPUs.",
-          "value": 8,
-          "value_label": "8 P100 GPUs",
-          "group": "Hardware"
-        },
-        {
-          "label": "Base run",
-          "detail": "Reported training duration for the base model.",
-          "value": 100000,
-          "value_label": "100K steps · 12 h",
-          "group": "Training run"
-        },
-        {
-          "label": "Big run",
-          "detail": "Reported training duration for the big model.",
-          "value": 300000,
-          "value_label": "300K steps · 3.5 days",
-          "group": "Training run"
-        }
-      ],
-      "claim_ids": [
-        "attn_007",
-        "attn_008",
-        "attn_009",
-        "attn_010"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7",
-        "source_attention_neurips_paper",
-        "source_attention_neurips_landing"
-      ],
-      "interpretation": "Corpus scale, vocabulary, shared hardware, and run length are conditions—not interchangeable result values.",
-      "limitations": [
-        "The reported durations are source conditions, not controlled hardware benchmarks."
-      ],
-      "alt_text": "Translation results depend on distinct training conditions. English–German corpus: ≈4.5M pairs · 37K vocab; English–French corpus: 36M pairs · 32K vocab; Shared hardware: 8 P100 GPUs; Base run: 100K steps · 12 h; Big run: 300K steps · 3.5 days.",
-      "fallback": "Corpus scale, vocabulary, shared hardware, and run length are conditions—not interchangeable result values. English–German corpus: ≈4.5M pairs · 37K vocab; English–French corpus: 36M pairs · 32K vocab; Shared hardware: 8 P100 GPUs; Base run: 100K steps · 12 h; Big run: 300K steps · 3.5 days."
-    },
-    {
-      "id": "visual_attention_bleu_sources",
-      "after_block_id": "attn_evidence",
-      "after_paragraph_id": "attn_evidence_p2",
-      "type": "EVIDENCE_MATRIX",
-      "title": "English–French BLEU changes by primary-source location",
-      "question": "Which exact source reports each result?",
-      "items": [
-        {
-          "label": "arXiv v7 Table 2 · English–German",
-          "detail": "Big model; exceeds the comparison ensembles listed in that table.",
-          "value": 28.4,
-          "value_label": "28.4 BLEU"
-        },
-        {
-          "label": "arXiv v7 Table 2 · English–French",
-          "detail": "Canonical table value in the selected arXiv version.",
-          "value": 41.8,
-          "value_label": "41.8 BLEU"
-        },
-        {
-          "label": "arXiv v7 Section 6.1",
-          "detail": "Conflicting prose value for English–French.",
-          "value": 41,
-          "value_label": "41.0 BLEU",
-          "role": "DISPUTED"
-        },
-        {
-          "label": "Official proceedings PDF",
-          "detail": "English–French value in the proceedings paper.",
-          "value": 41,
-          "value_label": "41.0 BLEU",
-          "role": "DISPUTED"
-        },
-        {
-          "label": "NeurIPS landing abstract",
-          "detail": "Distinct English–French value on the proceedings landing page.",
-          "value": 41.1,
-          "value_label": "41.1 BLEU",
-          "role": "DISPUTED"
-        }
-      ],
-      "claim_ids": [
-        "attn_007",
-        "attn_008",
-        "attn_009",
-        "attn_010"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7",
-        "source_attention_neurips_paper",
-        "source_attention_neurips_landing"
-      ],
-      "interpretation": "The English–French result cannot be flattened into one value without naming the exact primary-source location.",
-      "limitations": [
-        "The matrix preserves the conflict; it does not resolve which source value should supersede the others."
-      ],
-      "alt_text": "English–French BLEU changes by primary-source location. arXiv v7 Table 2 · English–German: 28.4 BLEU; arXiv v7 Table 2 · English–French: 41.8 BLEU; arXiv v7 Section 6.1: 41.0 BLEU; Official proceedings PDF: 41.0 BLEU; NeurIPS landing abstract: 41.1 BLEU.",
-      "fallback": "The English–French result cannot be flattened into one value without naming the exact primary-source location. arXiv v7 Table 2 · English–German: 28.4 BLEU; arXiv v7 Table 2 · English–French: 41.8 BLEU; arXiv v7 Section 6.1: 41.0 BLEU; Official proceedings PDF: 41.0 BLEU; NeurIPS landing abstract: 41.1 BLEU."
-    },
-    {
-      "id": "visual_attention_ablation_domains",
-      "after_block_id": "attn_evidence",
-      "after_paragraph_id": "attn_evidence_p3",
-      "type": "DOT_PLOT",
-      "title": "Ablations and parsing use separate disclosed scales",
-      "question": "How close are results within each experiment?",
-      "items": [
-        {
-          "label": "Base configuration",
-          "detail": "newstest2013 development BLEU.",
-          "value": 25.8,
-          "value_label": "25.8 BLEU",
-          "group": "Translation ablation · domain 24.8–25.9",
-          "domain_min": 24.8,
-          "domain_max": 25.9
-        },
-        {
-          "label": "One attention head",
-          "detail": "newstest2013 development BLEU.",
-          "value": 24.9,
-          "value_label": "24.9 BLEU",
-          "group": "Translation ablation · domain 24.8–25.9",
-          "domain_min": 24.8,
-          "domain_max": 25.9
-        },
-        {
-          "label": "32 attention heads",
-          "detail": "newstest2013 development BLEU.",
-          "value": 25.4,
-          "value_label": "25.4 BLEU",
-          "group": "Translation ablation · domain 24.8–25.9",
-          "domain_min": 24.8,
-          "domain_max": 25.9
-        },
-        {
-          "label": "Learned positional embeddings",
-          "detail": "newstest2013 development BLEU.",
-          "value": 25.7,
-          "value_label": "25.7 BLEU",
-          "group": "Translation ablation · domain 24.8–25.9",
-          "domain_min": 24.8,
-          "domain_max": 25.9
-        },
-        {
-          "label": "WSJ-only",
-          "detail": "arXiv v7 constituency parsing extension.",
-          "value": 91.3,
-          "value_label": "91.3 F1",
-          "group": "Parsing · domain 91.0–93.5",
-          "domain_min": 91,
-          "domain_max": 93.5
-        },
-        {
-          "label": "Semi-supervised",
-          "detail": "arXiv v7 constituency parsing extension.",
-          "value": 92.7,
-          "value_label": "92.7 F1",
-          "group": "Parsing · domain 91.0–93.5",
-          "domain_min": 91,
-          "domain_max": 93.5
-        },
-        {
-          "label": "Best listed comparison",
-          "detail": "Best comparison result listed with the parsing extension.",
-          "value": 93.3,
-          "value_label": "93.3 F1",
-          "group": "Parsing · domain 91.0–93.5",
-          "domain_min": 91,
-          "domain_max": 93.5
-        }
-      ],
-      "claim_ids": [
-        "attn_007",
-        "attn_008",
-        "attn_009",
-        "attn_010"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7",
-        "source_attention_neurips_paper",
-        "source_attention_neurips_landing"
-      ],
-      "interpretation": "Local, disclosed domains expose small within-experiment differences without placing BLEU and parsing F1 on one scale.",
-      "limitations": [
-        "The panels are separate because BLEU and parsing F1 are not directly comparable measures."
-      ],
-      "alt_text": "Ablations and parsing use separate disclosed scales. Base configuration: 25.8 BLEU; One attention head: 24.9 BLEU; 32 attention heads: 25.4 BLEU; Learned positional embeddings: 25.7 BLEU; WSJ-only: 91.3 F1; Semi-supervised: 92.7 F1; Best listed comparison: 93.3 F1.",
-      "fallback": "Local, disclosed domains expose small within-experiment differences without placing BLEU and parsing F1 on one scale. Base configuration: 25.8 BLEU; One attention head: 24.9 BLEU; 32 attention heads: 25.4 BLEU; Learned positional embeddings: 25.7 BLEU; WSJ-only: 91.3 F1; Semi-supervised: 92.7 F1; Best listed comparison: 93.3 F1."
-    },
-    {
-      "id": "visual_attention_complexity_boundary",
-      "after_block_id": "attn_limitations",
-      "after_paragraph_id": "attn_limitations_p1",
-      "type": "PARALLEL_VIEW",
-      "title": "Global attention trades quadratic pairings for short paths",
-      "question": "Which cost and path-length claims hold under which condition?",
-      "items": [
-        {
-          "label": "Full self-attention",
-          "detail": "O(n²d) work per layer and constant maximum within-layer path length.",
-          "group": "All-to-all attention"
-        },
-        {
-          "label": "Conditional speed argument",
-          "detail": "The paper argues self-attention is faster than recurrence when sequence length n is smaller than representation dimension d.",
-          "group": "Condition",
-          "role": "BOUNDARY"
-        },
-        {
-          "label": "Restricted attention proposal",
-          "detail": "Reducing pairings is future work and would increase maximum path length to O(n/r).",
-          "group": "Long-input trade-off"
-        }
-      ],
-      "claim_ids": [
-        "attn_006",
-        "attn_009",
-        "attn_012"
-      ],
-      "source_refs": [
-        "source_attention_arxiv_v7"
-      ],
-      "interpretation": "The short path comes with quadratic pairings, and the paper's speed comparison is conditional rather than universal.",
-      "limitations": [
-        "Asymptotic relationships do not establish wall-clock superiority on every sequence length or hardware platform."
-      ],
-      "alt_text": "Global attention trades quadratic pairings for short paths. Full self-attention; Conditional speed argument; Restricted attention proposal.",
-      "fallback": "The short path comes with quadratic pairings, and the paper's speed comparison is conditional rather than universal. Full self-attention; Conditional speed argument; Restricted attention proposal."
+      "alt_text": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state.",
+      "fallback": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state. The dependency map does not specify a decoding search algorithm or learned attention magnitudes."
     }
   ],
   "glossary": [

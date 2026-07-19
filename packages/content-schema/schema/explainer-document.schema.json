@@ -306,6 +306,7 @@
         "id",
         "after_block_id",
         "after_paragraph_id",
+        "delivery_medium",
         "type",
         "title",
         "question",
@@ -326,6 +327,10 @@
         },
         "after_paragraph_id": {
           "$ref": "#/$defs/identifier"
+        },
+        "delivery_medium": {
+          "type": "string",
+          "enum": ["HTML/CSS", "SVG", "JavaScript", "source asset", "generated asset"]
         },
         "type": {
           "type": "string",

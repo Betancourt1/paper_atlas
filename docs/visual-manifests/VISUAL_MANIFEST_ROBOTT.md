@@ -3,7 +3,7 @@
 - Paper ID: `paper_robott`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
-- Manifest revision: `4`
+- Manifest revision: `6`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -14,4071 +14,652 @@
   - `rttt_results_source` — RoboTTT v1 — real-robot evaluation and ablations; Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11
   - `rttt_limits_source` — RoboTTT v1 — limitations, deployment, and evaluation details; Section 6 and Appendices A–B, PDF pages 12 and 20–22
 
-Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 6 independently reassesses all 16 paragraphs under the four-form hard ban. It proposes 1 paper-specific visuals and keeps 15 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
 
 ## `rttt_why_p1`
 
 - Location: `rttt_why`, paragraph 1
-- Text anchor: "A robot acting for minutes must remember which stages it has completed, what actions failed, and what was previously visible before an object became occluded."
-- Claims and sources: `rttt_core` (OBSERVED, VERIFIED); `rttt_architecture` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct growing observation history versus fixed-size fast-weight state while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Growing observation history versus fixed-size fast-weight state.
-- Recommended scope and placement: Shared scope `rttt_why_p1`, `rttt_why_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_why_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-
-### Treatment A — Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view
-
-- Teaching purpose: Keep valid comparison groups separate and equally visible.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_why\_p1: Growing observation history versus fixed-size fast-weight state - Relationship-specific parallel view};
-\node[panel] at (0,0) {\textbf{Long robot history can be stored as tokens or changing state}\\[4pt]\textbf{Full-history attention}: qualitative -- Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit.\\\textbf{RoboTTT recurrent state}: qualitative -- Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep.\\\textbf{Information objective}: qualitative -- The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded.\\\textbf{Unmeasured boundary}: qualitative -- The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Long robot history can be stored as tokens or changing state"]
-    p1r1["Full-history attention: qualitative<br/>Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."]
-    p1r2["RoboTTT recurrent state: qualitative<br/>Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."]
-    p1r3["Information objective: qualitative<br/>The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."]
-    p1r4["Unmeasured boundary: qualitative<br/>The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p1: Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view"
-rows = [["Long robot history can be stored as tokens or changing state","Full-history attention","qualitative","Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."],["Long robot history can be stored as tokens or changing state","RoboTTT recurrent state","qualitative","Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."],["Long robot history can be stored as tokens or changing state","Information objective","qualitative","The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."],["Long robot history can be stored as tokens or changing state","Unmeasured boundary","qualitative","The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Growing observation history versus fixed-size fast-weight state — Condition and boundary matrix
-
-- Teaching purpose: Show every comparison value or qualitative condition in explicit columns.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_why\_p1: Growing observation history versus fixed-size fast-weight state - Condition and boundary matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Long robot history can be stored as tokens or changing state & Full-history attention & qualitative & Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit. \\
-Long robot history can be stored as tokens or changing state & RoboTTT recurrent state & qualitative & Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep. \\
-Long robot history can be stored as tokens or changing state & Information objective & qualitative & The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded. \\
-Long robot history can be stored as tokens or changing state & Unmeasured boundary & qualitative & The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Long robot history can be stored as tokens or changing state<br/>Full-history attention<br/><b>qualitative</b><br/>Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."]
-    r2["Long robot history can be stored as tokens or changing state<br/>RoboTTT recurrent state<br/><b>qualitative</b><br/>Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."]
-    r3["Long robot history can be stored as tokens or changing state<br/>Information objective<br/><b>qualitative</b><br/>The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."]
-    r4["Long robot history can be stored as tokens or changing state<br/>Unmeasured boundary<br/><b>qualitative</b><br/>The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p1: Growing observation history versus fixed-size fast-weight state — Condition and boundary matrix"
-rows = [["Long robot history can be stored as tokens or changing state","Full-history attention","qualitative","Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."],["Long robot history can be stored as tokens or changing state","RoboTTT recurrent state","qualitative","Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."],["Long robot history can be stored as tokens or changing state","Information objective","qualitative","The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."],["Long robot history can be stored as tokens or changing state","Unmeasured boundary","qualitative","The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]]
-height = 502
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Growing observation history versus fixed-size fast-weight state — Comparison topology
-
-- Teaching purpose: Connect only the alternatives and shared decision point stated in the paragraph.
-- Encoding and reading order: Use 6 named nodes and 5 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_why\_p1: Growing observation history versus fixed-size fast-weight state - Comparison topology};
-\node[box] (n1) at (1.00,-1.50) {A robot acting for minutes must remember which stages it has completed, what actions failed};
-\node[box] (n2) at (2.50,-1.50) {and what was previously visible before an object became occluded};
-\node[box] (n3) at (4.00,-1.50) {Most robot foundation policies instead condition on one observation or a short fixed window};
-\node[box] (n4) at (5.50,-1.50) {Full attention over an ever-growing history makes each new prediction more expensive};
-\node[box] (n5) at (7.00,-1.50) {A compact recurrent state avoids that growth};
-\node[box] (n6) at (8.50,-1.50) {but it must retain useful structure from dense, repetitive observations rather than merely storing more frames};
-\draw[link] (n1) -- node[rel] {compare} (n2);
-\draw[link] (n1) -- node[rel] {compare} (n3);
-\draw[link] (n1) -- node[rel] {compare} (n4);
-\draw[link] (n1) -- node[rel] {compare} (n5);
-\draw[link] (n1) -- node[rel] {compare} (n6);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["A robot acting for minutes must remember which stages it has completed, what actions failed"]
-  n2["and what was previously visible before an object became occluded"]
-  n3["Most robot foundation policies instead condition on one observation or a short fixed window"]
-  n4["Full attention over an ever-growing history makes each new prediction more expensive"]
-  n5["A compact recurrent state avoids that growth"]
-  n6["but it must retain useful structure from dense, repetitive observations rather than merely storing more frames"]
-  n1 -->|"compare"| n2
-  n1 -->|"compare"| n3
-  n1 -->|"compare"| n4
-  n1 -->|"compare"| n5
-  n1 -->|"compare"| n6
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p1: Growing observation history versus fixed-size fast-weight state — Comparison topology"
-nodes = [["n1","A robot acting for minutes must remember which stages it has completed, what actions failed",100,150],["n2","and what was previously visible before an object became occluded",250,150],["n3","Most robot foundation policies instead condition on one observation or a short fixed window",400,150],["n4","Full attention over an ever-growing history makes each new prediction more expensive",550,150],["n5","A compact recurrent state avoids that growth",700,150],["n6","but it must retain useful structure from dense, repetitive observations rather than merely storing more frames",850,150]]
-edges = [["n1","n2","compare"],["n1","n3","compare"],["n1","n4","compare"],["n1","n5","compare"],["n1","n6","compare"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "A robot acting for minutes must remember which stages it has completed, what actions"
+- Claims and sources: `rttt_core`, `rttt_architecture`, `rttt_architecture_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: A robot acting for minutes must remember which stages it has completed, what actions failed, and what was previously visible before an object became occluded. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Motivation and problem framing.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_history_memory` after `rttt_why_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_why_p1`, `rttt_why_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_why_p2`
 
 - Location: `rttt_why`, paragraph 2
-- Text anchor: "Full attention over an ever-growing history makes each new prediction more expensive."
-- Claims and sources: `rttt_core` (OBSERVED, VERIFIED); `rttt_architecture` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct growing observation history versus fixed-size fast-weight state while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Growing observation history versus fixed-size fast-weight state.
-- Recommended scope and placement: Shared scope `rttt_why_p1`, `rttt_why_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_why_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-
-### Treatment A — Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view
-
-- Teaching purpose: Keep valid comparison groups separate and equally visible.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_why\_p2: Growing observation history versus fixed-size fast-weight state - Relationship-specific parallel view};
-\node[panel] at (0,0) {\textbf{Long robot history can be stored as tokens or changing state}\\[4pt]\textbf{Full-history attention}: qualitative -- Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit.\\\textbf{RoboTTT recurrent state}: qualitative -- Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep.\\\textbf{Information objective}: qualitative -- The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded.\\\textbf{Unmeasured boundary}: qualitative -- The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Long robot history can be stored as tokens or changing state"]
-    p1r1["Full-history attention: qualitative<br/>Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."]
-    p1r2["RoboTTT recurrent state: qualitative<br/>Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."]
-    p1r3["Information objective: qualitative<br/>The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."]
-    p1r4["Unmeasured boundary: qualitative<br/>The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p2: Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view"
-rows = [["Long robot history can be stored as tokens or changing state","Full-history attention","qualitative","Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."],["Long robot history can be stored as tokens or changing state","RoboTTT recurrent state","qualitative","Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."],["Long robot history can be stored as tokens or changing state","Information objective","qualitative","The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."],["Long robot history can be stored as tokens or changing state","Unmeasured boundary","qualitative","The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Growing observation history versus fixed-size fast-weight state — Condition and boundary matrix
-
-- Teaching purpose: Show every comparison value or qualitative condition in explicit columns.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_why\_p2: Growing observation history versus fixed-size fast-weight state - Condition and boundary matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Long robot history can be stored as tokens or changing state & Full-history attention & qualitative & Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit. \\
-Long robot history can be stored as tokens or changing state & RoboTTT recurrent state & qualitative & Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep. \\
-Long robot history can be stored as tokens or changing state & Information objective & qualitative & The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded. \\
-Long robot history can be stored as tokens or changing state & Unmeasured boundary & qualitative & The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Long robot history can be stored as tokens or changing state<br/>Full-history attention<br/><b>qualitative</b><br/>Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."]
-    r2["Long robot history can be stored as tokens or changing state<br/>RoboTTT recurrent state<br/><b>qualitative</b><br/>Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."]
-    r3["Long robot history can be stored as tokens or changing state<br/>Information objective<br/><b>qualitative</b><br/>The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."]
-    r4["Long robot history can be stored as tokens or changing state<br/>Unmeasured boundary<br/><b>qualitative</b><br/>The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p2: Growing observation history versus fixed-size fast-weight state — Condition and boundary matrix"
-rows = [["Long robot history can be stored as tokens or changing state","Full-history attention","qualitative","Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."],["Long robot history can be stored as tokens or changing state","RoboTTT recurrent state","qualitative","Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."],["Long robot history can be stored as tokens or changing state","Information objective","qualitative","The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."],["Long robot history can be stored as tokens or changing state","Unmeasured boundary","qualitative","The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."]]
-height = 502
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Growing observation history versus fixed-size fast-weight state — Comparison topology
-
-- Teaching purpose: Connect only the alternatives and shared decision point stated in the paragraph.
-- Encoding and reading order: Use 6 named nodes and 5 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_core`, `rttt_architecture` from `rttt_architecture_source`. A shared visual belongs after the second paragraph and must distinguish compute growth from the separate information-retention objective.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_why\_p2: Growing observation history versus fixed-size fast-weight state - Comparison topology};
-\node[box] (n1) at (1.00,-1.50) {A robot acting for minutes must remember which stages it has completed, what actions failed};
-\node[box] (n2) at (2.50,-1.50) {and what was previously visible before an object became occluded};
-\node[box] (n3) at (4.00,-1.50) {Most robot foundation policies instead condition on one observation or a short fixed window};
-\node[box] (n4) at (5.50,-1.50) {Full attention over an ever-growing history makes each new prediction more expensive};
-\node[box] (n5) at (7.00,-1.50) {A compact recurrent state avoids that growth};
-\node[box] (n6) at (8.50,-1.50) {but it must retain useful structure from dense, repetitive observations rather than merely storing more frames};
-\draw[link] (n1) -- node[rel] {compare} (n2);
-\draw[link] (n1) -- node[rel] {compare} (n3);
-\draw[link] (n1) -- node[rel] {compare} (n4);
-\draw[link] (n1) -- node[rel] {compare} (n5);
-\draw[link] (n1) -- node[rel] {compare} (n6);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["A robot acting for minutes must remember which stages it has completed, what actions failed"]
-  n2["and what was previously visible before an object became occluded"]
-  n3["Most robot foundation policies instead condition on one observation or a short fixed window"]
-  n4["Full attention over an ever-growing history makes each new prediction more expensive"]
-  n5["A compact recurrent state avoids that growth"]
-  n6["but it must retain useful structure from dense, repetitive observations rather than merely storing more frames"]
-  n1 -->|"compare"| n2
-  n1 -->|"compare"| n3
-  n1 -->|"compare"| n4
-  n1 -->|"compare"| n5
-  n1 -->|"compare"| n6
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_why_p2: Growing observation history versus fixed-size fast-weight state — Comparison topology"
-nodes = [["n1","A robot acting for minutes must remember which stages it has completed, what actions failed",100,150],["n2","and what was previously visible before an object became occluded",250,150],["n3","Most robot foundation policies instead condition on one observation or a short fixed window",400,150],["n4","Full attention over an ever-growing history makes each new prediction more expensive",550,150],["n5","A compact recurrent state avoids that growth",700,150],["n6","but it must retain useful structure from dense, repetitive observations rather than merely storing more frames",850,150]]
-edges = [["n1","n2","compare"],["n1","n3","compare"],["n1","n4","compare"],["n1","n5","compare"],["n1","n6","compare"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "Full attention over an ever-growing history makes each new prediction more expensive. A compact"
+- Claims and sources: `rttt_core`, `rttt_architecture`, `rttt_architecture_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: Full attention over an ever-growing history makes each new prediction more expensive. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Motivation and problem framing.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_history_memory` after `rttt_why_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_why_p1`, `rttt_why_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_change_p1`
 
 - Location: `rttt_change`, paragraph 1
-- Text anchor: "RoboTTT does not keep the complete history available for attention."
-- Claims and sources: `rttt_architecture` (OBSERVED, VERIFIED); `rttt_training` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct observation projection, fast-weight gradient update, query retrieval, and current action while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Observation projection, fast-weight gradient update, query retrieval, and current action.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `rttt_change_p1`.
-- QA-informed planning change: This paragraph needs a local update/retrieval mechanism; a TBPTT training timeline cannot serve it.
-
-### Treatment A — Observation projection, fast-weight gradient update, query retrieval, and current action — Operation flow
-
-- Teaching purpose: Show the source-supported order and branch boundaries.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. This paragraph needs a local update/retrieval mechanism; a TBPTT training timeline cannot serve it.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_change\_p1: Observation projection, fast-weight gradient update, query retrieval, and current action - Operation flow};
-\node[box] (n1) at (1.00,-1.50) {RoboTTT does not keep the complete history available for attention};
-\node[box] (n2) at (2.50,-1.50) {It uses fast weights as recurrent state};
-\node[box] (n3) at (4.00,-1.50) {a small neural network updates its parameters by gradient descent at every timestep};
-\node[box] (n4) at (5.50,-1.50) {then applies the updated network to retrieve contextual information for the current action prediction};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["RoboTTT does not keep the complete history available for attention"]
-  n2["It uses fast weights as recurrent state"]
-  n3["a small neural network updates its parameters by gradient descent at every timestep"]
-  n4["then applies the updated network to retrieve contextual information for the current action prediction"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p1: Observation projection, fast-weight gradient update, query retrieval, and current action — Operation flow"
-nodes = [["n1","RoboTTT does not keep the complete history available for attention",100,150],["n2","It uses fast weights as recurrent state",250,150],["n3","a small neural network updates its parameters by gradient descent at every timestep",400,150],["n4","then applies the updated network to retrieve contextual information for the current action prediction",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Observation projection, fast-weight gradient update, query retrieval, and current action — Input-operation-output ledger
-
-- Teaching purpose: Make inputs, operations, outputs, and limits inspectable as columns.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. This paragraph needs a local update/retrieval mechanism; a TBPTT training timeline cannot serve it.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_change\_p1: Observation projection, fast-weight gradient update, query retrieval, and current action - Input-operation-output ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Long-sequence training without full-history gradients & Action chunks in a segment & qualitative & The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once. \\
-Long-sequence training without full-history gradients & Independent noise levels & qualitative & Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence. \\
-Long-sequence training without full-history gradients & Gradients within the segment & qualitative & Fast-weight updates and action losses backpropagate through the current segment. \\
-Long-sequence training without full-history gradients & Detached boundary & qualitative & At the segment boundary, the fast-weight state continues forward but its gradient history is stopped. \\
-Long-sequence training without full-history gradients & Next segment & qualitative & Training resumes from the carried state, so memory use depends on segment length rather than total context length. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Long-sequence training without full-history gradients<br/>Action chunks in a segment<br/><b>qualitative</b><br/>The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."]
-    r2["Long-sequence training without full-history gradients<br/>Independent noise levels<br/><b>qualitative</b><br/>Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."]
-    r3["Long-sequence training without full-history gradients<br/>Gradients within the segment<br/><b>qualitative</b><br/>Fast-weight updates and action losses backpropagate through the current segment."]
-    r4["Long-sequence training without full-history gradients<br/>Detached boundary<br/><b>qualitative</b><br/>At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."]
-    r5["Long-sequence training without full-history gradients<br/>Next segment<br/><b>qualitative</b><br/>Training resumes from the carried state, so memory use depends on segment length rather than total context length."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p1: Observation projection, fast-weight gradient update, query retrieval, and current action — Input-operation-output ledger"
-rows = [["Long-sequence training without full-history gradients","Action chunks in a segment","qualitative","The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."],["Long-sequence training without full-history gradients","Independent noise levels","qualitative","Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."],["Long-sequence training without full-history gradients","Gradients within the segment","qualitative","Fast-weight updates and action losses backpropagate through the current segment."],["Long-sequence training without full-history gradients","Detached boundary","qualitative","At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."],["Long-sequence training without full-history gradients","Next segment","qualitative","Training resumes from the carried state, so memory use depends on segment length rather than total context length."]]
-height = 590
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Observation projection, fast-weight gradient update, query retrieval, and current action — State-transition walkthrough
-
-- Teaching purpose: Follow the described state changes without inventing timing.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. This paragraph needs a local update/retrieval mechanism; a TBPTT training timeline cannot serve it.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_change\_p1: Observation projection, fast-weight gradient update, query retrieval, and current action - State-transition walkthrough};
-\node[box] (n1) at (1.00,-1.50) {RoboTTT does not keep the complete history available for attention};
-\node[box] (n2) at (2.50,-1.50) {It uses fast weights as recurrent state};
-\node[box] (n3) at (4.00,-1.50) {a small neural network updates its parameters by gradient descent at every timestep};
-\node[box] (n4) at (5.50,-1.50) {then applies the updated network to retrieve contextual information for the current action prediction};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["RoboTTT does not keep the complete history available for attention"]
-  n2["It uses fast weights as recurrent state"]
-  n3["a small neural network updates its parameters by gradient descent at every timestep"]
-  n4["then applies the updated network to retrieve contextual information for the current action prediction"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p1: Observation projection, fast-weight gradient update, query retrieval, and current action — State-transition walkthrough"
-nodes = [["n1","RoboTTT does not keep the complete history available for attention",100,150],["n2","It uses fast weights as recurrent state",250,150],["n3","a small neural network updates its parameters by gradient descent at every timestep",400,150],["n4","then applies the updated network to retrieve contextual information for the current action prediction",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "RoboTTT does not keep the complete history available for attention. It uses fast weights"
+- Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: RoboTTT does not keep the complete history available for attention. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Method distinction and scope.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Observation projection, fast-weight gradient update, query retrieval, and current action — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_current_action` after `rttt_change_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_change_p2`
 
 - Location: `rttt_change`, paragraph 2
-- Text anchor: "The paper combines this state mechanism with two training ideas."
-- Claims and sources: `rttt_architecture` (OBSERVED, VERIFIED); `rttt_training` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct per-chunk noise, carried fast weights, and detached tbptt boundaries while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Per-chunk noise, carried fast weights, and detached TBPTT boundaries.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `rttt_change_p2`.
-- QA-informed planning change: Show independent flow-matching noise by chunk, within-segment gradients, state carry, and stopped gradients at boundaries.
-
-### Treatment A — Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Training timeline
-
-- Teaching purpose: Show carried state and explicit stop-gradient boundaries.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. Show independent flow-matching noise by chunk, within-segment gradients, state carry, and stopped gradients at boundaries.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_change\_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries - Training timeline};
-\node[box] (n1) at (1.00,-1.50) {The paper combines this state mechanism with two training ideas};
-\node[box] (n2) at (2.50,-1.50) {Sequence action forcing samples a different flow-matching noise level for every action chunk};
-\node[box] (n3) at (4.00,-1.50) {Truncated backpropagation carries fast weights across segments while stopping their gradients at segment boundaries};
-\node[box] (n4) at (5.50,-1.50) {so memory use depends on segment length rather than total context length};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The paper combines this state mechanism with two training ideas"]
-  n2["Sequence action forcing samples a different flow-matching noise level for every action chunk"]
-  n3["Truncated backpropagation carries fast weights across segments while stopping their gradients at segment boundaries"]
-  n4["so memory use depends on segment length rather than total context length"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Training timeline"
-nodes = [["n1","The paper combines this state mechanism with two training ideas",100,150],["n2","Sequence action forcing samples a different flow-matching noise level for every action chunk",250,150],["n3","Truncated backpropagation carries fast weights across segments while stopping their gradients at segment boundaries",400,150],["n4","so memory use depends on segment length rather than total context length",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Boundary ledger
-
-- Teaching purpose: List every segment, gradient rule, and carried value.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. Show independent flow-matching noise by chunk, within-segment gradients, state carry, and stopped gradients at boundaries.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_change\_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries - Boundary ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Long-sequence training without full-history gradients & Action chunks in a segment & qualitative & The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once. \\
-Long-sequence training without full-history gradients & Independent noise levels & qualitative & Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence. \\
-Long-sequence training without full-history gradients & Gradients within the segment & qualitative & Fast-weight updates and action losses backpropagate through the current segment. \\
-Long-sequence training without full-history gradients & Detached boundary & qualitative & At the segment boundary, the fast-weight state continues forward but its gradient history is stopped. \\
-Long-sequence training without full-history gradients & Next segment & qualitative & Training resumes from the carried state, so memory use depends on segment length rather than total context length. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Long-sequence training without full-history gradients<br/>Action chunks in a segment<br/><b>qualitative</b><br/>The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."]
-    r2["Long-sequence training without full-history gradients<br/>Independent noise levels<br/><b>qualitative</b><br/>Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."]
-    r3["Long-sequence training without full-history gradients<br/>Gradients within the segment<br/><b>qualitative</b><br/>Fast-weight updates and action losses backpropagate through the current segment."]
-    r4["Long-sequence training without full-history gradients<br/>Detached boundary<br/><b>qualitative</b><br/>At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."]
-    r5["Long-sequence training without full-history gradients<br/>Next segment<br/><b>qualitative</b><br/>Training resumes from the carried state, so memory use depends on segment length rather than total context length."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Boundary ledger"
-rows = [["Long-sequence training without full-history gradients","Action chunks in a segment","qualitative","The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."],["Long-sequence training without full-history gradients","Independent noise levels","qualitative","Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."],["Long-sequence training without full-history gradients","Gradients within the segment","qualitative","Fast-weight updates and action losses backpropagate through the current segment."],["Long-sequence training without full-history gradients","Detached boundary","qualitative","At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."],["Long-sequence training without full-history gradients","Next segment","qualitative","Training resumes from the carried state, so memory use depends on segment length rather than total context length."]]
-height = 590
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Segment panels
-
-- Teaching purpose: Keep within-segment and across-segment behavior separate.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`. Show independent flow-matching noise by chunk, within-segment gradients, state carry, and stopped gradients at boundaries.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_change\_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries - Segment panels};
-\node[panel] at (0,0) {\textbf{Long-sequence training without full-history gradients}\\[4pt]\textbf{Action chunks in a segment}: qualitative -- The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once.\\\textbf{Independent noise levels}: qualitative -- Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence.\\\textbf{Gradients within the segment}: qualitative -- Fast-weight updates and action losses backpropagate through the current segment.\\\textbf{Detached boundary}: qualitative -- At the segment boundary, the fast-weight state continues forward but its gradient history is stopped.\\\textbf{Next segment}: qualitative -- Training resumes from the carried state, so memory use depends on segment length rather than total context length.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Long-sequence training without full-history gradients"]
-    p1r1["Action chunks in a segment: qualitative<br/>The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."]
-    p1r2["Independent noise levels: qualitative<br/>Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."]
-    p1r3["Gradients within the segment: qualitative<br/>Fast-weight updates and action losses backpropagate through the current segment."]
-    p1r4["Detached boundary: qualitative<br/>At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."]
-    p1r5["Next segment: qualitative<br/>Training resumes from the carried state, so memory use depends on segment length rather than total context length."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_change_p2: Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Segment panels"
-rows = [["Long-sequence training without full-history gradients","Action chunks in a segment","qualitative","The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."],["Long-sequence training without full-history gradients","Independent noise levels","qualitative","Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."],["Long-sequence training without full-history gradients","Gradients within the segment","qualitative","Fast-weight updates and action losses backpropagate through the current segment."],["Long-sequence training without full-history gradients","Detached boundary","qualitative","At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."],["Long-sequence training without full-history gradients","Next segment","qualitative","Training resumes from the carried state, so memory use depends on segment length rather than total context length."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "The paper combines this state mechanism with two training ideas. Sequence action forcing samples"
+- Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: The paper combines this state mechanism with two training ideas. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Method distinction and scope.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Training timeline” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_training_timeline` after `rttt_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p1`
 
 - Location: `rttt_mechanism`, paragraph 1
-- Text anchor: "RoboTTT is instantiated on GR00T N1.7."
-- Claims and sources: `rttt_architecture` (OBSERVED, VERIFIED); `rttt_training` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0); `rttt_training_source` (Sections 3.3–3.4, Figures 5–6, PDF pages 6–7)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct robottt within-timestep architecture and across-timestep recurrent update while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: RoboTTT within-timestep architecture and across-timestep recurrent update.
-- Recommended scope and placement: Shared scope `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-
-### Treatment A — RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop
-
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p1: RoboTTT within-timestep architecture and across-timestep recurrent update - Control or recurrence loop};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p1: RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger
-
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_mechanism\_p1: RoboTTT within-timestep architecture and across-timestep recurrent update - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-How robot history becomes fast-weight state & Encode the current timestep & qualitative & The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens. \\
-How robot history becomes fast-weight state & Attend within the timestep & qualitative & Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set. \\
-How robot history becomes fast-weight state & Form the inner objective & qualitative & Projected keys and values from the current-step representation define the learned inner loss for the TTT layer. \\
-How robot history becomes fast-weight state & Update fast weights & qualitative & Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state. \\
-How robot history becomes fast-weight state & Query and gate the memory & qualitative & The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway. \\
-How robot history becomes fast-weight state & Act and carry state & qualitative & The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["How robot history becomes fast-weight state<br/>Encode the current timestep<br/><b>qualitative</b><br/>The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."]
-    r2["How robot history becomes fast-weight state<br/>Attend within the timestep<br/><b>qualitative</b><br/>Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."]
-    r3["How robot history becomes fast-weight state<br/>Form the inner objective<br/><b>qualitative</b><br/>Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."]
-    r4["How robot history becomes fast-weight state<br/>Update fast weights<br/><b>qualitative</b><br/>Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."]
-    r5["How robot history becomes fast-weight state<br/>Query and gate the memory<br/><b>qualitative</b><br/>The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."]
-    r6["How robot history becomes fast-weight state<br/>Act and carry state<br/><b>qualitative</b><br/>The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p1: RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger"
-rows = [["How robot history becomes fast-weight state","Encode the current timestep","qualitative","The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."],["How robot history becomes fast-weight state","Attend within the timestep","qualitative","Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."],["How robot history becomes fast-weight state","Form the inner objective","qualitative","Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."],["How robot history becomes fast-weight state","Update fast weights","qualitative","Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."],["How robot history becomes fast-weight state","Query and gate the memory","qualitative","The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."],["How robot history becomes fast-weight state","Act and carry state","qualitative","The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard
-
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p1: RoboTTT within-timestep architecture and across-timestep recurrent update - One-iteration storyboard};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p1: RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "RoboTTT is instantiated on GR00T N1.7. Its vision-language model encodes the current observation, and"
+- Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`, `rttt_training_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph's bounded operation is already explicit: RoboTTT is instantiated on GR00T N1.7. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
+- Explanatory job: Mechanism explanation.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p2`
 
 - Location: `rttt_mechanism`, paragraph 2
-- Text anchor: "At each step, projected keys and values define an inner loss."
-- Claims and sources: `rttt_architecture` (OBSERVED, VERIFIED); `rttt_training` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0); `rttt_training_source` (Sections 3.3–3.4, Figures 5–6, PDF pages 6–7)
+- Text anchor: "At each step, projected keys and values define an inner loss. Gradient descent updates"
+- Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`, `rttt_training_source`
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct robottt within-timestep architecture and across-timestep recurrent update while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: RoboTTT within-timestep architecture and across-timestep recurrent update.
-- Recommended scope and placement: Shared scope `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
+- Complexity warrant: Feedback and dependency topology: keys and values define an inner loss that updates fast weights; the updated MLP processes the query; a learned gate merges that path with attention before action denoising.
+- Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Decision rationale: The mechanism contains a parameter update inside inference plus two concurrent information paths. A visual is needed to distinguish data flow, gradient flow, fast-weight state, and gated residual combination.
+- Explanatory job: Inference-time inner-loop update, parallel pathways, and gated merge.
 
-### Treatment A — RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop
+### Treatment A — Fast-weight inner-loop architecture
 
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Trace the separate attention and TTT paths and show where inference updates parameters.
+- Encoding and reading order: Projected keys and values feed the inner loss; a gradient edge changes `W_t` into `W_{t+1}`; the query passes through the updated MLP; a tanh gate merges this output with the attention path before action denoising. A separate recurrent-state edge must terminate at an explicit `next-timestep fast-weight state W_{t+1}`, which becomes `W_t` for the next update; it may not terminate beside the action path or in open space.
+- Evidence and limitations: Claims `rttt_architecture`, `rttt_training`; `rttt_architecture_source`, `rttt_training_source`, Equations 1–5 and Figures 2–4. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `SVG`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p2: RoboTTT within-timestep architecture and across-timestep recurrent update - Control or recurrence loop};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {K,V};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {inner loss};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {fast weights W\_t};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {gradient update W\_t+1};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {query};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {updated MLP};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {attention path};
+\node[draw,rounded corners,align=center] (n7) at (9.600000000000001,-1.8) {tanh gate};
+\node[draw,rounded corners,align=center] (n8) at (0.0,-3.6) {action denoising};
+\node[draw,rounded corners,align=center] (n9) at (3.2,-3.6) {next-timestep fast-weight state W\_t+1};
+\draw[->] (n0) -- (n1);
+\draw[->] (n1) -- (n3);
+\draw[->] (n2) -- (n3);
+\draw[->] (n3) -- (n5);
+\draw[->] (n4) -- (n5);
+\draw[->] (n4) -- (n6);
+\draw[->] (n5) -- (n7);
+\draw[->] (n6) -- (n7);
+\draw[->] (n7) -- (n8);
+\draw[->] (n3) -- (n9);
+\draw[->] (n9) -- (n2);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
+  n0["K,V"]
+  n1["inner loss"]
+  n2["fast weights W_t"]
+  n3["gradient update W_t+1"]
+  n4["query"]
+  n5["updated MLP"]
+  n6["attention path"]
+  n7["tanh gate"]
+  n8["action denoising"]
+  n9["next-timestep fast-weight state W_t+1"]
+  n0 --> n1
+  n1 --> n3
+  n2 --> n3
+  n3 --> n5
+  n4 --> n5
+  n4 --> n6
+  n5 --> n7
+  n6 --> n7
+  n7 --> n8
+  n3 --> n9
+  n9 --> n2
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "rttt_mechanism_p2: RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['K,V', 'inner loss', 'fast weights W_t', 'gradient update W_t+1', 'query', 'updated MLP', 'attention path', 'tanh gate', 'action denoising', 'next-timestep fast-weight state W_t+1']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 1), (1, 3), (2, 3), (3, 5), (4, 5), (4, 6), (5, 7), (6, 7), (7, 8), (3, 9), (9, 2)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment B — RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger
+### Treatment B — Parameter-space update and query response
 
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Explain that the same query is evaluated by a changed fast model after one gradient step.
+- Encoding and reading order: A contour field represents the inner loss over two schematic fast-weight dimensions; an arrow moves W_t to W_t+1; linked query-output glyphs show the corresponding contextual response change.
+- Evidence and limitations: Claims `rttt_architecture`, `rttt_training`; `rttt_architecture_source`, `rttt_training_source`, Equations 1–5 and Figures 2–4. The contour is schematic; the paper does not report a two-dimensional loss surface.
+- Primary delivery medium: `JavaScript`
+- Recommended web medium: `JavaScript`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_mechanism\_p2: RoboTTT within-timestep architecture and across-timestep recurrent update - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-How robot history becomes fast-weight state & Encode the current timestep & qualitative & The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens. \\
-How robot history becomes fast-weight state & Attend within the timestep & qualitative & Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set. \\
-How robot history becomes fast-weight state & Form the inner objective & qualitative & Projected keys and values from the current-step representation define the learned inner loss for the TTT layer. \\
-How robot history becomes fast-weight state & Update fast weights & qualitative & Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state. \\
-How robot history becomes fast-weight state & Query and gate the memory & qualitative & The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway. \\
-How robot history becomes fast-weight state & Act and carry state & qualitative & The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation. \\
-\end{tabular}};
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\draw[->] (0,0) -- (6,0) node[right]{fast weight 1};
+\draw[->] (0,0) -- (0,4) node[above]{fast weight 2};
+\draw[blue!30] (1,2) ellipse (1.8 and 1.2);
+\draw[blue!50] (1,2) ellipse (1.2 and 0.8);
+\draw[blue!70] (1,2) ellipse (0.6 and 0.4);
+\fill (3.8,3.1) circle (2pt) node[above] {$W_t$};
+\fill (1.5,2.2) circle (2pt) node[above] {$W_{t+1}$};
+\draw[->,red,thick] (3.8,3.1)--node[above]{inner-loss gradient}(1.5,2.2);
+\node[draw] (q1) at (4.8,1.3) {query via $W_t$};
+\node[draw] (q2) at (4.8,0.4) {query via $W_{t+1}$};
+\draw[->] (3.8,3.1)--(q1); \draw[->] (1.5,2.2)--(q2);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["How robot history becomes fast-weight state<br/>Encode the current timestep<br/><b>qualitative</b><br/>The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."]
-    r2["How robot history becomes fast-weight state<br/>Attend within the timestep<br/><b>qualitative</b><br/>Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."]
-    r3["How robot history becomes fast-weight state<br/>Form the inner objective<br/><b>qualitative</b><br/>Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."]
-    r4["How robot history becomes fast-weight state<br/>Update fast weights<br/><b>qualitative</b><br/>Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."]
-    r5["How robot history becomes fast-weight state<br/>Query and gate the memory<br/><b>qualitative</b><br/>The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."]
-    r6["How robot history becomes fast-weight state<br/>Act and carry state<br/><b>qualitative</b><br/>The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]
+flowchart LR
+  kv["projected K,V"] --> loss["inner loss surface"]
+  wt["fast weights W_t"] --> loss
+  loss -->|gradient step| next["updated W_t+1"]
+  query["same query"] --> before["response under W_t"]
+  query --> after["response under W_t+1"]
+  wt --> before
+  next --> after
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots(figsize=(9, 5))
+x = np.linspace(-2, 2, 80)
+y = np.linspace(-2, 2, 80)
+xx, yy = np.meshgrid(x, y)
+loss = (xx + 0.8) ** 2 + 0.6 * (yy - 0.4) ** 2
+ax.contour(xx, yy, loss, levels=8, cmap='Blues')
+ax.scatter([1.2, -0.4], [1.2, 0.6], color=['#a44e36','#2f5ea8'])
+ax.annotate('gradient update', (-0.4,0.6), (1.2,1.2), arrowprops={'arrowstyle':'->'})
+ax.set_xlabel('schematic fast-weight dimension 1')
+ax.set_ylabel('schematic fast-weight dimension 2')
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
+```
+
+### Treatment C — Data-flow versus gradient-flow incidence map
+
+- Teaching purpose: Prevent gradient updates from being mistaken for ordinary activation flow.
+- Encoding and reading order: Rows are K/V, query, fast weights, attention, gate, and action head; columns distinguish activation, inner-loss gradient, recurrent state, and gated residual. Marked cells expose concurrent paths and feedback.
+- Evidence and limitations: Claims `rttt_architecture`, `rttt_training`; `rttt_architecture_source`, `rttt_training_source`, Equations 1–5 and Figures 2–4. Cells encode only the stated relationships; they are not measured effect sizes.
+- Primary delivery medium: `generated asset`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\fill[blue!80] (0,-0) rectangle ++(0.9,-0.9);
+\draw (0,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-0) rectangle ++(0.9,-0.9);
+\draw (1,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-0) rectangle ++(0.9,-0.9);
+\draw (2,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-0) rectangle ++(0.9,-0.9);
+\draw (3,-0) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-1) rectangle ++(0.9,-0.9);
+\draw (0,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-1) rectangle ++(0.9,-0.9);
+\draw (1,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-1) rectangle ++(0.9,-0.9);
+\draw (2,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-1) rectangle ++(0.9,-0.9);
+\draw (3,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-2) rectangle ++(0.9,-0.9);
+\draw (0,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-2) rectangle ++(0.9,-0.9);
+\draw (1,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (2,-2) rectangle ++(0.9,-0.9);
+\draw (2,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-2) rectangle ++(0.9,-0.9);
+\draw (3,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-3) rectangle ++(0.9,-0.9);
+\draw (0,-3) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-3) rectangle ++(0.9,-0.9);
+\draw (1,-3) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-3) rectangle ++(0.9,-0.9);
+\draw (2,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (3,-3) rectangle ++(0.9,-0.9);
+\draw (3,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-4) rectangle ++(0.9,-0.9);
+\draw (0,-4) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-4) rectangle ++(0.9,-0.9);
+\draw (1,-4) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-4) rectangle ++(0.9,-0.9);
+\draw (2,-4) rectangle ++(0.9,-0.9);
+\fill[blue!80] (3,-4) rectangle ++(0.9,-0.9);
+\draw (3,-4) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-5) rectangle ++(0.9,-0.9);
+\draw (0,-5) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-5) rectangle ++(0.9,-0.9);
+\draw (1,-5) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-5) rectangle ++(0.9,-0.9);
+\draw (2,-5) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-5) rectangle ++(0.9,-0.9);
+\draw (3,-5) rectangle ++(0.9,-0.9);
+\node[anchor=west] at (0,1.0) {K/V / query / fast weights / attention / gate / action head};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart LR
+  title["Data-flow versus gradient-flow incidence map"]
+  subgraph rows["Rows"]
+    r0["K/V"]
+    r1["query"]
+    r2["fast weights"]
+    r3["attention"]
+    r4["gate"]
+    r5["action head"]
   end
+  subgraph columns["Encoded relations"]
+    c0["relation 1"]
+    c1["relation 2"]
+    c2["relation 3"]
+    c3["relation 4"]
+  end
+  title --- rows
+  title --- columns
+  r0 --> c0
+  r1 --> c0
+  r2 --> c1
+  r2 --> c2
+  r3 --> c0
+  r3 --> c3
+  r4 --> c0
+  r4 --> c3
+  r5 --> c0
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "rttt_mechanism_p2: RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger"
-rows = [["How robot history becomes fast-weight state","Encode the current timestep","qualitative","The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."],["How robot history becomes fast-weight state","Attend within the timestep","qualitative","Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."],["How robot history becomes fast-weight state","Form the inner objective","qualitative","Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."],["How robot history becomes fast-weight state","Update fast weights","qualitative","Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."],["How robot history becomes fast-weight state","Query and gate the memory","qualitative","The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."],["How robot history becomes fast-weight state","Act and carry state","qualitative","The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard
-
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p2: RoboTTT within-timestep architecture and across-timestep recurrent update - One-iteration storyboard};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p2: RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['K/V', 'query', 'fast weights', 'attention', 'gate', 'action head']
+fig, ax = plt.subplots(figsize=(9, 5))
+values = [[1, 0, 0, 0], [1, 0, 0, 0], [0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [1, 0, 0, 0]]
+image = ax.imshow(values, cmap='Blues', vmin=0)
+ax.set_title(' / '.join(labels))
+fig.colorbar(image, ax=ax, label='encoded relation')
+ax.grid(alpha=0.2)
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
 ### Implementation record
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Selection rationale: Treatment A remains the prior implementer selection. Rework must retain its parallel activation and gradient paths while terminating recurrence at the explicit next-timestep fast-weight state.
+- Delivery medium: `SVG`
+- Visual ID and placement: `visual_robottt_fast_weight_architecture` — rendered immediately after `rttt_mechanism_p2`.
+- Shared paragraph scope: `NONE`
+- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
+- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
+- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p3`
 
 - Location: `rttt_mechanism`, paragraph 3
-- Text anchor: "The updated weights become the next timestep's recurrent state."
-- Claims and sources: `rttt_architecture` (OBSERVED, VERIFIED); `rttt_training` (OBSERVED, VERIFIED); `rttt_architecture_source` (Sections 2–3.2, Equations 1–5, Figures 2–4, PDF pages 3–5; the arXiv v1 record identifies the paper as CC BY 4.0); `rttt_training_source` (Sections 3.3–3.4, Figures 5–6, PDF pages 6–7)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct robottt within-timestep architecture and across-timestep recurrent update while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: RoboTTT within-timestep architecture and across-timestep recurrent update.
-- Recommended scope and placement: Shared scope `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-
-### Treatment A — RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop
-
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p3: RoboTTT within-timestep architecture and across-timestep recurrent update - Control or recurrence loop};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p3: RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger
-
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_mechanism\_p3: RoboTTT within-timestep architecture and across-timestep recurrent update - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-How robot history becomes fast-weight state & Encode the current timestep & qualitative & The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens. \\
-How robot history becomes fast-weight state & Attend within the timestep & qualitative & Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set. \\
-How robot history becomes fast-weight state & Form the inner objective & qualitative & Projected keys and values from the current-step representation define the learned inner loss for the TTT layer. \\
-How robot history becomes fast-weight state & Update fast weights & qualitative & Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state. \\
-How robot history becomes fast-weight state & Query and gate the memory & qualitative & The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway. \\
-How robot history becomes fast-weight state & Act and carry state & qualitative & The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["How robot history becomes fast-weight state<br/>Encode the current timestep<br/><b>qualitative</b><br/>The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."]
-    r2["How robot history becomes fast-weight state<br/>Attend within the timestep<br/><b>qualitative</b><br/>Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."]
-    r3["How robot history becomes fast-weight state<br/>Form the inner objective<br/><b>qualitative</b><br/>Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."]
-    r4["How robot history becomes fast-weight state<br/>Update fast weights<br/><b>qualitative</b><br/>Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."]
-    r5["How robot history becomes fast-weight state<br/>Query and gate the memory<br/><b>qualitative</b><br/>The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."]
-    r6["How robot history becomes fast-weight state<br/>Act and carry state<br/><b>qualitative</b><br/>The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p3: RoboTTT within-timestep architecture and across-timestep recurrent update — Loop-state ledger"
-rows = [["How robot history becomes fast-weight state","Encode the current timestep","qualitative","The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."],["How robot history becomes fast-weight state","Attend within the timestep","qualitative","Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."],["How robot history becomes fast-weight state","Form the inner objective","qualitative","Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."],["How robot history becomes fast-weight state","Update fast weights","qualitative","Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."],["How robot history becomes fast-weight state","Query and gate the memory","qualitative","The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."],["How robot history becomes fast-weight state","Act and carry state","qualitative","The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard
-
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 8 named nodes and 8 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_architecture`, `rttt_training` from `rttt_architecture_source`, `rttt_training_source`. A shared visual belongs after the third paragraph and must show VLM/DiT inputs, projected K/V, inner loss, MLP update, query retrieval, tanh gate, action denoising, and fast-weight carry.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_mechanism\_p3: RoboTTT within-timestep architecture and across-timestep recurrent update - One-iteration storyboard};
-\node[box] (inputs) at (1.00,-1.50) {VLM and DiT tokens at timestep t};
-\node[box] (kv) at (2.50,-1.50) {Project keys and values};
-\node[box] (loss) at (4.00,-1.50) {Inner reconstruction loss};
-\node[box] (update) at (5.50,-1.50) {Gradient update of fast-weight MLP};
-\node[box] (query) at (7.00,-1.50) {Process current query with updated weights};
-\node[box] (gate) at (8.50,-1.50) {Tanh-gated contextual retrieval};
-\node[box] (action) at (10.00,-1.50) {Condition action denoising};
-\node[box] (carry) at (11.50,-1.50) {Carry fast weights to timestep t+1};
-\draw[link] (inputs) -- node[rel] {encode} (kv);
-\draw[link] (kv) -- node[rel] {self-supervise} (loss);
-\draw[link] (loss) -- node[rel] {gradient} (update);
-\draw[link] (update) -- node[rel] {updated state} (query);
-\draw[link] (query) -- node[rel] {retrieve} (gate);
-\draw[link] (gate) -- node[rel] {context} (action);
-\draw[link] (action) -- node[rel] {advance} (carry);
-\draw[link] (carry) -- node[rel] {next observation} (inputs);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  inputs["VLM and DiT tokens at timestep t"]
-  kv["Project keys and values"]
-  loss["Inner reconstruction loss"]
-  update["Gradient update of fast-weight MLP"]
-  query["Process current query with updated weights"]
-  gate["Tanh-gated contextual retrieval"]
-  action["Condition action denoising"]
-  carry["Carry fast weights to timestep t+1"]
-  inputs -->|"encode"| kv
-  kv -->|"self-supervise"| loss
-  loss -->|"gradient"| update
-  update -->|"updated state"| query
-  query -->|"retrieve"| gate
-  gate -->|"context"| action
-  action -->|"advance"| carry
-  carry -->|"next observation"| inputs
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_mechanism_p3: RoboTTT within-timestep architecture and across-timestep recurrent update — One-iteration storyboard"
-nodes = [["inputs","VLM and DiT tokens at timestep t",100,150],["kv","Project keys and values",250,150],["loss","Inner reconstruction loss",400,150],["update","Gradient update of fast-weight MLP",550,150],["query","Process current query with updated weights",700,150],["gate","Tanh-gated contextual retrieval",850,150],["action","Condition action denoising",1000,150],["carry","Carry fast weights to timestep t+1",1150,150]]
-edges = [["inputs","kv","encode"],["kv","loss","self-supervise"],["loss","update","gradient"],["update","query","updated state"],["query","gate","retrieve"],["gate","action","context"],["action","carry","advance"],["carry","inputs","next observation"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "The updated weights become the next timestep's recurrent state. During sequence training, gradients flow"
+- Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`, `rttt_training_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph's bounded operation is already explicit: The updated weights become the next timestep's recurrent state. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
+- Explanatory job: Mechanism explanation.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_example_p1`
 
 - Location: `rttt_example`, paragraph 1
-- Text anchor: "For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle."
-- Claims and sources: `rttt_context_learning` (OBSERVED, VERIFIED); `rttt_one_shot` (OBSERVED, VERIFIED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_training_source` (Sections 3.3–3.4, Figures 5–6, PDF pages 6–7); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct human demonstration as masked context for a reset robot trajectory while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Human demonstration as masked context for a reset robot trajectory.
-- Recommended scope and placement: Shared scope `rttt_example_p1`, `rttt_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_example_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-
-### Treatment A — Human demonstration as masked context for a reset robot trajectory — Worked sequence
-
-- Teaching purpose: Follow the actual example in source order.
-- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_example\_p1: Human demonstration as masked context for a reset robot trajectory - Worked sequence};
-\node[box] (n1) at (1.00,-1.50) {For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle};
-\node[box] (n2) at (2.50,-1.50) {The demonstration frames update RoboTTT's fast weights};
-\node[box] (n3) at (4.00,-1.50) {but their flow-matching loss is masked because the video does not contain robot action targets};
-\node[box] (n4) at (5.50,-1.50) {After the scene is reset, the robot receives the same generic instruction used for every configuration};
-\node[box] (n5) at (7.00,-1.50) {Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video};
-\node[box] (n6) at (8.50,-1.50) {In evaluation, RoboTTT completes 6 of 10 such unseen configurations};
-\node[box] (n7) at (10.00,-1.50) {while the GDN recurrent baseline completes none};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\draw[link] (n6) -- node[rel] {then} (n7);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle"]
-  n2["The demonstration frames update RoboTTT's fast weights"]
-  n3["but their flow-matching loss is masked because the video does not contain robot action targets"]
-  n4["After the scene is reset, the robot receives the same generic instruction used for every configuration"]
-  n5["Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video"]
-  n6["In evaluation, RoboTTT completes 6 of 10 such unseen configurations"]
-  n7["while the GDN recurrent baseline completes none"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
-  n6 -->|"then"| n7
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p1: Human demonstration as masked context for a reset robot trajectory — Worked sequence"
-nodes = [["n1","For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle",100,150],["n2","The demonstration frames update RoboTTT's fast weights",250,150],["n3","but their flow-matching loss is masked because the video does not contain robot action targets",400,150],["n4","After the scene is reset, the robot receives the same generic instruction used for every configuration",550,150],["n5","Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video",700,150],["n6","In evaluation, RoboTTT completes 6 of 10 such unseen configurations",850,150],["n7","while the GDN recurrent baseline completes none",1000,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Human demonstration as masked context for a reset robot trajectory — Example calculation or state ledger
-
-- Teaching purpose: Keep values, states, and boundaries grouped by example.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_example\_p1: Human demonstration as masked context for a reset robot trajectory - Example calculation or state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-A human demonstration becomes context, not an action target & Human demonstration & qualitative & A person assembles an unseen Circuit configuration while the robot remains idle. \\
-A human demonstration becomes context, not an action target & Context update, loss masked & qualitative & The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets. \\
-A human demonstration becomes context, not an action target & Scene reset & qualitative & The scene is reset before the robot receives the same generic instruction used across configurations. \\
-A human demonstration becomes context, not an action target & Robot trajectory & qualitative & Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video. \\
-A human demonstration becomes context, not an action target & Bounded result & qualitative & RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["A human demonstration becomes context, not an action target<br/>Human demonstration<br/><b>qualitative</b><br/>A person assembles an unseen Circuit configuration while the robot remains idle."]
-    r2["A human demonstration becomes context, not an action target<br/>Context update, loss masked<br/><b>qualitative</b><br/>The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."]
-    r3["A human demonstration becomes context, not an action target<br/>Scene reset<br/><b>qualitative</b><br/>The scene is reset before the robot receives the same generic instruction used across configurations."]
-    r4["A human demonstration becomes context, not an action target<br/>Robot trajectory<br/><b>qualitative</b><br/>Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."]
-    r5["A human demonstration becomes context, not an action target<br/>Bounded result<br/><b>qualitative</b><br/>RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p1: Human demonstration as masked context for a reset robot trajectory — Example calculation or state ledger"
-rows = [["A human demonstration becomes context, not an action target","Human demonstration","qualitative","A person assembles an unseen Circuit configuration while the robot remains idle."],["A human demonstration becomes context, not an action target","Context update, loss masked","qualitative","The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."],["A human demonstration becomes context, not an action target","Scene reset","qualitative","The scene is reset before the robot receives the same generic instruction used across configurations."],["A human demonstration becomes context, not an action target","Robot trajectory","qualitative","Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."],["A human demonstration becomes context, not an action target","Bounded result","qualitative","RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]]
-height = 590
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Human demonstration as masked context for a reset robot trajectory — Bounded example panels
-
-- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_example\_p1: Human demonstration as masked context for a reset robot trajectory - Bounded example panels};
-\node[panel] at (0,0) {\textbf{A human demonstration becomes context, not an action target}\\[4pt]\textbf{Human demonstration}: qualitative -- A person assembles an unseen Circuit configuration while the robot remains idle.\\\textbf{Context update, loss masked}: qualitative -- The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets.\\\textbf{Scene reset}: qualitative -- The scene is reset before the robot receives the same generic instruction used across configurations.\\\textbf{Robot trajectory}: qualitative -- Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video.\\\textbf{Bounded result}: qualitative -- RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["A human demonstration becomes context, not an action target"]
-    p1r1["Human demonstration: qualitative<br/>A person assembles an unseen Circuit configuration while the robot remains idle."]
-    p1r2["Context update, loss masked: qualitative<br/>The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."]
-    p1r3["Scene reset: qualitative<br/>The scene is reset before the robot receives the same generic instruction used across configurations."]
-    p1r4["Robot trajectory: qualitative<br/>Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."]
-    p1r5["Bounded result: qualitative<br/>RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p1: Human demonstration as masked context for a reset robot trajectory — Bounded example panels"
-rows = [["A human demonstration becomes context, not an action target","Human demonstration","qualitative","A person assembles an unseen Circuit configuration while the robot remains idle."],["A human demonstration becomes context, not an action target","Context update, loss masked","qualitative","The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."],["A human demonstration becomes context, not an action target","Scene reset","qualitative","The scene is reset before the robot receives the same generic instruction used across configurations."],["A human demonstration becomes context, not an action target","Robot trajectory","qualitative","Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."],["A human demonstration becomes context, not an action target","Bounded result","qualitative","RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "For the Circuit task, a human first assembles an unseen component configuration while the"
+- Claims and sources: `rttt_context_learning`, `rttt_one_shot`, `rttt_generality`, `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The worked example is short enough to follow in prose: For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Explanatory job: Worked example.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Human demonstration as masked context for a reset robot trajectory — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_masked_context` after `rttt_example_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_example_p1`, `rttt_example_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_example_p2`
 
 - Location: `rttt_example`, paragraph 2
-- Text anchor: "After the scene is reset, the robot receives the same generic instruction used for every configuration."
-- Claims and sources: `rttt_context_learning` (OBSERVED, VERIFIED); `rttt_one_shot` (OBSERVED, VERIFIED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_training_source` (Sections 3.3–3.4, Figures 5–6, PDF pages 6–7); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct human demonstration as masked context for a reset robot trajectory while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Human demonstration as masked context for a reset robot trajectory.
-- Recommended scope and placement: Shared scope `rttt_example_p1`, `rttt_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `rttt_example_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-
-### Treatment A — Human demonstration as masked context for a reset robot trajectory — Worked sequence
-
-- Teaching purpose: Follow the actual example in source order.
-- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_example\_p2: Human demonstration as masked context for a reset robot trajectory - Worked sequence};
-\node[box] (n1) at (1.00,-1.50) {For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle};
-\node[box] (n2) at (2.50,-1.50) {The demonstration frames update RoboTTT's fast weights};
-\node[box] (n3) at (4.00,-1.50) {but their flow-matching loss is masked because the video does not contain robot action targets};
-\node[box] (n4) at (5.50,-1.50) {After the scene is reset, the robot receives the same generic instruction used for every configuration};
-\node[box] (n5) at (7.00,-1.50) {Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video};
-\node[box] (n6) at (8.50,-1.50) {In evaluation, RoboTTT completes 6 of 10 such unseen configurations};
-\node[box] (n7) at (10.00,-1.50) {while the GDN recurrent baseline completes none};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\draw[link] (n6) -- node[rel] {then} (n7);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle"]
-  n2["The demonstration frames update RoboTTT's fast weights"]
-  n3["but their flow-matching loss is masked because the video does not contain robot action targets"]
-  n4["After the scene is reset, the robot receives the same generic instruction used for every configuration"]
-  n5["Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video"]
-  n6["In evaluation, RoboTTT completes 6 of 10 such unseen configurations"]
-  n7["while the GDN recurrent baseline completes none"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
-  n6 -->|"then"| n7
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p2: Human demonstration as masked context for a reset robot trajectory — Worked sequence"
-nodes = [["n1","For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle",100,150],["n2","The demonstration frames update RoboTTT's fast weights",250,150],["n3","but their flow-matching loss is masked because the video does not contain robot action targets",400,150],["n4","After the scene is reset, the robot receives the same generic instruction used for every configuration",550,150],["n5","Its action loss is computed on the robot trajectory conditioned on the fast weights produced by the human video",700,150],["n6","In evaluation, RoboTTT completes 6 of 10 such unseen configurations",850,150],["n7","while the GDN recurrent baseline completes none",1000,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Human demonstration as masked context for a reset robot trajectory — Example calculation or state ledger
-
-- Teaching purpose: Keep values, states, and boundaries grouped by example.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_example\_p2: Human demonstration as masked context for a reset robot trajectory - Example calculation or state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-A human demonstration becomes context, not an action target & Human demonstration & qualitative & A person assembles an unseen Circuit configuration while the robot remains idle. \\
-A human demonstration becomes context, not an action target & Context update, loss masked & qualitative & The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets. \\
-A human demonstration becomes context, not an action target & Scene reset & qualitative & The scene is reset before the robot receives the same generic instruction used across configurations. \\
-A human demonstration becomes context, not an action target & Robot trajectory & qualitative & Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video. \\
-A human demonstration becomes context, not an action target & Bounded result & qualitative & RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["A human demonstration becomes context, not an action target<br/>Human demonstration<br/><b>qualitative</b><br/>A person assembles an unseen Circuit configuration while the robot remains idle."]
-    r2["A human demonstration becomes context, not an action target<br/>Context update, loss masked<br/><b>qualitative</b><br/>The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."]
-    r3["A human demonstration becomes context, not an action target<br/>Scene reset<br/><b>qualitative</b><br/>The scene is reset before the robot receives the same generic instruction used across configurations."]
-    r4["A human demonstration becomes context, not an action target<br/>Robot trajectory<br/><b>qualitative</b><br/>Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."]
-    r5["A human demonstration becomes context, not an action target<br/>Bounded result<br/><b>qualitative</b><br/>RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p2: Human demonstration as masked context for a reset robot trajectory — Example calculation or state ledger"
-rows = [["A human demonstration becomes context, not an action target","Human demonstration","qualitative","A person assembles an unseen Circuit configuration while the robot remains idle."],["A human demonstration becomes context, not an action target","Context update, loss masked","qualitative","The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."],["A human demonstration becomes context, not an action target","Scene reset","qualitative","The scene is reset before the robot receives the same generic instruction used across configurations."],["A human demonstration becomes context, not an action target","Robot trajectory","qualitative","Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."],["A human demonstration becomes context, not an action target","Bounded result","qualitative","RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]]
-height = 590
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Human demonstration as masked context for a reset robot trajectory — Bounded example panels
-
-- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_context_learning`, `rttt_one_shot`, `rttt_generality` from `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`. A shared visual belongs after the second paragraph and must include masked demonstration action loss, reset, generic instruction, conditioned trajectory, 6/10 versus 0/10, and configuration-level scope.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_example\_p2: Human demonstration as masked context for a reset robot trajectory - Bounded example panels};
-\node[panel] at (0,0) {\textbf{A human demonstration becomes context, not an action target}\\[4pt]\textbf{Human demonstration}: qualitative -- A person assembles an unseen Circuit configuration while the robot remains idle.\\\textbf{Context update, loss masked}: qualitative -- The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets.\\\textbf{Scene reset}: qualitative -- The scene is reset before the robot receives the same generic instruction used across configurations.\\\textbf{Robot trajectory}: qualitative -- Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video.\\\textbf{Bounded result}: qualitative -- RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["A human demonstration becomes context, not an action target"]
-    p1r1["Human demonstration: qualitative<br/>A person assembles an unseen Circuit configuration while the robot remains idle."]
-    p1r2["Context update, loss masked: qualitative<br/>The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."]
-    p1r3["Scene reset: qualitative<br/>The scene is reset before the robot receives the same generic instruction used across configurations."]
-    p1r4["Robot trajectory: qualitative<br/>Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."]
-    p1r5["Bounded result: qualitative<br/>RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_example_p2: Human demonstration as masked context for a reset robot trajectory — Bounded example panels"
-rows = [["A human demonstration becomes context, not an action target","Human demonstration","qualitative","A person assembles an unseen Circuit configuration while the robot remains idle."],["A human demonstration becomes context, not an action target","Context update, loss masked","qualitative","The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."],["A human demonstration becomes context, not an action target","Scene reset","qualitative","The scene is reset before the robot receives the same generic instruction used across configurations."],["A human demonstration becomes context, not an action target","Robot trajectory","qualitative","Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."],["A human demonstration becomes context, not an action target","Bounded result","qualitative","RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "After the scene is reset, the robot receives the same generic instruction used for"
+- Claims and sources: `rttt_context_learning`, `rttt_one_shot`, `rttt_generality`, `rttt_training_source`, `rttt_results_source`, `rttt_limits_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The worked example is short enough to follow in prose: After the scene is reset, the robot receives the same generic instruction used for every configuration. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Explanatory job: Worked example.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Human demonstration as masked context for a reset robot trajectory — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_masked_context` after `rttt_example_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_example_p1`, `rttt_example_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_evidence_p1`
 
 - Location: `rttt_evidence`, paragraph 1
-- Text anchor: "Across Pup Go Car, Circuit, and Gear Bot, RoboTTT reports a 79% average rubric-based completion score, compared with 42% for single-step GR00T N1.7 and 56% for GDN."
-- Claims and sources: `rttt_main_result` (OBSERVED, VERIFIED); `rttt_scaling` (OBSERVED, VERIFIED); `rttt_perturbation` (OBSERVED, VERIFIED); `rttt_dagger` (OBSERVED, VERIFIED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct main-task average completion and per-task full-success counts while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Main-task average completion and per-task full-success counts.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `rttt_evidence_p1`.
-- QA-informed planning change: Keep 42/56/79 averages separate from 9/20, 13/20, and 2/10 full successes, and make the Gear Bot baseline boundary visible.
-
-### Treatment A — Main-task average completion and per-task full-success counts — Grouped disclosed-domain plot
-
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Average rubric completion` uses the disclosed domain 0–100 with 3 labeled marks; `Full successes` uses the disclosed domain 43.5–1486.5 with 3 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Keep 42/56/79 averages separate from 9/20, 13/20, and 2/10 full successes, and make the Gear Bot baseline boundary visible.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {rttt\_evidence\_p1: Main-task average completion and per-task full-success counts - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Average rubric completion: disclosed domain 0--100};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (3.360,-0.8) circle (2.5pt) node[above,font=\scriptsize] {42\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {Single-step GR00T N1.7};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (4.480,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {56\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {GDN};
-\draw (0,-2.1) -- (8,-2.1);
-\fill (6.320,-2.1) circle (2.5pt) node[above,font=\scriptsize] {79\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-2.1) {RoboTTT};
-\node[anchor=west,font=\bfseries] at (0,-3.25) {Full successes: disclosed domain 43.5--1486.5};
-\draw (0,-4.05) -- (8,-4.05);
-\fill (4.859,-4.05) circle (2.5pt) node[above,font=\scriptsize] {9/20};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.05) {Pup Go Car};
-\draw (0,-4.7) -- (8,-4.7);
-\fill (7.077,-4.7) circle (2.5pt) node[above,font=\scriptsize] {13/20};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.7) {Circuit};
-\draw (0,-5.3500000000000005) -- (8,-5.3500000000000005);
-\fill (0.923,-5.3500000000000005) circle (2.5pt) node[above,font=\scriptsize] {2/10};
-\node[anchor=east,font=\scriptsize] at (-0.2,-5.3500000000000005) {Gear Bot};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph g1["Average rubric completion — domain 0 to 100"]
-    g1r1["Single-step GR00T N1.7: 42%"]
-    g1r2["GDN: 56%"]
-    g1r3["RoboTTT: 79%"]
-  end
-  subgraph g2["Full successes — domain 43.5 to 1486.5"]
-    g2r1["Pup Go Car: 9/20"]
-    g2r2["Circuit: 13/20"]
-    g2r3["Gear Bot: 2/10"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-
-title = "rttt_evidence_p1: Main-task average completion and per-task full-success counts — Grouped disclosed-domain plot"
-groups = [{"name":"Average rubric completion","domain":[0,100],"items":[["Average rubric completion","Single-step GR00T N1.7","42%","three main tasks"],["Average rubric completion","GDN","56%","three main tasks"],["Average rubric completion","RoboTTT","79%","three main tasks"]]},{"name":"Full successes","domain":[43.5,1486.5],"items":[["Full successes","Pup Go Car","9/20","RoboTTT"],["Full successes","Circuit","13/20","RoboTTT"],["Full successes","Gear Bot","2/10","RoboTTT; no baseline fully completes Gear Bot"]]}]
-height = 632
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
-]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
-parts.append('</svg>')
-Path("rttt_evidence_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Main-task average completion and per-task full-success counts — Complete reported-value matrix
-
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Keep 42/56/79 averages separate from 9/20, 13/20, and 2/10 full successes, and make the Gear Bot baseline boundary visible.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_evidence\_p1: Main-task average completion and per-task full-success counts - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Average rubric completion & Single-step GR00T N1.7 & 42\% & three main tasks \\
-Average rubric completion & GDN & 56\% & three main tasks \\
-Average rubric completion & RoboTTT & 79\% & three main tasks \\
-Full successes & Pup Go Car & 9/20 & RoboTTT \\
-Full successes & Circuit & 13/20 & RoboTTT \\
-Full successes & Gear Bot & 2/10 & RoboTTT; no baseline fully completes Gear Bot \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Average rubric completion<br/>Single-step GR00T N1.7<br/><b>42%</b><br/>three main tasks"]
-    r2["Average rubric completion<br/>GDN<br/><b>56%</b><br/>three main tasks"]
-    r3["Average rubric completion<br/>RoboTTT<br/><b>79%</b><br/>three main tasks"]
-    r4["Full successes<br/>Pup Go Car<br/><b>9/20</b><br/>RoboTTT"]
-    r5["Full successes<br/>Circuit<br/><b>13/20</b><br/>RoboTTT"]
-    r6["Full successes<br/>Gear Bot<br/><b>2/10</b><br/>RoboTTT; no baseline fully completes Gear Bot"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p1: Main-task average completion and per-task full-success counts — Complete reported-value matrix"
-rows = [["Average rubric completion","Single-step GR00T N1.7","42%","three main tasks"],["Average rubric completion","GDN","56%","three main tasks"],["Average rubric completion","RoboTTT","79%","three main tasks"],["Full successes","Pup Go Car","9/20","RoboTTT"],["Full successes","Circuit","13/20","RoboTTT"],["Full successes","Gear Bot","2/10","RoboTTT; no baseline fully completes Gear Bot"]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Main-task average completion and per-task full-success counts — Experiment small multiples
-
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Keep 42/56/79 averages separate from 9/20, 13/20, and 2/10 full successes, and make the Gear Bot baseline boundary visible.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (2.75,3) {rttt\_evidence\_p1: Main-task average completion and per-task full-success counts - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Average rubric completion}\\[4pt]\textbf{Single-step GR00T N1.7}: 42\% -- three main tasks\\\textbf{GDN}: 56\% -- three main tasks\\\textbf{RoboTTT}: 79\% -- three main tasks};
-\node[panel] at (5.5,0) {\textbf{Full successes}\\[4pt]\textbf{Pup Go Car}: 9/20 -- RoboTTT\\\textbf{Circuit}: 13/20 -- RoboTTT\\\textbf{Gear Bot}: 2/10 -- RoboTTT; no baseline fully completes Gear Bot};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Average rubric completion"]
-    p1r1["Single-step GR00T N1.7: 42%<br/>three main tasks"]
-    p1r2["GDN: 56%<br/>three main tasks"]
-    p1r3["RoboTTT: 79%<br/>three main tasks"]
-  end
-  subgraph p2["Full successes"]
-    p2r1["Pup Go Car: 9/20<br/>RoboTTT"]
-    p2r2["Circuit: 13/20<br/>RoboTTT"]
-    p2r3["Gear Bot: 2/10<br/>RoboTTT; no baseline fully completes Gear Bot"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p1: Main-task average completion and per-task full-success counts — Experiment small multiples"
-rows = [["Average rubric completion","Single-step GR00T N1.7","42%","three main tasks"],["Average rubric completion","GDN","56%","three main tasks"],["Average rubric completion","RoboTTT","79%","three main tasks"],["Full successes","Pup Go Car","9/20","RoboTTT"],["Full successes","Circuit","13/20","RoboTTT"],["Full successes","Gear Bot","2/10","RoboTTT; no baseline fully completes Gear Bot"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "Across Pup Go Car, Circuit, and Gear Bot, RoboTTT reports a 79% average rubric-based"
+- Claims and sources: `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger`, `rttt_results_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The 79/42/56 average scores share a scale, but the paragraph also reports task-specific full-success counts with different denominators and notes that no baseline completes Gear Bot. A single average chart would erase task composition; separate task panels would repeat one metric and still lack intervals. Prose keeps rubric averages, raw success counts, and the Gear Bot boundary together.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `C`
-- Selection rationale: Retained revision-4 Treatment C and corrected the result-card grid so the Gear Bot baseline label, explanation, and ‘0 full successes’ value no longer compete for one collapsed text column.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_main_results` after `rttt_evidence_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `apps/web/app/globals.css`.
-- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
-- Evidence deviations: Responsive delivery correction only: the approved small-multiple result comparison and reported values remain unchanged; the label and details now retain readable width beside the separately placed value.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_evidence_p2`
 
 - Location: `rttt_evidence`, paragraph 2
-- Text anchor: "In the context-scaling study, average completion rises from 43.9% with 1K-timestep pretraining to 71.5% at 8K."
-- Claims and sources: `rttt_main_result` (OBSERVED, VERIFIED); `rttt_scaling` (OBSERVED, VERIFIED); `rttt_perturbation` (OBSERVED, VERIFIED); `rttt_dagger` (OBSERVED, VERIFIED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct context-scaling study separated from main-result dagger conditions while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Context-scaling study separated from main-result DAgger conditions.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `rttt_evidence_p2`.
-- QA-informed planning change: Group 43.9 at 1K, 45.6 one-frame baseline, and 71.5 at 8K in a pre-DAgger panel; do not combine with main-task results.
-
-### Treatment A — Context-scaling study separated from main-result DAgger conditions — Grouped disclosed-domain plot
-
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Main tasks` uses the disclosed domain 0–100 with 3 labeled marks; `Scaling study` uses the disclosed domain 0–100 with 3 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Group 43.9 at 1K, 45.6 one-frame baseline, and 71.5 at 8K in a pre-DAgger panel; do not combine with main-task results.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {rttt\_evidence\_p2: Context-scaling study separated from main-result DAgger conditions - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Main tasks: disclosed domain 0--100};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (3.360,-0.8) circle (2.5pt) node[above,font=\scriptsize] {42};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {single-step GR00T N1.7};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (4.480,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {56};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {GDN};
-\draw (0,-2.1) -- (8,-2.1);
-\fill (6.320,-2.1) circle (2.5pt) node[above,font=\scriptsize] {79};
-\node[anchor=east,font=\scriptsize] at (-0.2,-2.1) {RoboTTT};
-\node[anchor=west,font=\bfseries] at (0,-3.25) {Scaling study: disclosed domain 0--100};
-\draw (0,-4.05) -- (8,-4.05);
-\fill (3.512,-4.05) circle (2.5pt) node[above,font=\scriptsize] {43.9};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.05) {1K pretraining context};
-\draw (0,-4.7) -- (8,-4.7);
-\fill (3.648,-4.7) circle (2.5pt) node[above,font=\scriptsize] {45.6};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.7) {one-history-frame baseline};
-\draw (0,-5.3500000000000005) -- (8,-5.3500000000000005);
-\fill (5.720,-5.3500000000000005) circle (2.5pt) node[above,font=\scriptsize] {71.5};
-\node[anchor=east,font=\scriptsize] at (-0.2,-5.3500000000000005) {8K pretraining context};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph g1["Main tasks — domain 0 to 100"]
-    g1r1["single-step GR00T N1.7: 42"]
-    g1r2["GDN: 56"]
-    g1r3["RoboTTT: 79"]
-  end
-  subgraph g2["Scaling study — domain 0 to 100"]
-    g2r1["1K pretraining context: 43.9"]
-    g2r2["one-history-frame baseline: 45.6"]
-    g2r3["8K pretraining context: 71.5"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-
-title = "rttt_evidence_p2: Context-scaling study separated from main-result DAgger conditions — Grouped disclosed-domain plot"
-groups = [{"name":"Main tasks","domain":[0,100],"items":[["Main tasks","single-step GR00T N1.7","42","Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."],["Main tasks","GDN","56","Average rubric-based completion score across the same three tasks."],["Main tasks","RoboTTT","79","Average rubric-based completion score across the same three tasks."]]},{"name":"Scaling study","domain":[0,100],"items":[["Scaling study","1K pretraining context","43.9","Average completion before the DAgger training used for Pup Go Car in the main result."],["Scaling study","one-history-frame baseline","45.6","Average completion in the context-scaling study."],["Scaling study","8K pretraining context","71.5","Average completion at the longest reported pretraining context in this study."]]}]
-height = 632
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
-]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
-parts.append('</svg>')
-Path("rttt_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Context-scaling study separated from main-result DAgger conditions — Complete reported-value matrix
-
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Group 43.9 at 1K, 45.6 one-frame baseline, and 71.5 at 8K in a pre-DAgger panel; do not combine with main-task results.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_evidence\_p2: Context-scaling study separated from main-result DAgger conditions - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Main tasks & single-step GR00T N1.7 & 42 & Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot. \\
-Main tasks & GDN & 56 & Average rubric-based completion score across the same three tasks. \\
-Main tasks & RoboTTT & 79 & Average rubric-based completion score across the same three tasks. \\
-Scaling study & 1K pretraining context & 43.9 & Average completion before the DAgger training used for Pup Go Car in the main result. \\
-Scaling study & one-history-frame baseline & 45.6 & Average completion in the context-scaling study. \\
-Scaling study & 8K pretraining context & 71.5 & Average completion at the longest reported pretraining context in this study. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Main tasks<br/>single-step GR00T N1.7<br/><b>42</b><br/>Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."]
-    r2["Main tasks<br/>GDN<br/><b>56</b><br/>Average rubric-based completion score across the same three tasks."]
-    r3["Main tasks<br/>RoboTTT<br/><b>79</b><br/>Average rubric-based completion score across the same three tasks."]
-    r4["Scaling study<br/>1K pretraining context<br/><b>43.9</b><br/>Average completion before the DAgger training used for Pup Go Car in the main result."]
-    r5["Scaling study<br/>one-history-frame baseline<br/><b>45.6</b><br/>Average completion in the context-scaling study."]
-    r6["Scaling study<br/>8K pretraining context<br/><b>71.5</b><br/>Average completion at the longest reported pretraining context in this study."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p2: Context-scaling study separated from main-result DAgger conditions — Complete reported-value matrix"
-rows = [["Main tasks","single-step GR00T N1.7","42","Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."],["Main tasks","GDN","56","Average rubric-based completion score across the same three tasks."],["Main tasks","RoboTTT","79","Average rubric-based completion score across the same three tasks."],["Scaling study","1K pretraining context","43.9","Average completion before the DAgger training used for Pup Go Car in the main result."],["Scaling study","one-history-frame baseline","45.6","Average completion in the context-scaling study."],["Scaling study","8K pretraining context","71.5","Average completion at the longest reported pretraining context in this study."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Context-scaling study separated from main-result DAgger conditions — Experiment small multiples
-
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Group 43.9 at 1K, 45.6 one-frame baseline, and 71.5 at 8K in a pre-DAgger panel; do not combine with main-task results.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (2.75,3) {rttt\_evidence\_p2: Context-scaling study separated from main-result DAgger conditions - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Main tasks}\\[4pt]\textbf{single-step GR00T N1.7}: 42 -- Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot.\\\textbf{GDN}: 56 -- Average rubric-based completion score across the same three tasks.\\\textbf{RoboTTT}: 79 -- Average rubric-based completion score across the same three tasks.};
-\node[panel] at (5.5,0) {\textbf{Scaling study}\\[4pt]\textbf{1K pretraining context}: 43.9 -- Average completion before the DAgger training used for Pup Go Car in the main result.\\\textbf{one-history-frame baseline}: 45.6 -- Average completion in the context-scaling study.\\\textbf{8K pretraining context}: 71.5 -- Average completion at the longest reported pretraining context in this study.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Main tasks"]
-    p1r1["single-step GR00T N1.7: 42<br/>Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."]
-    p1r2["GDN: 56<br/>Average rubric-based completion score across the same three tasks."]
-    p1r3["RoboTTT: 79<br/>Average rubric-based completion score across the same three tasks."]
-  end
-  subgraph p2["Scaling study"]
-    p2r1["1K pretraining context: 43.9<br/>Average completion before the DAgger training used for Pup Go Car in the main result."]
-    p2r2["one-history-frame baseline: 45.6<br/>Average completion in the context-scaling study."]
-    p2r3["8K pretraining context: 71.5<br/>Average completion at the longest reported pretraining context in this study."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p2: Context-scaling study separated from main-result DAgger conditions — Experiment small multiples"
-rows = [["Main tasks","single-step GR00T N1.7","42","Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."],["Main tasks","GDN","56","Average rubric-based completion score across the same three tasks."],["Main tasks","RoboTTT","79","Average rubric-based completion score across the same three tasks."],["Scaling study","1K pretraining context","43.9","Average completion before the DAgger training used for Pup Go Car in the main result."],["Scaling study","one-history-frame baseline","45.6","Average completion in the context-scaling study."],["Scaling study","8K pretraining context","71.5","Average completion at the longest reported pretraining context in this study."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "In the context-scaling study, average completion rises from 43.9% with 1K-timestep pretraining to 71.5%"
+- Claims and sources: `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger`, `rttt_results_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: Completion versus context length is a warranted shared-scale relationship, but the paragraph provides only the 1K and 8K endpoints plus a one-history-frame baseline, not the intervening context points or uncertainty. A line would imply an unsupported trajectory, and a three-mark display would reduce to an item-plus-value comparison. The prose also preserves that these runs predate the DAgger condition used elsewhere.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Context-scaling study separated from main-result DAgger conditions — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_context_scaling` after `rttt_evidence_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_evidence_p3`
 
 - Location: `rttt_evidence`, paragraph 3
-- Text anchor: "RoboTTT recovers from roof and tire perturbations in 15 of 20 and 18 of 20 trials."
-- Claims and sources: `rttt_main_result` (OBSERVED, VERIFIED); `rttt_scaling` (OBSERVED, VERIFIED); `rttt_perturbation` (OBSERVED, VERIFIED); `rttt_dagger` (OBSERVED, VERIFIED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct perturbation recovery and dagger improvement as separate comparisons while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Perturbation recovery and DAgger improvement as separate comparisons.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `rttt_evidence_p3`.
-- QA-informed planning change: Show 15/20 roof, 18/20 tire, GDN 18/20 tire, and 33% average DAgger improvement; the existing completion plot contains none of these.
-
-### Treatment A — Perturbation recovery and DAgger improvement as separate comparisons — Grouped disclosed-domain plot
-
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Perturbation recovery` uses the disclosed domain 1475–1865 with 3 labeled marks; `DAgger distillation` uses the disclosed domain 32.5–33.5 with 1 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Show 15/20 roof, 18/20 tire, GDN 18/20 tire, and 33% average DAgger improvement; the existing completion plot contains none of these.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {rttt\_evidence\_p3: Perturbation recovery and DAgger improvement as separate comparisons - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Perturbation recovery: disclosed domain 1475--1865};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (0.923,-0.8) circle (2.5pt) node[above,font=\scriptsize] {15/20};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {RoboTTT roof recovery};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (7.077,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {18/20};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {RoboTTT tire recovery};
-\draw (0,-2.1) -- (8,-2.1);
-\fill (7.077,-2.1) circle (2.5pt) node[above,font=\scriptsize] {18/20};
-\node[anchor=east,font=\scriptsize] at (-0.2,-2.1) {GDN tire recovery};
-\node[anchor=west,font=\bfseries] at (0,-3.25) {DAgger distillation: disclosed domain 32.5--33.5};
-\draw (0,-4.05) -- (8,-4.05);
-\fill (4.000,-4.05) circle (2.5pt) node[above,font=\scriptsize] {33\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.05) {Average sequence-model improvement};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph g1["Perturbation recovery — domain 1475 to 1865"]
-    g1r1["RoboTTT roof recovery: 15/20"]
-    g1r2["RoboTTT tire recovery: 18/20"]
-    g1r3["GDN tire recovery: 18/20"]
-  end
-  subgraph g2["DAgger distillation — domain 32.5 to 33.5"]
-    g2r1["Average sequence-model improvement: 33%"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-
-title = "rttt_evidence_p3: Perturbation recovery and DAgger improvement as separate comparisons — Grouped disclosed-domain plot"
-groups = [{"name":"Perturbation recovery","domain":[1475,1865],"items":[["Perturbation recovery","RoboTTT roof recovery","15/20","separate perturbation test"],["Perturbation recovery","RoboTTT tire recovery","18/20","separate perturbation test"],["Perturbation recovery","GDN tire recovery","18/20","same tire outcome; no unique fast-weight advantage"]]},{"name":"DAgger distillation","domain":[32.5,33.5],"items":[["DAgger distillation","Average sequence-model improvement","33%","same correction dataset"]]}]
-height = 528
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
-]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
-parts.append('</svg>')
-Path("rttt_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Perturbation recovery and DAgger improvement as separate comparisons — Complete reported-value matrix
-
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Show 15/20 roof, 18/20 tire, GDN 18/20 tire, and 33% average DAgger improvement; the existing completion plot contains none of these.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_evidence\_p3: Perturbation recovery and DAgger improvement as separate comparisons - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Perturbation recovery & RoboTTT roof recovery & 15/20 & separate perturbation test \\
-Perturbation recovery & RoboTTT tire recovery & 18/20 & separate perturbation test \\
-Perturbation recovery & GDN tire recovery & 18/20 & same tire outcome; no unique fast-weight advantage \\
-DAgger distillation & Average sequence-model improvement & 33\% & same correction dataset \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Perturbation recovery<br/>RoboTTT roof recovery<br/><b>15/20</b><br/>separate perturbation test"]
-    r2["Perturbation recovery<br/>RoboTTT tire recovery<br/><b>18/20</b><br/>separate perturbation test"]
-    r3["Perturbation recovery<br/>GDN tire recovery<br/><b>18/20</b><br/>same tire outcome; no unique fast-weight advantage"]
-    r4["DAgger distillation<br/>Average sequence-model improvement<br/><b>33%</b><br/>same correction dataset"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p3: Perturbation recovery and DAgger improvement as separate comparisons — Complete reported-value matrix"
-rows = [["Perturbation recovery","RoboTTT roof recovery","15/20","separate perturbation test"],["Perturbation recovery","RoboTTT tire recovery","18/20","separate perturbation test"],["Perturbation recovery","GDN tire recovery","18/20","same tire outcome; no unique fast-weight advantage"],["DAgger distillation","Average sequence-model improvement","33%","same correction dataset"]]
-height = 502
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Perturbation recovery and DAgger improvement as separate comparisons — Experiment small multiples
-
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger` from `rttt_results_source`. Show 15/20 roof, 18/20 tire, GDN 18/20 tire, and 33% average DAgger improvement; the existing completion plot contains none of these.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (2.75,3) {rttt\_evidence\_p3: Perturbation recovery and DAgger improvement as separate comparisons - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Perturbation recovery}\\[4pt]\textbf{RoboTTT roof recovery}: 15/20 -- separate perturbation test\\\textbf{RoboTTT tire recovery}: 18/20 -- separate perturbation test\\\textbf{GDN tire recovery}: 18/20 -- same tire outcome; no unique fast-weight advantage};
-\node[panel] at (5.5,0) {\textbf{DAgger distillation}\\[4pt]\textbf{Average sequence-model improvement}: 33\% -- same correction dataset};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Perturbation recovery"]
-    p1r1["RoboTTT roof recovery: 15/20<br/>separate perturbation test"]
-    p1r2["RoboTTT tire recovery: 18/20<br/>separate perturbation test"]
-    p1r3["GDN tire recovery: 18/20<br/>same tire outcome; no unique fast-weight advantage"]
-  end
-  subgraph p2["DAgger distillation"]
-    p2r1["Average sequence-model improvement: 33%<br/>same correction dataset"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_evidence_p3: Perturbation recovery and DAgger improvement as separate comparisons — Experiment small multiples"
-rows = [["Perturbation recovery","RoboTTT roof recovery","15/20","separate perturbation test"],["Perturbation recovery","RoboTTT tire recovery","18/20","separate perturbation test"],["Perturbation recovery","GDN tire recovery","18/20","same tire outcome; no unique fast-weight advantage"],["DAgger distillation","Average sequence-model improvement","33%","same correction dataset"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "RoboTTT recovers from roof and tire perturbations in 15 of 20 and 18 of"
+- Claims and sources: `rttt_main_result`, `rttt_scaling`, `rttt_perturbation`, `rttt_dagger`, `rttt_results_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: Perturbation recovery counts are comparable within condition, but only tire recovery includes the crucial GDN tie and DAgger's 33% effect belongs to a separate correction study. Combining them would imply one causal comparison; splitting roof, tire, and DAgger into tracks would create repeated metric panels. Prose keeps the shared 18/20 tire result adjacent to the limitation on fast-weight attribution.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Perturbation recovery and DAgger improvement as separate comparisons — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_recovery_and_dagger` after `rttt_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_limitations_p1`
 
 - Location: `rttt_limitations`, paragraph 1
-- Text anchor: "The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics, and the policy still fails in deployment."
-- Claims and sources: `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
+- Text anchor: "The authors note that longer-context training costs more, the TTT objective is not designed"
+- Claims and sources: `rttt_latency_limit`, `rttt_generality`, `rttt_limits_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What remains uncertain about RoboTTT.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {rttt\_limitations\_p1: independent facets};
-\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]and the policy still fails in deployment\\[3pt]The experiments use one GR00T N1.7 backbone, one YAM tabletop setup\\[3pt]and three assembly task families};
-\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Tested or reported scope"]
-    g1i1["and the policy still fails in deployment"]
-    g1i2["The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-    g1i3["and three assembly task families"]
-  end
-  subgraph g2["Unestablished or missing evidence"]
-    g2i1["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p1: independent facets"
-groups = [{"title":"Tested or reported scope","items":["and the policy still fails in deployment","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup","and three assembly task families"]},{"title":"Unestablished or missing evidence","items":["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_limitations\_p1: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-limitations & Independent facet 1 & The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics \\
-limitations & Independent facet 2 & and the policy still fails in deployment \\
-limitations & Independent facet 3 & The experiments use one GR00T N1.7 backbone, one YAM tabletop setup \\
-limitations & Independent facet 4 & and three assembly task families \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["rttt_limitations_p1: non-directional evidence ledger"]
-    r1["limitations<br/><b>Independent facet 1</b><br/>The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-    r2["limitations<br/><b>Independent facet 2</b><br/>and the policy still fails in deployment"]
-    r3["limitations<br/><b>Independent facet 3</b><br/>The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-    r4["limitations<br/><b>Independent facet 4</b><br/>and three assembly task families"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p1: non-directional evidence ledger"
-rows = [["limitations","Independent facet 1","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"],["limitations","Independent facet 2","and the policy still fails in deployment"],["limitations","Independent facet 3","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"],["limitations","Independent facet 4","and three assembly task families"]]
-height = 518
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {rttt\_limitations\_p1: claim-boundary constellation};
-\node[box] (center) at (3,0) {What remains uncertain about RoboTTT};
-\node[box] (f1) at (0,2) {The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics};
-\node[box] (f2) at (6,2) {and the policy still fails in deployment};
-\node[box] (f3) at (0,0) {The experiments use one GR00T N1.7 backbone, one YAM tabletop setup};
-\node[box] (f4) at (6,0) {and three assembly task families};
-\draw (center) -- node[rel] {scope boundary} (f1);
-\draw (center) -- node[rel] {scope boundary} (f2);
-\draw (center) -- node[rel] {scope boundary} (f3);
-\draw (center) -- node[rel] {scope boundary} (f4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What remains uncertain about RoboTTT"]
-  f1["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-  f2["and the policy still fails in deployment"]
-  f3["The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-  f4["and three assembly task families"]
-  center ---|"scope boundary"| f1
-  center ---|"scope boundary"| f2
-  center ---|"scope boundary"| f3
-  center ---|"scope boundary"| f4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p1: claim-boundary constellation"
-nodes = [["center","What remains uncertain about RoboTTT",460,220],["f1","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics",100,40],["f2","and the policy still fails in deployment",820,40],["f3","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup",100,220],["f4","and three assembly task families",820,220]]
-edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics, and the policy still fails in deployment. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_limitations_p2`
 
 - Location: `rttt_limitations`, paragraph 2
-- Text anchor: "Trial counts are 20 per task, or 10 for the longest settings, without reported confidence intervals."
-- Claims and sources: `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
+- Text anchor: "Trial counts are 20 per task, or 10 for the longest settings, without reported"
+- Claims and sources: `rttt_latency_limit`, `rttt_generality`, `rttt_limits_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What remains uncertain about RoboTTT.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {rttt\_limitations\_p2: independent facets};
-\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]Trial counts are 20 per task\\[3pt]or 10 for the longest settings};
-\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]without reported confidence intervals\\[3pt]The paper argues that per-step computation does not grow with accumulated context\\[3pt]but it does not report a latency table comparing RoboTTT with the baselines\\[3pt]It therefore does not establish equal or lower absolute deployment latency};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Tested or reported scope"]
-    g1i1["Trial counts are 20 per task"]
-    g1i2["or 10 for the longest settings"]
-  end
-  subgraph g2["Unestablished or missing evidence"]
-    g2i1["without reported confidence intervals"]
-    g2i2["The paper argues that per-step computation does not grow with accumulated context"]
-    g2i3["but it does not report a latency table comparing RoboTTT with the baselines"]
-    g2i4["It therefore does not establish equal or lower absolute deployment latency"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p2: independent facets"
-groups = [{"title":"Tested or reported scope","items":["Trial counts are 20 per task","or 10 for the longest settings"]},{"title":"Unestablished or missing evidence","items":["without reported confidence intervals","The paper argues that per-step computation does not grow with accumulated context","but it does not report a latency table comparing RoboTTT with the baselines","It therefore does not establish equal or lower absolute deployment latency"]}]
-width = 900
-height = 588
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 6 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_limitations\_p2: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-limitations & Independent facet 1 & Trial counts are 20 per task \\
-limitations & Independent facet 2 & or 10 for the longest settings \\
-limitations & Independent facet 3 & without reported confidence intervals \\
-limitations & Independent facet 4 & The paper argues that per-step computation does not grow with accumulated context \\
-limitations & Independent facet 5 & but it does not report a latency table comparing RoboTTT with the baselines \\
-limitations & Independent facet 6 & It therefore does not establish equal or lower absolute deployment latency \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["rttt_limitations_p2: non-directional evidence ledger"]
-    r1["limitations<br/><b>Independent facet 1</b><br/>Trial counts are 20 per task"]
-    r2["limitations<br/><b>Independent facet 2</b><br/>or 10 for the longest settings"]
-    r3["limitations<br/><b>Independent facet 3</b><br/>without reported confidence intervals"]
-    r4["limitations<br/><b>Independent facet 4</b><br/>The paper argues that per-step computation does not grow with accumulated context"]
-    r5["limitations<br/><b>Independent facet 5</b><br/>but it does not report a latency table comparing RoboTTT with the baselines"]
-    r6["limitations<br/><b>Independent facet 6</b><br/>It therefore does not establish equal or lower absolute deployment latency"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p2: non-directional evidence ledger"
-rows = [["limitations","Independent facet 1","Trial counts are 20 per task"],["limitations","Independent facet 2","or 10 for the longest settings"],["limitations","Independent facet 3","without reported confidence intervals"],["limitations","Independent facet 4","The paper argues that per-step computation does not grow with accumulated context"],["limitations","Independent facet 5","but it does not report a latency table comparing RoboTTT with the baselines"],["limitations","Independent facet 6","It therefore does not establish equal or lower absolute deployment latency"]]
-height = 702
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 6 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {rttt\_limitations\_p2: claim-boundary constellation};
-\node[box] (center) at (3,0) {What remains uncertain about RoboTTT};
-\node[box] (f1) at (0,2) {Trial counts are 20 per task};
-\node[box] (f2) at (6,2) {or 10 for the longest settings};
-\node[box] (f3) at (0,0) {without reported confidence intervals};
-\node[box] (f4) at (6,0) {The paper argues that per-step computation does not grow with accumulated context};
-\node[box] (f5) at (0,-2) {but it does not report a latency table comparing RoboTTT with the baselines};
-\node[box] (f6) at (6,-2) {It therefore does not establish equal or lower absolute deployment latency};
-\draw (center) -- node[rel] {scope boundary} (f1);
-\draw (center) -- node[rel] {scope boundary} (f2);
-\draw (center) -- node[rel] {scope boundary} (f3);
-\draw (center) -- node[rel] {scope boundary} (f4);
-\draw (center) -- node[rel] {scope boundary} (f5);
-\draw (center) -- node[rel] {scope boundary} (f6);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What remains uncertain about RoboTTT"]
-  f1["Trial counts are 20 per task"]
-  f2["or 10 for the longest settings"]
-  f3["without reported confidence intervals"]
-  f4["The paper argues that per-step computation does not grow with accumulated context"]
-  f5["but it does not report a latency table comparing RoboTTT with the baselines"]
-  f6["It therefore does not establish equal or lower absolute deployment latency"]
-  center ---|"scope boundary"| f1
-  center ---|"scope boundary"| f2
-  center ---|"scope boundary"| f3
-  center ---|"scope boundary"| f4
-  center ---|"scope boundary"| f5
-  center ---|"scope boundary"| f6
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_limitations_p2: claim-boundary constellation"
-nodes = [["center","What remains uncertain about RoboTTT",460,220],["f1","Trial counts are 20 per task",100,40],["f2","or 10 for the longest settings",820,40],["f3","without reported confidence intervals",100,220],["f4","The paper argues that per-step computation does not grow with accumulated context",820,220],["f5","but it does not report a latency table comparing RoboTTT with the baselines",100,400],["f6","It therefore does not establish equal or lower absolute deployment latency",820,400]]
-edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false],["center","f5","scope boundary",false],["center","f6","scope boundary",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 540
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Trial counts are 20 per task, or 10 for the longest settings, without reported confidence intervals. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_review_p1`
 
 - Location: `rttt_review`, paragraph 1
-- Text anchor: "The mechanism is well matched to the problem: recurrent fast weights provide a fixed-size state, while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup."
-- Claims and sources: `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
+- Text anchor: "The mechanism is well matched to the problem: recurrent fast weights provide a fixed-size"
+- Claims and sources: `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality`, `rttt_results_source`, `rttt_limits_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What is convincing, and what requires another experiment.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {rttt\_review\_p1: independent facets};
-\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The mechanism is well matched to the problem\\[3pt]recurrent fast weights provide a fixed-size state\\[3pt]while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
-\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Supported conclusion"]
-    g1i1["The mechanism is well matched to the problem"]
-    g1i2["recurrent fast weights provide a fixed-size state"]
-    g1i3["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
-  end
-  subgraph g2["Rejected overclaim or qualification"]
-    g2i1["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p1: independent facets"
-groups = [{"title":"Supported conclusion","items":["The mechanism is well matched to the problem","recurrent fast weights provide a fixed-size state","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]},{"title":"Rejected overclaim or qualification","items":["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_review\_p1: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-critical review & Independent facet 1 & The mechanism is well matched to the problem \\
-critical review & Independent facet 2 & recurrent fast weights provide a fixed-size state \\
-critical review & Independent facet 3 & while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["rttt_review_p1: non-directional evidence ledger"]
-    r1["critical review<br/><b>Independent facet 1</b><br/>The mechanism is well matched to the problem"]
-    r2["critical review<br/><b>Independent facet 2</b><br/>recurrent fast weights provide a fixed-size state"]
-    r3["critical review<br/><b>Independent facet 3</b><br/>while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p1: non-directional evidence ledger"
-rows = [["critical review","Independent facet 1","The mechanism is well matched to the problem"],["critical review","Independent facet 2","recurrent fast weights provide a fixed-size state"],["critical review","Independent facet 3","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]]
-height = 426
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {rttt\_review\_p1: claim-boundary constellation};
-\node[box] (center) at (3,0) {What is convincing, and what requires another experiment};
-\node[box] (f1) at (0,2) {The mechanism is well matched to the problem};
-\node[box] (f2) at (6,2) {recurrent fast weights provide a fixed-size state};
-\node[box] (f3) at (0,0) {while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
-\draw (center) -- node[rel] {support or qualification} (f1);
-\draw (center) -- node[rel] {support or qualification} (f2);
-\draw (center) -- node[rel] {support or qualification} (f3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What is convincing, and what requires another experiment"]
-  f1["The mechanism is well matched to the problem"]
-  f2["recurrent fast weights provide a fixed-size state"]
-  f3["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
-  center ---|"support or qualification"| f1
-  center ---|"support or qualification"| f2
-  center ---|"support or qualification"| f3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p1: claim-boundary constellation"
-nodes = [["center","What is convincing, and what requires another experiment",460,220],["f1","The mechanism is well matched to the problem",100,40],["f2","recurrent fast weights provide a fixed-size state",820,40],["f3","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup",100,220]]
-edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The mechanism is well matched to the problem: recurrent fast weights provide a fixed-size state, while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `rttt_review_p2`
 
 - Location: `rttt_review`, paragraph 2
-- Text anchor: "The evidence is not yet a broad demonstration of robot-foundation-model scaling."
-- Claims and sources: `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
+- Text anchor: "The evidence is not yet a broad demonstration of robot-foundation-model scaling. A second backbone,"
+- Claims and sources: `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality`, `rttt_results_source`, `rttt_limits_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What is convincing, and what requires another experiment.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {rttt\_review\_p2: independent facets};
-\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]and direct latency measurements are needed\\[3pt]The authors' explanation that fast weights retain salient history is plausible and supported by behavior};
-\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]The evidence is not yet a broad demonstration of robot-foundation-model scaling\\[3pt]A second backbone, different embodiments and task domains, uncertainty estimates\\[3pt]but the experiments do not directly inspect what information those weights store};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Supported conclusion"]
-    g1i1["and direct latency measurements are needed"]
-    g1i2["The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-  end
-  subgraph g2["Rejected overclaim or qualification"]
-    g2i1["The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-    g2i2["A second backbone, different embodiments and task domains, uncertainty estimates"]
-    g2i3["but the experiments do not directly inspect what information those weights store"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p2: independent facets"
-groups = [{"title":"Supported conclusion","items":["and direct latency measurements are needed","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]},{"title":"Rejected overclaim or qualification","items":["The evidence is not yet a broad demonstration of robot-foundation-model scaling","A second backbone, different embodiments and task domains, uncertainty estimates","but the experiments do not directly inspect what information those weights store"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_review\_p2: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-critical review & Independent facet 1 & The evidence is not yet a broad demonstration of robot-foundation-model scaling \\
-critical review & Independent facet 2 & A second backbone, different embodiments and task domains, uncertainty estimates \\
-critical review & Independent facet 3 & and direct latency measurements are needed \\
-critical review & Independent facet 4 & The authors' explanation that fast weights retain salient history is plausible and supported by behavior \\
-critical review & Independent facet 5 & but the experiments do not directly inspect what information those weights store \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["rttt_review_p2: non-directional evidence ledger"]
-    r1["critical review<br/><b>Independent facet 1</b><br/>The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-    r2["critical review<br/><b>Independent facet 2</b><br/>A second backbone, different embodiments and task domains, uncertainty estimates"]
-    r3["critical review<br/><b>Independent facet 3</b><br/>and direct latency measurements are needed"]
-    r4["critical review<br/><b>Independent facet 4</b><br/>The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-    r5["critical review<br/><b>Independent facet 5</b><br/>but the experiments do not directly inspect what information those weights store"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p2: non-directional evidence ledger"
-rows = [["critical review","Independent facet 1","The evidence is not yet a broad demonstration of robot-foundation-model scaling"],["critical review","Independent facet 2","A second backbone, different embodiments and task domains, uncertainty estimates"],["critical review","Independent facet 3","and direct latency measurements are needed"],["critical review","Independent facet 4","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"],["critical review","Independent facet 5","but the experiments do not directly inspect what information those weights store"]]
-height = 610
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {rttt\_review\_p2: claim-boundary constellation};
-\node[box] (center) at (3,0) {What is convincing, and what requires another experiment};
-\node[box] (f1) at (0,2) {The evidence is not yet a broad demonstration of robot-foundation-model scaling};
-\node[box] (f2) at (6,2) {A second backbone, different embodiments and task domains, uncertainty estimates};
-\node[box] (f3) at (0,0) {and direct latency measurements are needed};
-\node[box] (f4) at (6,0) {The authors' explanation that fast weights retain salient history is plausible and supported by behavior};
-\node[box] (f5) at (0,-2) {but the experiments do not directly inspect what information those weights store};
-\draw (center) -- node[rel] {support or qualification} (f1);
-\draw (center) -- node[rel] {support or qualification} (f2);
-\draw (center) -- node[rel] {support or qualification} (f3);
-\draw (center) -- node[rel] {support or qualification} (f4);
-\draw (center) -- node[rel] {support or qualification} (f5);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What is convincing, and what requires another experiment"]
-  f1["The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-  f2["A second backbone, different embodiments and task domains, uncertainty estimates"]
-  f3["and direct latency measurements are needed"]
-  f4["The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-  f5["but the experiments do not directly inspect what information those weights store"]
-  center ---|"support or qualification"| f1
-  center ---|"support or qualification"| f2
-  center ---|"support or qualification"| f3
-  center ---|"support or qualification"| f4
-  center ---|"support or qualification"| f5
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "rttt_review_p2: claim-boundary constellation"
-nodes = [["center","What is convincing, and what requires another experiment",460,220],["f1","The evidence is not yet a broad demonstration of robot-foundation-model scaling",100,40],["f2","A second backbone, different embodiments and task domains, uncertainty estimates",820,40],["f3","and direct latency measurements are needed",100,220],["f4","The authors' explanation that fast weights retain salient history is plausible and supported by behavior",820,220],["f5","but the experiments do not directly inspect what information those weights store",100,400]]
-edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 540
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("rttt_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The evidence is not yet a broad demonstration of robot-foundation-model scaling. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`

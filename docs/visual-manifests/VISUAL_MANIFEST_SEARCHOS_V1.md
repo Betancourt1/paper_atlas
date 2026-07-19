@@ -3,7 +3,7 @@
 - Paper ID: `paper_searchos_v1`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
-- Manifest revision: `4`
+- Manifest revision: `6`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `17 / 17` prose paragraphs
@@ -15,4313 +15,1162 @@
   - `sos_ablations_source` — SearchOS-V1 — scheduling, middleware, and skill analyses; Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13
   - `sos_scope_source` — SearchOS-V1 — declared scope and future work; Scope note in Section 3.4 and Section 7, PDF pages 9 and 15
 
-Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 6 independently reassesses all 17 paragraphs under the four-form hard ban. It proposes 3 paper-specific visuals and keeps 14 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
 
 ## `sos_why_p1`
 
 - Location: `sos_why`, paragraph 1
-- Text anchor: "A long-horizon research task requires more than issuing good queries."
-- Claims and sources: `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0)
+- Text anchor: "A long-horizon research task requires more than issuing good queries. The system must remember"
+- Claims and sources: `sos_core`, `sos_socm`, `sos_formulation_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for Why do capable search agents still repeat work and miss evidence.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p1 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_why\_p1: independent facets};
-\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]A long-horizon research task requires more than issuing good queries\\[3pt]The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions\\[3pt]and avoid retrying search paths that another worker has already exhausted};
-\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]and avoid retrying search paths that another worker has already exhausted};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Premise or requirement"]
-    g1i1["A long-horizon research task requires more than issuing good queries"]
-    g1i2["The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions"]
-    g1i3["and avoid retrying search paths that another worker has already exhausted"]
-  end
-  subgraph g2["Constraint or research boundary"]
-    g2i1["and avoid retrying search paths that another worker has already exhausted"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p1: independent facets"
-groups = [{"title":"Premise or requirement","items":["A long-horizon research task requires more than issuing good queries","The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions","and avoid retrying search paths that another worker has already exhausted"]},{"title":"Constraint or research boundary","items":["and avoid retrying search paths that another worker has already exhausted"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p1 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_why\_p1: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-why it exists & Independent facet 1 & A long-horizon research task requires more than issuing good queries \\
-why it exists & Independent facet 2 & The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions \\
-why it exists & Independent facet 3 & and avoid retrying search paths that another worker has already exhausted \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_why_p1: non-directional evidence ledger"]
-    r1["why it exists<br/><b>Independent facet 1</b><br/>A long-horizon research task requires more than issuing good queries"]
-    r2["why it exists<br/><b>Independent facet 2</b><br/>The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions"]
-    r3["why it exists<br/><b>Independent facet 3</b><br/>and avoid retrying search paths that another worker has already exhausted"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p1: non-directional evidence ledger"
-rows = [["why it exists","Independent facet 1","A long-horizon research task requires more than issuing good queries"],["why it exists","Independent facet 2","The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions"],["why it exists","Independent facet 3","and avoid retrying search paths that another worker has already exhausted"]]
-height = 426
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p1 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_why\_p1: claim-boundary constellation};
-\node[box] (center) at (3,0) {Why do capable search agents still repeat work and miss evidence};
-\node[box] (f1) at (0,2) {A long-horizon research task requires more than issuing good queries};
-\node[box] (f2) at (6,2) {The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions};
-\node[box] (f3) at (0,0) {and avoid retrying search paths that another worker has already exhausted};
-\draw (center) -- node[rel] {requirement or constraint} (f1);
-\draw (center) -- node[rel] {requirement or constraint} (f2);
-\draw (center) -- node[rel] {requirement or constraint} (f3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["Why do capable search agents still repeat work and miss evidence"]
-  f1["A long-horizon research task requires more than issuing good queries"]
-  f2["The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions"]
-  f3["and avoid retrying search paths that another worker has already exhausted"]
-  center ---|"requirement or constraint"| f1
-  center ---|"requirement or constraint"| f2
-  center ---|"requirement or constraint"| f3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p1: claim-boundary constellation"
-nodes = [["center","Why do capable search agents still repeat work and miss evidence",460,220],["f1","A long-horizon research task requires more than issuing good queries",100,40],["f2","The system must remember which entities and attributes are complete, preserve the source for each value, expose contradictions",820,40],["f3","and avoid retrying search paths that another worker has already exhausted",100,220]]
-edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: A long-horizon research task requires more than issuing good queries. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Motivation and problem framing.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_why_p2`
 
 - Location: `sos_why`, paragraph 2
-- Text anchor: "Conventional agents often keep this state in growing conversation histories."
-- Claims and sources: `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0)
+- Text anchor: "Conventional agents often keep this state in growing conversation histories. As evidence becomes buried,"
+- Claims and sources: `sos_core`, `sos_socm`, `sos_formulation_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for Why do capable search agents still repeat work and miss evidence.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p2 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_why\_p2: independent facets};
-\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]Conventional agents often keep this state in growing conversation histories\\[3pt]As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps\\[3pt]or leave parallel slots idle while a slow branch finishes};
-\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]or leave parallel slots idle while a slow branch finishes};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Premise or requirement"]
-    g1i1["Conventional agents often keep this state in growing conversation histories"]
-    g1i2["As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps"]
-    g1i3["or leave parallel slots idle while a slow branch finishes"]
-  end
-  subgraph g2["Constraint or research boundary"]
-    g2i1["or leave parallel slots idle while a slow branch finishes"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p2: independent facets"
-groups = [{"title":"Premise or requirement","items":["Conventional agents often keep this state in growing conversation histories","As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps","or leave parallel slots idle while a slow branch finishes"]},{"title":"Constraint or research boundary","items":["or leave parallel slots idle while a slow branch finishes"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p2 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_why\_p2: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-why it exists & Independent facet 1 & Conventional agents often keep this state in growing conversation histories \\
-why it exists & Independent facet 2 & As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps \\
-why it exists & Independent facet 3 & or leave parallel slots idle while a slow branch finishes \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_why_p2: non-directional evidence ledger"]
-    r1["why it exists<br/><b>Independent facet 1</b><br/>Conventional agents often keep this state in growing conversation histories"]
-    r2["why it exists<br/><b>Independent facet 2</b><br/>As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps"]
-    r3["why it exists<br/><b>Independent facet 3</b><br/>or leave parallel slots idle while a slow branch finishes"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p2: non-directional evidence ledger"
-rows = [["why it exists","Independent facet 1","Conventional agents often keep this state in growing conversation histories"],["why it exists","Independent facet 2","As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps"],["why it exists","Independent facet 3","or leave parallel slots idle while a slow branch finishes"]]
-height = 426
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Why do capable search agents still repeat work and miss evidence — paragraph sos_why_p2 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_core` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_why\_p2: claim-boundary constellation};
-\node[box] (center) at (3,0) {Why do capable search agents still repeat work and miss evidence};
-\node[box] (f1) at (0,2) {Conventional agents often keep this state in growing conversation histories};
-\node[box] (f2) at (6,2) {As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps};
-\node[box] (f3) at (0,0) {or leave parallel slots idle while a slow branch finishes};
-\draw (center) -- node[rel] {requirement or constraint} (f1);
-\draw (center) -- node[rel] {requirement or constraint} (f2);
-\draw (center) -- node[rel] {requirement or constraint} (f3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["Why do capable search agents still repeat work and miss evidence"]
-  f1["Conventional agents often keep this state in growing conversation histories"]
-  f2["As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps"]
-  f3["or leave parallel slots idle while a slow branch finishes"]
-  center ---|"requirement or constraint"| f1
-  center ---|"requirement or constraint"| f2
-  center ---|"requirement or constraint"| f3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_why_p2: claim-boundary constellation"
-nodes = [["center","Why do capable search agents still repeat work and miss evidence",460,220],["f1","Conventional agents often keep this state in growing conversation histories",100,40],["f2","As evidence becomes buried, workers can duplicate effort, disagree about fields, overlook gaps",820,40],["f3","or leave parallel slots idle while a slow branch finishes",100,220]]
-edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: Conventional agents often keep this state in growing conversation histories. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Motivation and problem framing.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_change_p1`
 
 - Location: `sos_change`, paragraph 1
-- Text anchor: "SearchOS converts a natural-language request into one or more related tables."
-- Claims and sources: `sos_schema` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct request-to-table schema, cell state, and citation binding while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Request-to-table schema, cell state, and citation binding.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `sos_change_p1`.
-- QA-informed planning change: Show entities, attributes, populated/missing/conflicting cell states, and value-to-source-span binding.
-
-### Treatment A — Request-to-table schema, cell state, and citation binding — Component topology
-
-- Teaching purpose: Show the stated component connections and convergence points.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. Show entities, attributes, populated/missing/conflicting cell states, and value-to-source-span binding.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_change\_p1: Request-to-table schema, cell state, and citation binding - Component topology};
-\node[box] (n1) at (1.00,-1.50) {SearchOS converts a natural-language request into one or more related tables};
-\node[box] (n2) at (2.50,-1.50) {Rows represent entities, columns represent requested attributes};
-\node[box] (n3) at (4.00,-1.50) {and a citation matrix connects every populated value to a source URL and supporting excerpt};
-\node[box] (n4) at (5.50,-1.50) {Missing cells become concrete search targets rather than vague reminders in a plan};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["SearchOS converts a natural-language request into one or more related tables"]
-  n2["Rows represent entities, columns represent requested attributes"]
-  n3["and a citation matrix connects every populated value to a source URL and supporting excerpt"]
-  n4["Missing cells become concrete search targets rather than vague reminders in a plan"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p1: Request-to-table schema, cell state, and citation binding — Component topology"
-nodes = [["n1","SearchOS converts a natural-language request into one or more related tables",100,150],["n2","Rows represent entities, columns represent requested attributes",250,150],["n3","and a citation matrix connects every populated value to a source URL and supporting excerpt",400,150],["n4","Missing cells become concrete search targets rather than vague reminders in a plan",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Request-to-table schema, cell state, and citation binding — Architecture cross-section
-
-- Teaching purpose: Separate component responsibilities without flattening them into one list.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. Show entities, attributes, populated/missing/conflicting cell states, and value-to-source-span binding.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {sos\_change\_p1: Request-to-table schema, cell state, and citation binding - Architecture cross-section};
-\node[panel] at (0,0) {\textbf{From an open request to inspectable missing cells}\\[4pt]\textbf{Natural-language request}: qualitative -- The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state.\\\textbf{Related tables}: qualitative -- Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer.\\\textbf{Materialized coverage}: qualitative -- Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting.\\\textbf{Citation binding}: qualitative -- A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["From an open request to inspectable missing cells"]
-    p1r1["Natural-language request: qualitative<br/>The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."]
-    p1r2["Related tables: qualitative<br/>Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."]
-    p1r3["Materialized coverage: qualitative<br/>Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."]
-    p1r4["Citation binding: qualitative<br/>A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p1: Request-to-table schema, cell state, and citation binding — Architecture cross-section"
-rows = [["From an open request to inspectable missing cells","Natural-language request","qualitative","The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."],["From an open request to inspectable missing cells","Related tables","qualitative","Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."],["From an open request to inspectable missing cells","Materialized coverage","qualitative","Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."],["From an open request to inspectable missing cells","Citation binding","qualitative","A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Request-to-table schema, cell state, and citation binding — One-item traversal
-
-- Teaching purpose: Trace one token, request, or state through the architecture.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. Show entities, attributes, populated/missing/conflicting cell states, and value-to-source-span binding.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_change\_p1: Request-to-table schema, cell state, and citation binding - One-item traversal};
-\node[box] (n1) at (1.00,-1.50) {SearchOS converts a natural-language request into one or more related tables};
-\node[box] (n2) at (2.50,-1.50) {Rows represent entities, columns represent requested attributes};
-\node[box] (n3) at (4.00,-1.50) {and a citation matrix connects every populated value to a source URL and supporting excerpt};
-\node[box] (n4) at (5.50,-1.50) {Missing cells become concrete search targets rather than vague reminders in a plan};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["SearchOS converts a natural-language request into one or more related tables"]
-  n2["Rows represent entities, columns represent requested attributes"]
-  n3["and a citation matrix connects every populated value to a source URL and supporting excerpt"]
-  n4["Missing cells become concrete search targets rather than vague reminders in a plan"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p1: Request-to-table schema, cell state, and citation binding — One-item traversal"
-nodes = [["n1","SearchOS converts a natural-language request into one or more related tables",100,150],["n2","Rows represent entities, columns represent requested attributes",250,150],["n3","and a citation matrix connects every populated value to a source URL and supporting excerpt",400,150],["n4","Missing cells become concrete search targets rather than vague reminders in a plan",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "SearchOS converts a natural-language request into one or more related tables. Rows represent entities,"
+- Claims and sources: `sos_schema`, `sos_socm`, `sos_formulation_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: SearchOS converts a natural-language request into one or more related tables. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Method distinction and scope.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Request-to-table schema, cell state, and citation binding — Component topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_schema_topology` after `sos_change_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_change_p2`
 
 - Location: `sos_change`, paragraph 2
-- Text anchor: "The system then separates global coordination from local search."
-- Claims and sources: `sos_schema` (OBSERVED, VERIFIED); `sos_socm` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct orchestrator, browse agents, writer, and shared-record ownership while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Orchestrator, browse agents, writer, and shared-record ownership.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `sos_change_p2`.
-- QA-informed planning change: This paragraph needs actor-to-store topology; the schema-completion figure alone does not show role boundaries.
-
-### Treatment A — Orchestrator, browse agents, writer, and shared-record ownership — Component topology
-
-- Teaching purpose: Show the stated component connections and convergence points.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. This paragraph needs actor-to-store topology; the schema-completion figure alone does not show role boundaries.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_change\_p2: Orchestrator, browse agents, writer, and shared-record ownership - Component topology};
-\node[box] (n1) at (1.00,-1.50) {The system then separates global coordination from local search};
-\node[box] (n2) at (2.50,-1.50) {An orchestrator owns schema and task mutation, explore and search agents browse};
-\node[box] (n3) at (4.00,-1.50) {and a writer reads accumulated state};
-\node[box] (n4) at (5.50,-1.50) {Their coordination passes through shared records rather than free-form agent-to-agent conversation};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The system then separates global coordination from local search"]
-  n2["An orchestrator owns schema and task mutation, explore and search agents browse"]
-  n3["and a writer reads accumulated state"]
-  n4["Their coordination passes through shared records rather than free-form agent-to-agent conversation"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p2: Orchestrator, browse agents, writer, and shared-record ownership — Component topology"
-nodes = [["n1","The system then separates global coordination from local search",100,150],["n2","An orchestrator owns schema and task mutation, explore and search agents browse",250,150],["n3","and a writer reads accumulated state",400,150],["n4","Their coordination passes through shared records rather than free-form agent-to-agent conversation",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Orchestrator, browse agents, writer, and shared-record ownership — Architecture cross-section
-
-- Teaching purpose: Separate component responsibilities without flattening them into one list.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. This paragraph needs actor-to-store topology; the schema-completion figure alone does not show role boundaries.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {sos\_change\_p2: Orchestrator, browse agents, writer, and shared-record ownership - Architecture cross-section};
-\node[panel] at (0,0) {\textbf{From an open request to inspectable missing cells}\\[4pt]\textbf{Natural-language request}: qualitative -- The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state.\\\textbf{Related tables}: qualitative -- Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer.\\\textbf{Materialized coverage}: qualitative -- Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting.\\\textbf{Citation binding}: qualitative -- A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["From an open request to inspectable missing cells"]
-    p1r1["Natural-language request: qualitative<br/>The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."]
-    p1r2["Related tables: qualitative<br/>Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."]
-    p1r3["Materialized coverage: qualitative<br/>Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."]
-    p1r4["Citation binding: qualitative<br/>A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p2: Orchestrator, browse agents, writer, and shared-record ownership — Architecture cross-section"
-rows = [["From an open request to inspectable missing cells","Natural-language request","qualitative","The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."],["From an open request to inspectable missing cells","Related tables","qualitative","Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."],["From an open request to inspectable missing cells","Materialized coverage","qualitative","Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."],["From an open request to inspectable missing cells","Citation binding","qualitative","A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Orchestrator, browse agents, writer, and shared-record ownership — One-item traversal
-
-- Teaching purpose: Trace one token, request, or state through the architecture.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_socm` from `sos_formulation_source`. This paragraph needs actor-to-store topology; the schema-completion figure alone does not show role boundaries.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_change\_p2: Orchestrator, browse agents, writer, and shared-record ownership - One-item traversal};
-\node[box] (n1) at (1.00,-1.50) {The system then separates global coordination from local search};
-\node[box] (n2) at (2.50,-1.50) {An orchestrator owns schema and task mutation, explore and search agents browse};
-\node[box] (n3) at (4.00,-1.50) {and a writer reads accumulated state};
-\node[box] (n4) at (5.50,-1.50) {Their coordination passes through shared records rather than free-form agent-to-agent conversation};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The system then separates global coordination from local search"]
-  n2["An orchestrator owns schema and task mutation, explore and search agents browse"]
-  n3["and a writer reads accumulated state"]
-  n4["Their coordination passes through shared records rather than free-form agent-to-agent conversation"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_change_p2: Orchestrator, browse agents, writer, and shared-record ownership — One-item traversal"
-nodes = [["n1","The system then separates global coordination from local search",100,150],["n2","An orchestrator owns schema and task mutation, explore and search agents browse",250,150],["n3","and a writer reads accumulated state",400,150],["n4","Their coordination passes through shared records rather than free-form agent-to-agent conversation",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "The system then separates global coordination from local search. An orchestrator owns schema and"
+- Claims and sources: `sos_schema`, `sos_socm`, `sos_formulation_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph makes one bounded distinction in plain language: The system then separates global coordination from local search. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Explanatory job: Method distinction and scope.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Orchestrator, browse agents, writer, and shared-record ownership — Component topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_actor_ownership` after `sos_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_mechanism_p1`
 
 - Location: `sos_mechanism`, paragraph 1
-- Text anchor: "Search-Oriented Context Management contains four linked stores."
-- Claims and sources: `sos_socm` (OBSERVED, VERIFIED); `sos_middleware` (OBSERVED, VERIFIED); `sos_scheduler` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9)
+- Text anchor: "Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Evidence"
+- Claims and sources: `sos_socm`, `sos_middleware`, `sos_scheduler`, `sos_formulation_source`, `sos_middleware_source`
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct four stores, evidence gate, progress sensor, and continuous dispatch loop while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Four stores, evidence gate, progress sensor, and continuous dispatch loop.
-- Recommended scope and placement: Shared scope `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `sos_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
+- Complexity warrant: Shared-state system topology: four stores have distinct responsibilities and non-interchangeable cross-links among tasks, schema cells, evidence, provenance, and failures.
+- Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Decision rationale: A list of four stores would be insufficient; the explanatory burden is how task dependencies, grounded evidence, cell coverage, and failed routes constrain one another.
+- Explanatory job: Shared-state architecture and provenance topology.
 
-### Treatment A — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop
+### Treatment A — SOCM multiplex state graph
 
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show the typed relations among Frontier Task, Evidence Graph, Coverage Map, and Failure Memory.
+- Encoding and reading order: Four non-interchangeable stores surround schema cells. Task dependencies target missing cells; accepted evidence binds values and anchored spans; coverage reflects bindings; failures suppress or redirect task routes.
+- Evidence and limitations: Claims `sos_socm`, `sos_schema`; `sos_formulation_source`, Sections 2–3.2 and Figure 2. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `SVG`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Control or recurrence loop};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {Frontier Task};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {schema cell};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {Evidence Graph};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {Coverage Map};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {Failure Memory};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {source span};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {ready gap};
+\draw[->] (n0) -- (n1);
+\draw[->] (n1) -- (n2);
+\draw[->] (n2) -- (n5);
+\draw[->] (n2) -- (n3);
+\draw[->] (n3) -- (n6);
+\draw[->] (n6) -- (n0);
+\draw[->] (n4) -- (n0);
+\draw[->] (n0) -- (n4);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
+  n0["Frontier Task"]
+  n1["schema cell"]
+  n2["Evidence Graph"]
+  n3["Coverage Map"]
+  n4["Failure Memory"]
+  n5["source span"]
+  n6["ready gap"]
+  n0 --> n1
+  n1 --> n2
+  n2 --> n5
+  n2 --> n3
+  n3 --> n6
+  n6 --> n0
+  n4 --> n0
+  n0 --> n4
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['Frontier Task', 'schema cell', 'Evidence Graph', 'Coverage Map', 'Failure Memory', 'source span', 'ready gap']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 1), (1, 2), (2, 5), (2, 3), (3, 6), (6, 0), (4, 0), (0, 4)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment B — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger
+### Treatment B — Store-by-state relation matrix
 
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Expose which store owns each kind of state and which updates must remain linked.
+- Encoding and reading order: Rows represent tasks, evidence, coverage, and failures; columns represent dependency, schema binding, source anchor, completion state, and corrective guidance. Cross-marks encode supported ownership and coupling.
+- Evidence and limitations: Claims `sos_socm`, `sos_schema`; `sos_formulation_source`, Sections 2–3.2 and Figure 2. Cells encode only the stated relationships; they are not measured effect sizes.
+- Primary delivery medium: `generated asset`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_mechanism\_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-The SearchOS evidence-and-control loop & Frontier Task schedules a gap & qualitative & Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots. \\
-The SearchOS evidence-and-control loop & Context middleware projects state & qualitative & The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history. \\
-The SearchOS evidence-and-control loop & Worker searches & qualitative & An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt. \\
-The SearchOS evidence-and-control loop & Evidence middleware gates & qualitative & A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance. \\
-The SearchOS evidence-and-control loop & Shared stores update & qualitative & Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory. \\
-The SearchOS evidence-and-control loop & Sensors choose the next transition & qualitative & Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis. \\
-\end{tabular}};
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\fill[blue!80] (0,-0) rectangle ++(0.9,-0.9);
+\draw (0,-0) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-0) rectangle ++(0.9,-0.9);
+\draw (1,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-0) rectangle ++(0.9,-0.9);
+\draw (2,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-0) rectangle ++(0.9,-0.9);
+\draw (3,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (4,-0) rectangle ++(0.9,-0.9);
+\draw (4,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-1) rectangle ++(0.9,-0.9);
+\draw (0,-1) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-1) rectangle ++(0.9,-0.9);
+\draw (1,-1) rectangle ++(0.9,-0.9);
+\fill[blue!80] (2,-1) rectangle ++(0.9,-0.9);
+\draw (2,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-1) rectangle ++(0.9,-0.9);
+\draw (3,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (4,-1) rectangle ++(0.9,-0.9);
+\draw (4,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-2) rectangle ++(0.9,-0.9);
+\draw (0,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-2) rectangle ++(0.9,-0.9);
+\draw (1,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-2) rectangle ++(0.9,-0.9);
+\draw (2,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (3,-2) rectangle ++(0.9,-0.9);
+\draw (3,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (4,-2) rectangle ++(0.9,-0.9);
+\draw (4,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-3) rectangle ++(0.9,-0.9);
+\draw (0,-3) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-3) rectangle ++(0.9,-0.9);
+\draw (1,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (2,-3) rectangle ++(0.9,-0.9);
+\draw (2,-3) rectangle ++(0.9,-0.9);
+\fill[blue!20] (3,-3) rectangle ++(0.9,-0.9);
+\draw (3,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (4,-3) rectangle ++(0.9,-0.9);
+\draw (4,-3) rectangle ++(0.9,-0.9);
+\node[anchor=west] at (0,1.0) {Frontier / Evidence / Coverage / Failure};
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["The SearchOS evidence-and-control loop<br/>Frontier Task schedules a gap<br/><b>qualitative</b><br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    r2["The SearchOS evidence-and-control loop<br/>Context middleware projects state<br/><b>qualitative</b><br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    r3["The SearchOS evidence-and-control loop<br/>Worker searches<br/><b>qualitative</b><br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    r4["The SearchOS evidence-and-control loop<br/>Evidence middleware gates<br/><b>qualitative</b><br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    r5["The SearchOS evidence-and-control loop<br/>Shared stores update<br/><b>qualitative</b><br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    r6["The SearchOS evidence-and-control loop<br/>Sensors choose the next transition<br/><b>qualitative</b><br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
+flowchart LR
+  title["Store-by-state relation matrix"]
+  subgraph rows["Rows"]
+    r0["Frontier"]
+    r1["Evidence"]
+    r2["Coverage"]
+    r3["Failure"]
   end
+  subgraph columns["Encoded relations"]
+    c0["relation 1"]
+    c1["relation 2"]
+    c2["relation 3"]
+    c3["relation 4"]
+    c4["relation 5"]
+  end
+  title --- rows
+  title --- columns
+  r0 --> c0
+  r0 --> c1
+  r1 --> c1
+  r1 --> c2
+  r2 --> c1
+  r2 --> c3
+  r3 --> c0
+  r3 --> c2
+  r3 --> c4
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['Frontier', 'Evidence', 'Coverage', 'Failure']
+fig, ax = plt.subplots(figsize=(9, 5))
+values = [[1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 1, 0, 1, 0], [1, 0, 1, 0, 1]]
+image = ax.imshow(values, cmap='Blues', vmin=0)
+ax.set_title(' / '.join(labels))
+fig.colorbar(image, ax=ax, label='encoded relation')
+ax.grid(alpha=0.2)
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment C — Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard
+### Treatment C — Role-specific projection topology
 
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Explain how one shared state can yield different bounded contexts without free-form agent conversation.
+- Encoding and reading order: The four stores feed a projection boundary; orchestrator, explorer, search, and writer receive distinct subgraphs, while all writes return through typed state interfaces.
+- Evidence and limitations: Claims `sos_socm`, `sos_schema`; `sos_formulation_source`, Sections 2–3.2 and Figure 2. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `JavaScript`
+- Recommended web medium: `JavaScript`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop - One-iteration storyboard};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {four shared stores};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {projection boundary};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {orchestrator view};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {explorer view};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {search view};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {writer view};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {typed writes};
+\draw[->] (n0) -- (n1);
+\draw[->] (n1) -- (n2);
+\draw[->] (n1) -- (n3);
+\draw[->] (n1) -- (n4);
+\draw[->] (n1) -- (n5);
+\draw[->] (n2) -- (n6);
+\draw[->] (n3) -- (n6);
+\draw[->] (n4) -- (n6);
+\draw[->] (n5) -- (n6);
+\draw[->] (n6) -- (n0);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
+  n0["four shared stores"]
+  n1["projection boundary"]
+  n2["orchestrator view"]
+  n3["explorer view"]
+  n4["search view"]
+  n5["writer view"]
+  n6["typed writes"]
+  n0 --> n1
+  n1 --> n2
+  n1 --> n3
+  n1 --> n4
+  n1 --> n5
+  n2 --> n6
+  n3 --> n6
+  n4 --> n6
+  n5 --> n6
+  n6 --> n0
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p1: Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['four shared stores', 'projection boundary', 'orchestrator view', 'explorer view', 'search view', 'writer view', 'typed writes']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 6), (3, 6), (4, 6), (5, 6), (6, 0)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
 ### Implementation record
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Selection rationale: The multiplex graph gives each SOCM store a distinct relation to schema cells and makes evidence, coverage, task, and failure coupling inspectable.
+- Delivery medium: `SVG`
+- Visual ID and placement: `visual_searchos_socm_state_graph` — rendered immediately after `sos_mechanism_p1`.
+- Shared paragraph scope: `NONE`
+- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
+- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
+- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Evidence deviations: `NONE`
 
 ## `sos_mechanism_p2`
 
 - Location: `sos_mechanism`, paragraph 2
-- Text anchor: "Before a model call, context middleware projects only the role-relevant portion of that state and adds selected skills."
-- Claims and sources: `sos_socm` (OBSERVED, VERIFIED); `sos_middleware` (OBSERVED, VERIFIED); `sos_scheduler` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9)
+- Text anchor: "Before a model call, context middleware projects only the role-relevant portion of that state"
+- Claims and sources: `sos_socm`, `sos_middleware`, `sos_scheduler`, `sos_formulation_source`, `sos_middleware_source`
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct four stores, evidence gate, progress sensor, and continuous dispatch loop while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Four stores, evidence gate, progress sensor, and continuous dispatch loop.
-- Recommended scope and placement: Shared scope `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `sos_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
+- Complexity warrant: Transactional state transition with failure conditions: a browsing candidate must satisfy both schema binding and source-span anchoring before evidence and coverage update atomically.
+- Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Decision rationale: The crucial distinction is not an ordered pipeline but a conjunction gate, two rejection modes, and a dual-state commit. A decision topology prevents page visits from being mistaken for evidence.
+- Explanatory job: Evidence acceptance gate and atomic state mutation.
 
-### Treatment A — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop
+### Treatment A — Conjunctive evidence gate with rejection branches
 
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show why neither a page visit nor an extracted value alone fills a cell.
+- Encoding and reading order: Candidate value branches into schema-binding and anchored-span checks; only their conjunction reaches a transaction that writes Evidence Graph and Coverage Map together. Each failed condition routes to a distinct rejection record.
+- Evidence and limitations: Claim `sos_middleware`; `sos_middleware_source`, Sections 3.3–3.4 and Equations 11–18. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `SVG`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Control or recurrence loop};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {browsing candidate};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {schema binding?};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {anchored span?};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {reject: wrong cell};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {reject: unsupported};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {AND gate};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {atomic commit};
+\node[draw,rounded corners,align=center] (n7) at (9.600000000000001,-1.8) {Evidence Graph};
+\node[draw,rounded corners,align=center] (n8) at (0.0,-3.6) {Coverage Map};
+\draw[->] (n0) -- (n1);
+\draw[->] (n0) -- (n2);
+\draw[->] (n1) -- (n3);
+\draw[->] (n2) -- (n4);
+\draw[->] (n1) -- (n5);
+\draw[->] (n2) -- (n5);
+\draw[->] (n5) -- (n6);
+\draw[->] (n6) -- (n7);
+\draw[->] (n6) -- (n8);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
+  n0["browsing candidate"]
+  n1["schema binding?"]
+  n2["anchored span?"]
+  n3["reject: wrong cell"]
+  n4["reject: unsupported"]
+  n5["AND gate"]
+  n6["atomic commit"]
+  n7["Evidence Graph"]
+  n8["Coverage Map"]
+  n0 --> n1
+  n0 --> n2
+  n1 --> n3
+  n2 --> n4
+  n1 --> n5
+  n2 --> n5
+  n5 --> n6
+  n6 --> n7
+  n6 --> n8
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['browsing candidate', 'schema binding?', 'anchored span?', 'reject: wrong cell', 'reject: unsupported', 'AND gate', 'atomic commit', 'Evidence Graph', 'Coverage Map']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 1), (0, 2), (1, 3), (2, 4), (1, 5), (2, 5), (5, 6), (6, 7), (6, 8)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment B — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger
+### Treatment B — Evidence transaction truth table
 
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Make the conjunction and atomicity constraints mechanically inspectable.
+- Encoding and reading order: Rows enumerate binding and anchoring states; columns show accept, evidence-write, and coverage-write. Only the both-true row enables all three, and write columns remain identical.
+- Evidence and limitations: Claim `sos_middleware`; `sos_middleware_source`, Sections 3.3–3.4 and Equations 11–18. The matrix is a logical specification derived from the acceptance rule, not measured data.
+- Primary delivery medium: `generated asset`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_mechanism\_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-The SearchOS evidence-and-control loop & Frontier Task schedules a gap & qualitative & Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots. \\
-The SearchOS evidence-and-control loop & Context middleware projects state & qualitative & The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history. \\
-The SearchOS evidence-and-control loop & Worker searches & qualitative & An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt. \\
-The SearchOS evidence-and-control loop & Evidence middleware gates & qualitative & A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance. \\
-The SearchOS evidence-and-control loop & Shared stores update & qualitative & Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory. \\
-The SearchOS evidence-and-control loop & Sensors choose the next transition & qualitative & Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis. \\
-\end{tabular}};
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\fill[blue!20] (0,-0) rectangle ++(0.9,-0.9);
+\draw (0,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-0) rectangle ++(0.9,-0.9);
+\draw (1,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-0) rectangle ++(0.9,-0.9);
+\draw (2,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-1) rectangle ++(0.9,-0.9);
+\draw (0,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-1) rectangle ++(0.9,-0.9);
+\draw (1,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-1) rectangle ++(0.9,-0.9);
+\draw (2,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-2) rectangle ++(0.9,-0.9);
+\draw (0,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-2) rectangle ++(0.9,-0.9);
+\draw (1,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-2) rectangle ++(0.9,-0.9);
+\draw (2,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (0,-3) rectangle ++(0.9,-0.9);
+\draw (0,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-3) rectangle ++(0.9,-0.9);
+\draw (1,-3) rectangle ++(0.9,-0.9);
+\fill[blue!80] (2,-3) rectangle ++(0.9,-0.9);
+\draw (2,-3) rectangle ++(0.9,-0.9);
+\node[anchor=west] at (0,1.0) {00 / 01 / 10 / 11};
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["The SearchOS evidence-and-control loop<br/>Frontier Task schedules a gap<br/><b>qualitative</b><br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    r2["The SearchOS evidence-and-control loop<br/>Context middleware projects state<br/><b>qualitative</b><br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    r3["The SearchOS evidence-and-control loop<br/>Worker searches<br/><b>qualitative</b><br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    r4["The SearchOS evidence-and-control loop<br/>Evidence middleware gates<br/><b>qualitative</b><br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    r5["The SearchOS evidence-and-control loop<br/>Shared stores update<br/><b>qualitative</b><br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    r6["The SearchOS evidence-and-control loop<br/>Sensors choose the next transition<br/><b>qualitative</b><br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
+flowchart LR
+  title["Evidence transaction truth table"]
+  subgraph rows["Rows"]
+    r0["00"]
+    r1["01"]
+    r2["10"]
+    r3["11"]
   end
+  subgraph columns["Encoded relations"]
+    c0["relation 1"]
+    c1["relation 2"]
+    c2["relation 3"]
+  end
+  title --- rows
+  title --- columns
+  r3 --> c0
+  r3 --> c1
+  r3 --> c2
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['00', '01', '10', '11']
+fig, ax = plt.subplots(figsize=(9, 5))
+values = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [1, 1, 1]]
+image = ax.imshow(values, cmap='Blues', vmin=0)
+ax.set_title(' / '.join(labels))
+fig.colorbar(image, ax=ax, label='encoded relation')
+ax.grid(alpha=0.2)
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment C — Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard
+### Treatment C — Candidate-to-committed-state transition system
 
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Expose precondition checks, rollback, and the single committed state.
+- Encoding and reading order: States separate observed page, candidate extracted, validated pair, rejected candidate, and committed shared state. Invalid transitions return to tasking with failure guidance; commit has two synchronized effects.
+- Evidence and limitations: Claim `sos_middleware`; `sos_middleware_source`, Sections 3.3–3.4 and Equations 11–18. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `JavaScript`
+- Recommended web medium: `JavaScript`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop - One-iteration storyboard};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {observed page};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {candidate};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {validated value+span};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {rejected};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {failure guidance};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {committed evidence};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {coverage complete};
+\draw[->] (n0) -- (n1);
+\draw[->] (n1) -- (n2);
+\draw[->] (n1) -- (n3);
+\draw[->] (n3) -- (n4);
+\draw[->] (n4) -- (n0);
+\draw[->] (n2) -- (n5);
+\draw[->] (n2) -- (n6);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
+  n0["observed page"]
+  n1["candidate"]
+  n2["validated value+span"]
+  n3["rejected"]
+  n4["failure guidance"]
+  n5["committed evidence"]
+  n6["coverage complete"]
+  n0 --> n1
+  n1 --> n2
+  n1 --> n3
+  n3 --> n4
+  n4 --> n0
+  n2 --> n5
+  n2 --> n6
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p2: Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['observed page', 'candidate', 'validated value+span', 'rejected', 'failure guidance', 'committed evidence', 'coverage complete']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 1), (1, 2), (1, 3), (3, 4), (4, 0), (2, 5), (2, 6)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
 ### Implementation record
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Selection rationale: The conjunctive gate exposes two independent preconditions, distinct rejection paths, and one atomic dual-store commit.
+- Delivery medium: `SVG`
+- Visual ID and placement: `visual_searchos_evidence_gate` — rendered immediately after `sos_mechanism_p2`.
+- Shared paragraph scope: `NONE`
+- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
+- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
+- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Evidence deviations: `NONE`
 
 ## `sos_mechanism_p3`
 
 - Location: `sos_mechanism`, paragraph 3
-- Text anchor: "Sensor middleware measures changes in grounded coverage and evidence count, along with iteration, search, and time budgets."
-- Claims and sources: `sos_socm` (OBSERVED, VERIFIED); `sos_middleware` (OBSERVED, VERIFIED); `sos_scheduler` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9)
+- Text anchor: "Sensor middleware measures changes in grounded coverage and evidence count, along with iteration, search,"
+- Claims and sources: `sos_socm`, `sos_middleware`, `sos_scheduler`, `sos_formulation_source`, `sos_middleware_source`
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct four stores, evidence gate, progress sensor, and continuous dispatch loop while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Four stores, evidence gate, progress sensor, and continuous dispatch loop.
-- Recommended scope and placement: Shared scope `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `sos_mechanism_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
+- Complexity warrant: Changing-state control policy with branching, budget-dependent terminal states, backfill/correction paths, and asynchronous slot dependencies.
+- Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Decision rationale: Readers must reconstruct how progress sensors and resource budgets jointly choose among five actions while newly free slots dispatch ready gaps. A state policy surface is clearer than prose.
+- Explanatory job: Coverage-aware controller state machine and asynchronous scheduling.
 
-### Treatment A — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop
+### Treatment A — Sensor-policy-dispatch state machine
 
-- Teaching purpose: Make the return transition and carried state explicit.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show how grounded progress and budgets lead to different control actions.
+- Encoding and reading order: Coverage delta, evidence delta, and remaining budgets converge on a policy node with continue, backfill, correction, drain-only, and stop branches. In a separate concurrency subgraph, `slot released` and `ready unresolved gap` independently enter a dispatch-eligibility conjunction, which leads to a distinct `dispatch / execute ready gap` state. No policy outcome, especially `correction`, may substitute for that execution state.
+- Evidence and limitations: Claim `sos_scheduler`; `sos_middleware_source`, Sections 3.3–3.4 and Figures 3–4. The diagram is structural and does not imply unreported magnitudes.
+- Primary delivery medium: `SVG`
+- Recommended web medium: `SVG`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Control or recurrence loop};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners,align=center] (n0) at (0.0,0.0) {coverage delta};
+\node[draw,rounded corners,align=center] (n1) at (3.2,0.0) {evidence delta};
+\node[draw,rounded corners,align=center] (n2) at (6.4,0.0) {budgets};
+\node[draw,rounded corners,align=center] (n3) at (9.600000000000001,0.0) {sensor policy};
+\node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {continue};
+\node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {backfill};
+\node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {correction};
+\node[draw,rounded corners,align=center] (n7) at (9.600000000000001,-1.8) {drain-only};
+\node[draw,rounded corners,align=center] (n8) at (0.0,-3.6) {stop};
+\node[draw,rounded corners,align=center] (n9) at (3.2,-3.6) {slot released};
+\node[draw,rounded corners,align=center] (n10) at (6.4,-3.6) {ready unresolved gap};
+\node[draw,circle,align=center] (n11) at (8.2,-3.6) {AND};
+\node[draw,rounded corners,align=center] (n12) at (10.2,-3.6) {dispatch / execute ready gap};
+\draw[->] (n0) -- (n3);
+\draw[->] (n1) -- (n3);
+\draw[->] (n2) -- (n3);
+\draw[->] (n3) -- (n4);
+\draw[->] (n3) -- (n5);
+\draw[->] (n3) -- (n6);
+\draw[->] (n3) -- (n7);
+\draw[->] (n3) -- (n8);
+\draw[->] (n9) -- (n11);
+\draw[->] (n10) -- (n11);
+\draw[->] (n11) -- (n12);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
 flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
+  n0["coverage delta"]
+  n1["evidence delta"]
+  n2["budgets"]
+  n3["sensor policy"]
+  n4["continue"]
+  n5["backfill"]
+  n6["correction"]
+  n7["drain-only"]
+  n8["stop"]
+  n9["slot released"]
+  n10["ready unresolved gap"]
+  n11(("dispatch eligible"))
+  n12["dispatch / execute ready gap"]
+  n0 --> n3
+  n1 --> n3
+  n2 --> n3
+  n3 --> n4
+  n3 --> n5
+  n3 --> n6
+  n3 --> n7
+  n3 --> n8
+  n9 --> n11
+  n10 --> n11
+  n11 --> n12
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['coverage delta', 'evidence delta', 'budgets', 'sensor policy', 'continue', 'backfill', 'correction', 'drain-only', 'stop', 'slot released', 'ready unresolved gap', 'dispatch eligible', 'dispatch / execute ready gap']
+fig, ax = plt.subplots(figsize=(9, 5))
+edges = [(0, 3), (1, 3), (2, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (9, 11), (10, 11), (11, 12)]
+positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
+for i, label in enumerate(labels):
+    x, y = positions[i]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8'})
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
-### Treatment B — Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger
+### Treatment B — Qualitative sensor-action feedback graph
 
-- Teaching purpose: List each state variable, operation, and transition condition.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show which observations jointly inform the controller, the set of available actions, and which actions return the system to a later sensor assessment without asserting unsupported policy thresholds.
+- Encoding and reading order: Grounded-coverage observation, evidence-count observation, and qualitative budget state converge on one joint policy assessment. That assessment branches to the five reported action states. Continue, backfill, and correction feed into a `next sensor observation` state that returns to joint assessment; drain-only leads to completion of in-flight work, while stop reaches a terminal state. Use no metric axes, coordinates, regions, decision surfaces, thresholds, or exclusive sensor-to-action mapping.
+- Evidence and limitations: Claim `sos_scheduler`; `sos_middleware_source`, Sections 3.3–3.4 and Figures 3–4. The source supports the observed signals, available actions, repeated assessment, and draining behavior, but does not report numeric thresholds or policy boundaries. Branches therefore mean `available transition`, not a deterministic mapping, magnitude, or probability.
+- Primary delivery medium: `JavaScript`
+- Recommended web medium: `JavaScript`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
 
 #### TikZ
-
 ```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
+\documentclass[tikz,border=4pt]{standalone}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_mechanism\_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop - Loop-state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-The SearchOS evidence-and-control loop & Frontier Task schedules a gap & qualitative & Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots. \\
-The SearchOS evidence-and-control loop & Context middleware projects state & qualitative & The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history. \\
-The SearchOS evidence-and-control loop & Worker searches & qualitative & An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt. \\
-The SearchOS evidence-and-control loop & Evidence middleware gates & qualitative & A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance. \\
-The SearchOS evidence-and-control loop & Shared stores update & qualitative & Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory. \\
-The SearchOS evidence-and-control loop & Sensors choose the next transition & qualitative & Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis. \\
-\end{tabular}};
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\node[draw,rounded corners] (coverage) at (0,2) {grounded-coverage observation};
+\node[draw,rounded corners] (evidence) at (0,1) {evidence-count observation};
+\node[draw,rounded corners] (budget) at (0,0) {qualitative budget state};
+\node[draw,rounded corners,align=center] (policy) at (4,1) {joint policy assessment\\no thresholds asserted};
+\node[draw,rounded corners] (continue) at (7,3) {continue};
+\node[draw,rounded corners] (backfill) at (7,2) {backfill};
+\node[draw,rounded corners] (correct) at (7,1) {correction};
+\node[draw,rounded corners] (drain) at (7,0) {drain-only};
+\node[draw,rounded corners] (stop) at (7,-1) {stop};
+\node[draw,rounded corners] (next) at (10,2) {next sensor observation};
+\node[draw,rounded corners] (inflight) at (10,0) {finish in-flight work};
+\node[draw,rounded corners] (terminal) at (10,-1) {terminal state};
+\foreach \sensor in {coverage,evidence,budget} {\draw[->] (\sensor) -- (policy);}
+\foreach \action in {continue,backfill,correct,drain,stop} {\draw[->] (policy) -- node[above,sloped] {may select} (\action);}
+\foreach \action in {continue,backfill,correct} {\draw[->] (\action) -- (next);}
+\draw[->] (next) to[bend left=35] (policy);
+\draw[->] (drain) -- (inflight); \draw[->] (stop) -- (terminal);
 \end{tikzpicture}
 \end{document}
 ```
 
 #### Mermaid
-
 ```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["The SearchOS evidence-and-control loop<br/>Frontier Task schedules a gap<br/><b>qualitative</b><br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    r2["The SearchOS evidence-and-control loop<br/>Context middleware projects state<br/><b>qualitative</b><br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    r3["The SearchOS evidence-and-control loop<br/>Worker searches<br/><b>qualitative</b><br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    r4["The SearchOS evidence-and-control loop<br/>Evidence middleware gates<br/><b>qualitative</b><br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    r5["The SearchOS evidence-and-control loop<br/>Shared stores update<br/><b>qualitative</b><br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    r6["The SearchOS evidence-and-control loop<br/>Sensors choose the next transition<br/><b>qualitative</b><br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
+flowchart LR
+  coverage["grounded-coverage observation"] --> policy["joint policy assessment; no thresholds asserted"]
+  evidence["evidence-count observation"] --> policy
+  budget["qualitative budget state"] --> policy
+  policy -->|may select| continue["continue"]
+  policy -->|may select| backfill["backfill"]
+  policy -->|may select| correction["correction"]
+  policy -->|may select| drain["drain-only"]
+  policy -->|may select| stop["stop"]
+  continue --> next["next sensor observation"]
+  backfill --> next
+  correction --> next
+  next --> policy
+  drain --> inflight["finish in-flight work"]
+  stop --> terminal["terminal state"]
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+
+labels = [
+    'grounded-coverage observation', 'evidence-count observation', 'qualitative budget state',
+    'joint policy assessment\n(no thresholds asserted)', 'continue', 'backfill', 'correction',
+    'drain-only', 'stop', 'next sensor observation', 'finish in-flight work', 'terminal state',
+]
+positions = {
+    0: (0, 2), 1: (0, 1), 2: (0, 0), 3: (3, 1),
+    4: (6, 3), 5: (6, 2), 6: (6, 1), 7: (6, 0), 8: (6, -1),
+    9: (9, 2), 10: (9, 0), 11: (9, -1),
+}
+edges = [(0, 3), (1, 3), (2, 3)] + [(3, action) for action in range(4, 9)]
+edges += [(4, 9), (5, 9), (6, 9), (9, 3), (7, 10), (8, 11)]
+fig, ax = plt.subplots(figsize=(12, 7))
+for node, label in enumerate(labels):
+    x, y = positions[node]
+    ax.text(x, y, label, ha='center', va='center', bbox={'boxstyle': 'round', 'fc': '#fffdf8', 'ec': '#171714'})
+for start, end in edges:
+    x1, y1 = positions[start]
+    x2, y2 = positions[end]
+    ax.annotate('', (x2, y2), (x1, y1), arrowprops={'arrowstyle': '->', 'color': '#2f5ea8', 'connectionstyle': 'arc3,rad=0.08'})
+ax.set_title('Qualitative sensor-action feedback; branches are available transitions, not thresholds')
+ax.set_axis_off()
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
+```
+
+### Treatment C — Ready-gap and slot dependency matrix
+
+- Teaching purpose: Explain continuous dispatch without turning it into a batch-versus-continuous metric list.
+- Encoding and reading order: Rows are unresolved gaps with dependency states; columns are execution slots over release events. Cells activate only when a gap is ready and a slot is free, revealing asynchronous concurrency.
+- Evidence and limitations: Claim `sos_scheduler`; `sos_middleware_source`, Sections 3.3–3.4 and Figures 3–4. The schedule is illustrative; no specific benchmark trace is claimed.
+- Primary delivery medium: `JavaScript`
+- Recommended web medium: `JavaScript`
+- Mobile, accessibility, and motion behavior: Preserve all labels at 200% zoom; on narrow screens use a single controlled horizontal scroll region or a content-specific stacked variant. Provide a semantic description of every relation and value. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
+\fill[blue!80] (0,-0) rectangle ++(0.9,-0.9);
+\draw (0,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-0) rectangle ++(0.9,-0.9);
+\draw (1,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-0) rectangle ++(0.9,-0.9);
+\draw (2,-0) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-1) rectangle ++(0.9,-0.9);
+\draw (0,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (1,-1) rectangle ++(0.9,-0.9);
+\draw (1,-1) rectangle ++(0.9,-0.9);
+\fill[blue!80] (2,-1) rectangle ++(0.9,-0.9);
+\draw (2,-1) rectangle ++(0.9,-0.9);
+\fill[blue!20] (0,-2) rectangle ++(0.9,-0.9);
+\draw (0,-2) rectangle ++(0.9,-0.9);
+\fill[blue!80] (1,-2) rectangle ++(0.9,-0.9);
+\draw (1,-2) rectangle ++(0.9,-0.9);
+\fill[blue!20] (2,-2) rectangle ++(0.9,-0.9);
+\draw (2,-2) rectangle ++(0.9,-0.9);
+\node[anchor=west] at (0,1.0) {gap A ready / gap B blocked / gap C ready};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart LR
+  title["Ready-gap and slot dependency matrix"]
+  subgraph rows["Rows"]
+    r0["gap A ready"]
+    r1["gap B blocked"]
+    r2["gap C ready"]
   end
+  subgraph columns["Encoded relations"]
+    c0["relation 1"]
+    c1["relation 2"]
+    c2["relation 3"]
+  end
+  title --- rows
+  title --- columns
+  r0 --> c0
+  r1 --> c2
+  r2 --> c1
 ```
 
 #### Python
-
 ```python
-from html import escape
 from pathlib import Path
-from textwrap import wrap
+import matplotlib.pyplot as plt
 
-title = "sos_mechanism_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop — Loop-state ledger"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard
-
-- Teaching purpose: Unroll exactly one iteration while retaining the return boundary.
-- Encoding and reading order: Use 10 named nodes and 12 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_socm`, `sos_middleware`, `sos_scheduler` from `sos_formulation_source`, `sos_middleware_source`. A shared visual belongs after the third mechanism paragraph and must show Frontier Task, Evidence Graph, Coverage Map, Failure Memory, atomic updates, sensor decisions, and ready-slot dispatch.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_mechanism\_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop - One-iteration storyboard};
-\node[box] (frontier) at (1.00,-0.45) {Frontier Task};
-\node[box] (evidence) at (1.00,-1.50) {Evidence Graph};
-\node[box] (coverage) at (1.00,-2.55) {Coverage Map};
-\node[box] (failure) at (1.00,-3.60) {Failure Memory};
-\node[box] (project) at (2.50,-1.50) {Role-specific context projection};
-\node[box] (browse) at (4.00,-1.50) {Explore/search worker};
-\node[box] (gate) at (5.50,-1.50) {Schema binding + anchored source span};
-\node[box] (atomic) at (7.00,-1.50) {Atomic Evidence Graph + Coverage Map update};
-\node[box] (sensor) at (8.50,-1.50) {Coverage/evidence/budget sensor};
-\node[box] (dispatch) at (10.00,-1.50) {Continue, backfill, correct, drain, stop, or dispatch};
-\draw[link] (frontier) -- node[rel] {ready task} (project);
-\draw[link] (failure) -- node[rel] {avoid repeats} (project);
-\draw[link] (coverage) -- node[rel] {missing cell} (project);
-\draw[link] (project) -- node[rel] {context} (browse);
-\draw[link] (browse) -- node[rel] {candidate} (gate);
-\draw[link] (gate) -- node[rel] {accept} (atomic);
-\draw[link] (atomic) -- node[rel] {record} (evidence);
-\draw[link] (atomic) -- node[rel] {materialize} (coverage);
-\draw[link] (evidence) -- node[rel] {delta} (sensor);
-\draw[link] (coverage) -- node[rel] {delta} (sensor);
-\draw[link] (sensor) -- node[rel] {decision} (dispatch);
-\draw[link] (dispatch) -- node[rel] {new ready work} (frontier);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  frontier["Frontier Task"]
-  evidence["Evidence Graph"]
-  coverage["Coverage Map"]
-  failure["Failure Memory"]
-  project["Role-specific context projection"]
-  browse["Explore/search worker"]
-  gate["Schema binding + anchored source span"]
-  atomic["Atomic Evidence Graph + Coverage Map update"]
-  sensor["Coverage/evidence/budget sensor"]
-  dispatch["Continue, backfill, correct, drain, stop, or dispatch"]
-  frontier -->|"ready task"| project
-  failure -->|"avoid repeats"| project
-  coverage -->|"missing cell"| project
-  project -->|"context"| browse
-  browse -->|"candidate"| gate
-  gate -->|"accept"| atomic
-  atomic -->|"record"| evidence
-  atomic -->|"materialize"| coverage
-  evidence -->|"delta"| sensor
-  coverage -->|"delta"| sensor
-  sensor -->|"decision"| dispatch
-  dispatch -->|"new ready work"| frontier
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_mechanism_p3: Four stores, evidence gate, progress sensor, and continuous dispatch loop — One-iteration storyboard"
-nodes = [["frontier","Frontier Task",100,45],["evidence","Evidence Graph",100,150],["coverage","Coverage Map",100,255],["failure","Failure Memory",100,360],["project","Role-specific context projection",250,150],["browse","Explore/search worker",400,150],["gate","Schema binding + anchored source span",550,150],["atomic","Atomic Evidence Graph + Coverage Map update",700,150],["sensor","Coverage/evidence/budget sensor",850,150],["dispatch","Continue, backfill, correct, drain, stop, or dispatch",1000,150]]
-edges = [["frontier","project","ready task"],["failure","project","avoid repeats"],["coverage","project","missing cell"],["project","browse","context"],["browse","gate","candidate"],["gate","atomic","accept"],["atomic","evidence","record"],["atomic","coverage","materialize"],["evidence","sensor","delta"],["coverage","sensor","delta"],["sensor","dispatch","decision"],["dispatch","frontier","new ready work"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
+labels = ['gap A ready', 'gap B blocked', 'gap C ready']
+fig, ax = plt.subplots(figsize=(9, 5))
+values = [[1, 0, 0], [0, 0, 1], [0, 1, 0]]
+image = ax.imshow(values, cmap='Blues', vmin=0)
+ax.set_title(' / '.join(labels))
+fig.colorbar(image, ax=ax, label='encoded relation')
+ax.grid(alpha=0.2)
+fig.tight_layout()
+fig.savefig(Path('visual.svg'), format='svg')
 ```
 
 ### Implementation record
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Selection rationale: Treatment A remains the prior implementer selection. Rework must keep the five policy outcomes separate from the independent free-slot/ready-gap conjunction and its distinct dispatch/execution destination.
+- Delivery medium: `SVG`
+- Visual ID and placement: `visual_searchos_sensor_policy_dispatch` — rendered immediately after `sos_mechanism_p3`.
+- Shared paragraph scope: `NONE`
+- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
+- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
+- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Evidence deviations: `NONE`
 
 ## `sos_example_p1`
 
 - Location: `sos_example`, paragraph 1
-- Text anchor: "Suppose a comparison request has a known company row but no verified value for one attribute."
-- Claims and sources: `sos_schema` (OBSERVED, VERIFIED); `sos_middleware` (OBSERVED, VERIFIED); `sos_scheduler` (OBSERVED, VERIFIED); `sos_skills` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct one missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection.
-- Recommended scope and placement: Shared scope `sos_example_p1`, `sos_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `sos_example_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-
-### Treatment A — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence
-
-- Teaching purpose: Follow the actual example in source order.
-- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_example\_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Worked sequence};
-\node[box] (n1) at (1.00,-1.50) {Suppose a comparison request has a known company row but no verified value for one attribute};
-\node[box] (n2) at (2.50,-1.50) {The Coverage Map marks that cell missing};
-\node[box] (n3) at (4.00,-1.50) {Frontier Task creates or selects a scoped job for the cell};
-\node[box] (n4) at (5.50,-1.50) {and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills};
-\node[box] (n5) at (7.00,-1.50) {A page visit alone does not fill the cell};
-\node[box] (n6) at (8.50,-1.50) {Evidence middleware must extract a candidate value, bind it to the correct row and attribute};
-\node[box] (n7) at (10.00,-1.50) {and anchor it to a supporting span};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\draw[link] (n6) -- node[rel] {then} (n7);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["Suppose a comparison request has a known company row but no verified value for one attribute"]
-  n2["The Coverage Map marks that cell missing"]
-  n3["Frontier Task creates or selects a scoped job for the cell"]
-  n4["and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills"]
-  n5["A page visit alone does not fill the cell"]
-  n6["Evidence middleware must extract a candidate value, bind it to the correct row and attribute"]
-  n7["and anchor it to a supporting span"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
-  n6 -->|"then"| n7
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence"
-nodes = [["n1","Suppose a comparison request has a known company row but no verified value for one attribute",100,150],["n2","The Coverage Map marks that cell missing",250,150],["n3","Frontier Task creates or selects a scoped job for the cell",400,150],["n4","and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills",550,150],["n5","A page visit alone does not fill the cell",700,150],["n6","Evidence middleware must extract a candidate value, bind it to the correct row and attribute",850,150],["n7","and anchor it to a supporting span",1000,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Example calculation or state ledger
-
-- Teaching purpose: Keep values, states, and boundaries grouped by example.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_example\_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Example calculation or state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-The SearchOS evidence-and-control loop & Frontier Task schedules a gap & qualitative & Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots. \\
-The SearchOS evidence-and-control loop & Context middleware projects state & qualitative & The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history. \\
-The SearchOS evidence-and-control loop & Worker searches & qualitative & An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt. \\
-The SearchOS evidence-and-control loop & Evidence middleware gates & qualitative & A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance. \\
-The SearchOS evidence-and-control loop & Shared stores update & qualitative & Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory. \\
-The SearchOS evidence-and-control loop & Sensors choose the next transition & qualitative & Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["The SearchOS evidence-and-control loop<br/>Frontier Task schedules a gap<br/><b>qualitative</b><br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    r2["The SearchOS evidence-and-control loop<br/>Context middleware projects state<br/><b>qualitative</b><br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    r3["The SearchOS evidence-and-control loop<br/>Worker searches<br/><b>qualitative</b><br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    r4["The SearchOS evidence-and-control loop<br/>Evidence middleware gates<br/><b>qualitative</b><br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    r5["The SearchOS evidence-and-control loop<br/>Shared stores update<br/><b>qualitative</b><br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    r6["The SearchOS evidence-and-control loop<br/>Sensors choose the next transition<br/><b>qualitative</b><br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Example calculation or state ledger"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Bounded example panels
-
-- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {sos\_example\_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Bounded example panels};
-\node[panel] at (0,0) {\textbf{The SearchOS evidence-and-control loop}\\[4pt]\textbf{Frontier Task schedules a gap}: qualitative -- Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots.\\\textbf{Context middleware projects state}: qualitative -- The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history.\\\textbf{Worker searches}: qualitative -- An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt.\\\textbf{Evidence middleware gates}: qualitative -- A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance.\\\textbf{Shared stores update}: qualitative -- Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory.\\\textbf{Sensors choose the next transition}: qualitative -- Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["The SearchOS evidence-and-control loop"]
-    p1r1["Frontier Task schedules a gap: qualitative<br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    p1r2["Context middleware projects state: qualitative<br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    p1r3["Worker searches: qualitative<br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    p1r4["Evidence middleware gates: qualitative<br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    p1r5["Shared stores update: qualitative<br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    p1r6["Sensors choose the next transition: qualitative<br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p1: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Bounded example panels"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "Suppose a comparison request has a known company row but no verified value for"
+- Claims and sources: `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills`, `sos_formulation_source`, `sos_middleware_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The worked example is short enough to follow in prose: Suppose a comparison request has a known company row but no verified value for one attribute. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Explanatory job: Worked example.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_missing_cell` after `sos_example_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_example_p2`
 
 - Location: `sos_example`, paragraph 2
-- Text anchor: "A page visit alone does not fill the cell."
-- Claims and sources: `sos_schema` (OBSERVED, VERIFIED); `sos_middleware` (OBSERVED, VERIFIED); `sos_scheduler` (OBSERVED, VERIFIED); `sos_skills` (OBSERVED, VERIFIED); `sos_formulation_source` (Sections 2–3.2, Equations 1–10, Figure 2, PDF pages 3–6; the arXiv v1 record identifies the paper as CC BY 4.0); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct one missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection.
-- Recommended scope and placement: Shared scope `sos_example_p1`, `sos_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `sos_example_p2`. Otherwise split the visual by paragraph.
-- QA-informed planning change: A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-
-### Treatment A — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence
-
-- Teaching purpose: Follow the actual example in source order.
-- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_example\_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Worked sequence};
-\node[box] (n1) at (1.00,-1.50) {Suppose a comparison request has a known company row but no verified value for one attribute};
-\node[box] (n2) at (2.50,-1.50) {The Coverage Map marks that cell missing};
-\node[box] (n3) at (4.00,-1.50) {Frontier Task creates or selects a scoped job for the cell};
-\node[box] (n4) at (5.50,-1.50) {and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills};
-\node[box] (n5) at (7.00,-1.50) {A page visit alone does not fill the cell};
-\node[box] (n6) at (8.50,-1.50) {Evidence middleware must extract a candidate value, bind it to the correct row and attribute};
-\node[box] (n7) at (10.00,-1.50) {and anchor it to a supporting span};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\draw[link] (n6) -- node[rel] {then} (n7);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["Suppose a comparison request has a known company row but no verified value for one attribute"]
-  n2["The Coverage Map marks that cell missing"]
-  n3["Frontier Task creates or selects a scoped job for the cell"]
-  n4["and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills"]
-  n5["A page visit alone does not fill the cell"]
-  n6["Evidence middleware must extract a candidate value, bind it to the correct row and attribute"]
-  n7["and anchor it to a supporting span"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
-  n6 -->|"then"| n7
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence"
-nodes = [["n1","Suppose a comparison request has a known company row but no verified value for one attribute",100,150],["n2","The Coverage Map marks that cell missing",250,150],["n3","Frontier Task creates or selects a scoped job for the cell",400,150],["n4","and continuous dispatch sends it to an available search agent with relevant failure records and source-access skills",550,150],["n5","A page visit alone does not fill the cell",700,150],["n6","Evidence middleware must extract a candidate value, bind it to the correct row and attribute",850,150],["n7","and anchor it to a supporting span",1000,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Example calculation or state ledger
-
-- Teaching purpose: Keep values, states, and boundaries grouped by example.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_example\_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Example calculation or state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-The SearchOS evidence-and-control loop & Frontier Task schedules a gap & qualitative & Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots. \\
-The SearchOS evidence-and-control loop & Context middleware projects state & qualitative & The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history. \\
-The SearchOS evidence-and-control loop & Worker searches & qualitative & An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt. \\
-The SearchOS evidence-and-control loop & Evidence middleware gates & qualitative & A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance. \\
-The SearchOS evidence-and-control loop & Shared stores update & qualitative & Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory. \\
-The SearchOS evidence-and-control loop & Sensors choose the next transition & qualitative & Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["The SearchOS evidence-and-control loop<br/>Frontier Task schedules a gap<br/><b>qualitative</b><br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    r2["The SearchOS evidence-and-control loop<br/>Context middleware projects state<br/><b>qualitative</b><br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    r3["The SearchOS evidence-and-control loop<br/>Worker searches<br/><b>qualitative</b><br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    r4["The SearchOS evidence-and-control loop<br/>Evidence middleware gates<br/><b>qualitative</b><br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    r5["The SearchOS evidence-and-control loop<br/>Shared stores update<br/><b>qualitative</b><br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    r6["The SearchOS evidence-and-control loop<br/>Sensors choose the next transition<br/><b>qualitative</b><br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Example calculation or state ledger"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Bounded example panels
-
-- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills` from `sos_formulation_source`, `sos_middleware_source`. A shared example visual belongs after the second paragraph and must name the known-company/missing-attribute cell and preserve the URL-is-not-truth boundary.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {sos\_example\_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection - Bounded example panels};
-\node[panel] at (0,0) {\textbf{The SearchOS evidence-and-control loop}\\[4pt]\textbf{Frontier Task schedules a gap}: qualitative -- Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots.\\\textbf{Context middleware projects state}: qualitative -- The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history.\\\textbf{Worker searches}: qualitative -- An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt.\\\textbf{Evidence middleware gates}: qualitative -- A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance.\\\textbf{Shared stores update}: qualitative -- Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory.\\\textbf{Sensors choose the next transition}: qualitative -- Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["The SearchOS evidence-and-control loop"]
-    p1r1["Frontier Task schedules a gap: qualitative<br/>Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."]
-    p1r2["Context middleware projects state: qualitative<br/>The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."]
-    p1r3["Worker searches: qualitative<br/>An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."]
-    p1r4["Evidence middleware gates: qualitative<br/>A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."]
-    p1r5["Shared stores update: qualitative<br/>Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."]
-    p1r6["Sensors choose the next transition: qualitative<br/>Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_example_p2: One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Bounded example panels"
-rows = [["The SearchOS evidence-and-control loop","Frontier Task schedules a gap","qualitative","Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."],["The SearchOS evidence-and-control loop","Context middleware projects state","qualitative","The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."],["The SearchOS evidence-and-control loop","Worker searches","qualitative","An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."],["The SearchOS evidence-and-control loop","Evidence middleware gates","qualitative","A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."],["The SearchOS evidence-and-control loop","Shared stores update","qualitative","Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."],["The SearchOS evidence-and-control loop","Sensors choose the next transition","qualitative","Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "A page visit alone does not fill the cell. Evidence middleware must extract a"
+- Claims and sources: `sos_schema`, `sos_middleware`, `sos_scheduler`, `sos_skills`, `sos_formulation_source`, `sos_middleware_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The worked example is short enough to follow in prose: A page visit alone does not fill the cell. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Explanatory job: Worked example.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_missing_cell` after `sos_example_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_evidence_p1`
 
 - Location: `sos_evidence`, paragraph 1
-- Text anchor: "On WideSearch, SearchOS reports 80.3 item F1 and 56.5 row F1, compared with 76.0 and 54.5 for the strongest baseline on each metric."
-- Claims and sources: `sos_main_results` (OBSERVED, VERIFIED); `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct widesearch and gisa system-baseline pairs in separate metric panels while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: WideSearch and GISA system-baseline pairs in separate metric panels.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `sos_evidence_p1`.
-- QA-informed planning change: Use paired panels or deltas for item F1, row F1, and set F1; do not put three metrics on one undifferentiated track.
-
-### Treatment A — WideSearch and GISA system-baseline pairs in separate metric panels — Grouped disclosed-domain plot
-
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `WideSearch item F1` uses the disclosed domain 75.3–81 with 2 labeled marks; `WideSearch row F1` uses the disclosed domain 54–57 with 2 labeled marks; `GISA set F1` uses the disclosed domain 0–100 with 2 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use paired panels or deltas for item F1, row F1, and set F1; do not put three metrics on one undifferentiated track.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {sos\_evidence\_p1: WideSearch and GISA system-baseline pairs in separate metric panels - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {WideSearch item F1: disclosed domain 75.3--81};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (0.982,-0.8) circle (2.5pt) node[above,font=\scriptsize] {76};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {strongest baseline};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (7.018,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {80.3};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {SearchOS};
-\node[anchor=west,font=\bfseries] at (0,-2.6) {WideSearch row F1: disclosed domain 54--57};
-\draw (0,-3.4000000000000004) -- (8,-3.4000000000000004);
-\fill (1.333,-3.4000000000000004) circle (2.5pt) node[above,font=\scriptsize] {54.5};
-\node[anchor=east,font=\scriptsize] at (-0.2,-3.4000000000000004) {strongest baseline};
-\draw (0,-4.050000000000001) -- (8,-4.050000000000001);
-\fill (6.667,-4.050000000000001) circle (2.5pt) node[above,font=\scriptsize] {56.5};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.050000000000001) {SearchOS};
-\node[anchor=west,font=\bfseries] at (0,-5.200000000000001) {GISA set F1: disclosed domain 0--100};
-\draw (0,-6.000000000000001) -- (8,-6.000000000000001);
-\fill (5.048,-6.000000000000001) circle (2.5pt) node[above,font=\scriptsize] {63.1};
-\node[anchor=east,font=\scriptsize] at (-0.2,-6.000000000000001) {strongest baseline};
-\draw (0,-6.650000000000001) -- (8,-6.650000000000001);
-\fill (6.120,-6.650000000000001) circle (2.5pt) node[above,font=\scriptsize] {76.5};
-\node[anchor=east,font=\scriptsize] at (-0.2,-6.650000000000001) {SearchOS};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph g1["WideSearch item F1 — domain 75.3 to 81"]
-    g1r1["strongest baseline: 76"]
-    g1r2["SearchOS: 80.3"]
-  end
-  subgraph g2["WideSearch row F1 — domain 54 to 57"]
-    g2r1["strongest baseline: 54.5"]
-    g2r2["SearchOS: 56.5"]
-  end
-  subgraph g3["GISA set F1 — domain 0 to 100"]
-    g3r1["strongest baseline: 63.1"]
-    g3r2["SearchOS: 76.5"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-
-title = "sos_evidence_p1: WideSearch and GISA system-baseline pairs in separate metric panels — Grouped disclosed-domain plot"
-groups = [{"name":"WideSearch item F1","domain":[75.3,81],"items":[["WideSearch item F1","strongest baseline","76","Strongest reported baseline value for item F1."],["WideSearch item F1","SearchOS","80.3","SearchOS value for item F1."]]},{"name":"WideSearch row F1","domain":[54,57],"items":[["WideSearch row F1","strongest baseline","54.5","Strongest reported baseline value for row F1."],["WideSearch row F1","SearchOS","56.5","SearchOS value for row F1."]]},{"name":"GISA set F1","domain":[0,100],"items":[["GISA set F1","strongest baseline","63.1","Strongest reported baseline value for set F1."],["GISA set F1","SearchOS","76.5","SearchOS value for set F1."]]}]
-height = 712
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
-]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
-parts.append('</svg>')
-Path("sos_evidence_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — WideSearch and GISA system-baseline pairs in separate metric panels — Complete reported-value matrix
-
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use paired panels or deltas for item F1, row F1, and set F1; do not put three metrics on one undifferentiated track.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_evidence\_p1: WideSearch and GISA system-baseline pairs in separate metric panels - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-WideSearch item F1 & strongest baseline & 76 & Strongest reported baseline value for item F1. \\
-WideSearch item F1 & SearchOS & 80.3 & SearchOS value for item F1. \\
-WideSearch row F1 & strongest baseline & 54.5 & Strongest reported baseline value for row F1. \\
-WideSearch row F1 & SearchOS & 56.5 & SearchOS value for row F1. \\
-GISA set F1 & strongest baseline & 63.1 & Strongest reported baseline value for set F1. \\
-GISA set F1 & SearchOS & 76.5 & SearchOS value for set F1. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["WideSearch item F1<br/>strongest baseline<br/><b>76</b><br/>Strongest reported baseline value for item F1."]
-    r2["WideSearch item F1<br/>SearchOS<br/><b>80.3</b><br/>SearchOS value for item F1."]
-    r3["WideSearch row F1<br/>strongest baseline<br/><b>54.5</b><br/>Strongest reported baseline value for row F1."]
-    r4["WideSearch row F1<br/>SearchOS<br/><b>56.5</b><br/>SearchOS value for row F1."]
-    r5["GISA set F1<br/>strongest baseline<br/><b>63.1</b><br/>Strongest reported baseline value for set F1."]
-    r6["GISA set F1<br/>SearchOS<br/><b>76.5</b><br/>SearchOS value for set F1."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p1: WideSearch and GISA system-baseline pairs in separate metric panels — Complete reported-value matrix"
-rows = [["WideSearch item F1","strongest baseline","76","Strongest reported baseline value for item F1."],["WideSearch item F1","SearchOS","80.3","SearchOS value for item F1."],["WideSearch row F1","strongest baseline","54.5","Strongest reported baseline value for row F1."],["WideSearch row F1","SearchOS","56.5","SearchOS value for row F1."],["GISA set F1","strongest baseline","63.1","Strongest reported baseline value for set F1."],["GISA set F1","SearchOS","76.5","SearchOS value for set F1."]]
-height = 678
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — WideSearch and GISA system-baseline pairs in separate metric panels — Experiment small multiples
-
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use paired panels or deltas for item F1, row F1, and set F1; do not put three metrics on one undifferentiated track.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (5.5,3) {sos\_evidence\_p1: WideSearch and GISA system-baseline pairs in separate metric panels - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{WideSearch item F1}\\[4pt]\textbf{strongest baseline}: 76 -- Strongest reported baseline value for item F1.\\\textbf{SearchOS}: 80.3 -- SearchOS value for item F1.};
-\node[panel] at (5.5,0) {\textbf{WideSearch row F1}\\[4pt]\textbf{strongest baseline}: 54.5 -- Strongest reported baseline value for row F1.\\\textbf{SearchOS}: 56.5 -- SearchOS value for row F1.};
-\node[panel] at (11,0) {\textbf{GISA set F1}\\[4pt]\textbf{strongest baseline}: 63.1 -- Strongest reported baseline value for set F1.\\\textbf{SearchOS}: 76.5 -- SearchOS value for set F1.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["WideSearch item F1"]
-    p1r1["strongest baseline: 76<br/>Strongest reported baseline value for item F1."]
-    p1r2["SearchOS: 80.3<br/>SearchOS value for item F1."]
-  end
-  subgraph p2["WideSearch row F1"]
-    p2r1["strongest baseline: 54.5<br/>Strongest reported baseline value for row F1."]
-    p2r2["SearchOS: 56.5<br/>SearchOS value for row F1."]
-  end
-  subgraph p3["GISA set F1"]
-    p3r1["strongest baseline: 63.1<br/>Strongest reported baseline value for set F1."]
-    p3r2["SearchOS: 76.5<br/>SearchOS value for set F1."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p1: WideSearch and GISA system-baseline pairs in separate metric panels — Experiment small multiples"
-rows = [["WideSearch item F1","strongest baseline","76","Strongest reported baseline value for item F1."],["WideSearch item F1","SearchOS","80.3","SearchOS value for item F1."],["WideSearch row F1","strongest baseline","54.5","Strongest reported baseline value for row F1."],["WideSearch row F1","SearchOS","56.5","SearchOS value for row F1."],["GISA set F1","strongest baseline","63.1","Strongest reported baseline value for set F1."],["GISA set F1","SearchOS","76.5","SearchOS value for set F1."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "On WideSearch, SearchOS reports 80.3 item F1 and 56.5 row F1, compared with 76.0"
+- Claims and sources: `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation`, `sos_results_source`, `sos_ablations_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: SearchOS and baselines can be compared within each F1 metric, but item, row, set, table, and list F1 are distinct aggregations across two benchmarks, and the strongest comparator can differ by metric. A normalized multimetric chart would hide those identities; separate metric tracks would be forbidden repeated panels. With no run variance reported, prose is the least misleading complete account.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “WideSearch and GISA system-baseline pairs in separate metric panels — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_benchmark_results` after `sos_evidence_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_evidence_p2`
 
 - Location: `sos_evidence`, paragraph 2
-- Text anchor: "A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 to 476.34 seconds, raises slot utilization from 34.6% to 41.7%, and raises item F1 from 79.66 to 86.75."
-- Claims and sources: `sos_main_results` (OBSERVED, VERIFIED); `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct batch versus continuous dispatch across runtime, utilization, and item f1 while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Batch versus continuous dispatch across runtime, utilization, and item F1.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `sos_evidence_p2`.
-- QA-informed planning change: Show the 10-case subset, 629.13→476.34 seconds, 34.6→41.7% utilization, and 79.66→86.75 item F1 without claiming component causality.
-
-### Treatment A — Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition matrix
-
-- Teaching purpose: Align each condition with its exact value and scope.
-- Encoding and reading order: Render 2 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Show the 10-case subset, 629.13→476.34 seconds, 34.6→41.7% utilization, and 79.66→86.75 item F1 without claiming component causality.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_evidence\_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 - Condition matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Batch waiting versus continuous dispatch & Batch scheduling & qualitative & A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6\%, and item F1 is 79.66. \\
-Batch waiting versus continuous dispatch & Continuous dispatch & qualitative & Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7\%, and item F1 is 86.75. \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Batch waiting versus continuous dispatch<br/>Batch scheduling<br/><b>qualitative</b><br/>A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."]
-    r2["Batch waiting versus continuous dispatch<br/>Continuous dispatch<br/><b>qualitative</b><br/>Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition matrix"
-rows = [["Batch waiting versus continuous dispatch","Batch scheduling","qualitative","A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."],["Batch waiting versus continuous dispatch","Continuous dispatch","qualitative","Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."]]
-height = 326
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition groups
-
-- Teaching purpose: Group related corpus, hardware, model, or protocol conditions.
-- Encoding and reading order: Group the 2 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Show the 10-case subset, 629.13→476.34 seconds, 34.6→41.7% utilization, and 79.66→86.75 item F1 without claiming component causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {sos\_evidence\_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 - Condition groups};
-\node[panel] at (0,0) {\textbf{Batch waiting versus continuous dispatch}\\[4pt]\textbf{Batch scheduling}: qualitative -- A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6\%, and item F1 is 79.66.\\\textbf{Continuous dispatch}: qualitative -- Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7\%, and item F1 is 86.75.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Batch waiting versus continuous dispatch"]
-    p1r1["Batch scheduling: qualitative<br/>A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."]
-    p1r2["Continuous dispatch: qualitative<br/>Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition groups"
-rows = [["Batch waiting versus continuous dispatch","Batch scheduling","qualitative","A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."],["Batch waiting versus continuous dispatch","Continuous dispatch","qualitative","Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Batch versus continuous dispatch across runtime, utilization, and item F1 — Protocol timeline
-
-- Teaching purpose: Show sequence only where the protocol itself is ordered.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Show the 10-case subset, 629.13→476.34 seconds, 34.6→41.7% utilization, and 79.66→86.75 item F1 without claiming component causality.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {sos\_evidence\_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 - Protocol timeline};
-\node[box] (n1) at (1.00,-1.50) {A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 to 476.34 seconds, raises slot utilization from 34.6\% to 41.7\%};
-\node[box] (n2) at (2.50,-1.50) {and raises item F1 from 79.66 to 86.75};
-\node[box] (n3) at (4.00,-1.50) {This is a subset experiment, not the main benchmark result};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 to 476.34 seconds, raises slot utilization from 34.6% to 41.7%"]
-  n2["and raises item F1 from 79.66 to 86.75"]
-  n3["This is a subset experiment, not the main benchmark result"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p2: Batch versus continuous dispatch across runtime, utilization, and item F1 — Protocol timeline"
-nodes = [["n1","A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 to 476.34 seconds, raises slot utilization from 34.6% to 41.7%",100,150],["n2","and raises item F1 from 79.66 to 86.75",250,150],["n3","This is a subset experiment, not the main benchmark result",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average"
+- Claims and sources: `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation`, `sos_results_source`, `sos_ablations_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: Runtime, utilization, and item F1 form a meaningful joint trade-off, but their units and directions differ and the fixture exposes only two aggregate conditions over ten cases, without case-level points or intervals. Normalizing three two-point changes would invent a weighting; parallel metric tracks would be a repeated item-plus-value treatment. Prose preserves all three paired changes and the subset-study caveat.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_dispatch_conditions` after `sos_evidence_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_evidence_p3`
 
 - Location: `sos_evidence`, paragraph 3
-- Text anchor: "A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to 78.3 and row F1 from 56.5 to 53.1."
-- Claims and sources: `sos_main_results` (OBSERVED, VERIFIED); `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13)
-- Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct joint skill-removal deltas with metric-specific local domains while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Joint skill-removal deltas with metric-specific local domains.
-- Recommended scope and placement: This paragraph only; place the visual immediately after `sos_evidence_p3`.
-- QA-informed planning change: Use 77.5–80.5 for item F1 and 52.5–57.0 for row F1, disclose both axes, and show +2.0/+3.4 point deltas.
-
-### Treatment A — Joint skill-removal deltas with metric-specific local domains — Grouped disclosed-domain plot
-
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Item F1` uses the disclosed domain 77.5–80.5 with 2 labeled marks; `Row F1` uses the disclosed domain 52.5–57 with 2 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use 77.5–80.5 for item F1 and 52.5–57.0 for row F1, disclose both axes, and show +2.0/+3.4 point deltas.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {sos\_evidence\_p3: Joint skill-removal deltas with metric-specific local domains - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Item F1: disclosed domain 77.5--80.5};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (2.133,-0.8) circle (2.5pt) node[above,font=\scriptsize] {78.3};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {All skills removed};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (7.467,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {80.3};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {Skills enabled};
-\node[anchor=west,font=\bfseries] at (0,-2.6) {Row F1: disclosed domain 52.5--57};
-\draw (0,-3.4000000000000004) -- (8,-3.4000000000000004);
-\fill (1.067,-3.4000000000000004) circle (2.5pt) node[above,font=\scriptsize] {53.1};
-\node[anchor=east,font=\scriptsize] at (-0.2,-3.4000000000000004) {All skills removed};
-\draw (0,-4.050000000000001) -- (8,-4.050000000000001);
-\fill (7.111,-4.050000000000001) circle (2.5pt) node[above,font=\scriptsize] {56.5};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.050000000000001) {Skills enabled};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph g1["Item F1 — domain 77.5 to 80.5"]
-    g1r1["All skills removed: 78.3"]
-    g1r2["Skills enabled: 80.3"]
-  end
-  subgraph g2["Row F1 — domain 52.5 to 57"]
-    g2r1["All skills removed: 53.1"]
-    g2r2["Skills enabled: 56.5"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-
-title = "sos_evidence_p3: Joint skill-removal deltas with metric-specific local domains — Grouped disclosed-domain plot"
-groups = [{"name":"Item F1","domain":[77.5,80.5],"items":[["Item F1","All skills removed","78.3","domain 77.5–80.5"],["Item F1","Skills enabled","80.3","domain 77.5–80.5; +2.0 points"]]},{"name":"Row F1","domain":[52.5,57],"items":[["Row F1","All skills removed","53.1","domain 52.5–57.0"],["Row F1","Skills enabled","56.5","domain 52.5–57.0; +3.4 points"]]}]
-height = 528
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
-]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
-parts.append('</svg>')
-Path("sos_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Joint skill-removal deltas with metric-specific local domains — Complete reported-value matrix
-
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use 77.5–80.5 for item F1 and 52.5–57.0 for row F1, disclose both axes, and show +2.0/+3.4 point deltas.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_evidence\_p3: Joint skill-removal deltas with metric-specific local domains - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Item F1 & All skills removed & 78.3 & domain 77.5-80.5 \\
-Item F1 & Skills enabled & 80.3 & domain 77.5-80.5; +2.0 points \\
-Row F1 & All skills removed & 53.1 & domain 52.5-57.0 \\
-Row F1 & Skills enabled & 56.5 & domain 52.5-57.0; +3.4 points \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Visible_value_matrix
-    r1["Item F1<br/>All skills removed<br/><b>78.3</b><br/>domain 77.5–80.5"]
-    r2["Item F1<br/>Skills enabled<br/><b>80.3</b><br/>domain 77.5–80.5; +2.0 points"]
-    r3["Row F1<br/>All skills removed<br/><b>53.1</b><br/>domain 52.5–57.0"]
-    r4["Row F1<br/>Skills enabled<br/><b>56.5</b><br/>domain 52.5–57.0; +3.4 points"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p3: Joint skill-removal deltas with metric-specific local domains — Complete reported-value matrix"
-rows = [["Item F1","All skills removed","78.3","domain 77.5–80.5"],["Item F1","Skills enabled","80.3","domain 77.5–80.5; +2.0 points"],["Row F1","All skills removed","53.1","domain 52.5–57.0"],["Row F1","Skills enabled","56.5","domain 52.5–57.0; +3.4 points"]]
-height = 502
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Joint skill-removal deltas with metric-specific local domains — Experiment small multiples
-
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation` from `sos_results_source`, `sos_ablations_source`. Use 77.5–80.5 for item F1 and 52.5–57.0 for row F1, disclose both axes, and show +2.0/+3.4 point deltas.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (2.75,3) {sos\_evidence\_p3: Joint skill-removal deltas with metric-specific local domains - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Item F1}\\[4pt]\textbf{All skills removed}: 78.3 -- domain 77.5-80.5\\\textbf{Skills enabled}: 80.3 -- domain 77.5-80.5; +2.0 points};
-\node[panel] at (5.5,0) {\textbf{Row F1}\\[4pt]\textbf{All skills removed}: 53.1 -- domain 52.5-57.0\\\textbf{Skills enabled}: 56.5 -- domain 52.5-57.0; +3.4 points};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Item F1"]
-    p1r1["All skills removed: 78.3<br/>domain 77.5–80.5"]
-    p1r2["Skills enabled: 80.3<br/>domain 77.5–80.5; +2.0 points"]
-  end
-  subgraph p2["Row F1"]
-    p2r1["All skills removed: 53.1<br/>domain 52.5–57.0"]
-    p2r2["Skills enabled: 56.5<br/>domain 52.5–57.0; +3.4 points"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_evidence_p3: Joint skill-removal deltas with metric-specific local domains — Experiment small multiples"
-rows = [["Item F1","All skills removed","78.3","domain 77.5–80.5"],["Item F1","Skills enabled","80.3","domain 77.5–80.5; +2.0 points"],["Row F1","All skills removed","53.1","domain 52.5–57.0"],["Row F1","Skills enabled","56.5","domain 52.5–57.0; +3.4 points"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Text anchor: "A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to"
+- Claims and sources: `sos_main_results`, `sos_schedule_ablation`, `sos_skill_ablation`, `sos_results_source`, `sos_ablations_source`
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: The paragraph already reports the bounded evidence directly: A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to 78.3 and row F1 from 56.5 to 53.1. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
+- Explanatory job: Evaluation evidence.
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Joint skill-removal deltas with metric-specific local domains — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_skill_ablation` after `sos_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_limitations_p1`
 
 - Location: `sos_limitations`, paragraph 1
-- Text anchor: "The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports the best of three runs for each case."
-- Claims and sources: `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15)
+- Text anchor: "The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports"
+- Claims and sources: `sos_citation_truth`, `sos_budget_fairness`, `sos_middleware_causality`, `sos_schema_fit_inference`, `sos_generality`, `sos_middleware_source`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What does the evaluation leave unresolved.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What does the evaluation leave unresolved — paragraph sos_limitations_p1 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_limitations\_p1: independent facets};
-\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction\\[3pt]and reports the best of three runs for each case};
-\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]It does not report mean performance or variance across those runs\\[3pt]and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Tested or reported scope"]
-    g1i1["The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction"]
-    g1i2["and reports the best of three runs for each case"]
-  end
-  subgraph g2["Unestablished or missing evidence"]
-    g2i1["It does not report mean performance or variance across those runs"]
-    g2i2["and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p1: independent facets"
-groups = [{"title":"Tested or reported scope","items":["The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction","and reports the best of three runs for each case"]},{"title":"Unestablished or missing evidence","items":["It does not report mean performance or variance across those runs","and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness"]}]
-width = 900
-height = 404
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What does the evaluation leave unresolved — paragraph sos_limitations_p1 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_limitations\_p1: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-limitations & Independent facet 1 & The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction \\
-limitations & Independent facet 2 & and reports the best of three runs for each case \\
-limitations & Independent facet 3 & It does not report mean performance or variance across those runs \\
-limitations & Independent facet 4 & and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_limitations_p1: non-directional evidence ledger"]
-    r1["limitations<br/><b>Independent facet 1</b><br/>The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction"]
-    r2["limitations<br/><b>Independent facet 2</b><br/>and reports the best of three runs for each case"]
-    r3["limitations<br/><b>Independent facet 3</b><br/>It does not report mean performance or variance across those runs"]
-    r4["limitations<br/><b>Independent facet 4</b><br/>and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p1: non-directional evidence ledger"
-rows = [["limitations","Independent facet 1","The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction"],["limitations","Independent facet 2","and reports the best of three runs for each case"],["limitations","Independent facet 3","It does not report mean performance or variance across those runs"],["limitations","Independent facet 4","and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness"]]
-height = 518
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What does the evaluation leave unresolved — paragraph sos_limitations_p1 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_limitations\_p1: claim-boundary constellation};
-\node[box] (center) at (3,0) {What does the evaluation leave unresolved};
-\node[box] (f1) at (0,2) {The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction};
-\node[box] (f2) at (6,2) {and reports the best of three runs for each case};
-\node[box] (f3) at (0,0) {It does not report mean performance or variance across those runs};
-\node[box] (f4) at (6,0) {and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness};
-\draw (center) -- node[rel] {scope boundary} (f1);
-\draw (center) -- node[rel] {scope boundary} (f2);
-\draw (center) -- node[rel] {scope boundary} (f3);
-\draw (center) -- node[rel] {scope boundary} (f4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What does the evaluation leave unresolved"]
-  f1["The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction"]
-  f2["and reports the best of three runs for each case"]
-  f3["It does not report mean performance or variance across those runs"]
-  f4["and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness"]
-  center ---|"scope boundary"| f1
-  center ---|"scope boundary"| f2
-  center ---|"scope boundary"| f3
-  center ---|"scope boundary"| f4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p1: claim-boundary constellation"
-nodes = [["center","What does the evaluation leave unresolved",460,220],["f1","The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction",100,40],["f2","and reports the best of three runs for each case",820,40],["f3","It does not report mean performance or variance across those runs",100,220],["f4","and the paper does not document matched end-to-end budgets for every baseline in enough detail to settle cost fairness",820,220]]
-edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports the best of three runs for each case. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_limitations_p2`
 
 - Location: `sos_limitations`, paragraph 2
-- Text anchor: "A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true."
-- Claims and sources: `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15)
+- Text anchor: "A URL and anchored excerpt preserve provenance but do not independently prove that the"
+- Claims and sources: `sos_citation_truth`, `sos_budget_fairness`, `sos_middleware_causality`, `sos_schema_fit_inference`, `sos_generality`, `sos_middleware_source`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What does the evaluation leave unresolved.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What does the evaluation leave unresolved — paragraph sos_limitations_p2 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_limitations\_p2: independent facets};
-\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]and the benchmarks' structured answer formats may particularly suit relational schema completion};
-\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true\\[3pt]Citation correctness is not reported as a separate metric\\[3pt]The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Tested or reported scope"]
-    g1i1["and the benchmarks' structured answer formats may particularly suit relational schema completion"]
-  end
-  subgraph g2["Unestablished or missing evidence"]
-    g2i1["A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true"]
-    g2i2["Citation correctness is not reported as a separate metric"]
-    g2i3["The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p2: independent facets"
-groups = [{"title":"Tested or reported scope","items":["and the benchmarks' structured answer formats may particularly suit relational schema completion"]},{"title":"Unestablished or missing evidence","items":["A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true","Citation correctness is not reported as a separate metric","The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What does the evaluation leave unresolved — paragraph sos_limitations_p2 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_limitations\_p2: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-limitations & Independent facet 1 & A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true \\
-limitations & Independent facet 2 & Citation correctness is not reported as a separate metric \\
-limitations & Independent facet 3 & The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment \\
-limitations & Independent facet 4 & and the benchmarks' structured answer formats may particularly suit relational schema completion \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_limitations_p2: non-directional evidence ledger"]
-    r1["limitations<br/><b>Independent facet 1</b><br/>A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true"]
-    r2["limitations<br/><b>Independent facet 2</b><br/>Citation correctness is not reported as a separate metric"]
-    r3["limitations<br/><b>Independent facet 3</b><br/>The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment"]
-    r4["limitations<br/><b>Independent facet 4</b><br/>and the benchmarks' structured answer formats may particularly suit relational schema completion"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p2: non-directional evidence ledger"
-rows = [["limitations","Independent facet 1","A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true"],["limitations","Independent facet 2","Citation correctness is not reported as a separate metric"],["limitations","Independent facet 3","The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment"],["limitations","Independent facet 4","and the benchmarks' structured answer formats may particularly suit relational schema completion"]]
-height = 518
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What does the evaluation leave unresolved — paragraph sos_limitations_p2 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_limitations\_p2: claim-boundary constellation};
-\node[box] (center) at (3,0) {What does the evaluation leave unresolved};
-\node[box] (f1) at (0,2) {A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true};
-\node[box] (f2) at (6,2) {Citation correctness is not reported as a separate metric};
-\node[box] (f3) at (0,0) {The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment};
-\node[box] (f4) at (6,0) {and the benchmarks' structured answer formats may particularly suit relational schema completion};
-\draw (center) -- node[rel] {scope boundary} (f1);
-\draw (center) -- node[rel] {scope boundary} (f2);
-\draw (center) -- node[rel] {scope boundary} (f3);
-\draw (center) -- node[rel] {scope boundary} (f4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What does the evaluation leave unresolved"]
-  f1["A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true"]
-  f2["Citation correctness is not reported as a separate metric"]
-  f3["The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment"]
-  f4["and the benchmarks' structured answer formats may particularly suit relational schema completion"]
-  center ---|"scope boundary"| f1
-  center ---|"scope boundary"| f2
-  center ---|"scope boundary"| f3
-  center ---|"scope boundary"| f4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p2: claim-boundary constellation"
-nodes = [["center","What does the evaluation leave unresolved",460,220],["f1","A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true",100,40],["f2","Citation correctness is not reported as a separate metric",820,40],["f3","The middleware analysis shows three representative interventions rather than a controlled middleware-removal experiment",100,220],["f4","and the benchmarks' structured answer formats may particularly suit relational schema completion",820,220]]
-edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_limitations_p3`
 
 - Location: `sos_limitations`, paragraph 3
-- Text anchor: "The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search, and improved adaptation for future work."
-- Claims and sources: `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15)
+- Text anchor: "The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader"
+- Claims and sources: `sos_citation_truth`, `sos_budget_fairness`, `sos_middleware_causality`, `sos_schema_fit_inference`, `sos_generality`, `sos_middleware_source`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for What does the evaluation leave unresolved.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — What does the evaluation leave unresolved — paragraph sos_limitations_p3 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_limitations\_p3: independent facets};
-\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search};
-\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]and improved adaptation for future work};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Tested or reported scope"]
-    g1i1["The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search"]
-  end
-  subgraph g2["Unestablished or missing evidence"]
-    g2i1["and improved adaptation for future work"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p3: independent facets"
-groups = [{"title":"Tested or reported scope","items":["The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search"]},{"title":"Unestablished or missing evidence","items":["and improved adaptation for future work"]}]
-width = 900
-height = 312
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — What does the evaluation leave unresolved — paragraph sos_limitations_p3 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 2 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_limitations\_p3: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-limitations & Independent facet 1 & The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search \\
-limitations & Independent facet 2 & and improved adaptation for future work \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_limitations_p3: non-directional evidence ledger"]
-    r1["limitations<br/><b>Independent facet 1</b><br/>The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search"]
-    r2["limitations<br/><b>Independent facet 2</b><br/>and improved adaptation for future work"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p3: non-directional evidence ledger"
-rows = [["limitations","Independent facet 1","The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search"],["limitations","Independent facet 2","and improved adaptation for future work"]]
-height = 334
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — What does the evaluation leave unresolved — paragraph sos_limitations_p3 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 2 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_citation_truth` (NOT_ESTABLISHED, UNRESOLVED); `sos_budget_fairness` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_schema_fit_inference` (EXPLAINER_INFERENCE, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_middleware_source` (Sections 3.3–3.4, Equations 11–18, Figures 3–4, PDF pages 7–9); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_limitations\_p3: claim-boundary constellation};
-\node[box] (center) at (3,0) {What does the evaluation leave unresolved};
-\node[box] (f1) at (0,2) {The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search};
-\node[box] (f2) at (6,2) {and improved adaptation for future work};
-\draw (center) -- node[rel] {scope boundary} (f1);
-\draw (center) -- node[rel] {scope boundary} (f2);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["What does the evaluation leave unresolved"]
-  f1["The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search"]
-  f2["and improved adaptation for future work"]
-  center ---|"scope boundary"| f1
-  center ---|"scope boundary"| f2
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_limitations_p3: claim-boundary constellation"
-nodes = [["center","What does the evaluation leave unresolved",460,220],["f1","The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search",100,40],["f2","and improved adaptation for future work",820,40]]
-edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal search, and improved adaptation for future work. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_review_p1`
 
 - Location: `sos_review`, paragraph 1
-- Text anchor: "The paper provides bounded engineering evidence for making research state explicit."
-- Claims and sources: `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15)
+- Text anchor: "The paper provides bounded engineering evidence for making research state explicit. The schema, evidence"
+- Claims and sources: `sos_schedule_ablation`, `sos_skill_ablation`, `sos_explicit_state_interpretation`, `sos_middleware_causality`, `sos_recall_interpretation`, `sos_generality`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for Which conclusions follow from the ablations, and which do not.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p1 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_review\_p1: independent facets};
-\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The paper provides bounded engineering evidence for making research state explicit\\[3pt]The schema, evidence gate, progress sensors\\[3pt]and scheduler define inspectable responsibilities\\[3pt]while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets};
-\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Supported conclusion"]
-    g1i1["The paper provides bounded engineering evidence for making research state explicit"]
-    g1i2["The schema, evidence gate, progress sensors"]
-    g1i3["and scheduler define inspectable responsibilities"]
-    g1i4["while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]
-  end
-  subgraph g2["Rejected overclaim or qualification"]
-    g2i1["while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p1: independent facets"
-groups = [{"title":"Supported conclusion","items":["The paper provides bounded engineering evidence for making research state explicit","The schema, evidence gate, progress sensors","and scheduler define inspectable responsibilities","while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]},{"title":"Rejected overclaim or qualification","items":["while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]}]
-width = 900
-height = 588
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p1 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_review\_p1: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-critical review & Independent facet 1 & The paper provides bounded engineering evidence for making research state explicit \\
-critical review & Independent facet 2 & The schema, evidence gate, progress sensors \\
-critical review & Independent facet 3 & and scheduler define inspectable responsibilities \\
-critical review & Independent facet 4 & while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_review_p1: non-directional evidence ledger"]
-    r1["critical review<br/><b>Independent facet 1</b><br/>The paper provides bounded engineering evidence for making research state explicit"]
-    r2["critical review<br/><b>Independent facet 2</b><br/>The schema, evidence gate, progress sensors"]
-    r3["critical review<br/><b>Independent facet 3</b><br/>and scheduler define inspectable responsibilities"]
-    r4["critical review<br/><b>Independent facet 4</b><br/>while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p1: non-directional evidence ledger"
-rows = [["critical review","Independent facet 1","The paper provides bounded engineering evidence for making research state explicit"],["critical review","Independent facet 2","The schema, evidence gate, progress sensors"],["critical review","Independent facet 3","and scheduler define inspectable responsibilities"],["critical review","Independent facet 4","while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]]
-height = 518
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p1 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_review\_p1: claim-boundary constellation};
-\node[box] (center) at (3,0) {Which conclusions follow from the ablations, and which do not};
-\node[box] (f1) at (0,2) {The paper provides bounded engineering evidence for making research state explicit};
-\node[box] (f2) at (6,2) {The schema, evidence gate, progress sensors};
-\node[box] (f3) at (0,0) {and scheduler define inspectable responsibilities};
-\node[box] (f4) at (6,0) {while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets};
-\draw (center) -- node[rel] {support or qualification} (f1);
-\draw (center) -- node[rel] {support or qualification} (f2);
-\draw (center) -- node[rel] {support or qualification} (f3);
-\draw (center) -- node[rel] {support or qualification} (f4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["Which conclusions follow from the ablations, and which do not"]
-  f1["The paper provides bounded engineering evidence for making research state explicit"]
-  f2["The schema, evidence gate, progress sensors"]
-  f3["and scheduler define inspectable responsibilities"]
-  f4["while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets"]
-  center ---|"support or qualification"| f1
-  center ---|"support or qualification"| f2
-  center ---|"support or qualification"| f3
-  center ---|"support or qualification"| f4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p1: claim-boundary constellation"
-nodes = [["center","Which conclusions follow from the ablations, and which do not",460,220],["f1","The paper provides bounded engineering evidence for making research state explicit",100,40],["f2","The schema, evidence gate, progress sensors",820,40],["f3","and scheduler define inspectable responsibilities",100,220],["f4","while the scheduling and skill ablations support specific efficiency and quality benefits on their tested subsets",820,220]]
-edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 520
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The paper provides bounded engineering evidence for making research state explicit. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
 
 ## `sos_review_p2`
 
 - Location: `sos_review`, paragraph 2
-- Text anchor: "The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning, or skills individually."
-- Claims and sources: `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15)
+- Text anchor: "The main benchmark comparison evaluates the complete system, so it cannot assign the overall"
+- Claims and sources: `sos_schedule_ablation`, `sos_skill_ablation`, `sos_explicit_state_interpretation`, `sos_middleware_causality`, `sos_recall_interpretation`, `sos_generality`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
-- Explanatory job: Non-directional contingency audit for Which conclusions follow from the ablations, and which do not.
-- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
-
-### Treatment A — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p2 — independent scope panels
-
-- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
-- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
-\node[font=\bfseries] at (3,3.1) {sos\_review\_p2: independent facets};
-\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The main benchmark comparison evaluates the complete system\\[3pt]or skills individually\\[3pt]The authors connect the recall gains to coverage-aware dispatch};
-\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning\\[3pt]that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph g1["Supported conclusion"]
-    g1i1["The main benchmark comparison evaluates the complete system"]
-    g1i2["or skills individually"]
-    g1i3["The authors connect the recall gains to coverage-aware dispatch"]
-  end
-  subgraph g2["Rejected overclaim or qualification"]
-    g2i1["so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning"]
-    g2i2["that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p2: independent facets"
-groups = [{"title":"Supported conclusion","items":["The main benchmark comparison evaluates the complete system","or skills individually","The authors connect the recall gains to coverage-aware dispatch"]},{"title":"Rejected overclaim or qualification","items":["so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning","that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding"]}]
-width = 900
-height = 496
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, group in enumerate(groups):
-    x = 200 + group_index * 400
-    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
-    for item_index, item in enumerate(group["items"]):
-        y = 115 + item_index * 92
-        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        for line_index, line in enumerate(wrap(item, width=50)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p2 — evidence and boundary ledger
-
-- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
-- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{array}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{sos\_review\_p2: non-directional evidence ledger}\\[6pt]
-\begin{tabular}{p{4cm}p{6cm}p{8cm}}
-\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
-critical review & Independent facet 1 & The main benchmark comparison evaluates the complete system \\
-critical review & Independent facet 2 & so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning \\
-critical review & Independent facet 3 & or skills individually \\
-critical review & Independent facet 4 & The authors connect the recall gains to coverage-aware dispatch \\
-critical review & Independent facet 5 & that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding \\
-\end{tabular}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Ledger["sos_review_p2: non-directional evidence ledger"]
-    r1["critical review<br/><b>Independent facet 1</b><br/>The main benchmark comparison evaluates the complete system"]
-    r2["critical review<br/><b>Independent facet 2</b><br/>so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning"]
-    r3["critical review<br/><b>Independent facet 3</b><br/>or skills individually"]
-    r4["critical review<br/><b>Independent facet 4</b><br/>The authors connect the recall gains to coverage-aware dispatch"]
-    r5["critical review<br/><b>Independent facet 5</b><br/>that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p2: non-directional evidence ledger"
-rows = [["critical review","Independent facet 1","The main benchmark comparison evaluates the complete system"],["critical review","Independent facet 2","so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning"],["critical review","Independent facet 3","or skills individually"],["critical review","Independent facet 4","The authors connect the recall gains to coverage-aware dispatch"],["critical review","Independent facet 5","that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding"]]
-height = 610
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
-    f'<rect width="1200" height="{height}" fill="white"/>',
-]
-headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
-xs = [30, 300, 700]
-for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
-for row_index, row in enumerate(rows):
-    y = 110 + row_index * 92
-    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [30, 48, 60]):
-        for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Which conclusions follow from the ablations, and which do not — paragraph sos_review_p2 — non-directional claim constellation
-
-- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
-- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
-- Evidence and limitations: Use only `sos_schedule_ablation` (OBSERVED, VERIFIED); `sos_skill_ablation` (OBSERVED, VERIFIED); `sos_explicit_state_interpretation` (EXPLAINER_INFERENCE, VERIFIED); `sos_middleware_causality` (NOT_ESTABLISHED, UNRESOLVED); `sos_recall_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `sos_generality` (NOT_ESTABLISHED, UNRESOLVED); `sos_results_source` (Section 4, Table 2, PDF pages 9–11); `sos_ablations_source` (Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13); `sos_scope_source` (Scope note in Section 3.4 and Section 7, PDF pages 9 and 15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
-- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
-- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,2) {sos\_review\_p2: claim-boundary constellation};
-\node[box] (center) at (3,0) {Which conclusions follow from the ablations, and which do not};
-\node[box] (f1) at (0,2) {The main benchmark comparison evaluates the complete system};
-\node[box] (f2) at (6,2) {so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning};
-\node[box] (f3) at (0,0) {or skills individually};
-\node[box] (f4) at (6,0) {The authors connect the recall gains to coverage-aware dispatch};
-\node[box] (f5) at (0,-2) {that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding};
-\draw (center) -- node[rel] {support or qualification} (f1);
-\draw (center) -- node[rel] {support or qualification} (f2);
-\draw (center) -- node[rel] {support or qualification} (f3);
-\draw (center) -- node[rel] {support or qualification} (f4);
-\draw (center) -- node[rel] {support or qualification} (f5);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  center["Which conclusions follow from the ablations, and which do not"]
-  f1["The main benchmark comparison evaluates the complete system"]
-  f2["so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning"]
-  f3["or skills individually"]
-  f4["The authors connect the recall gains to coverage-aware dispatch"]
-  f5["that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding"]
-  center ---|"support or qualification"| f1
-  center ---|"support or qualification"| f2
-  center ---|"support or qualification"| f3
-  center ---|"support or qualification"| f4
-  center ---|"support or qualification"| f5
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "sos_review_p2: claim-boundary constellation"
-nodes = [["center","Which conclusions follow from the ablations, and which do not",460,220],["f1","The main benchmark comparison evaluates the complete system",100,40],["f2","so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning",820,40],["f3","or skills individually",100,220],["f4","The authors connect the recall gains to coverage-aware dispatch",820,220],["f5","that explanation is consistent with the result pattern but remains an interpretation rather than a controlled causal finding",100,400]]
-edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = 1000
-height = 540
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
-]
-for source, target, relation, directed in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    marker = ' marker-end="url(#arrow)"' if directed else ''
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=24)):
-        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("sos_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
-```
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, coverage-aware scheduling, schema planning, or skills individually. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
+- Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
-- Shared paragraph scope: NONE
-- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
-- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
-- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
-- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
+- Evidence deviations: `NONE`
