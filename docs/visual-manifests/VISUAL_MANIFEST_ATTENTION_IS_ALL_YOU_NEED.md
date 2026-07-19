@@ -3,7 +3,7 @@
 - Paper ID: `paper_attention_is_all_you_need`
 - Exact paper version: `v7`
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `18 / 18` prose paragraphs
@@ -15,7 +15,7 @@
   - `source_attention_arxiv_record` — arXiv record for Attention Is All You Need v7; Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023
   - `source_attention_arxiv_license` — arXiv non-exclusive license to distribute; License terms granting arXiv a perpetual non-exclusive distribution right
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `attn_why_p1`
 
@@ -23,18 +23,18 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 - Text anchor: "Recurrent sequence models process positions through a chain of hidden states."
 - Claims and sources: `attn_002` (OBSERVED, VERIFIED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice)
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct recurrent, convolutional, and self-attention path length while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Recurrent, convolutional, and self-attention path length.
+- Decision rationale: A visual passes the removal test because the reader must compare how a distant dependency traverses recurrence, convolution, and self-attention. Revision 4 replaces clause cards with actual handoff and hop topology.
+- Explanatory job: Recurrent handoffs, convolutional hop growth, and a direct self-attention path.
 - Recommended scope and placement: This paragraph only; place the visual immediately after `attn_why_p1`.
-- QA-informed planning change: Compare computational handoffs, not measured wall-clock latency; autoregressive generation remains sequential.
+- QA-informed planning change: Round-2 QA required real route marks. Every alternative now contains all three routes and preserves latency/generation boundaries.
 
-### Treatment A — Recurrent, convolutional, and self-attention path length — Route topology
+### Treatment A — Three route topologies between x₁ and xₙ
 
-- Teaching purpose: Compare the actual handoff topology among the alternatives.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. Compare computational handoffs, not measured wall-clock latency; autoregressive generation remains sequential.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show the actual chain, growing-hop, and direct-path structures.
+- Encoding and reading order: Use three aligned lanes: four recurrent position nodes joined by hidden-state handoffs; convolutional receptive-field hops whose count grows with separation; and one direct self-attention edge.
+- Evidence and limitations: Use `attn_002` and `source_attention_arxiv_v7`. The marks encode maximum computational path topology only; they do not claim measured device latency, a particular convolution kernel, or fully parallel autoregressive generation.
+- Recommended web medium: responsive SVG with semantic HTML/CSS lane fallback; optional JavaScript may highlight one route but cannot hide others.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -44,17 +44,25 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_why\_p1: Recurrent, convolutional, and self-attention path length - Route topology};
-\node[box] (n1) at (1.00,-1.50) {Recurrent sequence models process positions through a chain of hidden states};
-\node[box] (n2) at (2.50,-1.50) {That dependency makes computation within a training example inherently sequential};
-\node[box] (n3) at (4.00,-1.50) {which limits parallelization as sequences grow};
-\node[box] (n4) at (5.50,-1.50) {Convolutional sequence models can compute positions in parallel};
-\node[box] (n5) at (7.00,-1.50) {but connecting distant positions requires paths that grow with their separation};
-\draw[link] (n1) -- node[rel] {compare} (n2);
-\draw[link] (n1) -- node[rel] {compare} (n3);
-\draw[link] (n1) -- node[rel] {compare} (n4);
-\draw[link] (n1) -- node[rel] {compare} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_why\_p1: three route topologies};
+\node[box] (r1) at (0,2) {x1};
+\node[box] (r2) at (2,2) {x2};
+\node[box] (r3) at (4,2) {x3};
+\node[box] (rn) at (6,2) {xn};
+\node[box] (c1) at (0,0) {x1};
+\node[box] (ch1) at (2,0) {conv hop};
+\node[box] (ch2) at (4,0) {conv hop};
+\node[box] (cn) at (6,0) {xn};
+\node[box] (s1) at (0,-2) {x1};
+\node[box] (sn) at (6,-2) {xn};
+\draw[link] (r1) -- node[rel] {hidden-state handoff} (r2);
+\draw[link] (r2) -- node[rel] {hidden-state handoff} (r3);
+\draw[link] (r3) -- node[rel] {more handoffs as distance grows} (rn);
+\draw[link] (c1) -- node[rel] {receptive-field hop} (ch1);
+\draw[link] (ch1) -- node[rel] {hop growth} (ch2);
+\draw[link] (ch2) -- node[rel] {reaches distant position} (cn);
+\draw[link] (s1) -- node[rel] {direct within-layer attention} (sn);
 \end{tikzpicture}
 \end{document}
 ```
@@ -63,15 +71,23 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 
 ```mermaid
 flowchart LR
-  n1["Recurrent sequence models process positions through a chain of hidden states"]
-  n2["That dependency makes computation within a training example inherently sequential"]
-  n3["which limits parallelization as sequences grow"]
-  n4["Convolutional sequence models can compute positions in parallel"]
-  n5["but connecting distant positions requires paths that grow with their separation"]
-  n1 -->|"compare"| n2
-  n1 -->|"compare"| n3
-  n1 -->|"compare"| n4
-  n1 -->|"compare"| n5
+  r1["x₁"]
+  r2["x₂"]
+  r3["x₃"]
+  rn["xₙ"]
+  c1["x₁"]
+  ch1["conv hop"]
+  ch2["conv hop"]
+  cn["xₙ"]
+  s1["x₁"]
+  sn["xₙ"]
+  r1 -->|"hidden-state handoff"| r2
+  r2 -->|"hidden-state handoff"| r3
+  r3 -->|"more handoffs as distance grows"| rn
+  c1 -->|"receptive-field hop"| ch1
+  ch1 -->|"hop growth"| ch2
+  ch2 -->|"reaches distant position"| cn
+  s1 -->|"direct within-layer attention"| sn
 ```
 
 #### Python
@@ -81,38 +97,40 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p1: Recurrent, convolutional, and self-attention path length — Route topology"
-nodes = [["n1","Recurrent sequence models process positions through a chain of hidden states",100,150],["n2","That dependency makes computation within a training example inherently sequential",250,150],["n3","which limits parallelization as sequences grow",400,150],["n4","Convolutional sequence models can compute positions in parallel",550,150],["n5","but connecting distant positions requires paths that grow with their separation",700,150]]
-edges = [["n1","n2","compare"],["n1","n3","compare"],["n1","n4","compare"],["n1","n5","compare"]]
+title = "attn_why_p1: three route topologies"
+nodes = [["r1","x₁",100,40],["r2","x₂",340,40],["r3","x₃",580,40],["rn","xₙ",820,40],["c1","x₁",100,220],["ch1","conv hop",340,220],["ch2","conv hop",580,220],["cn","xₙ",820,220],["s1","x₁",100,400],["sn","xₙ",820,400]]
+edges = [["r1","r2","hidden-state handoff",true],["r2","r3","hidden-state handoff",true],["r3","rn","more handoffs as distance grows",true],["c1","ch1","receptive-field hop",true],["ch1","ch2","hop growth",true],["ch2","cn","reaches distant position",true],["s1","sn","direct within-layer attention",true]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Recurrent, convolutional, and self-attention path length — Handoff ledger
+### Treatment B — Path-growth comparison ledger
 
-- Teaching purpose: Expose route, sequential dependency, and scope in visible columns.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. Compare computational handoffs, not measured wall-clock latency; autoregressive generation remains sequential.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Make the route topology, growth behavior, and boundary visible as complete text.
+- Encoding and reading order: Render one row per architecture with symbolic path marks and an explicit interpretation column.
+- Evidence and limitations: Use `attn_002` and `source_attention_arxiv_v7`. The marks encode maximum computational path topology only; they do not claim measured device latency, a particular convolution kernel, or fully parallel autoregressive generation.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -123,12 +141,12 @@ Path("attn_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_why\_p1: Recurrent, convolutional, and self-attention path length - Handoff ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Long-range information takes different routes & Recurrent route & qualitative & A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance. \\
-Long-range information takes different routes & Convolutional route & qualitative & Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation. \\
-Long-range information takes different routes & Self-attention route & qualitative & Within one self-attention layer, any position can directly exchange information with every available position through one attention operation. \\
+\node[align=center] {\textbf{attn\_why\_p1: path-growth ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+Recurrent route & x1 to x2 to x3 to x4; adjacent handoffs continue to xn & Sequential handoffs grow with position distance \\
+Convolutional route & x1  receptive-field hops  xn & Positions compute in parallel, but hop count still grows with separation \\
+Self-attention route & x1  xn within one layer & Direct available-position exchange; not wall-clock latency or parallel generation \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -138,10 +156,10 @@ Long-range information takes different routes & Self-attention route & qualitati
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Long-range information takes different routes<br/>Recurrent route<br/><b>qualitative</b><br/>A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance."]
-    r2["Long-range information takes different routes<br/>Convolutional route<br/><b>qualitative</b><br/>Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation."]
-    r3["Long-range information takes different routes<br/>Self-attention route<br/><b>qualitative</b><br/>Within one self-attention layer, any position can directly exchange information with every available position through one attention operation."]
+  subgraph Ledger["attn_why_p1: path-growth ledger"]
+    r1["Recurrent route<br/><b>x₁ → x₂ → x₃ → x₄; adjacent handoffs continue to xₙ</b><br/>Sequential handoffs grow with position distance"]
+    r2["Convolutional route<br/><b>x₁ → receptive-field hops → xₙ</b><br/>Positions compute in parallel, but hop count still grows with separation"]
+    r3["Self-attention route<br/><b>x₁ → xₙ within one layer</b><br/>Direct available-position exchange; not wall-clock latency or parallel generation"]
   end
 ```
 
@@ -152,36 +170,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p1: Recurrent, convolutional, and self-attention path length — Handoff ledger"
-rows = [["Long-range information takes different routes","Recurrent route","qualitative","A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance."],["Long-range information takes different routes","Convolutional route","qualitative","Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation."],["Long-range information takes different routes","Self-attention route","qualitative","Within one self-attention layer, any position can directly exchange information with every available position through one attention operation."]]
-height = 414
+title = "attn_why_p1: path-growth ledger"
+rows = [["Recurrent route","x₁ → x₂ → x₃ → x₄; adjacent handoffs continue to xₙ","Sequential handoffs grow with position distance"],["Convolutional route","x₁ → receptive-field hops → xₙ","Positions compute in parallel, but hop count still grows with separation"],["Self-attention route","x₁ → xₙ within one layer","Direct available-position exchange; not wall-clock latency or parallel generation"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Recurrent, convolutional, and self-attention path length — Position-to-position trace
+### Treatment C — Near-to-far position trace
 
-- Teaching purpose: Follow one conceptual dependency across bounded route panels.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. Compare computational handoffs, not measured wall-clock latency; autoregressive generation remains sequential.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show how increasing separation changes recurrence and convolution while self-attention remains direct within a layer.
+- Encoding and reading order: Use near/far panels with the same three routes and a separate boundary panel. No numeric latency or kernel-specific hop count is invented.
+- Evidence and limitations: Use `attn_002` and `source_attention_arxiv_v7`. The marks encode maximum computational path topology only; they do not claim measured device latency, a particular convolution kernel, or fully parallel autoregressive generation.
+- Recommended web medium: CSS/SVG small multiples; optional JavaScript distance focus must retain the static near/far states.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -190,9 +208,11 @@ Path("attn_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_why\_p1: Recurrent, convolutional, and self-attention path length - Position-to-position trace};
-\node[panel] at (0,0) {\textbf{Long-range information takes different routes}\\[4pt]\textbf{Recurrent route}: qualitative -- A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance.\\\textbf{Convolutional route}: qualitative -- Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation.\\\textbf{Self-attention route}: qualitative -- Within one self-attention layer, any position can directly exchange information with every available position through one attention operation.};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (6,3.1) {attn\_why\_p1: near-to-far trace};
+\node[panel] at (0,0) {\textbf{Near positions}\\[5pt]Recurrence uses a short chain\\[3pt]Convolution uses a short receptive-field route\\[3pt]Self-attention uses one direct within-layer route};
+\node[panel] at (6,0) {\textbf{Far positions}\\[5pt]Recurrent handoffs increase\\[3pt]Convolutional hops increase with separation\\[3pt]Self-attention remains direct within the layer};
+\node[panel] at (12,0) {\textbf{Boundary}\\[5pt]Topology is computational path length, not measured latency\\[3pt]Autoregressive generation still selects tokens sequentially};
 \end{tikzpicture}
 \end{document}
 ```
@@ -201,10 +221,19 @@ Path("attn_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8
 
 ```mermaid
 flowchart LR
-  subgraph p1["Long-range information takes different routes"]
-    p1r1["Recurrent route: qualitative<br/>A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance."]
-    p1r2["Convolutional route: qualitative<br/>Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation."]
-    p1r3["Self-attention route: qualitative<br/>Within one self-attention layer, any position can directly exchange information with every available position through one attention operation."]
+  subgraph g1["Near positions"]
+    g1i1["Recurrence uses a short chain"]
+    g1i2["Convolution uses a short receptive-field route"]
+    g1i3["Self-attention uses one direct within-layer route"]
+  end
+  subgraph g2["Far positions"]
+    g2i1["Recurrent handoffs increase"]
+    g2i2["Convolutional hops increase with separation"]
+    g2i3["Self-attention remains direct within the layer"]
+  end
+  subgraph g3["Boundary"]
+    g3i1["Topology is computational path length, not measured latency"]
+    g3i2["Autoregressive generation still selects tokens sequentially"]
   end
 ```
 
@@ -215,28 +244,24 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p1: Recurrent, convolutional, and self-attention path length — Position-to-position trace"
-rows = [["Long-range information takes different routes","Recurrent route","qualitative","A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance."],["Long-range information takes different routes","Convolutional route","qualitative","Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation."],["Long-range information takes different routes","Self-attention route","qualitative","Within one self-attention layer, any position can directly exchange information with every available position through one attention operation."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_why_p1: near-to-far trace"
+groups = [{"title":"Near positions","items":["Recurrence uses a short chain","Convolution uses a short receptive-field route","Self-attention uses one direct within-layer route"]},{"title":"Far positions","items":["Recurrent handoffs increase","Convolutional hops increase with separation","Self-attention remains direct within the layer"]},{"title":"Boundary","items":["Topology is computational path length, not measured latency","Autoregressive generation still selects tokens sequentially"]}]
+width = 1200
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -260,18 +285,18 @@ Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 - Text anchor: "Attention already helped encoder-decoder systems retrieve information across a sequence, but it was usually combined with recurrence."
 - Claims and sources: `attn_002` (OBSERVED, VERIFIED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why was a different sequence model needed.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why was a different sequence model needed — paragraph attn_why_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_002` (OBSERVED, VERIFIED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -280,9 +305,10 @@ Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_why\_p2: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Attention already helped encoder-decoder systems retrieve information across a sequence\\\textbf{Statement 2}: qualitative -- but it was usually combined with recurrence\\\textbf{Statement 3}: qualitative -- The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_why\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]Attention already helped encoder-decoder systems retrieve information across a sequence\\[3pt]but it was usually combined with recurrence};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them};
 \end{tikzpicture}
 \end{document}
 ```
@@ -291,10 +317,12 @@ Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Attention already helped encoder-decoder systems retrieve information across a sequence"]
-    p1r2["Statement 2: qualitative<br/>but it was usually combined with recurrence"]
-    p1r3["Statement 3: qualitative<br/>The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
+  subgraph g1["Premise or requirement"]
+    g1i1["Attention already helped encoder-decoder systems retrieve information across a sequence"]
+    g1i2["but it was usually combined with recurrence"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
   end
 ```
 
@@ -305,39 +333,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p2: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","Attention already helped encoder-decoder systems retrieve information across a sequence"],["Paragraph evidence","Statement 2","qualitative","but it was usually combined with recurrence"],["Paragraph evidence","Statement 3","qualitative","The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_why_p2: independent facets"
+groups = [{"title":"Premise or requirement","items":["Attention already helped encoder-decoder systems retrieve information across a sequence","but it was usually combined with recurrence"]},{"title":"Constraint or research boundary","items":["The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why was a different sequence model needed — paragraph attn_why_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_002` (OBSERVED, VERIFIED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -348,12 +372,12 @@ Path("attn_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_why\_p2: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Attention already helped encoder-decoder systems retrieve information across a sequence \\
-Paragraph evidence & Statement 2 & qualitative & but it was usually combined with recurrence \\
-Paragraph evidence & Statement 3 & qualitative & The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them \\
+\node[align=center] {\textbf{attn\_why\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & Attention already helped encoder-decoder systems retrieve information across a sequence \\
+why it exists & Independent facet 2 & but it was usually combined with recurrence \\
+why it exists & Independent facet 3 & The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -363,10 +387,10 @@ Paragraph evidence & Statement 3 & qualitative & The paper asks whether attentio
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Attention already helped encoder-decoder systems retrieve information across a sequence"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>but it was usually combined with recurrence"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
+  subgraph Ledger["attn_why_p2: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>Attention already helped encoder-decoder systems retrieve information across a sequence"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>but it was usually combined with recurrence"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
   end
 ```
 
@@ -377,36 +401,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p2: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Attention already helped encoder-decoder systems retrieve information across a sequence"],["Paragraph evidence","Statement 2","qualitative","but it was usually combined with recurrence"],["Paragraph evidence","Statement 3","qualitative","The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]]
-height = 414
+title = "attn_why_p2: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","Attention already helped encoder-decoder systems retrieve information across a sequence"],["why it exists","Independent facet 2","but it was usually combined with recurrence"],["why it exists","Independent facet 3","The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why was a different sequence model needed — paragraph attn_why_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_002` from `source_attention_arxiv_v7`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_002` (OBSERVED, VERIFIED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -414,15 +438,16 @@ Path("attn_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_why\_p2: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {Attention already helped encoder-decoder systems retrieve information across a sequence};
-\node[box] (n2) at (2.50,-1.50) {but it was usually combined with recurrence};
-\node[box] (n3) at (4.00,-1.50) {The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_why\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why was a different sequence model needed};
+\node[box] (f1) at (0,2) {Attention already helped encoder-decoder systems retrieve information across a sequence};
+\node[box] (f2) at (6,2) {but it was usually combined with recurrence};
+\node[box] (f3) at (0,0) {The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -431,11 +456,13 @@ Path("attn_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8
 
 ```mermaid
 flowchart LR
-  n1["Attention already helped encoder-decoder systems retrieve information across a sequence"]
-  n2["but it was usually combined with recurrence"]
-  n3["The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Why was a different sequence model needed"]
+  f1["Attention already helped encoder-decoder systems retrieve information across a sequence"]
+  f2["but it was usually combined with recurrence"]
+  f3["The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
 ```
 
 #### Python
@@ -445,27 +472,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_why_p2: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","Attention already helped encoder-decoder systems retrieve information across a sequence",100,150],["n2","but it was usually combined with recurrence",250,150],["n3","The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "attn_why_p2: claim-boundary constellation"
+nodes = [["center","Why was a different sequence model needed",460,220],["f1","Attention already helped encoder-decoder systems retrieve information across a sequence",100,40],["f2","but it was usually combined with recurrence",820,40],["f3","The paper asks whether attention can replace sequence-aligned recurrence and convolution rather than merely supplement them",100,220]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3193,18 +3222,18 @@ Path("attn_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 - Text anchor: "The experiments cover WMT translation and, in arXiv v7, English constituency parsing."
 - Claims and sources: `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What does the paper leave unresolved.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What does the paper leave unresolved — paragraph attn_limitations_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3213,9 +3242,10 @@ Path("attn_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The experiments cover WMT translation and, in arXiv v7, English constituency parsing\\\textbf{Statement 2}: qualitative -- They do not establish superiority across all language tasks, modalities, sequence lengths\\\textbf{Statement 3}: qualitative -- or hardware\\\textbf{Statement 4}: qualitative -- The paper reports no repeated-seed uncertainty\\\textbf{Statement 5}: qualitative -- and its decoding hyperparameters were selected on development data};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_limitations\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The experiments cover WMT translation and, in arXiv v7, English constituency parsing\\[3pt]or hardware\\[3pt]The paper reports no repeated-seed uncertainty\\[3pt]and its decoding hyperparameters were selected on development data};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]They do not establish superiority across all language tasks, modalities, sequence lengths};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3224,12 +3254,14 @@ Path("attn_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
-    p1r2["Statement 2: qualitative<br/>They do not establish superiority across all language tasks, modalities, sequence lengths"]
-    p1r3["Statement 3: qualitative<br/>or hardware"]
-    p1r4["Statement 4: qualitative<br/>The paper reports no repeated-seed uncertainty"]
-    p1r5["Statement 5: qualitative<br/>and its decoding hyperparameters were selected on development data"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
+    g1i2["or hardware"]
+    g1i3["The paper reports no repeated-seed uncertainty"]
+    g1i4["and its decoding hyperparameters were selected on development data"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["They do not establish superiority across all language tasks, modalities, sequence lengths"]
   end
 ```
 
@@ -3240,39 +3272,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The experiments cover WMT translation and, in arXiv v7, English constituency parsing"],["Paragraph evidence","Statement 2","qualitative","They do not establish superiority across all language tasks, modalities, sequence lengths"],["Paragraph evidence","Statement 3","qualitative","or hardware"],["Paragraph evidence","Statement 4","qualitative","The paper reports no repeated-seed uncertainty"],["Paragraph evidence","Statement 5","qualitative","and its decoding hyperparameters were selected on development data"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_limitations_p2: independent facets"
+groups = [{"title":"Tested or reported scope","items":["The experiments cover WMT translation and, in arXiv v7, English constituency parsing","or hardware","The paper reports no repeated-seed uncertainty","and its decoding hyperparameters were selected on development data"]},{"title":"Unestablished or missing evidence","items":["They do not establish superiority across all language tasks, modalities, sequence lengths"]}]
+width = 900
+height = 588
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What does the paper leave unresolved — paragraph attn_limitations_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3283,14 +3311,14 @@ Path("attn_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encodin
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The experiments cover WMT translation and, in arXiv v7, English constituency parsing \\
-Paragraph evidence & Statement 2 & qualitative & They do not establish superiority across all language tasks, modalities, sequence lengths \\
-Paragraph evidence & Statement 3 & qualitative & or hardware \\
-Paragraph evidence & Statement 4 & qualitative & The paper reports no repeated-seed uncertainty \\
-Paragraph evidence & Statement 5 & qualitative & and its decoding hyperparameters were selected on development data \\
+\node[align=center] {\textbf{attn\_limitations\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The experiments cover WMT translation and, in arXiv v7, English constituency parsing \\
+limitations & Independent facet 2 & They do not establish superiority across all language tasks, modalities, sequence lengths \\
+limitations & Independent facet 3 & or hardware \\
+limitations & Independent facet 4 & The paper reports no repeated-seed uncertainty \\
+limitations & Independent facet 5 & and its decoding hyperparameters were selected on development data \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3300,12 +3328,12 @@ Paragraph evidence & Statement 5 & qualitative & and its decoding hyperparameter
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>They do not establish superiority across all language tasks, modalities, sequence lengths"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>or hardware"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The paper reports no repeated-seed uncertainty"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>and its decoding hyperparameters were selected on development data"]
+  subgraph Ledger["attn_limitations_p2: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>They do not establish superiority across all language tasks, modalities, sequence lengths"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>or hardware"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>The paper reports no repeated-seed uncertainty"]
+    r5["limitations<br/><b>Independent facet 5</b><br/>and its decoding hyperparameters were selected on development data"]
   end
 ```
 
@@ -3316,36 +3344,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The experiments cover WMT translation and, in arXiv v7, English constituency parsing"],["Paragraph evidence","Statement 2","qualitative","They do not establish superiority across all language tasks, modalities, sequence lengths"],["Paragraph evidence","Statement 3","qualitative","or hardware"],["Paragraph evidence","Statement 4","qualitative","The paper reports no repeated-seed uncertainty"],["Paragraph evidence","Statement 5","qualitative","and its decoding hyperparameters were selected on development data"]]
-height = 590
+title = "attn_limitations_p2: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The experiments cover WMT translation and, in arXiv v7, English constituency parsing"],["limitations","Independent facet 2","They do not establish superiority across all language tasks, modalities, sequence lengths"],["limitations","Independent facet 3","or hardware"],["limitations","Independent facet 4","The paper reports no repeated-seed uncertainty"],["limitations","Independent facet 5","and its decoding hyperparameters were selected on development data"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What does the paper leave unresolved — paragraph attn_limitations_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3353,19 +3381,20 @@ Path("attn_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encodin
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The experiments cover WMT translation and, in arXiv v7, English constituency parsing};
-\node[box] (n2) at (2.50,-1.50) {They do not establish superiority across all language tasks, modalities, sequence lengths};
-\node[box] (n3) at (4.00,-1.50) {or hardware};
-\node[box] (n4) at (5.50,-1.50) {The paper reports no repeated-seed uncertainty};
-\node[box] (n5) at (7.00,-1.50) {and its decoding hyperparameters were selected on development data};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_limitations\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What does the paper leave unresolved};
+\node[box] (f1) at (0,2) {The experiments cover WMT translation and, in arXiv v7, English constituency parsing};
+\node[box] (f2) at (6,2) {They do not establish superiority across all language tasks, modalities, sequence lengths};
+\node[box] (f3) at (0,0) {or hardware};
+\node[box] (f4) at (6,0) {The paper reports no repeated-seed uncertainty};
+\node[box] (f5) at (0,-2) {and its decoding hyperparameters were selected on development data};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
+\draw (center) -- node[rel] {scope boundary} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3374,15 +3403,17 @@ Path("attn_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  n1["The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
-  n2["They do not establish superiority across all language tasks, modalities, sequence lengths"]
-  n3["or hardware"]
-  n4["The paper reports no repeated-seed uncertainty"]
-  n5["and its decoding hyperparameters were selected on development data"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What does the paper leave unresolved"]
+  f1["The experiments cover WMT translation and, in arXiv v7, English constituency parsing"]
+  f2["They do not establish superiority across all language tasks, modalities, sequence lengths"]
+  f3["or hardware"]
+  f4["The paper reports no repeated-seed uncertainty"]
+  f5["and its decoding hyperparameters were selected on development data"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
+  center ---|"scope boundary"| f5
 ```
 
 #### Python
@@ -3392,27 +3423,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The experiments cover WMT translation and, in arXiv v7, English constituency parsing",100,150],["n2","They do not establish superiority across all language tasks, modalities, sequence lengths",250,150],["n3","or hardware",400,150],["n4","The paper reports no repeated-seed uncertainty",550,150],["n5","and its decoding hyperparameters were selected on development data",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "attn_limitations_p2: claim-boundary constellation"
+nodes = [["center","What does the paper leave unresolved",460,220],["f1","The experiments cover WMT translation and, in arXiv v7, English constituency parsing",100,40],["f2","They do not establish superiority across all language tasks, modalities, sequence lengths",820,40],["f3","or hardware",100,220],["f4","The paper reports no repeated-seed uncertainty",820,220],["f5","and its decoding hyperparameters were selected on development data",100,400]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false],["center","f5","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3436,18 +3469,18 @@ Path("attn_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 - Text anchor: "Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences, but the reported comparison only shows near-equal in-distribution development performance against learned positions."
 - Claims and sources: `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What does the paper leave unresolved.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What does the paper leave unresolved — paragraph attn_limitations_p3 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3456,9 +3489,10 @@ Path("attn_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_limitations\_p3: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences\\\textbf{Statement 2}: qualitative -- but the reported comparison only shows near-equal in-distribution development performance against learned positions\\\textbf{Statement 3}: qualitative -- Attention examples may show patterns\\\textbf{Statement 4}: qualitative -- but the paper does not establish that attention weights are faithful causal explanations};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_limitations\_p3: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences\\[3pt]Attention examples may show patterns};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]but the reported comparison only shows near-equal in-distribution development performance against learned positions\\[3pt]but the paper does not establish that attention weights are faithful causal explanations};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3467,11 +3501,13 @@ Path("attn_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
-    p1r2["Statement 2: qualitative<br/>but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
-    p1r3["Statement 3: qualitative<br/>Attention examples may show patterns"]
-    p1r4["Statement 4: qualitative<br/>but the paper does not establish that attention weights are faithful causal explanations"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
+    g1i2["Attention examples may show patterns"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
+    g2i2["but the paper does not establish that attention weights are faithful causal explanations"]
   end
 ```
 
@@ -3482,39 +3518,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p3: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"],["Paragraph evidence","Statement 2","qualitative","but the reported comparison only shows near-equal in-distribution development performance against learned positions"],["Paragraph evidence","Statement 3","qualitative","Attention examples may show patterns"],["Paragraph evidence","Statement 4","qualitative","but the paper does not establish that attention weights are faithful causal explanations"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_limitations_p3: independent facets"
+groups = [{"title":"Tested or reported scope","items":["Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences","Attention examples may show patterns"]},{"title":"Unestablished or missing evidence","items":["but the reported comparison only shows near-equal in-distribution development performance against learned positions","but the paper does not establish that attention weights are faithful causal explanations"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What does the paper leave unresolved — paragraph attn_limitations_p3 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3525,13 +3557,13 @@ Path("attn_limitations_p3_treatment_a.svg").write_text("\n".join(parts), encodin
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_limitations\_p3: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences \\
-Paragraph evidence & Statement 2 & qualitative & but the reported comparison only shows near-equal in-distribution development performance against learned positions \\
-Paragraph evidence & Statement 3 & qualitative & Attention examples may show patterns \\
-Paragraph evidence & Statement 4 & qualitative & but the paper does not establish that attention weights are faithful causal explanations \\
+\node[align=center] {\textbf{attn\_limitations\_p3: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences \\
+limitations & Independent facet 2 & but the reported comparison only shows near-equal in-distribution development performance against learned positions \\
+limitations & Independent facet 3 & Attention examples may show patterns \\
+limitations & Independent facet 4 & but the paper does not establish that attention weights are faithful causal explanations \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3541,11 +3573,11 @@ Paragraph evidence & Statement 4 & qualitative & but the paper does not establis
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>Attention examples may show patterns"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>but the paper does not establish that attention weights are faithful causal explanations"]
+  subgraph Ledger["attn_limitations_p3: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>Attention examples may show patterns"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>but the paper does not establish that attention weights are faithful causal explanations"]
   end
 ```
 
@@ -3556,36 +3588,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p3: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"],["Paragraph evidence","Statement 2","qualitative","but the reported comparison only shows near-equal in-distribution development performance against learned positions"],["Paragraph evidence","Statement 3","qualitative","Attention examples may show patterns"],["Paragraph evidence","Statement 4","qualitative","but the paper does not establish that attention weights are faithful causal explanations"]]
-height = 502
+title = "attn_limitations_p3: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"],["limitations","Independent facet 2","but the reported comparison only shows near-equal in-distribution development performance against learned positions"],["limitations","Independent facet 3","Attention examples may show patterns"],["limitations","Independent facet 4","but the paper does not establish that attention weights are faithful causal explanations"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What does the paper leave unresolved — paragraph attn_limitations_p3 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_006`, `attn_009`, `attn_012` from `source_attention_arxiv_v7`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_006` (OBSERVED, VERIFIED); `attn_009` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3593,17 +3625,18 @@ Path("attn_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encodin
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_limitations\_p3: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences};
-\node[box] (n2) at (2.50,-1.50) {but the reported comparison only shows near-equal in-distribution development performance against learned positions};
-\node[box] (n3) at (4.00,-1.50) {Attention examples may show patterns};
-\node[box] (n4) at (5.50,-1.50) {but the paper does not establish that attention weights are faithful causal explanations};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_limitations\_p3: claim-boundary constellation};
+\node[box] (center) at (3,0) {What does the paper leave unresolved};
+\node[box] (f1) at (0,2) {Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences};
+\node[box] (f2) at (6,2) {but the reported comparison only shows near-equal in-distribution development performance against learned positions};
+\node[box] (f3) at (0,0) {Attention examples may show patterns};
+\node[box] (f4) at (6,0) {but the paper does not establish that attention weights are faithful causal explanations};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3612,13 +3645,15 @@ Path("attn_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  n1["Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
-  n2["but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
-  n3["Attention examples may show patterns"]
-  n4["but the paper does not establish that attention weights are faithful causal explanations"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What does the paper leave unresolved"]
+  f1["Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences"]
+  f2["but the reported comparison only shows near-equal in-distribution development performance against learned positions"]
+  f3["Attention examples may show patterns"]
+  f4["but the paper does not establish that attention weights are faithful causal explanations"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3628,27 +3663,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_limitations_p3: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences",100,150],["n2","but the reported comparison only shows near-equal in-distribution development performance against learned positions",250,150],["n3","Attention examples may show patterns",400,150],["n4","but the paper does not establish that attention weights are faithful causal explanations",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "attn_limitations_p3: claim-boundary constellation"
+nodes = [["center","What does the paper leave unresolved",460,220],["f1","Sinusoidal positional encodings are motivated by a hypothesis that they may extrapolate to longer sequences",100,40],["f2","but the reported comparison only shows near-equal in-distribution development performance against learned positions",820,40],["f3","Attention examples may show patterns",100,220],["f4","but the paper does not establish that attention weights are faithful causal explanations",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3672,18 +3709,18 @@ Path("attn_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encodin
 - Text anchor: "The durable contribution is narrower and clearer than the title: the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks."
 - Claims and sources: `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for How should the title and historical claim be read.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — How should the title and historical claim be read — paragraph attn_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3692,9 +3729,10 @@ Path("attn_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encodin
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The durable contribution is narrower and clearer than the title\\\textbf{Statement 2}: qualitative -- the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks\\\textbf{Statement 3}: qualitative -- Attention supplies the cross-position routing\\\textbf{Statement 4}: qualitative -- while feed-forward transformations, normalization, residual paths, embeddings, positions\\\textbf{Statement 5}: qualitative -- and autoregressive output generation remain essential};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The durable contribution is narrower and clearer than the title\\[3pt]Attention supplies the cross-position routing\\[3pt]while feed-forward transformations, normalization, residual paths, embeddings, positions\\[3pt]and autoregressive output generation remain essential};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3703,12 +3741,14 @@ Path("attn_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The durable contribution is narrower and clearer than the title"]
-    p1r2["Statement 2: qualitative<br/>the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
-    p1r3["Statement 3: qualitative<br/>Attention supplies the cross-position routing"]
-    p1r4["Statement 4: qualitative<br/>while feed-forward transformations, normalization, residual paths, embeddings, positions"]
-    p1r5["Statement 5: qualitative<br/>and autoregressive output generation remain essential"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The durable contribution is narrower and clearer than the title"]
+    g1i2["Attention supplies the cross-position routing"]
+    g1i3["while feed-forward transformations, normalization, residual paths, embeddings, positions"]
+    g1i4["and autoregressive output generation remain essential"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
   end
 ```
 
@@ -3719,39 +3759,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The durable contribution is narrower and clearer than the title"],["Paragraph evidence","Statement 2","qualitative","the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"],["Paragraph evidence","Statement 3","qualitative","Attention supplies the cross-position routing"],["Paragraph evidence","Statement 4","qualitative","while feed-forward transformations, normalization, residual paths, embeddings, positions"],["Paragraph evidence","Statement 5","qualitative","and autoregressive output generation remain essential"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The durable contribution is narrower and clearer than the title","Attention supplies the cross-position routing","while feed-forward transformations, normalization, residual paths, embeddings, positions","and autoregressive output generation remain essential"]},{"title":"Rejected overclaim or qualification","items":["the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]}]
+width = 900
+height = 588
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — How should the title and historical claim be read — paragraph attn_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3762,14 +3798,14 @@ Path("attn_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The durable contribution is narrower and clearer than the title \\
-Paragraph evidence & Statement 2 & qualitative & the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks \\
-Paragraph evidence & Statement 3 & qualitative & Attention supplies the cross-position routing \\
-Paragraph evidence & Statement 4 & qualitative & while feed-forward transformations, normalization, residual paths, embeddings, positions \\
-Paragraph evidence & Statement 5 & qualitative & and autoregressive output generation remain essential \\
+\node[align=center] {\textbf{attn\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The durable contribution is narrower and clearer than the title \\
+critical review & Independent facet 2 & the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks \\
+critical review & Independent facet 3 & Attention supplies the cross-position routing \\
+critical review & Independent facet 4 & while feed-forward transformations, normalization, residual paths, embeddings, positions \\
+critical review & Independent facet 5 & and autoregressive output generation remain essential \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3779,12 +3815,12 @@ Paragraph evidence & Statement 5 & qualitative & and autoregressive output gener
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The durable contribution is narrower and clearer than the title"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>Attention supplies the cross-position routing"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>while feed-forward transformations, normalization, residual paths, embeddings, positions"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>and autoregressive output generation remain essential"]
+  subgraph Ledger["attn_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The durable contribution is narrower and clearer than the title"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>Attention supplies the cross-position routing"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>while feed-forward transformations, normalization, residual paths, embeddings, positions"]
+    r5["critical review<br/><b>Independent facet 5</b><br/>and autoregressive output generation remain essential"]
   end
 ```
 
@@ -3795,36 +3831,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The durable contribution is narrower and clearer than the title"],["Paragraph evidence","Statement 2","qualitative","the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"],["Paragraph evidence","Statement 3","qualitative","Attention supplies the cross-position routing"],["Paragraph evidence","Statement 4","qualitative","while feed-forward transformations, normalization, residual paths, embeddings, positions"],["Paragraph evidence","Statement 5","qualitative","and autoregressive output generation remain essential"]]
-height = 590
+title = "attn_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The durable contribution is narrower and clearer than the title"],["critical review","Independent facet 2","the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"],["critical review","Independent facet 3","Attention supplies the cross-position routing"],["critical review","Independent facet 4","while feed-forward transformations, normalization, residual paths, embeddings, positions"],["critical review","Independent facet 5","and autoregressive output generation remain essential"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — How should the title and historical claim be read — paragraph attn_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3832,19 +3868,20 @@ Path("attn_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The durable contribution is narrower and clearer than the title};
-\node[box] (n2) at (2.50,-1.50) {the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks};
-\node[box] (n3) at (4.00,-1.50) {Attention supplies the cross-position routing};
-\node[box] (n4) at (5.50,-1.50) {while feed-forward transformations, normalization, residual paths, embeddings, positions};
-\node[box] (n5) at (7.00,-1.50) {and autoregressive output generation remain essential};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {How should the title and historical claim be read};
+\node[box] (f1) at (0,2) {The durable contribution is narrower and clearer than the title};
+\node[box] (f2) at (6,2) {the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks};
+\node[box] (f3) at (0,0) {Attention supplies the cross-position routing};
+\node[box] (f4) at (6,0) {while feed-forward transformations, normalization, residual paths, embeddings, positions};
+\node[box] (f5) at (0,-2) {and autoregressive output generation remain essential};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
+\draw (center) -- node[rel] {support or qualification} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3853,15 +3890,17 @@ Path("attn_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["The durable contribution is narrower and clearer than the title"]
-  n2["the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
-  n3["Attention supplies the cross-position routing"]
-  n4["while feed-forward transformations, normalization, residual paths, embeddings, positions"]
-  n5["and autoregressive output generation remain essential"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["How should the title and historical claim be read"]
+  f1["The durable contribution is narrower and clearer than the title"]
+  f2["the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks"]
+  f3["Attention supplies the cross-position routing"]
+  f4["while feed-forward transformations, normalization, residual paths, embeddings, positions"]
+  f5["and autoregressive output generation remain essential"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
+  center ---|"support or qualification"| f5
 ```
 
 #### Python
@@ -3871,27 +3910,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The durable contribution is narrower and clearer than the title",100,150],["n2","the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks",250,150],["n3","Attention supplies the cross-position routing",400,150],["n4","while feed-forward transformations, normalization, residual paths, embeddings, positions",550,150],["n5","and autoregressive output generation remain essential",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "attn_review_p1: claim-boundary constellation"
+nodes = [["center","How should the title and historical claim be read",460,220],["f1","The durable contribution is narrower and clearer than the title",100,40],["f2","the paper shows that sequence-aligned recurrent and convolutional layers are not required for a strong encoder-decoder on the tested translation tasks",820,40],["f3","Attention supplies the cross-position routing",100,220],["f4","while feed-forward transformations, normalization, residual paths, embeddings, positions",820,220],["f5","and autoregressive output generation remain essential",100,400]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3915,18 +3956,18 @@ Path("attn_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Text anchor: "Training parallelism should not be confused with fully parallel generation."
 - Claims and sources: `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for How should the title and historical claim be read.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — How should the title and historical claim be read — paragraph attn_review_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3935,9 +3976,10 @@ Path("attn_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Training parallelism should not be confused with fully parallel generation\\\textbf{Statement 2}: qualitative -- The decoder mask allows known target positions to be trained together\\\textbf{Statement 3}: qualitative -- but generation still predicts one target token at a time\\\textbf{Statement 4}: qualitative -- The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size\\\textbf{Statement 5}: qualitative -- or hardware regime};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_review\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The decoder mask allows known target positions to be trained together\\[3pt]but generation still predicts one target token at a time\\[3pt]or hardware regime};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]Training parallelism should not be confused with fully parallel generation\\[3pt]The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3946,12 +3988,14 @@ Path("attn_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Training parallelism should not be confused with fully parallel generation"]
-    p1r2["Statement 2: qualitative<br/>The decoder mask allows known target positions to be trained together"]
-    p1r3["Statement 3: qualitative<br/>but generation still predicts one target token at a time"]
-    p1r4["Statement 4: qualitative<br/>The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
-    p1r5["Statement 5: qualitative<br/>or hardware regime"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The decoder mask allows known target positions to be trained together"]
+    g1i2["but generation still predicts one target token at a time"]
+    g1i3["or hardware regime"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["Training parallelism should not be confused with fully parallel generation"]
+    g2i2["The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
   end
 ```
 
@@ -3962,39 +4006,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Training parallelism should not be confused with fully parallel generation"],["Paragraph evidence","Statement 2","qualitative","The decoder mask allows known target positions to be trained together"],["Paragraph evidence","Statement 3","qualitative","but generation still predicts one target token at a time"],["Paragraph evidence","Statement 4","qualitative","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"],["Paragraph evidence","Statement 5","qualitative","or hardware regime"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_review_p2: independent facets"
+groups = [{"title":"Supported conclusion","items":["The decoder mask allows known target positions to be trained together","but generation still predicts one target token at a time","or hardware regime"]},{"title":"Rejected overclaim or qualification","items":["Training parallelism should not be confused with fully parallel generation","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — How should the title and historical claim be read — paragraph attn_review_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4005,14 +4045,14 @@ Path("attn_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Training parallelism should not be confused with fully parallel generation \\
-Paragraph evidence & Statement 2 & qualitative & The decoder mask allows known target positions to be trained together \\
-Paragraph evidence & Statement 3 & qualitative & but generation still predicts one target token at a time \\
-Paragraph evidence & Statement 4 & qualitative & The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size \\
-Paragraph evidence & Statement 5 & qualitative & or hardware regime \\
+\node[align=center] {\textbf{attn\_review\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & Training parallelism should not be confused with fully parallel generation \\
+critical review & Independent facet 2 & The decoder mask allows known target positions to be trained together \\
+critical review & Independent facet 3 & but generation still predicts one target token at a time \\
+critical review & Independent facet 4 & The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size \\
+critical review & Independent facet 5 & or hardware regime \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -4022,12 +4062,12 @@ Paragraph evidence & Statement 5 & qualitative & or hardware regime \\
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Training parallelism should not be confused with fully parallel generation"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>The decoder mask allows known target positions to be trained together"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>but generation still predicts one target token at a time"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>or hardware regime"]
+  subgraph Ledger["attn_review_p2: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>Training parallelism should not be confused with fully parallel generation"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>The decoder mask allows known target positions to be trained together"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>but generation still predicts one target token at a time"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
+    r5["critical review<br/><b>Independent facet 5</b><br/>or hardware regime"]
   end
 ```
 
@@ -4038,36 +4078,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Training parallelism should not be confused with fully parallel generation"],["Paragraph evidence","Statement 2","qualitative","The decoder mask allows known target positions to be trained together"],["Paragraph evidence","Statement 3","qualitative","but generation still predicts one target token at a time"],["Paragraph evidence","Statement 4","qualitative","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"],["Paragraph evidence","Statement 5","qualitative","or hardware regime"]]
-height = 590
+title = "attn_review_p2: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","Training parallelism should not be confused with fully parallel generation"],["critical review","Independent facet 2","The decoder mask allows known target positions to be trained together"],["critical review","Independent facet 3","but generation still predicts one target token at a time"],["critical review","Independent facet 4","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"],["critical review","Independent facet 5","or hardware regime"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — How should the title and historical claim be read — paragraph attn_review_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4075,19 +4115,20 @@ Path("attn_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Training parallelism should not be confused with fully parallel generation};
-\node[box] (n2) at (2.50,-1.50) {The decoder mask allows known target positions to be trained together};
-\node[box] (n3) at (4.00,-1.50) {but generation still predicts one target token at a time};
-\node[box] (n4) at (5.50,-1.50) {The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size};
-\node[box] (n5) at (7.00,-1.50) {or hardware regime};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_review\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {How should the title and historical claim be read};
+\node[box] (f1) at (0,2) {Training parallelism should not be confused with fully parallel generation};
+\node[box] (f2) at (6,2) {The decoder mask allows known target positions to be trained together};
+\node[box] (f3) at (0,0) {but generation still predicts one target token at a time};
+\node[box] (f4) at (6,0) {The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size};
+\node[box] (f5) at (0,-2) {or hardware regime};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
+\draw (center) -- node[rel] {support or qualification} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4096,15 +4137,17 @@ Path("attn_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["Training parallelism should not be confused with fully parallel generation"]
-  n2["The decoder mask allows known target positions to be trained together"]
-  n3["but generation still predicts one target token at a time"]
-  n4["The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
-  n5["or hardware regime"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["How should the title and historical claim be read"]
+  f1["Training parallelism should not be confused with fully parallel generation"]
+  f2["The decoder mask allows known target positions to be trained together"]
+  f3["but generation still predicts one target token at a time"]
+  f4["The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size"]
+  f5["or hardware regime"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
+  center ---|"support or qualification"| f5
 ```
 
 #### Python
@@ -4114,27 +4157,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","Training parallelism should not be confused with fully parallel generation",100,150],["n2","The decoder mask allows known target positions to be trained together",250,150],["n3","but generation still predicts one target token at a time",400,150],["n4","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size",550,150],["n5","or hardware regime",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "attn_review_p2: claim-boundary constellation"
+nodes = [["center","How should the title and historical claim be read",460,220],["f1","Training parallelism should not be confused with fully parallel generation",100,40],["f2","The decoder mask allows known target positions to be trained together",820,40],["f3","but generation still predicts one target token at a time",100,220],["f4","The source also does not prove that its asymptotic comparison wins for every sequence length, architecture size",820,220],["f5","or hardware regime",100,400]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4158,18 +4203,18 @@ Path("attn_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Text anchor: "This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources."
 - Claims and sources: `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for How should the title and historical claim be read.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — How should the title and historical claim be read — paragraph attn_review_p3 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4178,9 +4223,10 @@ Path("attn_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {attn\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources\\\textbf{Statement 2}: qualitative -- Its visual is newly composed rather than copied\\\textbf{Statement 3}: qualitative -- the arXiv record carries a non-exclusive distribution license\\\textbf{Statement 4}: qualitative -- and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {attn\_review\_p3: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources\\[3pt]the arXiv record carries a non-exclusive distribution license};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]Its visual is newly composed rather than copied\\[3pt]and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work};
 \end{tikzpicture}
 \end{document}
 ```
@@ -4189,11 +4235,13 @@ Path("attn_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
-    p1r2["Statement 2: qualitative<br/>Its visual is newly composed rather than copied"]
-    p1r3["Statement 3: qualitative<br/>the arXiv record carries a non-exclusive distribution license"]
-    p1r4["Statement 4: qualitative<br/>and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
+  subgraph g1["Supported conclusion"]
+    g1i1["This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
+    g1i2["the arXiv record carries a non-exclusive distribution license"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["Its visual is newly composed rather than copied"]
+    g2i2["and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
   end
 ```
 
@@ -4204,39 +4252,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"],["Paragraph evidence","Statement 2","qualitative","Its visual is newly composed rather than copied"],["Paragraph evidence","Statement 3","qualitative","the arXiv record carries a non-exclusive distribution license"],["Paragraph evidence","Statement 4","qualitative","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "attn_review_p3: independent facets"
+groups = [{"title":"Supported conclusion","items":["This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources","the arXiv record carries a non-exclusive distribution license"]},{"title":"Rejected overclaim or qualification","items":["Its visual is newly composed rather than copied","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — How should the title and historical claim be read — paragraph attn_review_p3 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4247,13 +4291,13 @@ Path("attn_review_p3_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{attn\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources \\
-Paragraph evidence & Statement 2 & qualitative & Its visual is newly composed rather than copied \\
-Paragraph evidence & Statement 3 & qualitative & the arXiv record carries a non-exclusive distribution license \\
-Paragraph evidence & Statement 4 & qualitative & and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work \\
+\node[align=center] {\textbf{attn\_review\_p3: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources \\
+critical review & Independent facet 2 & Its visual is newly composed rather than copied \\
+critical review & Independent facet 3 & the arXiv record carries a non-exclusive distribution license \\
+critical review & Independent facet 4 & and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -4263,11 +4307,11 @@ Paragraph evidence & Statement 4 & qualitative & and the v7 PDF separately grant
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Its visual is newly composed rather than copied"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>the arXiv record carries a non-exclusive distribution license"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
+  subgraph Ledger["attn_review_p3: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>Its visual is newly composed rather than copied"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>the arXiv record carries a non-exclusive distribution license"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
   end
 ```
 
@@ -4278,36 +4322,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"],["Paragraph evidence","Statement 2","qualitative","Its visual is newly composed rather than copied"],["Paragraph evidence","Statement 3","qualitative","the arXiv record carries a non-exclusive distribution license"],["Paragraph evidence","Statement 4","qualitative","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]]
-height = 502
+title = "attn_review_p3: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"],["critical review","Independent facet 2","Its visual is newly composed rather than copied"],["critical review","Independent facet 3","the arXiv record carries a non-exclusive distribution license"],["critical review","Independent facet 4","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — How should the title and historical claim be read — paragraph attn_review_p3 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `attn_001`, `attn_008`, `attn_011`, `attn_012` from `source_attention_arxiv_record`, `source_attention_arxiv_v7`, `source_attention_neurips_paper`, `source_attention_neurips_landing`, `source_attention_arxiv_license`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `attn_001` (OBSERVED, VERIFIED); `attn_008` (DISPUTED, UNRESOLVED); `attn_011` (OBSERVED, VERIFIED); `attn_012` (NOT_ESTABLISHED, UNRESOLVED); `source_attention_arxiv_record` (Version history, abstract, DOI, full-text links, and license link; v7 dated August 2, 2023); `source_attention_arxiv_v7` (Pages 1-10; Sections 1-7; Figures 1-2; Equation 1; Tables 1-4; version and figure-permission notice); `source_attention_neurips_paper` (Pages 1-8; abstract, Sections 1-7, Tables 1-3; English-French result in abstract, Table 2, and Section 6.1); `source_attention_neurips_landing` (Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values); `source_attention_arxiv_license` (License terms granting arXiv a perpetual non-exclusive distribution right). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4315,17 +4359,18 @@ Path("attn_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {attn\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources};
-\node[box] (n2) at (2.50,-1.50) {Its visual is newly composed rather than copied};
-\node[box] (n3) at (4.00,-1.50) {the arXiv record carries a non-exclusive distribution license};
-\node[box] (n4) at (5.50,-1.50) {and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {attn\_review\_p3: claim-boundary constellation};
+\node[box] (center) at (3,0) {How should the title and historical claim be read};
+\node[box] (f1) at (0,2) {This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources};
+\node[box] (f2) at (6,2) {Its visual is newly composed rather than copied};
+\node[box] (f3) at (0,0) {the arXiv record carries a non-exclusive distribution license};
+\node[box] (f4) at (6,0) {and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4334,13 +4379,15 @@ Path("attn_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
-  n2["Its visual is newly composed rather than copied"]
-  n3["the arXiv record carries a non-exclusive distribution license"]
-  n4["and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["How should the title and historical claim be read"]
+  f1["This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources"]
+  f2["Its visual is newly composed rather than copied"]
+  f3["the arXiv record carries a non-exclusive distribution license"]
+  f4["and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
 ```
 
 #### Python
@@ -4350,27 +4397,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "attn_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources",100,150],["n2","Its visual is newly composed rather than copied",250,150],["n3","the arXiv record carries a non-exclusive distribution license",400,150],["n4","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "attn_review_p3: claim-boundary constellation"
+nodes = [["center","How should the title and historical claim be read",460,220],["f1","This explainer uses arXiv v7 as its canonical version and preserves the conflicting English-French results from the primary sources",100,40],["f2","Its visual is newly composed rather than copied",820,40],["f3","the arXiv record carries a non-exclusive distribution license",100,220],["f4","and the v7 PDF separately grants attributed reproduction of tables and figures only for journalistic or scholarly work",820,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("attn_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4387,4 +4436,3 @@ Path("attn_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-

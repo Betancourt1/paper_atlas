@@ -3,7 +3,7 @@
 - Paper ID: `paper_partition_prompt_aggregate`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -14,7 +14,7 @@
   - `ppa_consistency_results` — Partition, Prompt, Aggregate v1 — self-consistency definitions and evaluation; Sections 5–6, Tables 1–3, PDF pages 11–18
   - `ppa_discussion` — Partition, Prompt, Aggregate v1 — discussion and limitations; Section 7 and Limitations, PDF pages 18–19
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `ppa_why_p1`
 
@@ -289,18 +289,18 @@ Path("ppa_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 - Text anchor: "A model can give locally plausible answers while violating this requirement."
 - Claims and sources: `ppa_partition` (OBSERVED, VERIFIED); `ppa_core` (OBSERVED, VERIFIED); `ppa_method` (Sections 3.1–3.4, Equations 2–3, PDF pages 5–7)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why test language models with the law of total probability.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why test language models with the law of total probability — paragraph ppa_why_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_partition`, `ppa_core` from `ppa_method`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_partition` (OBSERVED, VERIFIED); `ppa_core` (OBSERVED, VERIFIED); `ppa_method` (Sections 3.1–3.4, Equations 2–3, PDF pages 5–7). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -309,9 +309,10 @@ Path("ppa_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_why\_p2: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- A model can give locally plausible answers while violating this requirement\\\textbf{Statement 2}: qualitative -- Two statistically equivalent prompts can then produce incompatible estimates\\\textbf{Statement 3}: qualitative -- so conclusions may depend on an arbitrary choice of prompt granularity or condition order};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_why\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]A model can give locally plausible answers while violating this requirement\\[3pt]Two statistically equivalent prompts can then produce incompatible estimates\\[3pt]so conclusions may depend on an arbitrary choice of prompt granularity or condition order};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]so conclusions may depend on an arbitrary choice of prompt granularity or condition order};
 \end{tikzpicture}
 \end{document}
 ```
@@ -320,10 +321,13 @@ Path("ppa_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>A model can give locally plausible answers while violating this requirement"]
-    p1r2["Statement 2: qualitative<br/>Two statistically equivalent prompts can then produce incompatible estimates"]
-    p1r3["Statement 3: qualitative<br/>so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
+  subgraph g1["Premise or requirement"]
+    g1i1["A model can give locally plausible answers while violating this requirement"]
+    g1i2["Two statistically equivalent prompts can then produce incompatible estimates"]
+    g1i3["so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
   end
 ```
 
@@ -334,39 +338,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_why_p2: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","A model can give locally plausible answers while violating this requirement"],["Paragraph evidence","Statement 2","qualitative","Two statistically equivalent prompts can then produce incompatible estimates"],["Paragraph evidence","Statement 3","qualitative","so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ppa_why_p2: independent facets"
+groups = [{"title":"Premise or requirement","items":["A model can give locally plausible answers while violating this requirement","Two statistically equivalent prompts can then produce incompatible estimates","so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]},{"title":"Constraint or research boundary","items":["so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why test language models with the law of total probability — paragraph ppa_why_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_partition`, `ppa_core` from `ppa_method`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_partition` (OBSERVED, VERIFIED); `ppa_core` (OBSERVED, VERIFIED); `ppa_method` (Sections 3.1–3.4, Equations 2–3, PDF pages 5–7). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -377,12 +377,12 @@ Path("ppa_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8"
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_why\_p2: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & A model can give locally plausible answers while violating this requirement \\
-Paragraph evidence & Statement 2 & qualitative & Two statistically equivalent prompts can then produce incompatible estimates \\
-Paragraph evidence & Statement 3 & qualitative & so conclusions may depend on an arbitrary choice of prompt granularity or condition order \\
+\node[align=center] {\textbf{ppa\_why\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & A model can give locally plausible answers while violating this requirement \\
+why it exists & Independent facet 2 & Two statistically equivalent prompts can then produce incompatible estimates \\
+why it exists & Independent facet 3 & so conclusions may depend on an arbitrary choice of prompt granularity or condition order \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -392,10 +392,10 @@ Paragraph evidence & Statement 3 & qualitative & so conclusions may depend on an
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>A model can give locally plausible answers while violating this requirement"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Two statistically equivalent prompts can then produce incompatible estimates"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
+  subgraph Ledger["ppa_why_p2: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>A model can give locally plausible answers while violating this requirement"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>Two statistically equivalent prompts can then produce incompatible estimates"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
   end
 ```
 
@@ -406,36 +406,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_why_p2: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","A model can give locally plausible answers while violating this requirement"],["Paragraph evidence","Statement 2","qualitative","Two statistically equivalent prompts can then produce incompatible estimates"],["Paragraph evidence","Statement 3","qualitative","so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]]
-height = 414
+title = "ppa_why_p2: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","A model can give locally plausible answers while violating this requirement"],["why it exists","Independent facet 2","Two statistically equivalent prompts can then produce incompatible estimates"],["why it exists","Independent facet 3","so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why test language models with the law of total probability — paragraph ppa_why_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_partition`, `ppa_core` from `ppa_method`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_partition` (OBSERVED, VERIFIED); `ppa_core` (OBSERVED, VERIFIED); `ppa_method` (Sections 3.1–3.4, Equations 2–3, PDF pages 5–7). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -443,15 +443,16 @@ Path("ppa_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_why\_p2: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {A model can give locally plausible answers while violating this requirement};
-\node[box] (n2) at (2.50,-1.50) {Two statistically equivalent prompts can then produce incompatible estimates};
-\node[box] (n3) at (4.00,-1.50) {so conclusions may depend on an arbitrary choice of prompt granularity or condition order};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_why\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why test language models with the law of total probability};
+\node[box] (f1) at (0,2) {A model can give locally plausible answers while violating this requirement};
+\node[box] (f2) at (6,2) {Two statistically equivalent prompts can then produce incompatible estimates};
+\node[box] (f3) at (0,0) {so conclusions may depend on an arbitrary choice of prompt granularity or condition order};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -460,11 +461,13 @@ Path("ppa_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 
 ```mermaid
 flowchart LR
-  n1["A model can give locally plausible answers while violating this requirement"]
-  n2["Two statistically equivalent prompts can then produce incompatible estimates"]
-  n3["so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Why test language models with the law of total probability"]
+  f1["A model can give locally plausible answers while violating this requirement"]
+  f2["Two statistically equivalent prompts can then produce incompatible estimates"]
+  f3["so conclusions may depend on an arbitrary choice of prompt granularity or condition order"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
 ```
 
 #### Python
@@ -474,27 +477,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_why_p2: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","A model can give locally plausible answers while violating this requirement",100,150],["n2","Two statistically equivalent prompts can then produce incompatible estimates",250,150],["n3","so conclusions may depend on an arbitrary choice of prompt granularity or condition order",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "ppa_why_p2: claim-boundary constellation"
+nodes = [["center","Why test language models with the law of total probability",460,220],["f1","A model can give locally plausible answers while violating this requirement",100,40],["f2","Two statistically equivalent prompts can then produce incompatible estimates",820,40],["f3","so conclusions may depend on an arbitrary choice of prompt granularity or condition order",100,220]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2743,18 +2748,82 @@ Path("ppa_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 - Text anchor: "A one-prompt micro-to-macro instruction often improves ACS estimates, but its effect is less systematic and more model-dependent than explicit aggregation."
 - Claims and sources: `ppa_macro` (OBSERVED, VERIFIED); `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_micro_to_macro` (OBSERVED, VERIFIED); `ppa_acs_consistency` (OBSERVED, VERIFIED); `ppa_wvs_consistency` (OBSERVED, VERIFIED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_consistency_results` (Sections 5–6, Tables 1–3, PDF pages 11–18)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional protocol and evidence ledger.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What evidence supports the paper's conclusions.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: A missing comparison is an evidence gap, not a value to plot.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional protocol and evidence ledger — Visible evidence matrix
+### Treatment A — What evidence supports the paper's conclusions — paragraph ppa_evidence_p3 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Render source-backed values and conditions directly for sighted readers.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_macro`, `ppa_error_tradeoff`, `ppa_micro_to_macro`, `ppa_acs_consistency`, `ppa_wvs_consistency` from `ppa_macro_results`, `ppa_consistency_results`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_macro` (OBSERVED, VERIFIED); `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_micro_to_macro` (OBSERVED, VERIFIED); `ppa_acs_consistency` (OBSERVED, VERIFIED); `ppa_wvs_consistency` (OBSERVED, VERIFIED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_consistency_results` (Sections 5–6, Tables 1–3, PDF pages 11–18). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_evidence\_p3: independent facets};
+\node[panel] at (0,0) {\textbf{Protocol or reported evidence}\\[5pt]A one-prompt micro-to-macro instruction often improves ACS estimates};
+\node[panel] at (6,0) {\textbf{Missing comparison or scope limit}\\[5pt]but its effect is less systematic and more model-dependent than explicit aggregation};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph g1["Protocol or reported evidence"]
+    g1i1["A one-prompt micro-to-macro instruction often improves ACS estimates"]
+  end
+  subgraph g2["Missing comparison or scope limit"]
+    g2i1["but its effect is less systematic and more model-dependent than explicit aggregation"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "ppa_evidence_p3: independent facets"
+groups = [{"title":"Protocol or reported evidence","items":["A one-prompt micro-to-macro instruction often improves ACS estimates"]},{"title":"Missing comparison or scope limit","items":["but its effect is less systematic and more model-dependent than explicit aggregation"]}]
+width = 900
+height = 312
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("ppa_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — What evidence supports the paper's conclusions — paragraph ppa_evidence_p3 — evidence and boundary ledger
+
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 2 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_macro` (OBSERVED, VERIFIED); `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_micro_to_macro` (OBSERVED, VERIFIED); `ppa_acs_consistency` (OBSERVED, VERIFIED); `ppa_wvs_consistency` (OBSERVED, VERIFIED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_consistency_results` (Sections 5–6, Tables 1–3, PDF pages 11–18). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2765,13 +2834,11 @@ Path("ppa_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_evidence\_p3: Optional protocol and evidence ledger - Visible evidence matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-What each evaluation can establish & ACS alignment & qualitative & Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer. \\
-What each evaluation can establish & ACS consistency & qualitative & At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets. \\
-What each evaluation can establish & WVS consistency & qualitative & Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks. \\
-What each evaluation can establish & Synthetic tasks & qualitative & Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined. \\
+\node[align=center] {\textbf{ppa\_evidence\_p3: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+evidence & Independent facet 1 & A one-prompt micro-to-macro instruction often improves ACS estimates \\
+evidence & Independent facet 2 & but its effect is less systematic and more model-dependent than explicit aggregation \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -2781,11 +2848,9 @@ What each evaluation can establish & Synthetic tasks & qualitative & Tennis and 
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["What each evaluation can establish<br/>ACS alignment<br/><b>qualitative</b><br/>Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."]
-    r2["What each evaluation can establish<br/>ACS consistency<br/><b>qualitative</b><br/>At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."]
-    r3["What each evaluation can establish<br/>WVS consistency<br/><b>qualitative</b><br/>Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."]
-    r4["What each evaluation can establish<br/>Synthetic tasks<br/><b>qualitative</b><br/>Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]
+  subgraph Ledger["ppa_evidence_p3: non-directional evidence ledger"]
+    r1["evidence<br/><b>Independent facet 1</b><br/>A one-prompt micro-to-macro instruction often improves ACS estimates"]
+    r2["evidence<br/><b>Independent facet 2</b><br/>but its effect is less systematic and more model-dependent than explicit aggregation"]
   end
 ```
 
@@ -2796,103 +2861,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_evidence_p3: Optional protocol and evidence ledger — Visible evidence matrix"
-rows = [["What each evaluation can establish","ACS alignment","qualitative","Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."],["What each evaluation can establish","ACS consistency","qualitative","At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."],["What each evaluation can establish","WVS consistency","qualitative","Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."],["What each evaluation can establish","Synthetic tasks","qualitative","Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]]
-height = 502
+title = "ppa_evidence_p3: non-directional evidence ledger"
+rows = [["evidence","Independent facet 1","A one-prompt micro-to-macro instruction often improves ACS estimates"],["evidence","Independent facet 2","but its effect is less systematic and more model-dependent than explicit aggregation"]]
+height = 334
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("ppa_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Optional protocol and evidence ledger — Evidence-surface panels
-
-- Teaching purpose: Optional contingency only. Separate protocols or source surfaces that cannot share one scale.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_macro`, `ppa_error_tradeoff`, `ppa_micro_to_macro`, `ppa_acs_consistency`, `ppa_wvs_consistency` from `ppa_macro_results`, `ppa_consistency_results`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_evidence\_p3: Optional protocol and evidence ledger - Evidence-surface panels};
-\node[panel] at (0,0) {\textbf{What each evaluation can establish}\\[4pt]\textbf{ACS alignment}: qualitative -- Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer.\\\textbf{ACS consistency}: qualitative -- At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets.\\\textbf{WVS consistency}: qualitative -- Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks.\\\textbf{Synthetic tasks}: qualitative -- Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["What each evaluation can establish"]
-    p1r1["ACS alignment: qualitative<br/>Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."]
-    p1r2["ACS consistency: qualitative<br/>At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."]
-    p1r3["WVS consistency: qualitative<br/>Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."]
-    p1r4["Synthetic tasks: qualitative<br/>Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "ppa_evidence_p3: Optional protocol and evidence ledger — Evidence-surface panels"
-rows = [["What each evaluation can establish","ACS alignment","qualitative","Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."],["What each evaluation can establish","ACS consistency","qualitative","At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."],["What each evaluation can establish","WVS consistency","qualitative","Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."],["What each evaluation can establish","Synthetic tasks","qualitative","Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional protocol and evidence ledger — Evidence acquisition timeline
+### Treatment C — What evidence supports the paper's conclusions — paragraph ppa_evidence_p3 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Show only an actual source or protocol order stated in the paragraph.
-- Encoding and reading order: Use 2 named nodes and 1 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_macro`, `ppa_error_tradeoff`, `ppa_micro_to_macro`, `ppa_acs_consistency`, `ppa_wvs_consistency` from `ppa_macro_results`, `ppa_consistency_results`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 2 undirected spokes. Lines encode evidence condition, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_macro` (OBSERVED, VERIFIED); `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_micro_to_macro` (OBSERVED, VERIFIED); `ppa_acs_consistency` (OBSERVED, VERIFIED); `ppa_wvs_consistency` (OBSERVED, VERIFIED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_consistency_results` (Sections 5–6, Tables 1–3, PDF pages 11–18). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2900,13 +2898,14 @@ Path("ppa_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="u
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_evidence\_p3: Optional protocol and evidence ledger - Evidence acquisition timeline};
-\node[box] (n1) at (1.00,-1.50) {A one-prompt micro-to-macro instruction often improves ACS estimates};
-\node[box] (n2) at (2.50,-1.50) {but its effect is less systematic and more model-dependent than explicit aggregation};
-\draw[link] (n1) -- node[rel] {then} (n2);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_evidence\_p3: claim-boundary constellation};
+\node[box] (center) at (3,0) {What evidence supports the paper's conclusions};
+\node[box] (f1) at (0,2) {A one-prompt micro-to-macro instruction often improves ACS estimates};
+\node[box] (f2) at (6,2) {but its effect is less systematic and more model-dependent than explicit aggregation};
+\draw (center) -- node[rel] {evidence condition} (f1);
+\draw (center) -- node[rel] {evidence condition} (f2);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2915,9 +2914,11 @@ Path("ppa_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="u
 
 ```mermaid
 flowchart LR
-  n1["A one-prompt micro-to-macro instruction often improves ACS estimates"]
-  n2["but its effect is less systematic and more model-dependent than explicit aggregation"]
-  n1 -->|"then"| n2
+  center["What evidence supports the paper's conclusions"]
+  f1["A one-prompt micro-to-macro instruction often improves ACS estimates"]
+  f2["but its effect is less systematic and more model-dependent than explicit aggregation"]
+  center ---|"evidence condition"| f1
+  center ---|"evidence condition"| f2
 ```
 
 #### Python
@@ -2927,27 +2928,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_evidence_p3: Optional protocol and evidence ledger — Evidence acquisition timeline"
-nodes = [["n1","A one-prompt micro-to-macro instruction often improves ACS estimates",100,150],["n2","but its effect is less systematic and more model-dependent than explicit aggregation",250,150]]
-edges = [["n1","n2","then"]]
+title = "ppa_evidence_p3: claim-boundary constellation"
+nodes = [["center","What evidence supports the paper's conclusions",460,220],["f1","A one-prompt micro-to-macro instruction often improves ACS estimates",100,40],["f2","but its effect is less systematic and more model-dependent than explicit aggregation",820,40]]
+edges = [["center","f1","evidence condition",false],["center","f2","evidence condition",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2971,18 +2974,18 @@ Path("ppa_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 - Text anchor: "The macro-fallacy alignment analysis relies primarily on ACS data."
 - Claims and sources: `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Where should these findings not be generalized.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — Where should these findings not be generalized — paragraph ppa_limitations_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2991,9 +2994,10 @@ Path("ppa_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{What each evaluation can establish}\\[4pt]\textbf{ACS alignment}: qualitative -- Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer.\\\textbf{ACS consistency}: qualitative -- At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets.\\\textbf{WVS consistency}: qualitative -- Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks.\\\textbf{Synthetic tasks}: qualitative -- Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined.};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_limitations\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The macro-fallacy alignment analysis relies primarily on ACS data\\[3pt]Its magnitude depends on the chosen demographic splits, probability wording\\[3pt]and post-hoc normalization};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3002,11 +3006,13 @@ Path("ppa_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 ```mermaid
 flowchart LR
-  subgraph p1["What each evaluation can establish"]
-    p1r1["ACS alignment: qualitative<br/>Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."]
-    p1r2["ACS consistency: qualitative<br/>At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."]
-    p1r3["WVS consistency: qualitative<br/>Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."]
-    p1r4["Synthetic tasks: qualitative<br/>Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]
+  subgraph g1["Tested or reported scope"]
+    g1i1["The macro-fallacy alignment analysis relies primarily on ACS data"]
+    g1i2["Its magnitude depends on the chosen demographic splits, probability wording"]
+    g1i3["and post-hoc normalization"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]
   end
 ```
 
@@ -3017,39 +3023,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["What each evaluation can establish","ACS alignment","qualitative","Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."],["What each evaluation can establish","ACS consistency","qualitative","At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."],["What each evaluation can establish","WVS consistency","qualitative","Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."],["What each evaluation can establish","Synthetic tasks","qualitative","Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ppa_limitations_p1: independent facets"
+groups = [{"title":"Tested or reported scope","items":["The macro-fallacy alignment analysis relies primarily on ACS data","Its magnitude depends on the chosen demographic splits, probability wording","and post-hoc normalization"]},{"title":"Unestablished or missing evidence","items":["Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — Where should these findings not be generalized — paragraph ppa_limitations_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3060,13 +3062,13 @@ Path("ppa_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-What each evaluation can establish & ACS alignment & qualitative & Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer. \\
-What each evaluation can establish & ACS consistency & qualitative & At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets. \\
-What each evaluation can establish & WVS consistency & qualitative & Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks. \\
-What each evaluation can establish & Synthetic tasks & qualitative & Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined. \\
+\node[align=center] {\textbf{ppa\_limitations\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The macro-fallacy alignment analysis relies primarily on ACS data \\
+limitations & Independent facet 2 & Its magnitude depends on the chosen demographic splits, probability wording \\
+limitations & Independent facet 3 & and post-hoc normalization \\
+limitations & Independent facet 4 & Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3076,11 +3078,11 @@ What each evaluation can establish & Synthetic tasks & qualitative & Tennis and 
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["What each evaluation can establish<br/>ACS alignment<br/><b>qualitative</b><br/>Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."]
-    r2["What each evaluation can establish<br/>ACS consistency<br/><b>qualitative</b><br/>At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."]
-    r3["What each evaluation can establish<br/>WVS consistency<br/><b>qualitative</b><br/>Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."]
-    r4["What each evaluation can establish<br/>Synthetic tasks<br/><b>qualitative</b><br/>Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]
+  subgraph Ledger["ppa_limitations_p1: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The macro-fallacy alignment analysis relies primarily on ACS data"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>Its magnitude depends on the chosen demographic splits, probability wording"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>and post-hoc normalization"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]
   end
 ```
 
@@ -3091,36 +3093,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["What each evaluation can establish","ACS alignment","qualitative","Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."],["What each evaluation can establish","ACS consistency","qualitative","At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."],["What each evaluation can establish","WVS consistency","qualitative","Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."],["What each evaluation can establish","Synthetic tasks","qualitative","Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."]]
-height = 502
+title = "ppa_limitations_p1: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The macro-fallacy alignment analysis relies primarily on ACS data"],["limitations","Independent facet 2","Its magnitude depends on the chosen demographic splits, probability wording"],["limitations","Independent facet 3","and post-hoc normalization"],["limitations","Independent facet 4","Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — Where should these findings not be generalized — paragraph ppa_limitations_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3128,17 +3130,18 @@ Path("ppa_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The macro-fallacy alignment analysis relies primarily on ACS data};
-\node[box] (n2) at (2.50,-1.50) {Its magnitude depends on the chosen demographic splits, probability wording};
-\node[box] (n3) at (4.00,-1.50) {and post-hoc normalization};
-\node[box] (n4) at (5.50,-1.50) {Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_limitations\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {Where should these findings not be generalized};
+\node[box] (f1) at (0,2) {The macro-fallacy alignment analysis relies primarily on ACS data};
+\node[box] (f2) at (6,2) {Its magnitude depends on the chosen demographic splits, probability wording};
+\node[box] (f3) at (0,0) {and post-hoc normalization};
+\node[box] (f4) at (6,0) {Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3147,13 +3150,15 @@ Path("ppa_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["The macro-fallacy alignment analysis relies primarily on ACS data"]
-  n2["Its magnitude depends on the chosen demographic splits, probability wording"]
-  n3["and post-hoc normalization"]
-  n4["Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["Where should these findings not be generalized"]
+  f1["The macro-fallacy alignment analysis relies primarily on ACS data"]
+  f2["Its magnitude depends on the chosen demographic splits, probability wording"]
+  f3["and post-hoc normalization"]
+  f4["Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3163,27 +3168,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The macro-fallacy alignment analysis relies primarily on ACS data",100,150],["n2","Its magnitude depends on the chosen demographic splits, probability wording",250,150],["n3","and post-hoc normalization",400,150],["n4","Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "ppa_limitations_p1: claim-boundary constellation"
+nodes = [["center","Where should these findings not be generalized",460,220],["f1","The macro-fallacy alignment analysis relies primarily on ACS data",100,40],["f2","Its magnitude depends on the chosen demographic splits, probability wording",820,40],["f3","and post-hoc normalization",100,220],["f4","Finer partitions are not guaranteed to help because small, numerous subgroup priors become harder to estimate",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3207,18 +3214,18 @@ Path("ppa_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "Self-consistency is only a necessary condition for faithful conditional inference."
 - Claims and sources: `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Where should these findings not be generalized.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — Where should these findings not be generalized — paragraph ppa_limitations_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3227,9 +3234,10 @@ Path("ppa_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Self-consistency is only a necessary condition for faithful conditional inference\\\textbf{Statement 2}: qualitative -- A model can be internally coherent and still wrong about the target distribution\\\textbf{Statement 3}: qualitative -- The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy\\\textbf{Statement 4}: qualitative -- and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_limitations\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]A model can be internally coherent and still wrong about the target distribution};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]Self-consistency is only a necessary condition for faithful conditional inference\\[3pt]The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy\\[3pt]and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3238,11 +3246,13 @@ Path("ppa_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Self-consistency is only a necessary condition for faithful conditional inference"]
-    p1r2["Statement 2: qualitative<br/>A model can be internally coherent and still wrong about the target distribution"]
-    p1r3["Statement 3: qualitative<br/>The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
-    p1r4["Statement 4: qualitative<br/>and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["A model can be internally coherent and still wrong about the target distribution"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["Self-consistency is only a necessary condition for faithful conditional inference"]
+    g2i2["The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
+    g2i3["and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
   end
 ```
 
@@ -3253,39 +3263,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Self-consistency is only a necessary condition for faithful conditional inference"],["Paragraph evidence","Statement 2","qualitative","A model can be internally coherent and still wrong about the target distribution"],["Paragraph evidence","Statement 3","qualitative","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"],["Paragraph evidence","Statement 4","qualitative","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ppa_limitations_p2: independent facets"
+groups = [{"title":"Tested or reported scope","items":["A model can be internally coherent and still wrong about the target distribution"]},{"title":"Unestablished or missing evidence","items":["Self-consistency is only a necessary condition for faithful conditional inference","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — Where should these findings not be generalized — paragraph ppa_limitations_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3296,13 +3302,13 @@ Path("ppa_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Self-consistency is only a necessary condition for faithful conditional inference \\
-Paragraph evidence & Statement 2 & qualitative & A model can be internally coherent and still wrong about the target distribution \\
-Paragraph evidence & Statement 3 & qualitative & The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy \\
-Paragraph evidence & Statement 4 & qualitative & and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions \\
+\node[align=center] {\textbf{ppa\_limitations\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & Self-consistency is only a necessary condition for faithful conditional inference \\
+limitations & Independent facet 2 & A model can be internally coherent and still wrong about the target distribution \\
+limitations & Independent facet 3 & The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy \\
+limitations & Independent facet 4 & and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3312,11 +3318,11 @@ Paragraph evidence & Statement 4 & qualitative & and the experiments do not show
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Self-consistency is only a necessary condition for faithful conditional inference"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>A model can be internally coherent and still wrong about the target distribution"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
+  subgraph Ledger["ppa_limitations_p2: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>Self-consistency is only a necessary condition for faithful conditional inference"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>A model can be internally coherent and still wrong about the target distribution"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
   end
 ```
 
@@ -3327,36 +3333,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Self-consistency is only a necessary condition for faithful conditional inference"],["Paragraph evidence","Statement 2","qualitative","A model can be internally coherent and still wrong about the target distribution"],["Paragraph evidence","Statement 3","qualitative","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"],["Paragraph evidence","Statement 4","qualitative","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]]
-height = 502
+title = "ppa_limitations_p2: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","Self-consistency is only a necessary condition for faithful conditional inference"],["limitations","Independent facet 2","A model can be internally coherent and still wrong about the target distribution"],["limitations","Independent facet 3","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"],["limitations","Independent facet 4","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — Where should these findings not be generalized — paragraph ppa_limitations_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_error_tradeoff`, `ppa_generalization` from `ppa_discussion`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_error_tradeoff` (OBSERVED, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3364,17 +3370,18 @@ Path("ppa_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Self-consistency is only a necessary condition for faithful conditional inference};
-\node[box] (n2) at (2.50,-1.50) {A model can be internally coherent and still wrong about the target distribution};
-\node[box] (n3) at (4.00,-1.50) {The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy};
-\node[box] (n4) at (5.50,-1.50) {and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_limitations\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {Where should these findings not be generalized};
+\node[box] (f1) at (0,2) {Self-consistency is only a necessary condition for faithful conditional inference};
+\node[box] (f2) at (6,2) {A model can be internally coherent and still wrong about the target distribution};
+\node[box] (f3) at (0,0) {The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy};
+\node[box] (f4) at (6,0) {and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3383,13 +3390,15 @@ Path("ppa_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["Self-consistency is only a necessary condition for faithful conditional inference"]
-  n2["A model can be internally coherent and still wrong about the target distribution"]
-  n3["The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
-  n4["and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["Where should these findings not be generalized"]
+  f1["Self-consistency is only a necessary condition for faithful conditional inference"]
+  f2["A model can be internally coherent and still wrong about the target distribution"]
+  f3["The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy"]
+  f4["and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3399,27 +3408,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","Self-consistency is only a necessary condition for faithful conditional inference",100,150],["n2","A model can be internally coherent and still wrong about the target distribution",250,150],["n3","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy",400,150],["n4","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "ppa_limitations_p2: claim-boundary constellation"
+nodes = [["center","Where should these findings not be generalized",460,220],["f1","Self-consistency is only a necessary condition for faithful conditional inference",100,40],["f2","A model can be internally coherent and still wrong about the target distribution",820,40],["f3","The synthetic forecasting examples establish inconsistency, not real-world forecasting accuracy",100,220],["f4","and the experiments do not show that optimizing the proposed scores would improve alignment or downstream decisions",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3443,18 +3454,18 @@ Path("ppa_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "The strongest contribution is a simple, reference-free test of whether conditional estimates compose."
 - Claims and sources: `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is the strongest conclusion a careful reader should keep.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 2 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3463,9 +3474,10 @@ Path("ppa_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The strongest contribution is a simple, reference-free test of whether conditional estimates compose\\\textbf{Statement 2}: qualitative -- It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The strongest contribution is a simple, reference-free test of whether conditional estimates compose};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3474,9 +3486,11 @@ Path("ppa_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
-    p1r2["Statement 2: qualitative<br/>It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
   end
 ```
 
@@ -3487,39 +3501,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The strongest contribution is a simple, reference-free test of whether conditional estimates compose"],["Paragraph evidence","Statement 2","qualitative","It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ppa_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]},{"title":"Rejected overclaim or qualification","items":["It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]}]
+width = 900
+height = 312
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 2 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 2 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3530,11 +3540,11 @@ Path("ppa_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The strongest contribution is a simple, reference-free test of whether conditional estimates compose \\
-Paragraph evidence & Statement 2 & qualitative & It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern \\
+\node[align=center] {\textbf{ppa\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The strongest contribution is a simple, reference-free test of whether conditional estimates compose \\
+critical review & Independent facet 2 & It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3544,9 +3554,9 @@ Paragraph evidence & Statement 2 & qualitative & It exposes a failure that ordin
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
+  subgraph Ledger["ppa_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
   end
 ```
 
@@ -3557,36 +3567,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The strongest contribution is a simple, reference-free test of whether conditional estimates compose"],["Paragraph evidence","Statement 2","qualitative","It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]]
-height = 326
+title = "ppa_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The strongest contribution is a simple, reference-free test of whether conditional estimates compose"],["critical review","Independent facet 2","It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]]
+height = 334
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 2 named nodes and 1 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 2 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3594,13 +3604,14 @@ Path("ppa_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The strongest contribution is a simple, reference-free test of whether conditional estimates compose};
-\node[box] (n2) at (2.50,-1.50) {It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern};
-\draw[link] (n1) -- node[rel] {then} (n2);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is the strongest conclusion a careful reader should keep};
+\node[box] (f1) at (0,2) {The strongest contribution is a simple, reference-free test of whether conditional estimates compose};
+\node[box] (f2) at (6,2) {It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3609,9 +3620,11 @@ Path("ppa_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
-  n2["It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
-  n1 -->|"then"| n2
+  center["What is the strongest conclusion a careful reader should keep"]
+  f1["The strongest contribution is a simple, reference-free test of whether conditional estimates compose"]
+  f2["It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
 ```
 
 #### Python
@@ -3621,27 +3634,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The strongest contribution is a simple, reference-free test of whether conditional estimates compose",100,150],["n2","It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern",250,150]]
-edges = [["n1","n2","then"]]
+title = "ppa_review_p1: claim-boundary constellation"
+nodes = [["center","What is the strongest conclusion a careful reader should keep",460,220],["f1","The strongest contribution is a simple, reference-free test of whether conditional estimates compose",100,40],["f2","It exposes a failure that ordinary benchmark accuracy can miss and makes prompt granularity a measurable property rather than an informal concern",820,40]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3665,18 +3680,18 @@ Path("ppa_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Text anchor: "The macro fallacy is more bounded: it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer."
 - Claims and sources: `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is the strongest conclusion a careful reader should keep.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3685,9 +3700,10 @@ Path("ppa_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ppa\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The macro fallacy is more bounded\\\textbf{Statement 2}: qualitative -- it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer\\\textbf{Statement 3}: qualitative -- The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition\\\textbf{Statement 4}: qualitative -- but the experiments do not directly reveal what distributions the models internally represent};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ppa\_review\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The macro fallacy is more bounded\\[3pt]The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer\\[3pt]but the experiments do not directly reveal what distributions the models internally represent};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3696,11 +3712,13 @@ Path("ppa_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The macro fallacy is more bounded"]
-    p1r2["Statement 2: qualitative<br/>it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
-    p1r3["Statement 3: qualitative<br/>The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
-    p1r4["Statement 4: qualitative<br/>but the experiments do not directly reveal what distributions the models internally represent"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The macro fallacy is more bounded"]
+    g1i2["The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
+    g2i2["but the experiments do not directly reveal what distributions the models internally represent"]
   end
 ```
 
@@ -3711,39 +3729,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The macro fallacy is more bounded"],["Paragraph evidence","Statement 2","qualitative","it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"],["Paragraph evidence","Statement 3","qualitative","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"],["Paragraph evidence","Statement 4","qualitative","but the experiments do not directly reveal what distributions the models internally represent"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ppa_review_p2: independent facets"
+groups = [{"title":"Supported conclusion","items":["The macro fallacy is more bounded","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]},{"title":"Rejected overclaim or qualification","items":["it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer","but the experiments do not directly reveal what distributions the models internally represent"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3754,13 +3768,13 @@ Path("ppa_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ppa\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The macro fallacy is more bounded \\
-Paragraph evidence & Statement 2 & qualitative & it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer \\
-Paragraph evidence & Statement 3 & qualitative & The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition \\
-Paragraph evidence & Statement 4 & qualitative & but the experiments do not directly reveal what distributions the models internally represent \\
+\node[align=center] {\textbf{ppa\_review\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The macro fallacy is more bounded \\
+critical review & Independent facet 2 & it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer \\
+critical review & Independent facet 3 & The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition \\
+critical review & Independent facet 4 & but the experiments do not directly reveal what distributions the models internally represent \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3770,11 +3784,11 @@ Paragraph evidence & Statement 4 & qualitative & but the experiments do not dire
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The macro fallacy is more bounded"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>but the experiments do not directly reveal what distributions the models internally represent"]
+  subgraph Ledger["ppa_review_p2: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The macro fallacy is more bounded"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>but the experiments do not directly reveal what distributions the models internally represent"]
   end
 ```
 
@@ -3785,36 +3799,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The macro fallacy is more bounded"],["Paragraph evidence","Statement 2","qualitative","it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"],["Paragraph evidence","Statement 3","qualitative","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"],["Paragraph evidence","Statement 4","qualitative","but the experiments do not directly reveal what distributions the models internally represent"]]
-height = 502
+title = "ppa_review_p2: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The macro fallacy is more bounded"],["critical review","Independent facet 2","it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"],["critical review","Independent facet 3","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"],["critical review","Independent facet 4","but the experiments do not directly reveal what distributions the models internally represent"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is the strongest conclusion a careful reader should keep — paragraph ppa_review_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ppa_core`, `ppa_knowledge_interpretation`, `ppa_generalization` from `ppa_macro_results`, `ppa_discussion`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ppa_core` (OBSERVED, VERIFIED); `ppa_knowledge_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `ppa_generalization` (NOT_ESTABLISHED, UNRESOLVED); `ppa_macro_results` (Section 4, Figures 3–5, PDF pages 7–11); `ppa_discussion` (Section 7 and Limitations, PDF pages 18–19). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3822,17 +3836,18 @@ Path("ppa_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ppa\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The macro fallacy is more bounded};
-\node[box] (n2) at (2.50,-1.50) {it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer};
-\node[box] (n3) at (4.00,-1.50) {The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition};
-\node[box] (n4) at (5.50,-1.50) {but the experiments do not directly reveal what distributions the models internally represent};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ppa\_review\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is the strongest conclusion a careful reader should keep};
+\node[box] (f1) at (0,2) {The macro fallacy is more bounded};
+\node[box] (f2) at (6,2) {it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer};
+\node[box] (f3) at (0,0) {The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition};
+\node[box] (f4) at (6,0) {but the experiments do not directly reveal what distributions the models internally represent};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3841,13 +3856,15 @@ Path("ppa_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["The macro fallacy is more bounded"]
-  n2["it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
-  n3["The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
-  n4["but the experiments do not directly reveal what distributions the models internally represent"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What is the strongest conclusion a careful reader should keep"]
+  f1["The macro fallacy is more bounded"]
+  f2["it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer"]
+  f3["The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition"]
+  f4["but the experiments do not directly reveal what distributions the models internally represent"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
 ```
 
 #### Python
@@ -3857,27 +3874,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ppa_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The macro fallacy is more bounded",100,150],["n2","it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer",250,150],["n3","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition",400,150],["n4","but the experiments do not directly reveal what distributions the models internally represent",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "ppa_review_p2: claim-boundary constellation"
+nodes = [["center","What is the strongest conclusion a careful reader should keep",460,220],["f1","The macro fallacy is more bounded",100,40],["f2","it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer",820,40],["f3","The authors interpret the gains as evidence that useful subgroup information is more reliably elicited through decomposition",100,220],["f4","but the experiments do not directly reveal what distributions the models internally represent",820,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ppa_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3894,4 +3913,3 @@ Path("ppa_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-

@@ -3,7 +3,7 @@
 - Paper ID: `paper_llm_evaluators_languages`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -16,7 +16,7 @@
   - `language_source_regressions` — LLM Evaluators v1 structural regressions; Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12
   - `language_source_calibration` — LLM Evaluators v1 calibration analysis; Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `language_why_p1`
 
@@ -3142,18 +3142,18 @@ Path("language_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encodi
 - Text anchor: "The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments."
 - Claims and sources: `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What remains uncertain about the bias and its impact.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What remains uncertain about the bias and its impact — paragraph language_limitations_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3162,9 +3162,10 @@ Path("language_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encodi
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {language\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments\\\textbf{Statement 2}: qualitative -- Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior\\\textbf{Statement 3}: qualitative -- and undocumented data sources};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {language\_limitations\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]and undocumented data sources};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments\\[3pt]Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3173,10 +3174,12 @@ Path("language_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encodi
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
-    p1r2["Statement 2: qualitative<br/>Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
-    p1r3["Statement 3: qualitative<br/>and undocumented data sources"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["and undocumented data sources"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
+    g2i2["Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
   end
 ```
 
@@ -3187,39 +3190,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"],["Paragraph evidence","Statement 2","qualitative","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"],["Paragraph evidence","Statement 3","qualitative","and undocumented data sources"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "language_limitations_p1: independent facets"
+groups = [{"title":"Tested or reported scope","items":["and undocumented data sources"]},{"title":"Unestablished or missing evidence","items":["The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What remains uncertain about the bias and its impact — paragraph language_limitations_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3230,12 +3229,12 @@ Path("language_limitations_p1_treatment_a.svg").write_text("\n".join(parts), enc
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{language\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments \\
-Paragraph evidence & Statement 2 & qualitative & Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior \\
-Paragraph evidence & Statement 3 & qualitative & and undocumented data sources \\
+\node[align=center] {\textbf{language\_limitations\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments \\
+limitations & Independent facet 2 & Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior \\
+limitations & Independent facet 3 & and undocumented data sources \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3245,10 +3244,10 @@ Paragraph evidence & Statement 3 & qualitative & and undocumented data sources \
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>and undocumented data sources"]
+  subgraph Ledger["language_limitations_p1: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>and undocumented data sources"]
   end
 ```
 
@@ -3259,36 +3258,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"],["Paragraph evidence","Statement 2","qualitative","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"],["Paragraph evidence","Statement 3","qualitative","and undocumented data sources"]]
-height = 414
+title = "language_limitations_p1: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"],["limitations","Independent facet 2","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"],["limitations","Independent facet 3","and undocumented data sources"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What remains uncertain about the bias and its impact — paragraph language_limitations_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3296,15 +3295,16 @@ Path("language_limitations_p1_treatment_b.svg").write_text("\n".join(parts), enc
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {language\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments};
-\node[box] (n2) at (2.50,-1.50) {Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior};
-\node[box] (n3) at (4.00,-1.50) {and undocumented data sources};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {language\_limitations\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What remains uncertain about the bias and its impact};
+\node[box] (f1) at (0,2) {The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments};
+\node[box] (f2) at (6,2) {Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior};
+\node[box] (f3) at (0,0) {and undocumented data sources};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3313,11 +3313,13 @@ Path("language_limitations_p1_treatment_b.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  n1["The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
-  n2["Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
-  n3["and undocumented data sources"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["What remains uncertain about the bias and its impact"]
+  f1["The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments"]
+  f2["Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior"]
+  f3["and undocumented data sources"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
 ```
 
 #### Python
@@ -3327,27 +3329,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments",100,150],["n2","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior",250,150],["n3","and undocumented data sources",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "language_limitations_p1: claim-boundary constellation"
+nodes = [["center","What remains uncertain about the bias and its impact",460,220],["f1","The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments",100,40],["f2","Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior",820,40],["f3","and undocumented data sources",100,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3371,18 +3375,18 @@ Path("language_limitations_p1_treatment_c.svg").write_text("\n".join(parts), enc
 - Text anchor: "The uncertainty-score association does not establish uncertainty as the cause of the shift."
 - Claims and sources: `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What remains uncertain about the bias and its impact.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What remains uncertain about the bias and its impact — paragraph language_limitations_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3391,9 +3395,10 @@ Path("language_limitations_p1_treatment_c.svg").write_text("\n".join(parts), enc
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {language\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The uncertainty-score association does not establish uncertainty as the cause of the shift\\\textbf{Statement 2}: qualitative -- The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems\\\textbf{Statement 3}: qualitative -- The additional large-judge tests cover only two benchmark splits\\\textbf{Statement 4}: qualitative -- and production systems may use different thresholds or combine multiple signals};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {language\_limitations\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The uncertainty-score association does not establish uncertainty as the cause of the shift};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The uncertainty-score association does not establish uncertainty as the cause of the shift\\[3pt]The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems\\[3pt]The additional large-judge tests cover only two benchmark splits\\[3pt]and production systems may use different thresholds or combine multiple signals};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3402,11 +3407,14 @@ Path("language_limitations_p1_treatment_c.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The uncertainty-score association does not establish uncertainty as the cause of the shift"]
-    p1r2["Statement 2: qualitative<br/>The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
-    p1r3["Statement 3: qualitative<br/>The additional large-judge tests cover only two benchmark splits"]
-    p1r4["Statement 4: qualitative<br/>and production systems may use different thresholds or combine multiple signals"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["The uncertainty-score association does not establish uncertainty as the cause of the shift"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The uncertainty-score association does not establish uncertainty as the cause of the shift"]
+    g2i2["The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
+    g2i3["The additional large-judge tests cover only two benchmark splits"]
+    g2i4["and production systems may use different thresholds or combine multiple signals"]
   end
 ```
 
@@ -3417,39 +3425,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The uncertainty-score association does not establish uncertainty as the cause of the shift"],["Paragraph evidence","Statement 2","qualitative","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"],["Paragraph evidence","Statement 3","qualitative","The additional large-judge tests cover only two benchmark splits"],["Paragraph evidence","Statement 4","qualitative","and production systems may use different thresholds or combine multiple signals"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "language_limitations_p2: independent facets"
+groups = [{"title":"Tested or reported scope","items":["The uncertainty-score association does not establish uncertainty as the cause of the shift"]},{"title":"Unestablished or missing evidence","items":["The uncertainty-score association does not establish uncertainty as the cause of the shift","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems","The additional large-judge tests cover only two benchmark splits","and production systems may use different thresholds or combine multiple signals"]}]
+width = 900
+height = 588
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What remains uncertain about the bias and its impact — paragraph language_limitations_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3460,13 +3464,13 @@ Path("language_limitations_p2_treatment_a.svg").write_text("\n".join(parts), enc
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{language\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The uncertainty-score association does not establish uncertainty as the cause of the shift \\
-Paragraph evidence & Statement 2 & qualitative & The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems \\
-Paragraph evidence & Statement 3 & qualitative & The additional large-judge tests cover only two benchmark splits \\
-Paragraph evidence & Statement 4 & qualitative & and production systems may use different thresholds or combine multiple signals \\
+\node[align=center] {\textbf{language\_limitations\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The uncertainty-score association does not establish uncertainty as the cause of the shift \\
+limitations & Independent facet 2 & The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems \\
+limitations & Independent facet 3 & The additional large-judge tests cover only two benchmark splits \\
+limitations & Independent facet 4 & and production systems may use different thresholds or combine multiple signals \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3476,11 +3480,11 @@ Paragraph evidence & Statement 4 & qualitative & and production systems may use 
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The uncertainty-score association does not establish uncertainty as the cause of the shift"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>The additional large-judge tests cover only two benchmark splits"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and production systems may use different thresholds or combine multiple signals"]
+  subgraph Ledger["language_limitations_p2: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The uncertainty-score association does not establish uncertainty as the cause of the shift"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>The additional large-judge tests cover only two benchmark splits"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>and production systems may use different thresholds or combine multiple signals"]
   end
 ```
 
@@ -3491,36 +3495,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The uncertainty-score association does not establish uncertainty as the cause of the shift"],["Paragraph evidence","Statement 2","qualitative","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"],["Paragraph evidence","Statement 3","qualitative","The additional large-judge tests cover only two benchmark splits"],["Paragraph evidence","Statement 4","qualitative","and production systems may use different thresholds or combine multiple signals"]]
-height = 502
+title = "language_limitations_p2: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The uncertainty-score association does not establish uncertainty as the cause of the shift"],["limitations","Independent facet 2","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"],["limitations","Independent facet 3","The additional large-judge tests cover only two benchmark splits"],["limitations","Independent facet 4","and production systems may use different thresholds or combine multiple signals"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What remains uncertain about the bias and its impact — paragraph language_limitations_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_uncertainty`, `language_source_regressions`, `language_source_thresholds`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_uncertainty` (Pages 7–8, Sections 4–4.1, Equations 1–2, Figure 5, Table 2); `language_source_regressions` (Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3528,17 +3532,18 @@ Path("language_limitations_p2_treatment_b.svg").write_text("\n".join(parts), enc
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {language\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The uncertainty-score association does not establish uncertainty as the cause of the shift};
-\node[box] (n2) at (2.50,-1.50) {The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems};
-\node[box] (n3) at (4.00,-1.50) {The additional large-judge tests cover only two benchmark splits};
-\node[box] (n4) at (5.50,-1.50) {and production systems may use different thresholds or combine multiple signals};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {language\_limitations\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What remains uncertain about the bias and its impact};
+\node[box] (f1) at (0,2) {The uncertainty-score association does not establish uncertainty as the cause of the shift};
+\node[box] (f2) at (6,2) {The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems};
+\node[box] (f3) at (0,0) {The additional large-judge tests cover only two benchmark splits};
+\node[box] (f4) at (6,0) {and production systems may use different thresholds or combine multiple signals};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3547,13 +3552,15 @@ Path("language_limitations_p2_treatment_b.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  n1["The uncertainty-score association does not establish uncertainty as the cause of the shift"]
-  n2["The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
-  n3["The additional large-judge tests cover only two benchmark splits"]
-  n4["and production systems may use different thresholds or combine multiple signals"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What remains uncertain about the bias and its impact"]
+  f1["The uncertainty-score association does not establish uncertainty as the cause of the shift"]
+  f2["The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems"]
+  f3["The additional large-judge tests cover only two benchmark splits"]
+  f4["and production systems may use different thresholds or combine multiple signals"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3563,27 +3570,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The uncertainty-score association does not establish uncertainty as the cause of the shift",100,150],["n2","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems",250,150],["n3","The additional large-judge tests cover only two benchmark splits",400,150],["n4","and production systems may use different thresholds or combine multiple signals",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "language_limitations_p2: claim-boundary constellation"
+nodes = [["center","What remains uncertain about the bias and its impact",460,220],["f1","The uncertainty-score association does not establish uncertainty as the cause of the shift",100,40],["f2","The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems",820,40],["f3","The additional large-judge tests cover only two benchmark splits",100,220],["f4","and production systems may use different thresholds or combine multiple signals",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3607,18 +3616,18 @@ Path("language_limitations_p2_treatment_c.svg").write_text("\n".join(parts), enc
 - Text anchor: "The strongest result is a measurement warning: high pairwise accuracy does not certify that raw evaluator scores are comparable across languages."
 - Claims and sources: `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What should evaluator builders conclude from this study.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What should evaluator builders conclude from this study — paragraph language_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3627,9 +3636,10 @@ Path("language_limitations_p2_treatment_c.svg").write_text("\n".join(parts), enc
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {language\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The strongest result is a measurement warning\\\textbf{Statement 2}: qualitative -- high pairwise accuracy does not certify that raw evaluator scores are comparable across languages\\\textbf{Statement 3}: qualitative -- Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {language\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The strongest result is a measurement warning\\[3pt]Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]high pairwise accuracy does not certify that raw evaluator scores are comparable across languages};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3638,10 +3648,12 @@ Path("language_limitations_p2_treatment_c.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The strongest result is a measurement warning"]
-    p1r2["Statement 2: qualitative<br/>high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
-    p1r3["Statement 3: qualitative<br/>Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The strongest result is a measurement warning"]
+    g1i2["Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
   end
 ```
 
@@ -3652,39 +3664,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The strongest result is a measurement warning"],["Paragraph evidence","Statement 2","qualitative","high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"],["Paragraph evidence","Statement 3","qualitative","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "language_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The strongest result is a measurement warning","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]},{"title":"Rejected overclaim or qualification","items":["high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What should evaluator builders conclude from this study — paragraph language_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3695,12 +3703,12 @@ Path("language_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{language\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The strongest result is a measurement warning \\
-Paragraph evidence & Statement 2 & qualitative & high pairwise accuracy does not certify that raw evaluator scores are comparable across languages \\
-Paragraph evidence & Statement 3 & qualitative & Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly \\
+\node[align=center] {\textbf{language\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The strongest result is a measurement warning \\
+critical review & Independent facet 2 & high pairwise accuracy does not certify that raw evaluator scores are comparable across languages \\
+critical review & Independent facet 3 & Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3710,10 +3718,10 @@ Paragraph evidence & Statement 3 & qualitative & Systems using absolute threshol
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The strongest result is a measurement warning"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
+  subgraph Ledger["language_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The strongest result is a measurement warning"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
   end
 ```
 
@@ -3724,36 +3732,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The strongest result is a measurement warning"],["Paragraph evidence","Statement 2","qualitative","high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"],["Paragraph evidence","Statement 3","qualitative","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]]
-height = 414
+title = "language_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The strongest result is a measurement warning"],["critical review","Independent facet 2","high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"],["critical review","Independent facet 3","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What should evaluator builders conclude from this study — paragraph language_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3761,15 +3769,16 @@ Path("language_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {language\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The strongest result is a measurement warning};
-\node[box] (n2) at (2.50,-1.50) {high pairwise accuracy does not certify that raw evaluator scores are comparable across languages};
-\node[box] (n3) at (4.00,-1.50) {Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {language\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What should evaluator builders conclude from this study};
+\node[box] (f1) at (0,2) {The strongest result is a measurement warning};
+\node[box] (f2) at (6,2) {high pairwise accuracy does not certify that raw evaluator scores are comparable across languages};
+\node[box] (f3) at (0,0) {Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3778,11 +3787,13 @@ Path("language_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["The strongest result is a measurement warning"]
-  n2["high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
-  n3["Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["What should evaluator builders conclude from this study"]
+  f1["The strongest result is a measurement warning"]
+  f2["high pairwise accuracy does not certify that raw evaluator scores are comparable across languages"]
+  f3["Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
 ```
 
 #### Python
@@ -3792,27 +3803,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The strongest result is a measurement warning",100,150],["n2","high pairwise accuracy does not certify that raw evaluator scores are comparable across languages",250,150],["n3","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "language_review_p1: claim-boundary constellation"
+nodes = [["center","What should evaluator builders conclude from this study",460,220],["f1","The strongest result is a measurement warning",100,40],["f2","high pairwise accuracy does not certify that raw evaluator scores are comparable across languages",820,40],["f3","Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly",100,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3836,18 +3849,18 @@ Path("language_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "Per-language centering is a useful diagnostic and partial mitigation, not a full solution."
 - Claims and sources: `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What should evaluator builders conclude from this study.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What should evaluator builders conclude from this study — paragraph language_review_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3856,9 +3869,10 @@ Path("language_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {language\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Per-language centering is a useful diagnostic and partial mitigation, not a full solution\\\textbf{Statement 2}: 11.6 -- It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis\\\textbf{Statement 3}: qualitative -- and cannot remove language-item interactions\\\textbf{Statement 4}: qualitative -- The paper motivates language-aware training and calibration\\\textbf{Statement 5}: qualitative -- but does not establish which intervention will generalize to deployment};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {language\_review\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis\\[3pt]The paper motivates language-aware training and calibration};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]Per-language centering is a useful diagnostic and partial mitigation, not a full solution\\[3pt]and cannot remove language-item interactions\\[3pt]but does not establish which intervention will generalize to deployment};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3867,12 +3881,14 @@ Path("language_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
-    p1r2["Statement 2: 11.6<br/>It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
-    p1r3["Statement 3: qualitative<br/>and cannot remove language-item interactions"]
-    p1r4["Statement 4: qualitative<br/>The paper motivates language-aware training and calibration"]
-    p1r5["Statement 5: qualitative<br/>but does not establish which intervention will generalize to deployment"]
+  subgraph g1["Supported conclusion"]
+    g1i1["It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
+    g1i2["The paper motivates language-aware training and calibration"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
+    g2i2["and cannot remove language-item interactions"]
+    g2i3["but does not establish which intervention will generalize to deployment"]
   end
 ```
 
@@ -3883,39 +3899,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Per-language centering is a useful diagnostic and partial mitigation, not a full solution"],["Paragraph evidence","Statement 2","11.6","It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"],["Paragraph evidence","Statement 3","qualitative","and cannot remove language-item interactions"],["Paragraph evidence","Statement 4","qualitative","The paper motivates language-aware training and calibration"],["Paragraph evidence","Statement 5","qualitative","but does not establish which intervention will generalize to deployment"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "language_review_p2: independent facets"
+groups = [{"title":"Supported conclusion","items":["It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis","The paper motivates language-aware training and calibration"]},{"title":"Rejected overclaim or qualification","items":["Per-language centering is a useful diagnostic and partial mitigation, not a full solution","and cannot remove language-item interactions","but does not establish which intervention will generalize to deployment"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What should evaluator builders conclude from this study — paragraph language_review_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3926,14 +3938,14 @@ Path("language_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{language\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Per-language centering is a useful diagnostic and partial mitigation, not a full solution \\
-Paragraph evidence & Statement 2 & 11.6 & It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis \\
-Paragraph evidence & Statement 3 & qualitative & and cannot remove language-item interactions \\
-Paragraph evidence & Statement 4 & qualitative & The paper motivates language-aware training and calibration \\
-Paragraph evidence & Statement 5 & qualitative & but does not establish which intervention will generalize to deployment \\
+\node[align=center] {\textbf{language\_review\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & Per-language centering is a useful diagnostic and partial mitigation, not a full solution \\
+critical review & Independent facet 2 & It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis \\
+critical review & Independent facet 3 & and cannot remove language-item interactions \\
+critical review & Independent facet 4 & The paper motivates language-aware training and calibration \\
+critical review & Independent facet 5 & but does not establish which intervention will generalize to deployment \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3943,12 +3955,12 @@ Paragraph evidence & Statement 5 & qualitative & but does not establish which in
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>11.6</b><br/>It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>and cannot remove language-item interactions"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The paper motivates language-aware training and calibration"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>but does not establish which intervention will generalize to deployment"]
+  subgraph Ledger["language_review_p2: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>and cannot remove language-item interactions"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>The paper motivates language-aware training and calibration"]
+    r5["critical review<br/><b>Independent facet 5</b><br/>but does not establish which intervention will generalize to deployment"]
   end
 ```
 
@@ -3959,36 +3971,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Per-language centering is a useful diagnostic and partial mitigation, not a full solution"],["Paragraph evidence","Statement 2","11.6","It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"],["Paragraph evidence","Statement 3","qualitative","and cannot remove language-item interactions"],["Paragraph evidence","Statement 4","qualitative","The paper motivates language-aware training and calibration"],["Paragraph evidence","Statement 5","qualitative","but does not establish which intervention will generalize to deployment"]]
-height = 590
+title = "language_review_p2: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","Per-language centering is a useful diagnostic and partial mitigation, not a full solution"],["critical review","Independent facet 2","It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"],["critical review","Independent facet 3","and cannot remove language-item interactions"],["critical review","Independent facet 4","The paper motivates language-aware training and calibration"],["critical review","Independent facet 5","but does not establish which intervention will generalize to deployment"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What should evaluator builders conclude from this study — paragraph language_review_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `language_claim_pairwise_blind`, `language_claim_calibration`, `language_claim_cause_notshown`, `language_claim_production_notshown` from `language_source_thresholds`, `language_source_calibration`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `language_claim_pairwise_blind` (AUTHORS_INTERPRETATION, VERIFIED); `language_claim_calibration` (OBSERVED, VERIFIED); `language_claim_cause_notshown` (NOT_ESTABLISHED, VERIFIED); `language_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `language_source_thresholds` (Pages 5–7, Sections 3.4–3.5, Figure 4, Table 1, Appendix Table 15; Section 3.4 reports a 43.0-point aggregate maximum and separately describes rounded 23% versus 67% English/Ukrainian rates as a 44-point example); `language_source_calibration` (Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3996,19 +4008,20 @@ Path("language_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {language\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Per-language centering is a useful diagnostic and partial mitigation, not a full solution};
-\node[box] (n2) at (2.50,-1.50) {It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis};
-\node[box] (n3) at (4.00,-1.50) {and cannot remove language-item interactions};
-\node[box] (n4) at (5.50,-1.50) {The paper motivates language-aware training and calibration};
-\node[box] (n5) at (7.00,-1.50) {but does not establish which intervention will generalize to deployment};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {language\_review\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What should evaluator builders conclude from this study};
+\node[box] (f1) at (0,2) {Per-language centering is a useful diagnostic and partial mitigation, not a full solution};
+\node[box] (f2) at (6,2) {It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis};
+\node[box] (f3) at (0,0) {and cannot remove language-item interactions};
+\node[box] (f4) at (6,0) {The paper motivates language-aware training and calibration};
+\node[box] (f5) at (0,-2) {but does not establish which intervention will generalize to deployment};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
+\draw (center) -- node[rel] {support or qualification} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4017,15 +4030,17 @@ Path("language_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
-  n2["It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
-  n3["and cannot remove language-item interactions"]
-  n4["The paper motivates language-aware training and calibration"]
-  n5["but does not establish which intervention will generalize to deployment"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What should evaluator builders conclude from this study"]
+  f1["Per-language centering is a useful diagnostic and partial mitigation, not a full solution"]
+  f2["It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis"]
+  f3["and cannot remove language-item interactions"]
+  f4["The paper motivates language-aware training and calibration"]
+  f5["but does not establish which intervention will generalize to deployment"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
+  center ---|"support or qualification"| f5
 ```
 
 #### Python
@@ -4035,27 +4050,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "language_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","Per-language centering is a useful diagnostic and partial mitigation, not a full solution",100,150],["n2","It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis",250,150],["n3","and cannot remove language-item interactions",400,150],["n4","The paper motivates language-aware training and calibration",550,150],["n5","but does not establish which intervention will generalize to deployment",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "language_review_p2: claim-boundary constellation"
+nodes = [["center","What should evaluator builders conclude from this study",460,220],["f1","Per-language centering is a useful diagnostic and partial mitigation, not a full solution",100,40],["f2","It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis",820,40],["f3","and cannot remove language-item interactions",100,220],["f4","The paper motivates language-aware training and calibration",820,220],["f5","but does not establish which intervention will generalize to deployment",100,400]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("language_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4072,4 +4089,3 @@ Path("language_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-

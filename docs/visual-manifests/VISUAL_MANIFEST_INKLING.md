@@ -3,7 +3,7 @@
 - Paper ID: `paper_inkling`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `19 / 19` prose paragraphs
@@ -15,7 +15,7 @@
   - `source_inkling_hf_bf16` — Thinking Machines Lab: Inkling BF16 initial weight release; Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files
   - `source_inkling_hf_nvfp4` — Thinking Machines Lab: Inkling NVFP4 initial weight release; Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `ink_why_p1`
 
@@ -23,18 +23,18 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 - Text anchor: "The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark."
 - Claims and sources: `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why did Thinking Machines Lab release Inkling.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -43,9 +43,10 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_why\_p1: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark\\\textbf{Statement 2}: qualitative -- Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following\\\textbf{Statement 3}: qualitative -- and multimodal applications};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_why\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following\\[3pt]and multimodal applications};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark};
 \end{tikzpicture}
 \end{document}
 ```
@@ -54,10 +55,12 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
-    p1r2["Statement 2: qualitative<br/>Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
-    p1r3["Statement 3: qualitative<br/>and multimodal applications"]
+  subgraph g1["Premise or requirement"]
+    g1i1["Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
+    g1i2["and multimodal applications"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
   end
 ```
 
@@ -68,39 +71,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p1: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"],["Paragraph evidence","Statement 2","qualitative","Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"],["Paragraph evidence","Statement 3","qualitative","and multimodal applications"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_why_p1: independent facets"
+groups = [{"title":"Premise or requirement","items":["Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following","and multimodal applications"]},{"title":"Constraint or research boundary","items":["The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -111,12 +110,12 @@ Path("ink_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8"
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_why\_p1: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark \\
-Paragraph evidence & Statement 2 & qualitative & Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following \\
-Paragraph evidence & Statement 3 & qualitative & and multimodal applications \\
+\node[align=center] {\textbf{ink\_why\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark \\
+why it exists & Independent facet 2 & Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following \\
+why it exists & Independent facet 3 & and multimodal applications \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -126,10 +125,10 @@ Paragraph evidence & Statement 3 & qualitative & and multimodal applications \\
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>and multimodal applications"]
+  subgraph Ledger["ink_why_p1: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>and multimodal applications"]
   end
 ```
 
@@ -140,36 +139,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p1: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"],["Paragraph evidence","Statement 2","qualitative","Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"],["Paragraph evidence","Statement 3","qualitative","and multimodal applications"]]
-height = 414
+title = "ink_why_p1: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"],["why it exists","Independent facet 2","Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"],["why it exists","Independent facet 3","and multimodal applications"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -177,15 +176,16 @@ Path("ink_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_why\_p1: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark};
-\node[box] (n2) at (2.50,-1.50) {Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following};
-\node[box] (n3) at (4.00,-1.50) {and multimodal applications};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_why\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why did Thinking Machines Lab release Inkling};
+\node[box] (f1) at (0,2) {The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark};
+\node[box] (f2) at (6,2) {Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following};
+\node[box] (f3) at (0,0) {and multimodal applications};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -194,11 +194,13 @@ Path("ink_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 
 ```mermaid
 flowchart LR
-  n1["The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
-  n2["Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
-  n3["and multimodal applications"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Why did Thinking Machines Lab release Inkling"]
+  f1["The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark"]
+  f2["Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following"]
+  f3["and multimodal applications"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
 ```
 
 #### Python
@@ -208,27 +210,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p1: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark",100,150],["n2","Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following",250,150],["n3","and multimodal applications",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "ink_why_p1: claim-boundary constellation"
+nodes = [["center","Why did Thinking Machines Lab release Inkling",460,220],["f1","The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark",100,40],["f2","Its intended uses include agentic systems, coding assistants, chatbots, retrieval-augmented generation, instruction following",820,40],["f3","and multimodal applications",100,220]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -252,18 +256,18 @@ Path("ink_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 - Text anchor: "That positioning matters because the provider explicitly says Inkling is not the strongest model overall."
 - Claims and sources: `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why did Thinking Machines Lab release Inkling.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -272,9 +276,10 @@ Path("ink_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_why\_p2: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- That positioning matters because the provider explicitly says Inkling is not the strongest model overall\\\textbf{Statement 2}: qualitative -- The proposed value is the combination of open weights, multimodal input, controllable reasoning effort\\\textbf{Statement 3}: qualitative -- and availability for fine-tuning};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_why\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]The proposed value is the combination of open weights, multimodal input, controllable reasoning effort\\[3pt]and availability for fine-tuning};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]That positioning matters because the provider explicitly says Inkling is not the strongest model overall};
 \end{tikzpicture}
 \end{document}
 ```
@@ -283,10 +288,12 @@ Path("ink_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
-    p1r2["Statement 2: qualitative<br/>The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
-    p1r3["Statement 3: qualitative<br/>and availability for fine-tuning"]
+  subgraph g1["Premise or requirement"]
+    g1i1["The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
+    g1i2["and availability for fine-tuning"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
   end
 ```
 
@@ -297,39 +304,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p2: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","That positioning matters because the provider explicitly says Inkling is not the strongest model overall"],["Paragraph evidence","Statement 2","qualitative","The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"],["Paragraph evidence","Statement 3","qualitative","and availability for fine-tuning"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_why_p2: independent facets"
+groups = [{"title":"Premise or requirement","items":["The proposed value is the combination of open weights, multimodal input, controllable reasoning effort","and availability for fine-tuning"]},{"title":"Constraint or research boundary","items":["That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -340,12 +343,12 @@ Path("ink_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8"
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_why\_p2: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & That positioning matters because the provider explicitly says Inkling is not the strongest model overall \\
-Paragraph evidence & Statement 2 & qualitative & The proposed value is the combination of open weights, multimodal input, controllable reasoning effort \\
-Paragraph evidence & Statement 3 & qualitative & and availability for fine-tuning \\
+\node[align=center] {\textbf{ink\_why\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & That positioning matters because the provider explicitly says Inkling is not the strongest model overall \\
+why it exists & Independent facet 2 & The proposed value is the combination of open weights, multimodal input, controllable reasoning effort \\
+why it exists & Independent facet 3 & and availability for fine-tuning \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -355,10 +358,10 @@ Paragraph evidence & Statement 3 & qualitative & and availability for fine-tunin
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>and availability for fine-tuning"]
+  subgraph Ledger["ink_why_p2: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>and availability for fine-tuning"]
   end
 ```
 
@@ -369,36 +372,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p2: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","That positioning matters because the provider explicitly says Inkling is not the strongest model overall"],["Paragraph evidence","Statement 2","qualitative","The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"],["Paragraph evidence","Statement 3","qualitative","and availability for fine-tuning"]]
-height = 414
+title = "ink_why_p2: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","That positioning matters because the provider explicitly says Inkling is not the strongest model overall"],["why it exists","Independent facet 2","The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"],["why it exists","Independent facet 3","and availability for fine-tuning"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why did Thinking Machines Lab release Inkling — paragraph ink_why_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_005` from `source_inkling_model_card`, `source_inkling_release`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -406,15 +409,16 @@ Path("ink_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_why\_p2: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {That positioning matters because the provider explicitly says Inkling is not the strongest model overall};
-\node[box] (n2) at (2.50,-1.50) {The proposed value is the combination of open weights, multimodal input, controllable reasoning effort};
-\node[box] (n3) at (4.00,-1.50) {and availability for fine-tuning};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_why\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why did Thinking Machines Lab release Inkling};
+\node[box] (f1) at (0,2) {That positioning matters because the provider explicitly says Inkling is not the strongest model overall};
+\node[box] (f2) at (6,2) {The proposed value is the combination of open weights, multimodal input, controllable reasoning effort};
+\node[box] (f3) at (0,0) {and availability for fine-tuning};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -423,11 +427,13 @@ Path("ink_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8"
 
 ```mermaid
 flowchart LR
-  n1["That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
-  n2["The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
-  n3["and availability for fine-tuning"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Why did Thinking Machines Lab release Inkling"]
+  f1["That positioning matters because the provider explicitly says Inkling is not the strongest model overall"]
+  f2["The proposed value is the combination of open weights, multimodal input, controllable reasoning effort"]
+  f3["and availability for fine-tuning"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
 ```
 
 #### Python
@@ -437,27 +443,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_why_p2: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","That positioning matters because the provider explicitly says Inkling is not the strongest model overall",100,150],["n2","The proposed value is the combination of open weights, multimodal input, controllable reasoning effort",250,150],["n3","and availability for fine-tuning",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "ink_why_p2: claim-boundary constellation"
+nodes = [["center","Why did Thinking Machines Lab release Inkling",460,220],["f1","That positioning matters because the provider explicitly says Inkling is not the strongest model overall",100,40],["f2","The proposed value is the combination of open weights, multimodal input, controllable reasoning effort",820,40],["f3","and availability for fine-tuning",100,220]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -714,18 +722,18 @@ Path("ink_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Text anchor: "The release also exposes an effort control intended to trade generated tokens for performance."
 - Claims and sources: `ink_001` (OBSERVED, VERIFIED); `ink_002` (OBSERVED, VERIFIED); `ink_003` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional changed-versus-unchanged claim boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is materially different about the release.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Do not imply a measured effect or architecture not stated in this paragraph.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional changed-versus-unchanged claim boundary — Tested-versus-unestablished panels
+### Treatment A — What is materially different about the release — paragraph ink_change_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 2 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_001`, `ink_002`, `ink_003`, `ink_005`, `ink_008` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`. Do not imply a measured effect or architecture not stated in this paragraph.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_002` (OBSERVED, VERIFIED); `ink_003` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -734,9 +742,10 @@ Path("ink_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_change\_p2: Optional changed-versus-unchanged claim boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The release also exposes an effort control intended to trade generated tokens for performance\\\textbf{Statement 2}: qualitative -- This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_change\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Claimed change}\\[5pt]The release also exposes an effort control intended to trade generated tokens for performance};
+\node[panel] at (6,0) {\textbf{Unchanged or unproven boundary}\\[5pt]This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task};
 \end{tikzpicture}
 \end{document}
 ```
@@ -745,9 +754,11 @@ Path("ink_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The release also exposes an effort control intended to trade generated tokens for performance"]
-    p1r2["Statement 2: qualitative<br/>This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
+  subgraph g1["Claimed change"]
+    g1i1["The release also exposes an effort control intended to trade generated tokens for performance"]
+  end
+  subgraph g2["Unchanged or unproven boundary"]
+    g2i1["This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
   end
 ```
 
@@ -758,39 +769,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_change_p2: Optional changed-versus-unchanged claim boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release also exposes an effort control intended to trade generated tokens for performance"],["Paragraph evidence","Statement 2","qualitative","This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_change_p2: independent facets"
+groups = [{"title":"Claimed change","items":["The release also exposes an effort control intended to trade generated tokens for performance"]},{"title":"Unchanged or unproven boundary","items":["This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]}]
+width = 900
+height = 312
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional changed-versus-unchanged claim boundary — Scope ledger
+### Treatment B — What is materially different about the release — paragraph ink_change_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 2 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_001`, `ink_002`, `ink_003`, `ink_005`, `ink_008` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`. Do not imply a measured effect or architecture not stated in this paragraph.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 2 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_002` (OBSERVED, VERIFIED); `ink_003` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -801,11 +808,11 @@ Path("ink_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_change\_p2: Optional changed-versus-unchanged claim boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The release also exposes an effort control intended to trade generated tokens for performance \\
-Paragraph evidence & Statement 2 & qualitative & This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task \\
+\node[align=center] {\textbf{ink\_change\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+what it changes & Independent facet 1 & The release also exposes an effort control intended to trade generated tokens for performance \\
+what it changes & Independent facet 2 & This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -815,9 +822,9 @@ Paragraph evidence & Statement 2 & qualitative & This is a product and training 
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The release also exposes an effort control intended to trade generated tokens for performance"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
+  subgraph Ledger["ink_change_p2: non-directional evidence ledger"]
+    r1["what it changes<br/><b>Independent facet 1</b><br/>The release also exposes an effort control intended to trade generated tokens for performance"]
+    r2["what it changes<br/><b>Independent facet 2</b><br/>This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
   end
 ```
 
@@ -828,36 +835,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_change_p2: Optional changed-versus-unchanged claim boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release also exposes an effort control intended to trade generated tokens for performance"],["Paragraph evidence","Statement 2","qualitative","This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]]
-height = 326
+title = "ink_change_p2: non-directional evidence ledger"
+rows = [["what it changes","Independent facet 1","The release also exposes an effort control intended to trade generated tokens for performance"],["what it changes","Independent facet 2","This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]]
+height = 334
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional changed-versus-unchanged claim boundary — Annotated boundary map
+### Treatment C — What is materially different about the release — paragraph ink_change_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 2 named nodes and 1 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_001`, `ink_002`, `ink_003`, `ink_005`, `ink_008` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`. Do not imply a measured effect or architecture not stated in this paragraph.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 2 undirected spokes. Lines encode claim boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_002` (OBSERVED, VERIFIED); `ink_003` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -865,13 +872,14 @@ Path("ink_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_change\_p2: Optional changed-versus-unchanged claim boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The release also exposes an effort control intended to trade generated tokens for performance};
-\node[box] (n2) at (2.50,-1.50) {This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task};
-\draw[link] (n1) -- node[rel] {then} (n2);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_change\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is materially different about the release};
+\node[box] (f1) at (0,2) {The release also exposes an effort control intended to trade generated tokens for performance};
+\node[box] (f2) at (6,2) {This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task};
+\draw (center) -- node[rel] {claim boundary} (f1);
+\draw (center) -- node[rel] {claim boundary} (f2);
 \end{tikzpicture}
 \end{document}
 ```
@@ -880,9 +888,11 @@ Path("ink_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["The release also exposes an effort control intended to trade generated tokens for performance"]
-  n2["This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
-  n1 -->|"then"| n2
+  center["What is materially different about the release"]
+  f1["The release also exposes an effort control intended to trade generated tokens for performance"]
+  f2["This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task"]
+  center ---|"claim boundary"| f1
+  center ---|"claim boundary"| f2
 ```
 
 #### Python
@@ -892,27 +902,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_change_p2: Optional changed-versus-unchanged claim boundary — Annotated boundary map"
-nodes = [["n1","The release also exposes an effort control intended to trade generated tokens for performance",100,150],["n2","This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task",250,150]]
-edges = [["n1","n2","then"]]
+title = "ink_change_p2: claim-boundary constellation"
+nodes = [["center","What is materially different about the release",460,220],["f1","The release also exposes an effort control intended to trade generated tokens for performance",100,40],["f2","This is a product and training claim about controllability, not proof that Inkling dominates models at every effort level or task",820,40]]
+edges = [["center","f1","claim boundary",false],["center","f2","claim boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -1956,18 +1968,18 @@ Path("ink_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Text anchor: "The quantized option reduces memory requirements, but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison."
 - Claims and sources: `ink_004` (OBSERVED, VERIFIED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_hf_nvfp4` (Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional worked-example annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What would a local deployment decision look like.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Do not invent intermediate values or outcomes.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional worked-example annotation — Worked sequence
+### Treatment A — What would a local deployment decision look like — paragraph ink_example_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Follow the actual example in source order.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_004`, `ink_012` from `source_inkling_model_card`, `source_inkling_hf_bf16`, `source_inkling_hf_nvfp4`. Do not invent intermediate values or outcomes.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_004` (OBSERVED, VERIFIED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_hf_nvfp4` (Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -1975,15 +1987,11 @@ Path("ink_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_example\_p2: Optional worked-example annotation - Worked sequence};
-\node[box] (n1) at (1.00,-1.50) {The quantized option reduces memory requirements};
-\node[box] (n2) at (2.50,-1.50) {but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison};
-\node[box] (n3) at (4.00,-1.50) {A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_example\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Worked-example fact}\\[5pt]The quantized option reduces memory requirements};
+\node[panel] at (6,0) {\textbf{Evidence or transfer boundary}\\[5pt]but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison\\[3pt]A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1992,11 +2000,13 @@ Path("ink_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["The quantized option reduces memory requirements"]
-  n2["but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
-  n3["A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  subgraph g1["Worked-example fact"]
+    g1i1["The quantized option reduces memory requirements"]
+  end
+  subgraph g2["Evidence or transfer boundary"]
+    g2i1["but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
+    g2i2["A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
+  end
 ```
 
 #### Python
@@ -2006,38 +2016,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_example_p2: Optional worked-example annotation — Worked sequence"
-nodes = [["n1","The quantized option reduces memory requirements",100,150],["n2","but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison",250,150],["n3","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+title = "ink_example_p2: independent facets"
+groups = [{"title":"Worked-example fact","items":["The quantized option reduces memory requirements"]},{"title":"Evidence or transfer boundary","items":["but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional worked-example annotation — Example calculation or state ledger
+### Treatment B — What would a local deployment decision look like — paragraph ink_example_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Keep values, states, and boundaries grouped by example.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_004`, `ink_012` from `source_inkling_model_card`, `source_inkling_hf_bf16`, `source_inkling_hf_nvfp4`. Do not invent intermediate values or outcomes.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_004` (OBSERVED, VERIFIED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_hf_nvfp4` (Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2048,12 +2055,12 @@ Path("ink_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_example\_p2: Optional worked-example annotation - Example calculation or state ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The quantized option reduces memory requirements \\
-Paragraph evidence & Statement 2 & qualitative & but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison \\
-Paragraph evidence & Statement 3 & qualitative & A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint \\
+\node[align=center] {\textbf{ink\_example\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+worked example & Independent facet 1 & The quantized option reduces memory requirements \\
+worked example & Independent facet 2 & but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison \\
+worked example & Independent facet 3 & A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -2063,10 +2070,10 @@ Paragraph evidence & Statement 3 & qualitative & A deployment plan therefore can
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The quantized option reduces memory requirements"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
+  subgraph Ledger["ink_example_p2: non-directional evidence ledger"]
+    r1["worked example<br/><b>Independent facet 1</b><br/>The quantized option reduces memory requirements"]
+    r2["worked example<br/><b>Independent facet 2</b><br/>but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
+    r3["worked example<br/><b>Independent facet 3</b><br/>A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
   end
 ```
 
@@ -2077,36 +2084,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_example_p2: Optional worked-example annotation — Example calculation or state ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The quantized option reduces memory requirements"],["Paragraph evidence","Statement 2","qualitative","but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"],["Paragraph evidence","Statement 3","qualitative","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]]
-height = 414
+title = "ink_example_p2: non-directional evidence ledger"
+rows = [["worked example","Independent facet 1","The quantized option reduces memory requirements"],["worked example","Independent facet 2","but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"],["worked example","Independent facet 3","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional worked-example annotation — Bounded example panels
+### Treatment C — What would a local deployment decision look like — paragraph ink_example_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Separate multiple examples and aggregate results instead of flattening them.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_004`, `ink_012` from `source_inkling_model_card`, `source_inkling_hf_bf16`, `source_inkling_hf_nvfp4`. Do not invent intermediate values or outcomes.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode example boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_004` (OBSERVED, VERIFIED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_hf_nvfp4` (Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2115,9 +2122,15 @@ Path("ink_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_example\_p2: Optional worked-example annotation - Bounded example panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The quantized option reduces memory requirements\\\textbf{Statement 2}: qualitative -- but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison\\\textbf{Statement 3}: qualitative -- A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint};
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_example\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What would a local deployment decision look like};
+\node[box] (f1) at (0,2) {The quantized option reduces memory requirements};
+\node[box] (f2) at (6,2) {but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison};
+\node[box] (f3) at (0,0) {A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint};
+\draw (center) -- node[rel] {example boundary} (f1);
+\draw (center) -- node[rel] {example boundary} (f2);
+\draw (center) -- node[rel] {example boundary} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2126,11 +2139,13 @@ Path("ink_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The quantized option reduces memory requirements"]
-    p1r2["Statement 2: qualitative<br/>but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
-    p1r3["Statement 3: qualitative<br/>A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
-  end
+  center["What would a local deployment decision look like"]
+  f1["The quantized option reduces memory requirements"]
+  f2["but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"]
+  f3["A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]
+  center ---|"example boundary"| f1
+  center ---|"example boundary"| f2
+  center ---|"example boundary"| f3
 ```
 
 #### Python
@@ -2140,28 +2155,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_example_p2: Optional worked-example annotation — Bounded example panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The quantized option reduces memory requirements"],["Paragraph evidence","Statement 2","qualitative","but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison"],["Paragraph evidence","Statement 3","qualitative","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_example_p2: claim-boundary constellation"
+nodes = [["center","What would a local deployment decision look like",460,220],["f1","The quantized option reduces memory requirements",100,40],["f2","but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison",820,40],["f3","A deployment plan therefore cannot assume that the published benchmark values transfer unchanged to the quantized checkpoint",100,220]]
+edges = [["center","f1","example boundary",false],["center","f2","example boundary",false],["center","f3","example boundary",false]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for source, target, relation, directed in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2477,18 +2493,86 @@ Path("ink_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 - Text anchor: "The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens."
 - Claims and sources: `ink_007` (OBSERVED, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional protocol and evidence ledger.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What evidence does the release provide.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: A missing comparison is an evidence gap, not a value to plot.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional protocol and evidence ledger — Visible evidence matrix
+### Treatment A — What evidence does the release provide — paragraph ink_evidence_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Render source-backed values and conditions directly for sighted readers.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_007`, `ink_008`, `ink_009`, `ink_011` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_007` (OBSERVED, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_evidence\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Protocol or reported evidence}\\[5pt]The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens\\[3pt]Some comparisons use externally reported scores\\[3pt]otherwise the provider uses internal harnesses\\[3pt]Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero\\[3pt]and VoiceBench required a formatting instruction because its grader is sensitive to output format};
+\node[panel] at (6,0) {\textbf{Missing comparison or scope limit}\\[5pt]and VoiceBench required a formatting instruction because its grader is sensitive to output format};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph g1["Protocol or reported evidence"]
+    g1i1["The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
+    g1i2["Some comparisons use externally reported scores"]
+    g1i3["otherwise the provider uses internal harnesses"]
+    g1i4["Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
+    g1i5["and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
+  end
+  subgraph g2["Missing comparison or scope limit"]
+    g2i1["and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "ink_evidence_p2: independent facets"
+groups = [{"title":"Protocol or reported evidence","items":["The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens","Some comparisons use externally reported scores","otherwise the provider uses internal harnesses","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero","and VoiceBench required a formatting instruction because its grader is sensitive to output format"]},{"title":"Missing comparison or scope limit","items":["and VoiceBench required a formatting instruction because its grader is sensitive to output format"]}]
+width = 900
+height = 680
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("ink_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — What evidence does the release provide — paragraph ink_evidence_p2 — evidence and boundary ledger
+
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_007` (OBSERVED, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2499,14 +2583,14 @@ Path("ink_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_evidence\_p2: Optional protocol and evidence ledger - Visible evidence matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & 1.0, 256K & The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens \\
-Paragraph evidence & Statement 2 & qualitative & Some comparisons use externally reported scores \\
-Paragraph evidence & Statement 3 & qualitative & otherwise the provider uses internal harnesses \\
-Paragraph evidence & Statement 4 & qualitative & Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero \\
-Paragraph evidence & Statement 5 & qualitative & and VoiceBench required a formatting instruction because its grader is sensitive to output format \\
+\node[align=center] {\textbf{ink\_evidence\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+evidence & Independent facet 1 & The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens \\
+evidence & Independent facet 2 & Some comparisons use externally reported scores \\
+evidence & Independent facet 3 & otherwise the provider uses internal harnesses \\
+evidence & Independent facet 4 & Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero \\
+evidence & Independent facet 5 & and VoiceBench required a formatting instruction because its grader is sensitive to output format \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -2516,12 +2600,12 @@ Paragraph evidence & Statement 5 & qualitative & and VoiceBench required a forma
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>1.0, 256K</b><br/>The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Some comparisons use externally reported scores"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>otherwise the provider uses internal harnesses"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
+  subgraph Ledger["ink_evidence_p2: non-directional evidence ledger"]
+    r1["evidence<br/><b>Independent facet 1</b><br/>The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
+    r2["evidence<br/><b>Independent facet 2</b><br/>Some comparisons use externally reported scores"]
+    r3["evidence<br/><b>Independent facet 3</b><br/>otherwise the provider uses internal harnesses"]
+    r4["evidence<br/><b>Independent facet 4</b><br/>Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
+    r5["evidence<br/><b>Independent facet 5</b><br/>and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
   end
 ```
 
@@ -2532,104 +2616,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_evidence_p2: Optional protocol and evidence ledger — Visible evidence matrix"
-rows = [["Paragraph evidence","Statement 1","1.0, 256K","The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"],["Paragraph evidence","Statement 2","qualitative","Some comparisons use externally reported scores"],["Paragraph evidence","Statement 3","qualitative","otherwise the provider uses internal harnesses"],["Paragraph evidence","Statement 4","qualitative","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"],["Paragraph evidence","Statement 5","qualitative","and VoiceBench required a formatting instruction because its grader is sensitive to output format"]]
-height = 590
+title = "ink_evidence_p2: non-directional evidence ledger"
+rows = [["evidence","Independent facet 1","The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"],["evidence","Independent facet 2","Some comparisons use externally reported scores"],["evidence","Independent facet 3","otherwise the provider uses internal harnesses"],["evidence","Independent facet 4","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"],["evidence","Independent facet 5","and VoiceBench required a formatting instruction because its grader is sensitive to output format"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("ink_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — Optional protocol and evidence ledger — Evidence-surface panels
-
-- Teaching purpose: Optional contingency only. Separate protocols or source surfaces that cannot share one scale.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_007`, `ink_008`, `ink_009`, `ink_011` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_evidence\_p2: Optional protocol and evidence ledger - Evidence-surface panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: 1.0, 256K -- The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens\\\textbf{Statement 2}: qualitative -- Some comparisons use externally reported scores\\\textbf{Statement 3}: qualitative -- otherwise the provider uses internal harnesses\\\textbf{Statement 4}: qualitative -- Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero\\\textbf{Statement 5}: qualitative -- and VoiceBench required a formatting instruction because its grader is sensitive to output format};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: 1.0, 256K<br/>The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
-    p1r2["Statement 2: qualitative<br/>Some comparisons use externally reported scores"]
-    p1r3["Statement 3: qualitative<br/>otherwise the provider uses internal harnesses"]
-    p1r4["Statement 4: qualitative<br/>Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
-    p1r5["Statement 5: qualitative<br/>and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "ink_evidence_p2: Optional protocol and evidence ledger — Evidence-surface panels"
-rows = [["Paragraph evidence","Statement 1","1.0, 256K","The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"],["Paragraph evidence","Statement 2","qualitative","Some comparisons use externally reported scores"],["Paragraph evidence","Statement 3","qualitative","otherwise the provider uses internal harnesses"],["Paragraph evidence","Statement 4","qualitative","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"],["Paragraph evidence","Statement 5","qualitative","and VoiceBench required a formatting instruction because its grader is sensitive to output format"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional protocol and evidence ledger — Evidence acquisition timeline
+### Treatment C — What evidence does the release provide — paragraph ink_evidence_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Show only an actual source or protocol order stated in the paragraph.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_007`, `ink_008`, `ink_009`, `ink_011` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. A missing comparison is an evidence gap, not a value to plot.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode evidence condition, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_007` (OBSERVED, VERIFIED); `ink_008` (AUTHORS_INTERPRETATION, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2637,19 +2653,20 @@ Path("ink_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="u
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_evidence\_p2: Optional protocol and evidence ledger - Evidence acquisition timeline};
-\node[box] (n1) at (1.00,-1.50) {The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens};
-\node[box] (n2) at (2.50,-1.50) {Some comparisons use externally reported scores};
-\node[box] (n3) at (4.00,-1.50) {otherwise the provider uses internal harnesses};
-\node[box] (n4) at (5.50,-1.50) {Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero};
-\node[box] (n5) at (7.00,-1.50) {and VoiceBench required a formatting instruction because its grader is sensitive to output format};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_evidence\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What evidence does the release provide};
+\node[box] (f1) at (0,2) {The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens};
+\node[box] (f2) at (6,2) {Some comparisons use externally reported scores};
+\node[box] (f3) at (0,0) {otherwise the provider uses internal harnesses};
+\node[box] (f4) at (6,0) {Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero};
+\node[box] (f5) at (0,-2) {and VoiceBench required a formatting instruction because its grader is sensitive to output format};
+\draw (center) -- node[rel] {evidence condition} (f1);
+\draw (center) -- node[rel] {evidence condition} (f2);
+\draw (center) -- node[rel] {evidence condition} (f3);
+\draw (center) -- node[rel] {evidence condition} (f4);
+\draw (center) -- node[rel] {evidence condition} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2658,15 +2675,17 @@ Path("ink_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="u
 
 ```mermaid
 flowchart LR
-  n1["The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
-  n2["Some comparisons use externally reported scores"]
-  n3["otherwise the provider uses internal harnesses"]
-  n4["Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
-  n5["and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What evidence does the release provide"]
+  f1["The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens"]
+  f2["Some comparisons use externally reported scores"]
+  f3["otherwise the provider uses internal harnesses"]
+  f4["Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero"]
+  f5["and VoiceBench required a formatting instruction because its grader is sensitive to output format"]
+  center ---|"evidence condition"| f1
+  center ---|"evidence condition"| f2
+  center ---|"evidence condition"| f3
+  center ---|"evidence condition"| f4
+  center ---|"evidence condition"| f5
 ```
 
 #### Python
@@ -2676,27 +2695,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_evidence_p2: Optional protocol and evidence ledger — Evidence acquisition timeline"
-nodes = [["n1","The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens",100,150],["n2","Some comparisons use externally reported scores",250,150],["n3","otherwise the provider uses internal harnesses",400,150],["n4","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero",550,150],["n5","and VoiceBench required a formatting instruction because its grader is sensitive to output format",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "ink_evidence_p2: claim-boundary constellation"
+nodes = [["center","What evidence does the release provide",460,220],["f1","The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens",100,40],["f2","Some comparisons use externally reported scores",820,40],["f3","otherwise the provider uses internal harnesses",100,220],["f4","Inkling's Terminal Bench score uses an internal coding harness, contaminated web-search solutions were assigned zero",820,220],["f5","and VoiceBench required a formatting instruction because its grader is sensitive to output format",100,400]]
+edges = [["center","f1","evidence condition",false],["center","f2","evidence condition",false],["center","f3","evidence condition",false],["center","f4","evidence condition",false],["center","f5","evidence condition",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2961,18 +2982,18 @@ Path("ink_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 - Text anchor: "The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases, and perform unevenly across languages and subject domains."
 - Claims and sources: `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Where should the claims be narrowed.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — Where should the claims be narrowed — paragraph ink_limitations_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2981,9 +3002,10 @@ Path("ink_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases\\\textbf{Statement 2}: qualitative -- and perform unevenly across languages and subject domains\\\textbf{Statement 3}: qualitative -- It recommends independent evaluation, application-level safeguards\\\textbf{Statement 4}: qualitative -- and human oversight for high-stakes uses};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_limitations\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]and perform unevenly across languages and subject domains\\[3pt]It recommends independent evaluation, application-level safeguards\\[3pt]and human oversight for high-stakes uses};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2992,11 +3014,13 @@ Path("ink_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
-    p1r2["Statement 2: qualitative<br/>and perform unevenly across languages and subject domains"]
-    p1r3["Statement 3: qualitative<br/>It recommends independent evaluation, application-level safeguards"]
-    p1r4["Statement 4: qualitative<br/>and human oversight for high-stakes uses"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["and perform unevenly across languages and subject domains"]
+    g1i2["It recommends independent evaluation, application-level safeguards"]
+    g1i3["and human oversight for high-stakes uses"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
   end
 ```
 
@@ -3007,39 +3031,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"],["Paragraph evidence","Statement 2","qualitative","and perform unevenly across languages and subject domains"],["Paragraph evidence","Statement 3","qualitative","It recommends independent evaluation, application-level safeguards"],["Paragraph evidence","Statement 4","qualitative","and human oversight for high-stakes uses"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_limitations_p1: independent facets"
+groups = [{"title":"Tested or reported scope","items":["and perform unevenly across languages and subject domains","It recommends independent evaluation, application-level safeguards","and human oversight for high-stakes uses"]},{"title":"Unestablished or missing evidence","items":["The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — Where should the claims be narrowed — paragraph ink_limitations_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3050,13 +3070,13 @@ Path("ink_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases \\
-Paragraph evidence & Statement 2 & qualitative & and perform unevenly across languages and subject domains \\
-Paragraph evidence & Statement 3 & qualitative & It recommends independent evaluation, application-level safeguards \\
-Paragraph evidence & Statement 4 & qualitative & and human oversight for high-stakes uses \\
+\node[align=center] {\textbf{ink\_limitations\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases \\
+limitations & Independent facet 2 & and perform unevenly across languages and subject domains \\
+limitations & Independent facet 3 & It recommends independent evaluation, application-level safeguards \\
+limitations & Independent facet 4 & and human oversight for high-stakes uses \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3066,11 +3086,11 @@ Paragraph evidence & Statement 4 & qualitative & and human oversight for high-st
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>and perform unevenly across languages and subject domains"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>It recommends independent evaluation, application-level safeguards"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and human oversight for high-stakes uses"]
+  subgraph Ledger["ink_limitations_p1: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>and perform unevenly across languages and subject domains"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>It recommends independent evaluation, application-level safeguards"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>and human oversight for high-stakes uses"]
   end
 ```
 
@@ -3081,36 +3101,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"],["Paragraph evidence","Statement 2","qualitative","and perform unevenly across languages and subject domains"],["Paragraph evidence","Statement 3","qualitative","It recommends independent evaluation, application-level safeguards"],["Paragraph evidence","Statement 4","qualitative","and human oversight for high-stakes uses"]]
-height = 502
+title = "ink_limitations_p1: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"],["limitations","Independent facet 2","and perform unevenly across languages and subject domains"],["limitations","Independent facet 3","It recommends independent evaluation, application-level safeguards"],["limitations","Independent facet 4","and human oversight for high-stakes uses"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — Where should the claims be narrowed — paragraph ink_limitations_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3118,17 +3138,18 @@ Path("ink_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases};
-\node[box] (n2) at (2.50,-1.50) {and perform unevenly across languages and subject domains};
-\node[box] (n3) at (4.00,-1.50) {It recommends independent evaluation, application-level safeguards};
-\node[box] (n4) at (5.50,-1.50) {and human oversight for high-stakes uses};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_limitations\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {Where should the claims be narrowed};
+\node[box] (f1) at (0,2) {The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases};
+\node[box] (f2) at (6,2) {and perform unevenly across languages and subject domains};
+\node[box] (f3) at (0,0) {It recommends independent evaluation, application-level safeguards};
+\node[box] (f4) at (6,0) {and human oversight for high-stakes uses};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3137,13 +3158,15 @@ Path("ink_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
-  n2["and perform unevenly across languages and subject domains"]
-  n3["It recommends independent evaluation, application-level safeguards"]
-  n4["and human oversight for high-stakes uses"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["Where should the claims be narrowed"]
+  f1["The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases"]
+  f2["and perform unevenly across languages and subject domains"]
+  f3["It recommends independent evaluation, application-level safeguards"]
+  f4["and human oversight for high-stakes uses"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3153,27 +3176,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases",100,150],["n2","and perform unevenly across languages and subject domains",250,150],["n3","It recommends independent evaluation, application-level safeguards",400,150],["n4","and human oversight for high-stakes uses",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "ink_limitations_p1: claim-boundary constellation"
+nodes = [["center","Where should the claims be narrowed",460,220],["f1","The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases",100,40],["f2","and perform unevenly across languages and subject domains",820,40],["f3","It recommends independent evaluation, application-level safeguards",100,220],["f4","and human oversight for high-stakes uses",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3429,18 +3454,18 @@ Path("ink_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "Training disclosure remains high level."
 - Claims and sources: `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Where should the claims be narrowed.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — Where should the claims be narrowed — paragraph ink_limitations_p3 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3449,9 +3474,10 @@ Path("ink_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_limitations\_p3: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Training disclosure remains high level\\\textbf{Statement 2}: 45 -- The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution\\\textbf{Statement 3}: qualitative -- or training cutoff needed for a complete independent audit};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_limitations\_p3: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]Training disclosure remains high level\\[3pt]or training cutoff needed for a complete independent audit};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3460,10 +3486,12 @@ Path("ink_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Training disclosure remains high level"]
-    p1r2["Statement 2: 45<br/>The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
-    p1r3["Statement 3: qualitative<br/>or training cutoff needed for a complete independent audit"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["Training disclosure remains high level"]
+    g1i2["or training cutoff needed for a complete independent audit"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
   end
 ```
 
@@ -3474,39 +3502,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p3: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Training disclosure remains high level"],["Paragraph evidence","Statement 2","45","The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"],["Paragraph evidence","Statement 3","qualitative","or training cutoff needed for a complete independent audit"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_limitations_p3: independent facets"
+groups = [{"title":"Tested or reported scope","items":["Training disclosure remains high level","or training cutoff needed for a complete independent audit"]},{"title":"Unestablished or missing evidence","items":["The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — Where should the claims be narrowed — paragraph ink_limitations_p3 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3517,12 +3541,12 @@ Path("ink_limitations_p3_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_limitations\_p3: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Training disclosure remains high level \\
-Paragraph evidence & Statement 2 & 45 & The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution \\
-Paragraph evidence & Statement 3 & qualitative & or training cutoff needed for a complete independent audit \\
+\node[align=center] {\textbf{ink\_limitations\_p3: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & Training disclosure remains high level \\
+limitations & Independent facet 2 & The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution \\
+limitations & Independent facet 3 & or training cutoff needed for a complete independent audit \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3532,10 +3556,10 @@ Paragraph evidence & Statement 3 & qualitative & or training cutoff needed for a
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Training disclosure remains high level"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>45</b><br/>The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>or training cutoff needed for a complete independent audit"]
+  subgraph Ledger["ink_limitations_p3: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>Training disclosure remains high level"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>or training cutoff needed for a complete independent audit"]
   end
 ```
 
@@ -3546,36 +3570,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p3: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Training disclosure remains high level"],["Paragraph evidence","Statement 2","45","The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"],["Paragraph evidence","Statement 3","qualitative","or training cutoff needed for a complete independent audit"]]
-height = 414
+title = "ink_limitations_p3: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","Training disclosure remains high level"],["limitations","Independent facet 2","The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"],["limitations","Independent facet 3","or training cutoff needed for a complete independent audit"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — Where should the claims be narrowed — paragraph ink_limitations_p3 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3583,15 +3607,16 @@ Path("ink_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_limitations\_p3: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Training disclosure remains high level};
-\node[box] (n2) at (2.50,-1.50) {The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution};
-\node[box] (n3) at (4.00,-1.50) {or training cutoff needed for a complete independent audit};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_limitations\_p3: claim-boundary constellation};
+\node[box] (center) at (3,0) {Where should the claims be narrowed};
+\node[box] (f1) at (0,2) {Training disclosure remains high level};
+\node[box] (f2) at (6,2) {The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution};
+\node[box] (f3) at (0,0) {or training cutoff needed for a complete independent audit};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3600,11 +3625,13 @@ Path("ink_limitations_p3_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["Training disclosure remains high level"]
-  n2["The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
-  n3["or training cutoff needed for a complete independent audit"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Where should the claims be narrowed"]
+  f1["Training disclosure remains high level"]
+  f2["The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution"]
+  f3["or training cutoff needed for a complete independent audit"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
 ```
 
 #### Python
@@ -3614,27 +3641,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p3: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","Training disclosure remains high level",100,150],["n2","The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution",250,150],["n3","or training cutoff needed for a complete independent audit",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "ink_limitations_p3: claim-boundary constellation"
+nodes = [["center","Where should the claims be narrowed",460,220],["f1","Training disclosure remains high level",100,40],["f2","The sources give broad categories and a 45-trillion-token release claim but not the dataset composition, rights breakdown, contamination analysis, language distribution",820,40],["f3","or training cutoff needed for a complete independent audit",100,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3658,18 +3687,18 @@ Path("ink_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "The model card, release page, and Acceptable Use Policy remain mutable live pages, but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records."
 - Claims and sources: `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Where should the claims be narrowed.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — Where should the claims be narrowed — paragraph ink_limitations_p4 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3678,9 +3707,10 @@ Path("ink_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_limitations\_p4: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The model card, release page\\\textbf{Statement 2}: qualitative -- and Acceptable Use Policy remain mutable live pages\\\textbf{Statement 3}: 2026, -07, -18, -256 -- but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records\\\textbf{Statement 4}: qualitative -- Claims here describe those fixed retrievals\\\textbf{Statement 5}: qualitative -- later page changes are not silently incorporated and require new hashes and review};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_limitations\_p4: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The model card, release page\\[3pt]but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records\\[3pt]Claims here describe those fixed retrievals};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]and Acceptable Use Policy remain mutable live pages\\[3pt]later page changes are not silently incorporated and require new hashes and review};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3689,12 +3719,14 @@ Path("ink_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The model card, release page"]
-    p1r2["Statement 2: qualitative<br/>and Acceptable Use Policy remain mutable live pages"]
-    p1r3["Statement 3: 2026, -07, -18, -256<br/>but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
-    p1r4["Statement 4: qualitative<br/>Claims here describe those fixed retrievals"]
-    p1r5["Statement 5: qualitative<br/>later page changes are not silently incorporated and require new hashes and review"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["The model card, release page"]
+    g1i2["but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
+    g1i3["Claims here describe those fixed retrievals"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["and Acceptable Use Policy remain mutable live pages"]
+    g2i2["later page changes are not silently incorporated and require new hashes and review"]
   end
 ```
 
@@ -3705,39 +3737,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p4: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The model card, release page"],["Paragraph evidence","Statement 2","qualitative","and Acceptable Use Policy remain mutable live pages"],["Paragraph evidence","Statement 3","2026, -07, -18, -256","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"],["Paragraph evidence","Statement 4","qualitative","Claims here describe those fixed retrievals"],["Paragraph evidence","Statement 5","qualitative","later page changes are not silently incorporated and require new hashes and review"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_limitations_p4: independent facets"
+groups = [{"title":"Tested or reported scope","items":["The model card, release page","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records","Claims here describe those fixed retrievals"]},{"title":"Unestablished or missing evidence","items":["and Acceptable Use Policy remain mutable live pages","later page changes are not silently incorporated and require new hashes and review"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p4_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — Where should the claims be narrowed — paragraph ink_limitations_p4 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3748,14 +3776,14 @@ Path("ink_limitations_p4_treatment_a.svg").write_text("\n".join(parts), encoding
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_limitations\_p4: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The model card, release page \\
-Paragraph evidence & Statement 2 & qualitative & and Acceptable Use Policy remain mutable live pages \\
-Paragraph evidence & Statement 3 & 2026, -07, -18, -256 & but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records \\
-Paragraph evidence & Statement 4 & qualitative & Claims here describe those fixed retrievals \\
-Paragraph evidence & Statement 5 & qualitative & later page changes are not silently incorporated and require new hashes and review \\
+\node[align=center] {\textbf{ink\_limitations\_p4: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The model card, release page \\
+limitations & Independent facet 2 & and Acceptable Use Policy remain mutable live pages \\
+limitations & Independent facet 3 & but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records \\
+limitations & Independent facet 4 & Claims here describe those fixed retrievals \\
+limitations & Independent facet 5 & later page changes are not silently incorporated and require new hashes and review \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3765,12 +3793,12 @@ Paragraph evidence & Statement 5 & qualitative & later page changes are not sile
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The model card, release page"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>and Acceptable Use Policy remain mutable live pages"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>2026, -07, -18, -256</b><br/>but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Claims here describe those fixed retrievals"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>later page changes are not silently incorporated and require new hashes and review"]
+  subgraph Ledger["ink_limitations_p4: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The model card, release page"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>and Acceptable Use Policy remain mutable live pages"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>Claims here describe those fixed retrievals"]
+    r5["limitations<br/><b>Independent facet 5</b><br/>later page changes are not silently incorporated and require new hashes and review"]
   end
 ```
 
@@ -3781,36 +3809,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p4: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The model card, release page"],["Paragraph evidence","Statement 2","qualitative","and Acceptable Use Policy remain mutable live pages"],["Paragraph evidence","Statement 3","2026, -07, -18, -256","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"],["Paragraph evidence","Statement 4","qualitative","Claims here describe those fixed retrievals"],["Paragraph evidence","Statement 5","qualitative","later page changes are not silently incorporated and require new hashes and review"]]
-height = 590
+title = "ink_limitations_p4: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The model card, release page"],["limitations","Independent facet 2","and Acceptable Use Policy remain mutable live pages"],["limitations","Independent facet 3","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"],["limitations","Independent facet 4","Claims here describe those fixed retrievals"],["limitations","Independent facet 5","later page changes are not silently incorporated and require new hashes and review"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p4_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — Where should the claims be narrowed — paragraph ink_limitations_p4 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_003`, `ink_009`, `ink_010`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_003` (OBSERVED, VERIFIED); `ink_009` (OBSERVED, VERIFIED); `ink_010` (OBSERVED, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3818,19 +3846,20 @@ Path("ink_limitations_p4_treatment_b.svg").write_text("\n".join(parts), encoding
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_limitations\_p4: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The model card, release page};
-\node[box] (n2) at (2.50,-1.50) {and Acceptable Use Policy remain mutable live pages};
-\node[box] (n3) at (4.00,-1.50) {but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records};
-\node[box] (n4) at (5.50,-1.50) {Claims here describe those fixed retrievals};
-\node[box] (n5) at (7.00,-1.50) {later page changes are not silently incorporated and require new hashes and review};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_limitations\_p4: claim-boundary constellation};
+\node[box] (center) at (3,0) {Where should the claims be narrowed};
+\node[box] (f1) at (0,2) {The model card, release page};
+\node[box] (f2) at (6,2) {and Acceptable Use Policy remain mutable live pages};
+\node[box] (f3) at (0,0) {but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records};
+\node[box] (f4) at (6,0) {Claims here describe those fixed retrievals};
+\node[box] (f5) at (0,-2) {later page changes are not silently incorporated and require new hashes and review};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
+\draw (center) -- node[rel] {scope boundary} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3839,15 +3868,17 @@ Path("ink_limitations_p4_treatment_b.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  n1["The model card, release page"]
-  n2["and Acceptable Use Policy remain mutable live pages"]
-  n3["but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
-  n4["Claims here describe those fixed retrievals"]
-  n5["later page changes are not silently incorporated and require new hashes and review"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["Where should the claims be narrowed"]
+  f1["The model card, release page"]
+  f2["and Acceptable Use Policy remain mutable live pages"]
+  f3["but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records"]
+  f4["Claims here describe those fixed retrievals"]
+  f5["later page changes are not silently incorporated and require new hashes and review"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
+  center ---|"scope boundary"| f5
 ```
 
 #### Python
@@ -3857,27 +3888,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_limitations_p4: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The model card, release page",100,150],["n2","and Acceptable Use Policy remain mutable live pages",250,150],["n3","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records",400,150],["n4","Claims here describe those fixed retrievals",550,150],["n5","later page changes are not silently incorporated and require new hashes and review",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "ink_limitations_p4: claim-boundary constellation"
+nodes = [["center","Where should the claims be narrowed",460,220],["f1","The model card, release page",100,40],["f2","and Acceptable Use Policy remain mutable live pages",820,40],["f3","but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records",100,220],["f4","Claims here describe those fixed retrievals",820,220],["f5","later page changes are not silently incorporated and require new hashes and review",100,400]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false],["center","f5","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_limitations_p4_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3901,18 +3934,18 @@ Path("ink_limitations_p4_treatment_c.svg").write_text("\n".join(parts), encoding
 - Text anchor: "The release supports a strong descriptive conclusion: Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage."
 - Claims and sources: `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What should a careful reader conclude.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What should a careful reader conclude — paragraph ink_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3921,9 +3954,10 @@ Path("ink_limitations_p4_treatment_c.svg").write_text("\n".join(parts), encoding
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The release supports a strong descriptive conclusion\\\textbf{Statement 2}: qualitative -- Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage\\\textbf{Statement 3}: qualitative -- It does not support calling the model best overall, consumer-deployable, fully open source\\\textbf{Statement 4}: qualitative -- or proven at full quality across a one-million-token context};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The release supports a strong descriptive conclusion\\[3pt]Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage\\[3pt]or proven at full quality across a one-million-token context};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]It does not support calling the model best overall, consumer-deployable, fully open source};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3932,11 +3966,13 @@ Path("ink_limitations_p4_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The release supports a strong descriptive conclusion"]
-    p1r2["Statement 2: qualitative<br/>Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
-    p1r3["Statement 3: qualitative<br/>It does not support calling the model best overall, consumer-deployable, fully open source"]
-    p1r4["Statement 4: qualitative<br/>or proven at full quality across a one-million-token context"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The release supports a strong descriptive conclusion"]
+    g1i2["Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
+    g1i3["or proven at full quality across a one-million-token context"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["It does not support calling the model best overall, consumer-deployable, fully open source"]
   end
 ```
 
@@ -3947,39 +3983,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release supports a strong descriptive conclusion"],["Paragraph evidence","Statement 2","qualitative","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"],["Paragraph evidence","Statement 3","qualitative","It does not support calling the model best overall, consumer-deployable, fully open source"],["Paragraph evidence","Statement 4","qualitative","or proven at full quality across a one-million-token context"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The release supports a strong descriptive conclusion","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage","or proven at full quality across a one-million-token context"]},{"title":"Rejected overclaim or qualification","items":["It does not support calling the model best overall, consumer-deployable, fully open source"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What should a careful reader conclude — paragraph ink_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3990,13 +4022,13 @@ Path("ink_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The release supports a strong descriptive conclusion \\
-Paragraph evidence & Statement 2 & qualitative & Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage \\
-Paragraph evidence & Statement 3 & qualitative & It does not support calling the model best overall, consumer-deployable, fully open source \\
-Paragraph evidence & Statement 4 & qualitative & or proven at full quality across a one-million-token context \\
+\node[align=center] {\textbf{ink\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The release supports a strong descriptive conclusion \\
+critical review & Independent facet 2 & Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage \\
+critical review & Independent facet 3 & It does not support calling the model best overall, consumer-deployable, fully open source \\
+critical review & Independent facet 4 & or proven at full quality across a one-million-token context \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -4006,11 +4038,11 @@ Paragraph evidence & Statement 4 & qualitative & or proven at full quality acros
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The release supports a strong descriptive conclusion"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>It does not support calling the model best overall, consumer-deployable, fully open source"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>or proven at full quality across a one-million-token context"]
+  subgraph Ledger["ink_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The release supports a strong descriptive conclusion"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>It does not support calling the model best overall, consumer-deployable, fully open source"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>or proven at full quality across a one-million-token context"]
   end
 ```
 
@@ -4021,36 +4053,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The release supports a strong descriptive conclusion"],["Paragraph evidence","Statement 2","qualitative","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"],["Paragraph evidence","Statement 3","qualitative","It does not support calling the model best overall, consumer-deployable, fully open source"],["Paragraph evidence","Statement 4","qualitative","or proven at full quality across a one-million-token context"]]
-height = 502
+title = "ink_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The release supports a strong descriptive conclusion"],["critical review","Independent facet 2","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"],["critical review","Independent facet 3","It does not support calling the model best overall, consumer-deployable, fully open source"],["critical review","Independent facet 4","or proven at full quality across a one-million-token context"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What should a careful reader conclude — paragraph ink_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4058,17 +4090,18 @@ Path("ink_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The release supports a strong descriptive conclusion};
-\node[box] (n2) at (2.50,-1.50) {Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage};
-\node[box] (n3) at (4.00,-1.50) {It does not support calling the model best overall, consumer-deployable, fully open source};
-\node[box] (n4) at (5.50,-1.50) {or proven at full quality across a one-million-token context};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What should a careful reader conclude};
+\node[box] (f1) at (0,2) {The release supports a strong descriptive conclusion};
+\node[box] (f2) at (6,2) {Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage};
+\node[box] (f3) at (0,0) {It does not support calling the model best overall, consumer-deployable, fully open source};
+\node[box] (f4) at (6,0) {or proven at full quality across a one-million-token context};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4077,13 +4110,15 @@ Path("ink_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["The release supports a strong descriptive conclusion"]
-  n2["Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
-  n3["It does not support calling the model best overall, consumer-deployable, fully open source"]
-  n4["or proven at full quality across a one-million-token context"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What should a careful reader conclude"]
+  f1["The release supports a strong descriptive conclusion"]
+  f2["Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage"]
+  f3["It does not support calling the model best overall, consumer-deployable, fully open source"]
+  f4["or proven at full quality across a one-million-token context"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
 ```
 
 #### Python
@@ -4093,27 +4128,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The release supports a strong descriptive conclusion",100,150],["n2","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage",250,150],["n3","It does not support calling the model best overall, consumer-deployable, fully open source",400,150],["n4","or proven at full quality across a one-million-token context",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "ink_review_p1: claim-boundary constellation"
+nodes = [["center","What should a careful reader conclude",460,220],["f1","The release supports a strong descriptive conclusion",100,40],["f2","Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage",820,40],["f3","It does not support calling the model best overall, consumer-deployable, fully open source",100,220],["f4","or proven at full quality across a one-million-token context",820,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4137,18 +4174,18 @@ Path("ink_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Text anchor: "Source boundaries are part of the evidence."
 - Claims and sources: `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct content-addressed web snapshot and pinned checkpoint-card evidence while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Content-addressed web snapshot and pinned checkpoint-card evidence.
+- Decision rationale: A visual passes the removal test because source disagreements are interpretable only when mutable page snapshots and immutable checkpoint commits remain exactly identifiable.
+- Explanatory job: Copyable content hashes, byte counts, checkpoint commits, and unresolved source discrepancies.
 - Recommended scope and placement: This paragraph only; place the visual immediately after `ink_review_p2`.
-- QA-informed planning change: Show mutable pages, SHA-256 snapshot, immutable BF16/NVFP4 commits, and unresolved GDPVal-AA/MMMU Pro discrepancies without choosing a winner.
+- QA-informed planning change: Round-2 QA found that revision 3 promised exact identities but displayed only qualitative labels. Revision 4 prints every complete hash, byte count, and commit ID and specifies robust mobile wrapping.
 
-### Treatment A — Content-addressed web snapshot and pinned checkpoint-card evidence — Source-by-value matrix
+### Treatment A — Exact source-identity matrix
 
-- Teaching purpose: Keep each value beside its exact source and locator.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Show mutable pages, SHA-256 snapshot, immutable BF16/NVFP4 commits, and unresolved GDPVal-AA/MMMU Pro discrepancies without choosing a winner.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Make every mutable snapshot and immutable commit directly copyable beside its source role.
+- Encoding and reading order: Render five rows with complete identifiers and byte counts. Hashes and commits may wrap visually but may not be abbreviated.
+- Evidence and limitations: Use the exact fixed identities from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`, `source_inkling_hf_bf16`, and `source_inkling_hf_nvfp4`. Never abbreviate the stored value in fallback or copy text; visual wrapping may insert line breaks without changing characters.
+- Recommended web medium: semantic HTML/CSS table with copyable `<code>` values and responsive SVG export; JavaScript may provide a copy button but cannot be required.
+- Mobile, accessibility, and motion behavior: Render hashes and commit IDs in selectable monospace text with `overflow-wrap: anywhere`, `word-break: break-word`, and mobile-width containment. Insert visual line breaks only at safe character boundaries; preserve the exact copy value in DOM text and fallback. No motion is required.
 
 #### TikZ
 
@@ -4159,13 +4196,14 @@ Path("ink_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_review\_p2: Content-addressed web snapshot and pinned checkpoint-card evidence - Source-by-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Reproducibility depends on fixed source identities & Provider website snapshot & qualitative & The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change. \\
-Reproducibility depends on fixed source identities & BF16 checkpoint card & qualitative & The initial release is pinned to its immutable repository commit rather than a moving branch. \\
-Reproducibility depends on fixed source identities & NVFP4 checkpoint card & qualitative & The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements. \\
-Reproducibility depends on fixed source identities & Unresolved disagreement & qualitative & The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it. \\
+\node[align=center] {\textbf{ink\_review\_p2: exact source identity matrix}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+Mutable HTML snapshot & Model card & SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9  65,631 bytes \\
+Mutable HTML snapshot & Release page & SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc  222,133 bytes \\
+Mutable HTML snapshot & Acceptable Use Policy & SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7  25,968 bytes \\
+Immutable checkpoint commit & BF16 & 91b051f1ec836e6d56596c624c3775b495d797b1 \\
+Immutable checkpoint commit & NVFP4 & 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -4175,11 +4213,12 @@ Reproducibility depends on fixed source identities & Unresolved disagreement & q
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Reproducibility depends on fixed source identities<br/>Provider website snapshot<br/><b>qualitative</b><br/>The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change."]
-    r2["Reproducibility depends on fixed source identities<br/>BF16 checkpoint card<br/><b>qualitative</b><br/>The initial release is pinned to its immutable repository commit rather than a moving branch."]
-    r3["Reproducibility depends on fixed source identities<br/>NVFP4 checkpoint card<br/><b>qualitative</b><br/>The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements."]
-    r4["Reproducibility depends on fixed source identities<br/>Unresolved disagreement<br/><b>qualitative</b><br/>The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it."]
+  subgraph Ledger["ink_review_p2: exact source identity matrix"]
+    r1["Mutable HTML snapshot<br/><b>Model card</b><br/>SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes"]
+    r2["Mutable HTML snapshot<br/><b>Release page</b><br/>SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes"]
+    r3["Mutable HTML snapshot<br/><b>Acceptable Use Policy</b><br/>SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes"]
+    r4["Immutable checkpoint commit<br/><b>BF16</b><br/>91b051f1ec836e6d56596c624c3775b495d797b1"]
+    r5["Immutable checkpoint commit<br/><b>NVFP4</b><br/>93a182fb0376affeaeecfa4658c37a0fe9e5fa9e"]
   end
 ```
 
@@ -4190,36 +4229,108 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p2: Content-addressed web snapshot and pinned checkpoint-card evidence — Source-by-value matrix"
-rows = [["Reproducibility depends on fixed source identities","Provider website snapshot","qualitative","The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change."],["Reproducibility depends on fixed source identities","BF16 checkpoint card","qualitative","The initial release is pinned to its immutable repository commit rather than a moving branch."],["Reproducibility depends on fixed source identities","NVFP4 checkpoint card","qualitative","The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements."],["Reproducibility depends on fixed source identities","Unresolved disagreement","qualitative","The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it."]]
-height = 502
+title = "ink_review_p2: exact source identity matrix"
+rows = [["Mutable HTML snapshot","Model card","SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes"],["Mutable HTML snapshot","Release page","SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes"],["Mutable HTML snapshot","Acceptable Use Policy","SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes"],["Immutable checkpoint commit","BF16","91b051f1ec836e6d56596c624c3775b495d797b1"],["Immutable checkpoint commit","NVFP4","93a182fb0376affeaeecfa4658c37a0fe9e5fa9e"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Content-addressed web snapshot and pinned checkpoint-card evidence — Version or checkpoint timeline
+### Treatment B — Mutable snapshots versus immutable commits
 
-- Teaching purpose: Show source order without declaring later values more correct.
-- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Show mutable pages, SHA-256 snapshot, immutable BF16/NVFP4 commits, and unresolved GDPVal-AA/MMMU Pro discrepancies without choosing a winner.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Separate content-addressed web retrievals, pinned model commits, and the unresolved discrepancy boundary.
+- Encoding and reading order: Use three non-ranked panels. Every snapshot panel prints its full SHA-256 and byte count; every commit panel prints its full 40-character ID.
+- Evidence and limitations: Use the exact fixed identities from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`, `source_inkling_hf_bf16`, and `source_inkling_hf_nvfp4`. Never abbreviate the stored value in fallback or copy text; visual wrapping may insert line breaks without changing characters.
+- Recommended web medium: semantic HTML/CSS panels with `<code>` wrapping or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Render hashes and commit IDs in selectable monospace text with `overflow-wrap: anywhere`, `word-break: break-word`, and mobile-width containment. Insert visual line breaks only at safe character boundaries; preserve the exact copy value in DOM text and fallback. No motion is required.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (6,3.1) {ink\_review\_p2: snapshot and commit panels};
+\node[panel] at (0,0) {\textbf{Content-addressed mutable pages}\\[5pt]Model card  fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9  65,631 bytes\\[3pt]Release  cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc  222,133 bytes\\[3pt]AUP  c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7  25,968 bytes};
+\node[panel] at (6,0) {\textbf{Pinned initial checkpoint commits}\\[5pt]BF16  91b051f1ec836e6d56596c624c3775b495d797b1\\[3pt]NVFP4  93a182fb0376affeaeecfa4658c37a0fe9e5fa9e};
+\node[panel] at (12,0) {\textbf{Interpretation boundary}\\[5pt]GDPVal-AA and MMMU Pro values disagree across source surfaces\\[3pt]The manifest records identities; it does not choose a canonical winner};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph g1["Content-addressed mutable pages"]
+    g1i1["Model card · fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes"]
+    g1i2["Release · cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes"]
+    g1i3["AUP · c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes"]
+  end
+  subgraph g2["Pinned initial checkpoint commits"]
+    g2i1["BF16 · 91b051f1ec836e6d56596c624c3775b495d797b1"]
+    g2i2["NVFP4 · 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e"]
+  end
+  subgraph g3["Interpretation boundary"]
+    g3i1["GDPVal-AA and MMMU Pro values disagree across source surfaces"]
+    g3i2["The manifest records identities; it does not choose a canonical winner"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "ink_review_p2: snapshot and commit panels"
+groups = [{"title":"Content-addressed mutable pages","items":["Model card · fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes","Release · cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes","AUP · c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes"]},{"title":"Pinned initial checkpoint commits","items":["BF16 · 91b051f1ec836e6d56596c624c3775b495d797b1","NVFP4 · 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e"]},{"title":"Interpretation boundary","items":["GDPVal-AA and MMMU Pro values disagree across source surfaces","The manifest records identities; it does not choose a canonical winner"]}]
+width = 1200
+height = 496
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("ink_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Evidence-identity constellation
+
+- Teaching purpose: Associate each exact fixed identity with the reproducibility claim without implying chronology or precedence.
+- Encoding and reading order: Use five undirected identifier spokes. Every node carries its complete copyable SHA-256 or commit ID plus the three byte counts; wrapping may change line layout but never the stored characters.
+- Evidence and limitations: Use the exact fixed identities from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_aup`, `source_inkling_hf_bf16`, and `source_inkling_hf_nvfp4`. Never abbreviate the stored value in fallback or copy text; visual wrapping may insert line breaks without changing characters.
+- Recommended web medium: responsive SVG with a semantic HTML/CSS identifier list; JavaScript copy controls are optional.
+- Mobile, accessibility, and motion behavior: Render hashes and commit IDs in selectable monospace text with `overflow-wrap: anywhere`, `word-break: break-word`, and mobile-width containment. Insert visual line breaks only at safe character boundaries; preserve the exact copy value in DOM text and fallback. No motion is required.
 
 #### TikZ
 
@@ -4229,21 +4340,19 @@ Path("ink_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_review\_p2: Content-addressed web snapshot and pinned checkpoint-card evidence - Version or checkpoint timeline};
-\node[box] (n1) at (1.00,-1.50) {Source boundaries are part of the evidence};
-\node[box] (n2) at (2.50,-1.50) {The content-addressed website snapshot and initial checkpoint cards disagree on a few values, including GDPVal-AA and MMMU Pro};
-\node[box] (n3) at (4.00,-1.50) {The exact model-card, release-page};
-\node[box] (n4) at (5.50,-1.50) {and Acceptable Use Policy HTML retrieved on 2026-07-18 is identified by SHA-256 and byte count};
-\node[box] (n5) at (7.00,-1.50) {while BF16 and NVFP4 are pinned to their initial release commits};
-\node[box] (n6) at (8.50,-1.50) {The live pages remain mutable};
-\node[box] (n7) at (10.00,-1.50) {but the source versions used here are reproducible};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\draw[link] (n6) -- node[rel] {then} (n7);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_review\_p2: evidence identity constellation};
+\node[box] (claim) at (3,0) {Reproducible evidence identity};
+\node[box] (mc) at (0,2) {Model card SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9  65,631 bytes};
+\node[box] (release) at (0,0) {Release SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc  222,133 bytes};
+\node[box] (aup) at (0,-2) {AUP SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7  25,968 bytes};
+\node[box] (bf16) at (6,1) {BF16 commit 91b051f1ec836e6d56596c624c3775b495d797b1};
+\node[box] (nvfp4) at (6,-1) {NVFP4 commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e};
+\draw (claim) -- node[rel] {identified by} (mc);
+\draw (claim) -- node[rel] {identified by} (release);
+\draw (claim) -- node[rel] {identified by} (aup);
+\draw (claim) -- node[rel] {identified by} (bf16);
+\draw (claim) -- node[rel] {identified by} (nvfp4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4252,19 +4361,17 @@ Path("ink_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["Source boundaries are part of the evidence"]
-  n2["The content-addressed website snapshot and initial checkpoint cards disagree on a few values, including GDPVal-AA and MMMU Pro"]
-  n3["The exact model-card, release-page"]
-  n4["and Acceptable Use Policy HTML retrieved on 2026-07-18 is identified by SHA-256 and byte count"]
-  n5["while BF16 and NVFP4 are pinned to their initial release commits"]
-  n6["The live pages remain mutable"]
-  n7["but the source versions used here are reproducible"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
-  n6 -->|"then"| n7
+  claim["Reproducible evidence identity"]
+  mc["Model card SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes"]
+  release["Release SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes"]
+  aup["AUP SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes"]
+  bf16["BF16 commit 91b051f1ec836e6d56596c624c3775b495d797b1"]
+  nvfp4["NVFP4 commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e"]
+  claim ---|"identified by"| mc
+  claim ---|"identified by"| release
+  claim ---|"identified by"| aup
+  claim ---|"identified by"| bf16
+  claim ---|"identified by"| nvfp4
 ```
 
 #### Python
@@ -4274,94 +4381,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p2: Content-addressed web snapshot and pinned checkpoint-card evidence — Version or checkpoint timeline"
-nodes = [["n1","Source boundaries are part of the evidence",100,150],["n2","The content-addressed website snapshot and initial checkpoint cards disagree on a few values, including GDPVal-AA and MMMU Pro",250,150],["n3","The exact model-card, release-page",400,150],["n4","and Acceptable Use Policy HTML retrieved on 2026-07-18 is identified by SHA-256 and byte count",550,150],["n5","while BF16 and NVFP4 are pinned to their initial release commits",700,150],["n6","The live pages remain mutable",850,150],["n7","but the source versions used here are reproducible",1000,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
+title = "ink_review_p2: evidence identity constellation"
+nodes = [["claim","Reproducible evidence identity",460,220],["mc","Model card SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 · 65,631 bytes",100,40],["release","Release SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc · 222,133 bytes",100,220],["aup","AUP SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 · 25,968 bytes",100,400],["bf16","BF16 commit 91b051f1ec836e6d56596c624c3775b495d797b1",820,130],["nvfp4","NVFP4 commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e",820,310]]
+edges = [["claim","mc","identified by",false],["claim","release","identified by",false],["claim","aup","identified by",false],["claim","bf16","identified by",false],["claim","nvfp4","identified by",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
-parts.append('</svg>')
-Path("ink_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Content-addressed web snapshot and pinned checkpoint-card evidence — Discrepancy panels
-
-- Teaching purpose: Place conflicting or non-equivalent evidence in separate panels.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Show mutable pages, SHA-256 snapshot, immutable BF16/NVFP4 commits, and unresolved GDPVal-AA/MMMU Pro discrepancies without choosing a winner.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_review\_p2: Content-addressed web snapshot and pinned checkpoint-card evidence - Discrepancy panels};
-\node[panel] at (0,0) {\textbf{Reproducibility depends on fixed source identities}\\[4pt]\textbf{Provider website snapshot}: qualitative -- The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change.\\\textbf{BF16 checkpoint card}: qualitative -- The initial release is pinned to its immutable repository commit rather than a moving branch.\\\textbf{NVFP4 checkpoint card}: qualitative -- The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements.\\\textbf{Unresolved disagreement}: qualitative -- The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph p1["Reproducibility depends on fixed source identities"]
-    p1r1["Provider website snapshot: qualitative<br/>The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change."]
-    p1r2["BF16 checkpoint card: qualitative<br/>The initial release is pinned to its immutable repository commit rather than a moving branch."]
-    p1r3["NVFP4 checkpoint card: qualitative<br/>The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements."]
-    p1r4["Unresolved disagreement: qualitative<br/>The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "ink_review_p2: Content-addressed web snapshot and pinned checkpoint-card evidence — Discrepancy panels"
-rows = [["Reproducibility depends on fixed source identities","Provider website snapshot","qualitative","The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change."],["Reproducibility depends on fixed source identities","BF16 checkpoint card","qualitative","The initial release is pinned to its immutable repository commit rather than a moving branch."],["Reproducibility depends on fixed source identities","NVFP4 checkpoint card","qualitative","The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements."],["Reproducibility depends on fixed source identities","Unresolved disagreement","qualitative","The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
-    f'<rect width="{width}" height="{height}" fill="white"/>',
-]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4385,18 +4427,18 @@ Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Text anchor: "The provider labels the model Apache 2.0, but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy."
 - Claims and sources: `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What should a careful reader conclude.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What should a careful reader conclude — paragraph ink_review_p3 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4405,9 +4447,10 @@ Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {ink\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: 2.0 -- The provider labels the model Apache 2.0\\\textbf{Statement 2}: qualitative -- but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy\\\textbf{Statement 3}: qualitative -- This explainer records both statements rather than treating open weights as a synonym for unrestricted use};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {ink\_review\_p3: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The provider labels the model Apache 2.0\\[3pt]but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]This explainer records both statements rather than treating open weights as a synonym for unrestricted use};
 \end{tikzpicture}
 \end{document}
 ```
@@ -4416,10 +4459,12 @@ Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: 2.0<br/>The provider labels the model Apache 2.0"]
-    p1r2["Statement 2: qualitative<br/>but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
-    p1r3["Statement 3: qualitative<br/>This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The provider labels the model Apache 2.0"]
+    g1i2["but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
   end
 ```
 
@@ -4430,39 +4475,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","2.0","The provider labels the model Apache 2.0"],["Paragraph evidence","Statement 2","qualitative","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"],["Paragraph evidence","Statement 3","qualitative","This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "ink_review_p3: independent facets"
+groups = [{"title":"Supported conclusion","items":["The provider labels the model Apache 2.0","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]},{"title":"Rejected overclaim or qualification","items":["This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What should a careful reader conclude — paragraph ink_review_p3 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4473,12 +4514,12 @@ Path("ink_review_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{ink\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & 2.0 & The provider labels the model Apache 2.0 \\
-Paragraph evidence & Statement 2 & qualitative & but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy \\
-Paragraph evidence & Statement 3 & qualitative & This explainer records both statements rather than treating open weights as a synonym for unrestricted use \\
+\node[align=center] {\textbf{ink\_review\_p3: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The provider labels the model Apache 2.0 \\
+critical review & Independent facet 2 & but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy \\
+critical review & Independent facet 3 & This explainer records both statements rather than treating open weights as a synonym for unrestricted use \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -4488,10 +4529,10 @@ Paragraph evidence & Statement 3 & qualitative & This explainer records both sta
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>2.0</b><br/>The provider labels the model Apache 2.0"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
+  subgraph Ledger["ink_review_p3: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The provider labels the model Apache 2.0"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
   end
 ```
 
@@ -4502,36 +4543,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","2.0","The provider labels the model Apache 2.0"],["Paragraph evidence","Statement 2","qualitative","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"],["Paragraph evidence","Statement 3","qualitative","This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]]
-height = 414
+title = "ink_review_p3: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The provider labels the model Apache 2.0"],["critical review","Independent facet 2","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"],["critical review","Independent facet 3","This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What should a careful reader conclude — paragraph ink_review_p3 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `ink_001`, `ink_005`, `ink_011`, `ink_012` from `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`, `source_inkling_aup`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `ink_001` (OBSERVED, VERIFIED); `ink_005` (AUTHORS_INTERPRETATION, VERIFIED); `ink_011` (DISPUTED, UNRESOLVED); `ink_012` (NOT_ESTABLISHED, UNRESOLVED); `source_inkling_model_card` (Retrieved 2026-07-18; official HTML SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9 (65,631 bytes). Sections 1-6: identity, architecture, modalities, hardware, training, evaluations, safety. Live URL remains mutable.); `source_inkling_release` (Retrieved 2026-07-18; official HTML SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc (222,133 bytes). July 15 release sections on effort, multimodality, benchmarks, architecture, training, RL, availability. Live URL remains mutable.); `source_inkling_hf_bf16` (Immutable initial Model release commit 91b051f1ec836e6d56596c624c3775b495d797b1; README sections 1, 3, 5-7 and BF16 weight files); `source_inkling_aup` (Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -4539,15 +4580,16 @@ Path("ink_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {ink\_review\_p3: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The provider labels the model Apache 2.0};
-\node[box] (n2) at (2.50,-1.50) {but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy};
-\node[box] (n3) at (4.00,-1.50) {This explainer records both statements rather than treating open weights as a synonym for unrestricted use};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {ink\_review\_p3: claim-boundary constellation};
+\node[box] (center) at (3,0) {What should a careful reader conclude};
+\node[box] (f1) at (0,2) {The provider labels the model Apache 2.0};
+\node[box] (f2) at (6,2) {but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy};
+\node[box] (f3) at (0,0) {This explainer records both statements rather than treating open weights as a synonym for unrestricted use};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4556,11 +4598,13 @@ Path("ink_review_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf
 
 ```mermaid
 flowchart LR
-  n1["The provider labels the model Apache 2.0"]
-  n2["but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
-  n3["This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["What should a careful reader conclude"]
+  f1["The provider labels the model Apache 2.0"]
+  f2["but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy"]
+  f3["This explainer records both statements rather than treating open weights as a synonym for unrestricted use"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
 ```
 
 #### Python
@@ -4570,27 +4614,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "ink_review_p3: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The provider labels the model Apache 2.0",100,150],["n2","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy",250,150],["n3","This explainer records both statements rather than treating open weights as a synonym for unrestricted use",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "ink_review_p3: claim-boundary constellation"
+nodes = [["center","What should a careful reader conclude",460,220],["f1","The provider labels the model Apache 2.0",100,40],["f2","but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy",820,40],["f3","This explainer records both statements rather than treating open weights as a synonym for unrestricted use",100,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("ink_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4607,4 +4653,3 @@ Path("ink_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-

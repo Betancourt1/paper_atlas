@@ -3,7 +3,7 @@
 - Paper ID: `paper_computational_propaganda`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -15,7 +15,7 @@
   - `propaganda_source_models` — Computational Propaganda v1 model experiments; Pages 6–7, Sections 5.1–5.3, Tables 1–2
   - `propaganda_source_limitations` — Computational Propaganda v1 discussion and limitations; Pages 8–9, Sections 7.1–7.3
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `propaganda_why_p1`
 
@@ -23,18 +23,18 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 - Text anchor: "Pretraining corpora contain more web text than people can inspect."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why is web-scale pretraining poisoning difficult to assess.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -43,9 +43,10 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_why\_p1: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Pretraining corpora contain more web text than people can inspect\\\textbf{Statement 2}: qualitative -- That scale creates room for malicious content\\\textbf{Statement 3}: qualitative -- but an online post does not automatically become training data\\\textbf{Statement 4}: qualitative -- Crawlers may miss it, text extraction may remove it\\\textbf{Statement 5}: qualitative -- and quality or language filters may discard the document};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_why\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]Pretraining corpora contain more web text than people can inspect\\[3pt]That scale creates room for malicious content\\[3pt]Crawlers may miss it, text extraction may remove it\\[3pt]and quality or language filters may discard the document};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]but an online post does not automatically become training data};
 \end{tikzpicture}
 \end{document}
 ```
@@ -54,12 +55,14 @@ Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments ar
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Pretraining corpora contain more web text than people can inspect"]
-    p1r2["Statement 2: qualitative<br/>That scale creates room for malicious content"]
-    p1r3["Statement 3: qualitative<br/>but an online post does not automatically become training data"]
-    p1r4["Statement 4: qualitative<br/>Crawlers may miss it, text extraction may remove it"]
-    p1r5["Statement 5: qualitative<br/>and quality or language filters may discard the document"]
+  subgraph g1["Premise or requirement"]
+    g1i1["Pretraining corpora contain more web text than people can inspect"]
+    g1i2["That scale creates room for malicious content"]
+    g1i3["Crawlers may miss it, text extraction may remove it"]
+    g1i4["and quality or language filters may discard the document"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["but an online post does not automatically become training data"]
   end
 ```
 
@@ -70,39 +73,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p1: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","Pretraining corpora contain more web text than people can inspect"],["Paragraph evidence","Statement 2","qualitative","That scale creates room for malicious content"],["Paragraph evidence","Statement 3","qualitative","but an online post does not automatically become training data"],["Paragraph evidence","Statement 4","qualitative","Crawlers may miss it, text extraction may remove it"],["Paragraph evidence","Statement 5","qualitative","and quality or language filters may discard the document"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_why_p1: independent facets"
+groups = [{"title":"Premise or requirement","items":["Pretraining corpora contain more web text than people can inspect","That scale creates room for malicious content","Crawlers may miss it, text extraction may remove it","and quality or language filters may discard the document"]},{"title":"Constraint or research boundary","items":["but an online post does not automatically become training data"]}]
+width = 900
+height = 588
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -113,14 +112,14 @@ Path("propaganda_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding=
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_why\_p1: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Pretraining corpora contain more web text than people can inspect \\
-Paragraph evidence & Statement 2 & qualitative & That scale creates room for malicious content \\
-Paragraph evidence & Statement 3 & qualitative & but an online post does not automatically become training data \\
-Paragraph evidence & Statement 4 & qualitative & Crawlers may miss it, text extraction may remove it \\
-Paragraph evidence & Statement 5 & qualitative & and quality or language filters may discard the document \\
+\node[align=center] {\textbf{propaganda\_why\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & Pretraining corpora contain more web text than people can inspect \\
+why it exists & Independent facet 2 & That scale creates room for malicious content \\
+why it exists & Independent facet 3 & but an online post does not automatically become training data \\
+why it exists & Independent facet 4 & Crawlers may miss it, text extraction may remove it \\
+why it exists & Independent facet 5 & and quality or language filters may discard the document \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -130,12 +129,12 @@ Paragraph evidence & Statement 5 & qualitative & and quality or language filters
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Pretraining corpora contain more web text than people can inspect"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>That scale creates room for malicious content"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>but an online post does not automatically become training data"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Crawlers may miss it, text extraction may remove it"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>and quality or language filters may discard the document"]
+  subgraph Ledger["propaganda_why_p1: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>Pretraining corpora contain more web text than people can inspect"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>That scale creates room for malicious content"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>but an online post does not automatically become training data"]
+    r4["why it exists<br/><b>Independent facet 4</b><br/>Crawlers may miss it, text extraction may remove it"]
+    r5["why it exists<br/><b>Independent facet 5</b><br/>and quality or language filters may discard the document"]
   end
 ```
 
@@ -146,36 +145,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p1: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Pretraining corpora contain more web text than people can inspect"],["Paragraph evidence","Statement 2","qualitative","That scale creates room for malicious content"],["Paragraph evidence","Statement 3","qualitative","but an online post does not automatically become training data"],["Paragraph evidence","Statement 4","qualitative","Crawlers may miss it, text extraction may remove it"],["Paragraph evidence","Statement 5","qualitative","and quality or language filters may discard the document"]]
-height = 590
+title = "propaganda_why_p1: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","Pretraining corpora contain more web text than people can inspect"],["why it exists","Independent facet 2","That scale creates room for malicious content"],["why it exists","Independent facet 3","but an online post does not automatically become training data"],["why it exists","Independent facet 4","Crawlers may miss it, text extraction may remove it"],["why it exists","Independent facet 5","and quality or language filters may discard the document"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -183,19 +182,20 @@ Path("propaganda_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding=
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_why\_p1: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {Pretraining corpora contain more web text than people can inspect};
-\node[box] (n2) at (2.50,-1.50) {That scale creates room for malicious content};
-\node[box] (n3) at (4.00,-1.50) {but an online post does not automatically become training data};
-\node[box] (n4) at (5.50,-1.50) {Crawlers may miss it, text extraction may remove it};
-\node[box] (n5) at (7.00,-1.50) {and quality or language filters may discard the document};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_why\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why is web-scale pretraining poisoning difficult to assess};
+\node[box] (f1) at (0,2) {Pretraining corpora contain more web text than people can inspect};
+\node[box] (f2) at (6,2) {That scale creates room for malicious content};
+\node[box] (f3) at (0,0) {but an online post does not automatically become training data};
+\node[box] (f4) at (6,0) {Crawlers may miss it, text extraction may remove it};
+\node[box] (f5) at (0,-2) {and quality or language filters may discard the document};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
+\draw (center) -- node[rel] {requirement or constraint} (f4);
+\draw (center) -- node[rel] {requirement or constraint} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -204,15 +204,17 @@ Path("propaganda_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding=
 
 ```mermaid
 flowchart LR
-  n1["Pretraining corpora contain more web text than people can inspect"]
-  n2["That scale creates room for malicious content"]
-  n3["but an online post does not automatically become training data"]
-  n4["Crawlers may miss it, text extraction may remove it"]
-  n5["and quality or language filters may discard the document"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["Why is web-scale pretraining poisoning difficult to assess"]
+  f1["Pretraining corpora contain more web text than people can inspect"]
+  f2["That scale creates room for malicious content"]
+  f3["but an online post does not automatically become training data"]
+  f4["Crawlers may miss it, text extraction may remove it"]
+  f5["and quality or language filters may discard the document"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
+  center ---|"requirement or constraint"| f4
+  center ---|"requirement or constraint"| f5
 ```
 
 #### Python
@@ -222,27 +224,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p1: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","Pretraining corpora contain more web text than people can inspect",100,150],["n2","That scale creates room for malicious content",250,150],["n3","but an online post does not automatically become training data",400,150],["n4","Crawlers may miss it, text extraction may remove it",550,150],["n5","and quality or language filters may discard the document",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "propaganda_why_p1: claim-boundary constellation"
+nodes = [["center","Why is web-scale pretraining poisoning difficult to assess",460,220],["f1","Pretraining corpora contain more web text than people can inspect",100,40],["f2","That scale creates room for malicious content",820,40],["f3","but an online post does not automatically become training data",100,220],["f4","Crawlers may miss it, text extraction may remove it",820,220],["f5","and quality or language filters may discard the document",100,400]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false],["center","f4","requirement or constraint",false],["center","f5","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -266,18 +270,18 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 - Text anchor: "Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional prior-work and research-question annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for Why is web-scale pretraining poisoning difficult to assess.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
+### Treatment A — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -286,9 +290,10 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_why\_p2: Optional prior-work and research-question annotation - Annotated prior-work contrast};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline\\\textbf{Statement 2}: qualitative -- This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure\\\textbf{Statement 3}: qualitative -- or model weights};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_why\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Premise or requirement}\\[5pt]Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline\\[3pt]or model weights};
+\node[panel] at (6,0) {\textbf{Constraint or research boundary}\\[5pt]This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
 \end{tikzpicture}
 \end{document}
 ```
@@ -297,10 +302,12 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
-    p1r2["Statement 2: qualitative<br/>This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
-    p1r3["Statement 3: qualitative<br/>or model weights"]
+  subgraph g1["Premise or requirement"]
+    g1i1["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
+    g1i2["or model weights"]
+  end
+  subgraph g2["Constraint or research boundary"]
+    g2i1["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
   end
 ```
 
@@ -311,39 +318,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p2: Optional prior-work and research-question annotation — Annotated prior-work contrast"
-rows = [["Paragraph evidence","Statement 1","qualitative","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"],["Paragraph evidence","Statement 2","qualitative","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"],["Paragraph evidence","Statement 3","qualitative","or model weights"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_why_p2: independent facets"
+groups = [{"title":"Premise or requirement","items":["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline","or model weights"]},{"title":"Constraint or research boundary","items":["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]}]
+width = 900
+height = 404
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+### Treatment B — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -354,12 +357,12 @@ Path("propaganda_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding=
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_why\_p2: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline \\
-Paragraph evidence & Statement 2 & qualitative & This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure \\
-Paragraph evidence & Statement 3 & qualitative & or model weights \\
+\node[align=center] {\textbf{propaganda\_why\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+why it exists & Independent facet 1 & Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline \\
+why it exists & Independent facet 2 & This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure \\
+why it exists & Independent facet 3 & or model weights \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -369,10 +372,10 @@ Paragraph evidence & Statement 3 & qualitative & or model weights \\
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>or model weights"]
+  subgraph Ledger["propaganda_why_p2: non-directional evidence ledger"]
+    r1["why it exists<br/><b>Independent facet 1</b><br/>Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
+    r2["why it exists<br/><b>Independent facet 2</b><br/>This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
+    r3["why it exists<br/><b>Independent facet 3</b><br/>or model weights"]
   end
 ```
 
@@ -383,36 +386,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p2: Optional prior-work and research-question annotation — Research-question ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"],["Paragraph evidence","Statement 2","qualitative","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"],["Paragraph evidence","Statement 3","qualitative","or model weights"]]
-height = 414
+title = "propaganda_why_p2: non-directional evidence ledger"
+rows = [["why it exists","Independent facet 1","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"],["why it exists","Independent facet 2","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"],["why it exists","Independent facet 3","or model weights"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+### Treatment C — Why is web-scale pretraining poisoning difficult to assess — paragraph propaganda_why_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode requirement or constraint, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -420,15 +423,16 @@ Path("propaganda_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding=
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_why\_p2: Optional prior-work and research-question annotation - Question boundary map};
-\node[box] (n1) at (1.00,-1.50) {Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline};
-\node[box] (n2) at (2.50,-1.50) {This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
-\node[box] (n3) at (4.00,-1.50) {or model weights};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_why\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {Why is web-scale pretraining poisoning difficult to assess};
+\node[box] (f1) at (0,2) {Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline};
+\node[box] (f2) at (6,2) {This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
+\node[box] (f3) at (0,0) {or model weights};
+\draw (center) -- node[rel] {requirement or constraint} (f1);
+\draw (center) -- node[rel] {requirement or constraint} (f2);
+\draw (center) -- node[rel] {requirement or constraint} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -437,11 +441,13 @@ Path("propaganda_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding=
 
 ```mermaid
 flowchart LR
-  n1["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
-  n2["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
-  n3["or model weights"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["Why is web-scale pretraining poisoning difficult to assess"]
+  f1["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
+  f2["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
+  f3["or model weights"]
+  center ---|"requirement or constraint"| f1
+  center ---|"requirement or constraint"| f2
+  center ---|"requirement or constraint"| f3
 ```
 
 #### Python
@@ -451,27 +457,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p2: Optional prior-work and research-question annotation — Question boundary map"
-nodes = [["n1","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline",100,150],["n2","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure",250,150],["n3","or model weights",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "propaganda_why_p2: claim-boundary constellation"
+nodes = [["center","Why is web-scale pretraining poisoning difficult to assess",460,220],["f1","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline",100,40],["f2","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure",820,40],["f3","or model weights",100,220]]
+edges = [["center","f1","requirement or constraint",false],["center","f2","requirement or constraint",false],["center","f3","requirement or constraint",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2307,18 +2315,18 @@ Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encod
 - Text anchor: "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_claim_sft` (OBSERVED, VERIFIED); `propaganda_claim_formats` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct measured stages, derived product, and disputed introduction value while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Measured stages, derived product, and disputed introduction value.
+- Decision rationale: A visual passes the removal test because the reader must keep the sampling protocol, three conditional denominators, a derived product, and a conflicting source value distinct.
+- Explanatory job: Protocol sample, measured gates, derived inclusion estimate, and disputed introduction value.
 - Recommended scope and placement: This paragraph only; place the visual immediately after `propaganda_evidence_p1`.
-- QA-informed planning change: Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
+- QA-informed planning change: Round-2 QA found protocol conditions missing from some code forms. Revision 4 prints the complete sample identity in every treatment and every TikZ, Mermaid, and Python specification.
 
-### Treatment A — Measured stages, derived product, and disputed introduction value — Grouped disclosed-domain plot
+### Treatment A — Protocol-to-estimate evidence topology
 
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Sample` uses the disclosed domain 181856.5–181857.5 with 1 labeled marks; `Measured gate` uses the disclosed domain 0–100 with 3 labeled marks; `Derived product` uses the disclosed domain -0.4–0.7 with 1 labeled marks; `Disputed source value` uses the disclosed domain -0.4–0.7 with 1 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Connect the exact sample record only to the prevalence measurement, combine the three measured gates at the derived product, and keep 0.15% as a non-directional discrepancy.
+- Encoding and reading order: The sample node prints 181,857 pages, 200 WARC files, and CC-MAIN-2025-51. Gate nodes remain separately denominated; only their product reaches ≈0.13%.
+- Evidence and limitations: Use the paragraph's `propaganda_source_threat`, `propaganda_source_inclusion`, and verified claim IDs. All code forms must visibly retain `181,857 pages`, `200 WARC files`, and `CC-MAIN-2025-51`; measured gates, the derived product, and the disputed value remain different mark types.
+- Recommended web medium: responsive SVG with semantic HTML/CSS evidence fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2326,31 +2334,21 @@ Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encod
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Sample: disclosed domain 181856.5--181857.5};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (4.000,-0.8) circle (2.5pt) node[above,font=\scriptsize] {181,857};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {Pages scanned};
-\node[anchor=west,font=\bfseries] at (0,-1.9500000000000002) {Measured gate: disclosed domain 0--100};
-\draw (0,-2.75) -- (8,-2.75);
-\fill (0.272,-2.75) circle (2.5pt) node[above,font=\scriptsize] {3.4\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-2.75) {Page prevalence};
-\draw (0,-3.4) -- (8,-3.4);
-\fill (5.752,-3.4) circle (2.5pt) node[above,font=\scriptsize] {71.9\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-3.4) {Extraction survival};
-\draw (0,-4.05) -- (8,-4.05);
-\fill (0.440,-4.05) circle (2.5pt) node[above,font=\scriptsize] {5.5\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.05) {Curation survival};
-\node[anchor=west,font=\bfseries] at (0,-5.2) {Derived product: disclosed domain -0.4--0.7};
-\draw (0,-6) -- (8,-6);
-\fill (3.855,-6) circle (2.5pt) node[above,font=\scriptsize] {0.13\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-6) {Section 4.4 estimate};
-\node[anchor=west,font=\bfseries] at (0,-7.15) {Disputed source value: disclosed domain -0.4--0.7};
-\draw (0,-7.95) -- (8,-7.95);
-\fill (4.000,-7.95) circle (2.5pt) node[above,font=\scriptsize] {0.15\%};
-\node[anchor=east,font=\scriptsize] at (-0.2,-7.95) {Introduction estimate};
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_evidence\_p1: protocol-to-estimate topology};
+\node[box] (sample) at (0,2) {181,857 pages  200 WARC files  CC-MAIN-2025-51};
+\node[box] (s1) at (2,1) {Measured page prevalence  3.4\%};
+\node[box] (s2) at (2,0) {Measured extraction survival  71.9\%};
+\node[box] (s3) at (2,-1) {Measured curation survival  5.5\%};
+\node[box] (product) at (5,0) {Derived rounded product  0.13\%};
+\node[box] (intro) at (5,-2) {Introduction value  0.15\%  disputed};
+\draw[link] (sample) -- node[rel] {sample denominator} (s1);
+\draw[link] (s1) -- node[rel] {multiply} (product);
+\draw[link] (s2) -- node[rel] {multiply} (product);
+\draw[link] (s3) -- node[rel] {multiply} (product);
+\draw (intro) -- node[rel] {unreconciled discrepancy} (product);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2358,21 +2356,18 @@ Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encod
 #### Mermaid
 
 ```mermaid
-flowchart TB
-  subgraph g1["Sample — domain 181856.5 to 181857.5"]
-    g1r1["Pages scanned: 181,857"]
-  end
-  subgraph g2["Measured gate — domain 0 to 100"]
-    g2r1["Page prevalence: 3.4%"]
-    g2r2["Extraction survival: 71.9%"]
-    g2r3["Curation survival: 5.5%"]
-  end
-  subgraph g3["Derived product — domain -0.4 to 0.7"]
-    g3r1["Section 4.4 estimate: 0.13%"]
-  end
-  subgraph g4["Disputed source value — domain -0.4 to 0.7"]
-    g4r1["Introduction estimate: 0.15%"]
-  end
+flowchart LR
+  sample["181,857 pages · 200 WARC files · CC-MAIN-2025-51"]
+  s1["Measured page prevalence · 3.4%"]
+  s2["Measured extraction survival · 71.9%"]
+  s3["Measured curation survival · 5.5%"]
+  product["Derived rounded product · ≈0.13%"]
+  intro["Introduction value · 0.15% · disputed"]
+  sample -->|"sample denominator"| s1
+  s1 -->|"multiply"| product
+  s2 -->|"multiply"| product
+  s3 -->|"multiply"| product
+  intro ---|"unreconciled discrepancy"| product
 ```
 
 #### Python
@@ -2380,41 +2375,42 @@ flowchart TB
 ```python
 from html import escape
 from pathlib import Path
+from textwrap import wrap
 
-title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Grouped disclosed-domain plot"
-groups = [{"name":"Sample","domain":[181856.5,181857.5],"items":[["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"]]},{"name":"Measured gate","domain":[0,100],"items":[["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"]]},{"name":"Derived product","domain":[-0.4,0.7],"items":[["Derived product","Section 4.4 estimate","0.13%","rounded stage product"]]},{"name":"Disputed source value","domain":[-0.4,0.7],"items":[["Disputed source value","Introduction estimate","0.15%","unreconciled"]]}]
-height = 792
+title = "propaganda_evidence_p1: protocol-to-estimate topology"
+nodes = [["sample","181,857 pages · 200 WARC files · CC-MAIN-2025-51",100,40],["s1","Measured page prevalence · 3.4%",340,130],["s2","Measured extraction survival · 71.9%",340,220],["s3","Measured curation survival · 5.5%",340,310],["product","Derived rounded product · ≈0.13%",700,220],["intro","Introduction value · 0.15% · disputed",700,400]]
+edges = [["sample","s1","sample denominator",true],["s1","product","multiply",true],["s2","product","multiply",true],["s3","product","multiply",true],["intro","product","unreconciled discrepancy",false]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = 900
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
+for source, target, relation, directed in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Measured stages, derived product, and disputed introduction value — Complete reported-value matrix
+### Treatment B — Complete protocol and result matrix
 
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Expose every protocol condition, gate, derived value, and disputed value in visible columns.
+- Encoding and reading order: Render six rows with an explicit role column so sample, measured, derived, and disputed evidence cannot collapse into one sequence.
+- Evidence and limitations: Use the paragraph's `propaganda_source_threat`, `propaganda_source_inclusion`, and verified claim IDs. All code forms must visibly retain `181,857 pages`, `200 WARC files`, and `CC-MAIN-2025-51`; measured gates, the derived product, and the disputed value remain different mark types.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2425,15 +2421,15 @@ Path("propaganda_evidence_p1_treatment_a.svg").write_text("\n".join(parts), enco
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Sample & Pages scanned & 181,857 & 200 WARC files; CC-MAIN-2025-51 \\
-Measured gate & Page prevalence & 3.4\% & sampled pages \\
-Measured gate & Extraction survival & 71.9\% & simulated replacement comments \\
-Measured gate & Curation survival & 5.5\% & captured injections \\
-Derived product & Section 4.4 estimate & 0.13\% & rounded stage product \\
-Disputed source value & Introduction estimate & 0.15\% & unreconciled \\
+\node[align=center] {\textbf{propaganda\_evidence\_p1: complete protocol matrix}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+Protocol sample & Pages scanned & 181,857 pages from 200 WARC files in CC-MAIN-2025-51 \\
+Measured gate & Page prevalence & 3.4\% of sampled pages \\
+Measured gate & Extraction survival & 71.9\% of simulated replacement comments \\
+Measured gate & Curation survival & 5.5\% of captured injections \\
+Derived product & Section 4.4 estimate & 0.13\% from the rounded stage product \\
+Disputed source value & Introduction estimate & 0.15\%; unreconciled \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -2443,13 +2439,13 @@ Disputed source value & Introduction estimate & 0.15\% & unreconciled \\
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Sample<br/>Pages scanned<br/><b>181,857</b><br/>200 WARC files; CC-MAIN-2025-51"]
-    r2["Measured gate<br/>Page prevalence<br/><b>3.4%</b><br/>sampled pages"]
-    r3["Measured gate<br/>Extraction survival<br/><b>71.9%</b><br/>simulated replacement comments"]
-    r4["Measured gate<br/>Curation survival<br/><b>5.5%</b><br/>captured injections"]
-    r5["Derived product<br/>Section 4.4 estimate<br/><b>0.13%</b><br/>rounded stage product"]
-    r6["Disputed source value<br/>Introduction estimate<br/><b>0.15%</b><br/>unreconciled"]
+  subgraph Ledger["propaganda_evidence_p1: complete protocol matrix"]
+    r1["Protocol sample<br/><b>Pages scanned</b><br/>181,857 pages from 200 WARC files in CC-MAIN-2025-51"]
+    r2["Measured gate<br/><b>Page prevalence</b><br/>3.4% of sampled pages"]
+    r3["Measured gate<br/><b>Extraction survival</b><br/>71.9% of simulated replacement comments"]
+    r4["Measured gate<br/><b>Curation survival</b><br/>5.5% of captured injections"]
+    r5["Derived product<br/><b>Section 4.4 estimate</b><br/>≈0.13% from the rounded stage product"]
+    r6["Disputed source value<br/><b>Introduction estimate</b><br/>0.15%; unreconciled"]
   end
 ```
 
@@ -2460,36 +2456,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Complete reported-value matrix"
-rows = [["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"],["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"],["Derived product","Section 4.4 estimate","0.13%","rounded stage product"],["Disputed source value","Introduction estimate","0.15%","unreconciled"]]
-height = 678
+title = "propaganda_evidence_p1: complete protocol matrix"
+rows = [["Protocol sample","Pages scanned","181,857 pages from 200 WARC files in CC-MAIN-2025-51"],["Measured gate","Page prevalence","3.4% of sampled pages"],["Measured gate","Extraction survival","71.9% of simulated replacement comments"],["Measured gate","Curation survival","5.5% of captured injections"],["Derived product","Section 4.4 estimate","≈0.13% from the rounded stage product"],["Disputed source value","Introduction estimate","0.15%; unreconciled"]]
+height = 702
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Measured stages, derived product, and disputed introduction value — Experiment small multiples
+### Treatment C — Measured, derived, and disputed evidence panels
 
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Separate protocol identity, conditional measurements, and source disagreement into bounded panels.
+- Encoding and reading order: The protocol panel explicitly contains 181,857 pages, 200 WARC files, and CC-MAIN-2025-51; no panel shares an implied quantitative axis.
+- Evidence and limitations: Use the paragraph's `propaganda_source_threat`, `propaganda_source_inclusion`, and verified claim IDs. All code forms must visibly retain `181,857 pages`, `200 WARC files`, and `CC-MAIN-2025-51`; measured gates, the derived product, and the disputed value remain different mark types.
+- Recommended web medium: semantic HTML/CSS panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2498,12 +2494,11 @@ Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (8.25,3) {propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Sample}\\[4pt]\textbf{Pages scanned}: 181,857 -- 200 WARC files; CC-MAIN-2025-51};
-\node[panel] at (5.5,0) {\textbf{Measured gate}\\[4pt]\textbf{Page prevalence}: 3.4\% -- sampled pages\\\textbf{Extraction survival}: 71.9\% -- simulated replacement comments\\\textbf{Curation survival}: 5.5\% -- captured injections};
-\node[panel] at (11,0) {\textbf{Derived product}\\[4pt]\textbf{Section 4.4 estimate}: 0.13\% -- rounded stage product};
-\node[panel] at (16.5,0) {\textbf{Disputed source value}\\[4pt]\textbf{Introduction estimate}: 0.15\% -- unreconciled};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (6,3.1) {propaganda\_evidence\_p1: evidence panels};
+\node[panel] at (0,0) {\textbf{Protocol sample}\\[5pt]181,857 pages\\[3pt]200 WARC files\\[3pt]CC-MAIN-2025-51};
+\node[panel] at (6,0) {\textbf{Measured conditional gates}\\[5pt]3.4\% page prevalence\\[3pt]71.9\% extraction survival\\[3pt]5.5\% curation survival};
+\node[panel] at (12,0) {\textbf{Derived and disputed}\\[5pt]0.13\% rounded stage product\\[3pt]0.15\% Introduction value; unreconciled};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2512,19 +2507,19 @@ Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart LR
-  subgraph p1["Sample"]
-    p1r1["Pages scanned: 181,857<br/>200 WARC files; CC-MAIN-2025-51"]
+  subgraph g1["Protocol sample"]
+    g1i1["181,857 pages"]
+    g1i2["200 WARC files"]
+    g1i3["CC-MAIN-2025-51"]
   end
-  subgraph p2["Measured gate"]
-    p2r1["Page prevalence: 3.4%<br/>sampled pages"]
-    p2r2["Extraction survival: 71.9%<br/>simulated replacement comments"]
-    p2r3["Curation survival: 5.5%<br/>captured injections"]
+  subgraph g2["Measured conditional gates"]
+    g2i1["3.4% page prevalence"]
+    g2i2["71.9% extraction survival"]
+    g2i3["5.5% curation survival"]
   end
-  subgraph p3["Derived product"]
-    p3r1["Section 4.4 estimate: 0.13%<br/>rounded stage product"]
-  end
-  subgraph p4["Disputed source value"]
-    p4r1["Introduction estimate: 0.15%<br/>unreconciled"]
+  subgraph g3["Derived and disputed"]
+    g3i1["≈0.13% rounded stage product"]
+    g3i2["0.15% Introduction value; unreconciled"]
   end
 ```
 
@@ -2535,28 +2530,24 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Experiment small multiples"
-rows = [["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"],["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"],["Derived product","Section 4.4 estimate","0.13%","rounded stage product"],["Disputed source value","Introduction estimate","0.15%","unreconciled"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_evidence_p1: evidence panels"
+groups = [{"title":"Protocol sample","items":["181,857 pages","200 WARC files","CC-MAIN-2025-51"]},{"title":"Measured conditional gates","items":["3.4% page prevalence","71.9% extraction survival","5.5% curation survival"]},{"title":"Derived and disputed","items":["≈0.13% rounded stage product","0.15% Introduction value; unreconciled"]}]
+width = 1200
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2580,18 +2571,18 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 - Text anchor: "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_claim_sft` (OBSERVED, VERIFIED); `propaganda_claim_formats` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: A visual passes the removal test because readers must reconstruct base-model effect ranges and post-sft attenuation by condition while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
-- Explanatory job: Base-model effect ranges and post-SFT attenuation by condition.
+- Decision rationale: A shared visual remains justified, but this paragraph specifically requires the full controlled rate set before the 0.1%-conditioned effect range can be interpreted.
+- Explanatory job: Controlled poison-rate set with effects attached only to the 0.1% condition.
 - Recommended scope and placement: Shared scope `propaganda_evidence_p2`, `propaganda_evidence_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_evidence_p3`. Otherwise split the visual by paragraph.
-- QA-informed planning change: Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- QA-informed planning change: Round-2 QA found 0.001% and 0.01% absent. Revision 4 exposes all rates while preventing any lower-rate effect inference.
 
-### Treatment A — Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot
+### Treatment A — Rate-set branching with a single effect-bearing condition
 
-- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
-- Encoding and reading order: `Base-model shift` uses the disclosed domain 18.1–21.2 with 2 labeled marks; `Post-SFT shift` uses the disclosed domain -0.1–8.4 with 2 labeled marks; `No-label post-SFT` uses the disclosed domain -0.4–0.8 with 2 labeled marks. Exact values remain printed beside every mark.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
-- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Show three tested rates branching from the design and only the 0.1% branch reaching the reported effect.
+- Encoding and reading order: Use explicit nodes for 0.001%, 0.01%, and 0.1%. Only the 0.1% node has an outgoing effect edge.
+- Evidence and limitations: Use `propaganda_source_models` and the verified model-effect claims. Show all three controlled rates, but attach 18.6–20.7 points only to 0.1%; do not interpolate or assign lower-rate effects.
+- Recommended web medium: responsive SVG with semantic HTML/CSS fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2599,30 +2590,19 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-\node[font=\bfseries,anchor=west] at (0,1.2) {propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Grouped disclosed-domain plot};
-\node[anchor=west,font=\bfseries] at (0,0) {Base-model shift: disclosed domain 18.1--21.2};
-\draw (0,-0.8) -- (8,-0.8);
-\fill (1.290,-0.8) circle (2.5pt) node[above,font=\scriptsize] {18.6};
-\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {lower end};
-\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
-\fill (6.710,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {20.7};
-\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {upper end};
-\node[anchor=west,font=\bfseries] at (0,-2.6) {Post-SFT shift: disclosed domain -0.1--8.4};
-\draw (0,-3.4000000000000004) -- (8,-3.4000000000000004);
-\fill (0.941,-3.4000000000000004) circle (2.5pt) node[above,font=\scriptsize] {0.9};
-\node[anchor=east,font=\scriptsize] at (-0.2,-3.4000000000000004) {lower end};
-\draw (0,-4.050000000000001) -- (8,-4.050000000000001);
-\fill (7.059,-4.050000000000001) circle (2.5pt) node[above,font=\scriptsize] {7.4};
-\node[anchor=east,font=\scriptsize] at (-0.2,-4.050000000000001) {upper end};
-\node[anchor=west,font=\bfseries] at (0,-5.200000000000001) {No-label post-SFT: disclosed domain -0.4--0.8};
-\draw (0,-6.000000000000001) -- (8,-6.000000000000001);
-\fill (3.333,-6.000000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.1};
-\node[anchor=east,font=\scriptsize] at (-0.2,-6.000000000000001) {709M};
-\draw (0,-6.650000000000001) -- (8,-6.650000000000001);
-\fill (4.667,-6.650000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.3};
-\node[anchor=east,font=\scriptsize] at (-0.2,-6.650000000000001) {1.3B};
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_evidence\_p2: controlled rates and effect condition};
+\node[box] (rates) at (0,0) {Controlled poison-token rates};
+\node[box] (low1) at (2,2) {0.001\%  tested rate};
+\node[box] (low2) at (2,0) {0.01\%  tested rate};
+\node[box] (high) at (2,-2) {0.1\%  tested rate};
+\node[box] (effects) at (5,-2) {18.6-20.7-point base-model shift  five models  65M-1.3B};
+\draw[link] (rates) -- node[rel] {includes} (low1);
+\draw[link] (rates) -- node[rel] {includes} (low2);
+\draw[link] (rates) -- node[rel] {includes} (high);
+\draw[link] (high) -- node[rel] {reported effect only here} (effects);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2630,19 +2610,16 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 #### Mermaid
 
 ```mermaid
-flowchart TB
-  subgraph g1["Base-model shift — domain 18.1 to 21.2"]
-    g1r1["lower end: 18.6"]
-    g1r2["upper end: 20.7"]
-  end
-  subgraph g2["Post-SFT shift — domain -0.1 to 8.4"]
-    g2r1["lower end: 0.9"]
-    g2r2["upper end: 7.4"]
-  end
-  subgraph g3["No-label post-SFT — domain -0.4 to 0.8"]
-    g3r1["709M: 0.1"]
-    g3r2["1.3B: 0.3"]
-  end
+flowchart LR
+  rates["Controlled poison-token rates"]
+  low1["0.001% · tested rate"]
+  low2["0.01% · tested rate"]
+  high["0.1% · tested rate"]
+  effects["18.6–20.7-point base-model shift · five models · 65M–1.3B"]
+  rates -->|"includes"| low1
+  rates -->|"includes"| low2
+  rates -->|"includes"| high
+  high -->|"reported effect only here"| effects
 ```
 
 #### Python
@@ -2650,41 +2627,42 @@ flowchart TB
 ```python
 from html import escape
 from pathlib import Path
+from textwrap import wrap
 
-title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot"
-groups = [{"name":"Base-model shift","domain":[18.1,21.2],"items":[["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]]},{"name":"Post-SFT shift","domain":[-0.1,8.4],"items":[["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]]},{"name":"No-label post-SFT","domain":[-0.4,0.8],"items":[["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]}]
-height = 712
+title = "propaganda_evidence_p2: controlled rates and effect condition"
+nodes = [["rates","Controlled poison-token rates",100,220],["low1","0.001% · tested rate",340,40],["low2","0.01% · tested rate",340,220],["high","0.1% · tested rate",340,400],["effects","18.6–20.7-point base-model shift · five models · 65M–1.3B",700,400]]
+edges = [["rates","low1","includes",true],["rates","low2","includes",true],["rates","high","includes",true],["high","effects","reported effect only here",true]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = 900
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
-    f'<rect width="1000" height="{height}" fill="white"/>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-y = 90
-for group in groups:
-    lo, hi = group["domain"]
-    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
-    y += 38
-    for _, label, value, condition in group["items"]:
-        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
-        x = 300 + (number - lo) / (hi - lo) * 620
-        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
-        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
-        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
-        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
-        y += 52
-    y += 35
+for source, target, relation, directed in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix
+### Treatment B — Poison-rate and reported-effect ledger
 
-- Teaching purpose: Keep every value, condition, and limitation visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Make the absence of attached lower-rate effects visible rather than implicit.
+- Encoding and reading order: Render one row per rate and a separate 0.1% effect row with model count and scale.
+- Evidence and limitations: Use `propaganda_source_models` and the verified model-effect claims. Show all three controlled rates, but attach 18.6–20.7 points only to 0.1%; do not interpolate or assign lower-rate effects.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2695,15 +2673,13 @@ Path("propaganda_evidence_p2_treatment_a.svg").write_text("\n".join(parts), enco
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Complete reported-value matrix}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Base-model shift & lower end & 18.6 & Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
-Base-model shift & upper end & 20.7 & Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
-Post-SFT shift & lower end & 0.9 & Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
-Post-SFT shift & upper end & 7.4 & Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
-No-label post-SFT & 709M & 0.1 & Reported remaining shift for the 709M model under the no-label poison format. \\
-No-label post-SFT & 1.3B & 0.3 & Reported remaining shift for the 1.3B model under the no-label poison format. \\
+\node[align=center] {\textbf{propaganda\_evidence\_p2: rate-effect ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+Controlled rate set & 0.001\% & Tested poison-token rate; no 18.6-20.7-point effect range attached \\
+Controlled rate set & 0.01\% & Tested poison-token rate; no 18.6-20.7-point effect range attached \\
+Controlled rate set & 0.1\% & Condition for the reported base-model effect range \\
+0.1\% base models & 18.6-20.7 points & Five models, 65M-1.3B parameters, versus clean controls \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -2713,13 +2689,11 @@ No-label post-SFT & 1.3B & 0.3 & Reported remaining shift for the 1.3B model und
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Base-model shift<br/>lower end<br/><b>18.6</b><br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
-    r2["Base-model shift<br/>upper end<br/><b>20.7</b><br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
-    r3["Post-SFT shift<br/>lower end<br/><b>0.9</b><br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
-    r4["Post-SFT shift<br/>upper end<br/><b>7.4</b><br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
-    r5["No-label post-SFT<br/>709M<br/><b>0.1</b><br/>Reported remaining shift for the 709M model under the no-label poison format."]
-    r6["No-label post-SFT<br/>1.3B<br/><b>0.3</b><br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
+  subgraph Ledger["propaganda_evidence_p2: rate-effect ledger"]
+    r1["Controlled rate set<br/><b>0.001%</b><br/>Tested poison-token rate; no 18.6–20.7-point effect range attached"]
+    r2["Controlled rate set<br/><b>0.01%</b><br/>Tested poison-token rate; no 18.6–20.7-point effect range attached"]
+    r3["Controlled rate set<br/><b>0.1%</b><br/>Condition for the reported base-model effect range"]
+    r4["0.1% base models<br/><b>18.6–20.7 points</b><br/>Five models, 65M–1.3B parameters, versus clean controls"]
   end
 ```
 
@@ -2730,36 +2704,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix"
-rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
-height = 678
+title = "propaganda_evidence_p2: rate-effect ledger"
+rows = [["Controlled rate set","0.001%","Tested poison-token rate; no 18.6–20.7-point effect range attached"],["Controlled rate set","0.01%","Tested poison-token rate; no 18.6–20.7-point effect range attached"],["Controlled rate set","0.1%","Condition for the reported base-model effect range"],["0.1% base models","18.6–20.7 points","Five models, 65M–1.3B parameters, versus clean controls"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples
+### Treatment C — Rate set, reported effect, and inference-boundary panels
 
-- Teaching purpose: Prevent separate experiments from reading as one trend.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Keep experimental design, observed 0.1% result, and non-established lower-rate effects in separate groups.
+- Encoding and reading order: Use three panels; the boundary panel explicitly states that lower rates receive no effect range.
+- Evidence and limitations: Use `propaganda_source_models` and the verified model-effect claims. Show all three controlled rates, but attach 18.6–20.7 points only to 0.1%; do not interpolate or assign lower-rate effects.
+- Recommended web medium: semantic HTML/CSS panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -2768,11 +2742,11 @@ Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (5.5,3) {propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Experiment small multiples};
-\node[panel] at (0,0) {\textbf{Base-model shift}\\[4pt]\textbf{lower end}: 18.6 -- Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.\\\textbf{upper end}: 20.7 -- Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.};
-\node[panel] at (5.5,0) {\textbf{Post-SFT shift}\\[4pt]\textbf{lower end}: 0.9 -- Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.\\\textbf{upper end}: 7.4 -- Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.};
-\node[panel] at (11,0) {\textbf{No-label post-SFT}\\[4pt]\textbf{709M}: 0.1 -- Reported remaining shift for the 709M model under the no-label poison format.\\\textbf{1.3B}: 0.3 -- Reported remaining shift for the 1.3B model under the no-label poison format.};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (6,3.1) {propaganda\_evidence\_p2: bounded rate panels};
+\node[panel] at (0,0) {\textbf{Controlled rate set}\\[5pt]0.001\% tested\\[3pt]0.01\% tested\\[3pt]0.1\% tested};
+\node[panel] at (6,0) {\textbf{Reported effect condition}\\[5pt]Only 0.1\% carries the 18.6-20.7-point range\\[3pt]Five base models from 65M to 1.3B parameters\\[3pt]Comparison is against same-size clean controls};
+\node[panel] at (12,0) {\textbf{Boundary}\\[5pt]No effect range is attached here to 0.001\% or 0.01\%\\[3pt]This is controlled model training, not live web poisoning};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2781,17 +2755,19 @@ Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart LR
-  subgraph p1["Base-model shift"]
-    p1r1["lower end: 18.6<br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
-    p1r2["upper end: 20.7<br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+  subgraph g1["Controlled rate set"]
+    g1i1["0.001% tested"]
+    g1i2["0.01% tested"]
+    g1i3["0.1% tested"]
   end
-  subgraph p2["Post-SFT shift"]
-    p2r1["lower end: 0.9<br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
-    p2r2["upper end: 7.4<br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+  subgraph g2["Reported effect condition"]
+    g2i1["Only 0.1% carries the 18.6–20.7-point range"]
+    g2i2["Five base models from 65M to 1.3B parameters"]
+    g2i3["Comparison is against same-size clean controls"]
   end
-  subgraph p3["No-label post-SFT"]
-    p3r1["709M: 0.1<br/>Reported remaining shift for the 709M model under the no-label poison format."]
-    p3r2["1.3B: 0.3<br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
+  subgraph g3["Boundary"]
+    g3i1["No effect range is attached here to 0.001% or 0.01%"]
+    g3i2["This is controlled model training, not live web poisoning"]
   end
 ```
 
@@ -2802,28 +2778,24 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples"
-rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_evidence_p2: bounded rate panels"
+groups = [{"title":"Controlled rate set","items":["0.001% tested","0.01% tested","0.1% tested"]},{"title":"Reported effect condition","items":["Only 0.1% carries the 18.6–20.7-point range","Five base models from 65M to 1.3B parameters","Comparison is against same-size clean controls"]},{"title":"Boundary","items":["No effect range is attached here to 0.001% or 0.01%","This is controlled model training, not live web poisoning"]}]
+width = 1200
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3114,18 +3086,18 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 - Text anchor: "Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline."
 - Claims and sources: `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What does this study not demonstrate.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What does this study not demonstrate — paragraph propaganda_limitations_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3134,9 +3106,10 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Common Crawl is a proxy for production collection\\\textbf{Statement 2}: 3 -- and the tested curation path is one open Dolma 3-style pipeline\\\textbf{Statement 3}: qualitative -- Proprietary crawlers may differ in scope, rendering, frequency, extraction\\\textbf{Statement 4}: qualitative -- and filtering\\\textbf{Statement 5}: qualitative -- Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_limitations\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]Common Crawl is a proxy for production collection\\[3pt]and the tested curation path is one open Dolma 3-style pipeline\\[3pt]Proprietary crawlers may differ in scope, rendering, frequency, extraction\\[3pt]and filtering\\[3pt]Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3145,12 +3118,15 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>Common Crawl is a proxy for production collection"]
-    p1r2["Statement 2: 3<br/>and the tested curation path is one open Dolma 3-style pipeline"]
-    p1r3["Statement 3: qualitative<br/>Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
-    p1r4["Statement 4: qualitative<br/>and filtering"]
-    p1r5["Statement 5: qualitative<br/>Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["Common Crawl is a proxy for production collection"]
+    g1i2["and the tested curation path is one open Dolma 3-style pipeline"]
+    g1i3["Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
+    g1i4["and filtering"]
+    g1i5["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
   end
 ```
 
@@ -3161,39 +3137,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","Common Crawl is a proxy for production collection"],["Paragraph evidence","Statement 2","3","and the tested curation path is one open Dolma 3-style pipeline"],["Paragraph evidence","Statement 3","qualitative","Proprietary crawlers may differ in scope, rendering, frequency, extraction"],["Paragraph evidence","Statement 4","qualitative","and filtering"],["Paragraph evidence","Statement 5","qualitative","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_limitations_p1: independent facets"
+groups = [{"title":"Tested or reported scope","items":["Common Crawl is a proxy for production collection","and the tested curation path is one open Dolma 3-style pipeline","Proprietary crawlers may differ in scope, rendering, frequency, extraction","and filtering","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]},{"title":"Unestablished or missing evidence","items":["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]}]
+width = 900
+height = 680
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What does this study not demonstrate — paragraph propaganda_limitations_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3204,14 +3176,14 @@ Path("propaganda_limitations_p1_treatment_a.svg").write_text("\n".join(parts), e
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & Common Crawl is a proxy for production collection \\
-Paragraph evidence & Statement 2 & 3 & and the tested curation path is one open Dolma 3-style pipeline \\
-Paragraph evidence & Statement 3 & qualitative & Proprietary crawlers may differ in scope, rendering, frequency, extraction \\
-Paragraph evidence & Statement 4 & qualitative & and filtering \\
-Paragraph evidence & Statement 5 & qualitative & Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present \\
+\node[align=center] {\textbf{propaganda\_limitations\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & Common Crawl is a proxy for production collection \\
+limitations & Independent facet 2 & and the tested curation path is one open Dolma 3-style pipeline \\
+limitations & Independent facet 3 & Proprietary crawlers may differ in scope, rendering, frequency, extraction \\
+limitations & Independent facet 4 & and filtering \\
+limitations & Independent facet 5 & Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3221,12 +3193,12 @@ Paragraph evidence & Statement 5 & qualitative & Static HTML signatures may also
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Common Crawl is a proxy for production collection"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>3</b><br/>and the tested curation path is one open Dolma 3-style pipeline"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and filtering"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  subgraph Ledger["propaganda_limitations_p1: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>Common Crawl is a proxy for production collection"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>and the tested curation path is one open Dolma 3-style pipeline"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>and filtering"]
+    r5["limitations<br/><b>Independent facet 5</b><br/>Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
   end
 ```
 
@@ -3237,36 +3209,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","Common Crawl is a proxy for production collection"],["Paragraph evidence","Statement 2","3","and the tested curation path is one open Dolma 3-style pipeline"],["Paragraph evidence","Statement 3","qualitative","Proprietary crawlers may differ in scope, rendering, frequency, extraction"],["Paragraph evidence","Statement 4","qualitative","and filtering"],["Paragraph evidence","Statement 5","qualitative","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]]
-height = 590
+title = "propaganda_limitations_p1: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","Common Crawl is a proxy for production collection"],["limitations","Independent facet 2","and the tested curation path is one open Dolma 3-style pipeline"],["limitations","Independent facet 3","Proprietary crawlers may differ in scope, rendering, frequency, extraction"],["limitations","Independent facet 4","and filtering"],["limitations","Independent facet 5","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What does this study not demonstrate — paragraph propaganda_limitations_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3274,19 +3246,20 @@ Path("propaganda_limitations_p1_treatment_b.svg").write_text("\n".join(parts), e
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Common Crawl is a proxy for production collection};
-\node[box] (n2) at (2.50,-1.50) {and the tested curation path is one open Dolma 3-style pipeline};
-\node[box] (n3) at (4.00,-1.50) {Proprietary crawlers may differ in scope, rendering, frequency, extraction};
-\node[box] (n4) at (5.50,-1.50) {and filtering};
-\node[box] (n5) at (7.00,-1.50) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_limitations\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What does this study not demonstrate};
+\node[box] (f1) at (0,2) {Common Crawl is a proxy for production collection};
+\node[box] (f2) at (6,2) {and the tested curation path is one open Dolma 3-style pipeline};
+\node[box] (f3) at (0,0) {Proprietary crawlers may differ in scope, rendering, frequency, extraction};
+\node[box] (f4) at (6,0) {and filtering};
+\node[box] (f5) at (0,-2) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
+\draw (center) -- node[rel] {scope boundary} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3295,15 +3268,17 @@ Path("propaganda_limitations_p1_treatment_b.svg").write_text("\n".join(parts), e
 
 ```mermaid
 flowchart LR
-  n1["Common Crawl is a proxy for production collection"]
-  n2["and the tested curation path is one open Dolma 3-style pipeline"]
-  n3["Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
-  n4["and filtering"]
-  n5["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What does this study not demonstrate"]
+  f1["Common Crawl is a proxy for production collection"]
+  f2["and the tested curation path is one open Dolma 3-style pipeline"]
+  f3["Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
+  f4["and filtering"]
+  f5["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
+  center ---|"scope boundary"| f5
 ```
 
 #### Python
@@ -3313,27 +3288,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","Common Crawl is a proxy for production collection",100,150],["n2","and the tested curation path is one open Dolma 3-style pipeline",250,150],["n3","Proprietary crawlers may differ in scope, rendering, frequency, extraction",400,150],["n4","and filtering",550,150],["n5","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "propaganda_limitations_p1: claim-boundary constellation"
+nodes = [["center","What does this study not demonstrate",460,220],["f1","Common Crawl is a proxy for production collection",100,40],["f2","and the tested curation path is one open Dolma 3-style pipeline",820,40],["f3","Proprietary crawlers may differ in scope, rendering, frequency, extraction",100,220],["f4","and filtering",820,220],["f5","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present",100,400]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false],["center","f5","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3357,18 +3334,18 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 - Text anchor: "The authors avoid live injection and validate the vector in sandboxes."
 - Claims and sources: `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What does this study not demonstrate.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What does this study not demonstrate — paragraph propaganda_limitations_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3377,9 +3354,10 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The authors avoid live injection and validate the vector in sandboxes\\\textbf{Statement 2}: 1.3B -- The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters\\\textbf{Statement 3}: 4.4, 0.13\%, 0.15\% -- The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate\\\textbf{Statement 4}: qualitative -- or that the same effects persist in frontier-scale systems};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_limitations\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]The authors avoid live injection and validate the vector in sandboxes\\[3pt]The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters\\[3pt]or that the same effects persist in frontier-scale systems};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3388,11 +3366,13 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The authors avoid live injection and validate the vector in sandboxes"]
-    p1r2["Statement 2: 1.3B<br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
-    p1r3["Statement 3: 4.4, 0.13%, 0.15%<br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
-    p1r4["Statement 4: qualitative<br/>or that the same effects persist in frontier-scale systems"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["The authors avoid live injection and validate the vector in sandboxes"]
+    g1i2["The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
+    g1i3["or that the same effects persist in frontier-scale systems"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
   end
 ```
 
@@ -3403,39 +3383,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The authors avoid live injection and validate the vector in sandboxes"],["Paragraph evidence","Statement 2","1.3B","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"],["Paragraph evidence","Statement 3","4.4, 0.13%, 0.15%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"],["Paragraph evidence","Statement 4","qualitative","or that the same effects persist in frontier-scale systems"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_limitations_p2: independent facets"
+groups = [{"title":"Tested or reported scope","items":["The authors avoid live injection and validate the vector in sandboxes","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters","or that the same effects persist in frontier-scale systems"]},{"title":"Unestablished or missing evidence","items":["The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What does this study not demonstrate — paragraph propaganda_limitations_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3446,13 +3422,13 @@ Path("propaganda_limitations_p2_treatment_a.svg").write_text("\n".join(parts), e
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The authors avoid live injection and validate the vector in sandboxes \\
-Paragraph evidence & Statement 2 & 1.3B & The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters \\
-Paragraph evidence & Statement 3 & 4.4, 0.13\%, 0.15\% & The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate \\
-Paragraph evidence & Statement 4 & qualitative & or that the same effects persist in frontier-scale systems \\
+\node[align=center] {\textbf{propaganda\_limitations\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The authors avoid live injection and validate the vector in sandboxes \\
+limitations & Independent facet 2 & The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters \\
+limitations & Independent facet 3 & The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate \\
+limitations & Independent facet 4 & or that the same effects persist in frontier-scale systems \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3462,11 +3438,11 @@ Paragraph evidence & Statement 4 & qualitative & or that the same effects persis
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The authors avoid live injection and validate the vector in sandboxes"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>1.3B</b><br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>4.4, 0.13%, 0.15%</b><br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>or that the same effects persist in frontier-scale systems"]
+  subgraph Ledger["propaganda_limitations_p2: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The authors avoid live injection and validate the vector in sandboxes"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>or that the same effects persist in frontier-scale systems"]
   end
 ```
 
@@ -3477,36 +3453,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The authors avoid live injection and validate the vector in sandboxes"],["Paragraph evidence","Statement 2","1.3B","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"],["Paragraph evidence","Statement 3","4.4, 0.13%, 0.15%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"],["Paragraph evidence","Statement 4","qualitative","or that the same effects persist in frontier-scale systems"]]
-height = 502
+title = "propaganda_limitations_p2: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The authors avoid live injection and validate the vector in sandboxes"],["limitations","Independent facet 2","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"],["limitations","Independent facet 3","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"],["limitations","Independent facet 4","or that the same effects persist in frontier-scale systems"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What does this study not demonstrate — paragraph propaganda_limitations_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3514,17 +3490,18 @@ Path("propaganda_limitations_p2_treatment_b.svg").write_text("\n".join(parts), e
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The authors avoid live injection and validate the vector in sandboxes};
-\node[box] (n2) at (2.50,-1.50) {The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters};
-\node[box] (n3) at (4.00,-1.50) {The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate};
-\node[box] (n4) at (5.50,-1.50) {or that the same effects persist in frontier-scale systems};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_limitations\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What does this study not demonstrate};
+\node[box] (f1) at (0,2) {The authors avoid live injection and validate the vector in sandboxes};
+\node[box] (f2) at (6,2) {The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters};
+\node[box] (f3) at (0,0) {The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate};
+\node[box] (f4) at (6,0) {or that the same effects persist in frontier-scale systems};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3533,13 +3510,15 @@ Path("propaganda_limitations_p2_treatment_b.svg").write_text("\n".join(parts), e
 
 ```mermaid
 flowchart LR
-  n1["The authors avoid live injection and validate the vector in sandboxes"]
-  n2["The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
-  n3["The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
-  n4["or that the same effects persist in frontier-scale systems"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What does this study not demonstrate"]
+  f1["The authors avoid live injection and validate the vector in sandboxes"]
+  f2["The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
+  f3["The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
+  f4["or that the same effects persist in frontier-scale systems"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3549,27 +3528,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The authors avoid live injection and validate the vector in sandboxes",100,150],["n2","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters",250,150],["n3","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate",400,150],["n4","or that the same effects persist in frontier-scale systems",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "propaganda_limitations_p2: claim-boundary constellation"
+nodes = [["center","What does this study not demonstrate",460,220],["f1","The authors avoid live injection and validate the vector in sandboxes",100,40],["f2","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters",820,40],["f3","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate",100,220],["f4","or that the same effects persist in frontier-scale systems",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3593,18 +3574,18 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 - Text anchor: "The paper supports treating third-party page fragments as a real data-provenance concern."
 - Claims and sources: `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is the strongest defensible conclusion.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is the strongest defensible conclusion — paragraph propaganda_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3613,9 +3594,10 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The paper supports treating third-party page fragments as a real data-provenance concern\\\textbf{Statement 2}: qualitative -- Its strongest contribution is methodological\\\textbf{Statement 3}: qualitative -- a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone\\\textbf{Statement 4}: qualitative -- The negative advertisement result reinforces that point};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The paper supports treating third-party page fragments as a real data-provenance concern\\[3pt]Its strongest contribution is methodological\\[3pt]The negative advertisement result reinforces that point};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3624,11 +3606,13 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The paper supports treating third-party page fragments as a real data-provenance concern"]
-    p1r2["Statement 2: qualitative<br/>Its strongest contribution is methodological"]
-    p1r3["Statement 3: qualitative<br/>a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
-    p1r4["Statement 4: qualitative<br/>The negative advertisement result reinforces that point"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The paper supports treating third-party page fragments as a real data-provenance concern"]
+    g1i2["Its strongest contribution is methodological"]
+    g1i3["The negative advertisement result reinforces that point"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
   end
 ```
 
@@ -3639,39 +3623,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The paper supports treating third-party page fragments as a real data-provenance concern"],["Paragraph evidence","Statement 2","qualitative","Its strongest contribution is methodological"],["Paragraph evidence","Statement 3","qualitative","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"],["Paragraph evidence","Statement 4","qualitative","The negative advertisement result reinforces that point"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The paper supports treating third-party page fragments as a real data-provenance concern","Its strongest contribution is methodological","The negative advertisement result reinforces that point"]},{"title":"Rejected overclaim or qualification","items":["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is the strongest defensible conclusion — paragraph propaganda_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3682,13 +3662,13 @@ Path("propaganda_review_p1_treatment_a.svg").write_text("\n".join(parts), encodi
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The paper supports treating third-party page fragments as a real data-provenance concern \\
-Paragraph evidence & Statement 2 & qualitative & Its strongest contribution is methodological \\
-Paragraph evidence & Statement 3 & qualitative & a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone \\
-Paragraph evidence & Statement 4 & qualitative & The negative advertisement result reinforces that point \\
+\node[align=center] {\textbf{propaganda\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The paper supports treating third-party page fragments as a real data-provenance concern \\
+critical review & Independent facet 2 & Its strongest contribution is methodological \\
+critical review & Independent facet 3 & a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone \\
+critical review & Independent facet 4 & The negative advertisement result reinforces that point \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3698,11 +3678,11 @@ Paragraph evidence & Statement 4 & qualitative & The negative advertisement resu
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The paper supports treating third-party page fragments as a real data-provenance concern"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Its strongest contribution is methodological"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The negative advertisement result reinforces that point"]
+  subgraph Ledger["propaganda_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The paper supports treating third-party page fragments as a real data-provenance concern"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>Its strongest contribution is methodological"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>The negative advertisement result reinforces that point"]
   end
 ```
 
@@ -3713,36 +3693,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The paper supports treating third-party page fragments as a real data-provenance concern"],["Paragraph evidence","Statement 2","qualitative","Its strongest contribution is methodological"],["Paragraph evidence","Statement 3","qualitative","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"],["Paragraph evidence","Statement 4","qualitative","The negative advertisement result reinforces that point"]]
-height = 502
+title = "propaganda_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The paper supports treating third-party page fragments as a real data-provenance concern"],["critical review","Independent facet 2","Its strongest contribution is methodological"],["critical review","Independent facet 3","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"],["critical review","Independent facet 4","The negative advertisement result reinforces that point"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is the strongest defensible conclusion — paragraph propaganda_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3750,17 +3730,18 @@ Path("propaganda_review_p1_treatment_b.svg").write_text("\n".join(parts), encodi
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The paper supports treating third-party page fragments as a real data-provenance concern};
-\node[box] (n2) at (2.50,-1.50) {Its strongest contribution is methodological};
-\node[box] (n3) at (4.00,-1.50) {a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
-\node[box] (n4) at (5.50,-1.50) {The negative advertisement result reinforces that point};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is the strongest defensible conclusion};
+\node[box] (f1) at (0,2) {The paper supports treating third-party page fragments as a real data-provenance concern};
+\node[box] (f2) at (6,2) {Its strongest contribution is methodological};
+\node[box] (f3) at (0,0) {a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
+\node[box] (f4) at (6,0) {The negative advertisement result reinforces that point};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3769,13 +3750,15 @@ Path("propaganda_review_p1_treatment_b.svg").write_text("\n".join(parts), encodi
 
 ```mermaid
 flowchart LR
-  n1["The paper supports treating third-party page fragments as a real data-provenance concern"]
-  n2["Its strongest contribution is methodological"]
-  n3["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
-  n4["The negative advertisement result reinforces that point"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What is the strongest defensible conclusion"]
+  f1["The paper supports treating third-party page fragments as a real data-provenance concern"]
+  f2["Its strongest contribution is methodological"]
+  f3["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
+  f4["The negative advertisement result reinforces that point"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
 ```
 
 #### Python
@@ -3785,27 +3768,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The paper supports treating third-party page fragments as a real data-provenance concern",100,150],["n2","Its strongest contribution is methodological",250,150],["n3","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone",400,150],["n4","The negative advertisement result reinforces that point",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "propaganda_review_p1: claim-boundary constellation"
+nodes = [["center","What is the strongest defensible conclusion",460,220],["f1","The paper supports treating third-party page fragments as a real data-provenance concern",100,40],["f2","Its strongest contribution is methodological",820,40],["f3","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone",100,220],["f4","The negative advertisement result reinforces that point",820,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3829,18 +3814,18 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 - Text anchor: "The phrase 'can be poisoned at scale' should remain bounded by the threat model."
 - Claims and sources: `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is the strongest defensible conclusion.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is the strongest defensible conclusion — paragraph propaganda_review_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3849,9 +3834,10 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The phrase 'can be poisoned at scale' should remain bounded by the threat model\\\textbf{Statement 2}: qualitative -- Inclusion is estimated from a sampled, sandboxed, open pipeline\\\textbf{Statement 3}: 0.15\%, 4.4, 0.13\% -- and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%\\\textbf{Statement 4}: qualitative -- Model influence is shown in a separate controlled experiment\\\textbf{Statement 5}: qualitative -- Connecting those stages into a reliable live attack against a production system remains unestablished};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {propaganda\_review\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The phrase 'can be poisoned at scale' should remain bounded by the threat model\\[3pt]Inclusion is estimated from a sampled, sandboxed, open pipeline\\[3pt]and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%\\[3pt]Model influence is shown in a separate controlled experiment\\[3pt]Connecting those stages into a reliable live attack against a production system remains unestablished};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]Connecting those stages into a reliable live attack against a production system remains unestablished};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3860,12 +3846,15 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
-    p1r2["Statement 2: qualitative<br/>Inclusion is estimated from a sampled, sandboxed, open pipeline"]
-    p1r3["Statement 3: 0.15%, 4.4, 0.13%<br/>and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
-    p1r4["Statement 4: qualitative<br/>Model influence is shown in a separate controlled experiment"]
-    p1r5["Statement 5: qualitative<br/>Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
+    g1i2["Inclusion is estimated from a sampled, sandboxed, open pipeline"]
+    g1i3["and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
+    g1i4["Model influence is shown in a separate controlled experiment"]
+    g1i5["Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["Connecting those stages into a reliable live attack against a production system remains unestablished"]
   end
 ```
 
@@ -3876,39 +3865,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The phrase 'can be poisoned at scale' should remain bounded by the threat model"],["Paragraph evidence","Statement 2","qualitative","Inclusion is estimated from a sampled, sandboxed, open pipeline"],["Paragraph evidence","Statement 3","0.15%, 4.4, 0.13%","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"],["Paragraph evidence","Statement 4","qualitative","Model influence is shown in a separate controlled experiment"],["Paragraph evidence","Statement 5","qualitative","Connecting those stages into a reliable live attack against a production system remains unestablished"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "propaganda_review_p2: independent facets"
+groups = [{"title":"Supported conclusion","items":["The phrase 'can be poisoned at scale' should remain bounded by the threat model","Inclusion is estimated from a sampled, sandboxed, open pipeline","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%","Model influence is shown in a separate controlled experiment","Connecting those stages into a reliable live attack against a production system remains unestablished"]},{"title":"Rejected overclaim or qualification","items":["Connecting those stages into a reliable live attack against a production system remains unestablished"]}]
+width = 900
+height = 680
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is the strongest defensible conclusion — paragraph propaganda_review_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3919,14 +3904,14 @@ Path("propaganda_review_p2_treatment_a.svg").write_text("\n".join(parts), encodi
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The phrase 'can be poisoned at scale' should remain bounded by the threat model \\
-Paragraph evidence & Statement 2 & qualitative & Inclusion is estimated from a sampled, sandboxed, open pipeline \\
-Paragraph evidence & Statement 3 & 0.15\%, 4.4, 0.13\% & and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\% \\
-Paragraph evidence & Statement 4 & qualitative & Model influence is shown in a separate controlled experiment \\
-Paragraph evidence & Statement 5 & qualitative & Connecting those stages into a reliable live attack against a production system remains unestablished \\
+\node[align=center] {\textbf{propaganda\_review\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The phrase 'can be poisoned at scale' should remain bounded by the threat model \\
+critical review & Independent facet 2 & Inclusion is estimated from a sampled, sandboxed, open pipeline \\
+critical review & Independent facet 3 & and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\% \\
+critical review & Independent facet 4 & Model influence is shown in a separate controlled experiment \\
+critical review & Independent facet 5 & Connecting those stages into a reliable live attack against a production system remains unestablished \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3936,12 +3921,12 @@ Paragraph evidence & Statement 5 & qualitative & Connecting those stages into a 
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Inclusion is estimated from a sampled, sandboxed, open pipeline"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>0.15%, 4.4, 0.13%</b><br/>and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Model influence is shown in a separate controlled experiment"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  subgraph Ledger["propaganda_review_p2: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>Inclusion is estimated from a sampled, sandboxed, open pipeline"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>Model influence is shown in a separate controlled experiment"]
+    r5["critical review<br/><b>Independent facet 5</b><br/>Connecting those stages into a reliable live attack against a production system remains unestablished"]
   end
 ```
 
@@ -3952,36 +3937,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The phrase 'can be poisoned at scale' should remain bounded by the threat model"],["Paragraph evidence","Statement 2","qualitative","Inclusion is estimated from a sampled, sandboxed, open pipeline"],["Paragraph evidence","Statement 3","0.15%, 4.4, 0.13%","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"],["Paragraph evidence","Statement 4","qualitative","Model influence is shown in a separate controlled experiment"],["Paragraph evidence","Statement 5","qualitative","Connecting those stages into a reliable live attack against a production system remains unestablished"]]
-height = 590
+title = "propaganda_review_p2: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The phrase 'can be poisoned at scale' should remain bounded by the threat model"],["critical review","Independent facet 2","Inclusion is estimated from a sampled, sandboxed, open pipeline"],["critical review","Independent facet 3","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"],["critical review","Independent facet 4","Model influence is shown in a separate controlled experiment"],["critical review","Independent facet 5","Connecting those stages into a reliable live attack against a production system remains unestablished"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is the strongest defensible conclusion — paragraph propaganda_review_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3989,19 +3974,20 @@ Path("propaganda_review_p2_treatment_b.svg").write_text("\n".join(parts), encodi
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The phrase 'can be poisoned at scale' should remain bounded by the threat model};
-\node[box] (n2) at (2.50,-1.50) {Inclusion is estimated from a sampled, sandboxed, open pipeline};
-\node[box] (n3) at (4.00,-1.50) {and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%};
-\node[box] (n4) at (5.50,-1.50) {Model influence is shown in a separate controlled experiment};
-\node[box] (n5) at (7.00,-1.50) {Connecting those stages into a reliable live attack against a production system remains unestablished};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {propaganda\_review\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is the strongest defensible conclusion};
+\node[box] (f1) at (0,2) {The phrase 'can be poisoned at scale' should remain bounded by the threat model};
+\node[box] (f2) at (6,2) {Inclusion is estimated from a sampled, sandboxed, open pipeline};
+\node[box] (f3) at (0,0) {and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%};
+\node[box] (f4) at (6,0) {Model influence is shown in a separate controlled experiment};
+\node[box] (f5) at (0,-2) {Connecting those stages into a reliable live attack against a production system remains unestablished};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
+\draw (center) -- node[rel] {support or qualification} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4010,15 +3996,17 @@ Path("propaganda_review_p2_treatment_b.svg").write_text("\n".join(parts), encodi
 
 ```mermaid
 flowchart LR
-  n1["The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
-  n2["Inclusion is estimated from a sampled, sandboxed, open pipeline"]
-  n3["and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
-  n4["Model influence is shown in a separate controlled experiment"]
-  n5["Connecting those stages into a reliable live attack against a production system remains unestablished"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What is the strongest defensible conclusion"]
+  f1["The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
+  f2["Inclusion is estimated from a sampled, sandboxed, open pipeline"]
+  f3["and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
+  f4["Model influence is shown in a separate controlled experiment"]
+  f5["Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
+  center ---|"support or qualification"| f5
 ```
 
 #### Python
@@ -4028,27 +4016,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The phrase 'can be poisoned at scale' should remain bounded by the threat model",100,150],["n2","Inclusion is estimated from a sampled, sandboxed, open pipeline",250,150],["n3","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%",400,150],["n4","Model influence is shown in a separate controlled experiment",550,150],["n5","Connecting those stages into a reliable live attack against a production system remains unestablished",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "propaganda_review_p2: claim-boundary constellation"
+nodes = [["center","What is the strongest defensible conclusion",460,220],["f1","The phrase 'can be poisoned at scale' should remain bounded by the threat model",100,40],["f2","Inclusion is estimated from a sampled, sandboxed, open pipeline",820,40],["f3","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%",100,220],["f4","Model influence is shown in a separate controlled experiment",820,220],["f5","Connecting those stages into a reliable live attack against a production system remains unestablished",100,400]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4065,4 +4055,3 @@ Path("propaganda_review_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-

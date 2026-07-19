@@ -3,7 +3,7 @@
 - Paper ID: `paper_robott`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
-- Manifest revision: `3`
+- Manifest revision: `4`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -14,7 +14,7 @@
   - `rttt_results_source` — RoboTTT v1 — real-robot evaluation and ablations; Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11
   - `rttt_limits_source` — RoboTTT v1 — limitations, deployment, and evaluation details; Section 6 and Appendices A–B, PDF pages 12 and 20–22
 
-Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
+Revision 4 incorporates every sub-10 engineer finding from round-2 `VISUAL_QA` while preserving the already-10 paragraph plans. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `rttt_why_p1`
 
@@ -3114,18 +3114,18 @@ Path("rttt_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 - Text anchor: "The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics, and the policy still fails in deployment."
 - Claims and sources: `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What remains uncertain about RoboTTT.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3134,9 +3134,10 @@ Path("rttt_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics\\\textbf{Statement 2}: qualitative -- and the policy still fails in deployment\\\textbf{Statement 3}: 7 b -- The experiments use one GR00T N1.7 backbone, one YAM tabletop setup\\\textbf{Statement 4}: qualitative -- and three assembly task families};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {rttt\_limitations\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]and the policy still fails in deployment\\[3pt]The experiments use one GR00T N1.7 backbone, one YAM tabletop setup\\[3pt]and three assembly task families};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3145,11 +3146,13 @@ Path("rttt_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-    p1r2["Statement 2: qualitative<br/>and the policy still fails in deployment"]
-    p1r3["Statement 3: 7 b<br/>The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-    p1r4["Statement 4: qualitative<br/>and three assembly task families"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["and the policy still fails in deployment"]
+    g1i2["The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
+    g1i3["and three assembly task families"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
   end
 ```
 
@@ -3160,39 +3163,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"],["Paragraph evidence","Statement 2","qualitative","and the policy still fails in deployment"],["Paragraph evidence","Statement 3","7 b","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"],["Paragraph evidence","Statement 4","qualitative","and three assembly task families"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "rttt_limitations_p1: independent facets"
+groups = [{"title":"Tested or reported scope","items":["and the policy still fails in deployment","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup","and three assembly task families"]},{"title":"Unestablished or missing evidence","items":["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 4 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3203,13 +3202,13 @@ Path("rttt_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encodin
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics \\
-Paragraph evidence & Statement 2 & qualitative & and the policy still fails in deployment \\
-Paragraph evidence & Statement 3 & 7 b & The experiments use one GR00T N1.7 backbone, one YAM tabletop setup \\
-Paragraph evidence & Statement 4 & qualitative & and three assembly task families \\
+\node[align=center] {\textbf{rttt\_limitations\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics \\
+limitations & Independent facet 2 & and the policy still fails in deployment \\
+limitations & Independent facet 3 & The experiments use one GR00T N1.7 backbone, one YAM tabletop setup \\
+limitations & Independent facet 4 & and three assembly task families \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3219,11 +3218,11 @@ Paragraph evidence & Statement 4 & qualitative & and three assembly task familie
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>and the policy still fails in deployment"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>7 b</b><br/>The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and three assembly task families"]
+  subgraph Ledger["rttt_limitations_p1: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>and the policy still fails in deployment"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>and three assembly task families"]
   end
 ```
 
@@ -3234,36 +3233,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"],["Paragraph evidence","Statement 2","qualitative","and the policy still fails in deployment"],["Paragraph evidence","Statement 3","7 b","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"],["Paragraph evidence","Statement 4","qualitative","and three assembly task families"]]
-height = 502
+title = "rttt_limitations_p1: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"],["limitations","Independent facet 2","and the policy still fails in deployment"],["limitations","Independent facet 3","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"],["limitations","Independent facet 4","and three assembly task families"]]
+height = 518
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What remains uncertain about RoboTTT — paragraph rttt_limitations_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 4 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3271,17 +3270,18 @@ Path("rttt_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encodin
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics};
-\node[box] (n2) at (2.50,-1.50) {and the policy still fails in deployment};
-\node[box] (n3) at (4.00,-1.50) {The experiments use one GR00T N1.7 backbone, one YAM tabletop setup};
-\node[box] (n4) at (5.50,-1.50) {and three assembly task families};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {rttt\_limitations\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What remains uncertain about RoboTTT};
+\node[box] (f1) at (0,2) {The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics};
+\node[box] (f2) at (6,2) {and the policy still fails in deployment};
+\node[box] (f3) at (0,0) {The experiments use one GR00T N1.7 backbone, one YAM tabletop setup};
+\node[box] (f4) at (6,0) {and three assembly task families};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3290,13 +3290,15 @@ Path("rttt_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  n1["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
-  n2["and the policy still fails in deployment"]
-  n3["The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
-  n4["and three assembly task families"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
+  center["What remains uncertain about RoboTTT"]
+  f1["The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics"]
+  f2["and the policy still fails in deployment"]
+  f3["The experiments use one GR00T N1.7 backbone, one YAM tabletop setup"]
+  f4["and three assembly task families"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
 ```
 
 #### Python
@@ -3306,27 +3308,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics",100,150],["n2","and the policy still fails in deployment",250,150],["n3","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup",400,150],["n4","and three assembly task families",550,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "rttt_limitations_p1: claim-boundary constellation"
+nodes = [["center","What remains uncertain about RoboTTT",460,220],["f1","The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics",100,40],["f2","and the policy still fails in deployment",820,40],["f3","The experiments use one GR00T N1.7 backbone, one YAM tabletop setup",100,220],["f4","and three assembly task families",820,220]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3350,18 +3354,18 @@ Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 - Text anchor: "Trial counts are 20 per task, or 10 for the longest settings, without reported confidence intervals."
 - Claims and sources: `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional tested-versus-unestablished boundary.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What remains uncertain about RoboTTT.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
+### Treatment A — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3370,9 +3374,10 @@ Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: 20 -- Trial counts are 20 per task\\\textbf{Statement 2}: 10 -- or 10 for the longest settings\\\textbf{Statement 3}: qualitative -- without reported confidence intervals\\\textbf{Statement 4}: qualitative -- The paper argues that per-step computation does not grow with accumulated context\\\textbf{Statement 5}: qualitative -- but it does not report a latency table comparing RoboTTT with the baselines\\\textbf{Statement 6}: qualitative -- It therefore does not establish equal or lower absolute deployment latency};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {rttt\_limitations\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Tested or reported scope}\\[5pt]Trial counts are 20 per task\\[3pt]or 10 for the longest settings};
+\node[panel] at (6,0) {\textbf{Unestablished or missing evidence}\\[5pt]without reported confidence intervals\\[3pt]The paper argues that per-step computation does not grow with accumulated context\\[3pt]but it does not report a latency table comparing RoboTTT with the baselines\\[3pt]It therefore does not establish equal or lower absolute deployment latency};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3381,13 +3386,15 @@ Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: 20<br/>Trial counts are 20 per task"]
-    p1r2["Statement 2: 10<br/>or 10 for the longest settings"]
-    p1r3["Statement 3: qualitative<br/>without reported confidence intervals"]
-    p1r4["Statement 4: qualitative<br/>The paper argues that per-step computation does not grow with accumulated context"]
-    p1r5["Statement 5: qualitative<br/>but it does not report a latency table comparing RoboTTT with the baselines"]
-    p1r6["Statement 6: qualitative<br/>It therefore does not establish equal or lower absolute deployment latency"]
+  subgraph g1["Tested or reported scope"]
+    g1i1["Trial counts are 20 per task"]
+    g1i2["or 10 for the longest settings"]
+  end
+  subgraph g2["Unestablished or missing evidence"]
+    g2i1["without reported confidence intervals"]
+    g2i2["The paper argues that per-step computation does not grow with accumulated context"]
+    g2i3["but it does not report a latency table comparing RoboTTT with the baselines"]
+    g2i4["It therefore does not establish equal or lower absolute deployment latency"]
   end
 ```
 
@@ -3398,39 +3405,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","20","Trial counts are 20 per task"],["Paragraph evidence","Statement 2","10","or 10 for the longest settings"],["Paragraph evidence","Statement 3","qualitative","without reported confidence intervals"],["Paragraph evidence","Statement 4","qualitative","The paper argues that per-step computation does not grow with accumulated context"],["Paragraph evidence","Statement 5","qualitative","but it does not report a latency table comparing RoboTTT with the baselines"],["Paragraph evidence","Statement 6","qualitative","It therefore does not establish equal or lower absolute deployment latency"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "rttt_limitations_p2: independent facets"
+groups = [{"title":"Tested or reported scope","items":["Trial counts are 20 per task","or 10 for the longest settings"]},{"title":"Unestablished or missing evidence","items":["without reported confidence intervals","The paper argues that per-step computation does not grow with accumulated context","but it does not report a latency table comparing RoboTTT with the baselines","It therefore does not establish equal or lower absolute deployment latency"]}]
+width = 900
+height = 588
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+### Treatment B — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 6 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3441,15 +3444,15 @@ Path("rttt_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encodin
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & 20 & Trial counts are 20 per task \\
-Paragraph evidence & Statement 2 & 10 & or 10 for the longest settings \\
-Paragraph evidence & Statement 3 & qualitative & without reported confidence intervals \\
-Paragraph evidence & Statement 4 & qualitative & The paper argues that per-step computation does not grow with accumulated context \\
-Paragraph evidence & Statement 5 & qualitative & but it does not report a latency table comparing RoboTTT with the baselines \\
-Paragraph evidence & Statement 6 & qualitative & It therefore does not establish equal or lower absolute deployment latency \\
+\node[align=center] {\textbf{rttt\_limitations\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+limitations & Independent facet 1 & Trial counts are 20 per task \\
+limitations & Independent facet 2 & or 10 for the longest settings \\
+limitations & Independent facet 3 & without reported confidence intervals \\
+limitations & Independent facet 4 & The paper argues that per-step computation does not grow with accumulated context \\
+limitations & Independent facet 5 & but it does not report a latency table comparing RoboTTT with the baselines \\
+limitations & Independent facet 6 & It therefore does not establish equal or lower absolute deployment latency \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3459,13 +3462,13 @@ Paragraph evidence & Statement 6 & qualitative & It therefore does not establish
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>20</b><br/>Trial counts are 20 per task"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>10</b><br/>or 10 for the longest settings"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>without reported confidence intervals"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The paper argues that per-step computation does not grow with accumulated context"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>but it does not report a latency table comparing RoboTTT with the baselines"]
-    r6["Paragraph evidence<br/>Statement 6<br/><b>qualitative</b><br/>It therefore does not establish equal or lower absolute deployment latency"]
+  subgraph Ledger["rttt_limitations_p2: non-directional evidence ledger"]
+    r1["limitations<br/><b>Independent facet 1</b><br/>Trial counts are 20 per task"]
+    r2["limitations<br/><b>Independent facet 2</b><br/>or 10 for the longest settings"]
+    r3["limitations<br/><b>Independent facet 3</b><br/>without reported confidence intervals"]
+    r4["limitations<br/><b>Independent facet 4</b><br/>The paper argues that per-step computation does not grow with accumulated context"]
+    r5["limitations<br/><b>Independent facet 5</b><br/>but it does not report a latency table comparing RoboTTT with the baselines"]
+    r6["limitations<br/><b>Independent facet 6</b><br/>It therefore does not establish equal or lower absolute deployment latency"]
   end
 ```
 
@@ -3476,36 +3479,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","20","Trial counts are 20 per task"],["Paragraph evidence","Statement 2","10","or 10 for the longest settings"],["Paragraph evidence","Statement 3","qualitative","without reported confidence intervals"],["Paragraph evidence","Statement 4","qualitative","The paper argues that per-step computation does not grow with accumulated context"],["Paragraph evidence","Statement 5","qualitative","but it does not report a latency table comparing RoboTTT with the baselines"],["Paragraph evidence","Statement 6","qualitative","It therefore does not establish equal or lower absolute deployment latency"]]
-height = 678
+title = "rttt_limitations_p2: non-directional evidence ledger"
+rows = [["limitations","Independent facet 1","Trial counts are 20 per task"],["limitations","Independent facet 2","or 10 for the longest settings"],["limitations","Independent facet 3","without reported confidence intervals"],["limitations","Independent facet 4","The paper argues that per-step computation does not grow with accumulated context"],["limitations","Independent facet 5","but it does not report a latency table comparing RoboTTT with the baselines"],["limitations","Independent facet 6","It therefore does not establish equal or lower absolute deployment latency"]]
+height = 702
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+### Treatment C — What remains uncertain about RoboTTT — paragraph rttt_limitations_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 6 named nodes and 5 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_latency_limit`, `rttt_generality` from `rttt_limits_source`. Keep heterogeneous limitations separate and avoid a false common topology.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 6 undirected spokes. Lines encode scope boundary, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3513,21 +3516,22 @@ Path("rttt_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encodin
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {Trial counts are 20 per task};
-\node[box] (n2) at (2.50,-1.50) {or 10 for the longest settings};
-\node[box] (n3) at (4.00,-1.50) {without reported confidence intervals};
-\node[box] (n4) at (5.50,-1.50) {The paper argues that per-step computation does not grow with accumulated context};
-\node[box] (n5) at (7.00,-1.50) {but it does not report a latency table comparing RoboTTT with the baselines};
-\node[box] (n6) at (8.50,-1.50) {It therefore does not establish equal or lower absolute deployment latency};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {rttt\_limitations\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What remains uncertain about RoboTTT};
+\node[box] (f1) at (0,2) {Trial counts are 20 per task};
+\node[box] (f2) at (6,2) {or 10 for the longest settings};
+\node[box] (f3) at (0,0) {without reported confidence intervals};
+\node[box] (f4) at (6,0) {The paper argues that per-step computation does not grow with accumulated context};
+\node[box] (f5) at (0,-2) {but it does not report a latency table comparing RoboTTT with the baselines};
+\node[box] (f6) at (6,-2) {It therefore does not establish equal or lower absolute deployment latency};
+\draw (center) -- node[rel] {scope boundary} (f1);
+\draw (center) -- node[rel] {scope boundary} (f2);
+\draw (center) -- node[rel] {scope boundary} (f3);
+\draw (center) -- node[rel] {scope boundary} (f4);
+\draw (center) -- node[rel] {scope boundary} (f5);
+\draw (center) -- node[rel] {scope boundary} (f6);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3536,17 +3540,19 @@ Path("rttt_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  n1["Trial counts are 20 per task"]
-  n2["or 10 for the longest settings"]
-  n3["without reported confidence intervals"]
-  n4["The paper argues that per-step computation does not grow with accumulated context"]
-  n5["but it does not report a latency table comparing RoboTTT with the baselines"]
-  n6["It therefore does not establish equal or lower absolute deployment latency"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-  n5 -->|"then"| n6
+  center["What remains uncertain about RoboTTT"]
+  f1["Trial counts are 20 per task"]
+  f2["or 10 for the longest settings"]
+  f3["without reported confidence intervals"]
+  f4["The paper argues that per-step computation does not grow with accumulated context"]
+  f5["but it does not report a latency table comparing RoboTTT with the baselines"]
+  f6["It therefore does not establish equal or lower absolute deployment latency"]
+  center ---|"scope boundary"| f1
+  center ---|"scope boundary"| f2
+  center ---|"scope boundary"| f3
+  center ---|"scope boundary"| f4
+  center ---|"scope boundary"| f5
+  center ---|"scope boundary"| f6
 ```
 
 #### Python
@@ -3556,27 +3562,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
-nodes = [["n1","Trial counts are 20 per task",100,150],["n2","or 10 for the longest settings",250,150],["n3","without reported confidence intervals",400,150],["n4","The paper argues that per-step computation does not grow with accumulated context",550,150],["n5","but it does not report a latency table comparing RoboTTT with the baselines",700,150],["n6","It therefore does not establish equal or lower absolute deployment latency",850,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"]]
+title = "rttt_limitations_p2: claim-boundary constellation"
+nodes = [["center","What remains uncertain about RoboTTT",460,220],["f1","Trial counts are 20 per task",100,40],["f2","or 10 for the longest settings",820,40],["f3","without reported confidence intervals",100,220],["f4","The paper argues that per-step computation does not grow with accumulated context",820,220],["f5","but it does not report a latency table comparing RoboTTT with the baselines",100,400],["f6","It therefore does not establish equal or lower absolute deployment latency",820,400]]
+edges = [["center","f1","scope boundary",false],["center","f2","scope boundary",false],["center","f3","scope boundary",false],["center","f4","scope boundary",false],["center","f5","scope boundary",false],["center","f6","scope boundary",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3600,18 +3608,18 @@ Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 - Text anchor: "The mechanism is well matched to the problem: recurrent fast weights provide a fixed-size state, while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup."
 - Claims and sources: `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is convincing, and what requires another experiment.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3620,9 +3628,10 @@ Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The mechanism is well matched to the problem\\\textbf{Statement 2}: qualitative -- recurrent fast weights provide a fixed-size state\\\textbf{Statement 3}: qualitative -- while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {rttt\_review\_p1: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]The mechanism is well matched to the problem\\[3pt]recurrent fast weights provide a fixed-size state\\[3pt]while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3631,10 +3640,13 @@ Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The mechanism is well matched to the problem"]
-    p1r2["Statement 2: qualitative<br/>recurrent fast weights provide a fixed-size state"]
-    p1r3["Statement 3: qualitative<br/>while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
+  subgraph g1["Supported conclusion"]
+    g1i1["The mechanism is well matched to the problem"]
+    g1i2["recurrent fast weights provide a fixed-size state"]
+    g1i3["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
   end
 ```
 
@@ -3645,39 +3657,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The mechanism is well matched to the problem"],["Paragraph evidence","Statement 2","qualitative","recurrent fast weights provide a fixed-size state"],["Paragraph evidence","Statement 3","qualitative","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "rttt_review_p1: independent facets"
+groups = [{"title":"Supported conclusion","items":["The mechanism is well matched to the problem","recurrent fast weights provide a fixed-size state","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]},{"title":"Rejected overclaim or qualification","items":["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 3 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3688,12 +3696,12 @@ Path("rttt_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The mechanism is well matched to the problem \\
-Paragraph evidence & Statement 2 & qualitative & recurrent fast weights provide a fixed-size state \\
-Paragraph evidence & Statement 3 & qualitative & while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup \\
+\node[align=center] {\textbf{rttt\_review\_p1: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The mechanism is well matched to the problem \\
+critical review & Independent facet 2 & recurrent fast weights provide a fixed-size state \\
+critical review & Independent facet 3 & while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3703,10 +3711,10 @@ Paragraph evidence & Statement 3 & qualitative & while the scaling curve and com
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The mechanism is well matched to the problem"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>recurrent fast weights provide a fixed-size state"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
+  subgraph Ledger["rttt_review_p1: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The mechanism is well matched to the problem"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>recurrent fast weights provide a fixed-size state"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
   end
 ```
 
@@ -3717,36 +3725,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The mechanism is well matched to the problem"],["Paragraph evidence","Statement 2","qualitative","recurrent fast weights provide a fixed-size state"],["Paragraph evidence","Statement 3","qualitative","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]]
-height = 414
+title = "rttt_review_p1: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The mechanism is well matched to the problem"],["critical review","Independent facet 2","recurrent fast weights provide a fixed-size state"],["critical review","Independent facet 3","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]]
+height = 426
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is convincing, and what requires another experiment — paragraph rttt_review_p1 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 3 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3754,15 +3762,16 @@ Path("rttt_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The mechanism is well matched to the problem};
-\node[box] (n2) at (2.50,-1.50) {recurrent fast weights provide a fixed-size state};
-\node[box] (n3) at (4.00,-1.50) {while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {rttt\_review\_p1: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is convincing, and what requires another experiment};
+\node[box] (f1) at (0,2) {The mechanism is well matched to the problem};
+\node[box] (f2) at (6,2) {recurrent fast weights provide a fixed-size state};
+\node[box] (f3) at (0,0) {while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3771,11 +3780,13 @@ Path("rttt_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["The mechanism is well matched to the problem"]
-  n2["recurrent fast weights provide a fixed-size state"]
-  n3["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
+  center["What is convincing, and what requires another experiment"]
+  f1["The mechanism is well matched to the problem"]
+  f2["recurrent fast weights provide a fixed-size state"]
+  f3["while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
 ```
 
 #### Python
@@ -3785,27 +3796,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The mechanism is well matched to the problem",100,150],["n2","recurrent fast weights provide a fixed-size state",250,150],["n3","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup",400,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
+title = "rttt_review_p1: claim-boundary constellation"
+nodes = [["center","What is convincing, and what requires another experiment",460,220],["f1","The mechanism is well matched to the problem",100,40],["f2","recurrent fast weights provide a fixed-size state",820,40],["f3","while the scaling curve and component ablations connect longer training context and nonlinear fast models to better task completion on the evaluated setup",100,220]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 520
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3829,18 +3842,18 @@ Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Text anchor: "The evidence is not yet a broad demonstration of robot-foundation-model scaling."
 - Claims and sources: `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22)
 - Visual needed: `NO`
-- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
-- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion, requirement, provenance fact, or heterogeneous qualification without requiring readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The contingencies are retained for auditability but are explicitly non-directional.
+- Explanatory job: Non-directional contingency audit for What is convincing, and what requires another experiment.
 - Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
-- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- QA-informed planning change: Round-2 QA removed all generic directed `then` maps. Every contingency now uses this paragraph's independent scope, evidence, requirement, provenance, or claim-boundary facets.
 
-### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
+### Treatment A — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — independent scope panels
 
-- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
-- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally expose the paragraph's independent facets without inventing order.
+- Encoding and reading order: Use 2 named panels. Items within and across panels have no arrows, ordinal numbers, or implied progression.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3849,9 +3862,10 @@ Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
-\node[font=\bfseries] at (0,3) {rttt\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
-\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The evidence is not yet a broad demonstration of robot-foundation-model scaling\\\textbf{Statement 2}: qualitative -- A second backbone, different embodiments and task domains, uncertainty estimates\\\textbf{Statement 3}: qualitative -- and direct latency measurements are needed\\\textbf{Statement 4}: qualitative -- The authors' explanation that fast weights retain salient history is plausible and supported by behavior\\\textbf{Statement 5}: qualitative -- but the experiments do not directly inspect what information those weights store};
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=4.2cm}]
+\node[font=\bfseries] at (3,3.1) {rttt\_review\_p2: independent facets};
+\node[panel] at (0,0) {\textbf{Supported conclusion}\\[5pt]and direct latency measurements are needed\\[3pt]The authors' explanation that fast weights retain salient history is plausible and supported by behavior};
+\node[panel] at (6,0) {\textbf{Rejected overclaim or qualification}\\[5pt]The evidence is not yet a broad demonstration of robot-foundation-model scaling\\[3pt]A second backbone, different embodiments and task domains, uncertainty estimates\\[3pt]but the experiments do not directly inspect what information those weights store};
 \end{tikzpicture}
 \end{document}
 ```
@@ -3860,12 +3874,14 @@ Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  subgraph p1["Paragraph evidence"]
-    p1r1["Statement 1: qualitative<br/>The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-    p1r2["Statement 2: qualitative<br/>A second backbone, different embodiments and task domains, uncertainty estimates"]
-    p1r3["Statement 3: qualitative<br/>and direct latency measurements are needed"]
-    p1r4["Statement 4: qualitative<br/>The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-    p1r5["Statement 5: qualitative<br/>but the experiments do not directly inspect what information those weights store"]
+  subgraph g1["Supported conclusion"]
+    g1i1["and direct latency measurements are needed"]
+    g1i2["The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
+  end
+  subgraph g2["Rejected overclaim or qualification"]
+    g2i1["The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
+    g2i2["A second backbone, different embodiments and task domains, uncertainty estimates"]
+    g2i3["but the experiments do not directly inspect what information those weights store"]
   end
 ```
 
@@ -3876,39 +3892,35 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
-rows = [["Paragraph evidence","Statement 1","qualitative","The evidence is not yet a broad demonstration of robot-foundation-model scaling"],["Paragraph evidence","Statement 2","qualitative","A second backbone, different embodiments and task domains, uncertainty estimates"],["Paragraph evidence","Statement 3","qualitative","and direct latency measurements are needed"],["Paragraph evidence","Statement 4","qualitative","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"],["Paragraph evidence","Statement 5","qualitative","but the experiments do not directly inspect what information those weights store"]]
-groups = {}
-for group, label, value, condition in rows:
-    groups.setdefault(group, []).append((label, value, condition))
-width = max(900, len(groups) * 360)
-height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+title = "rttt_review_p2: independent facets"
+groups = [{"title":"Supported conclusion","items":["and direct latency measurements are needed","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]},{"title":"Rejected overclaim or qualification","items":["The evidence is not yet a broad demonstration of robot-foundation-model scaling","A second backbone, different embodiments and task domains, uncertainty estimates","but the experiments do not directly inspect what information those weights store"]}]
+width = 900
+height = 496
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    '<desc id="desc">Independent panels; spatial grouping does not encode sequence or causality.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for group_index, (group, items) in enumerate(groups.items()):
-    x = 180 + group_index * 360
-    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
-    for item_index, (label, value, condition) in enumerate(items):
-        y = 120 + item_index * 92
-        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
-        text = f"{label}: {value} — {condition}"
-        for line_index, line in enumerate(wrap(text, width=46)):
-            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+for group_index, group in enumerate(groups):
+    x = 200 + group_index * 400
+    parts.append(f'<text x="{x}" y="60" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["title"])}</text>')
+    for item_index, item in enumerate(group["items"]):
+        y = 115 + item_index * 92
+        parts.append(f'<rect x="{x-180}" y="{y-30}" width="360" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        for line_index, line in enumerate(wrap(item, width=50)):
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+### Treatment B — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — evidence and boundary ledger
 
-- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
-- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally make each statement and its evidence role inspectable in a flat ledger.
+- Encoding and reading order: Render 5 independent rows with facet, statement, and condition columns. Row order follows prose only and carries no process meaning.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: semantic HTML/CSS table with an SVG export; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3919,14 +3931,14 @@ Path("rttt_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="ut
 \usepackage{tikz}
 \begin{document}
 \begin{tikzpicture}[font=\sffamily]
-\node[align=center] {\textbf{rttt\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
-\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
-\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
-Paragraph evidence & Statement 1 & qualitative & The evidence is not yet a broad demonstration of robot-foundation-model scaling \\
-Paragraph evidence & Statement 2 & qualitative & A second backbone, different embodiments and task domains, uncertainty estimates \\
-Paragraph evidence & Statement 3 & qualitative & and direct latency measurements are needed \\
-Paragraph evidence & Statement 4 & qualitative & The authors' explanation that fast weights retain salient history is plausible and supported by behavior \\
-Paragraph evidence & Statement 5 & qualitative & but the experiments do not directly inspect what information those weights store \\
+\node[align=center] {\textbf{rttt\_review\_p2: non-directional evidence ledger}\\[6pt]
+\begin{tabular}{p{4cm}p{6cm}p{8cm}}
+\textbf{Facet} & \textbf{Statement or value} & \textbf{Evidence condition or boundary} \\ \hline
+critical review & Independent facet 1 & The evidence is not yet a broad demonstration of robot-foundation-model scaling \\
+critical review & Independent facet 2 & A second backbone, different embodiments and task domains, uncertainty estimates \\
+critical review & Independent facet 3 & and direct latency measurements are needed \\
+critical review & Independent facet 4 & The authors' explanation that fast weights retain salient history is plausible and supported by behavior \\
+critical review & Independent facet 5 & but the experiments do not directly inspect what information those weights store \\
 \end{tabular}};
 \end{tikzpicture}
 \end{document}
@@ -3936,12 +3948,12 @@ Paragraph evidence & Statement 5 & qualitative & but the experiments do not dire
 
 ```mermaid
 flowchart TB
-  subgraph Visible_value_matrix
-    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>A second backbone, different embodiments and task domains, uncertainty estimates"]
-    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>and direct latency measurements are needed"]
-    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>but the experiments do not directly inspect what information those weights store"]
+  subgraph Ledger["rttt_review_p2: non-directional evidence ledger"]
+    r1["critical review<br/><b>Independent facet 1</b><br/>The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
+    r2["critical review<br/><b>Independent facet 2</b><br/>A second backbone, different embodiments and task domains, uncertainty estimates"]
+    r3["critical review<br/><b>Independent facet 3</b><br/>and direct latency measurements are needed"]
+    r4["critical review<br/><b>Independent facet 4</b><br/>The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
+    r5["critical review<br/><b>Independent facet 5</b><br/>but the experiments do not directly inspect what information those weights store"]
   end
 ```
 
@@ -3952,36 +3964,36 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
-rows = [["Paragraph evidence","Statement 1","qualitative","The evidence is not yet a broad demonstration of robot-foundation-model scaling"],["Paragraph evidence","Statement 2","qualitative","A second backbone, different embodiments and task domains, uncertainty estimates"],["Paragraph evidence","Statement 3","qualitative","and direct latency measurements are needed"],["Paragraph evidence","Statement 4","qualitative","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"],["Paragraph evidence","Statement 5","qualitative","but the experiments do not directly inspect what information those weights store"]]
-height = 590
+title = "rttt_review_p2: non-directional evidence ledger"
+rows = [["critical review","Independent facet 1","The evidence is not yet a broad demonstration of robot-foundation-model scaling"],["critical review","Independent facet 2","A second backbone, different embodiments and task domains, uncertainty estimates"],["critical review","Independent facet 3","and direct latency measurements are needed"],["critical review","Independent facet 4","The authors' explanation that fast weights retain salient history is plausible and supported by behavior"],["critical review","Independent facet 5","but the experiments do not directly inspect what information those weights store"]]
+height = 610
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    '<desc id="desc">Non-directional evidence ledger with every statement and boundary visible.</desc>',
     f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
-xs = [30, 260, 590, 770]
+headers = ["Facet", "Statement or value", "Evidence condition or boundary"]
+xs = [30, 300, 700]
 for x, header in zip(xs, headers):
-    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+    parts.append(f'<text x="{x}" y="65" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
 for row_index, row in enumerate(rows):
-    y = 110 + row_index * 88
-    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
-    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+    y = 110 + row_index * 92
+    parts.append(f'<rect x="20" y="{y-30}" width="1160" height="80" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [30, 48, 60]):
         for line_index, line in enumerate(wrap(str(cell), width=width)):
-            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+            parts.append(f'<text x="{x}" y="{y-8+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+### Treatment C — What is convincing, and what requires another experiment — paragraph rttt_review_p2 — non-directional claim constellation
 
-- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
-- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
-- Evidence and limitations: Encode only `rttt_scaling`, `rttt_component_ablation`, `rttt_memory_interpretation`, `rttt_latency_limit`, `rttt_generality` from `rttt_results_source`, `rttt_limits_source`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
-- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
-- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+- Teaching purpose: Optionally show which requirements or qualifications belong to the paragraph's central question.
+- Encoding and reading order: Place the paragraph question at the center with 5 undirected spokes. Lines encode support or qualification, never sequence; Mermaid uses `---`, TikZ omits arrowheads, and Python emits plain lines.
+- Evidence and limitations: Use only `rttt_scaling` (OBSERVED, VERIFIED); `rttt_component_ablation` (OBSERVED, VERIFIED); `rttt_memory_interpretation` (AUTHORS_INTERPRETATION, VERIFIED); `rttt_latency_limit` (NOT_ESTABLISHED, UNRESOLVED); `rttt_generality` (NOT_ESTABLISHED, UNRESOLVED); `rttt_results_source` (Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11); `rttt_limits_source` (Section 6 and Appendices A–B, PDF pages 12 and 20–22). The contingency is non-directional: proximity and connecting lines mean membership, support, requirement, or scope only; they never mean temporal order or causality.
+- Recommended web medium: responsive SVG with semantic HTML/CSS list fallback; JavaScript is unnecessary.
+- Mobile, accessibility, and motion behavior: Keep every label and identifier as selectable DOM text; preserve non-directional grouping on mobile; use overflow-wrap: anywhere for long tokens; provide a complete static fallback; respect reduced motion; never make information depend on animation or pointer input.
 
 #### TikZ
 
@@ -3989,19 +4001,20 @@ Path("rttt_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
-\node[font=\bfseries,anchor=west] at (0,0.8) {rttt\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
-\node[box] (n1) at (1.00,-1.50) {The evidence is not yet a broad demonstration of robot-foundation-model scaling};
-\node[box] (n2) at (2.50,-1.50) {A second backbone, different embodiments and task domains, uncertainty estimates};
-\node[box] (n3) at (4.00,-1.50) {and direct latency measurements are needed};
-\node[box] (n4) at (5.50,-1.50) {The authors' explanation that fast weights retain salient history is plausible and supported by behavior};
-\node[box] (n5) at (7.00,-1.50) {but the experiments do not directly inspect what information those weights store};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3.3cm,minimum height=1.3cm},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,2) {rttt\_review\_p2: claim-boundary constellation};
+\node[box] (center) at (3,0) {What is convincing, and what requires another experiment};
+\node[box] (f1) at (0,2) {The evidence is not yet a broad demonstration of robot-foundation-model scaling};
+\node[box] (f2) at (6,2) {A second backbone, different embodiments and task domains, uncertainty estimates};
+\node[box] (f3) at (0,0) {and direct latency measurements are needed};
+\node[box] (f4) at (6,0) {The authors' explanation that fast weights retain salient history is plausible and supported by behavior};
+\node[box] (f5) at (0,-2) {but the experiments do not directly inspect what information those weights store};
+\draw (center) -- node[rel] {support or qualification} (f1);
+\draw (center) -- node[rel] {support or qualification} (f2);
+\draw (center) -- node[rel] {support or qualification} (f3);
+\draw (center) -- node[rel] {support or qualification} (f4);
+\draw (center) -- node[rel] {support or qualification} (f5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -4010,15 +4023,17 @@ Path("rttt_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="ut
 
 ```mermaid
 flowchart LR
-  n1["The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
-  n2["A second backbone, different embodiments and task domains, uncertainty estimates"]
-  n3["and direct latency measurements are needed"]
-  n4["The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
-  n5["but the experiments do not directly inspect what information those weights store"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
+  center["What is convincing, and what requires another experiment"]
+  f1["The evidence is not yet a broad demonstration of robot-foundation-model scaling"]
+  f2["A second backbone, different embodiments and task domains, uncertainty estimates"]
+  f3["and direct latency measurements are needed"]
+  f4["The authors' explanation that fast weights retain salient history is plausible and supported by behavior"]
+  f5["but the experiments do not directly inspect what information those weights store"]
+  center ---|"support or qualification"| f1
+  center ---|"support or qualification"| f2
+  center ---|"support or qualification"| f3
+  center ---|"support or qualification"| f4
+  center ---|"support or qualification"| f5
 ```
 
 #### Python
@@ -4028,27 +4043,29 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "rttt_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
-nodes = [["n1","The evidence is not yet a broad demonstration of robot-foundation-model scaling",100,150],["n2","A second backbone, different embodiments and task domains, uncertainty estimates",250,150],["n3","and direct latency measurements are needed",400,150],["n4","The authors' explanation that fast weights retain salient history is plausible and supported by behavior",550,150],["n5","but the experiments do not directly inspect what information those weights store",700,150]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
+title = "rttt_review_p2: claim-boundary constellation"
+nodes = [["center","What is convincing, and what requires another experiment",460,220],["f1","The evidence is not yet a broad demonstration of robot-foundation-model scaling",100,40],["f2","A second backbone, different embodiments and task domains, uncertainty estimates",820,40],["f3","and direct latency measurements are needed",100,220],["f4","The authors' explanation that fast weights retain salient history is plausible and supported by behavior",820,220],["f5","but the experiments do not directly inspect what information those weights store",100,400]]
+edges = [["center","f1","support or qualification",false],["center","f2","support or qualification",false],["center","f3","support or qualification",false],["center","f4","support or qualification",false],["center","f5","support or qualification",false]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
-height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+width = 1000
+height = 540
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" role="img" aria-labelledby="title desc">' % (width, height),
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    '<desc id="desc">Labeled relations; undirected lines are associations or boundaries, not temporal order.</desc>',
     f'<rect width="{width}" height="{height}" fill="white"/>',
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#345"/></marker></defs>',
 ]
-for source, target, relation in edges:
+for source, target, relation, directed in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    marker = ' marker-end="url(#arrow)"' if directed else ''
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"{marker}/>')
     parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=22)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-85}" y="{y-44}" width="170" height="88" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=24)):
+        parts.append(f'<text x="{x}" y="{y-26+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("rttt_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4065,4 +4082,3 @@ Path("rttt_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 - Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
 - Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
 - Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
-
