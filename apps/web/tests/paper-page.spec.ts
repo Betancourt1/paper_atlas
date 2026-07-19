@@ -53,11 +53,11 @@ test("reviewed digest entry opens as a source-backed explainer @visual", async (
   ).toBeVisible();
   await expect(
     page.getByRole("heading", {
-      name: "How TRACE turns a tool interaction into training credit",
+      name: "TRACE compares adjacent trajectory states",
     }),
   ).toBeVisible();
   await expect(
-    page.getByText("What this illustration does not establish"),
+    page.getByText("What this illustration does not establish").first(),
   ).toBeVisible();
   await expect(page.getByText("Not established", { exact: true }).first()).toBeVisible();
   await expect(
