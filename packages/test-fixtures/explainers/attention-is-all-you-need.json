@@ -426,11 +426,21 @@
             "alt_text": "Original right panel of Figure 2: projected queries, keys, and values enter parallel scaled dot-product attention heads whose outputs are concatenated and projected."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/attention/figure-2-scaled-dot-product.png",
+            "alt_text": "Original Figure 2 panel: scaled dot-product attention, shown at full mobile width."
+          },
+          {
+            "path": "/paper-assets/attention/figure-2-multi-head.png",
+            "alt_text": "Original Figure 2 panel: multi-head attention, stacked below the scaled dot-product panel on mobile."
+          }
+        ],
         "locator": "Figure 2, PDF page 4",
         "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
         "license_label": "Author-granted scholarly and journalistic figure reuse",
         "license_url": "https://arxiv.org/pdf/1706.03762v7",
-        "modifications": "None; both panels are original author-supplied PNGs."
+        "modifications": "No pixel edits; the two author-supplied panels are stacked vertically at mobile widths."
       }
     },
     {
@@ -472,11 +482,21 @@
             "alt_text": "The original Transformer architecture, including masked decoder self-attention, encoder-decoder attention, and the final linear and softmax output path."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/attention/mobile/figure-1-encoder.png",
+            "alt_text": "Original Figure 1 encoder crop including inputs, positional encoding, the complete encoder stack, residual paths, and the cross-attention connector overlap."
+          },
+          {
+            "path": "/paper-assets/attention/mobile/figure-1-decoder.png",
+            "alt_text": "Original Figure 1 decoder crop including shifted outputs, masking, encoder-decoder attention, output probabilities, and the overlapping cross-attention connector."
+          }
+        ],
         "locator": "Figure 1, PDF page 3",
         "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
         "license_label": "Author-granted scholarly and journalistic figure reuse",
         "license_url": "https://arxiv.org/pdf/1706.03762v7",
-        "modifications": "None; original author-supplied PNG."
+        "modifications": "Desktop uses the complete author-supplied PNG. Mobile uses two original-pixel encoder and decoder crops with a 260-pixel cross-attention overlap; no redraw or resampling."
       }
     }
   ],

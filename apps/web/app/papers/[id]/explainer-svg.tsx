@@ -8,13 +8,18 @@ export function ExplainerSvg({ visual }: { visual: Visual }) {
   const body = renderVisual(visual.id);
   if (body === null) return null;
   const height = visual.id === "visual_attention_query_key_field" ? 520 : 440;
+  const mobileBody = renderMobileVisual(visual.id);
 
   const titleId = `${visual.id}-svg-title`;
   const descriptionId = `${visual.id}-svg-description`;
   const arrowId = `${visual.id}-arrow`;
+  const mobileTitleId = `${visual.id}-mobile-svg-title`;
+  const mobileDescriptionId = `${visual.id}-mobile-svg-description`;
+  const mobileArrowId = `${visual.id}-mobile-arrow`;
   return (
     <div className="explainer-svg">
       <svg
+        className={mobileBody ? "explainer-svg__desktop" : undefined}
         data-visual-id={visual.id}
         viewBox={`0 0 ${WIDTH} ${height}`}
         role="img"
@@ -31,8 +36,38 @@ export function ExplainerSvg({ visual }: { visual: Visual }) {
         </defs>
         <g style={{ "--visual-arrow": `url(#${arrowId})` } as CSSProperties}>{body}</g>
       </svg>
+      {mobileBody ? (
+        <svg
+          className="explainer-svg__mobile"
+          data-visual-id={`${visual.id}-mobile`}
+          viewBox={`0 0 360 ${mobileBody.height}`}
+          role="img"
+          aria-labelledby={mobileTitleId}
+          aria-describedby={mobileDescriptionId}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <title id={mobileTitleId}>{visual.title}</title>
+          <desc id={mobileDescriptionId}>{visual.alt_text}</desc>
+          <defs>
+            <marker id={mobileArrowId} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 10 5 0 10Z" />
+            </marker>
+          </defs>
+          <g style={{ "--visual-arrow": `url(#${mobileArrowId})` } as CSSProperties}>{mobileBody.body}</g>
+        </svg>
+      ) : null}
     </div>
   );
+}
+
+function renderMobileVisual(id: string): { height: number; body: ReactNode } | null {
+  switch (id) {
+    case "propaganda_visual_halflife_tree": return { height: 980, body: <MobileHalfLifeTree /> };
+    case "visual_inkling_sparse_routing_field": return { height: 720, body: <MobileSparseRouting /> };
+    case "visual_ppa_weighted_reconstruction_graph": return { height: 940, body: <MobileWeightedReconstruction /> };
+    case "trace_visual_credit_dependency_dag": return { height: 780, body: <MobileCreditDag /> };
+    default: return null;
+  }
 }
 
 function renderVisual(id: string): ReactNode {
@@ -237,6 +272,97 @@ function CreditDag() {
     <Label x={430} y={410}>separate global anchor broadcasts to local turns</Label>
   </>;
 }
+
+function MobileSparseRouting() {
+  return <>
+    <MobileNode y={55}>token</MobileNode>
+    <MobileEdge y1={85} y2={115} />
+    <MobileNode y={145} accent>router</MobileNode>
+    <MobileLabel y={205}>256 routed experts</MobileLabel>
+    <MobileNode x={95} y={260} accent small>6 selected</MobileNode>
+    <MobileNode x={265} y={260} boundary small>250 inactive</MobileNode>
+    <path className="v-edge" d="M180 175 L95 225" />
+    <path className="v-edge v-edge--reject" d="M180 175 L265 225" />
+    <MobileLabel y={325}>inactive branch stops here</MobileLabel>
+    <MobileNode y={395}>2 shared experts · always active</MobileNode>
+    <path className="v-edge" d="M180 85 C35 170 35 350 180 360" />
+    <MobileNode y={530} accent>selected + shared result</MobileNode>
+    <path className="v-edge" d="M95 295 C95 430 135 460 180 495" />
+    <MobileEdge y1={430} y2={495} />
+    <MobileEdge y1={565} y2={610} />
+    <MobileNode y={645}>41B active path</MobileNode>
+  </>;
+}
+
+function MobileHalfLifeTree() {
+  return <>
+    <MobileLabel y={30}>Gate 1 · signature prevalence</MobileLabel>
+    <MobileNode y={80}>sampled pages</MobileNode>
+    <MobileNode x={95} y={175} accent small>3.4% signature</MobileNode>
+    <MobileNode x={265} y={175} boundary small>96.6% other</MobileNode>
+    <path className="v-edge" d="M180 115 L95 140" /><path className="v-edge v-edge--reject" d="M180 115 L265 140" />
+    <MobileLabel y={255}>Gate 2 · extraction conditional</MobileLabel>
+    <MobileNode y={305}>signature pages</MobileNode>
+    <MobileNode x={95} y={400} accent small>71.9% extracted</MobileNode>
+    <MobileNode x={265} y={400} boundary small>28.1% lost</MobileNode>
+    <path className="v-edge" d="M95 210 C95 245 130 270 180 270" /><path className="v-edge" d="M180 340 L95 365" /><path className="v-edge v-edge--reject" d="M180 340 L265 365" />
+    <MobileLabel y={480}>Gate 3 · curation conditional</MobileLabel>
+    <MobileNode y={530}>extracted documents</MobileNode>
+    <MobileNode x={95} y={625} accent small>5.5% retained</MobileNode>
+    <MobileNode x={265} y={625} boundary small>94.5% filtered</MobileNode>
+    <path className="v-edge" d="M95 435 C95 470 130 495 180 495" /><path className="v-edge" d="M180 565 L95 590" /><path className="v-edge v-edge--reject" d="M180 565 L265 590" />
+    <MobileNode y={755} accent>stage product ≈ 0.13%</MobileNode>
+    <path className="v-edge" d="M95 660 C95 705 135 720 180 720" />
+    <MobileNode y={870} boundary>Introduction summary · 0.15%</MobileNode>
+    <path className="v-compare" d="M180 790 L180 835" />
+    <MobileLabel y={940}>reported discrepancy remains visible</MobileLabel>
+  </>;
+}
+
+function MobileWeightedReconstruction() {
+  return <>
+    <MobileLabel y={30}>Direct root estimate</MobileLabel><MobileNode y={80} accent>q</MobileNode>
+    <MobileLabel y={165}>Depth 1 · complete partition</MobileLabel>
+    <MobileNode x={95} y={225} small>A · w₁q₁</MobileNode><MobileNode x={265} y={225} small>¬A · w₂q₂</MobileNode>
+    <MobileNode y={330} accent>D1 = Σ₂ wᵢqᵢ</MobileNode>
+    <path className="v-edge" d="M95 260 L150 295" /><path className="v-edge" d="M265 260 L210 295" />
+    <MobileLabel y={415}>Depth 2 · complete partition</MobileLabel>
+    <MobileNode x={95} y={470} small>A∩B</MobileNode><MobileNode x={265} y={470} small>A∩¬B</MobileNode>
+    <MobileNode x={95} y={555} small>¬A∩B</MobileNode><MobileNode x={265} y={555} small>¬A∩¬B</MobileNode>
+    <MobileNode y={660} accent>D2 = Σ₄ wⱼqⱼ</MobileNode>
+    <path className="v-edge" d="M95 505 L150 625" /><path className="v-edge" d="M265 505 L210 625" /><path className="v-edge" d="M95 590 L155 635" /><path className="v-edge" d="M265 590 L205 635" />
+    <MobileLabel y={750}>Cross-depth invariance</MobileLabel>
+    <MobileNode y={815} accent>q = D1 = D2</MobileNode>
+    <path className="v-compare" d="M180 115 C25 350 25 725 145 780" /><path className="v-compare" d="M180 365 C320 510 320 725 215 780" /><path className="v-compare" d="M180 695 L180 780" />
+    <MobileLabel y={900}>disagreement signals inconsistency</MobileLabel>
+  </>;
+}
+
+function MobileCreditDag() {
+  const xs = [45, 135, 225, 315];
+  return <>
+    <MobileLabel y={35}>Shared prefix values</MobileLabel>
+    {xs.map((x, i) => <g key={i}><circle className="v-node" cx={x} cy={85} r={25} /><text className="v-text" textAnchor="middle" x={x} y={91}>V{i}</text></g>)}
+    <MobileLabel y={155}>Local differences · telescope exactly</MobileLabel>
+    {xs.slice(0, -1).map((x, i) => <line className="v-edge" x1={x + 25} y1={195} x2={xs[i + 1] - 25} y2={195} key={i} />)}
+    {xs.map((x, i) => <text className="v-text" textAnchor="middle" x={x} y={202} key={i}>V{i}</text>)}
+    <MobileLabel y={270}>Short look-ahead dependencies</MobileLabel>
+    <path className="v-skip" d="M45 350 Q135 275 225 350" /><path className="v-skip" d="M135 350 Q225 275 315 350" />
+    {xs.map((x, i) => <text className="v-text" textAnchor="middle" x={x} y={370} key={i}>V{i}</text>)}
+    <MobileLabel y={445}>Verified-outcome anchor</MobileLabel>
+    <MobileNode y={510} boundary>verified final outcome</MobileNode>
+    {xs.slice(0, -1).map((x, i) => <line className="v-outcome" x1={180} y1={545} x2={x} y2={625} key={i} />)}
+    {xs.map((x, i) => <text className="v-text" textAnchor="middle" x={x} y={655} key={i}>turn {i}</text>)}
+    <MobileLabel y={720}>local · look-ahead · global anchor</MobileLabel>
+  </>;
+}
+
+function MobileNode({ x = 180, y, children, accent = false, boundary = false, small = false }: { x?: number; y: number; children: ReactNode; accent?: boolean; boundary?: boolean; small?: boolean }) {
+  const width = small ? 150 : 320;
+  return <g><rect className={`v-node${accent ? " v-node--accent" : ""}${boundary ? " v-node--boundary" : ""}`} x={x - width / 2} y={y - 35} width={width} height={70} rx={10}/><text className="v-text" textAnchor="middle" x={x} y={y + 6}>{children}</text></g>;
+}
+function MobileLabel({ y, children }: { y: number; children: ReactNode }) { return <text className="v-label" textAnchor="middle" x={180} y={y}>{children}</text>; }
+function MobileEdge({ y1, y2 }: { y1: number; y2: number }) { return <line className="v-edge" x1={180} y1={y1} x2={180} y2={y2}/>; }
 
 function Node({ x, y, children, wide = false, accent = false, boundary = false }: { x:number; y:number; children:ReactNode; wide?:boolean; accent?:boolean; boundary?:boolean }) {
   const width = wide ? 116 : 72;

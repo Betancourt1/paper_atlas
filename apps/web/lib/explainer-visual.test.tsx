@@ -45,6 +45,16 @@ const sourceVisual: Visual = {
         alt_text: "Original Figure 2, panel B.",
       },
     ],
+    mobile_images: [
+      {
+        path: "/paper-assets/test/mobile/figure-2-panel-a.png",
+        alt_text: "Mobile crop of original Figure 2, panel A.",
+      },
+      {
+        path: "/paper-assets/test/mobile/figure-2-panel-b.png",
+        alt_text: "Mobile crop of original Figure 2, panel B.",
+      },
+    ],
     locator: "Figure 2, panels A-B, page 4",
     attribution: "Test Author et al., Test Paper.",
     license_label: "CC BY 4.0",
@@ -61,12 +71,15 @@ describe("ExplainerVisual source assets", () => {
 
     expect(markup).toContain('data-delivery-medium="source asset"');
     expect(markup).toContain('data-image-count="2"');
+    expect(markup).toContain('data-mobile-image-count="2"');
     expect(markup).not.toContain("Scrollable original paper figure");
     expect(markup).not.toContain('role="region"');
     expect(markup).not.toContain('tabindex="0"');
     expect(markup).not.toContain("Scroll if needed");
     expect(markup).toContain('src="/paper-assets/test/figure-2-a.png"');
     expect(markup).toContain('alt="Original Figure 2, panel B."');
+    expect(markup).toContain('src="/paper-assets/test/mobile/figure-2-panel-a.png"');
+    expect(markup).toContain('alt="Mobile crop of original Figure 2, panel B."');
     expect(markup).toContain("Figure 2, panels A-B, page 4");
     expect(markup).toContain("Test Author et al., Test Paper.");
     expect(markup).toContain("CC BY 4.0");

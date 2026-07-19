@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
 - Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `19 / 19` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -358,15 +358,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to reflow routing, inactive capacity, shared experts, and convergence into four bands while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
+- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_inkling_sparse_routing_field` — rendered immediately after `ink_mechanism_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/inkling.json`
-- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
+- Changed files: `packages/test-fixtures/explainers/inkling.json`; `apps/web/app/papers/[id]/explainer-svg.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
 - Evidence deviations: `NONE`
 
 ## `ink_mechanism_p2`

@@ -205,6 +205,9 @@ class SourceAsset(BaseModel):
         extra='forbid',
     )
     images: Annotated[list[SourceAssetImage], Field(max_length=3, min_length=1)]
+    mobile_images: Annotated[
+        list[SourceAssetImage] | None, Field(max_length=3, min_length=1)
+    ] = None
     locator: Annotated[str, Field(max_length=300, min_length=1)]
     attribution: Annotated[str, Field(max_length=500, min_length=1)]
     license_label: Annotated[str, Field(max_length=200, min_length=1)]

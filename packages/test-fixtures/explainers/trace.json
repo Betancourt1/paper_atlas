@@ -419,11 +419,21 @@
             "alt_text": "Original Figure 1 showing how TRACE assigns local turn-level credit across a long research trajectory."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/trace/mobile/figure-1-success.png",
+            "alt_text": "Original Figure 1 shared question and initial search context followed by the successful orange branch ending in Answer: Dublin."
+          },
+          {
+            "path": "/paper-assets/trace/mobile/figure-1-failure.png",
+            "alt_text": "Original Figure 1 shared question and initial search context followed by the failed blue branch ending in Answer: Lisbon."
+          }
+        ],
         "locator": "Figure 1, PDF page 2",
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel branch composites with the shared question and initial-search context duplicated; outcomes and labels are unchanged."
       }
     },
     {
@@ -466,13 +476,31 @@
           {
             "path": "/paper-assets/trace/figure-3.png",
             "alt_text": "Original Figure 3 comparing training reward and evaluation performance over training."
+          },
+          {
+            "path": "/paper-assets/trace/figure-4.png",
+            "alt_text": "Original Figure 4 comparing TRACE and GRPO tool-calling trends over training."
           }
         ],
-        "locator": "Figure 3, PDF page 9",
+        "mobile_images": [
+          {
+            "path": "/paper-assets/trace/mobile/figure-3-4b.png",
+            "alt_text": "Original Figure 3 panels (a) and (b), retaining the TRACE and GRPO legend plus complete 4B training and evaluation axes."
+          },
+          {
+            "path": "/paper-assets/trace/mobile/figure-3-30b.png",
+            "alt_text": "Original Figure 3 panels (c) and (d), retaining the TRACE and GRPO legend plus complete 30B training and evaluation axes."
+          },
+          {
+            "path": "/paper-assets/trace/figure-4.png",
+            "alt_text": "Complete original Figure 4 Tool Calling Trend Comparison, retaining both series and full axes."
+          }
+        ],
+        "locator": "Figures 3-4, PDF page 9",
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop uses the complete 200-DPI Figures 3 and 4. Mobile splits Figure 3 only between paper-defined panel pairs and keeps Figure 4 complete; no trace, scale, or label was changed."
       }
     },
     {

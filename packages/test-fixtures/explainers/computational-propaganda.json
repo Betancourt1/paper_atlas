@@ -436,11 +436,21 @@
             "alt_text": "Original two-panel Figure 3 comparing an injected WordPress comment in HTML with the same comment in Resiliparse text extraction, followed by the authors' complete caption."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/computational-propaganda/mobile/figure-3-panel-a.png",
+            "alt_text": "Original Figure 3 panel (a), including the injected comment in static and rendered HTML and its complete code box."
+          },
+          {
+            "path": "/paper-assets/computational-propaganda/mobile/figure-3-panel-b.png",
+            "alt_text": "Original Figure 3 panel (b), including the complete Resiliparse extraction output."
+          }
+        ],
         "locator": "Figure 3, PDF page 14",
         "attribution": "Graf et al., Pretraining Data Can Be Poisoned through Computational Propaganda (arXiv:2607.15267v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Cropped intact from the official PDF page at 200 DPI; no content edits within Figure 3."
+        "modifications": "Desktop is the intact Figure 3 crop from the official PDF. Mobile uses two original-pixel crops at the paper-defined panel boundary; no content inside either panel was removed or redrawn."
       }
     },
     {

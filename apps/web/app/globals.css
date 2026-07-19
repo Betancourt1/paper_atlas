@@ -550,6 +550,10 @@ summary:focus-visible {
   color: var(--ink);
 }
 
+.explainer-svg__mobile {
+  display: none;
+}
+
 .explainer-source-asset {
   min-width: 0;
   max-width: 100%;
@@ -582,6 +586,10 @@ summary:focus-visible {
   border: 0;
 }
 
+.explainer-source-asset__images--mobile {
+  display: none;
+}
+
 .explainer-source-asset__provenance {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -611,6 +619,31 @@ summary:focus-visible {
 .explainer-source-asset__provenance a {
   color: var(--accent);
   text-underline-offset: 0.16em;
+}
+
+@media (max-width: 640px) {
+  .explainer-svg__desktop {
+    display: none !important;
+  }
+
+  .explainer-svg__mobile {
+    display: block;
+    max-height: none !important;
+  }
+
+  .explainer-svg__mobile .v-text,
+  .explainer-svg__mobile .v-label {
+    font-size: 19px;
+  }
+
+  .explainer-source-asset__images--desktop {
+    display: none;
+  }
+
+  .explainer-source-asset__images--mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {

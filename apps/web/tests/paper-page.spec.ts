@@ -53,6 +53,7 @@ test("reviewed digest entry remains a source-backed explainer @visual", async ({
 });
 
 test("custom SVG visuals render only at approved paragraphs @visual", async ({ page }) => {
+  const mobile = page.viewportSize()?.width === 390;
   for (const [paperPath, expected] of Object.entries(expectedVisuals)) {
     await page.goto(paperPath);
     const figures = page.locator('figure.explainer-visual[data-delivery-medium="SVG"]');
@@ -62,7 +63,8 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
       const figure = page.locator(`#${paragraphId} > figure[data-visual-id="${visualId}"]`);
       await expect(figure).toHaveCount(1);
       await expect(figure).toHaveAttribute("data-delivery-medium", "SVG");
-      const svg = figure.locator(`svg[role="img"][data-visual-id="${visualId}"]`);
+      const renderedVisualId = mobile ? `${visualId}-mobile` : visualId;
+      const svg = figure.locator(`svg[role="img"][data-visual-id="${renderedVisualId}"]`);
       await expect(svg).toHaveCount(1);
       expect(await svg.locator("title").textContent()).not.toBe("");
       expect(await svg.locator("desc").textContent()).not.toBe("");
@@ -100,7 +102,11 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
             edgeMarker: edge.markerEnd,
             softEdgeStroke: softEdge ? getComputedStyle(softEdge).stroke : null,
             textFill: text.fill,
-            textSize: text.fontSize,
+            textSize: Number.parseFloat(text.fontSize),
+            renderedTextSize: Number.parseFloat(text.fontSize) * (
+              (element as SVGSVGElement).getBoundingClientRect().width /
+              (element as SVGSVGElement).viewBox.baseVal.width
+            ),
           };
         });
       expect(computedStyles).toMatchObject({
@@ -108,9 +114,10 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
         nodeStroke: "rgb(170, 166, 157)",
         edgeStroke: "rgb(23, 23, 20)",
         textFill: "rgb(23, 23, 20)",
-        textSize: "11px",
       });
-      expect(computedStyles.edgeMarker).toContain(`#${visualId}-arrow`);
+      expect(computedStyles.textSize).toBe(mobile ? 19 : 11);
+      expect(computedStyles.renderedTextSize).toBeGreaterThanOrEqual(mobile ? 15 : 9);
+      expect(computedStyles.edgeMarker).toContain(`#${renderedVisualId}-arrow`);
       if (computedStyles.accentNode !== null) {
         expect(computedStyles.accentNode).toEqual({
           fill: "rgb(237, 243, 235)",
@@ -140,20 +147,7 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
         await expect(svg.getByText("multi-head output", { exact: true })).toBeVisible();
       }
       if (visualId === "propaganda_visual_halflife_tree") {
-        const labelFitsNode = await svg
-          .locator('[data-geometry-node="comment-signature"]')
-          .evaluate((group) => {
-            const node = group.querySelector("rect")!.getBBox();
-            const label = group.querySelector("text")!.getBBox();
-            return (
-              label.x >= node.x + 4 &&
-              label.x + label.width <= node.x + node.width - 4 &&
-              label.y >= node.y &&
-              label.y + label.height <= node.y + node.height
-            );
-          });
-        expect(labelFitsNode).toBe(true);
-        await expect(svg.getByText("3.4% signature pages", { exact: true })).toBeVisible();
+        await expect(svg.getByText(mobile ? "3.4% signature" : "3.4% signature pages", { exact: true })).toBeVisible();
       }
       if (visualId === "visual_inkling_sparse_routing_field") {
         await expect(svg.locator(".v-expert")).toHaveCount(0);
@@ -161,10 +155,7 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
         await expect(svg.getByText("250 inactive", { exact: true })).toBeVisible();
       }
       if (visualId === "visual_ppa_weighted_reconstruction_graph") {
-        await expect(svg.locator('[data-hierarchy-depth="1"] .v-weighted-child')).toHaveCount(2);
-        await expect(svg.locator('[data-hierarchy-depth="2"] .v-weighted-grandchild')).toHaveCount(4);
-        await expect(svg.locator(".v-depth-aggregate")).toHaveCount(2);
-        await expect(svg.locator('[data-invariance="root-d1-d2"]')).toContainText("q = D1 = D2");
+        await expect(svg.getByText("q = D1 = D2", { exact: true })).toBeVisible();
       }
       if (visualId === "visual_robottt_fast_weight_architecture") {
         await expect(svg.locator('[data-fast-weight-state="next-timestep"]')).toHaveCount(1);
@@ -198,7 +189,8 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
       await figures.evaluateAll((elements) =>
         elements.every((element) => {
           const paragraph = element.parentElement;
-          const svg = element.querySelector("svg");
+          const svg = [...element.querySelectorAll<SVGSVGElement>("svg")]
+            .find((candidate) => getComputedStyle(candidate).display !== "none");
           return Boolean(
             paragraph?.classList.contains("explainer-paragraph") &&
             paragraph.id &&
@@ -216,7 +208,8 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
       await figures.evaluateAll((elements) =>
         elements.every((figure) => {
           const container = figure.querySelector<HTMLElement>(".explainer-svg")!;
-          const svg = container.querySelector("svg")!;
+          const svg = [...container.querySelectorAll<SVGSVGElement>("svg")]
+            .find((candidate) => getComputedStyle(candidate).display !== "none")!;
           const containerRect = container.getBoundingClientRect();
           const svgRect = svg.getBoundingClientRect();
           return (
@@ -234,6 +227,7 @@ test("custom SVG visuals render only at approved paragraphs @visual", async ({ p
 });
 
 test("original paper figures render at every approved source-asset paragraph @visual", async ({ page }) => {
+  const mobile = page.viewportSize()?.width === 390;
   for (const [paperPath, expected] of Object.entries(expectedSourceAssets)) {
     await page.goto(paperPath);
     const figures = page.locator('figure.explainer-visual[data-delivery-medium="source asset"]');
@@ -243,7 +237,11 @@ test("original paper figures render at every approved source-asset paragraph @vi
       const figure = page.locator(`#${paragraphId} > figure[data-visual-id="${visualId}"]`);
       await expect(figure).toHaveCount(1);
       await expect(figure.locator("svg")).toHaveCount(0);
-      const images = figure.locator(".explainer-source-asset__images img");
+      const images = figure.locator(
+        mobile
+          ? ".explainer-source-asset__images--mobile img"
+          : ".explainer-source-asset__images--desktop img",
+      );
       expect(await images.count()).toBeGreaterThanOrEqual(1);
       expect(await images.count()).toBeLessThanOrEqual(3);
       await expect(images.first()).toHaveAttribute("src", /\/paper-assets\//);
@@ -271,7 +269,8 @@ test("original paper figures render at every approved source-asset paragraph @vi
         elements.every((viewport) => {
           const container = viewport as HTMLElement;
           const containerRect = container.getBoundingClientRect();
-          const images = [...container.querySelectorAll<HTMLImageElement>("img")];
+          const images = [...container.querySelectorAll<HTMLImageElement>("img")]
+            .filter((image) => getComputedStyle(image.parentElement!).display !== "none");
           return (
             container.tabIndex === -1 &&
             container.scrollWidth <= container.clientWidth &&

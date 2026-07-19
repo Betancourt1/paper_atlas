@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
 - Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -328,15 +328,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack original training and inference architecture crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
+- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_2_mechanism` — rendered immediately after `rttt_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`
-- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`; `apps/web/public/paper-assets/robott/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
 - Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p3`
@@ -516,15 +516,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the original TBPTT and fast-weight-update rows while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
+- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figures_2_4_mechanism` — rendered immediately after `rttt_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-4.png`
-- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-4.png`; `apps/web/public/paper-assets/robott/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
 - Evidence deviations: `NONE`
 
 ## `rttt_example_p1`
@@ -758,15 +758,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack two same-scale task-group crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
+- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_7` — rendered immediately after `rttt_evidence_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-7.png`
-- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-7.png`; `apps/web/public/paper-assets/robott/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
 - Evidence deviations: `NONE`
 
 ## `rttt_evidence_p2`
@@ -946,15 +946,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack overlapping same-scale context-range crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
+- Selection rationale: The selected evidence-correct treatment is implemented with its revision-13 semantic crop or narrow SVG reflow, preserving relationships, source fidelity, provenance, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_8` — rendered immediately after `rttt_evidence_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-8.png`
-- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-8.png`; `apps/web/public/paper-assets/robott/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
+- Accessibility and fallback verification: `VERIFIED` — paragraph-specific mobile crops or SVG reflows retain the selected labels and relationships; source modifications, paths, panel-specific alt text, semantic fallback, locator, attribution, and license remain explicit.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms the complete desktop visual and selected mobile crops or reflow fit without internal or page-level overflow; mobile SVG labels render at 15 CSS px or larger.
 - Evidence deviations: `NONE`
 
 ## `rttt_evidence_p3`

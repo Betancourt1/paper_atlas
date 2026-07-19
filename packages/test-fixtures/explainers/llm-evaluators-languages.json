@@ -450,11 +450,21 @@
             "alt_text": "Original two-panel interval chart of mean evaluator scores across 23 languages for prompted judges and trained reward models."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-1-llm-judge.png",
+            "alt_text": "Original Figure 1 LLM-as-a-Judge panel with all languages, uncertainty marks, and Hindi, Farsi, and English reference lines."
+          },
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-1-reward-models.png",
+            "alt_text": "Original Figure 1 Reward Models panel with all languages, uncertainty marks, and Hindi, Farsi, and English reference lines."
+          }
+        ],
         "locator": "Figure 1, PDF page 4",
         "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel crops split at the paper-defined model-panel boundary; no marks or scales were changed."
       }
     },
     {
@@ -499,11 +509,21 @@
             "alt_text": "Original multi-panel scatterplots relating language resource level to mean evaluation score across judge families."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-3-llm-judge.png",
+            "alt_text": "Original Figure 3 LLM-as-a-Judge scatter panel with complete axes, language points, background bands, and correlation annotation."
+          },
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-3-reward.png",
+            "alt_text": "Original Figure 3 Reward scatter panel with complete axes, language points, background bands, correlation annotation, and script legend."
+          }
+        ],
         "locator": "Figure 3, PDF page 5",
         "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel crops split at the paper-defined model-panel boundary; no points, labels, or scales were changed."
       }
     },
     {
@@ -546,11 +566,21 @@
             "alt_text": "Original per-language comparison of pairwise ranking accuracy and global-threshold acceptance rate."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-4-llm-judge.png",
+            "alt_text": "Original Figure 4 LLM-as-a-Judge panel with complete accuracy and acceptance axes, threshold guides, benchmark marks, and validated-regime highlight."
+          },
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-4-reward-models.png",
+            "alt_text": "Original Figure 4 Reward Models panel with complete accuracy and acceptance axes, threshold guides, benchmark marks, and validated-regime highlight."
+          }
+        ],
         "locator": "Figure 4, PDF page 6",
         "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel crops split at the paper-defined evaluator-panel boundary; no observations or thresholds were altered."
       }
     },
     {
@@ -595,11 +625,21 @@
             "alt_text": "Original Figure 5 comparing model uncertainty with reward score at language and item levels."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-5-language-level.png",
+            "alt_text": "Original Figure 5 language-level panel with its full axes, regression line and band, correlation annotation, and a duplicated original legend strip."
+          },
+          {
+            "path": "/paper-assets/llm-evaluators-languages/mobile/figure-5-item-level.png",
+            "alt_text": "Original Figure 5 item-level panel with its full axes, regression line and band, correlation annotation, and a duplicated original legend strip."
+          }
+        ],
         "locator": "Figure 5, PDF page 8",
         "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses original-pixel panel crops with the shared original legend strip duplicated below each panel; no data, labels, or scales were changed."
       }
     }
   ],

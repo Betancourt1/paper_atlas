@@ -421,6 +421,14 @@
             "$ref": "#/$defs/sourceAssetImage"
           }
         },
+        "mobile_images": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/sourceAssetImage"
+          }
+        },
         "locator": {
           "type": "string",
           "minLength": 1,

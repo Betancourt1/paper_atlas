@@ -165,6 +165,12 @@ export interface SourceAsset {
    */
   images:
     [SourceAssetImage] | [SourceAssetImage, SourceAssetImage] | [SourceAssetImage, SourceAssetImage, SourceAssetImage];
+  /**
+   * @minItems 1
+   * @maxItems 3
+   */
+  mobile_images?:
+    [SourceAssetImage] | [SourceAssetImage, SourceAssetImage] | [SourceAssetImage, SourceAssetImage, SourceAssetImage];
   locator: string;
   attribution: string;
   license_label: string;

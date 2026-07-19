@@ -119,6 +119,12 @@ describe("ExplainerDocument schema", () => {
           alt_text: "The original paper figure used by the schema test.",
         },
       ],
+      mobile_images: [
+        {
+          path: "/paper-assets/schema-test/mobile/figure-1-panel-a.png",
+          alt_text: "A semantic mobile crop of the original paper figure.",
+        },
+      ],
       locator: "Figure 1, page 3",
       attribution: "Test Author et al., Test Paper.",
       license_label: "CC BY 4.0",
@@ -175,6 +181,19 @@ describe("ExplainerDocument schema", () => {
       license_url: "https://creativecommons.org/licenses/by/4.0/",
       modifications: "None.",
     };
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "source asset path must start with /paper-assets/",
+    );
+
+    invalid.visuals[0].source_asset.images[0].path = "/paper-assets/schema-test/figure-1.png";
+    invalid.visuals[0].source_asset.mobile_images = [
+      {
+        path: "/other/mobile-figure-1.png",
+        alt_text: "A misplaced mobile crop.",
+      },
+    ];
 
     expect(validateExplainerDocument(invalid)).toBe(false);
     expect(() => parseExplainerDocument(invalid)).toThrow(

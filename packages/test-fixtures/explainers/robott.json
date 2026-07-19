@@ -417,11 +417,21 @@
             "alt_text": "Original Figure 2 showing attention within timesteps, TTT across timesteps, and fast weights updated and propagated during inference."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/robott/mobile/figure-2-training.png",
+            "alt_text": "Original Figure 2 sequence-training region with state and action encoders, self/cross attention, the TTT layer, flow-matching loss, and the original legend pixels reflowed beneath it."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-2-inference.png",
+            "alt_text": "Original Figure 2 inference region with both action chunks, propagated fast weights, and the original legend pixels reflowed beneath it."
+          }
+        ],
         "locator": "Figure 2, PDF page 4",
         "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses original-pixel training and inference crops; the original legend strip is duplicated and wrapped beneath each crop without redraw or resampling."
       }
     },
     {
@@ -464,11 +474,21 @@
             "alt_text": "Original Figure 4 showing gradient truncation while fast weights persist across segments."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/robott/mobile/figure-4-input-tbptt.png",
+            "alt_text": "Original Figure 4 input-sequence and TBPTT row, including Gradient Flow and Stop Gradient boundaries."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-4-fast-weights.png",
+            "alt_text": "Original Figure 4 TTT fast-weights update row, including Carry and Detach links and a 30-pixel alignment overlap."
+          }
+        ],
         "locator": "Figure 4, PDF page 5",
         "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel row crops with a 30-pixel vertical overlap; no labels or connectors were changed."
       }
     },
     {
@@ -512,11 +532,25 @@
             "alt_text": "Original Figure 7 comparing normalized task-completion scores across RoboTTT and baselines on three assembly tasks."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/robott/mobile/figure-7-legend.png",
+            "alt_text": "Original Figure 7 method legend, wrapped into two source-pixel rows for mobile reading."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-7-average-pup.png",
+            "alt_text": "Original Figure 7 Average and Pup Go Car task groups with the original completion-score axis."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-7-circuit-gear.png",
+            "alt_text": "Original Figure 7 Circuit and Gear Bot task groups with a duplicated original completion-score axis strip."
+          }
+        ],
         "locator": "Figure 7, PDF page 7",
         "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses the original legend plus two task-group crops; the original y-axis strip is duplicated beside Circuit and Gear Bot, with no redrawn bars or scale changes."
       }
     },
     {
@@ -560,11 +594,25 @@
             "alt_text": "Original Figure 8 plotting closed-loop performance against pretraining context length for RoboTTT and GDN, with short-context baselines."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/robott/mobile/figure-8-legend.png",
+            "alt_text": "Original Figure 8 method and reference-line legend."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-8-128-1k.png",
+            "alt_text": "Original Figure 8 context range from 128 through 1K, retaining both methods, reference lines, and the completion-score axis."
+          },
+          {
+            "path": "/paper-assets/robott/mobile/figure-8-1k-8k.png",
+            "alt_text": "Original Figure 8 context range from 1K through 8K with the shared 1K point and a duplicated original completion-score axis strip."
+          }
+        ],
         "locator": "Figure 8, PDF page 8",
         "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses the original legend and two overlapping x-range crops; the 1K point and original y-axis strip are duplicated for continuity, with no interpolation or scale change."
       }
     }
   ],

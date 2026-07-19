@@ -43,7 +43,9 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
         <div className="explainer-source-asset">
           <div className="explainer-source-asset__viewport">
             <div
-              className="explainer-source-asset__images"
+              className={`explainer-source-asset__images${
+                visual.source_asset.mobile_images ? " explainer-source-asset__images--desktop" : ""
+              }`}
               data-image-count={visual.source_asset.images.length}
             >
               {visual.source_asset.images.map((image) => (
@@ -56,6 +58,22 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
                 />
               ))}
             </div>
+            {visual.source_asset.mobile_images ? (
+              <div
+                className="explainer-source-asset__images explainer-source-asset__images--mobile"
+                data-mobile-image-count={visual.source_asset.mobile_images.length}
+              >
+                {visual.source_asset.mobile_images.map((image) => (
+                  <img
+                    src={paperAssetUrl(image.path)}
+                    alt={image.alt_text}
+                    decoding="async"
+                    loading="lazy"
+                    key={image.path}
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
           <dl className="explainer-source-asset__provenance">
             <div>

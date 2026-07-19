@@ -475,11 +475,25 @@
             "alt_text": "Original Figure 2 showing SearchOS agents, orchestrator, SOCM shared state, middleware, tools, skills, and report-writing path."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/searchos/mobile/figure-2-request-agents-output.png",
+            "alt_text": "Original Figure 2 request, agent-collaboration, and final-output zones reflowed vertically from their complete source-pixel modules."
+          },
+          {
+            "path": "/paper-assets/searchos/mobile/figure-2-middleware.png",
+            "alt_text": "Original Figure 2 context, sensor, and evidence middleware modules reflowed vertically in their source reading order."
+          },
+          {
+            "path": "/paper-assets/searchos/mobile/figure-2-context-skills.png",
+            "alt_text": "Original Figure 2 Frontier Tasks, Evidence Graph, Coverage Map, Failure Memory, and Search Agent Skills modules reflowed vertically with every named boundary retained."
+          }
+        ],
         "locator": "Figure 2, PDF page 4",
         "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses three semantic architecture-zone composites made only from original-pixel module crops in source reading order; no module, label, or connector was redrawn."
       }
     },
     {
@@ -523,11 +537,25 @@
             "alt_text": "Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions."
           }
         ],
+        "mobile_images": [
+          {
+            "path": "/paper-assets/searchos/mobile/figure-5-early.png",
+            "alt_text": "Original Figure 5 panel (a), early intervention ws_zh_034, with complete Coverage and Total entities plots, detected-gap annotation, intervention line, and tool-call axis."
+          },
+          {
+            "path": "/paper-assets/searchos/mobile/figure-5-mid.png",
+            "alt_text": "Original Figure 5 panel (b), mid-run intervention ws_zh_044, with complete Coverage and Total entities plots, detected-gap annotation, intervention line, and tool-call axis."
+          },
+          {
+            "path": "/paper-assets/searchos/mobile/figure-5-late.png",
+            "alt_text": "Original Figure 5 panel (c), late intervention ws_en_015, with complete Coverage and Total entities plots, detected-gap annotation, intervention line, and tool-call axis."
+          }
+        ],
         "locator": "Figure 5, PDF pages 12-13",
         "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses three original-pixel crops at the paper-defined intervention-panel boundaries; no data, axes, or annotations were changed."
       }
     }
   ],

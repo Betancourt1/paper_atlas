@@ -138,7 +138,11 @@ export function getExplainerIntegrityErrors(
       );
     }
 
-    for (const image of visual.source_asset?.images ?? []) {
+    const sourceImages = [
+      ...(visual.source_asset?.images ?? []),
+      ...(visual.source_asset?.mobile_images ?? []),
+    ];
+    for (const image of sourceImages) {
       if (!image.path.startsWith("/paper-assets/")) {
         errors.push(
           `visual ${visual.id} source asset path must start with /paper-assets/: ${image.path}`,
