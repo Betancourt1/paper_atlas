@@ -19,5 +19,7 @@ visual. Reject generic box sequences that restate prose without encoding the
 actual flow, conditional denominators, feedback, topology, comparison,
 uncertainty, or scope. Verify that each selected form fits the explanatory
 need, is adjacent to the affected claim, and remains complete in its static and
-accessible fallback.
+accessible fallback. Block a new or materially revised paper when HTML/CSS is
+the primary medium for more than 30% of proposed treatments or selected unique
+visual IDs.
 """

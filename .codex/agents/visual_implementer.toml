@@ -21,6 +21,11 @@ equivalent text, mobile behavior, keyboard behavior when interactive, and a
 reduced-motion or static fallback. Do not collapse different explanatory jobs
 into generic cards or horizontal bars.
 
+Across the paper's selected implementation set, no more than 30% of unique
+visual IDs may be HTML/CSS-led. Count a shared visual once. An accessible HTML
+fallback does not make an SVG, JavaScript, source-asset, or generated-asset
+visual HTML/CSS-led. Do not mark implementation complete until the cap passes.
+
 Do not change claims to fit a design, invent evidence, alter the engineer's
 three proposals, score the work, or approve publication.
 """

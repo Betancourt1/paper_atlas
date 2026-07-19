@@ -18,4 +18,9 @@ visual was added. Cite concrete evidence for every score and list actionable
 findings without repairing the work. Also give one aggregate 1 through 10 score
 for each agent. Do not omit a paragraph, average away a weak paragraph, infer a
 desired score, or approve publication.
+
+Independently calculate the paper-level primary-medium ratios. Treat more than
+30% HTML/CSS-led proposed treatments or more than 30% HTML/CSS-led selected
+unique visual IDs as a finding. Count accessible HTML fallbacks according to
+the declared non-HTML primary medium and count shared visuals once.
 """

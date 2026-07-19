@@ -20,6 +20,10 @@ visual novelty.
 6. Interactive artifacts require accessible static fallbacks.
 7. Do not reproduce full copyrighted source text without an explicit license.
 8. Do not execute paper repositories in API or worker containers.
+9. For each new or materially revised explainer, no more than 30% of proposed
+   visual treatments or selected unique visual IDs may be HTML/CSS-led.
+   Accessible HTML fallbacks for another primary medium do not count toward the
+   cap.
 
 ## Required workflow
 

@@ -31,6 +31,7 @@ Repeat this structure for every prose paragraph, including prose-only decisions:
 - Teaching purpose:
 - Encoding and reading order:
 - Evidence and limitations:
+- Primary delivery medium: `HTML/CSS | SVG | JavaScript | source asset | generated asset`
 - Recommended web medium: `SVG | CSS | JavaScript | HTML | source asset`
 - Mobile, accessibility, and motion behavior:
 
@@ -62,7 +63,7 @@ Repeat this structure for every prose paragraph, including prose-only decisions:
 - Status: `PENDING | NOT_NEEDED | IMPLEMENTED | REWORK_REQUIRED`
 - Selected treatment: `A | B | C | NONE`
 - Selection rationale:
-- Delivery medium: `SVG | CSS | JavaScript | HTML | generated asset | NONE`
+- Delivery medium: `HTML/CSS | SVG | JavaScript | source asset | generated asset | NONE`
 - Visual ID and placement:
 - Shared paragraph scope: `NONE` or the complete list of paragraph IDs served
 - Changed files:
@@ -76,6 +77,13 @@ not palette, orientation, or decoration variants. The three code forms are
 reproducible specifications for each treatment; the implementer may translate
 the selected treatment into CSS, JavaScript, or SVG when that is the clearest
 web delivery.
+
+Across the complete paper manifest, no more than 30% of proposed treatments
+may use `HTML/CSS` as their primary delivery medium. No more than 30% of the
+selected unique visual IDs may use `HTML/CSS` as their delivery medium. Count a
+shared visual once. HTML fallback content for another primary medium does not
+count toward either cap. This structured primary-medium field is required for
+new manifests and revision 5 or later.
 
 A treatment is not acceptable when the same topology and wording could be used
 for an unrelated paragraph by substituting labels. Use content-specific marks,

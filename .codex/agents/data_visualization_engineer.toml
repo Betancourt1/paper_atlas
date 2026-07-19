@@ -18,6 +18,12 @@ treatment. Recommend CSS, JavaScript, or SVG when a web-native illustration,
 responsive layout, or meaningful state change makes it the better delivery
 format.
 
+Assign exactly one primary medium to every proposed treatment. Across the
+paper's complete proposal portfolio, no more than 30% may be HTML/CSS-led.
+Accessible HTML fallbacks for SVG, JavaScript, source assets, or generated
+assets do not change their primary classification. Revise the portfolio before
+marking it complete when the cap is exceeded.
+
 A treatment is invalid if its topology and copy could be reused for an
 unrelated paragraph by merely substituting labels. Use content-specific marks,
 relationships, data, and concise self-contained labels; never paste ellipsized

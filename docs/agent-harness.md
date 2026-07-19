@@ -110,10 +110,15 @@ silently becoming stale.
      labels, and reject ellipsized prose as diagram copy.
    - Supply three distinct treatments with TikZ, Mermaid, and Python code for
      each; recommend SVG, CSS, or JavaScript for web-native delivery when apt.
+   - Across the paper's complete proposal portfolio, cap HTML/CSS-led
+     treatments at 30%. Record one explicit primary medium per treatment;
+     accessible HTML fallbacks do not change that classification.
 5. Have `visual_implementer` select, implement, and record one treatment for
    every YES paragraph.
    - One visual may serve adjacent YES paragraphs only when the manifest gives
      them a shared explanatory scope and visual ID.
+   - Count shared visuals once by visual ID and cap HTML/CSS-led selections at
+     30% of the paper's selected visual set.
 6. Invoke a fresh `VISUAL_QA` with only the evidence, manifest, implementation,
    rendered pages, and scoring brief. It scores every paragraph and both agents
    without modifying their work.
@@ -149,7 +154,9 @@ description is not an explainer summary.
   `make check`.
 - `scripts/check-visual-manifests.py` verifies exact fixture paragraph coverage,
   the three-treatment/code contract, implementation state, and rejects
-  ellipsized diagram copy.
+  ellipsized diagram copy. It also enforces the 30% HTML/CSS cap for new and
+  revision-5-or-later manifests. Revision-4 manifests are reported as explicit
+  legacy debt and must comply on their next revision.
 - Schema validation, source-reference coverage, content evaluations, and the
   human editorial console remain product milestones; this repository harness
   must not claim they are implemented before they exist.

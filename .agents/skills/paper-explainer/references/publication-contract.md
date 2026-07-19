@@ -68,6 +68,18 @@ implementation and gives a separate aggregate score to each producing agent.
 The reviewer does not edit the work and is not given coordinator retry or
 acceptance policy.
 
+### Primary-medium cap
+
+For each paper, HTML/CSS may be the primary delivery medium for no more than
+30% of all proposed treatments across the complete paragraph manifest. The
+same cap applies to selected implementations, counting shared visuals once by
+visual ID. Every treatment records exactly one primary medium from `HTML/CSS`,
+`SVG`, `JavaScript`, `source asset`, or `generated asset`. Accessible semantic
+HTML fallbacks remain required when appropriate but do not change a non-HTML
+primary classification. New manifests and manifest revision 5 or later fail
+review when either ratio exceeds 30%; revision-4 manifests are legacy debt and
+must comply when next revised.
+
 ### Visual selection rules
 
 Each difficult concept receives one explicit decision:

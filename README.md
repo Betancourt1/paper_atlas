@@ -86,6 +86,14 @@ treatment; SVG, CSS, and JavaScript are recommended web-native illustration
 media. A blind `VISUAL_QA` then scores every paragraph and both producing agents
 without being given the coordinator's retry policy.
 
+Across one paper's complete proposal portfolio, no more than 30% of treatments
+may name HTML/CSS as their primary medium. The same 30% cap applies to the
+paper's selected unique visual IDs. An HTML fallback for an SVG, JavaScript,
+source, or generated asset remains required when appropriate but does not count
+as HTML/CSS-led. The eight revision-4 manifests predate this rule and are
+reported as legacy debt; every new manifest and every revision 5 or later must
+pass the cap.
+
 An alternative is not valid merely because different prose can be substituted
 into the same boxes. Visuals use content-specific relationships, marks, and
 data, with complete labels rather than truncated paragraph text. A shared

@@ -85,6 +85,13 @@ Treat SVG, CSS, and JavaScript as recommended web illustration media. Prefer
 SVG or semantic HTML/CSS for static, responsive explanations and JavaScript
 only when meaningful state or interaction is part of the explanatory job.
 
+Across one paper's complete treatment portfolio, HTML/CSS may be the primary
+medium for no more than 30% of proposed treatments. Apply the same cap to the
+implemented set, counting each shared visual ID once. Require an explicit
+primary medium for each treatment. Do not count an accessible HTML fallback
+against SVG, JavaScript, source-asset, or generated-asset work. A new or
+materially revised paper fails the visual stage when either ratio exceeds 30%.
+
 Reject a proposed treatment when its topology and copy could explain an
 unrelated paragraph merely by substituting labels. Diagrams use concise,
 self-contained labels rather than truncated prose. One visual may cover
