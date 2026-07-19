@@ -14,6 +14,12 @@ EXPECTED_AGENTS = {
     "paper_researcher.toml": ("paper_researcher", "read-only"),
     "visual_editor.toml": ("visual_editor", "read-only"),
     "explainer_writer.toml": ("explainer_writer", "workspace-write"),
+    "data_visualization_engineer.toml": (
+        "data_visualization_engineer",
+        "workspace-write",
+    ),
+    "visual_implementer.toml": ("visual_implementer", "workspace-write"),
+    "visual_qa.toml": ("visual_qa", "workspace-write"),
     "publication_reviewer.toml": ("publication_reviewer", "read-only"),
 }
 
@@ -67,10 +73,15 @@ def check_skill() -> None:
         "paper_researcher",
         "visual_editor",
         "explainer_writer",
+        "data_visualization_engineer",
+        "visual_implementer",
+        "VISUAL_QA",
         "publication_reviewer",
         "Never substitute indexed metadata for an explanation",
         "every difficult concept",
         "Reject generic box sequences",
+        "TikZ, Mermaid, and Python",
+        "SVG, CSS, and JavaScript",
     )
     for phrase in required_phrases:
         if phrase not in text:
@@ -78,6 +89,7 @@ def check_skill() -> None:
     for relative_path in (
         "agents/openai.yaml",
         "references/publication-contract.md",
+        "references/visual-manifest-template.md",
     ):
         if not (SKILL_DIR / relative_path).is_file():
             fail(f"paper-explainer skill is missing {relative_path}")
@@ -93,6 +105,7 @@ def check_routing_docs() -> None:
     required_readme_phrases = (
         "Visual explanation standard",
         "There is no one-visual-per-paper quota",
+        "paragraph-level visual",
     )
     for phrase in required_readme_phrases:
         if phrase not in readme:

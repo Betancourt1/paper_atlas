@@ -77,3 +77,11 @@ its limitations, sit beside the relevant explanation, and include equivalent
 text plus appropriate mobile, keyboard, screen-reader, and reduced-motion
 behavior. Animation is reserved for concepts whose time, order, accumulation,
 feedback, or changing state cannot be explained as clearly in a static view.
+
+Every new or materially revised explainer uses a paragraph-level visual
+manifest. A `data_visualization_engineer` records a YES or NO decision for every
+paragraph and supplies three distinct treatments with TikZ, Mermaid, and Python
+code for each. A separate `visual_implementer` selects and records the delivered
+treatment; SVG, CSS, and JavaScript are recommended web-native illustration
+media. A blind `VISUAL_QA` then scores every paragraph and both producing agents
+without being given the coordinator's retry policy.

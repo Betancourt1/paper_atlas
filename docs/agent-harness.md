@@ -45,9 +45,13 @@ flowchart TD
   C -->|Code or operations| SM[site_maintainer]
   SM --> SR[site_reviewer]
   C -->|Paper meaning or publication| PR[paper_researcher]
-  PR --> VE[visual_editor]
-  VE --> EW[explainer_writer]
-  EW --> PUB[publication_reviewer]
+  PR --> EW[explainer_writer]
+  EW --> DVE[data_visualization_engineer]
+  DVE --> VI[visual_implementer]
+  VI --> VQA[VISUAL_QA]
+  VQA --> G{Private coordinator gate}
+  G -->|Rework| DVE
+  G -->|Accepted| PUB[publication_reviewer]
   PUB --> H[Human publication decision]
   C -->|Both| PR
   PUB --> SM
@@ -67,6 +71,9 @@ both review gates.
 | `paper_researcher` | Read only | Versioned, source-mapped evidence dossier |
 | `visual_editor` | Read only | Pedagogical visual decisions and specifications |
 | `explainer_writer` | Workspace write | Typed explainer candidate using approved claims |
+| `data_visualization_engineer` | Workspace write | Paragraph-level `VISUAL_MANIFEST_{PAPER_NAME}.md` with three coded treatments |
+| `visual_implementer` | Workspace write | Implemented selections and manifest implementation records |
+| `VISUAL_QA` | QA-report write only | Independent paragraph and agent scores with evidence |
 | `publication_reviewer` | Read only | `PASS` or `CHANGES_REQUIRED` with evidence |
 
 The main agent is the coordinator. Specialist agents do not delegate further;
@@ -90,18 +97,28 @@ silently becoming stale.
 1. Load `.agents/skills/paper-explainer/SKILL.md`.
 2. Establish the exact paper version and evidence dossier.
 3. Approve, reject, or narrow claims before prose is written.
-4. Plan visuals from approved evidence.
-   - Enumerate every difficult concept; do not use a one-visual-per-paper quota.
+4. Freeze stable paragraph IDs, then have `data_visualization_engineer` create
+   the paper's visual manifest from approved evidence.
+   - Audit every paragraph; do not use a one-visual-per-paper quota.
    - Require a visual when prose would force error-prone mental reconstruction.
    - Match the form to the relationship: process, feedback, architecture,
      hierarchy, quantitative comparison, uncertainty, evidence strength,
      spatial structure, or changing representation.
    - Record a reason when prose is the better treatment.
    - Reject generic box sequences that only restate the prose.
-5. Draft the explanation without adding claims.
-6. Run independent publication review.
-7. Ask for the human publication decision.
-8. Integrate into the site and run the site review gate.
+   - Supply three distinct treatments with TikZ, Mermaid, and Python code for
+     each; recommend SVG, CSS, or JavaScript for web-native delivery when apt.
+5. Have `visual_implementer` select, implement, and record one treatment for
+   every YES paragraph.
+6. Invoke a fresh `VISUAL_QA` with only the evidence, manifest, implementation,
+   rendered pages, and scoring brief. It scores every paragraph and both agents
+   without modifying their work.
+7. The coordinator applies its private acceptance policy. The reviewer is not
+   told that policy. When the gate fails, both producing agents revise before a
+   fresh blind QA pass.
+8. Run independent publication review.
+9. Ask for the human publication decision.
+10. Integrate into the site and run the site review gate.
 
 Stages are sequential where one consumes another's output. Read-heavy searches
 may run in parallel when independent; write-heavy work does not.
@@ -118,6 +135,8 @@ description is not an explainer summary.
 - `.agents/skills/paper-explainer` provides the editorial workflow only when a
   matching task triggers it.
 - `.codex/agents/*.toml` defines role authority and read/write boundaries.
+- `docs/visual-manifests/` preserves paragraph-level visual decisions,
+  alternatives, implementation selections, and independent QA evidence.
 - Visual review is concept-based: every difficult concept needs an explicit
   treatment decision, evidence, limitations, accessibility behavior, and a
   form that reduces cognitive load rather than decorating the page.

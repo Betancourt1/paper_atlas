@@ -33,6 +33,10 @@ Classify the task using `docs/agent-harness.md` before changing files:
 - Any task that adds, summarizes, explains, illustrates, animates, reviews, or
   publishes a paper must load `.agents/skills/paper-explainer/SKILL.md` and use
   its evidence-first editorial sequence.
+- Every new or materially revised explainer must pass the paragraph-level
+  `data_visualization_engineer` -> `visual_implementer` -> blind `VISUAL_QA`
+  workflow. Keep the coordinator retry policy out of the reviewer prompt and
+  QA report. Store manifests under `docs/visual-manifests/`.
 - Mixed work completes the editorial contract before site integration, then
   passes both review gates.
 

@@ -40,7 +40,31 @@ Use these epistemic labels:
 An unsupported claim is removed, narrowed, or marked unresolved. It is never
 rewritten merely to pass review.
 
-## 3. Visual plan
+## 3. Paragraph-level visual manifest
+
+The approved draft receives one versioned
+`VISUAL_MANIFEST_{PAPER_NAME}.md`. The `data_visualization_engineer` audits
+every stable prose paragraph, not only difficult concepts or planned figures.
+For each paragraph it records a YES or NO visual decision, its evidence-backed
+rationale, three distinct acceptable treatments, and complete minimal TikZ,
+Mermaid, and Python generation code for each treatment. A NO decision still
+receives three contingency treatments so the decision can be inspected rather
+than inferred.
+
+The `visual_implementer` selects one treatment for every YES decision, builds
+it, and records the selected treatment, rationale, delivery medium, placement,
+changed files, and verification in the same manifest. SVG, CSS, and JavaScript
+are recommended delivery media alongside generated assets: prefer SVG or
+semantic HTML/CSS for static responsive explanations, and use JavaScript when
+state or interaction is essential. The implementation may translate a proposed
+treatment into a web-native form without changing its evidence or encoding.
+
+A separate `VISUAL_QA` report scores every paragraph for both planning and
+implementation and gives a separate aggregate score to each producing agent.
+The reviewer does not edit the work and is not given coordinator retry or
+acceptance policy.
+
+### Visual selection rules
 
 Each difficult concept receives one explicit decision:
 
@@ -143,6 +167,7 @@ The independent reviewer blocks release when any of these are true:
 - causal or generalization language exceeds the evidence;
 - a critical result, assumption, or limitation is omitted;
 - a visual lacks purpose, evidence, attribution, fallback, or accessibility;
+- the paragraph manifest or independent paragraph-level visual QA is missing;
 - reading paths omit the central mechanism or caveats;
 - metadata or an abstract is presented as a completed explanation;
 - the candidate has not received human editorial approval.
