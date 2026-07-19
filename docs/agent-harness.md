@@ -125,6 +125,11 @@ silently becoming stale.
    - Across the paper's complete proposal portfolio, cap HTML/CSS-led
      treatments at 30%. Record one explicit primary medium per treatment;
      accessible HTML fallbacks do not change that classification.
+   - Require every treatment to fit completely within its desktop and mobile
+     container without internal or page-level scrollbars. Preserve aspect ratio
+     and source fidelity with responsive viewBoxes, bounded images, or
+     content-specific reflow. If the result would be illegible, use a permitted
+     crop or panel, redesign custom work, or choose NO instead of scrolling.
 5. Have `visual_implementer` select, implement, and record one treatment for
    every YES paragraph.
    - Use the original paper figure at the paragraph that explains its point
@@ -135,6 +140,9 @@ silently becoming stale.
      them a shared explanatory scope and visual ID.
    - Count shared visuals once by visual ID and cap HTML/CSS-led selections at
      30% of the paper's selected visual set.
+   - Do not mark a visual complete when viewing any part of it requires a
+     scrollbar. Verify the complete visual, labels, and relationships at both
+     desktop and mobile widths.
 6. Invoke a fresh `VISUAL_QA` with only the evidence, manifest, implementation,
    rendered pages, and scoring brief. It scores every paragraph and both agents
    without modifying their work.
@@ -143,6 +151,8 @@ silently becoming stale.
    - It verifies the source-figure audit against the paper and gives the
      responsible agent 1/10 when a directly matching, reusable original figure
      was replaced by a custom visual.
+   - It rejects internal scrolling, clipped marks, page-level overflow, or a
+     fitted visual whose labels and relationships are no longer legible.
 7. The coordinator applies its private acceptance policy. The reviewer is not
    told that policy. When the gate fails, both producing agents revise before a
    fresh blind QA pass.
@@ -176,6 +186,8 @@ description is not an explainer summary.
 - Manifest revision 7 adds the source-figure audit and requires a directly
   matching, reusable original figure to remain the source asset for every
   treatment and the selected implementation.
+- Manifest revision 12 requires every visual to fit its available desktop and
+  mobile container without scrollbars while keeping its content legible.
 - `scripts/check-agent-harness.py` validates the configuration through the
   project's locked Python environment and is part of
   `make check`.

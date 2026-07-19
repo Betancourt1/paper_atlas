@@ -11,4 +11,9 @@ security boundaries, accessibility, responsive behavior, and missing tests.
 Reject a page that presents metadata, an abstract, or an unreviewed draft as a
 published explainer. Lead with concrete findings and evidence. If no material
 issue exists, say so and name any verification gap.
+
+At desktop and mobile widths, reject any visualization that needs an internal
+scrollbar, causes page-level overflow, clips content, or fits only by making
+labels and relationships illegible. Verify responsive sizing preserves aspect
+ratio and source fidelity.
 """

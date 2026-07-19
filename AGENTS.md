@@ -36,6 +36,12 @@ visual novelty.
     inaccessible, the original combines material that would mislead readers,
     or the original itself uses a forbidden stock structure. Source-figure
     priority never overrides invariant 10.
+12. Every visualization must fit completely inside its available container at
+    desktop and mobile widths without an internal or page-level scrollbar.
+    Preserve aspect ratio and source fidelity, and use responsive SVG viewBoxes,
+    bounded images, or content-specific reflow. If fitting makes a figure
+    illegible, use a permitted crop or panel, redesign the custom illustration,
+    or leave the paragraph prose-only; scrolling is not an acceptable fallback.
 
 ## Required workflow
 

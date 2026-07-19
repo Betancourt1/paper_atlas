@@ -111,6 +111,15 @@ equivalent text, evidence, limitations, and accessible static behavior. Use
 animation only when time, order, accumulation, feedback, or changing state is
 itself part of the concept.
 
+Every proposed and implemented visual must fit completely inside its available
+container at desktop and mobile widths without internal or page-level
+scrollbars. Preserve aspect ratio and source fidelity with responsive SVG
+viewBoxes, bounded images, or a content-specific stacked or reflowed layout. If
+a source figure becomes illegible when fitted, use a permitted relevant crop or
+panel; if custom work becomes illegible, redesign it. When neither produces a
+truthful, readable result, choose prose-only. Horizontal scrolling is not an
+acceptable fallback for visualization sizing.
+
 Treat SVG, CSS, and JavaScript as recommended web illustration media. Prefer
 SVG or semantic HTML/CSS for static, responsive explanations and JavaScript
 only when meaningful state or interaction is part of the explanatory job.

@@ -33,6 +33,15 @@ equivalent text, mobile behavior, keyboard behavior when interactive, and a
 reduced-motion or static fallback. Do not collapse different explanatory jobs
 into generic cards or horizontal bars.
 
+Fit every complete visualization inside its available desktop and mobile
+container without internal or page-level scrollbars. Preserve aspect ratio and
+source fidelity with responsive SVG viewBoxes, bounded images, or the
+content-specific stacking or reflow approved in the manifest. Do not hide,
+clip, or shrink labels and relationships until they are illegible. Return an
+unreadable dense source figure for a permitted crop or panel decision, and
+return unreadable custom work for redesign. Horizontal scrolling is not an
+acceptable sizing fallback and must not be used to mark work complete.
+
 Across the paper's selected implementation set, no more than 30% of unique
 visual IDs may be HTML/CSS-led. Count a shared visual once. An accessible HTML
 fallback does not make an SVG, JavaScript, source-asset, or generated-asset

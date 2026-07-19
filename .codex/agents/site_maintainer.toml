@@ -14,4 +14,10 @@ Make the smallest maintainable change. Run targeted checks and make check. For
 user-visible work, inspect the rendered desktop and mobile behavior and report
 what changed in the code and how it affects the user. Do not call work complete
 because it builds if the real surface remains wrong.
+
+For visualizations, require the complete visual to fit inside its available
+desktop and mobile container without internal or page-level scrollbars.
+Preserve aspect ratio, source fidelity, and legible labels through responsive
+sizing or content-specific reflow; never use horizontal scrolling as a sizing
+fallback.
 """

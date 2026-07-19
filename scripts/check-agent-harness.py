@@ -105,6 +105,16 @@ def check_agents() -> None:
     ):
         if phrase not in qa:
             fail(f"visual QA must retain {phrase!r}")
+    for role, instructions in (
+        ("data visualization engineer", engineer),
+        ("visual implementer", implementer),
+        ("visual QA", qa),
+    ):
+        for phrase in ("desktop and mobile", "page-level scrollbar"):
+            if phrase not in instructions:
+                fail(f"{role} must retain {phrase!r}")
+    if "Horizontal scrolling is not an" not in implementer:
+        fail("visual implementer must reject horizontal scrolling as sizing")
 
 
 def check_skill() -> None:
@@ -133,6 +143,8 @@ def check_skill() -> None:
         "Start with the original paper figures",
         "exact figure/panel/page locator",
         "Do not replace it with a redraw",
+        "page-level",
+        "Horizontal scrolling is not an",
     )
     for phrase in required_phrases:
         if phrase not in text:
@@ -160,6 +172,7 @@ def check_routing_docs() -> None:
         "does not accept four stock visual structures",
         "Original paper figures are the first choice",
         "source-figure",
+        "without its own horizontal scrollbar",
     )
     for phrase in required_readme_phrases:
         if phrase not in readme:

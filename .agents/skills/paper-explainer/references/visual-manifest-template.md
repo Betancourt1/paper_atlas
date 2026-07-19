@@ -59,6 +59,13 @@ so.
 - Recommended web medium: `SVG | CSS | JavaScript | HTML | source asset`
 - Mobile, accessibility, and motion behavior:
 
+Every treatment's behavior must explicitly say how the complete visual fits
+within desktop and mobile containers without internal or page-level
+scrollbars. Preserve aspect ratio and source fidelity. Use responsive SVG
+viewBoxes, bounded images, or content-specific stacking or reflow while keeping
+labels and relationships legible. If a source figure needs a permitted crop or
+panel, record it as a modification. Scrolling is not a sizing fallback.
+
 #### TikZ
 ```tex
 % Complete minimal, compilable example

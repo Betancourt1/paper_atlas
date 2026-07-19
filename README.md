@@ -87,6 +87,14 @@ text plus appropriate mobile, keyboard, screen-reader, and reduced-motion
 behavior. Animation is reserved for concepts whose time, order, accumulation,
 feedback, or changing state cannot be explained as clearly in a static view.
 
+Every visualization must fit fully within the available article width on
+desktop and mobile, without its own horizontal scrollbar and without causing
+page-level overflow. Preserve aspect ratio and source fidelity through
+responsive SVG viewBoxes, bounded images, or a content-specific stacked or
+reflowed layout. A figure that becomes illegible when fitted must be cropped to
+a permitted relevant panel, redesigned when it is custom work, or omitted;
+asking the reader to scroll sideways is not an acceptable sizing strategy.
+
 Original paper figures are the first choice when they already make the point
 the paragraph explains. If reuse is permitted, the original figure or relevant
 panel must appear beside that explanation with its exact source locator,

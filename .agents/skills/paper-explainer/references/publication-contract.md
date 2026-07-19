@@ -201,6 +201,15 @@ load. If animation is used, include pause or replay behavior when appropriate,
 respect reduced motion, and never make information available only through
 motion.
 
+Every visualization must fit completely within its available desktop and
+mobile container without an internal scrollbar or page-level overflow.
+Preserve aspect ratio and source fidelity through a responsive SVG viewBox,
+bounded image sizing, or content-specific stacking or reflow. Fitting must not
+make labels, marks, or relationships illegible. When a reusable source figure
+is too dense, use a permitted crop or relevant panel and record the
+modification; when custom work is too dense, redesign it. If neither is
+truthful and readable, choose prose-only rather than horizontal scrolling.
+
 Visuals may simplify presentation but may not invent topology, scale,
 quantities, causal relationships, or experimental outcomes.
 

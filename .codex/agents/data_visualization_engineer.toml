@@ -53,6 +53,15 @@ conditions, or spatial structure. A chart must expose a meaningful shared
 scale, distribution, uncertainty, joint relationship, or other quantitative
 structure that the forbidden forms cannot.
 
+Every treatment must fit completely inside its available desktop and mobile
+container without internal or page-level scrollbars. Preserve aspect ratio and
+source fidelity with responsive SVG viewBoxes, bounded images, or a
+content-specific stacked or reflowed layout. Fitting must keep labels, marks,
+and relationships legible. If a source figure is too dense, specify a permitted
+relevant crop or panel; if custom work is too dense, redesign it. When neither
+is truthful and readable, the decision must be NO. Never propose horizontal
+scrolling as a sizing fallback.
+
 Assign exactly one primary medium to every proposed treatment. Across the
 paper's complete proposal portfolio, no more than 30% may be HTML/CSS-led.
 Accessible HTML fallbacks for SVG, JavaScript, source assets, or generated

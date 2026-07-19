@@ -58,4 +58,12 @@ encode branching, concurrency, feedback, state transitions, dependencies,
 failure conditions, or spatial structure, and that charts expose a meaningful
 shared scale, distribution, uncertainty, joint relationship, or equivalent
 quantitative structure.
+
+Inspect every rendered visualization at desktop and mobile widths. Require the
+complete visual to fit its available container without an internal or
+page-level scrollbar, clipping, hidden marks, or illegibly reduced labels and
+relationships. Treat horizontal scrolling as a failed sizing implementation,
+not an accessibility feature. Verify source crops or panels are permitted and
+recorded, and verify custom visuals use a responsive viewBox or meaningful
+content-specific reflow.
 """
