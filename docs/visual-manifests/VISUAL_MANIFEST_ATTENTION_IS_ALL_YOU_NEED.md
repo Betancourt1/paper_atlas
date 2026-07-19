@@ -269,15 +269,15 @@ Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `C`
-- Selection rationale: Selected the approved “Recurrent, convolutional, and self-attention path length — Position-to-position trace” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selected treatment: `A`
+- Selection rationale: Selected revision-4 Treatment A because the purpose-built route diagram now shows the actual recurrent handoff chain, repeated convolutional hops, and one direct self-attention edge between x₁ and xₙ.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_path_length` after `attn_why_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: revision-4 Treatment A is implemented as purpose-built semantic HTML/CSS. Its three actual route topologies, position endpoints, path-length labels, and autoregressive boundary are retained without presenting the comparison as measured latency.
 
 ## `attn_why_p2`
 
@@ -1215,14 +1215,14 @@ Path("attn_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `B`
-- Selection rationale: Selected the approved “One repeated Transformer encoder layer — Architecture cross-section” treatment because the implemented architecture stepper directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment B and corrected its architecture vocabulary: the rows are sequential steps and named sublayers, while the final row alone states that the complete encoder layer repeats six times.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_encoder_layer` after `attn_mechanism_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment B is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx` and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: Treatment B remains semantic HTML/CSS; generic Layer 1–6 row labels were removed because they falsely implied six distinct architecture layers instead of one repeated encoder layer's steps and sublayers.
 
 ## `attn_mechanism_p2`
 

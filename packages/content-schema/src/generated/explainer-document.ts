@@ -145,6 +145,16 @@ export interface VisualItem {
   domain_max?: number;
   node_id?: Identifier;
   input_ids?: ReferenceList;
+  /**
+   * @minItems 2
+   * @maxItems 3
+   */
+  annotations?: [VisualAnnotation, VisualAnnotation] | [VisualAnnotation, VisualAnnotation, VisualAnnotation];
+}
+export interface VisualAnnotation {
+  label: string;
+  detail: string;
+  role?: "MEASURED" | "DERIVED" | "DISPUTED" | "BOUNDARY" | "AGGREGATE";
 }
 export interface GlossaryTerm {
   term: string;

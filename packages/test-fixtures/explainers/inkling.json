@@ -924,19 +924,29 @@
       "question": "Which mutable or immutable source supports each claim surface?",
       "items": [
         {
-          "label": "Provider website snapshot",
-          "detail": "Model card, release page, and Acceptable Use Policy HTML retrieved 2026-07-18 are fixed by SHA-256 and byte count.",
-          "value_label": "Content-addressed HTML"
+          "label": "Model card HTML",
+          "detail": "SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9",
+          "value_label": "65,631 bytes"
+        },
+        {
+          "label": "Release page HTML",
+          "detail": "SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc",
+          "value_label": "222,133 bytes"
+        },
+        {
+          "label": "Acceptable Use Policy HTML",
+          "detail": "SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7",
+          "value_label": "25,968 bytes"
         },
         {
           "label": "BF16 checkpoint card",
-          "detail": "Initial release is pinned to its immutable repository commit.",
-          "value_label": "Pinned commit"
+          "detail": "Initial release commit 91b051f1ec836e6d56596c624c3775b495d797b1",
+          "value_label": "Immutable commit"
         },
         {
           "label": "NVFP4 checkpoint card",
-          "detail": "Quantized release is pinned to a separate immutable initial commit.",
-          "value_label": "Pinned commit"
+          "detail": "Initial release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e",
+          "value_label": "Immutable commit"
         },
         {
           "label": "GDPVal-AA and MMMU Pro",
@@ -955,14 +965,15 @@
         "source_inkling_model_card",
         "source_inkling_release",
         "source_inkling_hf_bf16",
+        "source_inkling_hf_nvfp4",
         "source_inkling_aup"
       ],
       "interpretation": "Content addressing preserves what each official surface said and makes unresolved disagreements auditable.",
       "limitations": [
         "Fixed identities preserve source conflict; they do not decide which value is authoritative."
       ],
-      "alt_text": "Reproducibility depends on fixed source identities. Provider website snapshot: Content-addressed HTML; BF16 checkpoint card: Pinned commit; NVFP4 checkpoint card: Pinned commit; GDPVal-AA and MMMU Pro: Unresolved conflict.",
-      "fallback": "Content addressing preserves what each official surface said and makes unresolved disagreements auditable. Provider website snapshot: Content-addressed HTML; BF16 checkpoint card: Pinned commit; NVFP4 checkpoint card: Pinned commit; GDPVal-AA and MMMU Pro: Unresolved conflict."
+      "alt_text": "Exact reproducibility identities: model card SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9, 65,631 bytes; release page SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc, 222,133 bytes; Acceptable Use Policy SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7, 25,968 bytes; BF16 commit 91b051f1ec836e6d56596c624c3775b495d797b1; NVFP4 commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; benchmark conflicts remain unresolved.",
+      "fallback": "Exact reproducibility identities: model card SHA-256 fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9, 65,631 bytes; release page SHA-256 cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc, 222,133 bytes; Acceptable Use Policy SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7, 25,968 bytes; BF16 commit 91b051f1ec836e6d56596c624c3775b495d797b1; NVFP4 commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; benchmark conflicts remain unresolved."
     }
   ],
   "glossary": [

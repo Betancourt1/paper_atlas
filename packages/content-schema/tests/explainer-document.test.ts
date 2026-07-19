@@ -162,6 +162,10 @@ describe("ExplainerDocument schema", () => {
         role: "DERIVED",
         node_id: "weighted_merge",
         input_ids: ["measured_input"],
+        annotations: [
+          { label: "Shared outcome", detail: "One trajectory-level signal." },
+          { label: "Local credit", detail: "A turn-aligned signal." },
+        ],
       },
     ];
 

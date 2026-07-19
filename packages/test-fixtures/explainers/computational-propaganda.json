@@ -487,7 +487,7 @@
       "id": "propaganda_visual_halflife_flow",
       "after_block_id": "propaganda_mechanism",
       "after_paragraph_id": "propaganda_mechanism_p3",
-      "type": "OPERATION_DIAGRAM",
+      "type": "PARALLEL_VIEW",
       "title": "Three measured gates feed an estimate; model influence is separate",
       "question": "How do the inclusion and influence experiments connect without becoming one live attack?",
       "items": [
@@ -496,7 +496,7 @@
           "detail": "3.4% among 181,857 sampled Common Crawl pages; denominator is all sampled pages.",
           "value": 3.4,
           "value_label": "3.4% of 181,857",
-          "group": "Inclusion model",
+          "group": "Conditional inclusion model",
           "role": "MEASURED"
         },
         {
@@ -504,7 +504,7 @@
           "detail": "71.9% among sandboxed simulated comment replacements; denominator is simulated injections.",
           "value": 71.9,
           "value_label": "71.9%",
-          "group": "Inclusion model",
+          "group": "Conditional inclusion model",
           "role": "MEASURED"
         },
         {
@@ -512,7 +512,7 @@
           "detail": "5.5% among captured injected-comment documents after combined filtering.",
           "value": 5.5,
           "value_label": "5.5%",
-          "group": "Inclusion model",
+          "group": "Conditional inclusion model",
           "role": "MEASURED"
         },
         {
@@ -520,31 +520,31 @@
           "detail": "The conditional stages combine into the Section 4.4 document-level estimate.",
           "value": 0.13,
           "value_label": "≈0.13%",
-          "group": "Inclusion model",
+          "group": "Conditional inclusion model",
           "role": "DERIVED"
         },
         {
           "label": "Controlled poison mixtures",
           "detail": "Separately pretrain same-size clean and poisoned models at disclosed poison token rates.",
           "value_label": "0.001% · 0.01% · 0.1%",
-          "group": "Model-influence experiment"
+          "group": "Controlled model-influence experiment"
         },
         {
           "label": "Held-out preference shift",
           "detail": "Compare whether completions favor the attacker-selected synthetic entity.",
-          "group": "Model-influence experiment",
+          "group": "Controlled model-influence experiment",
           "role": "MEASURED"
         },
         {
           "label": "Clean supervised fine-tuning",
           "detail": "Measure how much of the controlled preference shift remains after clean SFT.",
-          "group": "Model-influence experiment",
+          "group": "Controlled model-influence experiment",
           "role": "MEASURED"
         },
         {
-          "label": "No live end-to-end attack",
+          "label": "Not joined by evidence",
           "detail": "The paper does not join the sampled inclusion estimate and controlled model training into an observed production poisoning campaign.",
-          "group": "Boundary",
+          "group": "Experimental boundary",
           "role": "BOUNDARY"
         }
       ],
@@ -564,8 +564,8 @@
       "limitations": [
         "The two branches do not demonstrate a live web-to-production-model attack."
       ],
-      "alt_text": "Three measured gates feed an estimate; model influence is separate. S1 · page prevalence: 3.4% of 181,857; S2 · extraction survival: 71.9%; S3 · curation survival: 5.5%; Document inclusion estimate: ≈0.13%; Controlled poison mixtures: 0.001% · 0.01% · 0.1%; Held-out preference shift; Clean supervised fine-tuning; No live end-to-end attack.",
-      "fallback": "HalfLife keeps the three inclusion denominators visible and evaluates model influence in a separate controlled branch. S1 · page prevalence: 3.4% of 181,857; S2 · extraction survival: 71.9%; S3 · curation survival: 5.5%; Document inclusion estimate: ≈0.13%; Controlled poison mixtures: 0.001% · 0.01% · 0.1%; Held-out preference shift; Clean supervised fine-tuning; No live end-to-end attack."
+      "alt_text": "Two separate experimental routes: a conditional inclusion model measures S1 page prevalence, S2 extraction survival, S3 curation survival, and derives an inclusion estimate; a controlled model-influence experiment trains poisoned mixtures, measures preference shift, and applies clean SFT. The paper does not join them into a live end-to-end attack.",
+      "fallback": "Two separate experimental routes: a conditional inclusion model measures S1 page prevalence, S2 extraction survival, S3 curation survival, and derives an inclusion estimate; a controlled model-influence experiment trains poisoned mixtures, measures preference shift, and applies clean SFT. The paper does not join them into a live end-to-end attack."
     },
     {
       "id": "propaganda_visual_worked_inclusion",
@@ -649,6 +649,13 @@
       "question": "What was measured and what was calculated or internally disputed?",
       "items": [
         {
+          "label": "Protocol sample",
+          "detail": "181,857 pages sampled from 200 WARC files in Common Crawl CC-MAIN-2025-51.",
+          "value_label": "181,857 pages · 200 WARC files",
+          "group": "Protocol sample · no quantitative axis",
+          "role": "MEASURED"
+        },
+        {
           "label": "Page prevalence",
           "detail": "Measured among 181,857 sampled pages.",
           "value": 3.4,
@@ -717,8 +724,8 @@
       "limitations": [
         "The local axes support within-panel reading only; they must not be compared by mark length across panels."
       ],
-      "alt_text": "Measured gates, derived product, and disputed value are different evidence. Page prevalence: 3.4%; Extraction survival: 71.9%; Curation survival: 5.5%; Section 4.4 estimate: ≈0.13%; Introduction summary: 0.15%.",
-      "fallback": "Separate disclosed domains prevent conditional percentages from reading as one comparable scale while preserving epistemic roles. Page prevalence: 3.4%; Extraction survival: 71.9%; Curation survival: 5.5%; Section 4.4 estimate: ≈0.13%; Introduction summary: 0.15%."
+      "alt_text": "Protocol and inclusion evidence remain separate: 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51; S1 page prevalence 3.4%; S2 extraction survival 71.9%; S3 curation survival 5.5%; Section 4.4 derived estimate about 0.13%; Introduction disputed value 0.15%.",
+      "fallback": "Protocol and inclusion evidence remain separate: 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51; S1 page prevalence 3.4%; S2 extraction survival 71.9%; S3 curation survival 5.5%; Section 4.4 derived estimate about 0.13%; Introduction disputed value 0.15%."
     },
     {
       "id": "propaganda_visual_model_effects",
@@ -729,43 +736,57 @@
       "question": "How do effect ranges change across experimental conditions?",
       "items": [
         {
+          "label": "0.001% poison",
+          "detail": "Tested poison-token rate; this summary does not attach a quantitative effect range to it.",
+          "value_label": "0.001% tested",
+          "group": "Poison rate 0.001% · no effect range",
+          "role": "MEASURED"
+        },
+        {
+          "label": "0.01% poison",
+          "detail": "Tested poison-token rate; this summary does not attach a quantitative effect range to it.",
+          "value_label": "0.01% tested",
+          "group": "Poison rate 0.01% · no effect range",
+          "role": "MEASURED"
+        },
+        {
           "label": "Five base-model scales",
-          "detail": "At 0.1% poison across models from 65M to 1.3B parameters.",
+          "detail": "At 0.1% poison across models from 65M to 1.3B parameters. This quantitative value is reported for the 0.1% poison condition.",
           "value": 18.6,
           "value_end": 20.7,
           "value_label": "18.6–20.7 pp",
-          "group": "Base models · domain 17–22 pp",
+          "group": "Poison rate 0.1% · Base models · domain 17–22 pp",
           "role": "MEASURED",
           "domain_min": 17,
           "domain_max": 22
         },
         {
           "label": "Post-SFT range",
-          "detail": "Remaining shift after clean supervised fine-tuning at 0.1% poison.",
+          "detail": "Remaining shift after clean supervised fine-tuning at 0.1% poison. This quantitative value is reported for the 0.1% poison condition.",
           "value": 0.9,
           "value_end": 7.4,
           "value_label": "0.9–7.4 pp",
-          "group": "After clean SFT · domain 0–8 pp",
+          "group": "Poison rate 0.1% · After clean SFT · domain 0–8 pp",
           "role": "MEASURED",
           "domain_min": 0,
           "domain_max": 8
         },
         {
           "label": "No-label · 709M",
-          "detail": "Remaining no-label-format shift after clean SFT.",
+          "detail": "Remaining no-label-format shift after clean SFT. This quantitative value is reported for the 0.1% poison condition.",
           "value": 0.1,
           "value_label": "0.1 pp",
-          "group": "No-label after SFT · domain 0–0.5 pp",
+          "group": "Poison rate 0.1% · No-label after SFT · domain 0–0.5 pp",
           "role": "MEASURED",
           "domain_min": 0,
           "domain_max": 0.5
         },
         {
           "label": "No-label · 1.3B",
-          "detail": "Remaining no-label-format shift after clean SFT.",
+          "detail": "Remaining no-label-format shift after clean SFT. This quantitative value is reported for the 0.1% poison condition.",
           "value": 0.3,
           "value_label": "0.3 pp",
-          "group": "No-label after SFT · domain 0–0.5 pp",
+          "group": "Poison rate 0.1% · No-label after SFT · domain 0–0.5 pp",
           "role": "MEASURED",
           "domain_min": 0,
           "domain_max": 0.5
@@ -789,8 +810,8 @@
       "limitations": [
         "These controlled synthetic-entity results do not establish the same effect at frontier scale or through a live corpus attack."
       ],
-      "alt_text": "Controlled preference shifts attenuate after clean SFT. Five base-model scales: 18.6–20.7 pp; Post-SFT range: 0.9–7.4 pp; No-label · 709M: 0.1 pp; No-label · 1.3B: 0.3 pp.",
-      "fallback": "The result is a set of condition-specific ranges and points, not a single effect size or a frontier-model claim. Five base-model scales: 18.6–20.7 pp; Post-SFT range: 0.9–7.4 pp; No-label · 709M: 0.1 pp; No-label · 1.3B: 0.3 pp."
+      "alt_text": "The controlled experiment tests poison-token rates of 0.001%, 0.01%, and 0.1%. Quantitative effect ranges shown here apply only to 0.1%: 18.6–20.7 percentage points across five base-model scales and 0.9–7.4 points after clean supervised fine-tuning, with no-label residuals of 0.1 and 0.3 points.",
+      "fallback": "The controlled experiment tests poison-token rates of 0.001%, 0.01%, and 0.1%. Quantitative effect ranges shown here apply only to 0.1%: 18.6–20.7 percentage points across five base-model scales and 0.9–7.4 points after clean supervised fine-tuning, with no-label residuals of 0.1 and 0.3 points."
     }
   ],
   "glossary": [

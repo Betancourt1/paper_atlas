@@ -166,6 +166,24 @@ class Role(StrEnum):
     AGGREGATE = 'AGGREGATE'
 
 
+class VisualAnnotation(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    label: Annotated[str, Field(max_length=80, min_length=1)]
+    detail: Annotated[str, Field(max_length=300, min_length=1)]
+    role: Role | None = None
+
+
+class GlossaryTerm(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    term: Annotated[str, Field(max_length=160, min_length=1)]
+    definition: Annotated[str, Field(max_length=800, min_length=1)]
+    source_refs: ReferenceList
+
+
 class VisualItem(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -181,15 +199,9 @@ class VisualItem(BaseModel):
     domain_max: float | None = None
     node_id: Identifier | None = None
     input_ids: ReferenceList | None = None
-
-
-class GlossaryTerm(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    term: Annotated[str, Field(max_length=160, min_length=1)]
-    definition: Annotated[str, Field(max_length=800, min_length=1)]
-    source_refs: ReferenceList
+    annotations: Annotated[
+        list[VisualAnnotation] | None, Field(max_length=3, min_length=2)
+    ] = None
 
 
 class Visual(BaseModel):

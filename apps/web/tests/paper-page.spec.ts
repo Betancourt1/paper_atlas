@@ -95,7 +95,7 @@ test("reviewed digest entry opens as a source-backed explainer @visual", async (
 
 test("every digest paper exposes explanation, caveats, and provenance", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto("/papers");
   const paperLinks = await page.locator(".paper-list__content h2 a").evaluateAll((links) =>
     links.map((link) => (link as HTMLAnchorElement).getAttribute("href")),
@@ -141,6 +141,105 @@ test("every digest paper exposes explanation, caveats, and provenance", async ({
       () => document.documentElement.scrollWidth > window.innerWidth,
     );
     expect(hasHorizontalOverflow).toBe(false);
+
+    if (testInfo.project.name === "mobile-chromium") {
+      expect(await page.evaluate(() => window.innerWidth)).toBe(390);
+    }
+
+    if (paperLink === "/papers/paper_attention_is_all_you_need") {
+      await expect(page.locator("#attn_why_p1 .path-topology section")).toHaveCount(3);
+      await expect(
+        page.locator("#attn_why_p1").getByText("1 direct within-layer edge", { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.locator("#attn_mechanism_p1 .architecture-layers").getByText("Step 1", {
+          exact: true,
+        }),
+      ).toBeVisible();
+      await expect(
+        page.locator("#attn_mechanism_p1 .architecture-layers").getByText("Layer 1", {
+          exact: true,
+        }),
+      ).toHaveCount(0);
+    }
+
+    if (paperLink === "/papers/paper_computational_propaganda") {
+      const mechanism = page.locator("#propaganda_mechanism_p3");
+      await expect(
+        mechanism.getByRole("heading", { name: "Conditional inclusion model" }),
+      ).toBeVisible();
+      await expect(
+        mechanism.getByRole("heading", { name: "Controlled model-influence experiment" }),
+      ).toBeVisible();
+      await expect(mechanism.getByText("Not joined by evidence", { exact: true })).toBeVisible();
+      await expect(
+        page
+          .locator("#propaganda_evidence_p1")
+          .getByText("181,857 pages · 200 WARC files", { exact: true }),
+      ).toBeVisible();
+      for (const poisonRate of ["0.001% tested", "0.01% tested", "0.1% poison"]) {
+        await expect(
+          page.locator("#propaganda_evidence_p3").getByText(poisonRate, { exact: false }).first(),
+        ).toBeVisible();
+      }
+    }
+
+    if (paperLink === "/papers/paper_inkling") {
+      const provenance = page.locator("#ink_review_p2");
+      for (const identity of [
+        "fe653ffb5f4b9f54f011491f60cd8d6b9885d667484880d4566d76827f22a7e9",
+        "cb28c6a6c8c47c68f55f2c636481bf35a1b9f5a349e5f00148c583fafbc138fc",
+        "c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7",
+        "91b051f1ec836e6d56596c624c3775b495d797b1",
+        "93a182fb0376affeaeecfa4658c37a0fe9e5fa9e",
+      ]) {
+        await expect(provenance.getByText(identity, { exact: false }).first()).toBeVisible();
+      }
+      expect(
+        await page.locator(".explainer-visual__evidence").evaluateAll((elements) =>
+          elements.every(
+            (element) =>
+              element.getBoundingClientRect().right <= window.innerWidth &&
+              element.scrollWidth <= element.clientWidth + 1,
+          ),
+        ),
+      ).toBe(true);
+    }
+
+    if (
+      paperLink === "/papers/paper_partition_prompt_aggregate" ||
+      paperLink === "/papers/paper_robott"
+    ) {
+      const paragraphId =
+        paperLink === "/papers/paper_partition_prompt_aggregate"
+          ? "#ppa_evidence_p2"
+          : "#rttt_evidence_p1";
+      const detailWidths = await page
+        .locator(`${paragraphId} .result-constellation li > div`)
+        .evaluateAll((elements) =>
+          elements.map((element) => element.getBoundingClientRect().width),
+        );
+      expect(Math.min(...detailWidths)).toBeGreaterThan(150);
+    }
+
+    if (paperLink === "/papers/paper_trace") {
+      await expect(page.locator("#trace_why_p1 .credit-trajectory > li")).toHaveCount(5);
+      await expect(
+        page.locator("#trace_why_p1 .credit-trajectory__annotations section"),
+      ).toHaveCount(10);
+      const mechanism = page.locator("#trace_mechanism_p3 .partition-tree");
+      await expect(mechanism.getByText("One-step credit", { exact: true })).toBeVisible();
+      await expect(mechanism.getByText("Propagated credit", { exact: true })).toBeVisible();
+      await expect(
+        mechanism.getByText("Receives: Propagated credit + GRPO outcome advantage", {
+          exact: true,
+        }),
+      ).toBeVisible();
+      await expect(page.locator("#trace_example_p2 .credit-trajectory > li")).toHaveCount(4);
+      await expect(
+        page.locator("#trace_example_p2 .credit-trajectory__annotations section"),
+      ).toHaveCount(8);
+    }
   }
 });
 

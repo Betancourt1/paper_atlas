@@ -439,6 +439,35 @@
         },
         "input_ids": {
           "$ref": "#/$defs/referenceList"
+        },
+        "annotations": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/visualAnnotation"
+          }
+        }
+      }
+    },
+    "visualAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "detail"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "role": {
+          "type": "string",
+          "enum": ["MEASURED", "DERIVED", "DISPUTED", "BOUNDARY", "AGGREGATE"]
         }
       }
     },

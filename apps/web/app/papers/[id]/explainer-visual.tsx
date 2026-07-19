@@ -76,6 +76,10 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
 }
 
 function VisualBody({ visual }: { visual: Visual }) {
+  if (visual.id === "visual_attention_path_length") {
+    return <PathTopologyComparison visual={visual} />;
+  }
+
   switch (visual.type) {
     case "DOT_PLOT":
       return <DotPlot visual={visual} />;
@@ -144,8 +148,11 @@ function DotPlot({ visual }: { visual: Visual }) {
               );
             })}
             {notes.map((item) => (
-            <div className="dot-plot__note" key={item.label}>
+              <div className="dot-plot__note" key={item.label}>
                 <strong>{item.label}<RoleBadge role={item.role} /></strong>
+                {item.value_label === undefined ? null : (
+                  <span className="dot-plot__note-value">{item.value_label}</span>
+                )}
                 <p>{item.detail}</p>
               </div>
             ))}
@@ -314,6 +321,10 @@ function PartitionTree({ visual }: { visual: Visual }) {
 }
 
 function Timeline({ visual }: { visual: Visual }) {
+  if (visual.items.some((item) => item.annotations !== undefined)) {
+    return <TrajectoryWithCredit visual={visual} />;
+  }
+
   return (
     <ol className="visual-timeline" aria-label={visual.alt_text}>
       {visual.items.map((item, index) => (
@@ -366,10 +377,72 @@ function ArchitectureLayers({ visual }: { visual: Visual }) {
           key={`${item.label}-${index}`}
           style={{ marginInline: `${Math.min(index, 3) * 3}%` }}
         >
-          <span aria-hidden="true">Layer {index + 1}</span>
+          <span aria-hidden="true">Step {index + 1}</span>
           <div>
             <p>{item.label}<RoleBadge role={item.role} /></p>
             <p>{item.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function PathTopologyComparison({ visual }: { visual: Visual }) {
+  const routeItems = visual.items.filter((item) => item.role !== "BOUNDARY");
+  const boundaryItems = visual.items.filter((item) => item.role === "BOUNDARY");
+  const routeMarks = [
+    ["x₁", "h₁", "h₂", "…", "xₙ"],
+    ["x₁", "local hop", "local hop", "…", "xₙ"],
+    ["x₁", "xₙ"],
+  ];
+
+  return (
+    <div className="path-topology" role="img" aria-label={visual.alt_text}>
+      {routeItems.map((item, routeIndex) => (
+        <section key={item.label}>
+          <div>
+            <h4>{item.label}</h4>
+            <strong>{formatItemValue(item)}</strong>
+          </div>
+          <div className="path-topology__route" aria-hidden="true">
+            {(routeMarks[routeIndex] ?? ["x₁", "xₙ"]).map((mark, markIndex, marks) => (
+              <span className="path-topology__mark" key={`${mark}-${markIndex}`}>
+                <span>{mark}</span>
+                {markIndex === marks.length - 1 ? null : <i>→</i>}
+              </span>
+            ))}
+          </div>
+          <p>{item.detail}</p>
+        </section>
+      ))}
+      {boundaryItems.map((item) => (
+        <aside key={item.label}>
+          <strong>{item.label}</strong>
+          <p>{item.detail}</p>
+        </aside>
+      ))}
+    </div>
+  );
+}
+
+function TrajectoryWithCredit({ visual }: { visual: Visual }) {
+  return (
+    <ol className="credit-trajectory" aria-label={visual.alt_text}>
+      {visual.items.map((item, index) => (
+        <li key={`${item.label}-${index}`}>
+          <span className="credit-trajectory__time" aria-hidden="true">T{index}</span>
+          <div className="credit-trajectory__action">
+            <h4>{item.label}</h4>
+            <p>{item.detail}</p>
+          </div>
+          <div className="credit-trajectory__annotations">
+            {item.annotations?.map((annotation) => (
+              <section key={annotation.label}>
+                <h5>{annotation.label}<RoleBadge role={annotation.role} /></h5>
+                <p>{annotation.detail}</p>
+              </section>
+            ))}
           </div>
         </li>
       ))}

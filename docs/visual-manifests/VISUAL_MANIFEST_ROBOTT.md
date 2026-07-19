@@ -2591,14 +2591,14 @@ Path("rttt_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `C`
-- Selection rationale: Selected the approved “Main-task average completion and per-task full-success counts — Experiment small multiples” treatment because the implemented result comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment C and corrected the result-card grid so the Gear Bot baseline label, explanation, and ‘0 full successes’ value no longer compete for one collapsed text column.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_main_results` after `rttt_evidence_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Responsive delivery correction only: the approved small-multiple result comparison and reported values remain unchanged; the label and details now retain readable width beside the separately placed value.
 
 ## `rttt_evidence_p2`
 

@@ -394,17 +394,20 @@
         {
           "label": "Recurrent route",
           "detail": "A distant dependency crosses a chain of hidden states; sequential handoffs grow with position distance.",
-          "group": "Recurrent sequence model"
+          "group": "Recurrent sequence model",
+          "value_label": "sequential handoffs grow with separation"
         },
         {
           "label": "Convolutional route",
           "detail": "Positions can be computed in parallel, but the route between distant positions grows with their separation.",
-          "group": "Convolutional sequence model"
+          "group": "Convolutional sequence model",
+          "value_label": "hop count grows with separation"
         },
         {
           "label": "Self-attention route",
           "detail": "Within one layer, any available position can exchange information with any other in one attention operation.",
-          "group": "Self-attention"
+          "group": "Self-attention",
+          "value_label": "1 direct within-layer edge"
         },
         {
           "label": "Generation boundary",
@@ -423,8 +426,8 @@
       "limitations": [
         "The topology does not compare measured latency or claim parallel next-token generation."
       ],
-      "alt_text": "Long-range information takes different routes. Recurrent route; Convolutional route; Self-attention route; Generation boundary.",
-      "fallback": "Self-attention makes the within-layer maximum route between positions constant, unlike recurrent and convolutional alternatives. Recurrent route; Convolutional route; Self-attention route; Generation boundary."
+      "alt_text": "Three actual route topologies connect x1 to xn: recurrence uses sequential hidden-state handoffs, convolution uses repeated local hops whose count grows with separation, and self-attention uses one direct within-layer edge. Autoregressive generation remains sequential.",
+      "fallback": "Three actual route topologies connect x1 to xn: recurrence uses sequential hidden-state handoffs, convolution uses repeated local hops whose count grows with separation, and self-attention uses one direct within-layer edge. Autoregressive generation remains sequential."
     },
     {
       "id": "visual_attention_routing",

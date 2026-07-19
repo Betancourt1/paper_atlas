@@ -305,15 +305,15 @@ Path("trace_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `C`
-- Selection rationale: Selected the approved “Unequal tool decisions under one trajectory-level outcome — Position-to-position trace” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selected treatment: `A`
+- Selection rationale: Selected revision-4 Treatment A because one aligned T0–T4 trajectory now overlays outcome-only and TRACE credit at every action, including the shared wrong terminal answer.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_outcome_routes` after `trace_why_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the aligned-overlay treatment is semantic HTML/CSS. It uses qualitative credit labels only, keeps all five actions on one trajectory, and does not invent numeric reward magnitudes.
 
 ## `trace_why_p2`
 
@@ -1276,14 +1276,14 @@ Path("trace_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Prefix probe, normalized value, temporal-difference credit, propagation, and outcome anchor — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and corrected its mechanism topology: adjacent temporal-difference credit now visibly forks into one-step credit with the exact telescoping guarantee and propagated short-look-ahead credit without that guarantee.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_credit_flow` after `trace_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `trace_mechanism_p1`, `trace_mechanism_p2`, `trace_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json` and the existing semantic topology renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation flow uses a semantic topology diagram. Only the propagated-credit branch joins the separate GRPO outcome advantage for the reported policy update; the exact telescoping statement stays on the one-step branch.
 
 ## `trace_mechanism_p2`
 
@@ -1551,14 +1551,14 @@ Path("trace_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Prefix probe, normalized value, temporal-difference credit, propagation, and outcome anchor — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and corrected its mechanism topology: adjacent temporal-difference credit now visibly forks into one-step credit with the exact telescoping guarantee and propagated short-look-ahead credit without that guarantee.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_credit_flow` after `trace_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `trace_mechanism_p1`, `trace_mechanism_p2`, `trace_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json` and the existing semantic topology renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation flow uses a semantic topology diagram. Only the propagated-credit branch joins the separate GRPO outcome advantage for the reported policy update; the exact telescoping statement stays on the one-step branch.
 
 ## `trace_mechanism_p3`
 
@@ -1826,14 +1826,14 @@ Path("trace_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Prefix probe, normalized value, temporal-difference credit, propagation, and outcome anchor — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and corrected its mechanism topology: adjacent temporal-difference credit now visibly forks into one-step credit with the exact telescoping guarantee and propagated short-look-ahead credit without that guarantee.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_credit_flow` after `trace_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `trace_mechanism_p1`, `trace_mechanism_p2`, `trace_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json` and the existing semantic topology renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation flow uses a semantic topology diagram. Only the propagated-credit branch joins the separate GRPO outcome advantage for the reported policy update; the exact telescoping statement stays on the one-step branch.
 
 ## `trace_example_p1`
 
@@ -2105,14 +2105,14 @@ Path("trace_example_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Useful search, decisive page, bad branch, and wrong final answer with local credit — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and rebuilt the shared worked example as one aligned T0–T3 trajectory with outcome-only and TRACE credit shown beside each corresponding action.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_worked_trajectory` after `trace_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the worked sequence is semantic HTML/CSS with qualitative overlays and no invented magnitudes; the wrong final answer remains negative even when earlier turns receive conditionally positive local credit.
 
 ## `trace_example_p2`
 
@@ -2384,14 +2384,14 @@ Path("trace_example_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Useful search, decisive page, bad branch, and wrong final answer with local credit — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and rebuilt the shared worked example as one aligned T0–T3 trajectory with outcome-only and TRACE credit shown beside each corresponding action.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `trace_visual_worked_trajectory` after `trace_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `packages/content-schema/schema/explainer-document.schema.json`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the worked sequence is semantic HTML/CSS with qualitative overlays and no invented magnitudes; the wrong final answer remains negative even when earlier turns receive conditionally positive local credit.
 
 ## `trace_evidence_p1`
 

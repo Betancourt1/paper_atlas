@@ -1226,14 +1226,14 @@ Path("propaganda_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), enc
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and made its topology explicit as two independent experimental routes: a conditional inclusion model and a controlled model-influence experiment, separated by an evidence boundary.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing semantic comparison renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation-flow treatment is rendered as grouped semantic HTML/CSS. The inclusion gates and model-influence experiment are no longer connected as a single end-to-end attack, and the missing live-production link is stated visibly.
 
 ## `propaganda_mechanism_p2`
 
@@ -1503,14 +1503,14 @@ Path("propaganda_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), enc
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and made its topology explicit as two independent experimental routes: a conditional inclusion model and a controlled model-influence experiment, separated by an evidence boundary.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing semantic comparison renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation-flow treatment is rendered as grouped semantic HTML/CSS. The inclusion gates and model-influence experiment are no longer connected as a single end-to-end attack, and the missing live-production link is stated visibly.
 
 ## `propaganda_mechanism_p3`
 
@@ -1780,14 +1780,14 @@ Path("propaganda_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), enc
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A and made its topology explicit as two independent experimental routes: a conditional inclusion model and a controlled model-influence experiment, separated by an evidence boundary.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing semantic comparison renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the operation-flow treatment is rendered as grouped semantic HTML/CSS. The inclusion gates and model-influence experiment are no longer connected as a single end-to-end attack, and the missing live-production link is stated visibly.
 
 ## `propaganda_example_p1`
 
@@ -2555,15 +2555,15 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Measured stages, derived product, and disputed introduction value — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selected treatment: `C`
+- Selection rationale: Selected revision-4 Treatment C because bounded evidence panels can show the exact protocol sample separately from the conditional percentages and disputed derived estimates without inventing a common scale.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_inclusion_evidence` after `propaganda_evidence_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing disclosed-domain renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the bounded-panel treatment is rendered as semantic disclosed-domain panels. The exact sample of 181,857 pages from 200 WARC files in CC-MAIN-2025-51 is visible as protocol evidence with no quantitative axis.
 
 ## `propaganda_evidence_p2`
 
@@ -2803,15 +2803,15 @@ Path("propaganda_evidence_p2_treatment_c.svg").write_text("\n".join(parts), enco
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved “Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selected treatment: `C`
+- Selection rationale: Selected revision-4 Treatment C because bounded panels distinguish the three tested poison-token rates while attaching quantitative effect ranges only to the 0.1% condition supported by the cited results.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_model_effects` after `propaganda_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `propaganda_evidence_p2`, `propaganda_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing disclosed-domain renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: semantic panels list 0.001%, 0.01%, and 0.1% separately; only 0.1% carries the 18.6–20.7 and 0.9–7.4 percentage-point ranges, avoiding unsupported values for the lower rates.
 
 ## `propaganda_evidence_p3`
 
@@ -3071,14 +3071,14 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained revision-4 Treatment A within the shared evidence figure; the lower-rate protocol conditions are now visible while all quantitative post-SFT points and ranges remain explicitly attached to 0.1% poison.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `propaganda_visual_model_effects` after `propaganda_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `propaganda_evidence_p2`, `propaganda_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json` and the existing disclosed-domain renderer in `apps/web/app/papers/[id]/explainer-visual.tsx`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: the shared grouped plot remains semantic HTML/CSS. The revision-4 correction changes condition labeling, not the reported post-SFT values or their evidence scope.
 
 ## `propaganda_limitations_p1`
 

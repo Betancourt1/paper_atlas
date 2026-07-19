@@ -707,14 +707,14 @@ Path("ink_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “975B stored parameters versus the 41B active token path — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_total_vs_active` after `ink_change_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_change_p2`
 
@@ -1196,14 +1196,14 @@ Path("ink_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Inkling MoE routed and shared expert convergence — Convergence topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_moe_routing` after `ink_mechanism_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_mechanism_p2`
 
@@ -1457,14 +1457,14 @@ Path("ink_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Text, image, and audio front ends converging into one decoder — Convergence topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_multimodal_convergence` after `ink_mechanism_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_mechanism_p3`
 
@@ -1702,14 +1702,14 @@ Path("ink_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “45T-token pretraining, synthetic SFT, reinforcement learning, and disclosure boundary — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_training_sequence` after `ink_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_example_p1`
 
@@ -1953,14 +1953,14 @@ Path("ink_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “BF16, NVFP4 W4A4, and NVFP4 W4A16 deployment conditions — Condition matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_checkpoint_hardware` after `ink_example_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_example_p2`
 
@@ -2478,14 +2478,14 @@ Path("ink_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `C`
-- Selection rationale: Selected the approved “Vendor benchmark snapshot grouped by incomparable benchmark family — Experiment small multiples” treatment because the implemented result comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_benchmark_families` after `ink_evidence_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_evidence_p2`
 
@@ -2967,14 +2967,14 @@ Path("ink_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Effort-sweep and forecasting results tied to non-release checkpoints — Source-by-value matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_checkpoint_results` after `ink_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_limitations_p1`
 
@@ -3439,14 +3439,14 @@ Path("ink_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Advertised 1M capacity, hosted 64K/256K options, and unproven quality spans — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Retained the revision-4 selected treatment and corrected the shared responsive evidence presentation so long exact locators wrap inside the 390-pixel viewport without abbreviation or clipping.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_context_boundary` after `ink_limitations_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Revision-4 responsive correction: exact evidence locators now wrap anywhere without abbreviation; the approved visual encoding, values, grouping, and evidence boundaries are unchanged.
 
 ## `ink_limitations_p3`
 
@@ -4412,14 +4412,14 @@ Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved “Content-addressed web snapshot and pinned checkpoint-card evidence — Source-by-value matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
+- Selection rationale: Selected revision-4 Treatment A because a source-identity matrix makes every mutable HTML retrieval and immutable checkpoint identity directly visible, selectable, and auditable.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_inkling_source_provenance` after `ink_review_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/inkling.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
-- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
-- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
-- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
+- Changed files: `packages/test-fixtures/explainers/inkling.json` and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: The correction remains semantic and selectable, with a programmatic figure label, exact visible labels and values, equivalent fallback prose, source links, and a static no-motion body whose meaning does not depend on color or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and an explicitly asserted 390-pixel mobile viewport; targeted topology, exact-identity, condition-label, readable-width, and horizontal-overflow assertions all passed.
+- Evidence deviations: Delivery translation: Treatment A is a semantic evidence matrix containing the three full SHA-256 hashes with byte counts, both full checkpoint commits, and the unresolved benchmark conflict; no identity is abbreviated.
 
 ## `ink_review_p3`
 

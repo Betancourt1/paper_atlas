@@ -382,35 +382,79 @@
       "id": "trace_visual_outcome_routes",
       "after_block_id": "trace_why",
       "after_paragraph_id": "trace_why_p1",
-      "type": "PARALLEL_VIEW",
+      "type": "TIMELINE",
       "title": "One trajectory-level outcome hides unequal tool decisions",
       "question": "What signal reaches useful and wasteful actions under two credit views?",
       "items": [
         {
           "label": "Useful search",
-          "detail": "A step that improves answer readiness receives the same final failed-trajectory advantage as every other action.",
-          "group": "Outcome-only route"
+          "detail": "Search for a relevant source.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "conditionally positive"
+            }
+          ]
         },
         {
-          "label": "Redundant detour",
-          "detail": "A step that adds nothing receives that same trajectory-level advantage.",
-          "group": "Outcome-only route"
+          "label": "Open decisive page",
+          "detail": "Open the page that contains decisive evidence.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "conditionally positive"
+            }
+          ]
         },
         {
-          "label": "Useful search",
-          "detail": "Turn-local credit can be positive when the next transcript makes the gold answer more predictable.",
-          "group": "Turn-local route"
+          "label": "Redundant action",
+          "detail": "Repeat an action without changing answer readiness.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "near zero if readiness is unchanged"
+            }
+          ]
         },
         {
-          "label": "Redundant or harmful detour",
-          "detail": "Turn-local credit can be zero or negative when measured readiness stalls or falls.",
-          "group": "Turn-local route"
+          "label": "Harmful detour",
+          "detail": "Follow a branch that lowers answer readiness.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "negative if readiness falls"
+            }
+          ]
         },
         {
-          "label": "Shared terminal boundary",
-          "detail": "An incorrect submitted answer remains a failed outcome under both routes.",
-          "group": "Final outcome",
-          "role": "BOUNDARY"
+          "label": "Wrong final answer",
+          "detail": "Submit an incorrect terminal answer.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "negative terminal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "negative final"
+            }
+          ]
         }
       ],
       "claim_ids": [
@@ -425,8 +469,8 @@
       "limitations": [
         "Local credit measures frozen-model answer readiness, not causal necessity of a tool action."
       ],
-      "alt_text": "One trajectory-level outcome hides unequal tool decisions. Useful search; Redundant detour; Useful search; Redundant or harmful detour; Shared terminal boundary.",
-      "fallback": "Outcome-only training collapses unequal decisions into one signal; TRACE adds local differentiation without redefining final correctness. Useful search; Redundant detour; Useful search; Redundant or harmful detour; Shared terminal boundary."
+      "alt_text": "One aligned five-step trajectory compares credit at every action. T0 useful search and T1 decisive page receive the same failed signal under outcome-only credit but conditionally positive TRACE credit; T2 redundant action receives the same failed signal but near-zero TRACE credit if readiness is unchanged; T3 harmful detour receives the same failed signal but negative TRACE credit if readiness falls; T4 wrong final answer is negative under both.",
+      "fallback": "One aligned five-step trajectory compares credit at every action. T0 useful search and T1 decisive page receive the same failed signal under outcome-only credit but conditionally positive TRACE credit; T2 redundant action receives the same failed signal but near-zero TRACE credit if readiness is unchanged; T3 harmful detour receives the same failed signal but negative TRACE credit if readiness falls; T4 wrong final answer is negative under both."
     },
     {
       "id": "trace_visual_credit_assignment_change",
@@ -483,41 +527,76 @@
       "id": "trace_visual_credit_flow",
       "after_block_id": "trace_mechanism",
       "after_paragraph_id": "trace_mechanism_p3",
-      "type": "OPERATION_DIAGRAM",
+      "type": "PARTITION_TREE",
       "title": "Adjacent prefix values produce local credit",
       "question": "How does TRACE move from tool observations to a policy-gradient signal?",
       "items": [
         {
-          "label": "Split at tool boundaries",
-          "detail": "Every action and returned observation defines the next transcript prefix."
+          "label": "Tool-boundary prefixes",
+          "detail": "Every action and returned observation defines the next transcript prefix.",
+          "group": "Trajectory states",
+          "node_id": "prefix"
         },
         {
-          "label": "Probe gold-answer probability",
-          "detail": "One frozen copy of the initial policy computes average gold-answer log-probability for every prefix."
+          "label": "Frozen initial-policy probe",
+          "detail": "The same known gold answer is scored at every prefix.",
+          "group": "Probe",
+          "node_id": "probe",
+          "input_ids": [
+            "prefix"
+          ]
         },
         {
-          "label": "Normalize remaining gap",
-          "detail": "A log-ratio value measures relative closure of the initial answer-likelihood gap."
+          "label": "Normalized gap value",
+          "detail": "A log-ratio measures relative closure of the initial answer-likelihood gap.",
+          "group": "State value",
+          "node_id": "value",
+          "input_ids": [
+            "probe"
+          ]
         },
         {
-          "label": "Subtract adjacent values",
-          "detail": "The one-step temporal-difference credit is positive, zero, or negative measured progress."
+          "label": "Adjacent temporal difference",
+          "detail": "Subtract adjacent values to obtain positive, zero, or negative one-step progress.",
+          "group": "Local credit",
+          "node_id": "td",
+          "input_ids": [
+            "value"
+          ]
         },
         {
-          "label": "Preserve telescoping boundary",
-          "detail": "One-step credits telescope, so redundant inserted states cannot raise their endpoint sum."
+          "label": "One-step credit",
+          "detail": "These credits telescope; redundant inserted states cannot raise their endpoint sum.",
+          "group": "Credit fork",
+          "node_id": "one_step",
+          "input_ids": [
+            "td"
+          ]
         },
         {
-          "label": "Propagate short delayed effects",
-          "detail": "The reported objective adds look-ahead beyond the exact one-step guarantee."
+          "label": "Propagated credit",
+          "detail": "The reported objective adds short look-ahead; the exact telescoping guarantee does not extend to this branch.",
+          "group": "Credit fork",
+          "node_id": "propagated",
+          "input_ids": [
+            "td"
+          ]
         },
         {
-          "label": "Combine with GRPO outcome advantage",
-          "detail": "Local credit joins terminal correctness rather than replacing it."
+          "label": "GRPO outcome advantage",
+          "detail": "Final-answer correctness remains a separate terminal signal.",
+          "group": "Outcome anchor",
+          "node_id": "outcome"
         },
         {
-          "label": "Update the policy",
-          "detail": "The combined signal changes action probabilities under the shared training harness."
+          "label": "Policy update",
+          "detail": "Reported propagated local credit combines with the outcome advantage to change action probabilities.",
+          "group": "Combined objective",
+          "node_id": "update",
+          "input_ids": [
+            "propagated",
+            "outcome"
+          ]
         }
       ],
       "claim_ids": [
@@ -533,8 +612,8 @@
       "limitations": [
         "The exact telescoping guarantee applies to the one-step component, not the full propagated objective."
       ],
-      "alt_text": "Adjacent prefix values produce local credit. Split at tool boundaries; Probe gold-answer probability; Normalize remaining gap; Subtract adjacent values; Preserve telescoping boundary; Propagate short delayed effects; Combine with GRPO outcome advantage; Update the policy.",
-      "fallback": "TRACE derives local credit from adjacent normalized prefix values, adds limited propagation, and anchors the signal to final outcome advantage. Split at tool boundaries; Probe gold-answer probability; Normalize remaining gap; Subtract adjacent values; Preserve telescoping boundary; Propagate short delayed effects; Combine with GRPO outcome advantage; Update the policy."
+      "alt_text": "TRACE splits transcripts at tool boundaries, probes each prefix with a frozen initial policy, normalizes the remaining answer-likelihood gap, and subtracts adjacent values. The topology then forks: one-step credit has the exact telescoping guarantee, while propagated credit adds short look-ahead without that guarantee. The reported propagated credit combines with a separate GRPO outcome advantage for the policy update.",
+      "fallback": "TRACE splits transcripts at tool boundaries, probes each prefix with a frozen initial policy, normalizes the remaining answer-likelihood gap, and subtracts adjacent values. The topology then forks: one-step credit has the exact telescoping guarantee, while propagated credit adds short look-ahead without that guarantee. The reported propagated credit combines with a separate GRPO outcome advantage for the policy update."
     },
     {
       "id": "trace_visual_worked_trajectory",
@@ -546,28 +625,59 @@
       "items": [
         {
           "label": "Search relevant source",
-          "detail": "Can receive positive local credit if the observation increases gold-answer predictability."
+          "detail": "Search for evidence likely to resolve the question.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "conditionally positive"
+            }
+          ]
         },
         {
           "label": "Open decisive page",
-          "detail": "Can add further positive credit when the evidence closes more of the measured gap."
+          "detail": "Open the source containing decisive evidence.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "conditionally positive"
+            }
+          ]
         },
         {
-          "label": "Follow unrelated branch",
-          "detail": "Can receive near-zero or negative credit when readiness stalls or falls."
+          "label": "Unrelated branch",
+          "detail": "Follow a branch that does not improve readiness.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "same failed signal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "near-zero or negative"
+            }
+          ]
         },
         {
           "label": "Submit wrong answer",
-          "detail": "The terminal outcome remains negative."
-        },
-        {
-          "label": "Outcome-only comparison",
-          "detail": "The conventional objective would attach one poor trajectory-level advantage to every preceding action."
-        },
-        {
-          "label": "Example boundary",
-          "detail": "This illustrates the reward construction and is not a separate quantitative experiment.",
-          "role": "BOUNDARY"
+          "detail": "Submit an incorrect terminal answer.",
+          "annotations": [
+            {
+              "label": "Outcome-only",
+              "detail": "negative terminal"
+            },
+            {
+              "label": "TRACE",
+              "detail": "negative final"
+            }
+          ]
         }
       ],
       "claim_ids": [
@@ -583,8 +693,8 @@
       "limitations": [
         "The example is schematic and supplies no invented credit magnitudes."
       ],
-      "alt_text": "A failed rollout can contain progress and regression. Search relevant source; Open decisive page; Follow unrelated branch; Submit wrong answer; Outcome-only comparison; Example boundary.",
-      "fallback": "Local turn credit differentiates useful and harmful interactions while the wrong final submission remains failure. Search relevant source; Open decisive page; Follow unrelated branch; Submit wrong answer; Outcome-only comparison; Example boundary."
+      "alt_text": "One aligned four-step worked trajectory compares outcome-only and TRACE credit. T0 relevant search and T1 decisive page share the eventual failed signal under outcome-only credit but may receive conditionally positive TRACE credit; T2 unrelated branch shares the failed signal but receives near-zero or negative TRACE credit; T3 wrong answer is a negative terminal outcome and negative final TRACE signal.",
+      "fallback": "One aligned four-step worked trajectory compares outcome-only and TRACE credit. T0 relevant search and T1 decisive page share the eventual failed signal under outcome-only credit but may receive conditionally positive TRACE credit; T2 unrelated branch shares the failed signal but receives near-zero or negative TRACE credit; T3 wrong answer is a negative terminal outcome and negative final TRACE signal."
     },
     {
       "id": "trace_visual_training_conditions",
