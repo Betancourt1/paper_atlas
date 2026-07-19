@@ -379,53 +379,6 @@
   ],
   "visuals": [
     {
-      "id": "trace_visual_source_figure_1_why",
-      "after_block_id": "trace_why",
-      "after_paragraph_id": "trace_why_p1",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Outcome-only and turn-level credit assignment",
-      "question": "Why is one final reward not enough for a long tool-use trajectory?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 1, PDF page 2 from TRACE, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "trace_claim_outcome_blind",
-        "trace_claim_credit"
-      ],
-      "source_refs": [
-        "trace_source_intro",
-        "trace_source_method"
-      ],
-      "interpretation": "This is the authors' original figure 1, pdf page 2, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 1 contrasting sparse outcome-only reward with TRACE turn-level credit at tool-call boundaries.",
-      "fallback": "Outcome-only and turn-level credit assignment. Original Figure 1 contrasting sparse outcome-only reward with TRACE turn-level credit at tool-call boundaries.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/trace/figure-1.png",
-            "alt_text": "Original Figure 1 contrasting sparse outcome-only reward with TRACE turn-level credit at tool-call boundaries."
-          }
-        ],
-        "locator": "Figure 1, PDF page 2",
-        "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
       "id": "trace_visual_source_figure_1_change",
       "after_block_id": "trace_change",
       "after_paragraph_id": "trace_change_p1",
@@ -474,65 +427,17 @@
       }
     },
     {
-      "id": "trace_visual_source_figure_1_example",
-      "after_block_id": "trace_example",
-      "after_paragraph_id": "trace_example_p2",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Credit across one search trajectory",
-      "question": "What would TRACE do with a useful search followed by a bad branch?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 1, PDF page 2 from TRACE, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "trace_claim_prefix_probe",
-        "trace_claim_td",
-        "trace_claim_outcome_anchor"
-      ],
-      "source_refs": [
-        "trace_source_intro",
-        "trace_source_method"
-      ],
-      "interpretation": "This is the authors' original figure 1, pdf page 2, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 1 showing a worked long-horizon search trajectory under outcome-only reward and TRACE credit assignment.",
-      "fallback": "Credit across one search trajectory. Original Figure 1 showing a worked long-horizon search trajectory under outcome-only reward and TRACE credit assignment.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/trace/figure-1.png",
-            "alt_text": "Original Figure 1 showing a worked long-horizon search trajectory under outcome-only reward and TRACE credit assignment."
-          }
-        ],
-        "locator": "Figure 1, PDF page 2",
-        "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
       "id": "trace_visual_source_figures_3_4",
       "after_block_id": "trace_evidence",
       "after_paragraph_id": "trace_evidence_p3",
       "delivery_medium": "source asset",
       "type": "PARALLEL_VIEW",
-      "title": "Learning and trajectory dynamics",
+      "title": "Learning dynamics",
       "question": "What evidence supports the reported improvement?",
       "items": [
         {
           "label": "Original source figure",
-          "detail": "Figures 3-4, PDF pages 8-10 from TRACE, reproduced beside the claim it supports."
+          "detail": "Figure 3, PDF page 9, reproduced beside the distinct claim it supports."
         },
         {
           "label": "Evidence boundary",
@@ -550,24 +455,20 @@
         "trace_source_experiments",
         "trace_source_results"
       ],
-      "interpretation": "This is the authors' original figures 3-4, pdf pages 8-10, placed here because it directly performs the paragraph's explanatory job.",
+      "interpretation": "This is the authors original figure 3, pdf page 9, placed here because it directly performs this paragraphs distinct explanatory job.",
       "limitations": [
         "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Original Figure 3 comparing training reward and evaluation performance over training. Original Figure 4 comparing trajectory-scale dynamics for TRACE and GRPO.",
-      "fallback": "Learning and trajectory dynamics. Original Figure 3 comparing training reward and evaluation performance over training. Original Figure 4 comparing trajectory-scale dynamics for TRACE and GRPO.",
+      "alt_text": "Original Figure 3 comparing training reward and evaluation performance over training.",
+      "fallback": "Learning dynamics. Original Figure 3 comparing training reward and evaluation performance over training.",
       "source_asset": {
         "images": [
           {
             "path": "/paper-assets/trace/figure-3.png",
             "alt_text": "Original Figure 3 comparing training reward and evaluation performance over training."
-          },
-          {
-            "path": "/paper-assets/trace/figure-4.png",
-            "alt_text": "Original Figure 4 comparing trajectory-scale dynamics for TRACE and GRPO."
           }
         ],
-        "locator": "Figures 3-4, PDF pages 8-10",
+        "locator": "Figure 3, PDF page 9",
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",

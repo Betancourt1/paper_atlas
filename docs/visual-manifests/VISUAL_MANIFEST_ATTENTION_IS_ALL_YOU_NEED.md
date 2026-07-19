@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
 - Manifest revision: `10`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `18 / 18` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -331,7 +331,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_query_key_field` — rendered immediately after `attn_mechanism_p2`.
 - Shared paragraph scope: `NONE`
@@ -519,7 +519,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_decoder_dependencies` — rendered immediately after `attn_mechanism_p3`.
 - Shared paragraph scope: `NONE`

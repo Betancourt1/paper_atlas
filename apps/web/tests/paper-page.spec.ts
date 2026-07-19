@@ -13,30 +13,20 @@ const expectedVisuals: Record<string, Array<[string, string]>> = {
 
 const expectedSourceAssets: Record<string, Array<[string, string]>> = {
   "/papers/paper_attention_is_all_you_need": [
-    ["visual_attention_source_figure_1_change", "attn_change_p2"],
-    ["visual_attention_source_figure_1_mechanism", "attn_mechanism_p1"],
     ["visual_attention_query_key_field", "attn_mechanism_p2"],
     ["visual_attention_decoder_dependencies", "attn_mechanism_p3"],
-    ["visual_attention_source_figure_1_review", "attn_review_p1"],
   ],
   "/papers/paper_computational_propaganda": [
     ["propaganda_visual_source_figure_7", "propaganda_change_p2"],
     ["propaganda_visual_source_figure_3", "propaganda_example_p1"],
   ],
   "/papers/paper_llm_evaluators_languages": [
-    ["language_visual_source_figure_4_why", "language_why_p2"],
     ["language_visual_source_figure_1", "language_change_p1"],
     ["language_visual_source_figure_3", "language_change_p2"],
     ["language_visual_ranking_acceptance_graph", "language_mechanism_p2"],
     ["language_visual_source_figures_5_7_mechanism", "language_mechanism_p3"],
-    ["language_visual_source_figure_4_example", "language_example_p1"],
-    ["language_visual_source_figures_1_3", "language_evidence_p1"],
-    ["language_visual_source_figure_4_evidence", "language_evidence_p2"],
-    ["language_visual_source_figures_5_7_evidence", "language_evidence_p3"],
-    ["language_visual_source_figure_4_review", "language_review_p1"],
   ],
   "/papers/paper_robott": [
-    ["visual_robott_source_figure_2_change", "rttt_change_p2"],
     ["visual_robott_source_figure_2_mechanism", "rttt_mechanism_p2"],
     ["visual_robott_source_figures_2_4_mechanism", "rttt_mechanism_p3"],
     ["visual_robott_source_figure_7", "rttt_evidence_p1"],
@@ -45,12 +35,9 @@ const expectedSourceAssets: Record<string, Array<[string, string]>> = {
   "/papers/paper_searchos_v1": [
     ["visual_searchos_source_figure_2", "sos_mechanism_p2"],
     ["visual_searchos_source_figures_2_5", "sos_mechanism_p3"],
-    ["visual_searchos_source_figure_5_limit", "sos_limitations_p2"],
   ],
   "/papers/paper_trace": [
-    ["trace_visual_source_figure_1_why", "trace_why_p1"],
     ["trace_visual_source_figure_1_change", "trace_change_p1"],
-    ["trace_visual_source_figure_1_example", "trace_example_p2"],
     ["trace_visual_source_figures_3_4", "trace_evidence_p3"],
   ],
 };

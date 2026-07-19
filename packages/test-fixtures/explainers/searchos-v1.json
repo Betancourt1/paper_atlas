@@ -488,12 +488,12 @@
       "after_paragraph_id": "sos_mechanism_p3",
       "delivery_medium": "source asset",
       "type": "PARALLEL_VIEW",
-      "title": "Architecture and middleware interventions",
+      "title": "Middleware intervention trajectories",
       "question": "How does a browser observation become shared, grounded progress?",
       "items": [
         {
           "label": "Original source figure",
-          "detail": "Figures 2 and 5, PDF pages 4 and 12-13 from SearchOS-V1, reproduced beside the claim it supports."
+          "detail": "Figure 5, PDF pages 12-13, reproduced beside the distinct claim it supports."
         },
         {
           "label": "Evidence boundary",
@@ -510,73 +510,17 @@
         "sos_formulation_source",
         "sos_middleware_source"
       ],
-      "interpretation": "This is the authors' original figures 2 and 5, pdf pages 4 and 12-13, placed here because it directly performs the paragraph's explanatory job.",
+      "interpretation": "This is the authors original figure 5, pdf pages 12-13, placed here because it directly performs this paragraphs distinct explanatory job.",
       "limitations": [
         "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Original Figure 2 showing SearchOS architecture and dispatch relationships. Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
-      "fallback": "Architecture and middleware interventions. Original Figure 2 showing SearchOS architecture and dispatch relationships. Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
+      "alt_text": "Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
+      "fallback": "Middleware intervention trajectories. Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
       "source_asset": {
         "images": [
-          {
-            "path": "/paper-assets/searchos/figure-2.png",
-            "alt_text": "Original Figure 2 showing SearchOS architecture and dispatch relationships."
-          },
           {
             "path": "/paper-assets/searchos/figure-5.png",
             "alt_text": "Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions."
-          }
-        ],
-        "locator": "Figures 2 and 5, PDF pages 4 and 12-13",
-        "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "visual_searchos_source_figure_5_limit",
-      "after_block_id": "sos_limitations",
-      "after_paragraph_id": "sos_limitations_p2",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Three intervention case studies",
-      "question": "What does the evaluation leave unresolved?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 5, PDF pages 12-13 from SearchOS-V1, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "sos_citation_truth",
-        "sos_budget_fairness",
-        "sos_middleware_causality",
-        "sos_schema_fit_inference",
-        "sos_generality"
-      ],
-      "source_refs": [
-        "sos_middleware_source",
-        "sos_results_source",
-        "sos_ablations_source",
-        "sos_scope_source"
-      ],
-      "interpretation": "This is the authors' original figure 5, pdf pages 12-13, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 5 showing three selected middleware-governance trajectories and their intervention points.",
-      "fallback": "Three intervention case studies. Original Figure 5 showing three selected middleware-governance trajectories and their intervention points.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/searchos/figure-5.png",
-            "alt_text": "Original Figure 5 showing three selected middleware-governance trajectories and their intervention points."
           }
         ],
         "locator": "Figure 5, PDF pages 12-13",

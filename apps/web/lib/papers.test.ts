@@ -37,14 +37,11 @@ describe("getExplainerByPaperId", () => {
     expect(getExplainerByPaperId("paper_missing")).toBeUndefined();
   });
 
-  it("keeps the approved revision-7 placements and delivery media", () => {
+  it("keeps the approved revision-10 placements and delivery media", () => {
     const expectedVisuals = {
       paper_attention_is_all_you_need: [
-        ["visual_attention_source_figure_1_change", "attn_change_p2", "source asset"],
-        ["visual_attention_source_figure_1_mechanism", "attn_mechanism_p1", "source asset"],
         ["visual_attention_query_key_field", "attn_mechanism_p2", "source asset"],
         ["visual_attention_decoder_dependencies", "attn_mechanism_p3", "source asset"],
-        ["visual_attention_source_figure_1_review", "attn_review_p1", "source asset"],
       ],
       paper_computational_propaganda: [
         ["propaganda_visual_source_figure_7", "propaganda_change_p2", "source asset"],
@@ -53,20 +50,13 @@ describe("getExplainerByPaperId", () => {
       ],
       paper_inkling: [["visual_inkling_sparse_routing_field", "ink_mechanism_p1", "SVG"]],
       paper_llm_evaluators_languages: [
-        ["language_visual_source_figure_4_why", "language_why_p2", "source asset"],
         ["language_visual_source_figure_1", "language_change_p1", "source asset"],
         ["language_visual_source_figure_3", "language_change_p2", "source asset"],
         ["language_visual_ranking_acceptance_graph", "language_mechanism_p2", "source asset"],
         ["language_visual_source_figures_5_7_mechanism", "language_mechanism_p3", "source asset"],
-        ["language_visual_source_figure_4_example", "language_example_p1", "source asset"],
-        ["language_visual_source_figures_1_3", "language_evidence_p1", "source asset"],
-        ["language_visual_source_figure_4_evidence", "language_evidence_p2", "source asset"],
-        ["language_visual_source_figures_5_7_evidence", "language_evidence_p3", "source asset"],
-        ["language_visual_source_figure_4_review", "language_review_p1", "source asset"],
       ],
       paper_partition_prompt_aggregate: [["visual_ppa_weighted_reconstruction_graph", "ppa_mechanism_p2", "SVG"]],
       paper_robott: [
-        ["visual_robott_source_figure_2_change", "rttt_change_p2", "source asset"],
         ["visual_robott_source_figure_2_mechanism", "rttt_mechanism_p2", "source asset"],
         ["visual_robott_source_figures_2_4_mechanism", "rttt_mechanism_p3", "source asset"],
         ["visual_robott_source_figure_7", "rttt_evidence_p1", "source asset"],
@@ -75,12 +65,9 @@ describe("getExplainerByPaperId", () => {
       paper_searchos_v1: [
         ["visual_searchos_source_figure_2", "sos_mechanism_p2", "source asset"],
         ["visual_searchos_source_figures_2_5", "sos_mechanism_p3", "source asset"],
-        ["visual_searchos_source_figure_5_limit", "sos_limitations_p2", "source asset"],
       ],
       paper_trace: [
-        ["trace_visual_source_figure_1_why", "trace_why_p1", "source asset"],
         ["trace_visual_source_figure_1_change", "trace_change_p1", "source asset"],
-        ["trace_visual_source_figure_1_example", "trace_example_p2", "source asset"],
         ["trace_visual_source_figures_3_4", "trace_evidence_p3", "source asset"],
         ["trace_visual_credit_dependency_dag", "trace_mechanism_p3", "SVG"],
       ],

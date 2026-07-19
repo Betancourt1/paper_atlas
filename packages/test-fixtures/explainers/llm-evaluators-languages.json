@@ -409,53 +409,6 @@
   ],
   "visuals": [
     {
-      "id": "language_visual_source_figure_4_why",
-      "after_block_id": "language_why",
-      "after_paragraph_id": "language_why_p2",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Pairwise accuracy and global acceptance diverge",
-      "question": "Why can pairwise accuracy miss a multilingual evaluation problem?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 4, PDF page 6 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_pairwise_blind",
-        "language_claim_gap"
-      ],
-      "source_refs": [
-        "language_source_intro",
-        "language_source_thresholds"
-      ],
-      "interpretation": "This is the authors' original figure 4, pdf page 6, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original scatterplots of per-language pairwise accuracy against global-threshold acceptance rate, showing stable ranking accuracy alongside language-dependent acceptance.",
-      "fallback": "Pairwise accuracy and global acceptance diverge. Original scatterplots of per-language pairwise accuracy against global-threshold acceptance rate, showing stable ranking accuracy alongside language-dependent acceptance.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-4.png",
-            "alt_text": "Original scatterplots of per-language pairwise accuracy against global-threshold acceptance rate, showing stable ranking accuracy alongside language-dependent acceptance."
-          }
-        ],
-        "locator": "Figure 4, PDF page 6",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
       "id": "language_visual_source_figure_1",
       "after_block_id": "language_change",
       "after_paragraph_id": "language_change_p1",
@@ -606,12 +559,12 @@
       "after_paragraph_id": "language_mechanism_p3",
       "delivery_medium": "source asset",
       "type": "PARALLEL_VIEW",
-      "title": "Uncertainty, language identity, and score variation",
+      "title": "Uncertainty and reward scores",
       "question": "How can scores shift while rankings remain correct?",
       "items": [
         {
           "label": "Original source figure",
-          "detail": "Figures 5-7, PDF pages 8-10 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
+          "detail": "Figure 5, PDF page 8, reproduced beside the distinct claim it supports."
         },
         {
           "label": "Evidence boundary",
@@ -629,313 +582,20 @@
         "language_source_regressions",
         "language_source_calibration"
       ],
-      "interpretation": "This is the authors' original figures 5-7, pdf pages 8-10, placed here because it directly performs the paragraph's explanatory job.",
+      "interpretation": "This is the authors original figure 5, pdf page 8, placed here because it directly performs this paragraphs distinct explanatory job.",
       "limitations": [
         "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Original Figure 5 comparing model uncertainty with reward score at language and item levels. Original Figure 6 decomposing score variance into parts uniquely explained by NLL, uniquely explained by language identity, and shared by both. Original Figure 7 showing the distribution of within-language NLL-to-score slopes.",
-      "fallback": "Uncertainty, language identity, and score variation. Original Figure 5 comparing model uncertainty with reward score at language and item levels. Original Figure 6 decomposing score variance into parts uniquely explained by NLL, uniquely explained by language identity, and shared by both. Original Figure 7 showing the distribution of within-language NLL-to-score slopes.",
+      "alt_text": "Original Figure 5 comparing model uncertainty with reward score at language and item levels.",
+      "fallback": "Uncertainty and reward scores. Original Figure 5 comparing model uncertainty with reward score at language and item levels.",
       "source_asset": {
         "images": [
           {
             "path": "/paper-assets/llm-evaluators-languages/figure-5.png",
             "alt_text": "Original Figure 5 comparing model uncertainty with reward score at language and item levels."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-6.png",
-            "alt_text": "Original Figure 6 decomposing score variance into parts uniquely explained by NLL, uniquely explained by language identity, and shared by both."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-7.png",
-            "alt_text": "Original Figure 7 showing the distribution of within-language NLL-to-score slopes."
           }
         ],
-        "locator": "Figures 5-7, PDF pages 8-10",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "language_visual_source_figure_4_example",
-      "after_block_id": "language_example",
-      "after_paragraph_id": "language_example_p1",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "How a global threshold changes acceptance by language",
-      "question": "What does the hidden shift look like in a thresholded safety example?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 4, PDF page 6 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_gap",
-        "language_claim_english_ukrainian_rounding",
-        "language_claim_code_switch",
-        "language_claim_production_notshown"
-      ],
-      "source_refs": [
-        "language_source_intro",
-        "language_source_thresholds"
-      ],
-      "interpretation": "This is the authors' original figure 4, pdf page 6, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 4 showing that language-level acceptance rates vary strongly even when pairwise accuracy remains high.",
-      "fallback": "How a global threshold changes acceptance by language. Original Figure 4 showing that language-level acceptance rates vary strongly even when pairwise accuracy remains high.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-4.png",
-            "alt_text": "Original Figure 4 showing that language-level acceptance rates vary strongly even when pairwise accuracy remains high."
-          }
-        ],
-        "locator": "Figure 4, PDF page 6",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "language_visual_source_figures_1_3",
-      "after_block_id": "language_evidence",
-      "after_paragraph_id": "language_evidence_p1",
-      "delivery_medium": "source asset",
-      "type": "PARALLEL_VIEW",
-      "title": "Language score effects across models and resource levels",
-      "question": "How large and consistent are the measured language effects?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figures 1-3, PDF pages 4-5 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_effect",
-        "language_claim_resource",
-        "language_claim_gap",
-        "language_claim_english_ukrainian_rounding",
-        "language_claim_high_accuracy_gap",
-        "language_claim_additional_judges",
-        "language_claim_uncertainty",
-        "language_claim_language_after_nll",
-        "language_claim_calibration"
-      ],
-      "source_refs": [
-        "language_source_effects",
-        "language_source_thresholds",
-        "language_source_uncertainty",
-        "language_source_regressions",
-        "language_source_calibration"
-      ],
-      "interpretation": "This is the authors' original figures 1-3, pdf pages 4-5, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 1 showing score distributions across languages. Original Figure 2 showing cross-model correlations of language-dependent scoring patterns. Original Figure 3 relating evaluation scores to training-data resource level.",
-      "fallback": "Language score effects across models and resource levels. Original Figure 1 showing score distributions across languages. Original Figure 2 showing cross-model correlations of language-dependent scoring patterns. Original Figure 3 relating evaluation scores to training-data resource level.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-1.png",
-            "alt_text": "Original Figure 1 showing score distributions across languages."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-2.png",
-            "alt_text": "Original Figure 2 showing cross-model correlations of language-dependent scoring patterns."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-3.png",
-            "alt_text": "Original Figure 3 relating evaluation scores to training-data resource level."
-          }
-        ],
-        "locator": "Figures 1-3, PDF pages 4-5",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "language_visual_source_figure_4_evidence",
-      "after_block_id": "language_evidence",
-      "after_paragraph_id": "language_evidence_p2",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Threshold effects in the reported evidence",
-      "question": "How large and consistent are the measured language effects?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 4, PDF page 6 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_effect",
-        "language_claim_resource",
-        "language_claim_gap",
-        "language_claim_english_ukrainian_rounding",
-        "language_claim_high_accuracy_gap",
-        "language_claim_additional_judges",
-        "language_claim_uncertainty",
-        "language_claim_language_after_nll",
-        "language_claim_calibration"
-      ],
-      "source_refs": [
-        "language_source_effects",
-        "language_source_thresholds",
-        "language_source_uncertainty",
-        "language_source_regressions",
-        "language_source_calibration"
-      ],
-      "interpretation": "This is the authors' original figure 4, pdf page 6, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 4 comparing pairwise accuracy with acceptance under a single global threshold.",
-      "fallback": "Threshold effects in the reported evidence. Original Figure 4 comparing pairwise accuracy with acceptance under a single global threshold.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-4.png",
-            "alt_text": "Original Figure 4 comparing pairwise accuracy with acceptance under a single global threshold."
-          }
-        ],
-        "locator": "Figure 4, PDF page 6",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "language_visual_source_figures_5_7_evidence",
-      "after_block_id": "language_evidence",
-      "after_paragraph_id": "language_evidence_p3",
-      "delivery_medium": "source asset",
-      "type": "PARALLEL_VIEW",
-      "title": "Evidence for uncertainty and language-level structure",
-      "question": "How large and consistent are the measured language effects?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figures 5-7, PDF pages 8-10 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_effect",
-        "language_claim_resource",
-        "language_claim_gap",
-        "language_claim_english_ukrainian_rounding",
-        "language_claim_high_accuracy_gap",
-        "language_claim_additional_judges",
-        "language_claim_uncertainty",
-        "language_claim_language_after_nll",
-        "language_claim_calibration"
-      ],
-      "source_refs": [
-        "language_source_effects",
-        "language_source_thresholds",
-        "language_source_uncertainty",
-        "language_source_regressions",
-        "language_source_calibration"
-      ],
-      "interpretation": "This is the authors' original figures 5-7, pdf pages 8-10, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 5 relating NLL uncertainty to score. Original Figure 6 decomposing explained score variance. Original Figure 7 showing within-language regression slopes.",
-      "fallback": "Evidence for uncertainty and language-level structure. Original Figure 5 relating NLL uncertainty to score. Original Figure 6 decomposing explained score variance. Original Figure 7 showing within-language regression slopes.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-5.png",
-            "alt_text": "Original Figure 5 relating NLL uncertainty to score."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-6.png",
-            "alt_text": "Original Figure 6 decomposing explained score variance."
-          },
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-7.png",
-            "alt_text": "Original Figure 7 showing within-language regression slopes."
-          }
-        ],
-        "locator": "Figures 5-7, PDF pages 8-10",
-        "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
-      "id": "language_visual_source_figure_4_review",
-      "after_block_id": "language_review",
-      "after_paragraph_id": "language_review_p1",
-      "delivery_medium": "source asset",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Decision rules determine practical bias",
-      "question": "What should evaluator builders conclude from this study?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figure 4, PDF page 6 from LLM Evaluators are Biased across Languages, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "language_claim_pairwise_blind",
-        "language_claim_calibration",
-        "language_claim_cause_notshown",
-        "language_claim_production_notshown"
-      ],
-      "source_refs": [
-        "language_source_thresholds",
-        "language_source_calibration"
-      ],
-      "interpretation": "This is the authors' original figure 4, pdf page 6, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 4 makes visible the distinction between pairwise ordering and acceptance under one global cutoff.",
-      "fallback": "Decision rules determine practical bias. Original Figure 4 makes visible the distinction between pairwise ordering and acceptance under one global cutoff.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/llm-evaluators-languages/figure-4.png",
-            "alt_text": "Original Figure 4 makes visible the distinction between pairwise ordering and acceptance under one global cutoff."
-          }
-        ],
-        "locator": "Figure 4, PDF page 6",
+        "locator": "Figure 5, PDF page 8",
         "attribution": "Zhou et al., LLM Evaluators are Biased across Languages (arXiv:2607.14480v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",

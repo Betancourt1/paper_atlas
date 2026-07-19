@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
 - Manifest revision: `10`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -251,7 +251,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_1` — rendered immediately after `language_change_p1`.
 - Shared paragraph scope: `NONE`
@@ -439,7 +439,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_3` — rendered immediately after `language_change_p2`.
 - Shared paragraph scope: `NONE`
@@ -654,7 +654,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `NONE`
@@ -840,16 +840,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
-- Selected treatment: `NONE`
-- Selection rationale: Reimplementation must use the one exact original selected by revision 10; the previous multi-image set is rejected.
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_5_7_mechanism` — rendered immediately after `language_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE` — pending visual implementer rework.
-- Accessibility and fallback verification: `PENDING`
-- Desktop and mobile verification: `PENDING`
-- Evidence deviations: `REWORK_REQUIRED` — remove the rejected multi-image placement and preserve only the exact selected original.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-5.png`
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — the retained image has specific alt text; the focusable viewport, fallback, locator, attribution, license, and modification metadata remain present.
+- Desktop and mobile verification: `VERIFIED` — the retained original preserves intrinsic width inside figure-local overflow at 1440 × 1000 and 390 × 844, with focus, ArrowRight scrolling, a visible hint, and no document overflow.
+- Evidence deviations: `NONE`
 
 ## `language_example_p1`
 

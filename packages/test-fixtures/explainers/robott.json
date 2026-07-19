@@ -378,56 +378,6 @@
   ],
   "visuals": [
     {
-      "id": "visual_robott_source_figure_2_change",
-      "after_block_id": "rttt_change",
-      "after_paragraph_id": "rttt_change_p2",
-      "delivery_medium": "source asset",
-      "type": "PARALLEL_VIEW",
-      "title": "Fast-weight architecture and truncated training",
-      "question": "What is different from adding more history frames?",
-      "items": [
-        {
-          "label": "Original source figure",
-          "detail": "Figures 2 and 4, PDF pages 4-5 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "rttt_architecture",
-        "rttt_training"
-      ],
-      "source_refs": [
-        "rttt_architecture_source"
-      ],
-      "interpretation": "This is the authors' original figures 2 and 4, pdf pages 4-5, placed here because it directly performs the paragraph's explanatory job.",
-      "limitations": [
-        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
-      ],
-      "alt_text": "Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates. Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence.",
-      "fallback": "Fast-weight architecture and truncated training. Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates. Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence.",
-      "source_asset": {
-        "images": [
-          {
-            "path": "/paper-assets/robott/figure-2.png",
-            "alt_text": "Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates."
-          },
-          {
-            "path": "/paper-assets/robott/figure-4.png",
-            "alt_text": "Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence."
-          }
-        ],
-        "locator": "Figures 2 and 4, PDF pages 4-5",
-        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
-        "license_label": "CC BY 4.0",
-        "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
-      }
-    },
-    {
       "id": "visual_robott_source_figure_2_mechanism",
       "after_block_id": "rttt_mechanism",
       "after_paragraph_id": "rttt_mechanism_p2",
@@ -485,7 +435,7 @@
       "items": [
         {
           "label": "Original source figure",
-          "detail": "Figures 2 and 4, PDF pages 4-5 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
+          "detail": "Figure 4, PDF page 5, reproduced beside the distinct claim it supports."
         },
         {
           "label": "Evidence boundary",
@@ -501,24 +451,20 @@
         "rttt_architecture_source",
         "rttt_training_source"
       ],
-      "interpretation": "This is the authors' original figures 2 and 4, pdf pages 4-5, placed here because it directly performs the paragraph's explanatory job.",
+      "interpretation": "This is the authors original figure 4, pdf page 5, placed here because it directly performs this paragraphs distinct explanatory job.",
       "limitations": [
         "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Original Figure 2 showing the model's training and inference paths. Original Figure 4 showing gradient truncation while fast weights persist across segments.",
-      "fallback": "Sequence training preserves inference-time state. Original Figure 2 showing the model's training and inference paths. Original Figure 4 showing gradient truncation while fast weights persist across segments.",
+      "alt_text": "Original Figure 4 showing gradient truncation while fast weights persist across segments.",
+      "fallback": "Sequence training preserves inference-time state. Original Figure 4 showing gradient truncation while fast weights persist across segments.",
       "source_asset": {
         "images": [
-          {
-            "path": "/paper-assets/robott/figure-2.png",
-            "alt_text": "Original Figure 2 showing the model's training and inference paths."
-          },
           {
             "path": "/paper-assets/robott/figure-4.png",
             "alt_text": "Original Figure 4 showing gradient truncation while fast weights persist across segments."
           }
         ],
-        "locator": "Figures 2 and 4, PDF pages 4-5",
+        "locator": "Figure 4, PDF page 5",
         "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
