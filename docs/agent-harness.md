@@ -106,10 +106,14 @@ silently becoming stale.
      spatial structure, or changing representation.
    - Record a reason when prose is the better treatment.
    - Reject generic box sequences that only restate the prose.
+   - Reject templates that could fit unrelated paragraphs by substituting
+     labels, and reject ellipsized prose as diagram copy.
    - Supply three distinct treatments with TikZ, Mermaid, and Python code for
      each; recommend SVG, CSS, or JavaScript for web-native delivery when apt.
 5. Have `visual_implementer` select, implement, and record one treatment for
    every YES paragraph.
+   - One visual may serve adjacent YES paragraphs only when the manifest gives
+     them a shared explanatory scope and visual ID.
 6. Invoke a fresh `VISUAL_QA` with only the evidence, manifest, implementation,
    rendered pages, and scoring brief. It scores every paragraph and both agents
    without modifying their work.

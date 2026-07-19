@@ -64,6 +64,7 @@ Repeat this structure for every prose paragraph, including prose-only decisions:
 - Selection rationale:
 - Delivery medium: `SVG | CSS | JavaScript | HTML | generated asset | NONE`
 - Visual ID and placement:
+- Shared paragraph scope: `NONE` or the complete list of paragraph IDs served
 - Changed files:
 - Accessibility and fallback verification:
 - Desktop and mobile verification:
@@ -75,6 +76,13 @@ not palette, orientation, or decoration variants. The three code forms are
 reproducible specifications for each treatment; the implementer may translate
 the selected treatment into CSS, JavaScript, or SVG when that is the clearest
 web delivery.
+
+A treatment is not acceptable when the same topology and wording could be used
+for an unrelated paragraph by substituting labels. Use content-specific marks,
+relationships, and data with concise complete labels; never put ellipsized
+source prose into a visual. A single implemented visual may cover adjacent YES
+paragraphs only when each record names the shared paragraph scope and points to
+the same visual ID.
 
 ## QA report
 

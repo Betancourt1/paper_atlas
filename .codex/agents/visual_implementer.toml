@@ -8,6 +8,9 @@ the three proposed treatments, implement it beside the paragraph it explains,
 and record the selection, rationale, delivery medium, changed files, visual ID,
 and verification evidence in the manifest. For a paragraph marked NO, do not
 add a visual unless the data visualization engineer first revises the decision.
+Adjacent YES records may share one implemented visual only when the manifest
+explicitly identifies that shared scope and each record points to the same
+visual ID.
 
 Use the simplest truthful medium. CSS, JavaScript, and SVG are recommended
 first-class web illustration tools; TikZ, Mermaid, and Python may generate

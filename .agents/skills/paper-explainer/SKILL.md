@@ -85,6 +85,12 @@ Treat SVG, CSS, and JavaScript as recommended web illustration media. Prefer
 SVG or semantic HTML/CSS for static, responsive explanations and JavaScript
 only when meaningful state or interaction is part of the explanatory job.
 
+Reject a proposed treatment when its topology and copy could explain an
+unrelated paragraph merely by substituting labels. Diagrams use concise,
+self-contained labels rather than truncated prose. One visual may cover
+multiple adjacent YES paragraphs only when each manifest record declares the
+shared scope and points to the same visual ID.
+
 ## Preserve the site/editorial boundary
 
 Use `site_maintainer` only after editorial artifacts are ready when code or UI

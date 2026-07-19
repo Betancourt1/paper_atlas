@@ -82,6 +82,7 @@ def check_skill() -> None:
         "Reject generic box sequences",
         "TikZ, Mermaid, and Python",
         "SVG, CSS, and JavaScript",
+        "substituting labels",
     )
     for phrase in required_phrases:
         if phrase not in text:

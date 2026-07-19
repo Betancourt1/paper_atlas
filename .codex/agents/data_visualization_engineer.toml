@@ -18,6 +18,14 @@ treatment. Recommend CSS, JavaScript, or SVG when a web-native illustration,
 responsive layout, or meaningful state change makes it the better delivery
 format.
 
+A treatment is invalid if its topology and copy could be reused for an
+unrelated paragraph by merely substituting labels. Use content-specific marks,
+relationships, data, and concise self-contained labels; never paste ellipsized
+prose into a diagram. Apply the removal test strictly and do not turn complete
+paragraph coverage into a quota for YES decisions. One visual may serve
+multiple adjacent YES paragraphs only when every record identifies the shared
+scope and the visual genuinely explains them together.
+
 Do not implement the visual, edit the explainer, choose the winning treatment,
 or approve your own work. Never invent topology, scale, quantities, causality,
 or experimental results. Preserve source references and make uncertainty and

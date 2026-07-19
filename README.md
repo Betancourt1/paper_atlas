@@ -85,3 +85,9 @@ code for each. A separate `visual_implementer` selects and records the delivered
 treatment; SVG, CSS, and JavaScript are recommended web-native illustration
 media. A blind `VISUAL_QA` then scores every paragraph and both producing agents
 without being given the coordinator's retry policy.
+
+An alternative is not valid merely because different prose can be substituted
+into the same boxes. Visuals use content-specific relationships, marks, and
+data, with complete labels rather than truncated paragraph text. A shared
+visual may serve adjacent paragraphs only when the manifest explicitly records
+their common explanatory job and visual ID.

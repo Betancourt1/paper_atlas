@@ -58,6 +58,10 @@ are recommended delivery media alongside generated assets: prefer SVG or
 semantic HTML/CSS for static responsive explanations, and use JavaScript when
 state or interaction is essential. The implementation may translate a proposed
 treatment into a web-native form without changing its evidence or encoding.
+One implemented visual may serve multiple adjacent YES paragraphs only when
+each paragraph record identifies the shared scope and points to the same visual
+ID. This is grouping by explanatory job, not permission to use one generic
+visual for unrelated claims.
 
 A separate `VISUAL_QA` report scores every paragraph for both planning and
 implementation and gives a separate aggregate score to each producing agent.
@@ -119,6 +123,9 @@ would only repeat the prose, or the evidence cannot support the implied
 topology, scale, or causality. A generic sequence of labeled boxes is not an
 illustration merely because it validates against a visual schema. It must
 encode a real relationship that the prose alone makes harder to understand.
+A proposed treatment also fails when its topology and wording could be reused
+for an unrelated paragraph by substituting labels. Use content-specific marks,
+data, and relationships with concise complete labels, never ellipsized prose.
 
 For every proposed visual, record:
 
