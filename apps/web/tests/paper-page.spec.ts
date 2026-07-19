@@ -41,6 +41,19 @@ const expectedSourceAssets: Record<string, Array<[string, string]>> = {
   ],
 };
 
+const revision14MobileAssets: Record<string, Array<[string, number, number]>> = {
+  visual_searchos_source_figure_2: [
+    ["figure-2-context-middleware-clean.png", 592, 276],
+    ["figure-2-socm-clean.png", 1818, 473],
+    ["figure-2-search-agent-skills-clean.png", 596, 802],
+  ],
+  trace_visual_source_figure_1_change: [
+    ["figure-1-success-clean.png", 2084, 949],
+    ["figure-1-failure-clean.png", 2084, 949],
+    ["figure-1-trajectory-plot.png", 850, 930],
+  ],
+};
+
 test("reviewed digest entry remains a source-backed explainer @visual", async ({ page }) => {
   await page.goto("/papers/paper_trace");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -251,6 +264,14 @@ test("original paper figures render at every approved source-asset paragraph @vi
         await expect.poll(() => image.evaluate((element) => (
           (element as HTMLImageElement).naturalWidth
         ))).toBeGreaterThan(0);
+      }
+      if (mobile && revision14MobileAssets[visualId]) {
+        expect(
+          await images.evaluateAll((elements) => elements.map((element) => {
+            const image = element as HTMLImageElement;
+            return [image.src.split("/").at(-1), image.naturalWidth, image.naturalHeight];
+          })),
+        ).toEqual(revision14MobileAssets[visualId]);
       }
       await expect(figure.getByText("Original figure", { exact: true })).toBeVisible();
       await expect(figure.getByText("Attribution", { exact: true })).toBeVisible();

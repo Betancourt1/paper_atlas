@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
 - Manifest revision: `14`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `17 / 17` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -329,16 +329,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct, but revision 14 requires the exact clean source-pixel crops and assemblies specified above; the revision-13 assets with clipped neighbors or branch fragments must not be retained.
+- Selection rationale: Treatment A is implemented with the exact revision-14 source-pixel bounds: the complete Context Middleware box, complete Search-Oriented Context Management region, and complete Search Agent Skills region are independent mobile blocks; rejected revision-13 composites were removed.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`; `apps/web/public/paper-assets/searchos/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING` — verify every specified crop is complete, excludes adjacent fragments, retains precise alt text and provenance, and matches the recorded source-pixel modification.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every mobile block is legible, fragment-free, blank-free, contained, and scrollbar-free.
-- Evidence deviations: `REVISION_13_REJECTED` — replace the failed mobile crop assets; do not alter the complete desktop original.
+- Accessibility and fallback verification: `VERIFIED` — each clean crop has block-specific alt text, exact source-pixel bounds and modifications, and unchanged locator, attribution, license, fallback, and complete desktop original.
+- Desktop and mobile verification: `VERIFIED` — source inspection and Playwright at 1440 × 1000 and 390 × 844 confirm the three mobile blocks are complete, fragment-free, contained, and scrollbar-free while desktop retains full Figure 2.
+- Evidence deviations: `NONE` — rejected revision-13 assets were removed; the complete desktop original was not altered.
 
 ## `sos_mechanism_p3`
 

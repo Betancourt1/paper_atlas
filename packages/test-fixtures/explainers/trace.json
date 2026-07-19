@@ -421,19 +421,23 @@
         ],
         "mobile_images": [
           {
-            "path": "/paper-assets/trace/mobile/figure-1-success.png",
-            "alt_text": "Original Figure 1 shared question and initial search context followed by the successful orange branch ending in Answer: Dublin."
+            "path": "/paper-assets/trace/mobile/figure-1-success-clean.png",
+            "alt_text": "Clean original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete successful orange branch ending in Answer: Dublin."
           },
           {
-            "path": "/paper-assets/trace/mobile/figure-1-failure.png",
-            "alt_text": "Original Figure 1 shared question and initial search context followed by the failed blue branch ending in Answer: Lisbon."
+            "path": "/paper-assets/trace/mobile/figure-1-failure-clean.png",
+            "alt_text": "Clean original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete failed blue branch ending in Answer: Lisbon."
+          },
+          {
+            "path": "/paper-assets/trace/mobile/figure-1-trajectory-plot.png",
+            "alt_text": "Complete original right-side trajectory plot showing the shared prefix followed by diverging positive and negative log-probability trajectories."
           }
         ],
         "locator": "Figure 1, PDF page 2",
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses two original-pixel branch composites with the shared question and initial-search context duplicated; outcomes and labels are unchanged."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile vertically assembles exact original-pixel question (x=12..2095, y=16..139), shared prefix (x=640..1469, y=205..524), and success or failure branch rows (x=12..831 or x=1264..2083, y=644..1148), then shows the complete trajectory plot crop (x=2335..3184, y=145..1074). No branch fragment, neighboring box, redraw, or resampling is included."
       }
     },
     {

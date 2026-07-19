@@ -477,23 +477,23 @@
         ],
         "mobile_images": [
           {
-            "path": "/paper-assets/searchos/mobile/figure-2-request-agents-output.png",
-            "alt_text": "Original Figure 2 request, agent-collaboration, and final-output zones reflowed vertically from their complete source-pixel modules."
+            "path": "/paper-assets/searchos/mobile/figure-2-context-middleware-clean.png",
+            "alt_text": "Complete original-pixel Context Middleware box from SearchOS Figure 2, including Search Agent Context Register and Manager and the Pre LLM Call Wrapper label, with no neighboring middleware boxes."
           },
           {
-            "path": "/paper-assets/searchos/mobile/figure-2-middleware.png",
-            "alt_text": "Original Figure 2 context, sensor, and evidence middleware modules reflowed vertically in their source reading order."
+            "path": "/paper-assets/searchos/mobile/figure-2-socm-clean.png",
+            "alt_text": "Complete original-pixel Search-Oriented Context Management region from SearchOS Figure 2, including Frontier Tasks, Evidence Graph, Coverage Map, and Failure Memory."
           },
           {
-            "path": "/paper-assets/searchos/mobile/figure-2-context-skills.png",
-            "alt_text": "Original Figure 2 Frontier Tasks, Evidence Graph, Coverage Map, Failure Memory, and Search Agent Skills modules reflowed vertically with every named boundary retained."
+            "path": "/paper-assets/searchos/mobile/figure-2-search-agent-skills-clean.png",
+            "alt_text": "Complete original-pixel Search Agent Skills region from SearchOS Figure 2, including Skill Library, Skill Builder, and Registry and Router, without the adjacent Toolset column."
           }
         ],
         "locator": "Figure 2, PDF page 4",
         "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses three semantic architecture-zone composites made only from original-pixel module crops in source reading order; no module, label, or connector was redrawn."
+        "modifications": "Desktop is the complete 200-DPI raster. Mobile uses exactly three original-pixel crops: Context Middleware at x=46..637, y=884..1159; Search-Oriented Context Management at x=18..1835, y=1167..1639; and Search Agent Skills at x=1928..2523, y=817..1618. No neighboring module, connector fragment, redraw, or resampling is included."
       }
     },
     {

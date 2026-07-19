@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
 - Manifest revision: `14`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -248,16 +248,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct, but revision 14 requires the exact clean source-pixel crops and assemblies specified above; the revision-13 assets with clipped neighbors or branch fragments must not be retained.
+- Selection rationale: Treatment A is implemented with the exact revision-14 question, shared-prefix, success-branch, failure-branch, and trajectory-plot bounds; rejected revision-13 branch composites were removed.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`; `apps/web/public/paper-assets/trace/mobile/`; `apps/web/app/papers/[id]/explainer-svg.tsx`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING` — verify every specified crop is complete, excludes adjacent fragments, retains precise alt text and provenance, and matches the recorded source-pixel modification.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every mobile block is legible, fragment-free, blank-free, contained, and scrollbar-free.
-- Evidence deviations: `REVISION_13_REJECTED` — replace the failed mobile crop assets; do not alter the complete desktop original.
+- Accessibility and fallback verification: `VERIFIED` — each composite or crop has block-specific alt text, exact source-pixel bounds and modifications, and unchanged locator, attribution, license, fallback, and complete desktop original.
+- Desktop and mobile verification: `VERIFIED` — source inspection and Playwright at 1440 × 1000 and 390 × 844 confirm complete question, prefix, branch, and plot blocks without neighboring fragments, clipping, internal overflow, or page overflow.
+- Evidence deviations: `NONE` — rejected revision-13 assets were removed; the complete desktop original was not altered.
 
 ## `trace_change_p2`
 
