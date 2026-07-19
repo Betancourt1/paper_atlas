@@ -245,7 +245,9 @@ En móvil:
 
 - el rail pasa a drawer o índice inline;
 - tablas pueden cambiar a filas apiladas, pero conservan comparabilidad;
-- las figuras no se reducen hasta ser ilegibles: usan scroll horizontal controlado o una variante móvil;
+- las figuras caben completas sin scroll interno ni overflow de página; usan
+  viewBox responsivo, escalado proporcional o una variante móvil con reflow o
+  paneles semánticos, sin reducir etiquetas y relaciones hasta ser ilegibles;
 - controles táctiles de al menos 44 × 44 px;
 - no se ocultan fuentes ni caveats.
 
@@ -292,4 +294,3 @@ Cada PR visual debe incluir:
 - auditoría de texto agregado/eliminado;
 - prueba de teclado y reduced motion;
 - lista explícita de desviaciones.
-
