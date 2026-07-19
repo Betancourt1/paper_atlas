@@ -60,6 +60,28 @@ def check_agents() -> None:
             if not isinstance(value, str) or not value.strip():
                 fail(f"{filename} requires a non-empty {key}")
 
+    engineer = str(
+        load_toml(AGENT_DIR / "data_visualization_engineer.toml")[
+            "developer_instructions"
+        ]
+    )
+    qa = str(load_toml(AGENT_DIR / "visual_qa.toml")["developer_instructions"])
+    for phrase in (
+        "one interchangeable element leading to the next",
+        "repeated one-dimensional dot tracks",
+        "the decision must be NO",
+    ):
+        if phrase not in engineer:
+            fail(f"data visualization engineer must retain {phrase!r}")
+    for phrase in (
+        "one interchangeable element leading to the next",
+        "repeated one-dimensional dot tracks",
+        "score the engineer 1/10",
+        "score the implementer 1/10",
+    ):
+        if phrase not in qa:
+            fail(f"visual QA must retain {phrase!r}")
+
 
 def check_skill() -> None:
     skill_path = SKILL_DIR / "SKILL.md"
@@ -79,7 +101,8 @@ def check_skill() -> None:
         "publication_reviewer",
         "Never substitute indexed metadata for an explanation",
         "every difficult concept",
-        "Reject generic box sequences",
+        "If the only honest illustration",
+        "repeated one-dimensional dot tracks",
         "TikZ, Mermaid, and Python",
         "SVG, CSS, and JavaScript",
         "substituting labels",
@@ -107,6 +130,7 @@ def check_routing_docs() -> None:
         "Visual explanation standard",
         "There is no one-visual-per-paper quota",
         "paragraph-level visual",
+        "does not accept four stock visual structures",
     )
     for phrase in required_readme_phrases:
         if phrase not in readme:

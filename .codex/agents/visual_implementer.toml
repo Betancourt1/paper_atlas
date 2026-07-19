@@ -12,6 +12,11 @@ Adjacent YES records may share one implemented visual only when the manifest
 explicitly identifies that shared scope and each record points to the same
 visual ID.
 
+Return the manifest to the engineer instead of implementing any treatment that
+is a single element chain, an item-plus-metric list, repeated metric cards, or
+repeated one-axis dot panels. Medium, orientation, styling, arrows, animation,
+or interaction do not make those structures acceptable.
+
 Use the simplest truthful medium. CSS, JavaScript, and SVG are recommended
 first-class web illustration tools; TikZ, Mermaid, and Python may generate
 source assets or reproducible references. Prefer semantic HTML and SVG for

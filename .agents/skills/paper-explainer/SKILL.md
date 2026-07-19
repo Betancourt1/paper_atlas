@@ -32,8 +32,9 @@ does not replace the paragraph manifest, implementation, or blind QA stages.
    claims. Paragraph IDs must be stable before visual planning begins.
 3. `data_visualization_engineer` writes
    `VISUAL_MANIFEST_{PAPER_NAME}.md` paragraph by paragraph. Every paragraph
-   receives a YES or NO decision, justification, three distinct acceptable
-   treatments, and TikZ, Mermaid, and Python code for each treatment.
+   receives a YES or NO decision and justification. Only YES paragraphs receive
+   three distinct acceptable treatments plus TikZ, Mermaid, and Python code;
+   NO paragraphs remain prose-only and do not manufacture visual alternatives.
 4. `visual_implementer` selects and builds one approved treatment for every YES
    decision, then records the choice and verification in the manifest. CSS,
    JavaScript, and SVG are recommended first-class delivery media.
@@ -72,9 +73,24 @@ Do not treat “one visual per paper” as a quality target. A visual is necessa
 when removing it would force readers to reconstruct an important relationship
 and materially increase cognitive load or misunderstanding.
 
-Reject generic box sequences that only restate prose. They qualify only when
-the concept is inherently linear and the visual encoding adds meaning beyond
-the prose.
+Use YES only for complex arguments, non-trivial relationships, explanatory
+metaphors, genuinely complex processes, quantitative structures, uncertainty,
+hierarchies, spatial topologies, or changing state. A simple sequence,
+inventory, or set of values remains prose. If the only honest illustration is
+one of the following structures, record NO:
+
+1. one interchangeable element leading to the next in a single chain;
+2. a list of elements with one metric or value beside each;
+3. repeated cards showing the same metric for different segments or objects;
+4. repeated one-dimensional dot tracks or panels, one object or metric at a
+   time.
+
+These structures are forbidden regardless of orientation, medium, styling,
+arrows, loops, animation, or interaction. Complex-process visuals must expose
+branching, concurrency, feedback, state transitions, dependencies, failure
+conditions, or spatial structure. Charts must expose a meaningful shared
+scale, distribution, uncertainty, joint relationship, or another non-trivial
+quantitative structure.
 
 Place each approved visual beside the claim or mechanism it explains. Require
 equivalent text, evidence, limitations, and accessible static behavior. Use

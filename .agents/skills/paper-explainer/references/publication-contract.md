@@ -46,10 +46,12 @@ The approved draft receives one versioned
 `VISUAL_MANIFEST_{PAPER_NAME}.md`. The `data_visualization_engineer` audits
 every stable prose paragraph, not only difficult concepts or planned figures.
 For each paragraph it records a YES or NO visual decision, its evidence-backed
-rationale, three distinct acceptable treatments, and complete minimal TikZ,
-Mermaid, and Python generation code for each treatment. A NO decision still
-receives three contingency treatments so the decision can be inspected rather
-than inferred.
+rationale, a complexity warrant, and a forbidden-structure audit. A YES
+decision receives three distinct acceptable treatments and complete minimal
+TikZ, Mermaid, and Python generation code for each treatment. A NO decision
+receives no visual treatments or code: it records why prose is the correct
+form. Revision-5 manifests retain the older shape as legacy debt; revision 6
+and later use this rule.
 
 The `visual_implementer` selects one treatment for every YES decision, builds
 it, and records the selected treatment, rationale, delivery medium, placement,
@@ -106,22 +108,46 @@ cognitive load or the risk of misunderstanding. This commonly applies when:
   visibly distinct;
 - a limitation applies to only one stage, measurement, or result.
 
+### Forbidden stock structures
+
+Do not illustrate a paragraph when its only honest treatment is one of these
+rendered structures:
+
+1. one interchangeable element leading to the next in a single chain;
+2. a list of elements with one metric or value beside each;
+3. repeated cards showing the same metric for different segments or objects;
+4. repeated one-dimensional dot tracks or panels, one object or metric at a
+   time.
+
+They are forbidden regardless of orientation, medium, styling, arrows, loops,
+animation, or interaction. They remain forbidden when relabeled as a pipeline,
+timeline, evidence matrix, comparison view, small multiple, or dashboard.
+
+A YES decision requires a specific complexity warrant: a complex argument,
+non-trivial relationship, explanatory metaphor, genuinely complex process,
+quantitative structure, uncertainty, hierarchy, spatial topology, or changing
+state that prose would force readers to reconstruct. A complex-process visual
+must expose branching, concurrency, feedback, state transitions, dependencies,
+failure conditions, or spatial structure. A chart must expose a meaningful
+shared scale, distribution, uncertainty, joint relationship, or another
+non-trivial quantitative structure. Otherwise choose prose.
+
 Match the form to the explanatory need:
 
 | Explanatory need | Preferred form |
 | --- | --- |
-| Ordered transformation | Process or pipeline diagram |
-| Feedback or repeated updating | Control-loop or state-transition diagram |
+| Ordered transformation with non-trivial branching or dependencies | State-transition, dependency, or annotated process map |
+| Feedback or repeated updating | State-transition or causal-loop diagram with changing state |
 | Components and connections | Architecture or system schematic |
 | Branching or decomposition | Decision tree, hierarchy, or partition map |
-| Change over time | Timeline, sequence diagram, or restrained animation |
-| Relative results | Bar chart, dot plot, slope chart, or small multiples |
+| Change over time | State/change diagram or restrained animation that exposes consequential transitions |
+| Relative results | Shared-scale chart, slope chart, distribution view, or multivariate comparison |
 | Distribution and uncertainty | Distribution or interval plot |
-| Methods under shared criteria | Comparison matrix |
-| Claims with different support | Evidence matrix or claim map |
+| Methods under shared criteria | Shared-scale analytical chart or relational claim map |
+| Claims with different support | Claim-evidence network or support topology |
 | Spatial or geometric reasoning | Annotated geometric illustration |
-| Stepwise internal operation | Numbered mechanism walkthrough |
-| Change between representations | Parallel-view or before-and-after diagram |
+| Stepwise internal operation | Dependency/state map that exposes non-trivial internal relations |
+| Change between representations | Transformation map with explicit correspondences and losses |
 
 Use a source figure when it already answers the pedagogical question and its
 license permits reuse. Create a custom static illustration when the source
@@ -131,10 +157,9 @@ state. Use animation only when time, order, accumulation, feedback, or changing
 state cannot be communicated as clearly in a static view.
 
 Do not add a visual when prose is already short and unambiguous, the visual
-would only repeat the prose, or the evidence cannot support the implied
-topology, scale, or causality. A generic sequence of labeled boxes is not an
-illustration merely because it validates against a visual schema. It must
-encode a real relationship that the prose alone makes harder to understand.
+would only repeat the prose, the evidence cannot support the implied topology,
+scale, or causality, or every available form is forbidden above. A generic
+sequence of labeled boxes is never an illustration for Paper Atlas.
 A proposed treatment also fails when its topology and wording could be reused
 for an unrelated paragraph by substituting labels. Use content-specific marks,
 data, and relationships with concise complete labels, never ellipsized prose.

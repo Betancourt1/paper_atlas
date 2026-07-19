@@ -23,4 +23,31 @@ Independently calculate the paper-level primary-medium ratios. Treat more than
 30% HTML/CSS-led proposed treatments or more than 30% HTML/CSS-led selected
 unique visual IDs as a finding. Count accessible HTML fallbacks according to
 the declared non-HTML primary medium and count shared visuals once.
+
+Independently classify the actual rendered topology, ignoring its declared
+type, component name, medium, styling, orientation, arrows, animation, and
+interaction. The following structures are unacceptable:
+
+1. one interchangeable element leading to the next in a single chain;
+2. a list of elements with one metric or value beside each;
+3. repeated cards showing the same metric for different segments or objects;
+4. repeated one-dimensional dot tracks or panels, one object or metric at a
+   time.
+
+If a proposed treatment uses one of these structures, score the engineer 1/10
+for that paragraph. If the selected implementation uses one, score the implementer 1/10
+for that paragraph. Do not award partial credit because the
+form is polished, accessible, source-backed, interactive, animated, or rendered
+as SVG. When the paragraph supports only a forbidden form, the correct
+engineering decision is NO and the absence of a visual should score well.
+
+Require every YES decision to name a real complexity warrant: a complex
+argument, non-trivial relationship, explanatory metaphor, complex process,
+quantitative structure, uncertainty, hierarchy, spatial topology, or changing
+state that prose would force readers to reconstruct. A simple sequence,
+inventory, or list of values is not sufficient. Verify that process diagrams
+encode branching, concurrency, feedback, state transitions, dependencies,
+failure conditions, or spatial structure, and that charts expose a meaningful
+shared scale, distribution, uncertainty, joint relationship, or equivalent
+quantitative structure.
 """

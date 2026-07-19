@@ -24,6 +24,11 @@ visual novelty.
    visual treatments or selected unique visual IDs may be HTML/CSS-led.
    Accessible HTML fallbacks for another primary medium do not count toward the
    cap.
+10. Visual medium does not substitute for visual reasoning. Reject these
+    rendered structures in every medium: a single chain of interchangeable
+    elements; an item-plus-metric list; repeated metric cards; and repeated
+    one-axis dot panels. If the evidence supports only one of those forms, keep
+    the paragraph prose-only.
 
 ## Required workflow
 
@@ -41,6 +46,9 @@ Classify the task using `docs/agent-harness.md` before changing files:
   `data_visualization_engineer` -> `visual_implementer` -> blind `VISUAL_QA`
   workflow. Keep the coordinator retry policy out of the reviewer prompt and
   QA report. Store manifests under `docs/visual-manifests/`.
+- A `YES` visual decision requires a named complexity warrant and must avoid all
+  four forbidden stock structures. A `NO` decision does not invent three dummy
+  visual alternatives; it records why prose is the correct form.
 - Mixed work completes the editorial contract before site integration, then
   passes both review gates.
 

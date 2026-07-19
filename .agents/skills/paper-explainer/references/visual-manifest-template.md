@@ -23,8 +23,19 @@ Repeat this structure for every prose paragraph, including prose-only decisions:
 - Text anchor: "{short excerpt}"
 - Claims and sources: `{claim_ids and source references}`
 - Visual needed: `YES | NO`
+- Complexity warrant: `{specific non-trivial structure | NONE — prose is sufficient}`
+- Forbidden-structure audit: `PASS | NO_VISUAL`
 - Decision rationale: {why a visual reduces reconstruction or why prose wins}
 - Explanatory job: {process, architecture, comparison, uncertainty, etc.}
+
+For `NO`, stop here and add the implementation record with `NOT_NEEDED`,
+`NONE`, and `NO_VISUAL`. Do not add Treatment A, B, or C and do not write dummy
+visual code.
+
+For `YES`, `Complexity warrant` must name the specific complex argument,
+non-trivial relationship, metaphor, complex process, quantitative structure,
+uncertainty, hierarchy, spatial topology, or changing state. The
+`Forbidden-structure audit` must be `PASS`, and the three treatments follow.
 
 ### Treatment A — {distinct concept}
 
@@ -78,6 +89,10 @@ reproducible specifications for each treatment; the implementer may translate
 the selected treatment into CSS, JavaScript, or SVG when that is the clearest
 web delivery.
 
+Treatments exist only for YES decisions. A revision-6-or-later NO record fails
+the contract if it contains Treatment A, B, or C. This prevents paragraph
+coverage from generating speculative or decorative diagrams.
+
 Across the complete paper manifest, no more than 30% of proposed treatments
 may use `HTML/CSS` as their primary delivery medium. No more than 30% of the
 selected unique visual IDs may use `HTML/CSS` as their delivery medium. Count a
@@ -92,6 +107,21 @@ source prose into a visual. A single implemented visual may cover adjacent YES
 paragraphs only when each record names the shared paragraph scope and points to
 the same visual ID.
 
+The following rendered structures are forbidden for proposals and
+implementations, regardless of medium, orientation, styling, arrows, animation,
+or interaction:
+
+1. a single chain of interchangeable elements;
+2. an item-plus-metric list;
+3. repeated same-metric cards by segment or object;
+4. repeated one-axis dot tracks or panels.
+
+If these are the only available forms, choose `NO`. A process treatment must
+encode non-trivial branching, concurrency, feedback, state transitions,
+dependencies, failure conditions, or spatial structure. A chart must encode a
+meaningful shared scale, distribution, uncertainty, joint relationship, or
+another non-trivial quantitative structure.
+
 ## QA report
 
 `VISUAL_QA` writes a separate report at
@@ -99,4 +129,6 @@ the same visual ID.
 revision and, for every paragraph ID, an engineer score, implementer score,
 evidence for each score, and actionable findings. It ends with separate
 aggregate scores for `data_visualization_engineer` and `visual_implementer`.
-The QA report never changes the manifest or implementation.
+The QA report never changes the manifest or implementation. It scores a
+paragraph 1/10 for the responsible agent when a proposal or implementation uses
+one of the four forbidden structures.

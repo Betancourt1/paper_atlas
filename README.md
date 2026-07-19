@@ -72,6 +72,15 @@ architecture, hierarchy, quantitative comparison, uncertainty, evidence
 strength, spatial structure, or changing representation. Generic text boxes
 that merely repeat the exposition do not count.
 
+Paper Atlas does not accept four stock visual structures: a single chain of
+interchangeable elements, an item-plus-metric list, repeated same-metric cards,
+or repeated one-axis dot panels. Changing their orientation, medium, styling,
+arrows, animation, or interaction does not make them acceptable. If those are
+the only honest options, the paragraph stays prose-only. YES is reserved for a
+complex argument, non-trivial relationship, explanatory metaphor, complex
+process, quantitative structure, uncertainty, hierarchy, spatial topology, or
+changing state that readers would otherwise have to reconstruct.
+
 Every selected visual must name its pedagogical question and evidence, disclose
 its limitations, sit beside the relevant explanation, and include equivalent
 text plus appropriate mobile, keyboard, screen-reader, and reduced-motion
@@ -80,19 +89,22 @@ feedback, or changing state cannot be explained as clearly in a static view.
 
 Every new or materially revised explainer uses a paragraph-level visual
 manifest. A `data_visualization_engineer` records a YES or NO decision for every
-paragraph and supplies three distinct treatments with TikZ, Mermaid, and Python
-code for each. A separate `visual_implementer` selects and records the delivered
-treatment; SVG, CSS, and JavaScript are recommended web-native illustration
-media. A blind `VISUAL_QA` then scores every paragraph and both producing agents
-without being given the coordinator's retry policy.
+paragraph. YES decisions supply three distinct treatments with TikZ, Mermaid,
+and Python code; NO decisions do not manufacture dummy visual alternatives. A
+separate `visual_implementer` selects and records the delivered treatment; SVG,
+CSS, and JavaScript are recommended web-native illustration media. A blind
+`VISUAL_QA` then scores every paragraph and both producing agents without being
+given the coordinator's retry policy. It assigns 1/10 to the responsible agent
+when a proposal or implementation uses a forbidden stock structure.
 
 Across one paper's complete proposal portfolio, no more than 30% of treatments
 may name HTML/CSS as their primary medium. The same 30% cap applies to the
 paper's selected unique visual IDs. An HTML fallback for an SVG, JavaScript,
 source, or generated asset remains required when appropriate but does not count
-as HTML/CSS-led. The eight revision-4 manifests predate this rule and are
-reported as legacy debt; every new manifest and every revision 5 or later must
-pass the cap.
+as HTML/CSS-led. Every new manifest and every revision 5 or later must pass the
+cap. Revision 6 and later also require a complexity warrant, the forbidden-form
+audit, and no visual treatments for NO decisions; earlier manifests migrate on
+their next revision.
 
 An alternative is not valid merely because different prose can be substituted
 into the same boxes. Visuals use content-specific relationships, marks, and

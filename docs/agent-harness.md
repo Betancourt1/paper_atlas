@@ -71,7 +71,7 @@ both review gates.
 | `paper_researcher` | Read only | Versioned, source-mapped evidence dossier |
 | `visual_editor` | Read only | Pedagogical visual decisions and specifications |
 | `explainer_writer` | Workspace write | Typed explainer candidate using approved claims |
-| `data_visualization_engineer` | Workspace write | Paragraph-level `VISUAL_MANIFEST_{PAPER_NAME}.md` with three coded treatments |
+| `data_visualization_engineer` | Workspace write | Paragraph audit with prose-only NO decisions and three coded treatments for warranted YES decisions |
 | `visual_implementer` | Workspace write | Implemented selections and manifest implementation records |
 | `VISUAL_QA` | QA-report write only | Independent paragraph and agent scores with evidence |
 | `publication_reviewer` | Read only | `PASS` or `CHANGES_REQUIRED` with evidence |
@@ -101,20 +101,26 @@ silently becoming stale.
    the paper's visual manifest from approved evidence.
    - Audit every paragraph; do not use a one-visual-per-paper quota.
    - Require a visual when prose would force error-prone mental reconstruction.
-   - Match the form to the relationship: process, feedback, architecture,
-     hierarchy, quantitative comparison, uncertainty, evidence strength,
-     spatial structure, or changing representation.
-   - Record a reason when prose is the better treatment.
-   - Reject generic box sequences that only restate the prose.
+   - Require a specific complexity warrant: a complex argument, non-trivial
+     relationship, explanatory metaphor, complex process, quantitative
+     structure, uncertainty, hierarchy, spatial topology, or changing state.
+   - Record a reason when prose is the better treatment. A NO decision has no
+     visual treatments or code in manifest revision 6 and later.
+   - Reject a single chain of interchangeable elements, an item-plus-metric
+     list, repeated same-metric cards, and repeated one-axis dot panels in every
+     medium and orientation. If only those forms are possible, choose NO.
    - Reject templates that could fit unrelated paragraphs by substituting
      labels, and reject ellipsized prose as diagram copy.
-   - Supply three distinct treatments with TikZ, Mermaid, and Python code for
-     each; recommend SVG, CSS, or JavaScript for web-native delivery when apt.
+   - For YES only, supply three distinct treatments with TikZ, Mermaid, and
+     Python code; recommend SVG, CSS, or JavaScript for web-native delivery when
+     apt.
    - Across the paper's complete proposal portfolio, cap HTML/CSS-led
      treatments at 30%. Record one explicit primary medium per treatment;
      accessible HTML fallbacks do not change that classification.
 5. Have `visual_implementer` select, implement, and record one treatment for
    every YES paragraph.
+   - Return a forbidden stock structure to the engineer instead of styling or
+     translating it into another medium.
    - One visual may serve adjacent YES paragraphs only when the manifest gives
      them a shared explanatory scope and visual ID.
    - Count shared visuals once by visual ID and cap HTML/CSS-led selections at
@@ -122,6 +128,8 @@ silently becoming stale.
 6. Invoke a fresh `VISUAL_QA` with only the evidence, manifest, implementation,
    rendered pages, and scoring brief. It scores every paragraph and both agents
    without modifying their work.
+   - It classifies the actual rendered topology, not component names, and gives
+     the responsible agent 1/10 for any forbidden stock structure.
 7. The coordinator applies its private acceptance policy. The reviewer is not
    told that policy. When the gate fails, both producing agents revise before a
    fresh blind QA pass.
@@ -149,14 +157,17 @@ description is not an explainer summary.
 - Visual review is concept-based: every difficult concept needs an explicit
   treatment decision, evidence, limitations, accessibility behavior, and a
   form that reduces cognitive load rather than decorating the page.
+- Manifest revision 6 removes treatment/code requirements from NO paragraphs,
+  requires a complexity warrant and forbidden-structure audit, and reserves
+  visual proposals for YES decisions.
 - `scripts/check-agent-harness.py` validates the configuration through the
   project's locked Python environment and is part of
   `make check`.
 - `scripts/check-visual-manifests.py` verifies exact fixture paragraph coverage,
-  the three-treatment/code contract, implementation state, and rejects
-  ellipsized diagram copy. It also enforces the 30% HTML/CSS cap for new and
-  revision-5-or-later manifests. Revision-4 manifests are reported as explicit
-  legacy debt and must comply on their next revision.
+  the YES-only three-treatment/code contract, implementation state, and rejects
+  ellipsized diagram copy. It enforces the 30% HTML/CSS cap for revision 5 and
+  later. For revision 6 and later it also requires a complexity warrant and
+  forbidden-form audit, and rejects visual treatments on NO paragraphs.
 - Schema validation, source-reference coverage, content evaluations, and the
   human editorial console remain product milestones; this repository harness
   must not claim they are implemented before they exist.

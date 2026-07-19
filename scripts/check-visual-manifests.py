@@ -12,6 +12,7 @@ MANIFEST_DIR = ROOT / "docs" / "visual-manifests"
 PARAGRAPH_HEADING = re.compile(r"(?m)^## `([^`]+)`$")
 MEDIA_CAP_PERCENT = 30
 MEDIA_CAP_REVISION = 5
+STOCK_FORM_REVISION = 6
 PRIMARY_MEDIA = {"HTML/CSS", "SVG", "JavaScript", "source asset", "generated asset"}
 
 
@@ -176,6 +177,25 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
     if decision_match is None or status_match is None:
         fail(f"{paragraph_id} has an invalid decision or implementation status")
     decision, status = decision_match.group(1), status_match.group(1)
+
+    if revision >= STOCK_FORM_REVISION:
+        require_once(record, "- Complexity warrant:", paragraph_id)
+        require_once(record, "- Forbidden-structure audit:", paragraph_id)
+        complexity = implementation_field(record, "Complexity warrant", paragraph_id)
+        stock_audit = implementation_field(
+            record, "Forbidden-structure audit", paragraph_id
+        ).strip().strip("`")
+        if decision == "YES":
+            if complexity.strip().upper().startswith("NONE"):
+                fail(f"{paragraph_id} is YES and requires a complexity warrant")
+            if stock_audit != "PASS":
+                fail(f"{paragraph_id} is YES and must pass the forbidden-form audit")
+        else:
+            if not complexity.strip().upper().startswith("NONE"):
+                fail(f"{paragraph_id} is NO and must use complexity warrant NONE")
+            if stock_audit != "NO_VISUAL":
+                fail(f"{paragraph_id} is NO and must use forbidden audit NO_VISUAL")
+
     if decision == "NO" and status != "NOT_NEEDED":
         fail(f"{paragraph_id} is NO and must be NOT_NEEDED")
     selected = implementation_field(record, "Selected treatment", paragraph_id)
@@ -202,10 +222,15 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
             fail(f"{paragraph_id} is NO and must use delivery medium NONE")
         visual_id = None
 
-    proposal_media = [
-        check_treatment(record, paragraph_id, label, revision)
-        for label in ("A", "B", "C")
-    ]
+    if revision >= STOCK_FORM_REVISION and decision == "NO":
+        if re.search(r"(?m)^### Treatment [ABC] —", record):
+            fail(f"{paragraph_id} is NO and must not contain visual treatments")
+        proposal_media: list[str] = []
+    else:
+        proposal_media = [
+            check_treatment(record, paragraph_id, label, revision)
+            for label in ("A", "B", "C")
+        ]
 
     return {
         "decision": decision,
