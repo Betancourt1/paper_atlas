@@ -87,56 +87,93 @@ export default async function PaperPage({ params }: PaperPageProps) {
       <article className="paper-explainer" aria-labelledby="paper-title">
         <PaperHeader paper={paper} explainer={explainer} />
 
-        <nav className="reading-guide" aria-labelledby="reading-guide-title">
-          <h2 id="reading-guide-title">Choose your reading depth</h2>
-          <ol>
-            <li>
-              <a href={`#${explainer.reading_paths.FIVE_MIN[0]}`}>5 minutes</a>
-              <span>Claim, mechanism, evidence, and limits</span>
-            </li>
-            <li>
-              <a href={`#${explainer.reading_paths.TWENTY_MIN[0]}`}>20 minutes</a>
-              <span>Full explanation with worked example</span>
-            </li>
-            <li>
-              <a href="#claim-ledger">Deep dive</a>
-              <span>Atomic claims, source locators, and glossary</span>
-            </li>
-            <li>
-              <a href={paper.source.url.toString()}>Original paper</a>
-              <span>Exact source version: {paper.version}</span>
-            </li>
-          </ol>
-        </nav>
+        <div className="paper-explainer__layout">
+          <ExplainerPageIndex explainer={explainer} />
 
-        <section className="explainer-tldr" aria-labelledby="tldr-title">
-          <p className="section-eyebrow">The short version</p>
-          <h2 id="tldr-title">What should you retain?</h2>
-          <ul>
-            {explainer.tldr.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
+          <div className="paper-explainer__content">
+            <nav className="reading-guide" aria-labelledby="reading-guide-title">
+              <h2 id="reading-guide-title">Choose your reading depth</h2>
+              <ol>
+                <li>
+                  <a href={`#${explainer.reading_paths.FIVE_MIN[0]}`}>5 minutes</a>
+                  <span>Claim, mechanism, evidence, and limits</span>
+                </li>
+                <li>
+                  <a href={`#${explainer.reading_paths.TWENTY_MIN[0]}`}>20 minutes</a>
+                  <span>Full explanation with worked example</span>
+                </li>
+                <li>
+                  <a href="#claim-ledger">Deep dive</a>
+                  <span>Atomic claims, source locators, and glossary</span>
+                </li>
+                <li>
+                  <a href={paper.source.url.toString()}>Original paper</a>
+                  <span>Exact source version: {paper.version}</span>
+                </li>
+              </ol>
+            </nav>
 
-        <div className="explainer-blocks">
-          {explainer.blocks.map((block) => (
-            <div key={block.id}>
-              <ExplainerBlock
-                block={block}
-                claimsById={claimsById}
-                sourcesById={sourcesById}
-                visualsByParagraphId={visualsByParagraphId}
-              />
+            <section
+              id="short-version"
+              className="explainer-tldr"
+              aria-labelledby="tldr-title"
+            >
+              <p className="section-eyebrow">The short version</p>
+              <h2 id="tldr-title">What should you retain?</h2>
+              <ul>
+                {explainer.tldr.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <div className="explainer-blocks">
+              {explainer.blocks.map((block) => (
+                <div key={block.id}>
+                  <ExplainerBlock
+                    block={block}
+                    claimsById={claimsById}
+                    sourcesById={sourcesById}
+                    visualsByParagraphId={visualsByParagraphId}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <ClaimLedger explainer={explainer} sourcesById={sourcesById} />
-        <Glossary explainer={explainer} />
-        <References explainer={explainer} />
+            <ClaimLedger explainer={explainer} sourcesById={sourcesById} />
+            <Glossary explainer={explainer} />
+            <References explainer={explainer} />
+          </div>
+        </div>
       </article>
     </main>
+  );
+}
+
+function ExplainerPageIndex({ explainer }: { explainer: ExplainerDocument }) {
+  return (
+    <nav className="explainer-page-index" aria-labelledby="page-index-title">
+      <p id="page-index-title">On this page</p>
+      <ol>
+        <li>
+          <a href="#short-version">Short version</a>
+        </li>
+        {explainer.blocks.map((block) => (
+          <li key={block.id}>
+            <a href={`#${block.id}`}>{blockLabels[block.type]}</a>
+          </li>
+        ))}
+        <li>
+          <a href="#claim-ledger">Claim ledger</a>
+        </li>
+        <li>
+          <a href="#glossary">Glossary</a>
+        </li>
+        <li>
+          <a href="#references">Sources</a>
+        </li>
+      </ol>
+    </nav>
   );
 }
 
@@ -300,7 +337,11 @@ function ClaimLedger({
 
 function Glossary({ explainer }: { explainer: ExplainerDocument }) {
   return (
-    <section className="explainer-glossary" aria-labelledby="glossary-title">
+    <section
+      id="glossary"
+      className="explainer-glossary"
+      aria-labelledby="glossary-title"
+    >
       <p className="section-eyebrow">Terms</p>
       <h2 id="glossary-title">Glossary</h2>
       <dl>
@@ -322,7 +363,11 @@ function References({ explainer }: { explainer: ExplainerDocument }) {
       : "draft; independent review is still required";
 
   return (
-    <section className="explainer-references" aria-labelledby="references-title">
+    <section
+      id="references"
+      className="explainer-references"
+      aria-labelledby="references-title"
+    >
       <p className="section-eyebrow">Provenance</p>
       <h2 id="references-title">Sources and exact locators</h2>
       <ol>

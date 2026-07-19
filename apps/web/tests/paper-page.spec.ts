@@ -54,6 +54,66 @@ const revision18MobileAssets: Record<string, Array<[string, number, number]>> = 
   ],
 };
 
+test("paper navigation, theme, and repository link work across viewports", async ({ page }) => {
+  await page.goto("/papers/paper_trace");
+
+  const pageIndex = page.getByRole("navigation", { name: "On this page" });
+  await expect(pageIndex).toBeVisible();
+  await expect(
+    pageIndex.getByRole("link", { name: "Short version" }),
+  ).toBeVisible();
+  await expect(
+    pageIndex.getByRole("link", { name: "Claim ledger" }),
+  ).toBeVisible();
+
+  await pageIndex.getByRole("link", { name: "Claim ledger" }).click();
+  await expect(page).toHaveURL(/#claim-ledger$/);
+  await expect(page.getByRole("heading", { name: "Claim ledger" })).toBeVisible();
+
+  const mobile = page.viewportSize()!.width < 1000;
+  await expect(pageIndex).toHaveCSS("position", mobile ? "static" : "sticky");
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+
+  await expect(page.getByText("Menu", { exact: true })).toHaveCount(0);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Papers" }),
+  ).toBeVisible();
+
+  const repositoryLink = page.getByRole("link", { name: "GitHub repository" });
+  await expect(repositoryLink).toBeVisible();
+  await expect(repositoryLink).toHaveAttribute(
+    "href",
+    "https://github.com/Betancourt1/paper_atlas",
+  );
+  await expect(repositoryLink.locator("svg")).toHaveCount(1);
+
+  const themeToggle = page.getByRole("button", { name: "Dark mode" });
+  await expect(themeToggle).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(themeToggle).toHaveAttribute("aria-pressed", "false");
+  await themeToggle.focus();
+  await expect(themeToggle).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(themeToggle).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("body")).toHaveCSS(
+    "background-color",
+    "rgb(23, 23, 20)",
+  );
+
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(
+    page.getByRole("button", { name: "Dark mode" }),
+  ).toHaveAttribute("aria-pressed", "true");
+});
+
 test("reviewed digest entry remains a source-backed explainer @visual", async ({ page }) => {
   await page.goto("/papers/paper_trace");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
