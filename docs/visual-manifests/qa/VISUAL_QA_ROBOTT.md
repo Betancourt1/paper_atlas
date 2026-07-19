@@ -1,43 +1,34 @@
-# Blind VISUAL_QA — RoboTTT: Context Scaling for Robot Policies
+# Blind visual QA — RoboTTT
 
-## Verdict
+Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
 
-PASS. Paragraph average: semantic **9.00/10**, visual **8.94/10**; minimum individual score **8/10**.
+| Paragraph | E | I | Evidence |
+|---|---:|---:|---|
+| `rttt_why_p1` | 9 | 9 | Long-horizon memory motivation is concrete prose. |
+| `rttt_why_p2` | 9 | 9 | Cost-versus-state trade-off is clear without an invented chart. |
+| `rttt_change_p1` | 9 | 9 | Fast weights are introduced textually before the original architecture. |
+| `rttt_change_p2` | 9 | 9 | SAF and TBPTT distinctions need exact prose. |
+| `rttt_mechanism_p1` | 9 | 9 | Current-timestep attention versus cross-timestep TTT is concise. |
+| `rttt_mechanism_p2` | 10 | 5 | Original Figure 2 is exactly relevant and faithful, but its wide architecture labels become too small at 390 px. |
+| `rttt_mechanism_p3` | 10 | 5 | The supplied original training-sequence figure preserves the TBPTT boundary; mobile annotations are difficult to inspect. |
+| `rttt_example_p1` | 9 | 9 | Circuit demonstration setup is sequential prose with no warranted standalone visual. |
+| `rttt_example_p2` | 9 | 9 | The conditioned trajectory and 6/10 result remain bounded in text. |
+| `rttt_evidence_p1` | 10 | 5 | Original Figure 7 supplies the actual completion comparison and full provenance, but mobile bar labels are small. |
+| `rttt_evidence_p2` | 10 | 5 | Original Figure 8 is the relevant scaling result and remains undistorted; its mobile axes/legend are marginal. |
+| `rttt_evidence_p3` | 9 | 9 | Recovery comparisons and the GDN caveat are clearer in prose. |
+| `rttt_limitations_p1` | 9 | 9 | Backbone, setup, and task-family limits are qualitative. |
+| `rttt_limitations_p2` | 9 | 9 | Trial counts and absent latency evidence should not be charted as a result. |
+| `rttt_review_p1` | 9 | 9 | Mechanism-to-evidence synthesis is already supported by originals. |
+| `rttt_review_p2` | 9 | 9 | Missing backbones, embodiments, uncertainty, and latency remain explicit prose. |
 
-## Paragraph scores
+## Render and policy findings
 
-| Paragraph | Semantic accuracy | Rationale | Visual decision / execution | Rationale |
-|---|---:|---|---:|---|
-| `rttt_why_p1` | 9/10 | Bounded, source-aware account of “A robot acting for minutes must remember which stages…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_why_p2` | 9/10 | Bounded, source-aware account of “Full attention over an ever-growing history makes each new…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_change_p1` | 9/10 | Bounded, source-aware account of “RoboTTT does not keep the complete history available for…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_change_p2` | 9/10 | Bounded, source-aware account of “The paper combines this state mechanism with two training…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_mechanism_p1` | 9/10 | Bounded, source-aware account of “RoboTTT is instantiated on GR00T N1.7. Its vision-language model…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_mechanism_p2` | 9/10 | Bounded, source-aware account of “At each step, projected keys and values define an…” | 9/10 | Original Figure 2 directly shows training and recurrent inference, with readable native-pixel inspection. |
-| `rttt_mechanism_p3` | 9/10 | Bounded, source-aware account of “The updated weights become the next timestep's recurrent state…” | 8/10 | Original Figure 4 is relevant to propagated state, but its generic question duplicates the prior placement. |
-| `rttt_example_p1` | 9/10 | Bounded, source-aware account of “For the Circuit task, a human first assembles an…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_example_p2` | 9/10 | Bounded, source-aware account of “After the scene is reset, the robot receives the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_evidence_p1` | 9/10 | Bounded, source-aware account of “Across Pup Go Car, Circuit, and Gear Bot, RoboTTT…” | 9/10 | Original Figure 7 directly supports the main completion results and keeps exact experimental encoding. |
-| `rttt_evidence_p2` | 9/10 | Bounded, source-aware account of “In the context-scaling study, average completion rises from 43.9%…” | 9/10 | Original Figure 8 directly supports context scaling; dense labels remain available via scrolling. |
-| `rttt_evidence_p3` | 9/10 | Bounded, source-aware account of “RoboTTT recovers from roof and tire perturbations in 15…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_limitations_p1` | 9/10 | Bounded, source-aware account of “The authors note that longer-context training costs more, the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_limitations_p2` | 9/10 | Bounded, source-aware account of “Trial counts are 20 per task, or 10 for…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_review_p1` | 9/10 | Bounded, source-aware account of “The mechanism is well matched to the problem: recurrent…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `rttt_review_p2` | 9/10 | Bounded, source-aware account of “The evidence is not yet a broad demonstration of…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-
-## Cross-cutting inspection
-
-- **Primary finding:** Four originals are relevant and non-duplicated, though the Figure 4 placement repeats the prior question wording instead of naming its distinct state-propagation role.
-- **Desktop/mobile legibility:** The renderer keeps source assets at intrinsic pixel dimensions inside a bounded horizontal viewport. Custom SVGs scale on desktop and become a 680 px keyboard-focusable horizontal canvas on narrow screens. This preserves labels without page-level overflow, at the cost of intentional scrolling for dense originals.
-- **Focus, scroll, and overflow:** Both source-asset regions and custom SVG containers are focusable; visible 3 px focus styling, contained overscroll, stable scrollbar gutters, and `document.scrollWidth <= innerWidth` assertions cover the interaction contract.
-- **Provenance:** Every original placement exposes figure/page locator, attribution, HTTPS license link, modification statement, alt text, claim links, and exact source locator. Custom visuals expose title, description, equivalent fallback, limitations, claims, and sources.
-- **Original-figure relevance:** 4 source-asset placement(s) were checked against their adjacent paragraph; no irrelevant or repeated original was found.
-- **PPA two-depth requirement:** Not applicable to this explainer.
-- **Repetition / forbidden structures:** No single interchangeable chain, item-plus-metric list, repeated metric cards, or repeated one-axis dot panels are used. Prose-only paragraphs correctly avoid inventing visuals.
-- **Medium share:** 0 custom SVG, 4 source asset, **0 HTML/CSS-led visuals**; HTML/CSS-led share is **0%**.
+- All four original figures fit completely at 1440×1000 and 390×844 with no scrollbars, page overflow, clipping, or aspect-ratio distortion.
+- Source relevance and provenance are strong for every placement; limitations and evidence links are present.
+- No custom forbidden stock structure is introduced. HTML/CSS-led primary visuals: 0 of 4 (0%).
+- All four mobile figures rely on shrink-to-fit; key labels and relationships are materially harder to read than on desktop.
 
 ## Checks
 
-- Fixture/manifests/assets/renderer/CSS inspection: PASS.
-- Focused Vitest renderer checks: PASS (2 files, 8 tests).
-- Focused Playwright visual run: NOT COMPLETED; local server bind was blocked by sandbox (`listen EPERM 127.0.0.1:3100`) before browser assertions ran.
+- Focused Playwright visual suite: 6 passed across both required viewport projects.
+- Geometry capture: 4/4 containers fit at both sizes; natural image dimensions loaded; page width equals viewport width.

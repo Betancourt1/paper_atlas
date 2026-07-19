@@ -1,43 +1,34 @@
-# Blind VISUAL_QA — LLM Evaluators are Biased across Languages
+# Blind visual QA — LLM Evaluators across Languages
 
-## Verdict
+Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
 
-PASS. Paragraph average: semantic **9.00/10**, visual **9.00/10**; minimum individual score **8/10**.
+| Paragraph | E | I | Evidence |
+|---|---:|---:|---|
+| `language_why_p1` | 9 | 9 | Invariance of pairwise order under offsets is concise and needs no decorative plot. |
+| `language_why_p2` | 9 | 9 | Threshold-use motivation is conceptual prose. |
+| `language_change_p1` | 10 | 5 | Original Figure 1 directly supplies the cross-language distribution, provenance, and fidelity, but dense panel labels are not comfortably legible at 390 px. |
+| `language_change_p2` | 10 | 5 | Original Figure 3 is source-relevant and undistorted; its multi-panel text becomes too small on mobile. |
+| `language_mechanism_p1` | 9 | 9 | Pair construction and normalization details require exact prose. |
+| `language_mechanism_p2` | 10 | 5 | Original Figure 4 is the correct scatter-panel evidence and avoids a speculative redraw, but mobile axes, legends, and points are difficult to inspect. |
+| `language_mechanism_p3` | 10 | 5 | The supplied original uncertainty/evaluator figure is faithful and relevant; mobile density prevents confident label reading. |
+| `language_example_p1` | 9 | 9 | The offset example is simpler in text than in another plot. |
+| `language_example_p2` | 9 | 9 | Threshold consequences are explicit and do not need repeated one-axis panels. |
+| `language_evidence_p1` | 9 | 9 | Accuracy findings are already represented by the nearby source figure. |
+| `language_evidence_p2` | 9 | 9 | Acceptance-rate differences need prose qualification. |
+| `language_evidence_p3` | 9 | 9 | Uncertainty association is bounded and avoids visual overclaim. |
+| `language_limitations_p1` | 9 | 9 | Dataset, evaluator, and language scope are qualitative boundaries. |
+| `language_limitations_p2` | 9 | 9 | Correlation and calibration cautions should not be pictured as causal findings. |
+| `language_review_p1` | 9 | 9 | The ranking-versus-threshold synthesis is concise prose. |
+| `language_review_p2` | 9 | 9 | Generalization limits remain clear without another visual. |
 
-## Paragraph scores
+## Render and policy findings
 
-| Paragraph | Semantic accuracy | Rationale | Visual decision / execution | Rationale |
-|---|---:|---|---:|---|
-| `language_why_p1` | 9/10 | Bounded, source-aware account of “Pairwise accuracy asks whether an evaluator ranks a preferred…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_why_p2` | 9/10 | Bounded, source-aware account of “Many real uses depend on absolute scores instead: a…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_change_p1` | 9/10 | Bounded, source-aware account of “The study keeps semantic content aligned across 23 professionally…” | 9/10 | Original Figure 1 is relevant and pixel-faithful, though dense labels require horizontal inspection on mobile. |
-| `language_change_p2` | 9/10 | Bounded, source-aware account of “The authors also connect score shifts to Common Crawl…” | 9/10 | Original Figure 3 supports the resource-level qualification; native-size scrolling preserves detail. |
-| `language_mechanism_p1` | 9/10 | Bounded, source-aware account of “Suppose an evaluator adds a language-conditioned baseline to every…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_mechanism_p2` | 9/10 | Bounded, source-aware account of “A global threshold exposes the mismatch: languages receiving higher…” | 10/10 | Original Figure 4 directly exposes accuracy-versus-acceptance divergence with exact axes and panels. |
-| `language_mechanism_p3` | 9/10 | Bounded, source-aware account of “Summed response negative log-likelihood serves as one uncertainty proxy…” | 8/10 | Original Figure 5 is relevant, but the generic interpretation describes it less precisely than the paragraph does. |
-| `language_example_p1` | 9/10 | Bounded, source-aware account of “For Skywork-LLaMA-8B, the paper rounds English to 93% pairwise…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_example_p2` | 9/10 | Bounded, source-aware account of “The paper also wraps Hindi Safety content in an…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_evidence_p1` | 9/10 | Bounded, source-aware account of “All eight core evaluators show statistically significant differences in…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_evidence_p2` | 9/10 | Bounded, source-aware account of “Under one global median threshold, the aggregate reward-model analysis…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_evidence_p3` | 9/10 | Bounded, source-aware account of “Uncertainty measures correlate positively with score at the language…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_limitations_p1` | 9/10 | Bounded, source-aware account of “The data are translated benchmark items, not naturally authored…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_limitations_p2` | 9/10 | Bounded, source-aware account of “The uncertainty-score association does not establish uncertainty as the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_review_p1` | 9/10 | Bounded, source-aware account of “The strongest result is a measurement warning: high pairwise…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-| `language_review_p2` | 9/10 | Bounded, source-aware account of “Per-language centering is a useful diagnostic and partial mitigation…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
-
-## Cross-cutting inspection
-
-- **Primary finding:** Four distinct originals cover distributions, resource level, the Figure 4 relationship, and uncertainty; the last placement has a less specific interpretation than its source image.
-- **Desktop/mobile legibility:** The renderer keeps source assets at intrinsic pixel dimensions inside a bounded horizontal viewport. Custom SVGs scale on desktop and become a 680 px keyboard-focusable horizontal canvas on narrow screens. This preserves labels without page-level overflow, at the cost of intentional scrolling for dense originals.
-- **Focus, scroll, and overflow:** Both source-asset regions and custom SVG containers are focusable; visible 3 px focus styling, contained overscroll, stable scrollbar gutters, and `document.scrollWidth <= innerWidth` assertions cover the interaction contract.
-- **Provenance:** Every original placement exposes figure/page locator, attribution, HTTPS license link, modification statement, alt text, claim links, and exact source locator. Custom visuals expose title, description, equivalent fallback, limitations, claims, and sources.
-- **Original-figure relevance:** 4 source-asset placement(s) were checked against their adjacent paragraph; no irrelevant or repeated original was found.
-- **PPA two-depth requirement:** Not applicable to this explainer.
-- **Repetition / forbidden structures:** No single interchangeable chain, item-plus-metric list, repeated metric cards, or repeated one-axis dot panels are used. Prose-only paragraphs correctly avoid inventing visuals.
-- **Medium share:** 0 custom SVG, 4 source asset, **0 HTML/CSS-led visuals**; HTML/CSS-led share is **0%**.
+- All four source figures fit completely at 1440×1000 and 390×844: no internal scrollbars, page overflow, clipping, or aspect-ratio error.
+- Each placement uses directly relevant original evidence with locator, attribution, license, modification record, claims, sources, and limitations.
+- The implementation introduces no custom forbidden stock structure. HTML/CSS-led primary visuals: 0 of 4 (0%).
+- Fit is technically correct, but responsive shrinking alone makes every dense original plot materially hard to read on mobile.
 
 ## Checks
 
-- Fixture/manifests/assets/renderer/CSS inspection: PASS.
-- Focused Vitest renderer checks: PASS (2 files, 8 tests).
-- Focused Playwright visual run: NOT COMPLETED; local server bind was blocked by sandbox (`listen EPERM 127.0.0.1:3100`) before browser assertions ran.
+- Focused Playwright visual suite: 6 passed on both required viewports.
+- Geometry capture: 4/4 containers fit at both sizes; all images loaded at natural dimensions; page width equals viewport width.
