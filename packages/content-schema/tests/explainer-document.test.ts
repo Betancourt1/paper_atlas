@@ -109,6 +109,79 @@ describe("ExplainerDocument schema", () => {
     expect(() => parseExplainerDocument(invalid)).toThrow("Invalid ExplainerDocument");
   });
 
+  it("accepts source-asset delivery with bounded local images and provenance", () => {
+    const sourceAssetExplainer = structuredClone(validExplainer);
+    sourceAssetExplainer.visuals[0].delivery_medium = "source asset";
+    sourceAssetExplainer.visuals[0].source_asset = {
+      images: [
+        {
+          path: "/paper-assets/schema-test/figure-1.png",
+          alt_text: "The original paper figure used by the schema test.",
+        },
+      ],
+      locator: "Figure 1, page 3",
+      attribution: "Test Author et al., Test Paper.",
+      license_label: "CC BY 4.0",
+      license_url: "https://creativecommons.org/licenses/by/4.0/",
+      modifications: "None.",
+    };
+
+    expect(validateExplainerDocument(sourceAssetExplainer)).toBe(true);
+  });
+
+  it("requires source-asset metadata exactly for source-asset delivery", () => {
+    const missingMetadata = structuredClone(validExplainer);
+    missingMetadata.visuals[0].delivery_medium = "source asset";
+
+    expect(validateExplainerDocument(missingMetadata)).toBe(false);
+    expect(() => parseExplainerDocument(missingMetadata)).toThrow(
+      "uses source asset delivery without source_asset metadata",
+    );
+
+    const unexpectedMetadata = structuredClone(validExplainer);
+    unexpectedMetadata.visuals[0].source_asset = {
+      images: [
+        {
+          path: "/paper-assets/schema-test/figure-1.png",
+          alt_text: "The original paper figure used by the schema test.",
+        },
+      ],
+      locator: "Figure 1, page 3",
+      attribution: "Test Author et al., Test Paper.",
+      license_label: "CC BY 4.0",
+      license_url: "https://creativecommons.org/licenses/by/4.0/",
+      modifications: "None.",
+    };
+
+    expect(validateExplainerDocument(unexpectedMetadata)).toBe(false);
+    expect(() => parseExplainerDocument(unexpectedMetadata)).toThrow(
+      "declares source_asset metadata for SVG delivery",
+    );
+  });
+
+  it("rejects a source asset outside the paper-assets namespace", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.visuals[0].delivery_medium = "source asset";
+    invalid.visuals[0].source_asset = {
+      images: [
+        {
+          path: "/other/figure-1.png",
+          alt_text: "A misplaced original paper figure.",
+        },
+      ],
+      locator: "Figure 1, page 3",
+      attribution: "Test Author et al., Test Paper.",
+      license_label: "CC BY 4.0",
+      license_url: "https://creativecommons.org/licenses/by/4.0/",
+      modifications: "None.",
+    };
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "source asset path must start with /paper-assets/",
+    );
+  });
+
   it("rejects dangling claim references", () => {
     const invalid = structuredClone(validExplainer);
     invalid.blocks[0].claim_ids = ["missing_claim"];

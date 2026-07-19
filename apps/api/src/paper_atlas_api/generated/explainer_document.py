@@ -166,6 +166,14 @@ class Limitation(RootModel[str]):
     root: Annotated[str, Field(max_length=500, min_length=1)]
 
 
+class SourceAssetImage(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    path: Annotated[str, Field(max_length=500, min_length=1)]
+    alt_text: Annotated[str, Field(max_length=1000, min_length=1)]
+
+
 class Role(StrEnum):
     MEASURED = 'MEASURED'
     DERIVED = 'DERIVED'
@@ -190,6 +198,18 @@ class GlossaryTerm(BaseModel):
     term: Annotated[str, Field(max_length=160, min_length=1)]
     definition: Annotated[str, Field(max_length=800, min_length=1)]
     source_refs: ReferenceList
+
+
+class SourceAsset(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    images: Annotated[list[SourceAssetImage], Field(max_length=3, min_length=1)]
+    locator: Annotated[str, Field(max_length=300, min_length=1)]
+    attribution: Annotated[str, Field(max_length=500, min_length=1)]
+    license_label: Annotated[str, Field(max_length=200, min_length=1)]
+    license_url: AnyUrl
+    modifications: Annotated[str, Field(max_length=500, min_length=1)]
 
 
 class VisualItem(BaseModel):
@@ -230,6 +250,7 @@ class Visual(BaseModel):
     limitations: Annotated[list[Limitation], Field(min_length=1)]
     alt_text: Annotated[str, Field(max_length=1000, min_length=1)]
     fallback: Annotated[str, Field(max_length=1000, min_length=1)]
+    source_asset: SourceAsset | None = None
 
 
 class ExplainerDocument(BaseModel):

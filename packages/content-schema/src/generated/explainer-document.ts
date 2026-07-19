@@ -133,6 +133,7 @@ export interface Visual {
   limitations: [string, ...string[]];
   alt_text: string;
   fallback: string;
+  source_asset?: SourceAsset;
 }
 export interface VisualItem {
   label: string;
@@ -156,6 +157,23 @@ export interface VisualAnnotation {
   label: string;
   detail: string;
   role?: "MEASURED" | "DERIVED" | "DISPUTED" | "BOUNDARY" | "AGGREGATE";
+}
+export interface SourceAsset {
+  /**
+   * @minItems 1
+   * @maxItems 3
+   */
+  images:
+    [SourceAssetImage] | [SourceAssetImage, SourceAssetImage] | [SourceAssetImage, SourceAssetImage, SourceAssetImage];
+  locator: string;
+  attribution: string;
+  license_label: string;
+  license_url: string;
+  modifications: string;
+}
+export interface SourceAssetImage {
+  path: string;
+  alt_text: string;
 }
 export interface GlossaryTerm {
   term: string;

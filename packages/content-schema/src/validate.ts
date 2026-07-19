@@ -128,6 +128,24 @@ export function getExplainerIntegrityErrors(
     reportUnknownIds(errors, `visual ${visual.id} claim`, visual.claim_ids, claimIds);
     reportUnknownIds(errors, `visual ${visual.id} source`, visual.source_refs, sourceIds);
 
+    if (visual.delivery_medium === "source asset") {
+      if (visual.source_asset === undefined) {
+        errors.push(`visual ${visual.id} uses source asset delivery without source_asset metadata`);
+      }
+    } else if (visual.source_asset !== undefined) {
+      errors.push(
+        `visual ${visual.id} declares source_asset metadata for ${visual.delivery_medium} delivery`,
+      );
+    }
+
+    for (const image of visual.source_asset?.images ?? []) {
+      if (!image.path.startsWith("/paper-assets/")) {
+        errors.push(
+          `visual ${visual.id} source asset path must start with /paper-assets/: ${image.path}`,
+        );
+      }
+    }
+
     const nodeIds = visual.items.flatMap((item) =>
       item.node_id === undefined ? [] : [item.node_id],
     );

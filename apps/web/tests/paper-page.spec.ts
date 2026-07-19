@@ -1,21 +1,58 @@
 import { expect, test } from "@playwright/test";
 
 const expectedVisuals: Record<string, Array<[string, string]>> = {
-  "/papers/paper_attention_is_all_you_need": [
-    ["visual_attention_query_key_field", "attn_mechanism_p2"],
-    ["visual_attention_decoder_dependencies", "attn_mechanism_p3"],
-  ],
+  "/papers/paper_attention_is_all_you_need": [],
   "/papers/paper_computational_propaganda": [["propaganda_visual_halflife_tree", "propaganda_example_p2"]],
   "/papers/paper_inkling": [["visual_inkling_sparse_routing_field", "ink_mechanism_p1"]],
-  "/papers/paper_llm_evaluators_languages": [["language_visual_ranking_acceptance_graph", "language_mechanism_p1"]],
+  "/papers/paper_llm_evaluators_languages": [],
   "/papers/paper_partition_prompt_aggregate": [["visual_ppa_weighted_reconstruction_graph", "ppa_mechanism_p2"]],
-  "/papers/paper_robott": [["visual_robottt_fast_weight_architecture", "rttt_mechanism_p2"]],
-  "/papers/paper_searchos_v1": [
-    ["visual_searchos_socm_state_graph", "sos_mechanism_p1"],
-    ["visual_searchos_evidence_gate", "sos_mechanism_p2"],
-    ["visual_searchos_sensor_policy_dispatch", "sos_mechanism_p3"],
-  ],
+  "/papers/paper_robott": [],
+  "/papers/paper_searchos_v1": [],
   "/papers/paper_trace": [["trace_visual_credit_dependency_dag", "trace_mechanism_p3"]],
+};
+
+const expectedSourceAssets: Record<string, Array<[string, string]>> = {
+  "/papers/paper_attention_is_all_you_need": [
+    ["visual_attention_source_figure_1_change", "attn_change_p2"],
+    ["visual_attention_source_figure_1_mechanism", "attn_mechanism_p1"],
+    ["visual_attention_query_key_field", "attn_mechanism_p2"],
+    ["visual_attention_decoder_dependencies", "attn_mechanism_p3"],
+    ["visual_attention_source_figure_1_review", "attn_review_p1"],
+  ],
+  "/papers/paper_computational_propaganda": [
+    ["propaganda_visual_source_figure_7", "propaganda_change_p2"],
+    ["propaganda_visual_source_figure_3", "propaganda_example_p1"],
+  ],
+  "/papers/paper_llm_evaluators_languages": [
+    ["language_visual_source_figure_4_why", "language_why_p2"],
+    ["language_visual_source_figure_1", "language_change_p1"],
+    ["language_visual_source_figure_3", "language_change_p2"],
+    ["language_visual_ranking_acceptance_graph", "language_mechanism_p2"],
+    ["language_visual_source_figures_5_7_mechanism", "language_mechanism_p3"],
+    ["language_visual_source_figure_4_example", "language_example_p1"],
+    ["language_visual_source_figures_1_3", "language_evidence_p1"],
+    ["language_visual_source_figure_4_evidence", "language_evidence_p2"],
+    ["language_visual_source_figures_5_7_evidence", "language_evidence_p3"],
+    ["language_visual_source_figure_4_review", "language_review_p1"],
+  ],
+  "/papers/paper_robott": [
+    ["visual_robott_source_figure_2_change", "rttt_change_p2"],
+    ["visual_robott_source_figure_2_mechanism", "rttt_mechanism_p2"],
+    ["visual_robott_source_figures_2_4_mechanism", "rttt_mechanism_p3"],
+    ["visual_robott_source_figure_7", "rttt_evidence_p1"],
+    ["visual_robott_source_figure_8", "rttt_evidence_p2"],
+  ],
+  "/papers/paper_searchos_v1": [
+    ["visual_searchos_source_figure_2", "sos_mechanism_p2"],
+    ["visual_searchos_source_figures_2_5", "sos_mechanism_p3"],
+    ["visual_searchos_source_figure_5_limit", "sos_limitations_p2"],
+  ],
+  "/papers/paper_trace": [
+    ["trace_visual_source_figure_1_why", "trace_why_p1"],
+    ["trace_visual_source_figure_1_change", "trace_change_p1"],
+    ["trace_visual_source_figure_1_example", "trace_example_p2"],
+    ["trace_visual_source_figures_3_4", "trace_evidence_p3"],
+  ],
 };
 
 test("reviewed digest entry remains a source-backed explainer @visual", async ({ page }) => {
@@ -29,10 +66,10 @@ test("reviewed digest entry remains a source-backed explainer @visual", async ({
   await expect(page.getByRole("heading", { name: "Sources and exact locators" })).toBeVisible();
 });
 
-test("revision-6 visuals render only at approved YES paragraphs @visual", async ({ page }) => {
+test("custom SVG visuals render only at approved revision-7 paragraphs @visual", async ({ page }) => {
   for (const [paperPath, expected] of Object.entries(expectedVisuals)) {
     await page.goto(paperPath);
-    const figures = page.locator("figure.explainer-visual");
+    const figures = page.locator('figure.explainer-visual[data-delivery-medium="SVG"]');
     await expect(figures).toHaveCount(expected.length);
 
     for (const [visualId, paragraphId] of expected) {
@@ -204,6 +241,40 @@ test("revision-6 visuals render only at approved YES paragraphs @visual", async 
         ),
       ).toBe(true);
     }
+  }
+});
+
+test("original paper figures render at every approved source-asset paragraph @visual", async ({ page }) => {
+  for (const [paperPath, expected] of Object.entries(expectedSourceAssets)) {
+    await page.goto(paperPath);
+    const figures = page.locator('figure.explainer-visual[data-delivery-medium="source asset"]');
+    await expect(figures).toHaveCount(expected.length);
+
+    for (const [visualId, paragraphId] of expected) {
+      const figure = page.locator(`#${paragraphId} > figure[data-visual-id="${visualId}"]`);
+      await expect(figure).toHaveCount(1);
+      await expect(figure.locator("svg")).toHaveCount(0);
+      const images = figure.locator(".explainer-source-asset__images img");
+      expect(await images.count()).toBeGreaterThanOrEqual(1);
+      expect(await images.count()).toBeLessThanOrEqual(3);
+      await expect(images.first()).toHaveAttribute("src", /\/paper-assets\//);
+      for (const image of await images.all()) {
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).not.toHaveAttribute("alt", "");
+        await expect.poll(() => image.evaluate((element) => (
+          (element as HTMLImageElement).naturalWidth
+        ))).toBeGreaterThan(0);
+      }
+      await expect(figure.getByText("Original figure", { exact: true })).toBeVisible();
+      await expect(figure.getByText("Attribution", { exact: true })).toBeVisible();
+      await expect(figure.getByText("License", { exact: true })).toBeVisible();
+      await expect(figure.getByText("Modifications", { exact: true })).toBeVisible();
+      await expect(figure.locator(".explainer-source-asset__provenance a")).toHaveAttribute("href", /^https:\/\//);
+      await expect(figure.getByText("What this illustration does not establish")).toBeVisible();
+      await expect(figure.getByLabel("Evidence for this illustration")).toBeVisible();
+    }
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   }
 });
 

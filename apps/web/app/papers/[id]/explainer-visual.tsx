@@ -39,7 +39,46 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
         <p>{visual.question}</p>
       </div>
 
-      <ExplainerSvg visual={visual} />
+      {visual.delivery_medium === "source asset" && visual.source_asset ? (
+        <div className="explainer-source-asset">
+          <div
+            className="explainer-source-asset__images"
+            data-image-count={visual.source_asset.images.length}
+          >
+            {visual.source_asset.images.map((image) => (
+              <img
+                src={paperAssetUrl(image.path)}
+                alt={image.alt_text}
+                decoding="async"
+                loading="lazy"
+                key={image.path}
+              />
+            ))}
+          </div>
+          <dl className="explainer-source-asset__provenance">
+            <div>
+              <dt>Original figure</dt>
+              <dd>{visual.source_asset.locator}</dd>
+            </div>
+            <div>
+              <dt>Attribution</dt>
+              <dd>{visual.source_asset.attribution}</dd>
+            </div>
+            <div>
+              <dt>License</dt>
+              <dd>
+                <a href={visual.source_asset.license_url}>{visual.source_asset.license_label}</a>
+              </dd>
+            </div>
+            <div>
+              <dt>Modifications</dt>
+              <dd>{visual.source_asset.modifications}</dd>
+            </div>
+          </dl>
+        </div>
+      ) : (
+        <ExplainerSvg visual={visual} />
+      )}
 
       <figcaption id={descriptionId}>
         <p>{visual.interpretation}</p>
@@ -59,4 +98,9 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
       </figcaption>
     </figure>
   );
+}
+
+export function paperAssetUrl(path: string, basePath = process.env.PAGES_BASE_PATH): string {
+  const trimmedBasePath = basePath?.replace(/^\/+|\/+$/g, "");
+  return trimmedBasePath ? `/${trimmedBasePath}${path}` : path;
 }

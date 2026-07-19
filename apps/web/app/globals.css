@@ -556,10 +556,64 @@ summary:focus-visible {
   color: var(--ink);
 }
 
+.explainer-source-asset {
+  margin-top: 34px;
+}
+
+.explainer-source-asset__images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.explainer-source-asset__images img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.explainer-source-asset__provenance {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 18px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.explainer-source-asset__provenance div {
+  min-width: 0;
+}
+
+.explainer-source-asset__provenance dt {
+  color: var(--ink-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.explainer-source-asset__provenance dd {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.explainer-source-asset__provenance a {
+  color: var(--accent);
+  text-underline-offset: 0.16em;
+}
+
 @media (max-width: 720px) {
   .explainer-svg svg {
     width: 680px;
     max-width: none;
+  }
+
+  .explainer-source-asset__provenance {
+    grid-template-columns: 1fr;
   }
 }
 
