@@ -563,12 +563,17 @@ summary:focus-visible {
 }
 
 .explainer-source-asset__hint {
-  display: none;
+  margin: 0 0 10px;
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 .explainer-source-asset__viewport {
   max-width: 100%;
   overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
   overscroll-behavior-inline: contain;
   scrollbar-gutter: stable;
 }
@@ -580,18 +585,20 @@ summary:focus-visible {
 }
 
 .explainer-source-asset__images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  display: flex;
+  width: max-content;
+  min-width: 100%;
   gap: 16px;
   align-items: start;
 }
 
 .explainer-source-asset__images img {
   display: block;
-  width: 100%;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
   height: auto;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: 0;
 }
 
 .explainer-source-asset__provenance {
@@ -629,33 +636,6 @@ summary:focus-visible {
   .explainer-svg svg {
     width: 680px;
     max-width: none;
-  }
-
-  .explainer-source-asset__hint {
-    display: block;
-    margin: 0 0 10px;
-    color: var(--ink-muted);
-    font-size: 0.8rem;
-    line-height: 1.4;
-  }
-
-  .explainer-source-asset__viewport {
-    border: 1px solid var(--line);
-    background: var(--surface);
-  }
-
-  .explainer-source-asset__images {
-    display: flex;
-    width: max-content;
-    min-width: 100%;
-    gap: 16px;
-  }
-
-  .explainer-source-asset__images img {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: none;
-    border: 0;
   }
 
   .explainer-source-asset__provenance {

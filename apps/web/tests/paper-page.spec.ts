@@ -275,39 +275,37 @@ test("original paper figures render at every approved source-asset paragraph @vi
     }
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    if (page.viewportSize()?.width === 390) {
-      const viewports = figures.getByRole("region", { name: "Scrollable original paper figure" });
-      await expect(viewports).toHaveCount(expected.length);
-      await expect(
-        figures.getByText("Swipe or use arrow keys to inspect the original figure.", { exact: true }),
-      ).toHaveCount(expected.length);
-      expect(
-        await viewports.evaluateAll((elements) =>
-          elements.every((viewport) => {
-            const scroller = viewport as HTMLElement;
-            const images = [...scroller.querySelectorAll<HTMLImageElement>("img")];
-            return (
-              scroller.tabIndex === 0 &&
-              scroller.scrollWidth > scroller.clientWidth &&
-              scroller.getBoundingClientRect().right <= window.innerWidth + 1 &&
-              images.every((image) => Math.abs(image.clientWidth - image.naturalWidth) <= 1)
-            );
-          }),
-        ),
-      ).toBe(true);
-
-      const firstViewport = viewports.first();
-      await firstViewport.focus();
-      expect(
-        await firstViewport.evaluate((element) => {
-          const style = getComputedStyle(element);
-          return style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) >= 3;
+    const viewports = figures.getByRole("region", { name: "Scrollable original paper figure" });
+    await expect(viewports).toHaveCount(expected.length);
+    await expect(
+      figures.getByText("Scroll or use arrow keys to inspect the original figure.", { exact: true }),
+    ).toHaveCount(expected.length);
+    expect(
+      await viewports.evaluateAll((elements) =>
+        elements.every((viewport) => {
+          const scroller = viewport as HTMLElement;
+          const images = [...scroller.querySelectorAll<HTMLImageElement>("img")];
+          return (
+            scroller.tabIndex === 0 &&
+            scroller.scrollWidth > scroller.clientWidth &&
+            scroller.getBoundingClientRect().right <= window.innerWidth + 1 &&
+            images.every((image) => Math.abs(image.clientWidth - image.naturalWidth) <= 1)
+          );
         }),
-      ).toBe(true);
-      await page.keyboard.press("ArrowRight");
-      await expect.poll(() => firstViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    }
+      ),
+    ).toBe(true);
+
+    const firstViewport = viewports.first();
+    await firstViewport.focus();
+    expect(
+      await firstViewport.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) >= 3;
+      }),
+    ).toBe(true);
+    await page.keyboard.press("ArrowRight");
+    await expect.poll(() => firstViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   }
 });
 

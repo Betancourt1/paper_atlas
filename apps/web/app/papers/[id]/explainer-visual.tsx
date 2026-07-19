@@ -43,7 +43,7 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
       {visual.delivery_medium === "source asset" && visual.source_asset ? (
         <div className="explainer-source-asset">
           <p className="explainer-source-asset__hint" id={inspectionHintId}>
-            Swipe or use arrow keys to inspect the original figure.
+            Scroll or use arrow keys to inspect the original figure.
           </p>
           <div
             aria-describedby={inspectionHintId}

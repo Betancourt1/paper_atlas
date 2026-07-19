@@ -197,13 +197,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_4_why` — rendered immediately after `language_why_p2`.
 - Shared paragraph scope: `language_why_p1`, `language_why_p2`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_why_p2`
@@ -385,13 +385,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_4_why` — rendered immediately after `language_why_p2`.
 - Shared paragraph scope: `language_why_p1`, `language_why_p2`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_change_p1`
@@ -573,13 +573,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_1` — rendered immediately after `language_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_change_p2`
@@ -761,13 +761,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_3` — rendered immediately after `language_change_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-3.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p1`
@@ -949,13 +949,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `language_mechanism_p1`, `language_mechanism_p2`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p2`
@@ -1137,13 +1137,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `language_mechanism_p1`, `language_mechanism_p2`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p3`
@@ -1325,13 +1325,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_5_7_mechanism` — rendered immediately after `language_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-5.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-6.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-7.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_example_p1`
@@ -1513,13 +1513,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_4_example` — rendered immediately after `language_example_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_example_p2`
@@ -1728,13 +1728,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_1_3` — rendered immediately after `language_evidence_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-1.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-2.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-3.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_evidence_p2`
@@ -1916,13 +1916,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_4_evidence` — rendered immediately after `language_evidence_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_evidence_p3`
@@ -2104,13 +2104,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_5_7_evidence` — rendered immediately after `language_evidence_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-5.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-6.png`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-7.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_limitations_p1`
@@ -2346,13 +2346,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_4_review` — rendered immediately after `language_review_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `language_review_p2`
