@@ -3,7 +3,7 @@
 - Paper ID: `paper_computational_propaganda`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Manifest revision: `2`
+- Manifest revision: `3`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -15,7 +15,7 @@
   - `propaganda_source_models` — Computational Propaganda v1 model experiments; Pages 6–7, Sections 5.1–5.3, Tables 1–2
   - `propaganda_source_limitations` — Computational Propaganda v1 discussion and limitations; Pages 8–9, Sections 7.1–7.3
 
-The engineer applied the removal test paragraph by paragraph. `NO` records keep three source-bounded contingencies because the workflow requires them, but they are explicitly not recommended for implementation unless the prose or adjacent scope changes. Each code example embeds this paragraph's actual propositions, claim-source edges, quantities, or scope groups; labels are complete and contain no ellipsized source prose.
+Revision 3 incorporates every paragraph-level `VISUAL_QA` finding. Treatments are selected by the paragraph's actual explanatory job rather than a universal graph/matrix/card trio. Shared visuals are allowed only for the explicit adjacent scopes recorded below, must encode every scoped mechanism and value, and are placed after the final paragraph in scope. Numeric tables expose values visibly, small-delta plots disclose local domains, and implementers must record any topology, scope, placement, or evidence deviation instead of claiming `NONE`.
 
 ## `propaganda_why_p1`
 
@@ -23,16 +23,18 @@ The engineer applied the removal test paragraph by paragraph. `NO` records keep 
 - Text anchor: "Pretraining corpora contain more web text than people can inspect."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "Pretraining corpora contain more web text than people can inspect". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: problem and research-question relation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional prior-work and research-question annotation.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
 
-### Treatment A — Pretraining corpora contain more web text than people can — problem and research-question relation
+### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
 
-- Teaching purpose: Optional contingency only. Answer "Why is web-scale pretraining poisoning difficult to assess?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "Pretraining corpora contain more web text than people can inspect"; "That scale creates room for malicious content"; "but an online post does not automatically become training data"; "Crawlers may miss it, text extraction may remove it"; "and quality or language filters may discard the document". Edges carry the explicit relation labels "motivates", "contrasts with", "motivates", "motivates"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
+- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -40,19 +42,160 @@ The engineer applied the removal test paragraph by paragraph. `NO` records keep 
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_why\_p1: Pretraining corpora contain more web text than people can - problem and research-question relation};
-\node[concept] (n1) at (1.8,0) {Pretraining corpora contain more web text than people can inspect};
-\node[concept] (n2) at (6.1,0) {That scale creates room for malicious content};
-\node[concept] (n3) at (10.4,0) {but an online post does not automatically become training data};
-\node[concept] (n4) at (1.8,-3.2) {Crawlers may miss it, text extraction may remove it};
-\node[concept] (n5) at (6.1,-3.2) {and quality or language filters may discard the document};
-\draw[link] (n1) -- node[rel] {motivates} (n2);
-\draw[link] (n2) -- node[rel] {contrasts with} (n3);
-\draw[link] (n3) -- node[rel] {motivates} (n4);
-\draw[link] (n4) -- node[rel] {motivates} (n5);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_why\_p1: Optional prior-work and research-question annotation - Annotated prior-work contrast};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Pretraining corpora contain more web text than people can inspect\\\textbf{Statement 2}: qualitative -- That scale creates room for malicious content\\\textbf{Statement 3}: qualitative -- but an online post does not automatically become training data\\\textbf{Statement 4}: qualitative -- Crawlers may miss it, text extraction may remove it\\\textbf{Statement 5}: qualitative -- and quality or language filters may discard the document};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>Pretraining corpora contain more web text than people can inspect"]
+    p1r2["Statement 2: qualitative<br/>That scale creates room for malicious content"]
+    p1r3["Statement 3: qualitative<br/>but an online post does not automatically become training data"]
+    p1r4["Statement 4: qualitative<br/>Crawlers may miss it, text extraction may remove it"]
+    p1r5["Statement 5: qualitative<br/>and quality or language filters may discard the document"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_why_p1: Optional prior-work and research-question annotation — Annotated prior-work contrast"
+rows = [["Paragraph evidence","Statement 1","qualitative","Pretraining corpora contain more web text than people can inspect"],["Paragraph evidence","Statement 2","qualitative","That scale creates room for malicious content"],["Paragraph evidence","Statement 3","qualitative","but an online post does not automatically become training data"],["Paragraph evidence","Statement 4","qualitative","Crawlers may miss it, text extraction may remove it"],["Paragraph evidence","Statement 5","qualitative","and quality or language filters may discard the document"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+
+- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_why\_p1: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & Pretraining corpora contain more web text than people can inspect \\
+Paragraph evidence & Statement 2 & qualitative & That scale creates room for malicious content \\
+Paragraph evidence & Statement 3 & qualitative & but an online post does not automatically become training data \\
+Paragraph evidence & Statement 4 & qualitative & Crawlers may miss it, text extraction may remove it \\
+Paragraph evidence & Statement 5 & qualitative & and quality or language filters may discard the document \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Pretraining corpora contain more web text than people can inspect"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>That scale creates room for malicious content"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>but an online post does not automatically become training data"]
+    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Crawlers may miss it, text extraction may remove it"]
+    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>and quality or language filters may discard the document"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_why_p1: Optional prior-work and research-question annotation — Research-question ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","Pretraining corpora contain more web text than people can inspect"],["Paragraph evidence","Statement 2","qualitative","That scale creates room for malicious content"],["Paragraph evidence","Statement 3","qualitative","but an online post does not automatically become training data"],["Paragraph evidence","Statement 4","qualitative","Crawlers may miss it, text extraction may remove it"],["Paragraph evidence","Statement 5","qualitative","and quality or language filters may discard the document"]]
+height = 590
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+
+- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
+- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_why\_p1: Optional prior-work and research-question annotation - Question boundary map};
+\node[box] (n1) at (1.00,-1.50) {Pretraining corpora contain more web text than people can inspect};
+\node[box] (n2) at (2.50,-1.50) {That scale creates room for malicious content};
+\node[box] (n3) at (4.00,-1.50) {but an online post does not automatically become training data};
+\node[box] (n4) at (5.50,-1.50) {Crawlers may miss it, text extraction may remove it};
+\node[box] (n5) at (7.00,-1.50) {and quality or language filters may discard the document};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
+\draw[link] (n4) -- node[rel] {then} (n5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -66,10 +209,10 @@ flowchart LR
   n3["but an online post does not automatically become training data"]
   n4["Crawlers may miss it, text extraction may remove it"]
   n5["and quality or language filters may discard the document"]
-  n1 -->|"motivates"| n2
-  n2 -->|"contrasts with"| n3
-  n3 -->|"motivates"| n4
-  n4 -->|"motivates"| n5
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
+  n4 -->|"then"| n5
 ```
 
 #### Python
@@ -79,173 +222,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p1: Pretraining corpora contain more web text than people can — problem and research-question relation"
-nodes = [["n1","Pretraining corpora contain more web text than people can inspect",120,150],["n2","That scale creates room for malicious content",420,150],["n3","but an online post does not automatically become training data",720,150],["n4","Crawlers may miss it, text extraction may remove it",120,340],["n5","and quality or language filters may discard the document",420,340]]
-edges = [["n1","n2","motivates"],["n2","n3","contrasts with"],["n3","n4","motivates"],["n4","n5","motivates"]]
+title = "propaganda_why_p1: Optional prior-work and research-question annotation — Question boundary map"
+nodes = [["n1","Pretraining corpora contain more web text than people can inspect",100,150],["n2","That scale creates room for malicious content",250,150],["n3","but an online post does not automatically become training data",400,150],["n4","Crawlers may miss it, text extraction may remove it",550,150],["n5","and quality or language filters may discard the document",700,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_why_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 2 claim nodes on the left and 2 source nodes on the right, with only the 2 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_why\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_why_p1: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,250],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,250]]
-edges = [["c1","s1"],["c2","s2"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 440
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_why_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Pretraining corpora contain more web text than people can — supported-versus-bounded scope
-
-- Teaching purpose: Optional contingency only. Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 4 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_why\_p1: Pretraining corpora contain more web text than people can - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {Pretraining corpora contain more web text than people can inspect};
-\node[item] at (0,-2) {That scale creates room for malicious content};
-\node[item] at (0,-4) {Crawlers may miss it, text extraction may remove it};
-\node[item] at (0,-6) {and quality or language filters may discard the document};
-\node[item] at (7,0) {but an online post does not automatically become training data};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["Pretraining corpora contain more web text than people can inspect"]
-    a2["That scale creates room for malicious content"]
-    a3["Crawlers may miss it, text extraction may remove it"]
-    a4["and quality or language filters may discard the document"]
-  end
-  subgraph Boundary
-    b1["but an online post does not automatically become training data"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_why_p1: Pretraining corpora contain more web text than people can — supported-versus-bounded scope"
-columns = {"Supported statement": ["Pretraining corpora contain more web text than people can inspect","That scale creates room for malicious content","Crawlers may miss it, text extraction may remove it","and quality or language filters may discard the document"], "Boundary or contingency": ["but an online post does not automatically become training data"]}
-height = 660
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -269,16 +266,18 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 - Text anchor: "Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: problem and research-question relation.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional prior-work and research-question annotation.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: The prose is already sufficient; any contingency must remain a non-quantitative annotation.
 
-### Treatment A — Earlier demonstrations often targeted known sources or assumed access — problem and research-question relation
+### Treatment A — Optional prior-work and research-question annotation — Annotated prior-work contrast
 
-- Teaching purpose: Optional contingency only. Answer "Why is web-scale pretraining poisoning difficult to assess?" by exposing the paragraph's 3 named propositions and 2 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"; "This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"; "or model weights". Edges carry the explicit relation labels "contrasts with", "motivates"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Keep prior work and the paper's question distinct.
+- Encoding and reading order: Group the 3 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -286,15 +285,150 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_why\_p2: Earlier demonstrations often targeted known sources or assumed access - problem and research-question relation};
-\node[concept] (n1) at (1.8,0) {Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline};
-\node[concept] (n2) at (6.1,0) {This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
-\node[concept] (n3) at (10.4,0) {or model weights};
-\draw[link] (n1) -- node[rel] {contrasts with} (n2);
-\draw[link] (n2) -- node[rel] {motivates} (n3);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_why\_p2: Optional prior-work and research-question annotation - Annotated prior-work contrast};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline\\\textbf{Statement 2}: qualitative -- This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure\\\textbf{Statement 3}: qualitative -- or model weights};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
+    p1r2["Statement 2: qualitative<br/>This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
+    p1r3["Statement 3: qualitative<br/>or model weights"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_why_p2: Optional prior-work and research-question annotation — Annotated prior-work contrast"
+rows = [["Paragraph evidence","Statement 1","qualitative","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"],["Paragraph evidence","Statement 2","qualitative","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"],["Paragraph evidence","Statement 3","qualitative","or model weights"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional prior-work and research-question annotation — Research-question ledger
+
+- Teaching purpose: Optional contingency only. List assumptions and exclusions without inventing a mechanism.
+- Encoding and reading order: Render 3 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_why\_p2: Optional prior-work and research-question annotation - Research-question ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline \\
+Paragraph evidence & Statement 2 & qualitative & This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure \\
+Paragraph evidence & Statement 3 & qualitative & or model weights \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>or model weights"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_why_p2: Optional prior-work and research-question annotation — Research-question ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"],["Paragraph evidence","Statement 2","qualitative","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"],["Paragraph evidence","Statement 3","qualitative","or model weights"]]
+height = 414
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional prior-work and research-question annotation — Question boundary map
+
+- Teaching purpose: Optional contingency only. Connect only the explicit premise and research question.
+- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`. The prose is already sufficient; any contingency must remain a non-quantitative annotation.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_why\_p2: Optional prior-work and research-question annotation - Question boundary map};
+\node[box] (n1) at (1.00,-1.50) {Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline};
+\node[box] (n2) at (2.50,-1.50) {This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
+\node[box] (n3) at (4.00,-1.50) {or model weights};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -306,8 +440,8 @@ flowchart LR
   n1["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
   n2["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
   n3["or model weights"]
-  n1 -->|"contrasts with"| n2
-  n2 -->|"motivates"| n3
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
 ```
 
 #### Python
@@ -317,169 +451,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_why_p2: Earlier demonstrations often targeted known sources or assumed access — problem and research-question relation"
-nodes = [["n1","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline",120,150],["n2","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure",420,150],["n3","or model weights",720,150]]
-edges = [["n1","n2","contrasts with"],["n2","n3","motivates"]]
+title = "propaganda_why_p2: Optional prior-work and research-question annotation — Question boundary map"
+nodes = [["n1","Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline",100,150],["n2","This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure",250,150],["n3","or model weights",400,150]]
+edges = [["n1","n2","then"],["n2","n3","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_why_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 2 claim nodes on the left and 2 source nodes on the right, with only the 2 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_why\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_why_p2: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,250],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,250]]
-edges = [["c1","s1"],["c2","s2"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 440
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_why_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Earlier demonstrations often targeted known sources or assumed access — supported-versus-bounded scope
-
-- Teaching purpose: Optional contingency only. Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 2 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_why\_p2: Earlier demonstrations often targeted known sources or assumed access - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline};
-\node[item] at (0,-2) {or model weights};
-\node[item] at (7,0) {This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline"]
-    a2["or model weights"]
-  end
-  subgraph Boundary
-    b1["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_why_p2: Earlier demonstrations often targeted known sources or assumed access — supported-versus-bounded scope"
-columns = {"Supported statement": ["Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline","or model weights"], "Boundary or contingency": ["This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure"]}
-height = 440
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -503,16 +495,18 @@ Path("propaganda_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding=
 - Text anchor: "HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model" and "and whether the resulting document survives the victim's curation pipeline" while also tracking 3 source-bounded propositions. The paragraph contains a real changed-versus-preserved relation; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: changed-versus-preserved relation.
+- Decision rationale: A visual passes the removal test because readers must reconstruct posting access versus the three conditional inclusion questions while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Posting access versus the three conditional inclusion questions.
+- Recommended scope and placement: This paragraph only; place the visual immediately after `propaganda_change_p1`.
+- QA-informed planning change: This paragraph needs its own S1/S2/S3 question topology; a comments-versus-ads comparison does not serve it.
 
-### Treatment A — HalfLife replaces the binary question 'can content be posted' — changed-versus-preserved relation
+### Treatment A — Posting access versus the three conditional inclusion questions — Operation flow
 
-- Teaching purpose: Answer "What does HalfLife add to poisoning analysis?" by exposing the paragraph's 3 named propositions and 2 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model"; "It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext"; "and whether the resulting document survives the victim's curation pipeline". Edges carry the explicit relation labels "changes into", "changes into"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Show the source-supported order and branch boundaries.
+- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. This paragraph needs its own S1/S2/S3 question topology; a comments-versus-ads comparison does not serve it.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -520,15 +514,15 @@ Path("propaganda_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding=
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_change\_p1: HalfLife replaces the binary question 'can content be posted' - changed-versus-preserved relation};
-\node[concept] (n1) at (1.8,0) {HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model};
-\node[concept] (n2) at (6.1,0) {It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext};
-\node[concept] (n3) at (10.4,0) {and whether the resulting document survives the victim's curation pipeline};
-\draw[link] (n1) -- node[rel] {changes into} (n2);
-\draw[link] (n2) -- node[rel] {changes into} (n3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_change\_p1: Posting access versus the three conditional inclusion questions - Operation flow};
+\node[box] (n1) at (1.00,-1.50) {HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model};
+\node[box] (n2) at (2.50,-1.50) {It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext};
+\node[box] (n3) at (4.00,-1.50) {and whether the resulting document survives the victim's curation pipeline};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -540,8 +534,8 @@ flowchart LR
   n1["HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model"]
   n2["It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext"]
   n3["and whether the resulting document survives the victim's curation pipeline"]
-  n1 -->|"changes into"| n2
-  n2 -->|"changes into"| n3
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
 ```
 
 #### Python
@@ -551,37 +545,105 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_change_p1: HalfLife replaces the binary question 'can content be posted' — changed-versus-preserved relation"
-nodes = [["n1","HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model",120,150],["n2","It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext",420,150],["n3","and whether the resulting document survives the victim's curation pipeline",720,150]]
-edges = [["n1","n2","changes into"],["n2","n3","changes into"]]
+title = "propaganda_change_p1: Posting access versus the three conditional inclusion questions — Operation flow"
+nodes = [["n1","HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model",100,150],["n2","It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext",250,150],["n3","and whether the resulting document survives the victim's curation pipeline",400,150]]
+edges = [["n1","n2","then"],["n2","n3","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_change_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — propaganda_claim_halflife, propaganda_claim_ads — claim-to-source provenance
+### Treatment B — Posting access versus the three conditional inclusion questions — Input-operation-output ledger
 
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 2 claim nodes on the left and 2 source nodes on the right, with only the 2 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
+- Teaching purpose: Make inputs, operations, outputs, and limits inspectable as columns.
+- Encoding and reading order: Render 2 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. This paragraph needs its own S1/S2/S3 question topology; a comments-versus-ads comparison does not serve it.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_change\_p1: Posting access versus the three conditional inclusion questions - Input-operation-output ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Visible web content does not follow one extraction path & Public comment lane & 71.9 & The researchers replaced existing comments in sandboxed pages; 71.9\% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext. \\
+Visible web content does not follow one extraction path & Programmatic advertisement lane & qualitative & Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion. \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Visible web content does not follow one extraction path<br/>Public comment lane<br/><b>71.9</b><br/>The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."]
+    r2["Visible web content does not follow one extraction path<br/>Programmatic advertisement lane<br/><b>qualitative</b><br/>Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_change_p1: Posting access versus the three conditional inclusion questions — Input-operation-output ledger"
+rows = [["Visible web content does not follow one extraction path","Public comment lane","71.9","The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."],["Visible web content does not follow one extraction path","Programmatic advertisement lane","qualitative","Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]]
+height = 326
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_change_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Posting access versus the three conditional inclusion questions — State-transition walkthrough
+
+- Teaching purpose: Follow the described state changes without inventing timing.
+- Encoding and reading order: Use 3 named nodes and 2 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. This paragraph needs its own S1/S2/S3 question topology; a comments-versus-ads comparison does not serve it.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -591,14 +653,13 @@ Path("propaganda_change_p1_treatment_a.svg").write_text("\n".join(parts), encodi
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_change\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_change\_p1: Posting access versus the three conditional inclusion questions - State-transition walkthrough};
+\node[box] (n1) at (1.00,-1.50) {HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model};
+\node[box] (n2) at (2.50,-1.50) {It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext};
+\node[box] (n3) at (4.00,-1.50) {and whether the resulting document survives the victim's curation pipeline};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
 \end{tikzpicture}
 \end{document}
 ```
@@ -607,16 +668,11 @@ Path("propaganda_change_p1_treatment_a.svg").write_text("\n".join(parts), encodi
 
 ```mermaid
 flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
+  n1["HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model"]
+  n2["It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext"]
+  n3["and whether the resulting document survives the victim's curation pipeline"]
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
 ```
 
 #### Python
@@ -626,96 +682,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_change_p1: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]",190,250],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250]]
-edges = [["c1","s1"],["c2","s2"]]
+title = "propaganda_change_p1: Posting access versus the three conditional inclusion questions — State-transition walkthrough"
+nodes = [["n1","HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model",100,150],["n2","It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext",250,150],["n3","and whether the resulting document survives the victim's curation pipeline",400,150]]
+edges = [["n1","n2","then"],["n2","n3","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 440
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target in edges:
+for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_change_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — HalfLife replaces the binary question 'can content be posted' — supported-versus-bounded scope
-
-- Teaching purpose: Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 3 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_change\_p1: HalfLife replaces the binary question 'can content be posted' - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model};
-\node[item] at (0,-2) {It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext};
-\node[item] at (0,-4) {and whether the resulting document survives the victim's curation pipeline};
-\node[item] at (7,0) {and whether the resulting document survives the victim's curation pipeline};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model"]
-    a2["It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext"]
-    a3["and whether the resulting document survives the victim's curation pipeline"]
-  end
-  subgraph Boundary
-    b1["and whether the resulting document survives the victim's curation pipeline"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_change_p1: HalfLife replaces the binary question 'can content be posted' — supported-versus-bounded scope"
-columns = {"Supported statement": ["HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model","It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext","and whether the resulting document survives the victim's curation pipeline"], "Boundary or contingency": ["and whether the resulting document survives the victim's curation pipeline"]}
-height = 550
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -739,16 +726,18 @@ Path("propaganda_change_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 - Text anchor: "That decomposition can reject superficially plausible vectors."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "That decomposition can reject superficially plausible vectors" and "The result is specific to the tested collection architecture rather than a claim about every possible crawler" while also tracking 4 source-bounded propositions. The paragraph contains a real changed-versus-preserved relation; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: changed-versus-preserved relation.
+- Decision rationale: A visual passes the removal test because readers must reconstruct comments and programmatic advertisements in the tested extraction path while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Comments and programmatic advertisements in the tested extraction path.
+- Recommended scope and placement: This paragraph only; place the visual immediately after `propaganda_change_p2`.
+- QA-informed planning change: Keep the 71.9% sandboxed comment survival and absent advertisement plaintext tied to the tested DOM-based path.
 
-### Treatment A — That decomposition can reject superficially plausible vectors — changed-versus-preserved relation
+### Treatment A — Comments and programmatic advertisements in the tested extraction path — Relationship-specific parallel view
 
-- Teaching purpose: Answer "What does HalfLife add to poisoning analysis?" by exposing the paragraph's 4 named propositions and 3 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "That decomposition can reject superficially plausible vectors"; "In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext"; "while public comments often did"; "The result is specific to the tested collection architecture rather than a claim about every possible crawler". Edges carry the explicit relation labels "changes into", "contrasts with", "contrasts with"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Keep valid comparison groups separate and equally visible.
+- Encoding and reading order: Group the 2 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. Keep the 71.9% sandboxed comment survival and absent advertisement plaintext tied to the tested DOM-based path.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -756,17 +745,149 @@ Path("propaganda_change_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_change\_p2: That decomposition can reject superficially plausible vectors - changed-versus-preserved relation};
-\node[concept] (n1) at (1.8,0) {That decomposition can reject superficially plausible vectors};
-\node[concept] (n2) at (6.1,0) {In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext};
-\node[concept] (n3) at (10.4,0) {while public comments often did};
-\node[concept] (n4) at (1.8,-3.2) {The result is specific to the tested collection architecture rather than a claim about every possible crawler};
-\draw[link] (n1) -- node[rel] {changes into} (n2);
-\draw[link] (n2) -- node[rel] {contrasts with} (n3);
-\draw[link] (n3) -- node[rel] {contrasts with} (n4);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_change\_p2: Comments and programmatic advertisements in the tested extraction path - Relationship-specific parallel view};
+\node[panel] at (0,0) {\textbf{Visible web content does not follow one extraction path}\\[4pt]\textbf{Public comment lane}: 71.9 -- The researchers replaced existing comments in sandboxed pages; 71.9\% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext.\\\textbf{Programmatic advertisement lane}: qualitative -- Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion.};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Visible web content does not follow one extraction path"]
+    p1r1["Public comment lane: 71.9<br/>The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."]
+    p1r2["Programmatic advertisement lane: qualitative<br/>Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_change_p2: Comments and programmatic advertisements in the tested extraction path — Relationship-specific parallel view"
+rows = [["Visible web content does not follow one extraction path","Public comment lane","71.9","The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."],["Visible web content does not follow one extraction path","Programmatic advertisement lane","qualitative","Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Comments and programmatic advertisements in the tested extraction path — Condition and boundary matrix
+
+- Teaching purpose: Show every comparison value or qualitative condition in explicit columns.
+- Encoding and reading order: Render 2 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. Keep the 71.9% sandboxed comment survival and absent advertisement plaintext tied to the tested DOM-based path.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_change\_p2: Comments and programmatic advertisements in the tested extraction path - Condition and boundary matrix}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Visible web content does not follow one extraction path & Public comment lane & 71.9 & The researchers replaced existing comments in sandboxed pages; 71.9\% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext. \\
+Visible web content does not follow one extraction path & Programmatic advertisement lane & qualitative & Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion. \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Visible web content does not follow one extraction path<br/>Public comment lane<br/><b>71.9</b><br/>The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."]
+    r2["Visible web content does not follow one extraction path<br/>Programmatic advertisement lane<br/><b>qualitative</b><br/>Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_change_p2: Comments and programmatic advertisements in the tested extraction path — Condition and boundary matrix"
+rows = [["Visible web content does not follow one extraction path","Public comment lane","71.9","The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext."],["Visible web content does not follow one extraction path","Programmatic advertisement lane","qualitative","Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."]]
+height = 326
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Comments and programmatic advertisements in the tested extraction path — Comparison topology
+
+- Teaching purpose: Connect only the alternatives and shared decision point stated in the paragraph.
+- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_ads` from `propaganda_source_halflife`, `propaganda_source_inclusion`. Keep the 71.9% sandboxed comment survival and absent advertisement plaintext tied to the tested DOM-based path.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_change\_p2: Comments and programmatic advertisements in the tested extraction path - Comparison topology};
+\node[box] (n1) at (1.00,-1.50) {That decomposition can reject superficially plausible vectors};
+\node[box] (n2) at (2.50,-1.50) {In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext};
+\node[box] (n3) at (4.00,-1.50) {while public comments often did};
+\node[box] (n4) at (5.50,-1.50) {The result is specific to the tested collection architecture rather than a claim about every possible crawler};
+\draw[link] (n1) -- node[rel] {compare} (n2);
+\draw[link] (n1) -- node[rel] {compare} (n3);
+\draw[link] (n1) -- node[rel] {compare} (n4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -779,9 +900,9 @@ flowchart LR
   n2["In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext"]
   n3["while public comments often did"]
   n4["The result is specific to the tested collection architecture rather than a claim about every possible crawler"]
-  n1 -->|"changes into"| n2
-  n2 -->|"contrasts with"| n3
-  n3 -->|"contrasts with"| n4
+  n1 -->|"compare"| n2
+  n1 -->|"compare"| n3
+  n1 -->|"compare"| n4
 ```
 
 #### Python
@@ -791,171 +912,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_change_p2: That decomposition can reject superficially plausible vectors — changed-versus-preserved relation"
-nodes = [["n1","That decomposition can reject superficially plausible vectors",120,150],["n2","In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext",420,150],["n3","while public comments often did",720,150],["n4","The result is specific to the tested collection architecture rather than a claim about every possible crawler",120,340]]
-edges = [["n1","n2","changes into"],["n2","n3","contrasts with"],["n3","n4","contrasts with"]]
+title = "propaganda_change_p2: Comments and programmatic advertisements in the tested extraction path — Comparison topology"
+nodes = [["n1","That decomposition can reject superficially plausible vectors",100,150],["n2","In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext",250,150],["n3","while public comments often did",400,150],["n4","The result is specific to the tested collection architecture rather than a claim about every possible crawler",550,150]]
+edges = [["n1","n2","compare"],["n1","n3","compare"],["n1","n4","compare"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_change_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_ads — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 2 claim nodes on the left and 2 source nodes on the right, with only the 2 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_change\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_change_p2: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]",190,250],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250]]
-edges = [["c1","s1"],["c2","s2"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 440
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_change_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — That decomposition can reject superficially plausible vectors — supported-versus-bounded scope
-
-- Teaching purpose: Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 3 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_change\_p2: That decomposition can reject superficially plausible vectors - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {That decomposition can reject superficially plausible vectors};
-\node[item] at (0,-2) {In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext};
-\node[item] at (0,-4) {while public comments often did};
-\node[item] at (7,0) {The result is specific to the tested collection architecture rather than a claim about every possible crawler};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["That decomposition can reject superficially plausible vectors"]
-    a2["In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext"]
-    a3["while public comments often did"]
-  end
-  subgraph Boundary
-    b1["The result is specific to the tested collection architecture rather than a claim about every possible crawler"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_change_p2: That decomposition can reject superficially plausible vectors — supported-versus-bounded scope"
-columns = {"Supported statement": ["That decomposition can reject superficially plausible vectors","In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext","while public comments often did"], "Boundary or contingency": ["The result is specific to the tested collection architecture rather than a claim about every possible crawler"]}
-height = 550
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -979,93 +956,18 @@ Path("propaganda_change_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 - Text anchor: "HalfLife defines three gates."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "HalfLife defines three gates" and "and deduplication filters" while also tracking 5 source-bounded propositions. The paragraph contains a real mechanism relation graph; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: mechanism relation graph.
+- Decision rationale: A visual passes the removal test because readers must reconstruct halflife conditional gates, denominators, and separate model-influence experiment while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: HalfLife conditional gates, denominators, and separate model-influence experiment.
+- Recommended scope and placement: Shared scope `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_mechanism_p3`. Otherwise split the visual by paragraph.
+- QA-informed planning change: A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
 
-### Treatment A — HalfLife defines three gates — mechanism relation graph
+### Treatment A — HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow
 
-- Teaching purpose: Answer "How does malicious comment text move toward a training corpus?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "HalfLife defines three gates"; "S1 measures whether a page is injectable through a public discussion interface"; "S2 measures whether a crawler and text extractor preserve the injected fragment"; "S3 measures whether the captured document survives heuristic, language, quality"; "and deduplication filters". Edges carry the explicit relation labels "then", "then", "then", "then"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_mechanism\_p1: HalfLife defines three gates - mechanism relation graph};
-\node[concept] (n1) at (1.8,0) {HalfLife defines three gates};
-\node[concept] (n2) at (6.1,0) {S1 measures whether a page is injectable through a public discussion interface};
-\node[concept] (n3) at (10.4,0) {S2 measures whether a crawler and text extractor preserve the injected fragment};
-\node[concept] (n4) at (1.8,-3.2) {S3 measures whether the captured document survives heuristic, language, quality};
-\node[concept] (n5) at (6.1,-3.2) {and deduplication filters};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["HalfLife defines three gates"]
-  n2["S1 measures whether a page is injectable through a public discussion interface"]
-  n3["S2 measures whether a crawler and text extractor preserve the injected fragment"]
-  n4["S3 measures whether the captured document survives heuristic, language, quality"]
-  n5["and deduplication filters"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_mechanism_p1: HalfLife defines three gates — mechanism relation graph"
-nodes = [["n1","HalfLife defines three gates",120,150],["n2","S1 measures whether a page is injectable through a public discussion interface",420,150],["n3","S2 measures whether a crawler and text extractor preserve the injected fragment",720,150],["n4","S3 measures whether the captured document survives heuristic, language, quality",120,340],["n5","and deduplication filters",420,340]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_model_shift — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 5 claim nodes on the left and 3 source nodes on the right, with only the 5 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
+- Teaching purpose: Show the source-supported order and branch boundaries.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -1075,21 +977,23 @@ Path("propaganda_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), enc
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_mechanism\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\draw[link] (c3) -- (s2);
-\draw[link] (c4) -- (s2);
-\draw[link] (c5) -- (s3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p1: HalfLife conditional gates, denominators, and separate model-influence experiment - Operation flow};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
 \end{tikzpicture}
 \end{document}
 ```
@@ -1098,23 +1002,21 @@ Path("propaganda_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c3["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c4["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-  c3 -->|"supported at"| s2
-  c4 -->|"supported at"| s2
-  c5 -->|"supported at"| s3
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
 ```
 
 #### Python
@@ -1124,57 +1026,57 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p1: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,250],["c3","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,370],["c4","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s2"],["c3","s2"],["c4","s2"],["c5","s3"]]
+title = "propaganda_mechanism_p1: HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 800
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target in edges:
+for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
-Path("propaganda_mechanism_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+Path("propaganda_mechanism_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — HalfLife defines three gates — input-operation-outcome storyboard
+### Treatment B — HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger
 
-- Teaching purpose: Let readers inspect the paragraph as concrete input, operation, and outcome states.
-- Encoding and reading order: Use 5 ordered states labeled "Input: HalfLife defines three gates", "Operation: S1 measures whether a page is injectable through a public discussion interface", "Operation: S2 measures whether a crawler and text extractor preserve the injected fragment", "Operation: S3 measures whether the captured document survives heuristic, language, quality", "Outcome: and deduplication filters". State connectors reproduce paragraph order and do not imply unreported timing.
-- Evidence and limitations: The first, intermediate, and final states are paragraph clauses; no hidden state, quantity, or transition is added.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Make inputs, operations, outputs, and limits inspectable as columns.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
 ```tex
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
+\usepackage{array}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,state/.style={draw,rounded corners,align=center,text width=3.2cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (7.6,2) {propaganda\_mechanism\_p1: HalfLife defines three gates - input-operation-outcome storyboard};
-\node[state] (k1) at (0,0) {\textbf{Input}\\HalfLife defines three gates};
-\node[state] (k2) at (3.8,0) {\textbf{Operation}\\S1 measures whether a page is injectable through a public discussion interface};
-\node[state] (k3) at (7.6,0) {\textbf{Operation}\\S2 measures whether a crawler and text extractor preserve the injected fragment};
-\node[state] (k4) at (11.399999999999999,0) {\textbf{Operation}\\S3 measures whether the captured document survives heuristic, language, quality};
-\node[state] (k5) at (15.2,0) {\textbf{Outcome}\\and deduplication filters};
-\draw[->,thick] (k1) -- (k2);
-\draw[->,thick] (k2) -- (k3);
-\draw[->,thick] (k3) -- (k4);
-\draw[->,thick] (k4) -- (k5);
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_mechanism\_p1: HalfLife conditional gates, denominators, and separate model-influence experiment - Input-operation-output ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+S1 & Page prevalence & 3.4 & Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population. \\
+S2 & Extraction survival & 71.9 & Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set. \\
+S3 & Curation survival & 5.5 & Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path. \\
+HalfLife multiplies three conditional inclusion gates & Section 4.4 and rounded product & 0.13 & Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4. \\
+HalfLife multiplies three conditional inclusion gates & Conflicting Introduction summary & 0.15 & The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product. \\
+\end{tabular}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1182,16 +1084,14 @@ Path("propaganda_mechanism_p1_treatment_b.svg").write_text("\n".join(parts), enc
 #### Mermaid
 
 ```mermaid
-stateDiagram-v2
-  state "Input — HalfLife defines three gates" as k1
-  state "Operation — S1 measures whether a page is injectable through a public discussion interface" as k2
-  state "Operation — S2 measures whether a crawler and text extractor preserve the injected fragment" as k3
-  state "Operation — S3 measures whether the captured document survives heuristic, language, quality" as k4
-  state "Outcome — and deduplication filters" as k5
-  k1 --> k2
-  k2 --> k3
-  k3 --> k4
-  k4 --> k5
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["S1<br/>Page prevalence<br/><b>3.4</b><br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+    r2["S2<br/>Extraction survival<br/><b>71.9</b><br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+    r3["S3<br/>Curation survival<br/><b>5.5</b><br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+    r4["HalfLife multiplies three conditional inclusion gates<br/>Section 4.4 and rounded product<br/><b>0.13</b><br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    r5["HalfLife multiplies three conditional inclusion gates<br/>Conflicting Introduction summary<br/><b>0.15</b><br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
+  end
 ```
 
 #### Python
@@ -1201,24 +1101,115 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p1: HalfLife defines three gates — input-operation-outcome storyboard"
-items = [["Input","HalfLife defines three gates",120,210],["Operation","S1 measures whether a page is injectable through a public discussion interface",290,210],["Operation","S2 measures whether a crawler and text extractor preserve the injected fragment",460,210],["Operation","S3 measures whether the captured document survives heuristic, language, quality",630,210],["Outcome","and deduplication filters",800,210]]
-width = max(760, 240 + len(items) * 170)
+title = "propaganda_mechanism_p1: HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+height = 590
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 460" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Input, operation, and outcome states follow the paragraph in source order.</desc>',
-    f'<rect width="{width}" height="460" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index in range(len(items)-1):
-    _, _, x1, y1 = items[index]
-    _, _, x2, y2 = items[index+1]
-    parts.append(f'<line x1="{x1+65}" y1="{y1}" x2="{x2-65}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-for group, label, x, y in items:
-    parts.append(f'<rect x="{x-65}" y="{y-90}" width="130" height="180" rx="16" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y-60}" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700">{escape(group)}</text>')
-    for line_index, line in enumerate(wrap(label, width=18)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_mechanism_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough
+
+- Teaching purpose: Follow the described state changes without inventing timing.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p1: HalfLife conditional gates, denominators, and separate model-influence experiment - State-transition walkthrough};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_mechanism_p1: HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for source, target, relation in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -1242,93 +1233,18 @@ Path("propaganda_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), enc
 - Text anchor: "The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements, then combines the stages into a document-level inclusion estimate."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements" and "and curation survival among captured documents" while also tracking 5 source-bounded propositions. The paragraph contains a real mechanism relation graph; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: mechanism relation graph.
+- Decision rationale: A visual passes the removal test because readers must reconstruct halflife conditional gates, denominators, and separate model-influence experiment while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: HalfLife conditional gates, denominators, and separate model-influence experiment.
+- Recommended scope and placement: Shared scope `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_mechanism_p3`. Otherwise split the visual by paragraph.
+- QA-informed planning change: A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
 
-### Treatment A — The paper estimates the conditional probability at each gate — mechanism relation graph
+### Treatment A — HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow
 
-- Teaching purpose: Answer "How does malicious comment text move toward a training corpus?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements"; "then combines the stages into a document-level inclusion estimate"; "This keeps three different denominators visible"; "prevalence among sampled pages, extraction survival among simulated injections"; "and curation survival among captured documents". Edges carry the explicit relation labels "then", "then", "then", "then"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_mechanism\_p2: The paper estimates the conditional probability at each gate - mechanism relation graph};
-\node[concept] (n1) at (1.8,0) {The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements};
-\node[concept] (n2) at (6.1,0) {then combines the stages into a document-level inclusion estimate};
-\node[concept] (n3) at (10.4,0) {This keeps three different denominators visible};
-\node[concept] (n4) at (1.8,-3.2) {prevalence among sampled pages, extraction survival among simulated injections};
-\node[concept] (n5) at (6.1,-3.2) {and curation survival among captured documents};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {then} (n5);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements"]
-  n2["then combines the stages into a document-level inclusion estimate"]
-  n3["This keeps three different denominators visible"]
-  n4["prevalence among sampled pages, extraction survival among simulated injections"]
-  n5["and curation survival among captured documents"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"then"| n5
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_mechanism_p2: The paper estimates the conditional probability at each gate — mechanism relation graph"
-nodes = [["n1","The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements",120,150],["n2","then combines the stages into a document-level inclusion estimate",420,150],["n3","This keeps three different denominators visible",720,150],["n4","prevalence among sampled pages, extraction survival among simulated injections",120,340],["n5","and curation survival among captured documents",420,340]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_model_shift — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 5 claim nodes on the left and 3 source nodes on the right, with only the 5 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
+- Teaching purpose: Show the source-supported order and branch boundaries.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -1338,21 +1254,23 @@ Path("propaganda_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), enc
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_mechanism\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\draw[link] (c3) -- (s2);
-\draw[link] (c4) -- (s2);
-\draw[link] (c5) -- (s3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p2: HalfLife conditional gates, denominators, and separate model-influence experiment - Operation flow};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
 \end{tikzpicture}
 \end{document}
 ```
@@ -1361,23 +1279,21 @@ Path("propaganda_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c3["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c4["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-  c3 -->|"supported at"| s2
-  c4 -->|"supported at"| s2
-  c5 -->|"supported at"| s3
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
 ```
 
 #### Python
@@ -1387,57 +1303,57 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p2: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,250],["c3","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,370],["c4","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s2"],["c3","s2"],["c4","s2"],["c5","s3"]]
+title = "propaganda_mechanism_p2: HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 800
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target in edges:
+for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
-Path("propaganda_mechanism_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+Path("propaganda_mechanism_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — The paper estimates the conditional probability at each gate — input-operation-outcome storyboard
+### Treatment B — HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger
 
-- Teaching purpose: Let readers inspect the paragraph as concrete input, operation, and outcome states.
-- Encoding and reading order: Use 5 ordered states labeled "Input: The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements", "Operation: then combines the stages into a document-level inclusion estimate", "Operation: This keeps three different denominators visible", "Operation: prevalence among sampled pages, extraction survival among simulated injections", "Outcome: and curation survival among captured documents". State connectors reproduce paragraph order and do not imply unreported timing.
-- Evidence and limitations: The first, intermediate, and final states are paragraph clauses; no hidden state, quantity, or transition is added.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Make inputs, operations, outputs, and limits inspectable as columns.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
 ```tex
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
+\usepackage{array}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,state/.style={draw,rounded corners,align=center,text width=3.2cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (7.6,2) {propaganda\_mechanism\_p2: The paper estimates the conditional probability at each gate - input-operation-outcome storyboard};
-\node[state] (k1) at (0,0) {\textbf{Input}\\The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements};
-\node[state] (k2) at (3.8,0) {\textbf{Operation}\\then combines the stages into a document-level inclusion estimate};
-\node[state] (k3) at (7.6,0) {\textbf{Operation}\\This keeps three different denominators visible};
-\node[state] (k4) at (11.399999999999999,0) {\textbf{Operation}\\prevalence among sampled pages, extraction survival among simulated injections};
-\node[state] (k5) at (15.2,0) {\textbf{Outcome}\\and curation survival among captured documents};
-\draw[->,thick] (k1) -- (k2);
-\draw[->,thick] (k2) -- (k3);
-\draw[->,thick] (k3) -- (k4);
-\draw[->,thick] (k4) -- (k5);
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_mechanism\_p2: HalfLife conditional gates, denominators, and separate model-influence experiment - Input-operation-output ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+S1 & Page prevalence & 3.4 & Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population. \\
+S2 & Extraction survival & 71.9 & Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set. \\
+S3 & Curation survival & 5.5 & Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path. \\
+HalfLife multiplies three conditional inclusion gates & Section 4.4 and rounded product & 0.13 & Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4. \\
+HalfLife multiplies three conditional inclusion gates & Conflicting Introduction summary & 0.15 & The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product. \\
+\end{tabular}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1445,16 +1361,14 @@ Path("propaganda_mechanism_p2_treatment_b.svg").write_text("\n".join(parts), enc
 #### Mermaid
 
 ```mermaid
-stateDiagram-v2
-  state "Input — The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements" as k1
-  state "Operation — then combines the stages into a document-level inclusion estimate" as k2
-  state "Operation — This keeps three different denominators visible" as k3
-  state "Operation — prevalence among sampled pages, extraction survival among simulated injections" as k4
-  state "Outcome — and curation survival among captured documents" as k5
-  k1 --> k2
-  k2 --> k3
-  k3 --> k4
-  k4 --> k5
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["S1<br/>Page prevalence<br/><b>3.4</b><br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+    r2["S2<br/>Extraction survival<br/><b>71.9</b><br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+    r3["S3<br/>Curation survival<br/><b>5.5</b><br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+    r4["HalfLife multiplies three conditional inclusion gates<br/>Section 4.4 and rounded product<br/><b>0.13</b><br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    r5["HalfLife multiplies three conditional inclusion gates<br/>Conflicting Introduction summary<br/><b>0.15</b><br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
+  end
 ```
 
 #### Python
@@ -1464,24 +1378,115 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p2: The paper estimates the conditional probability at each gate — input-operation-outcome storyboard"
-items = [["Input","The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements",120,210],["Operation","then combines the stages into a document-level inclusion estimate",290,210],["Operation","This keeps three different denominators visible",460,210],["Operation","prevalence among sampled pages, extraction survival among simulated injections",630,210],["Outcome","and curation survival among captured documents",800,210]]
-width = max(760, 240 + len(items) * 170)
+title = "propaganda_mechanism_p2: HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+height = 590
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 460" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Input, operation, and outcome states follow the paragraph in source order.</desc>',
-    f'<rect width="{width}" height="460" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index in range(len(items)-1):
-    _, _, x1, y1 = items[index]
-    _, _, x2, y2 = items[index+1]
-    parts.append(f'<line x1="{x1+65}" y1="{y1}" x2="{x2-65}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-for group, label, x, y in items:
-    parts.append(f'<rect x="{x-65}" y="{y-90}" width="130" height="180" rx="16" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y-60}" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700">{escape(group)}</text>')
-    for line_index, line in enumerate(wrap(label, width=18)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_mechanism_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough
+
+- Teaching purpose: Follow the described state changes without inventing timing.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p2: HalfLife conditional gates, denominators, and separate model-influence experiment - State-transition walkthrough};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_mechanism_p2: HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for source, target, relation in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -1505,85 +1510,18 @@ Path("propaganda_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), enc
 - Text anchor: "Corpus inclusion is still only an intermediate outcome."
 - Claims and sources: `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "Corpus inclusion is still only an intermediate outcome" and "That second experiment tests model influence without claiming a live web-to-model attack" while also tracking 3 source-bounded propositions. The paragraph contains a real mechanism relation graph; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: mechanism relation graph.
+- Decision rationale: A visual passes the removal test because readers must reconstruct halflife conditional gates, denominators, and separate model-influence experiment while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: HalfLife conditional gates, denominators, and separate model-influence experiment.
+- Recommended scope and placement: Shared scope `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_mechanism_p3`. Otherwise split the visual by paragraph.
+- QA-informed planning change: A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
 
-### Treatment A — Corpus inclusion is still only an intermediate outcome — mechanism relation graph
+### Treatment A — HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow
 
-- Teaching purpose: Answer "How does malicious comment text move toward a training corpus?" by exposing the paragraph's 3 named propositions and 2 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "Corpus inclusion is still only an intermediate outcome"; "The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity"; "That second experiment tests model influence without claiming a live web-to-model attack". Edges carry the explicit relation labels "then", "then"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_mechanism\_p3: Corpus inclusion is still only an intermediate outcome - mechanism relation graph};
-\node[concept] (n1) at (1.8,0) {Corpus inclusion is still only an intermediate outcome};
-\node[concept] (n2) at (6.1,0) {The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity};
-\node[concept] (n3) at (10.4,0) {That second experiment tests model influence without claiming a live web-to-model attack};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["Corpus inclusion is still only an intermediate outcome"]
-  n2["The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity"]
-  n3["That second experiment tests model influence without claiming a live web-to-model attack"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_mechanism_p3: Corpus inclusion is still only an intermediate outcome — mechanism relation graph"
-nodes = [["n1","Corpus inclusion is still only an intermediate outcome",120,150],["n2","The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity",420,150],["n3","That second experiment tests model influence without claiming a live web-to-model attack",720,150]]
-edges = [["n1","n2","then"],["n2","n3","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_halflife, propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_model_shift — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 5 claim nodes on the left and 3 source nodes on the right, with only the 5 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
+- Teaching purpose: Show the source-supported order and branch boundaries.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -1593,21 +1531,23 @@ Path("propaganda_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), enc
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_mechanism\_p3: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s2);
-\draw[link] (c3) -- (s2);
-\draw[link] (c4) -- (s2);
-\draw[link] (c5) -- (s3);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p3: HalfLife conditional gates, denominators, and separate model-influence experiment - Operation flow};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
 \end{tikzpicture}
 \end{document}
 ```
@@ -1616,23 +1556,21 @@ Path("propaganda_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), enc
 
 ```mermaid
 flowchart LR
-  subgraph Claims
-  c1["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c2["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c3["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c4["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-  c3 -->|"supported at"| s2
-  c4 -->|"supported at"| s2
-  c5 -->|"supported at"| s3
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
 ```
 
 #### Python
@@ -1642,53 +1580,57 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p3: claim-to-source provenance"
-nodes = [["c1","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,130],["c2","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,250],["c3","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,370],["c4","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["s1","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s2"],["c3","s2"],["c4","s2"],["c5","s3"]]
+title = "propaganda_mechanism_p3: HalfLife conditional gates, denominators, and separate model-influence experiment — Operation flow"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 800
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target in edges:
+for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
-Path("propaganda_mechanism_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+Path("propaganda_mechanism_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — Corpus inclusion is still only an intermediate outcome — input-operation-outcome storyboard
+### Treatment B — HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger
 
-- Teaching purpose: Let readers inspect the paragraph as concrete input, operation, and outcome states.
-- Encoding and reading order: Use 3 ordered states labeled "Input: Corpus inclusion is still only an intermediate outcome", "Operation: The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity", "Outcome: That second experiment tests model influence without claiming a live web-to-model attack". State connectors reproduce paragraph order and do not imply unreported timing.
-- Evidence and limitations: The first, intermediate, and final states are paragraph clauses; no hidden state, quantity, or transition is added.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Make inputs, operations, outputs, and limits inspectable as columns.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
 ```tex
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
+\usepackage{array}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,state/.style={draw,rounded corners,align=center,text width=3.2cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (3.8,2) {propaganda\_mechanism\_p3: Corpus inclusion is still only an intermediate outcome - input-operation-outcome storyboard};
-\node[state] (k1) at (0,0) {\textbf{Input}\\Corpus inclusion is still only an intermediate outcome};
-\node[state] (k2) at (3.8,0) {\textbf{Operation}\\The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity};
-\node[state] (k3) at (7.6,0) {\textbf{Outcome}\\That second experiment tests model influence without claiming a live web-to-model attack};
-\draw[->,thick] (k1) -- (k2);
-\draw[->,thick] (k2) -- (k3);
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_mechanism\_p3: HalfLife conditional gates, denominators, and separate model-influence experiment - Input-operation-output ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+S1 & Page prevalence & 3.4 & Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population. \\
+S2 & Extraction survival & 71.9 & Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set. \\
+S3 & Curation survival & 5.5 & Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path. \\
+HalfLife multiplies three conditional inclusion gates & Section 4.4 and rounded product & 0.13 & Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4. \\
+HalfLife multiplies three conditional inclusion gates & Conflicting Introduction summary & 0.15 & The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product. \\
+\end{tabular}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1696,12 +1638,14 @@ Path("propaganda_mechanism_p3_treatment_b.svg").write_text("\n".join(parts), enc
 #### Mermaid
 
 ```mermaid
-stateDiagram-v2
-  state "Input — Corpus inclusion is still only an intermediate outcome" as k1
-  state "Operation — The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity" as k2
-  state "Outcome — That second experiment tests model influence without claiming a live web-to-model attack" as k3
-  k1 --> k2
-  k2 --> k3
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["S1<br/>Page prevalence<br/><b>3.4</b><br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+    r2["S2<br/>Extraction survival<br/><b>71.9</b><br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+    r3["S3<br/>Curation survival<br/><b>5.5</b><br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+    r4["HalfLife multiplies three conditional inclusion gates<br/>Section 4.4 and rounded product<br/><b>0.13</b><br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    r5["HalfLife multiplies three conditional inclusion gates<br/>Conflicting Introduction summary<br/><b>0.15</b><br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
+  end
 ```
 
 #### Python
@@ -1711,24 +1655,115 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_mechanism_p3: Corpus inclusion is still only an intermediate outcome — input-operation-outcome storyboard"
-items = [["Input","Corpus inclusion is still only an intermediate outcome",120,210],["Operation","The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity",290,210],["Outcome","That second experiment tests model influence without claiming a live web-to-model attack",460,210]]
-width = max(760, 240 + len(items) * 170)
+title = "propaganda_mechanism_p3: HalfLife conditional gates, denominators, and separate model-influence experiment — Input-operation-output ledger"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+height = 590
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 460" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Input, operation, and outcome states follow the paragraph in source order.</desc>',
-    f'<rect width="{width}" height="460" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index in range(len(items)-1):
-    _, _, x1, y1 = items[index]
-    _, _, x2, y2 = items[index+1]
-    parts.append(f'<line x1="{x1+65}" y1="{y1}" x2="{x2-65}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-for group, label, x, y in items:
-    parts.append(f'<rect x="{x-65}" y="{y-90}" width="130" height="180" rx="16" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y-60}" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700">{escape(group)}</text>')
-    for line_index, line in enumerate(wrap(label, width=18)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_mechanism_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough
+
+- Teaching purpose: Follow the described state changes without inventing timing.
+- Encoding and reading order: Use 8 named nodes and 7 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_halflife`, `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_model_shift` from `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_models`. A shared visual may appear only after the third paragraph and must include S1/S2/S3, distinct denominators, the inclusion estimate, and a visibly separate controlled model-influence branch.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_mechanism\_p3: HalfLife conditional gates, denominators, and separate model-influence experiment - State-transition walkthrough};
+\node[box] (pages) at (1.00,-1.50) {Sampled pages};
+\node[box] (s1) at (2.50,-1.50) {S1: public comment interface};
+\node[box] (s2) at (4.00,-1.50) {S2: fragment survives extraction};
+\node[box] (s3) at (5.50,-1.50) {S3: captured document survives curation};
+\node[box] (incl) at (7.00,-1.50) {Document-level inclusion estimate};
+\node[box] (controlled) at (7.00,-2.55) {Separate controlled poison-mixture model training};
+\node[box] (effect) at (8.50,-2.55) {Held-out entity-preference shift};
+\node[box] (boundary) at (8.50,-1.50) {No live web-to-production attack established};
+\draw[link] (pages) -- node[rel] {page prevalence} (s1);
+\draw[link] (s1) -- node[rel] {conditional survival} (s2);
+\draw[link] (s2) -- node[rel] {conditional survival} (s3);
+\draw[link] (s3) -- node[rel] {multiply gates} (incl);
+\draw[link] (controlled) -- node[rel] {measure} (effect);
+\draw[link] (incl) -- node[rel] {intermediate only} (boundary);
+\draw[link] (effect) -- node[rel] {separate experiment} (boundary);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  pages["Sampled pages"]
+  s1["S1: public comment interface"]
+  s2["S2: fragment survives extraction"]
+  s3["S3: captured document survives curation"]
+  incl["Document-level inclusion estimate"]
+  controlled["Separate controlled poison-mixture model training"]
+  effect["Held-out entity-preference shift"]
+  boundary["No live web-to-production attack established"]
+  pages -->|"page prevalence"| s1
+  s1 -->|"conditional survival"| s2
+  s2 -->|"conditional survival"| s3
+  s3 -->|"multiply gates"| incl
+  controlled -->|"measure"| effect
+  incl -->|"intermediate only"| boundary
+  effect -->|"separate experiment"| boundary
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_mechanism_p3: HalfLife conditional gates, denominators, and separate model-influence experiment — State-transition walkthrough"
+nodes = [["pages","Sampled pages",100,150],["s1","S1: public comment interface",250,150],["s2","S2: fragment survives extraction",400,150],["s3","S3: captured document survives curation",550,150],["incl","Document-level inclusion estimate",700,150],["controlled","Separate controlled poison-mixture model training",700,255],["effect","Held-out entity-preference shift",850,255],["boundary","No live web-to-production attack established",850,150]]
+edges = [["pages","s1","page prevalence"],["s1","s2","conditional survival"],["s2","s3","conditional survival"],["s3","incl","multiply gates"],["controlled","effect","measure"],["incl","boundary","intermediate only"],["effect","boundary","separate experiment"]]
+node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for source, target, relation in edges:
+    _, x1, y1 = node_by_id[source]
+    _, x2, y2 = node_by_id[target]
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -1752,16 +1787,18 @@ Path("propaganda_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), enc
 - Text anchor: "Start with a page identified as having a comment interface."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "Start with a page identified as having a comment interface" and "71.9% of those simulated injections remain visible after this extraction step" while also tracking 4 source-bounded propositions. The paragraph contains a real example state path; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: example state path.
+- Decision rationale: A visual passes the removal test because readers must reconstruct sandboxed comment replacement through extraction, curation, and rounded inclusion product while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Sandboxed comment replacement through extraction, curation, and rounded inclusion product.
+- Recommended scope and placement: Shared scope `propaganda_example_p1`, `propaganda_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_example_p2`. Otherwise split the visual by paragraph.
+- QA-informed planning change: A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
 
-### Treatment A — Start with a page identified as having a comment — example state path
+### Treatment A — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Worked sequence
 
-- Teaching purpose: Answer "What happens to a simulated poisoned comment in the reported pipeline?" by exposing the paragraph's 4 named propositions and 3 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "Start with a page identified as having a comment interface"; "In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words"; "Resiliparse converts the HTML to plaintext"; "71.9% of those simulated injections remain visible after this extraction step". Edges carry the explicit relation labels "then", "then", "then"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Follow the actual example in source order.
+- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -1769,17 +1806,23 @@ Path("propaganda_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), enc
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_example\_p1: Start with a page identified as having a comment - example state path};
-\node[concept] (n1) at (1.8,0) {Start with a page identified as having a comment interface};
-\node[concept] (n2) at (6.1,0) {In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words};
-\node[concept] (n3) at (10.4,0) {Resiliparse converts the HTML to plaintext};
-\node[concept] (n4) at (1.8,-3.2) {71.9\% of those simulated injections remain visible after this extraction step};
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_example\_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Worked sequence};
+\node[box] (n1) at (1.00,-1.50) {Start with a page identified as having a comment interface};
+\node[box] (n2) at (2.50,-1.50) {In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words};
+\node[box] (n3) at (4.00,-1.50) {Resiliparse converts the HTML to plaintext};
+\node[box] (n4) at (5.50,-1.50) {71.9\% of those simulated injections remain visible after this extraction step};
+\node[box] (n5) at (7.00,-1.50) {The resulting documents then pass through Dolma 3-style heuristic, English-language, quality};
+\node[box] (n6) at (8.50,-1.50) {and deduplication filters};
+\node[box] (n7) at (10.00,-1.50) {The combined curation survival among captured injections is 5.5\%};
 \draw[link] (n1) -- node[rel] {then} (n2);
 \draw[link] (n2) -- node[rel] {then} (n3);
 \draw[link] (n3) -- node[rel] {then} (n4);
+\draw[link] (n4) -- node[rel] {then} (n5);
+\draw[link] (n5) -- node[rel] {then} (n6);
+\draw[link] (n6) -- node[rel] {then} (n7);
 \end{tikzpicture}
 \end{document}
 ```
@@ -1792,9 +1835,15 @@ flowchart LR
   n2["In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words"]
   n3["Resiliparse converts the HTML to plaintext"]
   n4["71.9% of those simulated injections remain visible after this extraction step"]
+  n5["The resulting documents then pass through Dolma 3-style heuristic, English-language, quality"]
+  n6["and deduplication filters"]
+  n7["The combined curation survival among captured injections is 5.5%"]
   n1 -->|"then"| n2
   n2 -->|"then"| n3
   n3 -->|"then"| n4
+  n4 -->|"then"| n5
+  n5 -->|"then"| n6
+  n6 -->|"then"| n7
 ```
 
 #### Python
@@ -1804,135 +1853,57 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_example_p1: Start with a page identified as having a comment — example state path"
-nodes = [["n1","Start with a page identified as having a comment interface",120,150],["n2","In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words",420,150],["n3","Resiliparse converts the HTML to plaintext",720,150],["n4","71.9% of those simulated injections remain visible after this extraction step",120,340]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
+title = "propaganda_example_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Worked sequence"
+nodes = [["n1","Start with a page identified as having a comment interface",100,150],["n2","In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words",250,150],["n3","Resiliparse converts the HTML to plaintext",400,150],["n4","71.9% of those simulated injections remain visible after this extraction step",550,150],["n5","The resulting documents then pass through Dolma 3-style heuristic, English-language, quality",700,150],["n6","and deduplication filters",850,150],["n7","The combined curation survival among captured injections is 5.5%",1000,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_example_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment B — propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_inclusion — claim-to-source provenance
+### Treatment B — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Example calculation or state ledger
 
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 4 claim nodes on the left and 2 source nodes on the right, with only the 5 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_example\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s1);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s2);
-\draw[link] (c4) -- (s1);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c2["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c3["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c4["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s1
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s2
-  c4 -->|"supported at"| s1
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_example_p1: claim-to-source provenance"
-nodes = [["c1","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,130],["c2","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,250],["c3","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,370],["c4","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,490],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,250]]
-edges = [["c1","s1"],["c2","s1"],["c3","s1"],["c4","s2"],["c4","s1"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 680
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_example_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 37.5, 71.9% — exact-condition board
-
-- Teaching purpose: Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 2 unscaled marks, one per reported value (37.5, 71.9%), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Keep values, states, and boundaries grouped by example.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
 ```tex
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
+\usepackage{array}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_example\_p1: 37.5, 71.9\% - exact-condition board};
-\node[fact] at (0,0) {\textbf{37.5}\\In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words.};
-\node[fact] at (4.6,0) {\textbf{71.9\%}\\Resiliparse converts the HTML to plaintext; 71.9\% of those simulated injections remain visible after this extraction step.};
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_example\_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Example calculation or state ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+S1 & Page prevalence & 3.4 & Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population. \\
+S2 & Extraction survival & 71.9 & Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set. \\
+S3 & Curation survival & 5.5 & Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path. \\
+HalfLife multiplies three conditional inclusion gates & Section 4.4 and rounded product & 0.13 & Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4. \\
+HalfLife multiplies three conditional inclusion gates & Conflicting Introduction summary & 0.15 & The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product. \\
+\end{tabular}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1941,9 +1912,12 @@ Path("propaganda_example_p1_treatment_b.svg").write_text("\n".join(parts), encod
 
 ```mermaid
 flowchart TB
-  subgraph Exact_reported_quantities
-    q1["37.5<br/>In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words."]
-    q2["71.9%<br/>Resiliparse converts the HTML to plaintext; 71.9% of those simulated injections remain visible after this extraction step."]
+  subgraph Visible_value_matrix
+    r1["S1<br/>Page prevalence<br/><b>3.4</b><br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+    r2["S2<br/>Extraction survival<br/><b>71.9</b><br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+    r3["S3<br/>Curation survival<br/><b>5.5</b><br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+    r4["HalfLife multiplies three conditional inclusion gates<br/>Section 4.4 and rounded product<br/><b>0.13</b><br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    r5["HalfLife multiplies three conditional inclusion gates<br/>Conflicting Introduction summary<br/><b>0.15</b><br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
   end
 ```
 
@@ -1954,22 +1928,102 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_example_p1: 37.5, 71.9% — exact-condition board"
-items = [["37.5","In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words."],["71.9%","Resiliparse converts the HTML to plaintext; 71.9% of those simulated injections remain visible after this extraction step."]]
-height = 350
+title = "propaganda_example_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Example calculation or state ledger"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+height = 590
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_example_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Bounded example panels
+
+- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
+- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (8.25,3) {propaganda\_example\_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Bounded example panels};
+\node[panel] at (0,0) {\textbf{S1}\\[4pt]\textbf{Page prevalence}: 3.4 -- Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population.};
+\node[panel] at (5.5,0) {\textbf{S2}\\[4pt]\textbf{Extraction survival}: 71.9 -- Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set.};
+\node[panel] at (11,0) {\textbf{S3}\\[4pt]\textbf{Curation survival}: 5.5 -- Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path.};
+\node[panel] at (16.5,0) {\textbf{HalfLife multiplies three conditional inclusion gates}\\[4pt]\textbf{Section 4.4 and rounded product}: 0.13 -- Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4.\\\textbf{Conflicting Introduction summary}: 0.15 -- The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product.};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["S1"]
+    p1r1["Page prevalence: 3.4<br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+  end
+  subgraph p2["S2"]
+    p2r1["Extraction survival: 71.9<br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+  end
+  subgraph p3["S3"]
+    p3r1["Curation survival: 5.5<br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+  end
+  subgraph p4["HalfLife multiplies three conditional inclusion gates"]
+    p4r1["Section 4.4 and rounded product: 0.13<br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    p4r2["Conflicting Introduction summary: 0.15<br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_example_p1: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Bounded example panels"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -1993,97 +2047,18 @@ Path("propaganda_example_p1_treatment_c.svg").write_text("\n".join(parts), encod
 - Text anchor: "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality" and "without reconciling the difference" while also tracking 6 source-bounded propositions. The paragraph contains a real example state path; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: example state path.
+- Decision rationale: A visual passes the removal test because readers must reconstruct sandboxed comment replacement through extraction, curation, and rounded inclusion product while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Sandboxed comment replacement through extraction, curation, and rounded inclusion product.
+- Recommended scope and placement: Shared scope `propaganda_example_p1`, `propaganda_example_p2` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_example_p2`. Otherwise split the visual by paragraph.
+- QA-informed planning change: A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
 
-### Treatment A — The resulting documents then pass through Dolma 3-style heuristic — example state path
+### Treatment A — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Worked sequence
 
-- Teaching purpose: Answer "What happens to a simulated poisoned comment in the reported pipeline?" by exposing the paragraph's 6 named propositions and 5 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality"; "and deduplication filters"; "The combined curation survival among captured injections is 5.5%"; "Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product"; "The v1 Introduction instead says 0.15%"; "without reconciling the difference". Edges carry the explicit relation labels "then", "then", "then", "contrasts with", "then"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_example\_p2: The resulting documents then pass through Dolma 3-style heuristic - example state path};
-\node[concept] (n1) at (1.8,0) {The resulting documents then pass through Dolma 3-style heuristic, English-language, quality};
-\node[concept] (n2) at (6.1,0) {and deduplication filters};
-\node[concept] (n3) at (10.4,0) {The combined curation survival among captured injections is 5.5\%};
-\node[concept] (n4) at (1.8,-3.2) {Together with the measured 3.4\% page prevalence and 71.9\% extraction survival, Section 4.4 reports a 0.13\% document inclusion estimate, consistent with the rounded stage product};
-\node[concept] (n5) at (6.1,-3.2) {The v1 Introduction instead says 0.15\%};
-\node[concept] (n6) at (10.4,-3.2) {without reconciling the difference};
-\draw[link] (n1) -- node[rel] {then} (n2);
-\draw[link] (n2) -- node[rel] {then} (n3);
-\draw[link] (n3) -- node[rel] {then} (n4);
-\draw[link] (n4) -- node[rel] {contrasts with} (n5);
-\draw[link] (n5) -- node[rel] {then} (n6);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The resulting documents then pass through Dolma 3-style heuristic, English-language, quality"]
-  n2["and deduplication filters"]
-  n3["The combined curation survival among captured injections is 5.5%"]
-  n4["Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product"]
-  n5["The v1 Introduction instead says 0.15%"]
-  n6["without reconciling the difference"]
-  n1 -->|"then"| n2
-  n2 -->|"then"| n3
-  n3 -->|"then"| n4
-  n4 -->|"contrasts with"| n5
-  n5 -->|"then"| n6
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_example_p2: The resulting documents then pass through Dolma 3-style heuristic — example state path"
-nodes = [["n1","The resulting documents then pass through Dolma 3-style heuristic, English-language, quality",120,150],["n2","and deduplication filters",420,150],["n3","The combined curation survival among captured injections is 5.5%",720,150],["n4","Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product",120,340],["n5","The v1 Introduction instead says 0.15%",420,340],["n6","without reconciling the difference",720,340]]
-edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","contrasts with"],["n5","n6","then"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_inclusion — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 4 claim nodes on the left and 2 source nodes on the right, with only the 5 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
+- Teaching purpose: Follow the actual example in source order.
+- Encoding and reading order: Use 7 named nodes and 6 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -2093,19 +2068,21 @@ Path("propaganda_example_p2_treatment_a.svg").write_text("\n".join(parts), encod
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_example\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s1);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s2);
-\draw[link] (c4) -- (s1);
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_example\_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Worked sequence};
+\node[box] (n1) at (1.00,-1.50) {Start with a page identified as having a comment interface};
+\node[box] (n2) at (2.50,-1.50) {In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words};
+\node[box] (n3) at (4.00,-1.50) {Resiliparse converts the HTML to plaintext};
+\node[box] (n4) at (5.50,-1.50) {71.9\% of those simulated injections remain visible after this extraction step};
+\node[box] (n5) at (7.00,-1.50) {The resulting documents then pass through Dolma 3-style heuristic, English-language, quality};
+\node[box] (n6) at (8.50,-1.50) {and deduplication filters};
+\node[box] (n7) at (10.00,-1.50) {The combined curation survival among captured injections is 5.5\%};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
+\draw[link] (n4) -- node[rel] {then} (n5);
+\draw[link] (n5) -- node[rel] {then} (n6);
+\draw[link] (n6) -- node[rel] {then} (n7);
 \end{tikzpicture}
 \end{document}
 ```
@@ -2114,21 +2091,19 @@ Path("propaganda_example_p2_treatment_a.svg").write_text("\n".join(parts), encod
 
 ```mermaid
 flowchart LR
-  subgraph Claims
-  c1["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c2["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c3["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c4["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s1
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s2
-  c4 -->|"supported at"| s1
+  n1["Start with a page identified as having a comment interface"]
+  n2["In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words"]
+  n3["Resiliparse converts the HTML to plaintext"]
+  n4["71.9% of those simulated injections remain visible after this extraction step"]
+  n5["The resulting documents then pass through Dolma 3-style heuristic, English-language, quality"]
+  n6["and deduplication filters"]
+  n7["The combined curation survival among captured injections is 5.5%"]
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
+  n4 -->|"then"| n5
+  n5 -->|"then"| n6
+  n6 -->|"then"| n7
 ```
 
 #### Python
@@ -2138,55 +2113,57 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_example_p2: claim-to-source provenance"
-nodes = [["c1","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,130],["c2","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,250],["c3","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,370],["c4","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,490],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,250]]
-edges = [["c1","s1"],["c2","s1"],["c3","s1"],["c4","s2"],["c4","s1"]]
+title = "propaganda_example_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Worked sequence"
+nodes = [["n1","Start with a page identified as having a comment interface",100,150],["n2","In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words",250,150],["n3","Resiliparse converts the HTML to plaintext",400,150],["n4","71.9% of those simulated injections remain visible after this extraction step",550,150],["n5","The resulting documents then pass through Dolma 3-style heuristic, English-language, quality",700,150],["n6","and deduplication filters",850,150],["n7","The combined curation survival among captured injections is 5.5%",1000,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"],["n5","n6","then"],["n6","n7","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 680
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
-for source, target in edges:
+for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
+for _, label, x, y in nodes:
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
-Path("propaganda_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+Path("propaganda_example_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
 
-### Treatment C — 3, 5.5%, 3.4%, 71.9%, 4.4, 0.13%, 0.15% — exact-condition board
+### Treatment B — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Example calculation or state ledger
 
-- Teaching purpose: Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 7 unscaled marks, one per reported value (3, 5.5%, 3.4%, 71.9%, 4.4, 0.13%, 0.15%), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Keep values, states, and boundaries grouped by example.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
 ```tex
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
+\usepackage{array}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_example\_p2: 3, 5.5\%, 3.4\%, 71.9\%, 4.4, 0.13\%, 0.15\% - exact-condition board};
-\node[fact] at (0,0) {\textbf{3}\\The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters.};
-\node[fact] at (4.6,0) {\textbf{5.5\%}\\The combined curation survival among captured injections is 5.5\%.};
-\node[fact] at (9.2,0) {\textbf{3.4\%}\\Together with the measured 3.4\% page prevalence and 71.9\% extraction survival, Section 4.4 reports a 0.13\% document inclusion estimate, consistent with the rounded stage product.};
-\node[fact] at (0,-2.8) {\textbf{71.9\%}\\Together with the measured 3.4\% page prevalence and 71.9\% extraction survival, Section 4.4 reports a 0.13\% document inclusion estimate, consistent with the rounded stage product.};
-\node[fact] at (4.6,-2.8) {\textbf{4.4}\\Together with the measured 3.4\% page prevalence and 71.9\% extraction survival, Section 4.4 reports a 0.13\% document inclusion estimate, consistent with the rounded stage product.};
-\node[fact] at (9.2,-2.8) {\textbf{0.13\%}\\Together with the measured 3.4\% page prevalence and 71.9\% extraction survival, Section 4.4 reports a 0.13\% document inclusion estimate, consistent with the rounded stage product.};
-\node[fact] at (0,-5.6) {\textbf{0.15\%}\\The v1 Introduction instead says 0.15\%, without reconciling the difference.};
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_example\_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Example calculation or state ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+S1 & Page prevalence & 3.4 & Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population. \\
+S2 & Extraction survival & 71.9 & Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set. \\
+S3 & Curation survival & 5.5 & Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path. \\
+HalfLife multiplies three conditional inclusion gates & Section 4.4 and rounded product & 0.13 & Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4. \\
+HalfLife multiplies three conditional inclusion gates & Conflicting Introduction summary & 0.15 & The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product. \\
+\end{tabular}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2195,14 +2172,12 @@ Path("propaganda_example_p2_treatment_b.svg").write_text("\n".join(parts), encod
 
 ```mermaid
 flowchart TB
-  subgraph Exact_reported_quantities
-    q1["3<br/>The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters."]
-    q2["5.5%<br/>The combined curation survival among captured injections is 5.5%."]
-    q3["3.4%<br/>Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."]
-    q4["71.9%<br/>Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."]
-    q5["4.4<br/>Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."]
-    q6["0.13%<br/>Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."]
-    q7["0.15%<br/>The v1 Introduction instead says 0.15%, without reconciling the difference."]
+  subgraph Visible_value_matrix
+    r1["S1<br/>Page prevalence<br/><b>3.4</b><br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+    r2["S2<br/>Extraction survival<br/><b>71.9</b><br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+    r3["S3<br/>Curation survival<br/><b>5.5</b><br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+    r4["HalfLife multiplies three conditional inclusion gates<br/>Section 4.4 and rounded product<br/><b>0.13</b><br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    r5["HalfLife multiplies three conditional inclusion gates<br/>Conflicting Introduction summary<br/><b>0.15</b><br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
   end
 ```
 
@@ -2213,22 +2188,102 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_example_p2: 3, 5.5%, 3.4%, 71.9%, 4.4, 0.13%, 0.15% — exact-condition board"
-items = [["3","The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters."],["5.5%","The combined curation survival among captured injections is 5.5%."],["3.4%","Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."],["71.9%","Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."],["4.4","Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."],["0.13%","Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product."],["0.15%","The v1 Introduction instead says 0.15%, without reconciling the difference."]]
-height = 860
+title = "propaganda_example_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Example calculation or state ledger"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+height = 590
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_example_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Bounded example panels
+
+- Teaching purpose: Separate multiple examples and aggregate results instead of flattening them.
+- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion` from `propaganda_source_threat`, `propaganda_source_inclusion`. A shared visual belongs after the second example and must include 37.5 words, 71.9%, 5.5%, 3.4%, the derived 0.13%, disputed 0.15%, and the non-live boundary.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (8.25,3) {propaganda\_example\_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product - Bounded example panels};
+\node[panel] at (0,0) {\textbf{S1}\\[4pt]\textbf{Page prevalence}: 3.4 -- Comment-platform signatures appeared on 3.4\% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population.};
+\node[panel] at (5.5,0) {\textbf{S2}\\[4pt]\textbf{Extraction survival}: 71.9 -- Among sandboxed simulated comment replacements, 71.9\% remained in extracted plaintext. This denominator is the simulated-injection set.};
+\node[panel] at (11,0) {\textbf{S3}\\[4pt]\textbf{Curation survival}: 5.5 -- Among captured injected-comment documents, 5.5\% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path.};
+\node[panel] at (16.5,0) {\textbf{HalfLife multiplies three conditional inclusion gates}\\[4pt]\textbf{Section 4.4 and rounded product}: 0.13 -- Multiplying the rounded conditional stages gives about 0.13\%, matching the document-level estimate reported in Section 4.4.\\\textbf{Conflicting Introduction summary}: 0.15 -- The v1 Introduction instead states 0.15\% and does not reconcile that number with Section 4.4 or the rounded stage product.};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["S1"]
+    p1r1["Page prevalence: 3.4<br/>Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."]
+  end
+  subgraph p2["S2"]
+    p2r1["Extraction survival: 71.9<br/>Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."]
+  end
+  subgraph p3["S3"]
+    p3r1["Curation survival: 5.5<br/>Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."]
+  end
+  subgraph p4["HalfLife multiplies three conditional inclusion gates"]
+    p4r1["Section 4.4 and rounded product: 0.13<br/>Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."]
+    p4r2["Conflicting Introduction summary: 0.15<br/>The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_example_p2: Sandboxed comment replacement through extraction, curation, and rounded inclusion product — Bounded example panels"
+rows = [["S1","Page prevalence","3.4","Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population."],["S2","Extraction survival","71.9","Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set."],["S3","Curation survival","5.5","Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path."],["HalfLife multiplies three conditional inclusion gates","Section 4.4 and rounded product","0.13","Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4."],["HalfLife multiplies three conditional inclusion gates","Conflicting Introduction summary","0.15","The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product."]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2252,193 +2307,18 @@ Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encod
 - Text anchor: "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_claim_sft` (OBSERVED, VERIFIED); `propaganda_claim_formats` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51" and "the v1 Introduction separately states 0.15%, an unresolved internal discrepancy" while also tracking 5 source-bounded propositions. The paragraph contains a real reported-condition comparison; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: reported-condition comparison.
+- Decision rationale: A visual passes the removal test because readers must reconstruct measured stages, derived product, and disputed introduction value while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Measured stages, derived product, and disputed introduction value.
+- Recommended scope and placement: This paragraph only; place the visual immediately after `propaganda_evidence_p1`.
+- QA-informed planning change: Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
 
-### Treatment A — The inclusion analysis scans 181857 pages from 200 WARC — reported-condition comparison
+### Treatment A — Measured stages, derived product, and disputed introduction value — Grouped disclosed-domain plot
 
-- Teaching purpose: Answer "What evidence connects public comments to model behavior?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51"; "Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction"; "and 5.5% of captured injections survive the combined curation path"; "Their rounded product is about 0.13%, matching Section 4.4"; "the v1 Introduction separately states 0.15%, an unresolved internal discrepancy". Edges carry the explicit relation labels "reported alongside", "reported alongside", "reported alongside", "bounded by"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_evidence\_p1: The inclusion analysis scans 181857 pages from 200 WARC - reported-condition comparison};
-\node[concept] (n1) at (1.8,0) {The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51};
-\node[concept] (n2) at (6.1,0) {Comment signatures appear on 3.4\% of pages, 71.9\% of simulated replacement comments survive extraction};
-\node[concept] (n3) at (10.4,0) {and 5.5\% of captured injections survive the combined curation path};
-\node[concept] (n4) at (1.8,-3.2) {Their rounded product is about 0.13\%, matching Section 4.4};
-\node[concept] (n5) at (6.1,-3.2) {the v1 Introduction separately states 0.15\%, an unresolved internal discrepancy};
-\draw[link] (n1) -- node[rel] {reported alongside} (n2);
-\draw[link] (n1) -- node[rel] {reported alongside} (n3);
-\draw[link] (n1) -- node[rel] {reported alongside} (n4);
-\draw[link] (n1) -- node[rel] {bounded by} (n5);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51"]
-  n2["Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction"]
-  n3["and 5.5% of captured injections survive the combined curation path"]
-  n4["Their rounded product is about 0.13%, matching Section 4.4"]
-  n5["the v1 Introduction separately states 0.15%, an unresolved internal discrepancy"]
-  n1 -->|"reported alongside"| n2
-  n1 -->|"reported alongside"| n3
-  n1 -->|"reported alongside"| n4
-  n1 -->|"bounded by"| n5
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p1: The inclusion analysis scans 181857 pages from 200 WARC — reported-condition comparison"
-nodes = [["n1","The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51",120,150],["n2","Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction",420,150],["n3","and 5.5% of captured injections survive the combined curation path",720,150],["n4","Their rounded product is about 0.13%, matching Section 4.4",120,340],["n5","the v1 Introduction separately states 0.15%, an unresolved internal discrepancy",420,340]]
-edges = [["n1","n2","reported alongside"],["n1","n3","reported alongside"],["n1","n4","reported alongside"],["n1","n5","bounded by"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_inclusion, propaganda_claim_model_shift, propaganda_claim_sft, propaganda_claim_formats — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 7 claim nodes on the left and 3 source nodes on the right, with only the 8 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_evidence\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[claim] (c6) at (0,-12) {Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]};
-\node[claim] (c7) at (0,-14.399999999999999) {Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s1);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s2);
-\draw[link] (c4) -- (s1);
-\draw[link] (c5) -- (s3);
-\draw[link] (c6) -- (s3);
-\draw[link] (c7) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c2["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c3["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c4["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  c6["Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. OBSERVED"]
-  c7["Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s1
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s2
-  c4 -->|"supported at"| s1
-  c5 -->|"supported at"| s3
-  c6 -->|"supported at"| s3
-  c7 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p1: claim-to-source provenance"
-nodes = [["c1","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,130],["c2","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,250],["c3","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,370],["c4","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["c6","Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]",190,730],["c7","Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]",190,850],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s1"],["c3","s1"],["c4","s2"],["c4","s1"],["c5","s3"],["c6","s3"],["c7","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 1040
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 181,857, 200, 2025, 51., 3.4%, 71.9%, 5.5%, 0.13% — exact-condition board
-
-- Teaching purpose: Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 8 unscaled marks, one per reported value (181,857, 200, 2025, 51., 3.4%, 71.9%, 5.5%, 0.13%), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
+- Encoding and reading order: `Sample` uses the disclosed domain 181856.5–181857.5 with 1 labeled marks; `Measured gate` uses the disclosed domain 0–100 with 3 labeled marks; `Derived product` uses the disclosed domain -0.4–0.7 with 1 labeled marks; `Disputed source value` uses the disclosed domain -0.4–0.7 with 1 labeled marks. Exact values remain printed beside every mark.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
+- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -2447,16 +2327,30 @@ Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_evidence\_p1: 181,857, 200, 2025, 51., 3.4\%, 71.9\%, 5.5\%, 0.13\% - exact-condition board};
-\node[fact] at (0,0) {\textbf{181,857}\\The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51.};
-\node[fact] at (4.6,0) {\textbf{200}\\The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51.};
-\node[fact] at (9.2,0) {\textbf{2025}\\The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51.};
-\node[fact] at (0,-2.8) {\textbf{51.}\\The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51.};
-\node[fact] at (4.6,-2.8) {\textbf{3.4\%}\\Comment signatures appear on 3.4\% of pages, 71.9\% of simulated replacement comments survive extraction, and 5.5\% of captured injections survive the combined curation path.};
-\node[fact] at (9.2,-2.8) {\textbf{71.9\%}\\Comment signatures appear on 3.4\% of pages, 71.9\% of simulated replacement comments survive extraction, and 5.5\% of captured injections survive the combined curation path.};
-\node[fact] at (0,-5.6) {\textbf{5.5\%}\\Comment signatures appear on 3.4\% of pages, 71.9\% of simulated replacement comments survive extraction, and 5.5\% of captured injections survive the combined curation path.};
-\node[fact] at (4.6,-5.6) {\textbf{0.13\%}\\Their rounded product is about 0.13\%, matching Section 4.4; the v1 Introduction separately states 0.15\%, an unresolved internal discrepancy.};
+\begin{tikzpicture}[font=\sffamily]
+\node[font=\bfseries,anchor=west] at (0,1.2) {propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Grouped disclosed-domain plot};
+\node[anchor=west,font=\bfseries] at (0,0) {Sample: disclosed domain 181856.5--181857.5};
+\draw (0,-0.8) -- (8,-0.8);
+\fill (4.000,-0.8) circle (2.5pt) node[above,font=\scriptsize] {181,857};
+\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {Pages scanned};
+\node[anchor=west,font=\bfseries] at (0,-1.9500000000000002) {Measured gate: disclosed domain 0--100};
+\draw (0,-2.75) -- (8,-2.75);
+\fill (0.272,-2.75) circle (2.5pt) node[above,font=\scriptsize] {3.4\%};
+\node[anchor=east,font=\scriptsize] at (-0.2,-2.75) {Page prevalence};
+\draw (0,-3.4) -- (8,-3.4);
+\fill (5.752,-3.4) circle (2.5pt) node[above,font=\scriptsize] {71.9\%};
+\node[anchor=east,font=\scriptsize] at (-0.2,-3.4) {Extraction survival};
+\draw (0,-4.05) -- (8,-4.05);
+\fill (0.440,-4.05) circle (2.5pt) node[above,font=\scriptsize] {5.5\%};
+\node[anchor=east,font=\scriptsize] at (-0.2,-4.05) {Curation survival};
+\node[anchor=west,font=\bfseries] at (0,-5.2) {Derived product: disclosed domain -0.4--0.7};
+\draw (0,-6) -- (8,-6);
+\fill (3.855,-6) circle (2.5pt) node[above,font=\scriptsize] {0.13\%};
+\node[anchor=east,font=\scriptsize] at (-0.2,-6) {Section 4.4 estimate};
+\node[anchor=west,font=\bfseries] at (0,-7.15) {Disputed source value: disclosed domain -0.4--0.7};
+\draw (0,-7.95) -- (8,-7.95);
+\fill (4.000,-7.95) circle (2.5pt) node[above,font=\scriptsize] {0.15\%};
+\node[anchor=east,font=\scriptsize] at (-0.2,-7.95) {Introduction estimate};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2465,15 +2359,97 @@ Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart TB
-  subgraph Exact_reported_quantities
-    q1["181,857<br/>The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."]
-    q2["200<br/>The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."]
-    q3["2025<br/>The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."]
-    q4["51.<br/>The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."]
-    q5["3.4%<br/>Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."]
-    q6["71.9%<br/>Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."]
-    q7["5.5%<br/>Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."]
-    q8["0.13%<br/>Their rounded product is about 0.13%, matching Section 4.4; the v1 Introduction separately states 0.15%, an unresolved internal discrepancy."]
+  subgraph g1["Sample — domain 181856.5 to 181857.5"]
+    g1r1["Pages scanned: 181,857"]
+  end
+  subgraph g2["Measured gate — domain 0 to 100"]
+    g2r1["Page prevalence: 3.4%"]
+    g2r2["Extraction survival: 71.9%"]
+    g2r3["Curation survival: 5.5%"]
+  end
+  subgraph g3["Derived product — domain -0.4 to 0.7"]
+    g3r1["Section 4.4 estimate: 0.13%"]
+  end
+  subgraph g4["Disputed source value — domain -0.4 to 0.7"]
+    g4r1["Introduction estimate: 0.15%"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+
+title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Grouped disclosed-domain plot"
+groups = [{"name":"Sample","domain":[181856.5,181857.5],"items":[["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"]]},{"name":"Measured gate","domain":[0,100],"items":[["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"]]},{"name":"Derived product","domain":[-0.4,0.7],"items":[["Derived product","Section 4.4 estimate","0.13%","rounded stage product"]]},{"name":"Disputed source value","domain":[-0.4,0.7],"items":[["Disputed source value","Introduction estimate","0.15%","unreconciled"]]}]
+height = 792
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
+    f'<rect width="1000" height="{height}" fill="white"/>',
+]
+y = 90
+for group in groups:
+    lo, hi = group["domain"]
+    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
+    y += 38
+    for _, label, value, condition in group["items"]:
+        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
+        x = 300 + (number - lo) / (hi - lo) * 620
+        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
+        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
+        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
+        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
+        y += 52
+    y += 35
+parts.append('</svg>')
+Path("propaganda_evidence_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Measured stages, derived product, and disputed introduction value — Complete reported-value matrix
+
+- Teaching purpose: Keep every value, condition, and limitation visible.
+- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Complete reported-value matrix}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Sample & Pages scanned & 181,857 & 200 WARC files; CC-MAIN-2025-51 \\
+Measured gate & Page prevalence & 3.4\% & sampled pages \\
+Measured gate & Extraction survival & 71.9\% & simulated replacement comments \\
+Measured gate & Curation survival & 5.5\% & captured injections \\
+Derived product & Section 4.4 estimate & 0.13\% & rounded stage product \\
+Disputed source value & Introduction estimate & 0.15\% & unreconciled \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Sample<br/>Pages scanned<br/><b>181,857</b><br/>200 WARC files; CC-MAIN-2025-51"]
+    r2["Measured gate<br/>Page prevalence<br/><b>3.4%</b><br/>sampled pages"]
+    r3["Measured gate<br/>Extraction survival<br/><b>71.9%</b><br/>simulated replacement comments"]
+    r4["Measured gate<br/>Curation survival<br/><b>5.5%</b><br/>captured injections"]
+    r5["Derived product<br/>Section 4.4 estimate<br/><b>0.13%</b><br/>rounded stage product"]
+    r6["Disputed source value<br/>Introduction estimate<br/><b>0.15%</b><br/>unreconciled"]
   end
 ```
 
@@ -2484,22 +2460,103 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p1: 181,857, 200, 2025, 51., 3.4%, 71.9%, 5.5%, 0.13% — exact-condition board"
-items = [["181,857","The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."],["200","The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."],["2025","The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."],["51.","The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51."],["3.4%","Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."],["71.9%","Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."],["5.5%","Comment signatures appear on 3.4% of pages, 71.9% of simulated replacement comments survive extraction, and 5.5% of captured injections survive the combined curation path."],["0.13%","Their rounded product is about 0.13%, matching Section 4.4; the v1 Introduction separately states 0.15%, an unresolved internal discrepancy."]]
-height = 860
+title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Complete reported-value matrix"
+rows = [["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"],["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"],["Derived product","Section 4.4 estimate","0.13%","rounded stage product"],["Disputed source value","Introduction estimate","0.15%","unreconciled"]]
+height = 678
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_evidence_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Measured stages, derived product, and disputed introduction value — Experiment small multiples
+
+- Teaching purpose: Prevent separate experiments from reading as one trend.
+- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Visually distinguish sampled prevalence, conditional survival rates, the multiplied estimate, and the conflicting source value.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (8.25,3) {propaganda\_evidence\_p1: Measured stages, derived product, and disputed introduction value - Experiment small multiples};
+\node[panel] at (0,0) {\textbf{Sample}\\[4pt]\textbf{Pages scanned}: 181,857 -- 200 WARC files; CC-MAIN-2025-51};
+\node[panel] at (5.5,0) {\textbf{Measured gate}\\[4pt]\textbf{Page prevalence}: 3.4\% -- sampled pages\\\textbf{Extraction survival}: 71.9\% -- simulated replacement comments\\\textbf{Curation survival}: 5.5\% -- captured injections};
+\node[panel] at (11,0) {\textbf{Derived product}\\[4pt]\textbf{Section 4.4 estimate}: 0.13\% -- rounded stage product};
+\node[panel] at (16.5,0) {\textbf{Disputed source value}\\[4pt]\textbf{Introduction estimate}: 0.15\% -- unreconciled};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Sample"]
+    p1r1["Pages scanned: 181,857<br/>200 WARC files; CC-MAIN-2025-51"]
+  end
+  subgraph p2["Measured gate"]
+    p2r1["Page prevalence: 3.4%<br/>sampled pages"]
+    p2r2["Extraction survival: 71.9%<br/>simulated replacement comments"]
+    p2r3["Curation survival: 5.5%<br/>captured injections"]
+  end
+  subgraph p3["Derived product"]
+    p3r1["Section 4.4 estimate: 0.13%<br/>rounded stage product"]
+  end
+  subgraph p4["Disputed source value"]
+    p4r1["Introduction estimate: 0.15%<br/>unreconciled"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_evidence_p1: Measured stages, derived product, and disputed introduction value — Experiment small multiples"
+rows = [["Sample","Pages scanned","181,857","200 WARC files; CC-MAIN-2025-51"],["Measured gate","Page prevalence","3.4%","sampled pages"],["Measured gate","Extraction survival","71.9%","simulated replacement comments"],["Measured gate","Curation survival","5.5%","captured injections"],["Derived product","Section 4.4 estimate","0.13%","rounded stage product"],["Disputed source value","Introduction estimate","0.15%","unreconciled"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2523,181 +2580,18 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 - Text anchor: "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_claim_sft` (OBSERVED, VERIFIED); `propaganda_claim_formats` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%" and "At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls" while also tracking 2 source-bounded propositions. The paragraph contains a real reported-condition comparison; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: reported-condition comparison.
+- Decision rationale: A visual passes the removal test because readers must reconstruct base-model effect ranges and post-sft attenuation by condition while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Base-model effect ranges and post-SFT attenuation by condition.
+- Recommended scope and placement: Shared scope `propaganda_evidence_p2`, `propaganda_evidence_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_evidence_p3`. Otherwise split the visual by paragraph.
+- QA-informed planning change: Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
 
-### Treatment A — For model effects the authors pretrain OLMo-3-like models from — reported-condition comparison
+### Treatment A — Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot
 
-- Teaching purpose: Answer "What evidence connects public comments to model behavior?" by exposing the paragraph's 2 named propositions and 1 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%"; "At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls". Edges carry the explicit relation labels "compared with"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_evidence\_p2: For model effects the authors pretrain OLMo-3-like models from - reported-condition comparison};
-\node[concept] (n1) at (1.8,0) {For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%};
-\node[concept] (n2) at (6.1,0) {At the 0.1\% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls};
-\draw[link] (n1) -- node[rel] {compared with} (n2);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%"]
-  n2["At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls"]
-  n1 -->|"compared with"| n2
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p2: For model effects the authors pretrain OLMo-3-like models from — reported-condition comparison"
-nodes = [["n1","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%",120,150],["n2","At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls",420,150]]
-edges = [["n1","n2","compared with"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_inclusion, propaganda_claim_model_shift, propaganda_claim_sft, propaganda_claim_formats — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 7 claim nodes on the left and 3 source nodes on the right, with only the 8 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_evidence\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[claim] (c6) at (0,-12) {Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]};
-\node[claim] (c7) at (0,-14.399999999999999) {Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s1);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s2);
-\draw[link] (c4) -- (s1);
-\draw[link] (c5) -- (s3);
-\draw[link] (c6) -- (s3);
-\draw[link] (c7) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c2["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c3["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c4["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  c6["Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. OBSERVED"]
-  c7["Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s1
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s2
-  c4 -->|"supported at"| s1
-  c5 -->|"supported at"| s3
-  c6 -->|"supported at"| s3
-  c7 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p2: claim-to-source provenance"
-nodes = [["c1","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,130],["c2","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,250],["c3","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,370],["c4","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["c6","Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]",190,730],["c7","Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]",190,850],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s1"],["c3","s1"],["c4","s2"],["c4","s1"],["c5","s3"],["c6","s3"],["c7","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 1040
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 3, 65M, 1.3B, 0.001%, 0.01%, 0.1%, 0.1%, 18.6 — exact-condition board
-
-- Teaching purpose: Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 8 unscaled marks, one per reported value (3, 65M, 1.3B, 0.001%, 0.01%, 0.1%, 0.1%, 18.6), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
+- Encoding and reading order: `Base-model shift` uses the disclosed domain 18.1–21.2 with 2 labeled marks; `Post-SFT shift` uses the disclosed domain -0.1–8.4 with 2 labeled marks; `No-label post-SFT` uses the disclosed domain -0.4–0.8 with 2 labeled marks. Exact values remain printed beside every mark.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -2706,16 +2600,29 @@ Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_evidence\_p2: 3, 65M, 1.3B, 0.001\%, 0.01\%, 0.1\%, 0.1\%, 18.6 - exact-condition board};
-\node[fact] at (0,0) {\textbf{3}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (4.6,0) {\textbf{65M}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (9.2,0) {\textbf{1.3B}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (0,-2.8) {\textbf{0.001\%}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (4.6,-2.8) {\textbf{0.01\%}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (9.2,-2.8) {\textbf{0.1\%}\\For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001\%, 0.01\%, or 0.1\%.};
-\node[fact] at (0,-5.6) {\textbf{0.1\%}\\At the 0.1\% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls.};
-\node[fact] at (4.6,-5.6) {\textbf{18.6}\\At the 0.1\% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls.};
+\begin{tikzpicture}[font=\sffamily]
+\node[font=\bfseries,anchor=west] at (0,1.2) {propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Grouped disclosed-domain plot};
+\node[anchor=west,font=\bfseries] at (0,0) {Base-model shift: disclosed domain 18.1--21.2};
+\draw (0,-0.8) -- (8,-0.8);
+\fill (1.290,-0.8) circle (2.5pt) node[above,font=\scriptsize] {18.6};
+\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {lower end};
+\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
+\fill (6.710,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {20.7};
+\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {upper end};
+\node[anchor=west,font=\bfseries] at (0,-2.6) {Post-SFT shift: disclosed domain -0.1--8.4};
+\draw (0,-3.4000000000000004) -- (8,-3.4000000000000004);
+\fill (0.941,-3.4000000000000004) circle (2.5pt) node[above,font=\scriptsize] {0.9};
+\node[anchor=east,font=\scriptsize] at (-0.2,-3.4000000000000004) {lower end};
+\draw (0,-4.050000000000001) -- (8,-4.050000000000001);
+\fill (7.059,-4.050000000000001) circle (2.5pt) node[above,font=\scriptsize] {7.4};
+\node[anchor=east,font=\scriptsize] at (-0.2,-4.050000000000001) {upper end};
+\node[anchor=west,font=\bfseries] at (0,-5.200000000000001) {No-label post-SFT: disclosed domain -0.4--0.8};
+\draw (0,-6.000000000000001) -- (8,-6.000000000000001);
+\fill (3.333,-6.000000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.1};
+\node[anchor=east,font=\scriptsize] at (-0.2,-6.000000000000001) {709M};
+\draw (0,-6.650000000000001) -- (8,-6.650000000000001);
+\fill (4.667,-6.650000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.3};
+\node[anchor=east,font=\scriptsize] at (-0.2,-6.650000000000001) {1.3B};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2724,15 +2631,95 @@ Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart TB
-  subgraph Exact_reported_quantities
-    q1["3<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q2["65M<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q3["1.3B<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q4["0.001%<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q5["0.01%<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q6["0.1%<br/>For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."]
-    q7["0.1%<br/>At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls."]
-    q8["18.6<br/>At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls."]
+  subgraph g1["Base-model shift — domain 18.1 to 21.2"]
+    g1r1["lower end: 18.6"]
+    g1r2["upper end: 20.7"]
+  end
+  subgraph g2["Post-SFT shift — domain -0.1 to 8.4"]
+    g2r1["lower end: 0.9"]
+    g2r2["upper end: 7.4"]
+  end
+  subgraph g3["No-label post-SFT — domain -0.4 to 0.8"]
+    g3r1["709M: 0.1"]
+    g3r2["1.3B: 0.3"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+
+title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot"
+groups = [{"name":"Base-model shift","domain":[18.1,21.2],"items":[["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]]},{"name":"Post-SFT shift","domain":[-0.1,8.4],"items":[["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]]},{"name":"No-label post-SFT","domain":[-0.4,0.8],"items":[["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]}]
+height = 712
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
+    f'<rect width="1000" height="{height}" fill="white"/>',
+]
+y = 90
+for group in groups:
+    lo, hi = group["domain"]
+    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
+    y += 38
+    for _, label, value, condition in group["items"]:
+        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
+        x = 300 + (number - lo) / (hi - lo) * 620
+        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
+        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
+        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
+        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
+        y += 52
+    y += 35
+parts.append('</svg>')
+Path("propaganda_evidence_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix
+
+- Teaching purpose: Keep every value, condition, and limitation visible.
+- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Complete reported-value matrix}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Base-model shift & lower end & 18.6 & Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
+Base-model shift & upper end & 20.7 & Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
+Post-SFT shift & lower end & 0.9 & Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
+Post-SFT shift & upper end & 7.4 & Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
+No-label post-SFT & 709M & 0.1 & Reported remaining shift for the 709M model under the no-label poison format. \\
+No-label post-SFT & 1.3B & 0.3 & Reported remaining shift for the 1.3B model under the no-label poison format. \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Base-model shift<br/>lower end<br/><b>18.6</b><br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    r2["Base-model shift<br/>upper end<br/><b>20.7</b><br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    r3["Post-SFT shift<br/>lower end<br/><b>0.9</b><br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    r4["Post-SFT shift<br/>upper end<br/><b>7.4</b><br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    r5["No-label post-SFT<br/>709M<br/><b>0.1</b><br/>Reported remaining shift for the 709M model under the no-label poison format."]
+    r6["No-label post-SFT<br/>1.3B<br/><b>0.3</b><br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
   end
 ```
 
@@ -2743,22 +2730,100 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p2: 3, 65M, 1.3B, 0.001%, 0.01%, 0.1%, 0.1%, 18.6 — exact-condition board"
-items = [["3","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["65M","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["1.3B","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["0.001%","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["0.01%","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["0.1%","For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%."],["0.1%","At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls."],["18.6","At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls."]]
-height = 860
+title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix"
+rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
+height = 678
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_evidence_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples
+
+- Teaching purpose: Prevent separate experiments from reading as one trend.
+- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (5.5,3) {propaganda\_evidence\_p2: Base-model effect ranges and post-SFT attenuation by condition - Experiment small multiples};
+\node[panel] at (0,0) {\textbf{Base-model shift}\\[4pt]\textbf{lower end}: 18.6 -- Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.\\\textbf{upper end}: 20.7 -- Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.};
+\node[panel] at (5.5,0) {\textbf{Post-SFT shift}\\[4pt]\textbf{lower end}: 0.9 -- Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.\\\textbf{upper end}: 7.4 -- Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.};
+\node[panel] at (11,0) {\textbf{No-label post-SFT}\\[4pt]\textbf{709M}: 0.1 -- Reported remaining shift for the 709M model under the no-label poison format.\\\textbf{1.3B}: 0.3 -- Reported remaining shift for the 1.3B model under the no-label poison format.};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Base-model shift"]
+    p1r1["lower end: 18.6<br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    p1r2["upper end: 20.7<br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+  end
+  subgraph p2["Post-SFT shift"]
+    p2r1["lower end: 0.9<br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    p2r2["upper end: 7.4<br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+  end
+  subgraph p3["No-label post-SFT"]
+    p3r1["709M: 0.1<br/>Reported remaining shift for the 709M model under the no-label poison format."]
+    p3r2["1.3B: 0.3<br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_evidence_p2: Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples"
+rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -2782,189 +2847,18 @@ Path("propaganda_evidence_p2_treatment_c.svg").write_text("\n".join(parts), enco
 - Text anchor: "Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."
 - Claims and sources: `propaganda_claim_comments` (OBSERVED, VERIFIED); `propaganda_claim_extraction` (OBSERVED, VERIFIED); `propaganda_claim_curation` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_model_shift` (OBSERVED, VERIFIED); `propaganda_claim_sft` (OBSERVED, VERIFIED); `propaganda_claim_formats` (OBSERVED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_models` (Pages 6–7, Sections 5.1–5.3, Tables 1–2)
 - Visual needed: `YES`
-- Decision rationale: Removing a visual would require readers to retain the material relation between "at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points" and "Q/A and no-label formats still affect every tested base-model scale" while also tracking 4 source-bounded propositions. The paragraph contains a real reported-condition comparison; the visual must preserve its stated conditions and must not add causal or proportional meaning.
-- Explanatory job: reported-condition comparison.
+- Decision rationale: A visual passes the removal test because readers must reconstruct base-model effect ranges and post-sft attenuation by condition while preserving the paragraph's conditions and boundaries. Revision 3 narrows the topology and placement so no visual can claim this paragraph without encoding its mechanism, grouping, or values.
+- Explanatory job: Base-model effect ranges and post-SFT attenuation by condition.
+- Recommended scope and placement: Shared scope `propaganda_evidence_p2`, `propaganda_evidence_p3` is allowed only when one visual encodes every listed mechanism, condition, and value; place it immediately after the final paragraph, `propaganda_evidence_p3`. Otherwise split the visual by paragraph.
+- QA-informed planning change: Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
 
-### Treatment A — at 01% poison post-SFT shifts range from 09 to — reported-condition comparison
+### Treatment A — Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot
 
-- Teaching purpose: Answer "What evidence connects public comments to model behavior?" by exposing the paragraph's 4 named propositions and 3 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points"; "but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models"; "Clean supervised fine-tuning reduces the measured effect"; "Q/A and no-label formats still affect every tested base-model scale". Edges carry the explicit relation labels "contrasts with", "reported alongside", "reported alongside"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_evidence\_p3: at 01\% poison post-SFT shifts range from 09 to - reported-condition comparison};
-\node[concept] (n1) at (1.8,0) {at 0.1\% poison, post-SFT shifts range from 0.9 to 7.4 points};
-\node[concept] (n2) at (6.1,0) {but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models};
-\node[concept] (n3) at (10.4,0) {Clean supervised fine-tuning reduces the measured effect};
-\node[concept] (n4) at (1.8,-3.2) {Q/A and no-label formats still affect every tested base-model scale};
-\draw[link] (n1) -- node[rel] {contrasts with} (n2);
-\draw[link] (n1) -- node[rel] {reported alongside} (n3);
-\draw[link] (n1) -- node[rel] {reported alongside} (n4);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  n1["at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points"]
-  n2["but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models"]
-  n3["Clean supervised fine-tuning reduces the measured effect"]
-  n4["Q/A and no-label formats still affect every tested base-model scale"]
-  n1 -->|"contrasts with"| n2
-  n1 -->|"reported alongside"| n3
-  n1 -->|"reported alongside"| n4
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p3: at 01% poison post-SFT shifts range from 09 to — reported-condition comparison"
-nodes = [["n1","at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points",120,150],["n2","but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models",420,150],["n3","Clean supervised fine-tuning reduces the measured effect",720,150],["n4","Q/A and no-label formats still affect every tested base-model scale",120,340]]
-edges = [["n1","n2","contrasts with"],["n1","n3","reported alongside"],["n1","n4","reported alongside"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
-parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
-]
-for source, target, relation in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
-for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_comments, propaganda_claim_extraction, propaganda_claim_curation, propaganda_claim_inclusion, propaganda_claim_model_shift, propaganda_claim_sft, propaganda_claim_formats — claim-to-source provenance
-
-- Teaching purpose: Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 7 claim nodes on the left and 3 source nodes on the right, with only the 8 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_evidence\_p3: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Comment-platform signatures were detected on 3.4\% of 181,857 sampled Common Crawl pages. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {In sandboxed replacements, 71.9\% of injected comments survived plaintext extraction. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {The combined tested Dolma 3-style curation path retained 5.5\% of captured injected-comment documents. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {At a 0.1\% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]};
-\node[claim] (c6) at (0,-12) {Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]};
-\node[claim] (c7) at (0,-14.399999999999999) {Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\draw[link] (c1) -- (s1);
-\draw[link] (c2) -- (s1);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s2);
-\draw[link] (c4) -- (s1);
-\draw[link] (c5) -- (s3);
-\draw[link] (c6) -- (s3);
-\draw[link] (c7) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. OBSERVED"]
-  c2["In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. OBSERVED"]
-  c3["The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. OBSERVED"]
-  c4["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c5["At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. OBSERVED"]
-  c6["Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. OBSERVED"]
-  c7["Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. OBSERVED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  s3[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  end
-  c1 -->|"supported at"| s1
-  c2 -->|"supported at"| s1
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s2
-  c4 -->|"supported at"| s1
-  c5 -->|"supported at"| s3
-  c6 -->|"supported at"| s3
-  c7 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_evidence_p3: claim-to-source provenance"
-nodes = [["c1","Comment-platform signatures were detected on 3.4% of 181,857 sampled Common Crawl pages. [OBSERVED]",190,130],["c2","In sandboxed replacements, 71.9% of injected comments survived plaintext extraction. [OBSERVED]",190,250],["c3","The combined tested Dolma 3-style curation path retained 5.5% of captured injected-comment documents. [OBSERVED]",190,370],["c4","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,490],["c5","At a 0.1% token poison rate, all five tested base models shifted 18.6 to 20.7 percentage points toward the attacker-favored entity. [OBSERVED]",190,610],["c6","Clean supervised fine-tuning reduced but did not uniformly eliminate the measured preference shift. [OBSERVED]",190,730],["c7","Q/A and no-label poison formats shifted every tested base-model scale without relying on USER/ASSISTANT markers. [OBSERVED]",190,850],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,250],["s3","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,370]]
-edges = [["c1","s1"],["c2","s1"],["c3","s1"],["c4","s2"],["c4","s1"],["c5","s3"],["c6","s3"],["c7","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 1040
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 0.1%, 0.9, 7.4 points, 0.1, 0.3 points, 709M, 1.3B — exact-condition board
-
-- Teaching purpose: Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 7 unscaled marks, one per reported value (0.1%, 0.9, 7.4 points, 0.1, 0.3 points, 709M, 1.3B), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
+- Teaching purpose: Use separate, labeled domains for valid within-group comparisons.
+- Encoding and reading order: `Base-model shift` uses the disclosed domain 18.1–21.2 with 2 labeled marks; `Post-SFT shift` uses the disclosed domain -0.1–8.4 with 2 labeled marks; `No-label post-SFT` uses the disclosed domain -0.4–0.8 with 2 labeled marks. Exact values remain printed beside every mark.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: responsive SVG with semantic HTML/CSS value table; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -2973,15 +2867,29 @@ Path("propaganda_evidence_p3_treatment_b.svg").write_text("\n".join(parts), enco
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_evidence\_p3: 0.1\%, 0.9, 7.4 points, 0.1, 0.3 points, 709M, 1.3B - exact-condition board};
-\node[fact] at (0,0) {\textbf{0.1\%}\\Clean supervised fine-tuning reduces the measured effect: at 0.1\% poison, post-SFT shifts range from 0.9 to 7.4 points.};
-\node[fact] at (4.6,0) {\textbf{0.9}\\Clean supervised fine-tuning reduces the measured effect: at 0.1\% poison, post-SFT shifts range from 0.9 to 7.4 points.};
-\node[fact] at (9.2,0) {\textbf{7.4 points}\\Clean supervised fine-tuning reduces the measured effect: at 0.1\% poison, post-SFT shifts range from 0.9 to 7.4 points.};
-\node[fact] at (0,-2.8) {\textbf{0.1}\\Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models.};
-\node[fact] at (4.6,-2.8) {\textbf{0.3 points}\\Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models.};
-\node[fact] at (9.2,-2.8) {\textbf{709M}\\Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models.};
-\node[fact] at (0,-5.6) {\textbf{1.3B}\\Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models.};
+\begin{tikzpicture}[font=\sffamily]
+\node[font=\bfseries,anchor=west] at (0,1.2) {propaganda\_evidence\_p3: Base-model effect ranges and post-SFT attenuation by condition - Grouped disclosed-domain plot};
+\node[anchor=west,font=\bfseries] at (0,0) {Base-model shift: disclosed domain 18.1--21.2};
+\draw (0,-0.8) -- (8,-0.8);
+\fill (1.290,-0.8) circle (2.5pt) node[above,font=\scriptsize] {18.6};
+\node[anchor=east,font=\scriptsize] at (-0.2,-0.8) {lower end};
+\draw (0,-1.4500000000000002) -- (8,-1.4500000000000002);
+\fill (6.710,-1.4500000000000002) circle (2.5pt) node[above,font=\scriptsize] {20.7};
+\node[anchor=east,font=\scriptsize] at (-0.2,-1.4500000000000002) {upper end};
+\node[anchor=west,font=\bfseries] at (0,-2.6) {Post-SFT shift: disclosed domain -0.1--8.4};
+\draw (0,-3.4000000000000004) -- (8,-3.4000000000000004);
+\fill (0.941,-3.4000000000000004) circle (2.5pt) node[above,font=\scriptsize] {0.9};
+\node[anchor=east,font=\scriptsize] at (-0.2,-3.4000000000000004) {lower end};
+\draw (0,-4.050000000000001) -- (8,-4.050000000000001);
+\fill (7.059,-4.050000000000001) circle (2.5pt) node[above,font=\scriptsize] {7.4};
+\node[anchor=east,font=\scriptsize] at (-0.2,-4.050000000000001) {upper end};
+\node[anchor=west,font=\bfseries] at (0,-5.200000000000001) {No-label post-SFT: disclosed domain -0.4--0.8};
+\draw (0,-6.000000000000001) -- (8,-6.000000000000001);
+\fill (3.333,-6.000000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.1};
+\node[anchor=east,font=\scriptsize] at (-0.2,-6.000000000000001) {709M};
+\draw (0,-6.650000000000001) -- (8,-6.650000000000001);
+\fill (4.667,-6.650000000000001) circle (2.5pt) node[above,font=\scriptsize] {0.3};
+\node[anchor=east,font=\scriptsize] at (-0.2,-6.650000000000001) {1.3B};
 \end{tikzpicture}
 \end{document}
 ```
@@ -2990,14 +2898,95 @@ Path("propaganda_evidence_p3_treatment_b.svg").write_text("\n".join(parts), enco
 
 ```mermaid
 flowchart TB
-  subgraph Exact_reported_quantities
-    q1["0.1%<br/>Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."]
-    q2["0.9<br/>Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."]
-    q3["7.4 points<br/>Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."]
-    q4["0.1<br/>Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."]
-    q5["0.3 points<br/>Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."]
-    q6["709M<br/>Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."]
-    q7["1.3B<br/>Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."]
+  subgraph g1["Base-model shift — domain 18.1 to 21.2"]
+    g1r1["lower end: 18.6"]
+    g1r2["upper end: 20.7"]
+  end
+  subgraph g2["Post-SFT shift — domain -0.1 to 8.4"]
+    g2r1["lower end: 0.9"]
+    g2r2["upper end: 7.4"]
+  end
+  subgraph g3["No-label post-SFT — domain -0.4 to 0.8"]
+    g3r1["709M: 0.1"]
+    g3r2["1.3B: 0.3"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+
+title = "propaganda_evidence_p3: Base-model effect ranges and post-SFT attenuation by condition — Grouped disclosed-domain plot"
+groups = [{"name":"Base-model shift","domain":[18.1,21.2],"items":[["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]]},{"name":"Post-SFT shift","domain":[-0.1,8.4],"items":[["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]]},{"name":"No-label post-SFT","domain":[-0.4,0.8],"items":[["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]}]
+height = 712
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Each comparison uses its own disclosed local domain; exact values are printed beside the marks.</desc>',
+    f'<rect width="1000" height="{height}" fill="white"/>',
+]
+y = 90
+for group in groups:
+    lo, hi = group["domain"]
+    parts.append(f'<text x="30" y="{y}" font-family="sans-serif" font-size="16" font-weight="700">{escape(group["name"])} — domain {lo} to {hi}</text>')
+    y += 38
+    for _, label, value, condition in group["items"]:
+        number = float("".join(ch for ch in str(value) if ch.isdigit() or ch in ".-"))
+        x = 300 + (number - lo) / (hi - lo) * 620
+        parts.append(f'<line x1="300" y1="{y}" x2="920" y2="{y}" stroke="#ccd"/>')
+        parts.append(f'<circle cx="{x}" cy="{y}" r="6" fill="#245"/>')
+        parts.append(f'<text x="30" y="{y+5}" font-family="sans-serif" font-size="12">{escape(label)}</text>')
+        parts.append(f'<text x="{x+12}" y="{y+5}" font-family="sans-serif" font-size="12">{escape(str(value))}</text>')
+        y += 52
+    y += 35
+parts.append('</svg>')
+Path("propaganda_evidence_p3_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix
+
+- Teaching purpose: Keep every value, condition, and limitation visible.
+- Encoding and reading order: Render 6 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_evidence\_p3: Base-model effect ranges and post-SFT attenuation by condition - Complete reported-value matrix}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Base-model shift & lower end & 18.6 & Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
+Base-model shift & upper end & 20.7 & Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales. \\
+Post-SFT shift & lower end & 0.9 & Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
+Post-SFT shift & upper end & 7.4 & Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning. \\
+No-label post-SFT & 709M & 0.1 & Reported remaining shift for the 709M model under the no-label poison format. \\
+No-label post-SFT & 1.3B & 0.3 & Reported remaining shift for the 1.3B model under the no-label poison format. \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Base-model shift<br/>lower end<br/><b>18.6</b><br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    r2["Base-model shift<br/>upper end<br/><b>20.7</b><br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    r3["Post-SFT shift<br/>lower end<br/><b>0.9</b><br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    r4["Post-SFT shift<br/>upper end<br/><b>7.4</b><br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    r5["No-label post-SFT<br/>709M<br/><b>0.1</b><br/>Reported remaining shift for the 709M model under the no-label poison format."]
+    r6["No-label post-SFT<br/>1.3B<br/><b>0.3</b><br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
   end
 ```
 
@@ -3008,22 +2997,100 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_evidence_p3: 0.1%, 0.9, 7.4 points, 0.1, 0.3 points, 709M, 1.3B — exact-condition board"
-items = [["0.1%","Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."],["0.9","Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."],["7.4 points","Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points."],["0.1","Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."],["0.3 points","Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."],["709M","Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."],["1.3B","Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."]]
-height = 860
+title = "propaganda_evidence_p3: Base-model effect ranges and post-SFT attenuation by condition — Complete reported-value matrix"
+rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
+height = 678
 parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
 ]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_evidence_p3_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples
+
+- Teaching purpose: Prevent separate experiments from reading as one trend.
+- Encoding and reading order: Group the 6 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_claim_model_shift`, `propaganda_claim_sft`, `propaganda_claim_formats` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_models`. Treat 18.6–20.7 and 0.9–7.4 as ranges, and keep 0.1/0.3 no-label post-SFT points in their own condition group.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (5.5,3) {propaganda\_evidence\_p3: Base-model effect ranges and post-SFT attenuation by condition - Experiment small multiples};
+\node[panel] at (0,0) {\textbf{Base-model shift}\\[4pt]\textbf{lower end}: 18.6 -- Lower endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.\\\textbf{upper end}: 20.7 -- Upper endpoint of the 18.6-20.7 percentage-point range across the five tested base-model scales.};
+\node[panel] at (5.5,0) {\textbf{Post-SFT shift}\\[4pt]\textbf{lower end}: 0.9 -- Lower endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.\\\textbf{upper end}: 7.4 -- Upper endpoint of the 0.9-7.4 percentage-point range after clean supervised fine-tuning.};
+\node[panel] at (11,0) {\textbf{No-label post-SFT}\\[4pt]\textbf{709M}: 0.1 -- Reported remaining shift for the 709M model under the no-label poison format.\\\textbf{1.3B}: 0.3 -- Reported remaining shift for the 1.3B model under the no-label poison format.};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Base-model shift"]
+    p1r1["lower end: 18.6<br/>Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+    p1r2["upper end: 20.7<br/>Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."]
+  end
+  subgraph p2["Post-SFT shift"]
+    p2r1["lower end: 0.9<br/>Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+    p2r2["upper end: 7.4<br/>Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."]
+  end
+  subgraph p3["No-label post-SFT"]
+    p3r1["709M: 0.1<br/>Reported remaining shift for the 709M model under the no-label poison format."]
+    p3r2["1.3B: 0.3<br/>Reported remaining shift for the 1.3B model under the no-label poison format."]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_evidence_p3: Base-model effect ranges and post-SFT attenuation by condition — Experiment small multiples"
+rows = [["Base-model shift","lower end","18.6","Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Base-model shift","upper end","20.7","Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales."],["Post-SFT shift","lower end","0.9","Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["Post-SFT shift","upper end","7.4","Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning."],["No-label post-SFT","709M","0.1","Reported remaining shift for the 709M model under the no-label poison format."],["No-label post-SFT","1.3B","0.3","Reported remaining shift for the 1.3B model under the no-label poison format."]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3047,16 +3114,18 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 - Text anchor: "Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline."
 - Claims and sources: `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "Common Crawl is a proxy for production collection". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: constraint and scope graph.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional tested-versus-unestablished boundary.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
 
-### Treatment A — Common Crawl is a proxy for production collection — constraint and scope graph
+### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
 
-- Teaching purpose: Optional contingency only. Answer "What does this study not demonstrate?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "Common Crawl is a proxy for production collection"; "and the tested curation path is one open Dolma 3-style pipeline"; "Proprietary crawlers may differ in scope, rendering, frequency, extraction"; "and filtering"; "Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present". Edges carry the explicit relation labels "qualified by", "qualified by", "qualified by", "qualified by"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
+- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -3064,19 +3133,160 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_limitations\_p1: Common Crawl is a proxy for production collection - constraint and scope graph};
-\node[concept] (n1) at (1.8,0) {Common Crawl is a proxy for production collection};
-\node[concept] (n2) at (6.1,0) {and the tested curation path is one open Dolma 3-style pipeline};
-\node[concept] (n3) at (10.4,0) {Proprietary crawlers may differ in scope, rendering, frequency, extraction};
-\node[concept] (n4) at (1.8,-3.2) {and filtering};
-\node[concept] (n5) at (6.1,-3.2) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
-\draw[link] (n1) -- node[rel] {qualified by} (n2);
-\draw[link] (n1) -- node[rel] {qualified by} (n3);
-\draw[link] (n1) -- node[rel] {qualified by} (n4);
-\draw[link] (n1) -- node[rel] {qualified by} (n5);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- Common Crawl is a proxy for production collection\\\textbf{Statement 2}: 3 -- and the tested curation path is one open Dolma 3-style pipeline\\\textbf{Statement 3}: qualitative -- Proprietary crawlers may differ in scope, rendering, frequency, extraction\\\textbf{Statement 4}: qualitative -- and filtering\\\textbf{Statement 5}: qualitative -- Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>Common Crawl is a proxy for production collection"]
+    p1r2["Statement 2: 3<br/>and the tested curation path is one open Dolma 3-style pipeline"]
+    p1r3["Statement 3: qualitative<br/>Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
+    p1r4["Statement 4: qualitative<br/>and filtering"]
+    p1r5["Statement 5: qualitative<br/>Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
+rows = [["Paragraph evidence","Statement 1","qualitative","Common Crawl is a proxy for production collection"],["Paragraph evidence","Statement 2","3","and the tested curation path is one open Dolma 3-style pipeline"],["Paragraph evidence","Statement 3","qualitative","Proprietary crawlers may differ in scope, rendering, frequency, extraction"],["Paragraph evidence","Statement 4","qualitative","and filtering"],["Paragraph evidence","Statement 5","qualitative","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+
+- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & Common Crawl is a proxy for production collection \\
+Paragraph evidence & Statement 2 & 3 & and the tested curation path is one open Dolma 3-style pipeline \\
+Paragraph evidence & Statement 3 & qualitative & Proprietary crawlers may differ in scope, rendering, frequency, extraction \\
+Paragraph evidence & Statement 4 & qualitative & and filtering \\
+Paragraph evidence & Statement 5 & qualitative & Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>Common Crawl is a proxy for production collection"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>3</b><br/>and the tested curation path is one open Dolma 3-style pipeline"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
+    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>and filtering"]
+    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Scope ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","Common Crawl is a proxy for production collection"],["Paragraph evidence","Statement 2","3","and the tested curation path is one open Dolma 3-style pipeline"],["Paragraph evidence","Statement 3","qualitative","Proprietary crawlers may differ in scope, rendering, frequency, extraction"],["Paragraph evidence","Statement 4","qualitative","and filtering"],["Paragraph evidence","Statement 5","qualitative","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]]
+height = 590
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+
+- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
+- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_limitations\_p1: Optional tested-versus-unestablished boundary - Annotated boundary map};
+\node[box] (n1) at (1.00,-1.50) {Common Crawl is a proxy for production collection};
+\node[box] (n2) at (2.50,-1.50) {and the tested curation path is one open Dolma 3-style pipeline};
+\node[box] (n3) at (4.00,-1.50) {Proprietary crawlers may differ in scope, rendering, frequency, extraction};
+\node[box] (n4) at (5.50,-1.50) {and filtering};
+\node[box] (n5) at (7.00,-1.50) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
+\draw[link] (n4) -- node[rel] {then} (n5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3090,10 +3300,10 @@ flowchart LR
   n3["Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
   n4["and filtering"]
   n5["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
-  n1 -->|"qualified by"| n2
-  n1 -->|"qualified by"| n3
-  n1 -->|"qualified by"| n4
-  n1 -->|"qualified by"| n5
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
+  n4 -->|"then"| n5
 ```
 
 #### Python
@@ -3103,187 +3313,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p1: Common Crawl is a proxy for production collection — constraint and scope graph"
-nodes = [["n1","Common Crawl is a proxy for production collection",120,150],["n2","and the tested curation path is one open Dolma 3-style pipeline",420,150],["n3","Proprietary crawlers may differ in scope, rendering, frequency, extraction",720,150],["n4","and filtering",120,340],["n5","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present",420,340]]
-edges = [["n1","n2","qualified by"],["n1","n3","qualified by"],["n1","n4","qualified by"],["n1","n5","qualified by"]]
+title = "propaganda_limitations_p1: Optional tested-versus-unestablished boundary — Annotated boundary map"
+nodes = [["n1","Common Crawl is a proxy for production collection",100,150],["n2","and the tested curation path is one open Dolma 3-style pipeline",250,150],["n3","Proprietary crawlers may differ in scope, rendering, frequency, extraction",400,150],["n4","and filtering",550,150],["n5","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present",700,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_limitations_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_inclusion, propaganda_claim_scope_pipeline, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 3 claim nodes on the left and 3 source nodes on the right, with only the 6 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_limitations\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Neither the 0.13\% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15\% value is established for proprietary crawlers or curation pipelines. [NOT\_ESTABLISHED]};
-\node[claim] (c3) at (0,-4.8) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\draw[link] (c1) -- (s1);
-\draw[link] (c1) -- (s2);
-\draw[link] (c2) -- (s1);
-\draw[link] (c2) -- (s2);
-\draw[link] (c2) -- (s3);
-\draw[link] (c3) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c2["Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. NOT_ESTABLISHED"]
-  c3["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s3[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  end
-  c1 -->|"supported at"| s1
-  c1 -->|"supported at"| s2
-  c2 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-  c2 -->|"supported at"| s3
-  c3 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_limitations_p1: claim-to-source provenance"
-nodes = [["c1","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,130],["c2","Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. [NOT_ESTABLISHED]",190,250],["c3","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,370],["s1","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250],["s3","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,370]]
-edges = [["c1","s1"],["c1","s2"],["c2","s1"],["c2","s2"],["c2","s3"],["c3","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 560
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_limitations_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — Common Crawl is a proxy for production collection — supported-versus-bounded scope
-
-- Teaching purpose: Optional contingency only. Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 5 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_limitations\_p1: Common Crawl is a proxy for production collection - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {Common Crawl is a proxy for production collection};
-\node[item] at (0,-2) {and the tested curation path is one open Dolma 3-style pipeline};
-\node[item] at (0,-4) {Proprietary crawlers may differ in scope, rendering, frequency, extraction};
-\node[item] at (0,-6) {and filtering};
-\node[item] at (0,-8) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
-\node[item] at (7,0) {Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["Common Crawl is a proxy for production collection"]
-    a2["and the tested curation path is one open Dolma 3-style pipeline"]
-    a3["Proprietary crawlers may differ in scope, rendering, frequency, extraction"]
-    a4["and filtering"]
-    a5["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
-  end
-  subgraph Boundary
-    b1["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_limitations_p1: Common Crawl is a proxy for production collection — supported-versus-bounded scope"
-columns = {"Supported statement": ["Common Crawl is a proxy for production collection","and the tested curation path is one open Dolma 3-style pipeline","Proprietary crawlers may differ in scope, rendering, frequency, extraction","and filtering","Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"], "Boundary or contingency": ["Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present"]}
-height = 770
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3307,16 +3357,18 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 - Text anchor: "The authors avoid live injection and validate the vector in sandboxes."
 - Claims and sources: `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "The authors avoid live injection and validate the vector in sandboxes". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: constraint and scope graph.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional tested-versus-unestablished boundary.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: Keep heterogeneous limitations separate and avoid a false common topology.
 
-### Treatment A — The authors avoid live injection and validate the vector — constraint and scope graph
+### Treatment A — Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels
 
-- Teaching purpose: Optional contingency only. Answer "What does this study not demonstrate?" by exposing the paragraph's 4 named propositions and 3 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The authors avoid live injection and validate the vector in sandboxes"; "The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"; "The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"; "or that the same effects persist in frontier-scale systems". Edges carry the explicit relation labels "qualified by", "bounded by", "qualified by"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
+- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -3324,17 +3376,155 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_limitations\_p2: The authors avoid live injection and validate the vector - constraint and scope graph};
-\node[concept] (n1) at (1.8,0) {The authors avoid live injection and validate the vector in sandboxes};
-\node[concept] (n2) at (6.1,0) {The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters};
-\node[concept] (n3) at (10.4,0) {The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate};
-\node[concept] (n4) at (1.8,-3.2) {or that the same effects persist in frontier-scale systems};
-\draw[link] (n1) -- node[rel] {qualified by} (n2);
-\draw[link] (n1) -- node[rel] {bounded by} (n3);
-\draw[link] (n1) -- node[rel] {qualified by} (n4);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Tested-versus-unestablished panels};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The authors avoid live injection and validate the vector in sandboxes\\\textbf{Statement 2}: 1.3B -- The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters\\\textbf{Statement 3}: 4.4, 0.13\%, 0.15\% -- The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate\\\textbf{Statement 4}: qualitative -- or that the same effects persist in frontier-scale systems};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>The authors avoid live injection and validate the vector in sandboxes"]
+    p1r2["Statement 2: 1.3B<br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
+    p1r3["Statement 3: 4.4, 0.13%, 0.15%<br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
+    p1r4["Statement 4: qualitative<br/>or that the same effects persist in frontier-scale systems"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Tested-versus-unestablished panels"
+rows = [["Paragraph evidence","Statement 1","qualitative","The authors avoid live injection and validate the vector in sandboxes"],["Paragraph evidence","Statement 2","1.3B","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"],["Paragraph evidence","Statement 3","4.4, 0.13%, 0.15%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"],["Paragraph evidence","Statement 4","qualitative","or that the same effects persist in frontier-scale systems"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional tested-versus-unestablished boundary — Scope ledger
+
+- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
+- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Scope ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & The authors avoid live injection and validate the vector in sandboxes \\
+Paragraph evidence & Statement 2 & 1.3B & The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters \\
+Paragraph evidence & Statement 3 & 4.4, 0.13\%, 0.15\% & The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate \\
+Paragraph evidence & Statement 4 & qualitative & or that the same effects persist in frontier-scale systems \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The authors avoid live injection and validate the vector in sandboxes"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>1.3B</b><br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>4.4, 0.13%, 0.15%</b><br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
+    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>or that the same effects persist in frontier-scale systems"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Scope ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","The authors avoid live injection and validate the vector in sandboxes"],["Paragraph evidence","Statement 2","1.3B","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"],["Paragraph evidence","Statement 3","4.4, 0.13%, 0.15%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"],["Paragraph evidence","Statement 4","qualitative","or that the same effects persist in frontier-scale systems"]]
+height = 502
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional tested-versus-unestablished boundary — Annotated boundary map
+
+- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
+- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_inclusion`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Keep heterogeneous limitations separate and avoid a false common topology.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_limitations\_p2: Optional tested-versus-unestablished boundary - Annotated boundary map};
+\node[box] (n1) at (1.00,-1.50) {The authors avoid live injection and validate the vector in sandboxes};
+\node[box] (n2) at (2.50,-1.50) {The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters};
+\node[box] (n3) at (4.00,-1.50) {The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate};
+\node[box] (n4) at (5.50,-1.50) {or that the same effects persist in frontier-scale systems};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3347,9 +3537,9 @@ flowchart LR
   n2["The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters"]
   n3["The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate"]
   n4["or that the same effects persist in frontier-scale systems"]
-  n1 -->|"qualified by"| n2
-  n1 -->|"bounded by"| n3
-  n1 -->|"qualified by"| n4
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
 ```
 
 #### Python
@@ -3359,178 +3549,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_limitations_p2: The authors avoid live injection and validate the vector — constraint and scope graph"
-nodes = [["n1","The authors avoid live injection and validate the vector in sandboxes",120,150],["n2","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters",420,150],["n3","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate",720,150],["n4","or that the same effects persist in frontier-scale systems",120,340]]
-edges = [["n1","n2","qualified by"],["n1","n3","bounded by"],["n1","n4","qualified by"]]
+title = "propaganda_limitations_p2: Optional tested-versus-unestablished boundary — Annotated boundary map"
+nodes = [["n1","The authors avoid live injection and validate the vector in sandboxes",100,150],["n2","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters",250,150],["n3","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate",400,150],["n4","or that the same effects persist in frontier-scale systems",550,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_limitations_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_inclusion, propaganda_claim_scope_pipeline, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 3 claim nodes on the left and 3 source nodes on the right, with only the 6 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_limitations\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c2) at (0,-2.4) {Neither the 0.13\% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15\% value is established for proprietary crawlers or curation pipelines. [NOT\_ESTABLISHED]};
-\node[claim] (c3) at (0,-4.8) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\draw[link] (c1) -- (s1);
-\draw[link] (c1) -- (s2);
-\draw[link] (c2) -- (s1);
-\draw[link] (c2) -- (s2);
-\draw[link] (c2) -- (s3);
-\draw[link] (c3) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c2["Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. NOT_ESTABLISHED"]
-  c3["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  s2[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s3[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  end
-  c1 -->|"supported at"| s1
-  c1 -->|"supported at"| s2
-  c2 -->|"supported at"| s1
-  c2 -->|"supported at"| s2
-  c2 -->|"supported at"| s3
-  c3 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_limitations_p2: claim-to-source provenance"
-nodes = [["c1","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,130],["c2","Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. [NOT_ESTABLISHED]",190,250],["c3","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,370],["s1","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,130],["s2","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,250],["s3","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,370]]
-edges = [["c1","s1"],["c1","s2"],["c2","s1"],["c2","s2"],["c2","s3"],["c3","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 560
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_limitations_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 1.3B, 4.4, 0.13%, 0.15% — exact-condition board
-
-- Teaching purpose: Optional contingency only. Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 4 unscaled marks, one per reported value (1.3B, 4.4, 0.13%, 0.15%), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_limitations\_p2: 1.3B, 4.4, 0.13\%, 0.15\% - exact-condition board};
-\node[fact] at (0,0) {\textbf{1.3B}\\The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters.};
-\node[fact] at (4.6,0) {\textbf{4.4}\\The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate, or that the same effects persist in frontier-scale systems.};
-\node[fact] at (9.2,0) {\textbf{0.13\%}\\The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate, or that the same effects persist in frontier-scale systems.};
-\node[fact] at (0,-2.8) {\textbf{0.15\%}\\The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13\% or the Introduction value of 0.15\% is a universal inclusion rate, or that the same effects persist in frontier-scale systems.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Exact_reported_quantities
-    q1["1.3B<br/>The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters."]
-    q2["4.4<br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."]
-    q3["0.13%<br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."]
-    q4["0.15%<br/>The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_limitations_p2: 1.3B, 4.4, 0.13%, 0.15% — exact-condition board"
-items = [["1.3B","The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters."],["4.4","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."],["0.13%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."],["0.15%","The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."]]
-height = 520
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3554,16 +3593,18 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 - Text anchor: "The paper supports treating third-party page fragments as a real data-provenance concern."
 - Claims and sources: `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "The paper supports treating third-party page fragments as a real data-provenance concern". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: claim-boundary graph.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
 
-### Treatment A — The paper supports treating third-party page fragments as a — claim-boundary graph
+### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
 
-- Teaching purpose: Optional contingency only. Answer "What is the strongest defensible conclusion?" by exposing the paragraph's 4 named propositions and 3 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The paper supports treating third-party page fragments as a real data-provenance concern"; "Its strongest contribution is methodological"; "a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"; "The negative advertisement result reinforces that point". Edges carry the explicit relation labels "qualified by", "contrasts with", "qualified by"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
+- Encoding and reading order: Group the 4 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -3571,17 +3612,155 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_review\_p1: The paper supports treating third-party page fragments as a - claim-boundary graph};
-\node[concept] (n1) at (1.8,0) {The paper supports treating third-party page fragments as a real data-provenance concern};
-\node[concept] (n2) at (6.1,0) {Its strongest contribution is methodological};
-\node[concept] (n3) at (10.4,0) {a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
-\node[concept] (n4) at (1.8,-3.2) {The negative advertisement result reinforces that point};
-\draw[link] (n1) -- node[rel] {qualified by} (n2);
-\draw[link] (n1) -- node[rel] {contrasts with} (n3);
-\draw[link] (n1) -- node[rel] {qualified by} (n4);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The paper supports treating third-party page fragments as a real data-provenance concern\\\textbf{Statement 2}: qualitative -- Its strongest contribution is methodological\\\textbf{Statement 3}: qualitative -- a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone\\\textbf{Statement 4}: qualitative -- The negative advertisement result reinforces that point};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>The paper supports treating third-party page fragments as a real data-provenance concern"]
+    p1r2["Statement 2: qualitative<br/>Its strongest contribution is methodological"]
+    p1r3["Statement 3: qualitative<br/>a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
+    p1r4["Statement 4: qualitative<br/>The negative advertisement result reinforces that point"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
+rows = [["Paragraph evidence","Statement 1","qualitative","The paper supports treating third-party page fragments as a real data-provenance concern"],["Paragraph evidence","Statement 2","qualitative","Its strongest contribution is methodological"],["Paragraph evidence","Statement 3","qualitative","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"],["Paragraph evidence","Statement 4","qualitative","The negative advertisement result reinforces that point"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+
+- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
+- Encoding and reading order: Render 4 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & The paper supports treating third-party page fragments as a real data-provenance concern \\
+Paragraph evidence & Statement 2 & qualitative & Its strongest contribution is methodological \\
+Paragraph evidence & Statement 3 & qualitative & a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone \\
+Paragraph evidence & Statement 4 & qualitative & The negative advertisement result reinforces that point \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The paper supports treating third-party page fragments as a real data-provenance concern"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Its strongest contribution is methodological"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>qualitative</b><br/>a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
+    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>The negative advertisement result reinforces that point"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","The paper supports treating third-party page fragments as a real data-provenance concern"],["Paragraph evidence","Statement 2","qualitative","Its strongest contribution is methodological"],["Paragraph evidence","Statement 3","qualitative","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"],["Paragraph evidence","Statement 4","qualitative","The negative advertisement result reinforces that point"]]
+height = 502
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+
+- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
+- Encoding and reading order: Use 4 named nodes and 3 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_review\_p1: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
+\node[box] (n1) at (1.00,-1.50) {The paper supports treating third-party page fragments as a real data-provenance concern};
+\node[box] (n2) at (2.50,-1.50) {Its strongest contribution is methodological};
+\node[box] (n3) at (4.00,-1.50) {a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
+\node[box] (n4) at (5.50,-1.50) {The negative advertisement result reinforces that point};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3594,9 +3773,9 @@ flowchart LR
   n2["Its strongest contribution is methodological"]
   n3["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
   n4["The negative advertisement result reinforces that point"]
-  n1 -->|"qualified by"| n2
-  n1 -->|"contrasts with"| n3
-  n1 -->|"qualified by"| n4
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
 ```
 
 #### Python
@@ -3606,203 +3785,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p1: The paper supports treating third-party page fragments as a — claim-boundary graph"
-nodes = [["n1","The paper supports treating third-party page fragments as a real data-provenance concern",120,150],["n2","Its strongest contribution is methodological",420,150],["n3","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone",720,150],["n4","The negative advertisement result reinforces that point",120,340]]
-edges = [["n1","n2","qualified by"],["n1","n3","contrasts with"],["n1","n4","qualified by"]]
+title = "propaganda_review_p1: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
+nodes = [["n1","The paper supports treating third-party page fragments as a real data-provenance concern",100,150],["n2","Its strongest contribution is methodological",250,150],["n3","a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone",400,150],["n4","The negative advertisement result reinforces that point",550,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_review_p1_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_central, propaganda_claim_halflife, propaganda_claim_inclusion, propaganda_claim_ads, propaganda_claim_scope_pipeline, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 6 claim nodes on the left and 5 source nodes on the right, with only the 11 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_review\_p1: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. [EXPLAINER\_INFERENCE]};
-\node[claim] (c2) at (0,-2.4) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {Neither the 0.13\% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15\% value is established for proprietary crawlers or curation pipelines. [NOT\_ESTABLISHED]};
-\node[claim] (c6) at (0,-12) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\node[source] (s4) at (8,-7.199999999999999) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s5) at (8,-9.6) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\draw[link] (c1) -- (s1);
-\draw[link] (c1) -- (s2);
-\draw[link] (c1) -- (s3);
-\draw[link] (c2) -- (s4);
-\draw[link] (c3) -- (s5);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s1);
-\draw[link] (c5) -- (s5);
-\draw[link] (c5) -- (s1);
-\draw[link] (c5) -- (s3);
-\draw[link] (c6) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. EXPLAINER_INFERENCE"]
-  c2["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c3["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c4["Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. OBSERVED"]
-  c5["Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. NOT_ESTABLISHED"]
-  c6["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  s3[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  s4[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s5[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  end
-  c1 -->|"supported at"| s1
-  c1 -->|"supported at"| s2
-  c1 -->|"supported at"| s3
-  c2 -->|"supported at"| s4
-  c3 -->|"supported at"| s5
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s1
-  c5 -->|"supported at"| s5
-  c5 -->|"supported at"| s1
-  c5 -->|"supported at"| s3
-  c6 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_review_p1: claim-to-source provenance"
-nodes = [["c1","Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. [EXPLAINER_INFERENCE]",190,130],["c2","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,250],["c3","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,370],["c4","Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]",190,490],["c5","Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. [NOT_ESTABLISHED]",190,610],["c6","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,730],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,250],["s3","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,370],["s4","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,490],["s5","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,610]]
-edges = [["c1","s1"],["c1","s2"],["c1","s3"],["c2","s4"],["c3","s5"],["c3","s1"],["c4","s1"],["c5","s5"],["c5","s1"],["c5","s3"],["c6","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 920
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_review_p1_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — The paper supports treating third-party page fragments as a — supported-versus-bounded scope
-
-- Teaching purpose: Optional contingency only. Separate what the paragraph supports from the qualification or contingency that bounds it.
-- Encoding and reading order: Partition the paragraph into 3 supported statement(s) and 1 boundary or contingency statement(s). The two columns are categories, not a scale or causal path.
-- Evidence and limitations: Every card is a complete paragraph clause. The boundary column makes negative and not-established language visible without weakening it.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,item/.style={draw,align=center,text width=5.5cm,minimum height=1.4cm}]
-\node[font=\bfseries] at (3.5,2) {propaganda\_review\_p1: The paper supports treating third-party page fragments as a - supported-versus-bounded scope};
-\node[font=\bfseries] at (0,1) {Supported statement};
-\node[font=\bfseries] at (7,1) {Boundary or contingency};
-\node[item] at (0,0) {The paper supports treating third-party page fragments as a real data-provenance concern};
-\node[item] at (0,-2) {Its strongest contribution is methodological};
-\node[item] at (0,-4) {The negative advertisement result reinforces that point};
-\node[item] at (7,0) {a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Supported
-    a1["The paper supports treating third-party page fragments as a real data-provenance concern"]
-    a2["Its strongest contribution is methodological"]
-    a3["The negative advertisement result reinforces that point"]
-  end
-  subgraph Boundary
-    b1["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_review_p1: The paper supports treating third-party page fragments as a — supported-versus-bounded scope"
-columns = {"Supported statement": ["The paper supports treating third-party page fragments as a real data-provenance concern","Its strongest contribution is methodological","The negative advertisement result reinforces that point"], "Boundary or contingency": ["a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone"]}
-height = 550
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Statements are partitioned into supported content and explicit boundaries.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for column_index, (heading, items) in enumerate(columns.items()):
-    x = 240 + column_index * 430
-    parts.append(f'<text x="{x}" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(heading)}</text>')
-    for item_index, item in enumerate(items):
-        y = 130 + item_index * 110
-        parts.append(f'<rect x="{x-180}" y="{y-35}" width="360" height="80" rx="12" fill="#f7fbff" stroke="#234"/>')
-        for line_index, line in enumerate(wrap(item, width=48)):
-            parts.append(f'<text x="{x}" y="{y-12+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -3826,16 +3829,18 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 - Text anchor: "The phrase 'can be poisoned at scale' should remain bounded by the threat model."
 - Claims and sources: `propaganda_claim_central` (EXPLAINER_INFERENCE, VERIFIED); `propaganda_claim_halflife` (OBSERVED, VERIFIED); `propaganda_claim_inclusion` (OBSERVED, VERIFIED); `propaganda_claim_ads` (OBSERVED, VERIFIED); `propaganda_claim_scope_pipeline` (NOT_ESTABLISHED, VERIFIED); `propaganda_claim_production_notshown` (NOT_ESTABLISHED, VERIFIED); `propaganda_source_threat` (Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability); `propaganda_source_halflife` (Pages 3–4, Section 3, Equation 1); `propaganda_source_inclusion` (Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product); `propaganda_source_limitations` (Pages 8–9, Sections 7.1–7.3)
 - Visual needed: `NO`
-- Decision rationale: The paragraph's main work is the bounded statement "The phrase 'can be poisoned at scale' should remain bounded by the threat model". Its qualification is explicit in prose and does not require readers to reconstruct a material process, topology, quantitative comparison, uncertainty distribution, or state change. A visual would repeat the wording, so all treatments below are optional contingencies only.
-- Explanatory job: claim-boundary graph.
+- Decision rationale: Prose remains the better primary form. The paragraph states a bounded conclusion or heterogeneous qualification without requiring a material process, topology, quantitative comparison, uncertainty distribution, or state transition. The three treatments are contingencies only and are not recommended for implementation.
+- Explanatory job: Optional supported-conclusion and rejected-overclaim annotation.
+- Recommended scope and placement: Prose-only. Do not attach a figure unless the paragraph or evidence changes.
+- QA-informed planning change: Existing visuals should be referenced rather than duplicated when they already carry the relationship.
 
-### Treatment A — The phrase 'can be poisoned at scale' should remain — claim-boundary graph
+### Treatment A — Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels
 
-- Teaching purpose: Optional contingency only. Answer "What is the strongest defensible conclusion?" by exposing the paragraph's 5 named propositions and 4 stated reading, comparison, or qualification relations.
-- Encoding and reading order: Nodes reproduce the complete labels "The phrase 'can be poisoned at scale' should remain bounded by the threat model"; "Inclusion is estimated from a sampled, sandboxed, open pipeline"; "and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"; "Model influence is shown in a separate controlled experiment"; "Connecting those stages into a reliable live attack against a production system remains unestablished". Edges carry the explicit relation labels "qualified by", "qualified by", "qualified by", "qualified by"; arrow direction is sequence only for mechanism or example prose and otherwise denotes reading order.
-- Evidence and limitations: The topology is derived from this paragraph rather than a fixed pipeline. Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` and do not turn reading-order edges into causal claims.
-- Recommended web medium: responsive inline SVG with CSS; JavaScript may add optional step focus only when state order matters.
-- Mobile, accessibility, and motion behavior: Keep the full node-and-relation list in DOM order, expose the relation labels in the long description, stack nodes on narrow screens, and disable focus transitions under reduced motion.
+- Teaching purpose: Optional contingency only. Separate supported scope from explicit unknowns.
+- Encoding and reading order: Group the 5 source-backed records into named panels using the first column as the grouping key. Panels preserve experimental, source, or example boundaries and never imply one shared scale.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: semantic HTML/CSS grouped panels or responsive SVG; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
 
 #### TikZ
 
@@ -3843,19 +3848,160 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 \documentclass[tikz,border=5pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily,concept/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=1.35cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize,inner sep=2pt}]
-\node[font=\bfseries,align=center] at (6.1,2.0) {propaganda\_review\_p2: The phrase 'can be poisoned at scale' should remain - claim-boundary graph};
-\node[concept] (n1) at (1.8,0) {The phrase 'can be poisoned at scale' should remain bounded by the threat model};
-\node[concept] (n2) at (6.1,0) {Inclusion is estimated from a sampled, sandboxed, open pipeline};
-\node[concept] (n3) at (10.4,0) {and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%};
-\node[concept] (n4) at (1.8,-3.2) {Model influence is shown in a separate controlled experiment};
-\node[concept] (n5) at (6.1,-3.2) {Connecting those stages into a reliable live attack against a production system remains unestablished};
-\draw[link] (n1) -- node[rel] {qualified by} (n2);
-\draw[link] (n1) -- node[rel] {qualified by} (n3);
-\draw[link] (n1) -- node[rel] {qualified by} (n4);
-\draw[link] (n1) -- node[rel] {qualified by} (n5);
+\begin{tikzpicture}[font=\sffamily,panel/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=4cm}]
+\node[font=\bfseries] at (0,3) {propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Tested-versus-unestablished panels};
+\node[panel] at (0,0) {\textbf{Paragraph evidence}\\[4pt]\textbf{Statement 1}: qualitative -- The phrase 'can be poisoned at scale' should remain bounded by the threat model\\\textbf{Statement 2}: qualitative -- Inclusion is estimated from a sampled, sandboxed, open pipeline\\\textbf{Statement 3}: 0.15\%, 4.4, 0.13\% -- and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%\\\textbf{Statement 4}: qualitative -- Model influence is shown in a separate controlled experiment\\\textbf{Statement 5}: qualitative -- Connecting those stages into a reliable live attack against a production system remains unestablished};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart LR
+  subgraph p1["Paragraph evidence"]
+    p1r1["Statement 1: qualitative<br/>The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
+    p1r2["Statement 2: qualitative<br/>Inclusion is estimated from a sampled, sandboxed, open pipeline"]
+    p1r3["Statement 3: 0.15%, 4.4, 0.13%<br/>and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
+    p1r4["Statement 4: qualitative<br/>Model influence is shown in a separate controlled experiment"]
+    p1r5["Statement 5: qualitative<br/>Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Tested-versus-unestablished panels"
+rows = [["Paragraph evidence","Statement 1","qualitative","The phrase 'can be poisoned at scale' should remain bounded by the threat model"],["Paragraph evidence","Statement 2","qualitative","Inclusion is estimated from a sampled, sandboxed, open pipeline"],["Paragraph evidence","Statement 3","0.15%, 4.4, 0.13%","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"],["Paragraph evidence","Statement 4","qualitative","Model influence is shown in a separate controlled experiment"],["Paragraph evidence","Statement 5","qualitative","Connecting those stages into a reliable live attack against a production system remains unestablished"]]
+groups = {}
+for group, label, value, condition in rows:
+    groups.setdefault(group, []).append((label, value, condition))
+width = max(900, len(groups) * 360)
+height = 220 + max((len(items) for items in groups.values()), default=1) * 92
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Separate panels preserve grouping and prevent unrelated conditions from reading as one sequence.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
+]
+for group_index, (group, items) in enumerate(groups.items()):
+    x = 180 + group_index * 360
+    parts.append(f'<text x="{x}" y="65" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700">{escape(group)}</text>')
+    for item_index, (label, value, condition) in enumerate(items):
+        y = 120 + item_index * 92
+        parts.append(f'<rect x="{x-160}" y="{y-30}" width="320" height="78" rx="12" fill="#f7fbff" stroke="#ccd"/>')
+        text = f"{label}: {value} — {condition}"
+        for line_index, line in enumerate(wrap(text, width=46)):
+            parts.append(f'<text x="{x}" y="{y-6+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment B — Optional supported-conclusion and rejected-overclaim annotation — Scope ledger
+
+- Teaching purpose: Optional contingency only. Make each condition and missing evidence item visible.
+- Encoding and reading order: Render 5 rows with explicit `Group`, `Measure or state`, `Visible value`, and `Condition or boundary` columns. The value column must be visible, not only present in ARIA text or fallback prose.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: semantic HTML/CSS table with SVG export; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+\node[align=center] {\textbf{propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Scope ledger}\\[6pt]
+\begin{tabular}{p{3.2cm}p{4.0cm}p{2.8cm}p{6.2cm}}
+\textbf{Group} & \textbf{Measure or state} & \textbf{Visible value} & \textbf{Condition or boundary} \\ \hline
+Paragraph evidence & Statement 1 & qualitative & The phrase 'can be poisoned at scale' should remain bounded by the threat model \\
+Paragraph evidence & Statement 2 & qualitative & Inclusion is estimated from a sampled, sandboxed, open pipeline \\
+Paragraph evidence & Statement 3 & 0.15\%, 4.4, 0.13\% & and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\% \\
+Paragraph evidence & Statement 4 & qualitative & Model influence is shown in a separate controlled experiment \\
+Paragraph evidence & Statement 5 & qualitative & Connecting those stages into a reliable live attack against a production system remains unestablished \\
+\end{tabular}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+
+```mermaid
+flowchart TB
+  subgraph Visible_value_matrix
+    r1["Paragraph evidence<br/>Statement 1<br/><b>qualitative</b><br/>The phrase 'can be poisoned at scale' should remain bounded by the threat model"]
+    r2["Paragraph evidence<br/>Statement 2<br/><b>qualitative</b><br/>Inclusion is estimated from a sampled, sandboxed, open pipeline"]
+    r3["Paragraph evidence<br/>Statement 3<br/><b>0.15%, 4.4, 0.13%</b><br/>and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
+    r4["Paragraph evidence<br/>Statement 4<br/><b>qualitative</b><br/>Model influence is shown in a separate controlled experiment"]
+    r5["Paragraph evidence<br/>Statement 5<br/><b>qualitative</b><br/>Connecting those stages into a reliable live attack against a production system remains unestablished"]
+  end
+```
+
+#### Python
+
+```python
+from html import escape
+from pathlib import Path
+from textwrap import wrap
+
+title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Scope ledger"
+rows = [["Paragraph evidence","Statement 1","qualitative","The phrase 'can be poisoned at scale' should remain bounded by the threat model"],["Paragraph evidence","Statement 2","qualitative","Inclusion is estimated from a sampled, sandboxed, open pipeline"],["Paragraph evidence","Statement 3","0.15%, 4.4, 0.13%","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"],["Paragraph evidence","Statement 4","qualitative","Model influence is shown in a separate controlled experiment"],["Paragraph evidence","Statement 5","qualitative","Connecting those stages into a reliable live attack against a production system remains unestablished"]]
+height = 590
+parts = [
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">',
+    f'<title id="title">{escape(title)}</title>',
+    '<desc id="desc">Every reported value is visible beside its condition and group.</desc>',
+    f'<rect width="1200" height="{height}" fill="white"/>',
+]
+headers = ["Group", "Measure or state", "Visible value", "Condition or boundary"]
+xs = [30, 260, 590, 770]
+for x, header in zip(xs, headers):
+    parts.append(f'<text x="{x}" y="70" font-family="sans-serif" font-size="16" font-weight="700">{escape(header)}</text>')
+for row_index, row in enumerate(rows):
+    y = 110 + row_index * 88
+    parts.append(f'<rect x="20" y="{y-28}" width="1160" height="76" fill="#f7fbff" stroke="#ccd"/>')
+    for x, cell, width in zip(xs, row, [26, 38, 20, 58]):
+        for line_index, line in enumerate(wrap(str(cell), width=width)):
+            parts.append(f'<text x="{x}" y="{y+line_index*14}" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+parts.append('</svg>')
+Path("propaganda_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
+```
+
+### Treatment C — Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map
+
+- Teaching purpose: Optional contingency only. Connect a claim only to the qualification that bounds it.
+- Encoding and reading order: Use 5 named nodes and 4 explicit labeled relations. Preserve all branch, merge, hierarchy, loop, or sequence edges shown in the code; changing them is an evidence deviation.
+- Evidence and limitations: Encode only `propaganda_claim_central`, `propaganda_claim_halflife`, `propaganda_claim_inclusion`, `propaganda_claim_ads`, `propaganda_claim_scope_pipeline`, `propaganda_claim_production_notshown` from `propaganda_source_threat`, `propaganda_source_halflife`, `propaganda_source_inclusion`, `propaganda_source_limitations`. Existing visuals should be referenced rather than duplicated when they already carry the relationship.
+- Recommended web medium: responsive inline SVG with semantic HTML/CSS fallback; JavaScript is optional only for meaningful focus, drill-down, or state playback.
+- Mobile, accessibility, and motion behavior: Preserve the same group and node order in the DOM; retain all values and relation labels as selectable text; stack panels or levels below 640px; provide keyboard access for any optional focus state; keep a complete static fallback; respect reduced motion and never encode information only through animation.
+
+#### TikZ
+
+```tex
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily,box/.style={draw,rounded corners,align=center,text width=3cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thick},rel/.style={fill=white,font=\scriptsize}]
+\node[font=\bfseries,anchor=west] at (0,0.8) {propaganda\_review\_p2: Optional supported-conclusion and rejected-overclaim annotation - Annotated boundary map};
+\node[box] (n1) at (1.00,-1.50) {The phrase 'can be poisoned at scale' should remain bounded by the threat model};
+\node[box] (n2) at (2.50,-1.50) {Inclusion is estimated from a sampled, sandboxed, open pipeline};
+\node[box] (n3) at (4.00,-1.50) {and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%};
+\node[box] (n4) at (5.50,-1.50) {Model influence is shown in a separate controlled experiment};
+\node[box] (n5) at (7.00,-1.50) {Connecting those stages into a reliable live attack against a production system remains unestablished};
+\draw[link] (n1) -- node[rel] {then} (n2);
+\draw[link] (n2) -- node[rel] {then} (n3);
+\draw[link] (n3) -- node[rel] {then} (n4);
+\draw[link] (n4) -- node[rel] {then} (n5);
 \end{tikzpicture}
 \end{document}
 ```
@@ -3869,10 +4015,10 @@ flowchart LR
   n3["and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%"]
   n4["Model influence is shown in a separate controlled experiment"]
   n5["Connecting those stages into a reliable live attack against a production system remains unestablished"]
-  n1 -->|"qualified by"| n2
-  n1 -->|"qualified by"| n3
-  n1 -->|"qualified by"| n4
-  n1 -->|"qualified by"| n5
+  n1 -->|"then"| n2
+  n2 -->|"then"| n3
+  n3 -->|"then"| n4
+  n4 -->|"then"| n5
 ```
 
 #### Python
@@ -3882,196 +4028,27 @@ from html import escape
 from pathlib import Path
 from textwrap import wrap
 
-title = "propaganda_review_p2: The phrase 'can be poisoned at scale' should remain — claim-boundary graph"
-nodes = [["n1","The phrase 'can be poisoned at scale' should remain bounded by the threat model",120,150],["n2","Inclusion is estimated from a sampled, sandboxed, open pipeline",420,150],["n3","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%",720,150],["n4","Model influence is shown in a separate controlled experiment",120,340],["n5","Connecting those stages into a reliable live attack against a production system remains unestablished",420,340]]
-edges = [["n1","n2","qualified by"],["n1","n3","qualified by"],["n1","n4","qualified by"],["n1","n5","qualified by"]]
+title = "propaganda_review_p2: Optional supported-conclusion and rejected-overclaim annotation — Annotated boundary map"
+nodes = [["n1","The phrase 'can be poisoned at scale' should remain bounded by the threat model",100,150],["n2","Inclusion is estimated from a sampled, sandboxed, open pipeline",250,150],["n3","and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%",400,150],["n4","Model influence is shown in a separate controlled experiment",550,150],["n5","Connecting those stages into a reliable live attack against a production system remains unestablished",700,150]]
+edges = [["n1","n2","then"],["n2","n3","then"],["n3","n4","then"],["n4","n5","then"]]
 node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-
+width = max(900, max((x for _, _, x, _ in nodes), default=800) + 180)
+height = max(500, max((y for _, _, _, y in nodes), default=400) + 140)
 parts = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" role="img" aria-labelledby="title desc">',
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
     f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">The labeled relations reproduce only relationships stated in the paragraph.</desc>',
-    '<rect width="860" height="520" fill="white"/>',
+    '<desc id="desc">Edges and convergence points encode only relationships stated in the scoped paragraphs.</desc>',
+    f'<rect width="{width}" height="{height}" fill="white"/>',
 ]
 for source, target, relation in edges:
     _, x1, y1 = node_by_id[source]
     _, x2, y2 = node_by_id[target]
     parts.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#345" stroke-width="2"/>')
-    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-6}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(relation)}</text>')
+    parts.append(f'<text x="{(x1+x2)/2}" y="{(y1+y2)/2-5}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(relation)}</text>')
 for _, label, x, y in nodes:
-    parts.append(f'<rect x="{x-125}" y="{y-58}" width="250" height="116" rx="14" fill="#eef6ff" stroke="#234"/>')
-    for line_index, line in enumerate(wrap(label, width=32)):
-        parts.append(f'<text x="{x}" y="{y-34+line_index*16}" text-anchor="middle" font-family="sans-serif" font-size="12">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_review_p2_treatment_a.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment B — propaganda_claim_central, propaganda_claim_halflife, propaganda_claim_inclusion, propaganda_claim_ads, propaganda_claim_scope_pipeline, propaganda_claim_production_notshown — claim-to-source provenance
-
-- Teaching purpose: Optional contingency only. Show exactly which atomic claims underwrite this paragraph and which fixed source records support each claim.
-- Encoding and reading order: A bipartite graph places 6 claim nodes on the left and 5 source nodes on the right, with only the 11 claim-source edges recorded in the fixture. Claim labels include epistemic status; source labels include the exact locator.
-- Evidence and limitations: This treatment explains provenance and uncertainty, not the paper's causal mechanism. Missing edges remain visibly absent and no source count is treated as confidence.
-- Recommended web medium: semantic HTML/CSS claim-source table with an SVG network view; JavaScript only for keyboard-controlled source highlighting.
-- Mobile, accessibility, and motion behavior: Provide real table headers and source links in the static fallback, make every edge recoverable as text, stack claim records before source records on mobile, and require no motion.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,claim/.style={draw,rounded corners,align=center,text width=5.2cm,minimum height=1.2cm},source/.style={draw,dashed,align=center,text width=5.2cm,minimum height=1.2cm},link/.style={-{Latex[length=2mm]},thin}]
-\node[font=\bfseries] at (4,1.8) {propaganda\_review\_p2: claim-to-source provenance};
-\node[claim] (c1) at (0,0) {Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. [EXPLAINER\_INFERENCE]};
-\node[claim] (c2) at (0,-2.4) {HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]};
-\node[claim] (c3) at (0,-4.8) {Section 4.4 and the rounded product of the reported stages give an approximately 0.13\% document-level inclusion estimate, while the v1 Introduction states 0.15\%; the paper does not reconcile the difference. [OBSERVED]};
-\node[claim] (c4) at (0,-7.199999999999999) {Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]};
-\node[claim] (c5) at (0,-9.6) {Neither the 0.13\% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15\% value is established for proprietary crawlers or curation pipelines. [NOT\_ESTABLISHED]};
-\node[claim] (c6) at (0,-12) {The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT\_ESTABLISHED]};
-\node[source] (s1) at (8,0) {Computational Propaganda v1 stage results and Section 4.4 inclusion estimate - Pages 4-6, Sections 4.1-4.6, Figures 1-2; Section 4.4 page 5 reports 0.13\%, consistent with the rounded 3.4\% x 71.9\% x 5.5\% stage product};
-\node[source] (s2) at (8,-2.4) {Computational Propaganda v1 model experiments - Pages 6-7, Sections 5.1-5.3, Tables 1-2};
-\node[source] (s3) at (8,-4.8) {Computational Propaganda v1 discussion and limitations - Pages 8-9, Sections 7.1-7.3};
-\node[source] (s4) at (8,-7.199999999999999) {Computational Propaganda v1 HalfLife method - Pages 3-4, Section 3, Equation 1};
-\node[source] (s5) at (8,-9.6) {Computational Propaganda v1 threat model and Introduction inclusion summary - Pages 1-3, Sections 1-2.2; Introduction page 2 states a 0.15\% inclusion probability};
-\draw[link] (c1) -- (s1);
-\draw[link] (c1) -- (s2);
-\draw[link] (c1) -- (s3);
-\draw[link] (c2) -- (s4);
-\draw[link] (c3) -- (s5);
-\draw[link] (c3) -- (s1);
-\draw[link] (c4) -- (s1);
-\draw[link] (c5) -- (s5);
-\draw[link] (c5) -- (s1);
-\draw[link] (c5) -- (s3);
-\draw[link] (c6) -- (s3);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart LR
-  subgraph Claims
-  c1["Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. EXPLAINER_INFERENCE"]
-  c2["HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. OBSERVED"]
-  c3["Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. OBSERVED"]
-  c4["Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. OBSERVED"]
-  c5["Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. NOT_ESTABLISHED"]
-  c6["The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. NOT_ESTABLISHED"]
-  end
-  subgraph Sources
-  s1[/"Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product"/]
-  s2[/"Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2"/]
-  s3[/"Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3"/]
-  s4[/"Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1"/]
-  s5[/"Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability"/]
-  end
-  c1 -->|"supported at"| s1
-  c1 -->|"supported at"| s2
-  c1 -->|"supported at"| s3
-  c2 -->|"supported at"| s4
-  c3 -->|"supported at"| s5
-  c3 -->|"supported at"| s1
-  c4 -->|"supported at"| s1
-  c5 -->|"supported at"| s5
-  c5 -->|"supported at"| s1
-  c5 -->|"supported at"| s3
-  c6 -->|"supported at"| s3
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_review_p2: claim-to-source provenance"
-nodes = [["c1","Public discussion interfaces are a plausible pretraining-data poisoning vector in the studied open-web pipeline because some injected fragments survive extraction and curation, and controlled poisoned pretraining shifts model preferences. [EXPLAINER_INFERENCE]",190,130],["c2","HalfLife decomposes poison inclusion into page injectability, extraction survival, and curation survival. [OBSERVED]",190,250],["c3","Section 4.4 and the rounded product of the reported stages give an approximately 0.13% document-level inclusion estimate, while the v1 Introduction states 0.15%; the paper does not reconcile the difference. [OBSERVED]",190,370],["c4","Programmatic advertisement content did not appear in extracted plaintext in the tested DOM-based crawl path. [OBSERVED]",190,490],["c5","Neither the 0.13% Section 4.4 estimate nor the v1 Introduction's conflicting 0.15% value is established for proprietary crawlers or curation pipelines. [NOT_ESTABLISHED]",190,610],["c6","The study does not demonstrate live comment poisoning of a deployed production or frontier-scale model. [NOT_ESTABLISHED]",190,730],["s1","Computational Propaganda v1 stage results and Section 4.4 inclusion estimate — Pages 4–6, Sections 4.1–4.6, Figures 1–2; Section 4.4 page 5 reports 0.13%, consistent with the rounded 3.4% × 71.9% × 5.5% stage product",700,130],["s2","Computational Propaganda v1 model experiments — Pages 6–7, Sections 5.1–5.3, Tables 1–2",700,250],["s3","Computational Propaganda v1 discussion and limitations — Pages 8–9, Sections 7.1–7.3",700,370],["s4","Computational Propaganda v1 HalfLife method — Pages 3–4, Section 3, Equation 1",700,490],["s5","Computational Propaganda v1 threat model and Introduction inclusion summary — Pages 1–3, Sections 1–2.2; Introduction page 2 states a 0.15% inclusion probability",700,610]]
-edges = [["c1","s1"],["c1","s2"],["c1","s3"],["c2","s4"],["c3","s5"],["c3","s1"],["c4","s1"],["c5","s5"],["c5","s1"],["c5","s3"],["c6","s3"]]
-node_by_id = {node_id: (label, x, y) for node_id, label, x, y in nodes}
-height = 920
-
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Bipartite map from verified claim records to their exact source records.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for source, target in edges:
-    _, x1, y1 = node_by_id[source]
-    _, x2, y2 = node_by_id[target]
-    parts.append(f'<line x1="{x1+145}" y1="{y1}" x2="{x2-145}" y2="{y2}" stroke="#456" stroke-width="2"/>')
-for node_id, label, x, y in nodes:
-    dashed = ' stroke-dasharray="7 5"' if node_id.startswith("s") else ''
-    parts.append(f'<rect x="{x-145}" y="{y-46}" width="290" height="92" rx="12" fill="#f7fbff" stroke="#234"{dashed}/>')
-    for line_index, line in enumerate(wrap(label, width=38)):
-        parts.append(f'<text x="{x}" y="{y-24+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
-parts.append('</svg>')
-Path("propaganda_review_p2_treatment_b.svg").write_text("\n".join(parts), encoding="utf-8")
-```
-
-### Treatment C — 0.15%, 4.4, 0.13% — exact-condition board
-
-- Teaching purpose: Optional contingency only. Keep reported quantities attached to their conditions so unlike measurements are not flattened into one bar chart.
-- Encoding and reading order: Use 3 unscaled marks, one per reported value (0.15%, 4.4, 0.13%), each attached to its complete sentence-level condition. Do not share an axis when units, datasets, checkpoints, or experimental conditions differ.
-- Evidence and limitations: Every value is copied from the paragraph and remains text. Spatial order follows source order; distance and area carry no magnitude.
-- Recommended web medium: responsive SVG or semantic HTML/CSS; JavaScript is optional only for a meaningful state or scope toggle.
-- Mobile, accessibility, and motion behavior: Preserve every exact value or scope statement as selectable text, avoid color-only distinctions, stack groups on mobile, and keep all information visible when JavaScript or motion is disabled.
-
-#### TikZ
-
-```tex
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage[T1]{fontenc}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily,fact/.style={draw,align=center,text width=4cm,minimum height=1.8cm}]
-\node[font=\bfseries] at (4.6,2) {propaganda\_review\_p2: 0.15\%, 4.4, 0.13\% - exact-condition board};
-\node[fact] at (0,0) {\textbf{0.15\%}\\Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%.};
-\node[fact] at (4.6,0) {\textbf{4.4}\\Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%.};
-\node[fact] at (9.2,0) {\textbf{0.13\%}\\Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15\% and Section 4.4's stage-derived 0.13\%.};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-
-```mermaid
-flowchart TB
-  subgraph Exact_reported_quantities
-    q1["0.15%<br/>Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."]
-    q2["4.4<br/>Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."]
-    q3["0.13%<br/>Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."]
-  end
-```
-
-#### Python
-
-```python
-from html import escape
-from pathlib import Path
-from textwrap import wrap
-
-title = "propaganda_review_p2: 0.15%, 4.4, 0.13% — exact-condition board"
-items = [["0.15%","Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."],["4.4","Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."],["0.13%","Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%."]]
-height = 520
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 {height}" role="img" aria-labelledby="title desc">',
-    f'<title id="title">{escape(title)}</title>',
-    '<desc id="desc">Exact values are separated because the paragraph may mix units and experimental conditions.</desc>',
-    f'<rect width="900" height="{height}" fill="white"/>',
-]
-for index, (value, context) in enumerate(items):
-    x = 240 + (index % 2) * 440
-    y = 130 + (index // 2) * 170
-    parts.append(f'<circle cx="{x}" cy="{y}" r="52" fill="#eef6ff" stroke="#234"/>')
-    parts.append(f'<text x="{x}" y="{y+6}" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700">{escape(value)}</text>')
-    for line_index, line in enumerate(wrap(context, width=42)):
-        parts.append(f'<text x="{x}" y="{y+78+line_index*14}" text-anchor="middle" font-family="sans-serif" font-size="11">{escape(line)}</text>')
+    parts.append(f'<rect x="{x-78}" y="{y-42}" width="156" height="84" rx="12" fill="#eef6ff" stroke="#234"/>')
+    for line_index, line in enumerate(wrap(label, width=22)):
+        parts.append(f'<text x="{x}" y="{y-24+line_index*13}" text-anchor="middle" font-family="sans-serif" font-size="10">{escape(line)}</text>')
 parts.append('</svg>')
 Path("propaganda_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8")
 ```
@@ -4088,5 +4065,4 @@ Path("propaganda_review_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 - Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
 - Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
-
 
