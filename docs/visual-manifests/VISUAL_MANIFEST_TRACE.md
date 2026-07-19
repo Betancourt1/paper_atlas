@@ -196,13 +196,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_why` — rendered immediately after `trace_why_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `trace_why_p2`
@@ -411,13 +411,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `trace_change_p2`
@@ -939,13 +939,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
 - Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `trace_example_p2`
@@ -1127,13 +1127,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
 - Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `trace_evidence_p1`
@@ -1369,13 +1369,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figures_3_4` — rendered immediately after `trace_evidence_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-3.png`, `apps/web/public/paper-assets/trace/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `trace_limitations_p1`

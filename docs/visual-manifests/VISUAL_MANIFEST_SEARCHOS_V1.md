@@ -304,13 +304,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `sos_mechanism_p2`
@@ -492,13 +492,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `sos_mechanism_p3`
@@ -680,13 +680,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figures_2_5` — rendered immediately after `sos_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`, `apps/web/public/paper-assets/searchos/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `sos_example_p1`
@@ -1030,13 +1030,13 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable scale inside the revision-8 focusable horizontal inspection viewport; exact provenance and repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_5_limit` — rendered immediately after `sos_limitations_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
+- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible mobile instruction; exact locator, attribution, license, modification metadata, and fallback remain present.
+- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images, contained figure-only overflow, focus indication, ArrowRight scrolling, visible mobile hint, and no document-level horizontal overflow.
 - Evidence deviations: `NONE`
 
 ## `sos_limitations_p3`

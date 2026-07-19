@@ -24,6 +24,7 @@ const visualLabels: Record<Visual["type"], string> = {
 export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
   const titleId = `${visual.id}-title`;
   const descriptionId = `${visual.id}-description`;
+  const inspectionHintId = `${visual.id}-inspection-hint`;
   return (
     <figure
       className="explainer-visual"
@@ -41,19 +42,30 @@ export function ExplainerVisual({ visual, sourcesById }: ExplainerVisualProps) {
 
       {visual.delivery_medium === "source asset" && visual.source_asset ? (
         <div className="explainer-source-asset">
+          <p className="explainer-source-asset__hint" id={inspectionHintId}>
+            Swipe or use arrow keys to inspect the original figure.
+          </p>
           <div
-            className="explainer-source-asset__images"
-            data-image-count={visual.source_asset.images.length}
+            aria-describedby={inspectionHintId}
+            aria-label="Scrollable original paper figure"
+            className="explainer-source-asset__viewport"
+            role="region"
+            tabIndex={0}
           >
-            {visual.source_asset.images.map((image) => (
-              <img
-                src={paperAssetUrl(image.path)}
-                alt={image.alt_text}
-                decoding="async"
-                loading="lazy"
-                key={image.path}
-              />
-            ))}
+            <div
+              className="explainer-source-asset__images"
+              data-image-count={visual.source_asset.images.length}
+            >
+              {visual.source_asset.images.map((image) => (
+                <img
+                  src={paperAssetUrl(image.path)}
+                  alt={image.alt_text}
+                  decoding="async"
+                  loading="lazy"
+                  key={image.path}
+                />
+              ))}
+            </div>
           </div>
           <dl className="explainer-source-asset__provenance">
             <div>
