@@ -1,31 +1,24 @@
-# VISUAL_QA — LLM Evaluators are Biased across Languages
+# Blind visual QA — LLM Evaluators Across Languages — revision 8
 
-- Input revision: `7`
-- Coverage: `16 / 16` paragraphs
-- Verdict: `PASS WITH IMPLEMENTATION FINDING`
-- Aggregate `data_visualization_engineer`: `9.75 / 10`
-- Aggregate `visual_implementer`: `7.75 / 10`
-- HTML/CSS share: `0 / 10 = 0%` (passes the 30% cap)
+Scores are engineer decision / implemented result.
 
-The source audit is strong: Figures 1–7 are used at the paragraphs whose jobs they directly perform, with exact PDF-page ranges, CC BY 4.0 attribution, and rasterization disclosures. Shared placements are explicit. Inspection confirmed that Figure 4 directly contrasts pairwise agreement with fixed-threshold acceptance and that the other wide empirical panels retain original axes/legends. The implementation weakness is systemic mobile legibility: 796–2980 px-wide originals are shrunk to the phone column rather than given source-preserving zoom/scroll. Add a keyboard-accessible pan/zoom or controlled overflow treatment to all source-asset image groups.
+| Paragraph | Scores | Rationale |
+| --- | --- | --- |
+| `language_why_p1` | 9 / 9 | The motivating distinction does not need a decorative comparison. |
+| `language_why_p2` | 10 / 7 | Figure 4 directly separates pairwise agreement from absolute acceptance, but desktop labels are reduced to 41%. |
+| `language_change_p1` | 10 / 5 | Figure 1 is the correct cross-language evidence, yet its 2780px source is displayed at 642px and fine labels are hard to inspect. |
+| `language_change_p2` | 10 / 5 | Figure 3 matches evaluator-type variation; 22% desktop scale defeats detailed comparison. |
+| `language_mechanism_p1` | 9 / 9 | Pairwise construction remains clearer in prose. |
+| `language_mechanism_p2` | 10 / 7 | Original Figure 4 supports the ranking/threshold split, with good provenance but limited desktop inspection. |
+| `language_mechanism_p3` | 9 / 4 | Figures 5–7 are relevant, but a three-image grid shrinks two assets to 95–138px high and makes their evidence unreadable on desktop. |
+| `language_example_p1` | 9 / 7 | Figure 4 usefully grounds the example, though it repeats the same asset and remains reduced. |
+| `language_example_p2` | 9 / 9 | The counterexample's logic is more precise in prose. |
+| `language_evidence_p1` | 10 / 3 | Figures 1–3 are the right originals, but the three-image desktop grid renders them only 110–130px high; comparative details are not legible. |
+| `language_evidence_p2` | 10 / 7 | Figure 4 matches the evidence and is fully attributed; desktop inspection is still fitted-only. |
+| `language_evidence_p3` | 9 / 4 | Figures 5–7 match the finding, but the same tiny three-image grid prevents meaningful desktop inspection. |
+| `language_limitations_p1` | 9 / 9 | Sampling and benchmark boundaries remain prose. |
+| `language_limitations_p2` | 9 / 9 | Generalization caveats resist a stock list. |
+| `language_review_p1` | 8 / 6 | Figure 4 is relevant but its fourth placement adds substantial repetition with no new focus. |
+| `language_review_p2` | 9 / 9 | The bounded conclusion is correctly textual. |
 
-| Paragraph | Engineer | Implementer | Evidence and actionable finding |
-|---|---:|---:|---|
-| `language_why_p1` | 10 | 7 | Figure 4 directly establishes pairwise-versus-threshold disagreement; shared placement after `language_why_p2` is documented. Add mobile source inspection. |
-| `language_why_p2` | 10 | 7 | Same exact Figure 4, PDF page 6, with specific alt/fallback and CC BY attribution. Add zoom/scroll on narrow screens. |
-| `language_change_p1` | 10 | 7 | Original Figure 1 directly shows the cross-language effect and is placed after this paragraph. Wide 2780×976 raster needs mobile inspection. |
-| `language_change_p2` | 10 | 7 | Original Figure 3 is precisely located on PDF page 5 and unedited beyond rasterization. Add mobile zoom/scroll. |
-| `language_mechanism_p1` | 10 | 7 | Figure 4 directly supports the ranking/acceptance distinction and shares placement after p2. Mobile labels become too small. |
-| `language_mechanism_p2` | 10 | 7 | Exact Figure 4 is used instead of a custom redraw; provenance is complete. Add responsive source inspection. |
-| `language_mechanism_p3` | 10 | 7 | Original Figures 5–7 directly cover uncertainty/regression relationships, with exact pages 8–10. Multi-image mobile scaling needs zoom/scroll. |
-| `language_example_p1` | 10 | 7 | Figure 4 directly visualizes the worked decision divergence. Preserve original and add mobile inspection. |
-| `language_example_p2` | 9 | 10 | `NO_MATCH`; prose is sufficient for the bounded example and avoids a stock chain. No action. |
-| `language_evidence_p1` | 10 | 7 | Figures 1–3 directly present the empirical evidence, exact pages and attribution included. Add mobile zoom/scroll for 2771–2980 px-wide panels. |
-| `language_evidence_p2` | 10 | 7 | Figure 4 directly supports the threshold evidence. Add mobile inspection. |
-| `language_evidence_p3` | 10 | 7 | Figures 5–7 preserve aligned uncertainty/regression evidence and source metadata. Add mobile inspection. |
-| `language_limitations_p1` | 9 | 10 | `NO_MATCH`; caveat remains prose and avoids metric cards. No action. |
-| `language_limitations_p2` | 9 | 10 | `NO_MATCH`; no direct figure is wrongly substituted. No action. |
-| `language_review_p1` | 10 | 7 | Figure 4 is the correct direct original for the recap, with exact locator and license. Add mobile zoom/scroll. |
-| `language_review_p2` | 9 | 10 | `NO_MATCH`; final caution is better as prose. No action. |
-
-Checks: `make harness-check` passed. Figure 4 and representative Figures 1, 3, 5–7 were inspected through the assets and fixture metadata. `make visual` was blocked by an existing Next development process holding the app lock after the sandbox also denied port 3100.
+Findings: provenance and accessible alternatives are complete; no page overflow. At 390px, originals remain at intrinsic pixel dimensions inside a focusable, ArrowRight-scrollable viewport with hint and visible focus. Desktop instead fits wide originals to 642px, and multi-image sets to 312px each, making several plots effectively uninspectable. Four placements of Figure 4 and repeated Figures 5–7 also make the page exceptionally long and repetitive. No custom forbidden stock structure. HTML/CSS-led primary visuals: 0/10 (0%).
