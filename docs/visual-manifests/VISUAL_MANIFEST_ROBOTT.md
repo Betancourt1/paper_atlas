@@ -3,7 +3,7 @@
 - Paper ID: `paper_robott`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
-- Manifest revision: `7`
+- Manifest revision: `8`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -14,7 +14,7 @@
   - `rttt_results_source` — RoboTTT v1 — real-robot evaluation and ablations; Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11
   - `rttt_limits_source` — RoboTTT v1 — limitations, deployment, and evaluation details; Section 6 and Appendices A–B, PDF pages 12 and 20–22
 
-Revision 7 audits every paragraph against the original paper figures before custom ideation. Reusable direct matches require the source asset; restricted, misleading, or forbidden originals are explicitly adapted or left prose-only. Implementation must be redone from this manifest.
+Revision 8 retains the paragraph-level source audit and adds a mandatory narrow-screen inspection contract for every reused original: readable intrinsic width, keyboard-accessible horizontal inspection, a visible mobile hint, contained overflow, unaltered source pixels, and preserved provenance.
 
 ## `rttt_why_p1`
 
@@ -91,7 +91,7 @@ Revision 7 audits every paragraph against the original paper figures before cust
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -140,7 +140,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -200,7 +200,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -279,7 +279,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -328,7 +328,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -388,7 +388,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -467,7 +467,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -516,7 +516,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -576,7 +576,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -655,7 +655,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -704,7 +704,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -764,7 +764,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -843,7 +843,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -892,7 +892,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -952,7 +952,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1085,7 +1085,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1134,7 +1134,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1194,7 +1194,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1273,7 +1273,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1322,7 +1322,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1382,7 +1382,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
