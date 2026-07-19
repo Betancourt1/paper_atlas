@@ -3,9 +3,9 @@
 - Paper ID: `paper_computational_propaganda`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Manifest revision: `10`
+- Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -15,7 +15,7 @@
   - `propaganda_source_models` — Computational Propaganda v1 model experiments; Pages 6–7, Sections 5.1–5.3, Tables 1–2
   - `propaganda_source_limitations` — Computational Propaganda v1 discussion and limitations; Pages 8–9, Sections 7.1–7.3
 
-Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
+Revision 11 corrects source-pixel semantics, removes a mismatched source figure, requires conditional inspection instructions, and returns the PPA hierarchy adaptation for visible two-depth invariance rework.
 
 ## `propaganda_why_p1`
 
@@ -103,187 +103,26 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 - Location: `propaganda_change`, paragraph 2
 - Text anchor: "That decomposition can reject superficially plausible vectors. In the tested DOM-based crawl path, programmatic"
 - Claims and sources: `propaganda_claim_halflife`, `propaganda_claim_ads`, `propaganda_source_halflife`, `propaganda_source_inclusion`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — poisoning impact across model conditions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 7, PDF page 18, `propaganda_source_models`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — Figure 7 was checked and does not answer this paragraph's decomposition question.
+- Decision rationale: Figure 7 reports a different model-result question; placing it here creates a semantic mismatch. The paragraph's bounded decomposition is clearer as prose, so no replacement visual is warranted.
 - Explanatory job: Method distinction and scope.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
-  focus["Reading focus: poisoning impact across model conditions"]
-  locator["Source locator: Figure 7, PDF page 18, propaganda_source_models"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("poisoning impact across model conditions")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/computational-propaganda/figure-7.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 7, PDF page 18, propaganda_source_models"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("poisoning impact across model conditions")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("poisoning impact across model conditions")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
-- Delivery medium: `source asset`
-- Visual ID and placement: `propaganda_visual_source_figure_7` — rendered immediately after `propaganda_change_p2`.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the rejected Figure 7 placement must be removed.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/public/paper-assets/computational-propaganda/figure-7.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `propaganda_mechanism_p1`
@@ -388,7 +227,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -437,7 +276,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -497,7 +336,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex

@@ -3,9 +3,9 @@
 - Paper ID: `paper_attention_is_all_you_need`
 - Exact paper version: `v7`
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
-- Manifest revision: `10`
+- Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `18 / 18` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -15,7 +15,7 @@
   - `source_attention_neurips_landing` — NIPS 2017 proceedings landing page for Attention Is All You Need; Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values
   - `source_attention_arxiv_license` — arXiv non-exclusive license to distribute; License terms granting arXiv a perpetual non-exclusive distribution right
 
-Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
+Revision 11 corrects source-pixel semantics, removes a mismatched source figure, requires conditional inspection instructions, and returns the PPA hierarchy adaptation for visible two-depth invariance rework.
 
 ## `attn_why_p1`
 
@@ -158,22 +158,22 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 - Text anchor: "For scaled dot-product attention, the model compares a query with every key using Q"
 - Claims and sources: `attn_003`, `attn_004`, `attn_005`, `source_attention_arxiv_v7`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — scaled dot-product and multi-head attention correspondence; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
 - Original figure locator: Figure 2, PDF page 4, `source_attention_arxiv_v7`
 - License and reuse status: `PERMITTED` — The v7 PDF explicitly permits reuse of its figures for scholarly and journalistic use; preserve the authors, caption, and locator.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
-- Explanatory job: Many-to-many attention mechanism and representation change.
+- Decision rationale: The source figure is relevant only for these visible pixels: Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer. Treatments and fallback may not infer token-position graphs, threshold nodes, comparators, or causal edges absent from the source.
+- Explanatory job: Visible Q/K/V attention blocks and multi-head concatenation.
 
-### Treatment A — Full original with focus frame
+### Treatment A — Complete Figure 2 attention blocks
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -193,7 +193,7 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 ```mermaid
 flowchart TB
   source@{ img: "/paper-assets/attention/figure-2.png", label: "Original paper figure" }
-  focus["Reading focus: scaled dot-product and multi-head attention correspondence"]
+  focus["Reading focus: Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer"]
   locator["Source locator: Figure 2, PDF page 4, source_attention_arxiv_v7"]
   source --- focus
   source --- locator
@@ -210,19 +210,19 @@ fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("scaled dot-product and multi-head attention correspondence")
+ax.set_title("Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment B — Original detail with context inset
+### Treatment B — Scaled dot-product block with complete-figure context
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -270,19 +270,19 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("scaled dot-product and multi-head attention correspondence")
+ax.set_title("Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment C — Original with numbered reading key
+### Treatment C — Complete Figure 2 with Q/K/V and concatenation reading key
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -322,23 +322,23 @@ ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("scaled dot-product and multi-head attention correspondence")
+ax.set_title("Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_query_key_field` — rendered immediately after `attn_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/public/paper-assets/attention/figure-2-scaled-dot-product.png`, `apps/web/public/paper-assets/attention/figure-2-multi-head.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 2 shows Q, K, and V entering scaled dot-product attention, and parallel attention heads being concatenated before a final linear layer.”
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
 
 ## `attn_mechanism_p3`
 
@@ -346,22 +346,22 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Text anchor: "The decoder also repeats 6 layers. Its self-attention masks future target positions, then encoder-decoder"
 - Claims and sources: `attn_003`, `attn_004`, `attn_005`, `source_attention_arxiv_v7`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — masked decoder self-attention and encoder-decoder attention dependencies; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
 - Original figure locator: Figure 1, PDF page 3, `source_attention_arxiv_v7`
 - License and reuse status: `PERMITTED` — The v7 PDF explicitly permits reuse of its figures for scholarly and journalistic use; preserve the authors, caption, and locator.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
-- Explanatory job: Decoder dependency architecture and autoregressive state transition.
+- Decision rationale: The source figure is relevant only for these visible pixels: Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention. Treatments and fallback may not infer token-position graphs, threshold nodes, comparators, or causal edges absent from the source.
+- Explanatory job: Visible encoder-decoder stacks, residual paths, masked attention, and cross-attention blocks.
 
-### Treatment A — Full original with focus frame
+### Treatment A — Complete Figure 1 encoder-decoder stacks
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -381,7 +381,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```mermaid
 flowchart TB
   source@{ img: "/paper-assets/attention/figure-1.png", label: "Original paper figure" }
-  focus["Reading focus: masked decoder self-attention and encoder-decoder attention dependencies"]
+  focus["Reading focus: Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention"]
   locator["Source locator: Figure 1, PDF page 3, source_attention_arxiv_v7"]
   source --- focus
   source --- locator
@@ -398,19 +398,19 @@ fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("masked decoder self-attention and encoder-decoder attention dependencies")
+ax.set_title("Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment B — Original detail with context inset
+### Treatment B — Decoder stack detail with complete-figure context
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -458,19 +458,19 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("masked decoder self-attention and encoder-decoder attention dependencies")
+ax.set_title("Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment C — Original with numbered reading key
+### Treatment C — Complete Figure 1 with masked attention, cross-attention, and Add & Norm reading key
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -510,23 +510,23 @@ ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("masked decoder self-attention and encoder-decoder attention dependencies")
+ax.set_title("Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_decoder_dependencies` — rendered immediately after `attn_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/public/paper-assets/attention/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 1 shows stacked encoder and decoder blocks with Add & Norm residual paths, masked decoder attention, and encoder-decoder attention.”
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
 
 ## `attn_example_p1`
 

@@ -3,9 +3,9 @@
 - Paper ID: `paper_partition_prompt_aggregate`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
-- Manifest revision: `10`
+- Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -15,7 +15,7 @@
   - `ppa_discussion` — Partition, Prompt, Aggregate v1 — discussion and limitations; Section 7 and Limitations, PDF pages 18–19
   - `ppa_protocol` — Partition, Prompt, Aggregate v1 — ACS prior elicitation details; Appendix E.2, PDF pages 34–35
 
-Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
+Revision 11 corrects source-pixel semantics, removes a mismatched source figure, requires conditional inspection instructions, and returns the PPA hierarchy adaptation for visible two-depth invariance rework.
 
 ## `ppa_why_p1`
 
@@ -163,13 +163,13 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: Reuse cannot supply the needed treatment under the recorded constraint; the existing independently warranted non-banned adaptation remains eligible for revision-7 implementation. The reader otherwise has to reconstruct how normalized priors, subgroup conditionals, and tree depth jointly determine one aggregate and why cross-depth disagreement is inconsistency.
+- Decision rationale: Reuse cannot supply the needed treatment under the recorded constraint; the revised non-banned adaptation must make two hierarchy depths and their invariance test visible. The reader otherwise has to reconstruct how normalized priors, subgroup conditionals, and tree depth jointly determine one aggregate and why cross-depth disagreement is inconsistency.
 - Explanatory job: Hierarchical weighted reconstruction and cross-depth invariance.
 
 ### Treatment A — Weighted binary partition tree
 
 - Teaching purpose: Show how each depth remains exhaustive and how leaf contributions return to one root estimate.
-- Encoding and reading order: Branch widths encode normalized subgroup priors; every node carries a conditional estimate; contribution edges p(subgroup) times estimate converge on the depth aggregate, with depth aggregates aligned for consistency checking.
+- Encoding and reading order: Branch widths encode normalized subgroup priors; every node carries a conditional estimate; contribution edges p(subgroup) times estimate converge on the depth aggregate, with depth aggregates aligned for root = D1 = D2ing.
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. The diagram is structural and does not imply unreported magnitudes.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
@@ -188,9 +188,9 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 \node[draw,rounded corners,align=center] (n4) at (0.0,-1.8) {A and not B};
 \node[draw,rounded corners,align=center] (n5) at (3.2,-1.8) {not A and B};
 \node[draw,rounded corners,align=center] (n6) at (6.4,-1.8) {not A and not B};
-\node[draw,rounded corners,align=center] (n7) at (0,-3.6) {depth-1 aggregate};
-\node[draw,rounded corners,align=center] (n8) at (3.2,-3.6) {depth-2 aggregate};
-\node[draw,rounded corners,align=center] (n9) at (6.4,-3.6) {consistency check};
+\node[draw,rounded corners,align=center] (n7) at (0,-3.6) {D1 = w_A q_A + w_notA q_notA};
+\node[draw,rounded corners,align=center] (n8) at (3.2,-3.6) {D2 = sum of four weighted leaves};
+\node[draw,rounded corners,align=center] (n9) at (6.4,-3.6) {root = D1 = D2};
 \draw[->] (n0) -- (n1);
 \draw[->] (n0) -- (n2);
 \draw[->] (n1) -- (n3);
@@ -214,9 +214,9 @@ flowchart LR
   n4["A and not B"]
   n5["not A and B"]
   n6["not A and not B"]
-  n7["depth-1 aggregate"]
-  n8["depth-2 aggregate"]
-  n9["consistency check"]
+  n7["D1 = w_A q_A + w_notA q_notA"]
+  n8["D2 = sum of four weighted leaves"]
+  n9["root = D1 = D2"]
   n0 --> n1
   n0 --> n2
   n1 --> n3
@@ -238,7 +238,7 @@ flowchart LR
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-labels = ['population', 'A', 'not A', 'A and B', 'A and not B', 'not A and B', 'not A and not B', 'depth-1 aggregate', 'depth-2 aggregate', 'consistency check']
+labels = ['population', 'A', 'not A', 'A and B', 'A and not B', 'not A and B', 'not A and not B', 'D1 = w_A q_A + w_notA q_notA', 'D2 = sum of four weighted leaves', 'root = D1 = D2']
 fig, ax = plt.subplots(figsize=(9, 5))
 edges = [(0,1),(0,2),(1,3),(1,4),(2,5),(2,6),(1,7),(2,7),(3,8),(4,8),(5,8),(6,8),(7,9),(8,9)]
 positions = {i: ((i % 4) * 2.5, -(i // 4) * 1.4) for i in range(len(labels))}
@@ -257,7 +257,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 ### Treatment B — Nested partition contribution mosaic
 
 - Teaching purpose: Make the law of total probability visible as area-weighted contributions.
-- Encoding and reading order: Each tile area represents a normalized subgroup prior and its fill encodes the subgroup conditional estimate; the area-weighted fill over the whole rectangle is compared with the direct root estimate.
+- Encoding and reading order: Show a depth-1 mosaic with two weighted children and a depth-2 mosaic with four weighted grandchildren. Each depth has its own visible weighted aggregate, and both aggregates meet the direct root estimate at one equality/invariance comparison.
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. Values are illustrative because the paragraph states the protocol rather than one numerical ACS reconstruction.
 - Primary delivery medium: `generated asset`
 - Recommended web medium: `SVG`
@@ -266,62 +266,42 @@ fig.savefig(Path('visual.svg'), format='svg')
 #### TikZ
 ```tex
 \documentclass[tikz,border=4pt]{standalone}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
-\fill[blue!68] (0,-0) rectangle ++(0.9,-0.9);
-\draw (0,-0) rectangle ++(0.9,-0.9);
-\fill[blue!38] (1,-0) rectangle ++(0.9,-0.9);
-\draw (1,-0) rectangle ++(0.9,-0.9);
-\fill[blue!50] (0,-1) rectangle ++(0.9,-0.9);
-\draw (0,-1) rectangle ++(0.9,-0.9);
-\fill[blue!32] (1,-1) rectangle ++(0.9,-0.9);
-\draw (1,-1) rectangle ++(0.9,-0.9);
-\node[anchor=west] at (0,1.0) {A,B / A,not B / not A,B / not A,not B};
-\end{tikzpicture}
-\end{document}
+\usepackage{tikz}\begin{document}\begin{tikzpicture}[font=\scriptsize]
+\node[draw] (d1) at (0,2) {depth 1: two weighted children};
+\node[draw] (a1) at (4,2) {$D_1=w_Aq_A+w_{\neg A}q_{\neg A}$};
+\node[draw] (d2) at (0,0) {depth 2: four weighted grandchildren};
+\node[draw] (a2) at (4,0) {$D_2=\sum_{i=1}^{4}w_iq_i$};
+\node[draw] (root) at (4,-2) {direct root $q$};
+\node[draw] (eq) at (8,0) {$q=D_1=D_2$};
+\draw[->] (d1)--(a1); \draw[->] (d2)--(a2); \draw[->] (a1)--(eq); \draw[->] (a2)--(eq); \draw[->] (root)--(eq);
+\end{tikzpicture}\end{document}
 ```
 
 #### Mermaid
 ```mermaid
 flowchart LR
-  title["Nested partition contribution mosaic"]
-  subgraph rows["Rows"]
-    r0["A,B"]
-    r1["A,not B"]
-  end
-  subgraph columns["Encoded relations"]
-    c0["relation 1"]
-    c1["relation 2"]
-  end
-  title --- rows
-  title --- columns
-  r0 --> c0
-  r0 --> c1
-  r1 --> c0
-  r1 --> c1
+  d1["Depth 1: two weighted children"] --> a1["D1 = wA qA + w¬A q¬A"]
+  d2["Depth 2: four weighted grandchildren"] --> a2["D2 = Σ four weighted leaves"]
+  root["Direct root estimate q"] --> eq{"q = D1 = D2?"}
+  a1 --> eq
+  a2 --> eq
 ```
 
 #### Python
 ```python
 from pathlib import Path
 import matplotlib.pyplot as plt
-
-labels = ['A,B', 'A,not B', 'not A,B', 'not A,not B']
-fig, ax = plt.subplots(figsize=(9, 5))
-values = [[0.8, 0.3], [0.5, 0.2]]
-image = ax.imshow(values, cmap='Blues', vmin=0)
-ax.set_title(' / '.join(labels))
-fig.colorbar(image, ax=ax, label='encoded relation')
-ax.grid(alpha=0.2)
-fig.tight_layout()
-fig.savefig(Path('visual.svg'), format='svg')
+fig, ax = plt.subplots(figsize=(9, 4))
+ax.text(0.05, .75, "Depth 1: two weighted children → D1 = wAqA + w¬Aq¬A")
+ax.text(0.05, .45, "Depth 2: four weighted grandchildren → D2 = Σ wiqi")
+ax.text(0.55, .15, "direct root q = D1 = D2", bbox={"boxstyle":"round","fc":"#fffdf8"})
+ax.set_axis_off(); fig.savefig(Path("visual.svg"), format="svg")
 ```
 
 ### Treatment C — Weighted-reconstruction factor graph
 
 - Teaching purpose: Expose the algebra that binds normalized subgroup priors to subgroup estimates without implying that tree depth alone causes accuracy.
-- Encoding and reading order: Each subgroup prior and conditional estimate meet at a multiplication node; parallel contribution branches meet at one summation node. A separate normalization constraint spans all priors, and the reconstructed result meets the direct root estimate only at the consistency comparator.
+- Encoding and reading order: Render two simultaneous aggregation branches: depth 1 multiplies and sums two weighted children; depth 2 multiplies and sums four weighted grandchildren. Both depth aggregates connect to a single explicit equality comparator with the direct root estimate.
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. Symbols explain the reported identity and protocol; they are not empirical ACS values.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
@@ -330,75 +310,47 @@ fig.savefig(Path('visual.svg'), format='svg')
 #### TikZ
 ```tex
 \documentclass[tikz,border=4pt]{standalone}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}[font=\sffamily\scriptsize,>=stealth]
-\node[draw] (w1) at (0,2) {$w_1$};
-\node[draw] (q1) at (0,0) {$q_1$};
-\node[draw,circle] (m1) at (2,1) {$\times$};
-\node[draw] (w2) at (0,-2) {$w_2$};
-\node[draw] (q2) at (0,-4) {$q_2$};
-\node[draw,circle] (m2) at (2,-3) {$\times$};
-\node[draw,circle] (sum) at (5,-1) {$\sum$};
-\node[draw] (root) at (5,-3) {direct root};
-\node[draw] (check) at (8,-2) {consistency};
-\node[draw] (norm) at (2,3) {$\sum_i w_i=1$};
-\draw[->] (w1)--(m1); \draw[->] (q1)--(m1);
-\draw[->] (w2)--(m2); \draw[->] (q2)--(m2);
-\draw[->] (m1)--(sum); \draw[->] (m2)--(sum);
-\draw[->] (sum)--(check); \draw[->] (root)--(check);
-\draw[dashed] (w1)--(norm); \draw[dashed] (w2)--(norm);
-\end{tikzpicture}
-\end{document}
+\usepackage{tikz}\begin{document}\begin{tikzpicture}[font=\scriptsize,>=stealth]
+\node[draw] (d1) at (0,2) {2 children: $w_iq_i$}; \node[draw] (s1) at (4,2) {$D_1=\sum_{i=1}^{2}w_iq_i$};
+\node[draw] (d2) at (0,0) {4 grandchildren: $w_jq_j$}; \node[draw] (s2) at (4,0) {$D_2=\sum_{j=1}^{4}w_jq_j$};
+\node[draw] (root) at (4,-2) {root $q$}; \node[draw] (eq) at (8,0) {$q=D_1=D_2$};
+\draw[->](d1)--(s1);\draw[->](d2)--(s2);\draw[->](s1)--(eq);\draw[->](s2)--(eq);\draw[->](root)--(eq);
+\end{tikzpicture}\end{document}
 ```
 
 #### Mermaid
 ```mermaid
 flowchart LR
-  w1["prior w1"] --> m1(("multiply"))
-  q1["conditional q1"] --> m1
-  w2["prior w2"] --> m2(("multiply"))
-  q2["conditional q2"] --> m2
-  w1 -. "sum priors = 1" .-> norm["normalization"]
-  w2 -.-> norm
-  m1 --> sum(("sum contributions"))
-  m2 --> sum
-  sum --> check{"same estimate?"}
-  root["direct root estimate"] --> check
+  c1["Depth 1: 2 weighted children"] --> s1(("Σ → D1"))
+  c2["Depth 2: 4 weighted grandchildren"] --> s2(("Σ → D2"))
+  s1 --> eq{"root = D1 = D2?"}
+  s2 --> eq
+  root["Direct root estimate"] --> eq
 ```
 
 #### Python
 ```python
 from pathlib import Path
 import matplotlib.pyplot as plt
-
-labels = ['prior w1', 'conditional q1', 'prior w2', 'conditional q2', 'multiply w1q1', 'multiply w2q2', 'sum', 'direct root', 'consistency']
-fig, ax = plt.subplots(figsize=(9, 5))
-positions = {0:(0,3), 1:(0,2), 2:(0,0), 3:(0,-1), 4:(3,2.5), 5:(3,-0.5), 6:(5,1), 7:(5,-2), 8:(8,0)}
-edges = [(0,4),(1,4),(2,5),(3,5),(4,6),(5,6),(6,8),(7,8)]
-for i, label in enumerate(labels):
-    x, y = positions[i]
-    ax.text(x, y, label, ha='center', bbox={'boxstyle':'round','fc':'#fffdf8'})
-for start, end in edges:
-    ax.annotate('', positions[end], positions[start], arrowprops={'arrowstyle':'->'})
-ax.text(2, 3.4, 'w1 + w2 = 1', ha='center')
-ax.set_axis_off()
-fig.tight_layout()
-fig.savefig(Path('visual.svg'), format='svg')
+fig, ax = plt.subplots(figsize=(9, 4))
+nodes=[("2 weighted children",.05,.75),("D1 = Σ2 wiqi",.38,.75),("4 weighted grandchildren",.05,.35),("D2 = Σ4 wjqj",.38,.35),("root = D1 = D2",.72,.55)]
+for label,x,y in nodes: ax.text(x,y,label,bbox={"boxstyle":"round","fc":"#fffdf8"})
+for y in (.75,.35): ax.annotate("",(.7,.55),(.55,y),arrowprops={"arrowstyle":"->"})
+ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `C`
-- Selection rationale: Treatment C is the approved revision-7 treatment already implemented as the preserved custom SVG; its evidence encoding and accessible fallback remain unchanged.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: The implementer must rebuild the SVG so depth 1 and depth 2 each show weighted-child aggregation and both are compared for equality with the direct root estimate.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_ppa_weighted_reconstruction_graph` — rendered immediately after `ppa_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
-- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — the preserved custom SVG retains its specific alt text, limitations, and static fallback.
-- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING` — alt text and fallback must describe only the visible source pixels named in revision 11.
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
 
 ## `ppa_mechanism_p3`
 

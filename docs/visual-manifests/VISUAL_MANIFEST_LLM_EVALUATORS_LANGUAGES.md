@@ -3,9 +3,9 @@
 - Paper ID: `paper_llm_evaluators_languages`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
-- Manifest revision: `10`
+- Manifest revision: `11`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -16,7 +16,7 @@
   - `language_source_regressions` — LLM Evaluators v1 structural regressions; Pages 8–10, Sections 4.2–4.3, Equations 3–6, Figures 6–7, Appendix Tables 11–12
   - `language_source_calibration` — LLM Evaluators v1 calibration analysis; Pages 10 and 22–23, Section 5, Appendix D, Tables 13–15
 
-Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
+Revision 11 corrects source-pixel semantics, removes a mismatched source figure, requires conditional inspection instructions, and returns the PPA hierarchy adaptation for visible two-depth invariance rework.
 
 ## `language_why_p1`
 
@@ -93,7 +93,7 @@ Revision 10 scopes source reuse to distinct reconstructive questions. A reusable
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -142,7 +142,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -202,7 +202,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -281,7 +281,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -330,7 +330,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -390,7 +390,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -481,22 +481,22 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Text anchor: "A global threshold exposes the mismatch: languages receiving higher baseline scores accept more responses"
 - Claims and sources: `language_claim_pairwise_blind`, `language_claim_uncertainty`, `language_claim_language_after_nll`, `language_source_uncertainty`, `language_source_regressions`, `language_source_calibration`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — shared-score translation into language-specific acceptance decisions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
 - Original figure locator: Figure 4, PDF page 6, `language_source_thresholds`
 - License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
-- Explanatory job: Mechanism explanation.
+- Decision rationale: The source figure is relevant only for these visible pixels: Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model. Treatments and fallback may not infer token-position graphs, threshold nodes, comparators, or causal edges absent from the source.
+- Explanatory job: Visible relationship between pairwise accuracy and acceptance rate across languages and evaluator models.
 
-### Treatment A — Full original with focus frame
+### Treatment A — Complete Figure 4 scatter-plot panels
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only shared-score translation into language-specific acceptance decisions; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -516,7 +516,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```mermaid
 flowchart TB
   source@{ img: "/paper-assets/llm-evaluators-languages/figure-4.png", label: "Original paper figure" }
-  focus["Reading focus: shared-score translation into language-specific acceptance decisions"]
+  focus["Reading focus: Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model"]
   locator["Source locator: Figure 4, PDF page 6, language_source_thresholds"]
   source --- focus
   source --- locator
@@ -533,19 +533,19 @@ fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("shared-score translation into language-specific acceptance decisions")
+ax.set_title("Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment B — Original detail with context inset
+### Treatment B — One model panel with complete-figure context
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only shared-score translation into language-specific acceptance decisions; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -593,19 +593,19 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("shared-score translation into language-specific acceptance decisions")
+ax.set_title("Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
 
-### Treatment C — Original with numbered reading key
+### Treatment C — Complete Figure 4 with axis and model-panel reading key
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only shared-score translation into language-specific acceptance decisions; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -645,23 +645,23 @@ ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("shared-score translation into language-specific acceptance decisions")
+ax.set_title("Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A preserves the one exact original assigned by revision 10 to this distinct explanatory question, unmodified at readable intrinsic scale inside the desktop and mobile inspection viewport; provenance remains exact and no rejected repeated placement is retained.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: The visual implementer must preserve the original and rewrite title, alt text, and fallback to describe only the visible pixels specified by revision 11.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING` — Required alt/fallback: “Figure 4 shows language points in model-specific scatter plots with pairwise accuracy on one axis and acceptance rate on the other.” No comparator, threshold node, or causal edge may be added.
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected semantic encoding.
 
 ## `language_mechanism_p3`
 
@@ -684,7 +684,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -733,7 +733,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -793,7 +793,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll if needed or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
