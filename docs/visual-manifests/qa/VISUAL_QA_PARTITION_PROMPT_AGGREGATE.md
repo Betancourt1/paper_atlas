@@ -1,33 +1,24 @@
-# Blind visual QA — Partition, Prompt, Aggregate
+# Blind visual QA — Partition, Prompt, Aggregate — revision 13
 
-Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
-
-| Paragraph | E | I | Evidence |
+| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
 |---|---:|---:|---|
-| `ppa_why_p1` | 9 | 9 | Prompt granularity motivation is conceptual and clear. |
-| `ppa_why_p2` | 9 | 9 | Consistency versus truth is an essential prose distinction. |
-| `ppa_change_p1` | 9 | 9 | The partitioning change is introduced before the warranted reconstruction graph. |
-| `ppa_change_p2` | 9 | 9 | Reference-free and reference-based checks need exact definitions. |
-| `ppa_mechanism_p1` | 9 | 9 | Recursive partition setup is readable without duplicating the next visual. |
-| `ppa_mechanism_p2` | 10 | 6 | The weighted reconstruction graph shows two depths, priors, sums, and `q = D1 = D2` as a relational structure; at mobile scale its labels are too small for comfortable reading. |
-| `ppa_mechanism_p3` | 9 | 9 | Split/order consistency definitions remain clearer in prose. |
-| `ppa_example_p1` | 9 | 9 | The demographic split example is short and grounded. |
-| `ppa_example_p2` | 9 | 9 | Reconstruction versus ACS alignment is accurately distinguished in prose. |
-| `ppa_evidence_p1` | 9 | 9 | Depth trade-off is qualified and does not warrant a custom trend without the original figure asset. |
-| `ppa_evidence_p2` | 9 | 9 | Mixed consistency results would become a forbidden repeated metric display. |
-| `ppa_evidence_p3` | 9 | 9 | Model-dependent micro-to-macro effect is concise. |
-| `ppa_limitations_p1` | 9 | 9 | Dependence on splits, wording, and priors is qualitative. |
-| `ppa_limitations_p2` | 10 | 10 | Declining a visual correctly prevents coherence from looking like correctness. |
-| `ppa_review_p1` | 9 | 9 | The reference-free contribution is a textual synthesis. |
-| `ppa_review_p2` | 9 | 9 | Macro-fallacy scope and interpretation require prose qualifiers. |
+| `ppa_why_p1` | 9 | 10 | Conditional estimates versus aggregate behavior is motivation; the later hierarchy supplies the necessary reconstruction. |
+| `ppa_why_p2` | 9 | 10 | Reference-free consistency is one conceptual distinction and needs no generic diagram. |
+| `ppa_change_p1` | 9 | 10 | Partitioning and recombination are fully visualized at the mechanism placement. |
+| `ppa_change_p2` | 9 | 10 | Consistency versus alignment is a bounded two-part definition best retained in prose. |
+| `ppa_mechanism_p1` | 9 | 10 | The direct estimate and split setup are prerequisites for the next paragraph's complete hierarchy. |
+| `ppa_mechanism_p2` | 10 | 10 | The custom visual warrants itself through two complete partition depths, distinct weighted leaves, two aggregation operators, and the invariant `q = D1 = D2`; mobile preserves all levels and labels. |
+| `ppa_mechanism_p3` | 9 | 10 | Split and order consistency are additional verbal checks without sufficient evidence for another visual. |
+| `ppa_example_p1` | 9 | 10 | The age/employment example maps directly onto the preceding abstract hierarchy; duplication is unnecessary. |
+| `ppa_example_p2` | 9 | 10 | Multiplication, summation, and comparison have already been visualized. |
+| `ppa_evidence_p1` | 9 | 10 | The depth trade-off is reported without a reusable exact figure in the current implementation; an invented curve would overstate it. |
+| `ppa_evidence_p2` | 9 | 10 | Cross-task consistency scores are heterogeneous and would become repeated metric panels. |
+| `ppa_evidence_p3` | 9 | 10 | The one-prompt effect is explicitly less systematic, so prose is the honest treatment. |
+| `ppa_limitations_p1` | 9 | 10 | Split dependence and harder fine-grained priors are scope limitations. |
+| `ppa_limitations_p2` | 9 | 10 | Internal coherence versus truth is a conceptual boundary, not a new diagram. |
+| `ppa_review_p1` | 9 | 10 | The synthesis is already supported by the hierarchy visual. |
+| `ppa_review_p2` | 9 | 10 | The non-universality of the macro fallacy is correctly retained as prose. |
 
-## Render and policy findings
+Engineer average: **9.06**. Implementation average: **10.00**. Combined average: **9.53**. Minimum: engineer **9**, implementation **10**.
 
-- The SVG fits fully at both required viewports with no internal/page overflow or clipping and preserves its 760×440 aspect ratio.
-- The graph is source-relevant, source-linked, accessible, and avoids all four forbidden structures. HTML/CSS-led primary visuals: 0 of 1 (0%).
-- The desktop hierarchy is legible; mobile scaling reduces 11 px design text to roughly 4.6 CSS px, so fit does not equal legibility.
-
-## Checks
-
-- Focused Playwright visual suite: 6 passed on desktop 1440×1000 and mobile 390×844.
-- Geometry capture: 1/1 container fits at both sizes; page width equals viewport width.
+The SVG is a real two-depth hierarchy rather than a single chain or repeated metric card. Desktop and mobile viewBoxes contain every node and edge, mobile text is legible, aspect ratio is preserved, and no internal/page scrollbar or clipping was found. HTML/CSS-led share: **0/1 (0%)**.

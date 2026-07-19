@@ -1,35 +1,25 @@
-# Blind visual QA — SearchOS-V1
+# Blind visual QA — SearchOS-V1 — revision 13
 
-Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
-
-| Paragraph | E | I | Evidence |
+| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
 |---|---:|---:|---|
-| `sos_why_p1` | 9 | 9 | Research-state requirements are a heterogeneous set, not a comparable visual scale. |
-| `sos_why_p2` | 9 | 9 | Failure modes are clearly explained without repeated cards. |
-| `sos_change_p1` | 9 | 9 | Table and citation-matrix concept is concrete prose before architecture evidence. |
-| `sos_change_p2` | 9 | 9 | Role separation is concise and does not require a generic org chart. |
-| `sos_mechanism_p1` | 9 | 9 | Four stores are densely defined; a custom box list would be a forbidden stock structure. |
-| `sos_mechanism_p2` | 10 | 5 | Original Figure 2 directly shows the state/evidence architecture with faithful provenance, but dense labels are difficult at mobile width. |
-| `sos_mechanism_p3` | 10 | 4 | The original sensor-policy/dispatch figure is relevant and undistorted; its very wide 316×106 mobile rendering makes labels and fine relationships largely unreadable. |
-| `sos_example_p1` | 9 | 9 | The missing-cell dispatch walkthrough is linear and concrete. |
-| `sos_example_p2` | 9 | 9 | Acceptance, atomic update, and stop behavior remain precise in prose. |
-| `sos_evidence_p1` | 9 | 9 | Benchmark metrics are already compact and should not become cards. |
-| `sos_evidence_p2` | 9 | 9 | Paired scheduling results include subset scope in prose. |
-| `sos_evidence_p3` | 9 | 9 | Joint-removal evidence cannot isolate a skill layer and is correctly unillustrated. |
-| `sos_limitations_p1` | 9 | 9 | Best-of-three and budget-fairness limits need textual prominence. |
-| `sos_limitations_p2` | 10 | 10 | Declining a visual avoids turning provenance into truth or representative cases into causal evidence. |
-| `sos_limitations_p3` | 9 | 9 | Future-work scope is qualitative. |
-| `sos_review_p1` | 9 | 9 | Bounded engineering synthesis is already supported by the originals. |
-| `sos_review_p2` | 9 | 9 | Component attribution remains an interpretation and should not be diagrammed as causal. |
+| `sos_why_p1` | 9 | 10 | Entity/attribute completion and provenance are motivation; the later architecture supplies structure. |
+| `sos_why_p2` | 9 | 10 | Buried evidence, duplicate work, and idle slots are failure modes, not a warranted metric panel. |
+| `sos_change_p1` | 9 | 10 | Rows, columns, citation matrix, and missing cells are explained and later visible in Figure 2. |
+| `sos_change_p2` | 9 | 10 | Global versus local coordination is fully covered by the original architecture placement. |
+| `sos_mechanism_p1` | 9 | 10 | The four stores are visible in Figure 2 at the next paragraph; no duplicate cards are introduced. |
+| `sos_mechanism_p2` | 10 | 3 | Figure 2 is the right source choice and desktop is complete, but the mobile `context-skills` composite is not faithful: it contains severed neighboring modules, clipped labels, and connector fragments between stacked sections. This is an arbitrary-looking slice, not a clean semantic reflow. |
+| `sos_mechanism_p3` | 10 | 10 | Figure 5 directly shows early, mid-run, and late interventions. Mobile uses the three complete paper-defined panels with axes, intervention lines, annotations, and entity plots intact. |
+| `sos_example_p1` | 9 | 10 | Missing-cell dispatch is a worked example of relationships already visible in Figure 2. |
+| `sos_example_p2` | 9 | 10 | Evidence acceptance and branch stopping reuse the preceding architecture/intervention visuals. |
+| `sos_evidence_p1` | 9 | 10 | Benchmark values are heterogeneous table/list metrics and correctly remain prose. |
+| `sos_evidence_p2` | 9 | 10 | The paired scheduler study is a small metric set without an implemented source figure. |
+| `sos_evidence_p3` | 9 | 10 | Joint skill removal does not isolate layers; a visual would imply unsupported attribution. |
+| `sos_limitations_p1` | 9 | 10 | Model, best-of-three, variance, and budget caveats are exact prose. |
+| `sos_limitations_p2` | 9 | 10 | Citation provenance versus truth is a conceptual boundary. |
+| `sos_limitations_p3` | 9 | 10 | Future-work categories do not warrant a roadmap visual. |
+| `sos_review_p1` | 9 | 10 | The synthesis is already covered by the two source figures. |
+| `sos_review_p2` | 9 | 10 | Component-level causal attribution is explicitly unavailable and should remain prose. |
 
-## Render and policy findings
+Engineer average: **9.12**. Implementation average: **9.59**. Combined average: **9.35**. Minimum: engineer **9**, implementation **3**.
 
-- Both source figures fit completely at 1440×1000 and 390×844 with no internal/page scrollbar, clipping, or aspect-ratio distortion.
-- Both are directly relevant originals with locator, attribution, license, modification record, evidence, and limitation text.
-- No custom forbidden stock structure is introduced. HTML/CSS-led primary visuals: 0 of 2 (0%).
-- Mobile fit is achieved by shrinking; Figure 5's combined wide layout is not legible enough to inspect labels or connections reliably.
-
-## Checks
-
-- Focused Playwright visual suite: 6 passed across both required viewports.
-- Geometry capture: 2/2 containers fit at both sizes; page width equals viewport width.
+Finding: automated containment passes, desktop originals are complete, and Figure 5's mobile panels are sound. However, no-scroll containment is not enough for Figure 2: the very tall mobile composite visibly truncates module boundaries and labels while carrying unrelated fragments from adjacent regions. Provenance is present and image aspect ratios are preserved, but source fidelity/completeness fails for that mobile implementation. HTML/CSS-led share: **0/2 (0%)**.

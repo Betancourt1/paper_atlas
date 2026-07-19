@@ -1,34 +1,24 @@
-# Blind visual QA — Computational Propaganda
+# Blind visual QA — Computational Propaganda — revision 13
 
-Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
-
-| Paragraph | E | I | Evidence |
+| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
 |---|---:|---:|---|
-| `propaganda_why_p1` | 9 | 9 | The crawl/extract/filter uncertainty is a compact causal qualification, not a useful stock chain. |
-| `propaganda_why_p2` | 9 | 9 | Threat-model boundaries are best retained verbatim in prose. |
-| `propaganda_change_p1` | 9 | 9 | The three questions are introduced clearly before the later quantitative treatment. |
-| `propaganda_change_p2` | 9 | 9 | The advertisement/comment contrast is categorical and already concise. |
-| `propaganda_mechanism_p1` | 9 | 9 | Gate definitions are readable prose; illustrating them here would duplicate the worked example. |
-| `propaganda_mechanism_p2` | 9 | 9 | Changing denominators are described explicitly and reserved for the warranted tree. |
-| `propaganda_mechanism_p3` | 9 | 9 | The distinction between inclusion and model influence should not be collapsed into one pipeline. |
-| `propaganda_example_p1` | 9 | 6 | Figure 3 is directly relevant and faithfully shown, but its wide, detailed plot is too small for comfortable mobile label reading. |
-| `propaganda_example_p2` | 10 | 7 | The branching survival tree exposes changing denominators and the 0.13/0.15 discrepancy without a forbidden list; mobile labels are small but the relationships remain discernible. |
-| `propaganda_evidence_p1` | 9 | 9 | Exact counts and unresolved discrepancy are safer in prose than a second metric display. |
-| `propaganda_evidence_p2` | 9 | 9 | Model-scale and poison-rate results are concise and do not need repeated cards. |
-| `propaganda_evidence_p3` | 9 | 9 | Post-SFT qualification is exact and visually unembellished. |
-| `propaganda_limitations_p1` | 9 | 9 | Proxy and pipeline scope are qualitative boundaries. |
-| `propaganda_limitations_p2` | 9 | 9 | The non-live, synthetic, sub-frontier limitations are appropriately prose-only. |
-| `propaganda_review_p1` | 9 | 9 | Methodological synthesis is clear without another flow. |
-| `propaganda_review_p2` | 10 | 10 | Prose preserves the crucial gap between staged evidence and a live attack. |
+| `propaganda_why_p1` | 9 | 10 | Crawl, extraction, and filtering uncertainty is motivation; visualizing it here would pre-empt the later conditional model. |
+| `propaganda_why_p2` | 9 | 10 | The indirect-attacker boundary is explicit prose and has no additional paper figure that performs a distinct job. |
+| `propaganda_change_p1` | 9 | 10 | The three gates are fully visualized at the worked estimate, avoiding a duplicate generic pipeline. |
+| `propaganda_change_p2` | 9 | 10 | Ads-versus-comments is a bounded tested-path qualification; a two-item comparison would be stock. |
+| `propaganda_mechanism_p1` | 9 | 10 | S1/S2/S3 definitions are readable and later gain their conditional denominator structure. |
+| `propaganda_mechanism_p2` | 9 | 10 | Three denominators are explained explicitly; the selected tree later supplies the needed reconstruction. |
+| `propaganda_mechanism_p3` | 9 | 10 | Inclusion versus influence is a scope boundary, not evidence for another flow diagram. |
+| `propaganda_example_p1` | 10 | 10 | Original Figure 3 directly shows the injected HTML and extracted text. Desktop is complete; mobile crops exactly the paper's two labeled panels with all content retained. |
+| `propaganda_example_p2` | 10 | 10 | The custom tree warrants itself through conditional denominators, rejection complements, the 0.13% product, and 0.15% discrepancy; mobile reflows the same branching logic with legible labels. |
+| `propaganda_evidence_p1` | 9 | 10 | Repeating the same three rates would duplicate the immediately preceding visual. |
+| `propaganda_evidence_p2` | 9 | 10 | Parameter scales and shifts are a metric list without a common explanatory geometry. |
+| `propaganda_evidence_p3` | 9 | 10 | Post-SFT ranges and format caveats remain clearer as prose than repeated metric cards. |
+| `propaganda_limitations_p1` | 9 | 10 | Proxy-pipeline limitations are categorical and do not warrant invented architecture. |
+| `propaganda_limitations_p2` | 9 | 10 | The non-live, synthetic, sub-frontier scope is a textual boundary. |
+| `propaganda_review_p1` | 9 | 10 | The methodological synthesis is already supported by the two placed visuals. |
+| `propaganda_review_p2` | 9 | 10 | Threat-model bounds and the unresolved value discrepancy are already explicit. |
 
-## Render and policy findings
+Engineer average: **9.13**. Implementation average: **10.00**. Combined average: **9.56**. Minimum: engineer **9**, implementation **10**.
 
-- Both visuals fit completely at 1440×1000 and 390×844: no container or page overflow, no clipping, and preserved image/SVG aspect ratios.
-- Figure 3 has exact provenance. The custom tree has claim/source links, explicit limitation text, and a responsive `viewBox`.
-- Neither visual is a single interchangeable chain, item-plus-metric list, repeated cards, or repeated one-axis dot panels. HTML/CSS-led primary visuals: 0 of 2 (0%).
-- Mobile legibility is the only material defect: the source plot is small; the SVG's 11 px design labels scale to roughly 4.6 CSS px.
-
-## Checks
-
-- Focused Playwright visual suite: 6 passed on both required viewports.
-- Geometry capture: 2/2 containers fit at both sizes; page width equals viewport width.
+Focused inspection confirms complete desktop source fidelity, meaningful mobile panel crops, explicit provenance and modifications, legible 19px mobile SVG source text, preserved aspect ratios, and no internal/page scrollbars or clipping. The tree is not a single interchangeable chain: rejection complements and changing denominators are essential. HTML/CSS-led share: **0/2 (0%)**.

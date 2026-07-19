@@ -1,34 +1,24 @@
-# Blind visual QA — RoboTTT
+# Blind visual QA — RoboTTT — revision 13
 
-Independent revision-12 review. `E` is engineer decision/proposal; `I` is implemented visual quality, both 1–10.
-
-| Paragraph | E | I | Evidence |
+| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
 |---|---:|---:|---|
-| `rttt_why_p1` | 9 | 9 | Long-horizon memory motivation is concrete prose. |
-| `rttt_why_p2` | 9 | 9 | Cost-versus-state trade-off is clear without an invented chart. |
-| `rttt_change_p1` | 9 | 9 | Fast weights are introduced textually before the original architecture. |
-| `rttt_change_p2` | 9 | 9 | SAF and TBPTT distinctions need exact prose. |
-| `rttt_mechanism_p1` | 9 | 9 | Current-timestep attention versus cross-timestep TTT is concise. |
-| `rttt_mechanism_p2` | 10 | 5 | Original Figure 2 is exactly relevant and faithful, but its wide architecture labels become too small at 390 px. |
-| `rttt_mechanism_p3` | 10 | 5 | The supplied original training-sequence figure preserves the TBPTT boundary; mobile annotations are difficult to inspect. |
-| `rttt_example_p1` | 9 | 9 | Circuit demonstration setup is sequential prose with no warranted standalone visual. |
-| `rttt_example_p2` | 9 | 9 | The conditioned trajectory and 6/10 result remain bounded in text. |
-| `rttt_evidence_p1` | 10 | 5 | Original Figure 7 supplies the actual completion comparison and full provenance, but mobile bar labels are small. |
-| `rttt_evidence_p2` | 10 | 5 | Original Figure 8 is the relevant scaling result and remains undistorted; its mobile axes/legend are marginal. |
-| `rttt_evidence_p3` | 9 | 9 | Recovery comparisons and the GDN caveat are clearer in prose. |
-| `rttt_limitations_p1` | 9 | 9 | Backbone, setup, and task-family limits are qualitative. |
-| `rttt_limitations_p2` | 9 | 9 | Trial counts and absent latency evidence should not be charted as a result. |
-| `rttt_review_p1` | 9 | 9 | Mechanism-to-evidence synthesis is already supported by originals. |
-| `rttt_review_p2` | 9 | 9 | Missing backbones, embodiments, uncertainty, and latency remain explicit prose. |
+| `rttt_why_p1` | 9 | 10 | Long-horizon memory need is motivation; a frame-history strip would be a stock chain. |
+| `rttt_why_p2` | 9 | 10 | Growing attention cost versus compact state is a bounded trade-off. |
+| `rttt_change_p1` | 9 | 10 | Fast-weight updating is shown in the later complete architecture figure. |
+| `rttt_change_p2` | 9 | 10 | Action forcing and TBPTT are fully shown at the training-state paragraph. |
+| `rttt_mechanism_p1` | 9 | 10 | Backbone and within/across-timestep roles are context for Figure 2, not a separate visual job. |
+| `rttt_mechanism_p2` | 10 | 10 | Original Figure 2 directly shows training and inference dependencies; desktop is complete and mobile splits at the paper-defined training/inference panels. |
+| `rttt_mechanism_p3` | 10 | 9 | Figure 4 directly shows TBPTT gradient stopping with fast-weight carry. Mobile separates the paper's input/TBPTT and fast-weight bands meaningfully, though the cross-band relation requires reading two images. |
+| `rttt_example_p1` | 9 | 10 | Human demonstration and masked action loss are a worked narrative, not a separate topology. |
+| `rttt_example_p2` | 9 | 10 | Reset, generic instruction, and 6/10 result are explicit prose. |
+| `rttt_evidence_p1` | 10 | 9 | Figure 7 directly compares all task groups. Desktop is complete; mobile retains the original legend and two paper-defined task-group crops with an axis strip, but separation modestly increases lookup cost. |
+| `rttt_evidence_p2` | 10 | 9 | Figure 8 directly shows context scaling. Desktop is complete; mobile uses meaningful overlapping x-ranges and duplicates the 1K point and original y-axis for continuity. |
+| `rttt_evidence_p3` | 9 | 10 | Perturbation and DAgger numbers would be an item-plus-metric list and correctly stay prose-only. |
+| `rttt_limitations_p1` | 9 | 10 | Costs, objective, backbone, setup, and task-family scope are categorical limitations. |
+| `rttt_limitations_p2` | 9 | 10 | Trial counts, missing intervals, and absent latency comparison should remain exact prose. |
+| `rttt_review_p1` | 9 | 10 | The mechanism/result synthesis is already covered by four originals. |
+| `rttt_review_p2` | 9 | 10 | Missing generalization and latency evidence is a prose boundary. |
 
-## Render and policy findings
+Engineer average: **9.25**. Implementation average: **9.81**. Combined average: **9.53**. Minimum: engineer **9**, implementation **9**.
 
-- All four original figures fit completely at 1440×1000 and 390×844 with no scrollbars, page overflow, clipping, or aspect-ratio distortion.
-- Source relevance and provenance are strong for every placement; limitations and evidence links are present.
-- No custom forbidden stock structure is introduced. HTML/CSS-led primary visuals: 0 of 4 (0%).
-- All four mobile figures rely on shrink-to-fit; key labels and relationships are materially harder to read than on desktop.
-
-## Checks
-
-- Focused Playwright visual suite: 6 passed across both required viewport projects.
-- Geometry capture: 4/4 containers fit at both sizes; natural image dimensions loaded; page width equals viewport width.
+All desktop figures are complete originals. Mobile crops use paper-defined training/inference, TBPTT/fast-weight, task-group, and x-range structures rather than arbitrary slices; axes, legends, and source pixels remain identifiable. Provenance and modification disclosure are complete. Natural aspect ratios hold and focused checks show no clipping or internal/page scrollbars. HTML/CSS-led share: **0/4 (0%)**.
