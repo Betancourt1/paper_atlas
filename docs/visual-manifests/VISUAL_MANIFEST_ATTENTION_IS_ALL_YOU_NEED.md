@@ -3,7 +3,7 @@
 - Paper ID: `paper_attention_is_all_you_need`
 - Exact paper version: `v7`
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
-- Manifest revision: `8`
+- Manifest revision: `9`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `18 / 18` prose paragraphs
@@ -15,7 +15,7 @@
   - `source_attention_neurips_landing` — NIPS 2017 proceedings landing page for Attention Is All You Need; Proceedings identity and landing-page abstract, including its distinct 27.5 and 41.1 BLEU values
   - `source_attention_arxiv_license` — arXiv non-exclusive license to distribute; License terms granting arXiv a perpetual non-exclusive distribution right
 
-Revision 8 retains the paragraph-level source audit and adds a mandatory narrow-screen inspection contract for every reused original: readable intrinsic width, keyboard-accessible horizontal inspection, a visible mobile hint, contained overflow, unaltered source pixels, and preserved provenance.
+Revision 9 requires intrinsic-width inspection for every reused original on desktop and mobile. Source figures remain unmodified inside keyboard-accessible, figure-local horizontal viewports; multi-image sets may not be compressed into equal-width columns.
 
 ## `attn_why_p1`
 
@@ -92,7 +92,7 @@ Revision 8 retains the paragraph-level source audit and adds a mandatory narrow-
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -141,7 +141,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -201,7 +201,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -280,7 +280,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -329,7 +329,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -389,7 +389,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Transformer encoder-decoder architecture and residual information paths; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -468,7 +468,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only encoder and decoder sublayer topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -517,7 +517,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only encoder and decoder sublayer topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -577,7 +577,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only encoder and decoder sublayer topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -656,7 +656,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -705,7 +705,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -765,7 +765,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only scaled dot-product and multi-head attention correspondence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -844,7 +844,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -893,7 +893,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -953,7 +953,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only masked decoder self-attention and encoder-decoder attention dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1248,7 +1248,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only architectural contribution and retained autoregressive decoder constraint; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1297,7 +1297,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only architectural contribution and retained autoregressive decoder constraint; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
@@ -1357,7 +1357,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only architectural contribution and retained autoregressive decoder constraint; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep the source asset unaltered at a readable intrinsic width inside a simple horizontally inspectable viewport on narrow screens. Make the viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show a visible mobile hint: “Swipe or use arrow keys to inspect the original figure.” Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
+- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
 
 #### TikZ
 ```tex
