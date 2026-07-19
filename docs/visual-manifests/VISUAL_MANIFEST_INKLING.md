@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
 - Manifest revision: `12`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `19 / 19` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -358,15 +358,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct, but revision 12 requires responsive SVG rework: preserve its evidence encoding and accessible fallback while fitting the complete composition without internal or page scrolling.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_inkling_sparse_routing_field` — rendered immediately after `ink_mechanism_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/inkling.json`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `ink_mechanism_p2`

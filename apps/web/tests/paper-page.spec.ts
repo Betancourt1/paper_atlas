@@ -52,7 +52,7 @@ test("reviewed digest entry remains a source-backed explainer @visual", async ({
   await expect(page.getByRole("heading", { name: "Sources and exact locators" })).toBeVisible();
 });
 
-test("custom SVG visuals render only at approved revision-7 paragraphs @visual", async ({ page }) => {
+test("custom SVG visuals render only at approved paragraphs @visual", async ({ page }) => {
   for (const [paperPath, expected] of Object.entries(expectedVisuals)) {
     await page.goto(paperPath);
     const figures = page.locator('figure.explainer-visual[data-delivery-medium="SVG"]');
@@ -212,22 +212,24 @@ test("custom SVG visuals render only at approved revision-7 paragraphs @visual",
     ).toBe(true);
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    if (page.viewportSize()?.width === 390) {
-      expect(
-        await figures.evaluateAll((elements) =>
-          elements.every((figure) => {
-            const scroller = figure.querySelector<HTMLElement>(".explainer-svg")!;
-            const svg = scroller.querySelector("svg")!;
-            return (
-              scroller.scrollWidth > scroller.clientWidth &&
-              svg.getBoundingClientRect().width >= 680 &&
-              scroller.getBoundingClientRect().right <= window.innerWidth + 1 &&
-              scroller.tabIndex === 0
-            );
-          }),
-        ),
-      ).toBe(true);
-    }
+    expect(
+      await figures.evaluateAll((elements) =>
+        elements.every((figure) => {
+          const container = figure.querySelector<HTMLElement>(".explainer-svg")!;
+          const svg = container.querySelector("svg")!;
+          const containerRect = container.getBoundingClientRect();
+          const svgRect = svg.getBoundingClientRect();
+          return (
+            container.scrollWidth <= container.clientWidth &&
+            container.scrollHeight <= container.clientHeight &&
+            svgRect.left >= containerRect.left - 1 &&
+            svgRect.right <= containerRect.right + 1 &&
+            svg.getAttribute("preserveAspectRatio") === "xMidYMid meet" &&
+            container.tabIndex === -1
+          );
+        }),
+      ),
+    ).toBe(true);
   }
 });
 
@@ -262,42 +264,33 @@ test("original paper figures render at every approved source-asset paragraph @vi
     }
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    const viewports = figures.getByRole("region", { name: "Scrollable original paper figure" });
+    const viewports = figures.locator(".explainer-source-asset__viewport");
     await expect(viewports).toHaveCount(expected.length);
-    await expect(
-      figures.getByText("Scroll if needed or use arrow keys to inspect the original figure.", { exact: true }),
-    ).toHaveCount(expected.length);
     expect(
       await viewports.evaluateAll((elements) =>
         elements.every((viewport) => {
-          const scroller = viewport as HTMLElement;
-          const images = [...scroller.querySelectorAll<HTMLImageElement>("img")];
+          const container = viewport as HTMLElement;
+          const containerRect = container.getBoundingClientRect();
+          const images = [...container.querySelectorAll<HTMLImageElement>("img")];
           return (
-            scroller.tabIndex === 0 &&
-            scroller.getBoundingClientRect().right <= window.innerWidth + 1 &&
-            images.every((image) => Math.abs(image.clientWidth - image.naturalWidth) <= 1)
+            container.tabIndex === -1 &&
+            container.scrollWidth <= container.clientWidth &&
+            container.scrollHeight <= container.clientHeight &&
+            containerRect.right <= window.innerWidth + 1 &&
+            images.every((image) => {
+              const imageRect = image.getBoundingClientRect();
+              const renderedRatio = imageRect.width / imageRect.height;
+              const naturalRatio = image.naturalWidth / image.naturalHeight;
+              return (
+                imageRect.left >= containerRect.left - 1 &&
+                imageRect.right <= containerRect.right + 1 &&
+                Math.abs(renderedRatio - naturalRatio) < 0.02
+              );
+            })
           );
         }),
       ),
     ).toBe(true);
-
-    const firstViewport = viewports.first();
-    await firstViewport.focus();
-    expect(
-      await firstViewport.evaluate((element) => {
-        const style = getComputedStyle(element);
-        return style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) >= 3;
-      }),
-    ).toBe(true);
-    const scrollableIndex = await viewports.evaluateAll((elements) =>
-      elements.findIndex((element) => element.scrollWidth > element.clientWidth),
-    );
-    if (scrollableIndex >= 0) {
-      const scrollableViewport = viewports.nth(scrollableIndex);
-      await scrollableViewport.focus();
-      await page.keyboard.press("ArrowRight");
-      await expect.poll(() => scrollableViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   }
 });

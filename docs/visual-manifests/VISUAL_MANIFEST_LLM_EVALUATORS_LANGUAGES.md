@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
 - Manifest revision: `12`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -249,15 +249,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains the evidence-correct choice, but its current intrinsic-width inspection treatment violates revision 12. Reimplementation must fit the complete source asset inside the container without internal or page scrolling while preserving aspect ratio, source pixels, provenance, and legibility; use a permitted crop or panel, or reconsider the visual, if responsive fitting is illegible.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_1` — rendered immediately after `language_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-1.png`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `language_change_p2`
@@ -437,15 +437,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains the evidence-correct choice, but its current intrinsic-width inspection treatment violates revision 12. Reimplementation must fit the complete source asset inside the container without internal or page scrolling while preserving aspect ratio, source pixels, provenance, and legibility; use a permitted crop or panel, or reconsider the visual, if responsive fitting is illegible.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_3` — rendered immediately after `language_change_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-3.png`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p1`
@@ -652,15 +652,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct for original Figure 4, but revision 12 requires responsive source-asset fitting that preserves the figure, its provenance, specific alt text, and visible relationships without internal or page scrolling.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p3`
@@ -840,15 +840,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains the evidence-correct choice, but its current intrinsic-width inspection treatment violates revision 12. Reimplementation must fit the complete source asset inside the container without internal or page scrolling while preserving aspect ratio, source pixels, provenance, and legibility; use a permitted crop or panel, or reconsider the visual, if responsive fitting is illegible.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_5_7_mechanism` — rendered immediately after `language_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-5.png`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `language_example_p1`

@@ -13,7 +13,7 @@ export function ExplainerSvg({ visual }: { visual: Visual }) {
   const descriptionId = `${visual.id}-svg-description`;
   const arrowId = `${visual.id}-arrow`;
   return (
-    <div className="explainer-svg" tabIndex={0} aria-label="Scrollable explanatory figure">
+    <div className="explainer-svg">
       <svg
         data-visual-id={visual.id}
         viewBox={`0 0 ${WIDTH} ${height}`}

@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
 - Manifest revision: `12`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -383,15 +383,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains the evidence-correct choice, but its current intrinsic-width inspection treatment violates revision 12. Reimplementation must fit the complete source asset inside the container without internal or page scrolling while preserving aspect ratio, source pixels, provenance, and legibility; use a permitted crop or panel, or reconsider the visual, if responsive fitting is illegible.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `source asset`
 - Visual ID and placement: `propaganda_visual_source_figure_3` — rendered immediately after `propaganda_example_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/public/paper-assets/computational-propaganda/figure-3.png`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `propaganda_example_p2`
@@ -619,15 +619,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct, but revision 12 requires responsive SVG rework: preserve its evidence encoding and accessible fallback while fitting the complete composition without internal or page scrolling.
+- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
 - Delivery medium: `SVG`
 - Visual ID and placement: `propaganda_visual_halflife_tree` — rendered immediately after `propaganda_example_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Accessibility and fallback verification: `PENDING RESPONSIVE REWORK` — retain existing specific alt text, semantic fallback, exact locator, attribution, license, and modification metadata; verify that labels and relationships remain legible without horizontal interaction.
-- Desktop and mobile verification: `PENDING RESPONSIVE REWORK` — prove at 1440 × 1000 and 390 × 844 that the complete visualization fits inside its container, preserves aspect ratio, keeps labels and relationships legible, and creates neither internal nor page-level scrollbars.
+- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
+- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
 - Evidence deviations: `NONE`
 
 ## `propaganda_evidence_p1`

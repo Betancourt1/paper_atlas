@@ -61,10 +61,10 @@ describe("ExplainerVisual source assets", () => {
 
     expect(markup).toContain('data-delivery-medium="source asset"');
     expect(markup).toContain('data-image-count="2"');
-    expect(markup).toContain('aria-label="Scrollable original paper figure"');
-    expect(markup).toContain('role="region"');
-    expect(markup).toContain('tabindex="0"');
-    expect(markup).toContain("Scroll if needed or use arrow keys to inspect the original figure.");
+    expect(markup).not.toContain("Scrollable original paper figure");
+    expect(markup).not.toContain('role="region"');
+    expect(markup).not.toContain('tabindex="0"');
+    expect(markup).not.toContain("Scroll if needed");
     expect(markup).toContain('src="/paper-assets/test/figure-2-a.png"');
     expect(markup).toContain('alt="Original Figure 2, panel B."');
     expect(markup).toContain("Figure 2, panels A-B, page 4");
