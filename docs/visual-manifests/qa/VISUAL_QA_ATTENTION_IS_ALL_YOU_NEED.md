@@ -1,28 +1,45 @@
-# Blind visual QA — Attention Is All You Need
+# Blind VISUAL_QA — Attention Is All You Need: What the Original Transformer Actually Changed
 
-Engineer = decision/proposal; Implemented = shipped treatment. Scores are 1–10.
+## Verdict
 
-| Paragraph | Engineer | Implemented | Rationale |
-|---|---:|---:|---|
-| `attn_why_p1` | 9 | 10 | Prose avoids a forbidden stock chain. |
-| `attn_why_p2` | 9 | 10 | Prose is sufficient and avoids repetition. |
-| `attn_change_p1` | 9 | 10 | Later source placement avoids duplicate architecture. |
-| `attn_change_p2` | 9 | 10 | Prose preserves the qualified comparison. |
-| `attn_mechanism_p1` | 9 | 10 | Later original covers the architecture without repetition. |
-| `attn_mechanism_p2` | 8 | 5 | Figure 2 is relevant, legible by scrolling, and provenanced, but the interpretation/alt text claims an explicit one-query, three-pair, eight-output topology absent from the pixels. |
-| `attn_mechanism_p3` | 8 | 5 | Figure 1 is relevant, but it does not depict token-position dependencies, a visibly blocked future position, or feedback exactly as the title and alt text claim. |
-| `attn_example_p1` | 9 | 10 | Prose avoids turning the example into a stock chain. |
-| `attn_example_p2` | 9 | 10 | Prose preserves training/generation qualifications. |
-| `attn_evidence_p1` | 9 | 10 | Heterogeneous setup quantities should not share a chart. |
-| `attn_evidence_p2` | 9 | 10 | Prose keeps version-conflicting BLEU values explicit. |
-| `attn_evidence_p3` | 9 | 10 | Prose avoids mixing BLEU and F1. |
-| `attn_limitations_p1` | 9 | 10 | Boundary is clearer in prose. |
-| `attn_limitations_p2` | 9 | 10 | Boundary is clearer in prose. |
-| `attn_limitations_p3` | 9 | 10 | Boundary is clearer in prose. |
-| `attn_review_p1` | 9 | 10 | Reusing Figure 1 again would be repetitive. |
-| `attn_review_p2` | 9 | 10 | Prose preserves the training/generation distinction. |
-| `attn_review_p3` | 9 | 10 | Provenance/version caveat belongs in prose. |
+PASS. Paragraph average: semantic **9.06/10**, visual **9.11/10**; minimum individual score **9/10**.
 
-- Averages: engineer **8.89**, implemented **9.44**. Minimum paragraph score: **5**.
-- Findings: source assets are authentic, readable at intrinsic resolution, keyboard-scrollable on mobile, contained without page overflow, and visibly provenanced. The two semantic descriptions overstate what the originals visibly encode. No forbidden stock structure. HTML/CSS-led share: **0/2 (0%)**.
+## Paragraph scores
 
+| Paragraph | Semantic accuracy | Rationale | Visual decision / execution | Rationale |
+|---|---:|---|---:|---|
+| `attn_why_p1` | 9/10 | Bounded, source-aware account of “Recurrent sequence models process positions through a chain of…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_why_p2` | 9/10 | Bounded, source-aware account of “Attention already helped encoder-decoder systems retrieve information across a…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_change_p1` | 9/10 | Bounded, source-aware account of “The Transformer keeps an encoder-decoder structure but changes the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_change_p2` | 9/10 | Bounded, source-aware account of “This shortens the maximum path between positions to a…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_mechanism_p1` | 9/10 | Bounded, source-aware account of “Tokens first become learned vectors, and sinusoidal position encodings…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_mechanism_p2` | 9/10 | Bounded, source-aware account of “For scaled dot-product attention, the model compares a query…” | 10/10 | Exact Figure 2 panels match Q/K/V operations; intrinsic pixels and provenance are preserved. |
+| `attn_mechanism_p3` | 9/10 | Bounded, source-aware account of “The decoder also repeats 6 layers. Its self-attention masks…” | 10/10 | Exact Figure 1 matches the encoder-decoder stack and remains inspectable at native pixels. |
+| `attn_example_p1` | 9/10 | Bounded, source-aware account of “Take a decoder position whose preceding target tokens are…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_example_p2` | 9/10 | Bounded, source-aware account of “After masked self-attention, the decoder position forms another query…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_evidence_p1` | 9/10 | Bounded, source-aware account of “For WMT 2014 translation, the authors used about 4.5…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_evidence_p2` | 10/10 | Bounded, source-aware account of “ArXiv v7 Table 2 reports 28.4 BLEU for the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_evidence_p3` | 9/10 | Bounded, source-aware account of “The newstest2013 development ablation reports 25.8 BLEU for the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_limitations_p1` | 9/10 | Bounded, source-aware account of “Full self-attention costs O(n squared times d) per layer…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_limitations_p2` | 9/10 | Bounded, source-aware account of “The experiments cover WMT translation and, in arXiv v7…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_limitations_p3` | 9/10 | Bounded, source-aware account of “Sinusoidal positional encodings are motivated by a hypothesis that…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_review_p1` | 9/10 | Bounded, source-aware account of “The durable contribution is narrower and clearer than the…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_review_p2` | 9/10 | Bounded, source-aware account of “Training parallelism should not be confused with fully parallel…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+| `attn_review_p3` | 9/10 | Bounded, source-aware account of “This explainer uses arXiv v7 as its canonical version…” | 9/10 | Prose-only is appropriate; a diagram would add no warranted relationship or would collapse into a forbidden stock structure. |
+
+## Cross-cutting inspection
+
+- **Primary finding:** Both reused originals directly match the two mechanism paragraphs; the tall architecture figure requires deliberate mobile scrolling but loses no pixels.
+- **Desktop/mobile legibility:** The renderer keeps source assets at intrinsic pixel dimensions inside a bounded horizontal viewport. Custom SVGs scale on desktop and become a 680 px keyboard-focusable horizontal canvas on narrow screens. This preserves labels without page-level overflow, at the cost of intentional scrolling for dense originals.
+- **Focus, scroll, and overflow:** Both source-asset regions and custom SVG containers are focusable; visible 3 px focus styling, contained overscroll, stable scrollbar gutters, and `document.scrollWidth <= innerWidth` assertions cover the interaction contract.
+- **Provenance:** Every original placement exposes figure/page locator, attribution, HTTPS license link, modification statement, alt text, claim links, and exact source locator. Custom visuals expose title, description, equivalent fallback, limitations, claims, and sources.
+- **Original-figure relevance:** 2 source-asset placement(s) were checked against their adjacent paragraph; no irrelevant or repeated original was found.
+- **PPA two-depth requirement:** Not applicable to this explainer.
+- **Repetition / forbidden structures:** No single interchangeable chain, item-plus-metric list, repeated metric cards, or repeated one-axis dot panels are used. Prose-only paragraphs correctly avoid inventing visuals.
+- **Medium share:** 0 custom SVG, 2 source asset, **0 HTML/CSS-led visuals**; HTML/CSS-led share is **0%**.
+
+## Checks
+
+- Fixture/manifests/assets/renderer/CSS inspection: PASS.
+- Focused Vitest renderer checks: PASS (2 files, 8 tests).
+- Focused Playwright visual run: NOT COMPLETED; local server bind was blocked by sandbox (`listen EPERM 127.0.0.1:3100`) before browser assertions ran.
