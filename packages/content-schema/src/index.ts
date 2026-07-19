@@ -5,6 +5,7 @@ export type {
   GlossaryTerm,
   SourceRef,
   Visual,
+  VisualItem,
 } from "./generated/explainer-document.js";
 export type { Author, PaperSummary, Source } from "./generated/paper-summary.js";
 export {

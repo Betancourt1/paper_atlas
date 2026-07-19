@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
 - Manifest revision: `2`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -254,13 +254,13 @@ Path("propaganda_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_why_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_why_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `propaganda_why_p2`
@@ -488,13 +488,13 @@ Path("propaganda_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_why_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_why_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `propaganda_change_p1`
@@ -722,16 +722,16 @@ Path("propaganda_change_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_comments_vs_ads` after `propaganda_change_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_change_p1`, `propaganda_change_p2`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_change_p2`
 
@@ -962,16 +962,16 @@ Path("propaganda_change_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_comments_vs_ads` after `propaganda_change_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_change_p1`, `propaganda_change_p2`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_mechanism_p1`
 
@@ -1225,16 +1225,16 @@ Path("propaganda_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), enc
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_mechanism_p2`
 
@@ -1488,16 +1488,16 @@ Path("propaganda_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), enc
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_mechanism_p3`
 
@@ -1735,16 +1735,16 @@ Path("propaganda_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), enc
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_example_p1`
 
@@ -1976,16 +1976,16 @@ Path("propaganda_example_p1_treatment_c.svg").write_text("\n".join(parts), encod
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_example_p2`
 
@@ -2235,16 +2235,16 @@ Path("propaganda_example_p2_treatment_c.svg").write_text("\n".join(parts), encod
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_evidence_p1`
 
@@ -2506,16 +2506,16 @@ Path("propaganda_evidence_p1_treatment_c.svg").write_text("\n".join(parts), enco
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_halflife_flow` after `propaganda_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_mechanism_p1`, `propaganda_mechanism_p2`, `propaganda_mechanism_p3`, `propaganda_example_p1`, `propaganda_example_p2`, `propaganda_evidence_p1`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_evidence_p2`
 
@@ -2765,16 +2765,16 @@ Path("propaganda_evidence_p2_treatment_c.svg").write_text("\n".join(parts), enco
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_model_effects` after `propaganda_evidence_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_evidence_p2`, `propaganda_evidence_p3`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_evidence_p3`
 
@@ -3030,16 +3030,16 @@ Path("propaganda_evidence_p3_treatment_c.svg").write_text("\n".join(parts), enco
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `propaganda_visual_model_effects` after `propaganda_evidence_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `propaganda_evidence_p2`, `propaganda_evidence_p3`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `propaganda_limitations_p1`
 
@@ -3292,13 +3292,13 @@ Path("propaganda_limitations_p1_treatment_c.svg").write_text("\n".join(parts), e
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_limitations_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_limitations_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `propaganda_limitations_p2`
@@ -3539,13 +3539,13 @@ Path("propaganda_limitations_p2_treatment_c.svg").write_text("\n".join(parts), e
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_limitations_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_limitations_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `propaganda_review_p1`
@@ -3811,13 +3811,13 @@ Path("propaganda_review_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_review_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_review_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `propaganda_review_p2`
@@ -4080,13 +4080,13 @@ Path("propaganda_review_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `propaganda_review_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#propaganda_review_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 

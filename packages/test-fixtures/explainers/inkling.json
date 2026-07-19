@@ -405,8 +405,174 @@
   ],
   "visuals": [
     {
+      "id": "visual_inkling_total_vs_active",
+      "after_block_id": "ink_change",
+      "after_paragraph_id": "ink_change_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "Stored capacity and per-token activation are different quantities",
+      "question": "What do 975 billion total and 41 billion active parameters mean?",
+      "items": [
+        {
+          "label": "975B total parameters",
+          "detail": "The stored sparse model contains the full collection of routed and shared expert parameters."
+        },
+        {
+          "label": "41B active parameters",
+          "detail": "For one token, the router selects 6 of 256 routed experts and also uses 2 shared experts, producing the reported active path."
+        },
+        {
+          "label": "Deployment implication",
+          "detail": "Sparse activation reduces computation per token, but the downloadable checkpoint still has to represent the much larger stored model."
+        }
+      ],
+      "claim_ids": ["ink_002", "ink_004"],
+      "source_refs": ["source_inkling_model_card", "source_inkling_release"],
+      "interpretation": "The active parameter count describes the computation path for a token; it is not the checkpoint size or a promise that consumer hardware can hold the model.",
+      "limitations": [
+        "Parameter counts alone do not determine throughput, latency, or memory under a specific serving implementation.",
+        "Checkpoint hardware requirements are reported separately in the deployment comparison."
+      ],
+      "alt_text": "Parallel lanes distinguish Inkling's 975 billion stored parameters from its 41 billion active parameters per token. Six of 256 routed experts and two shared experts make up the active path, but the full checkpoint remains much larger.",
+      "fallback": "Inkling stores 975 billion total parameters. A token activates a reported 41-billion-parameter path by using 6 of 256 routed experts plus 2 shared experts. Sparse activation does not make the stored checkpoint only 41 billion parameters."
+    },
+    {
+      "id": "visual_inkling_multimodal_stack",
+      "after_block_id": "ink_mechanism",
+      "after_paragraph_id": "ink_mechanism_p3",
+      "type": "ARCHITECTURE_STEPPER",
+      "title": "Three input paths meet in one autoregressive decoder",
+      "question": "How do text, images, and audio enter Inkling's shared hidden space?",
+      "items": [
+        {
+          "label": "Text tokens",
+          "detail": "Text begins as token representations in the decoder's hidden space."
+        },
+        {
+          "label": "Image patches",
+          "detail": "The release describes 40-by-40 patches passing through a four-layer hierarchical MLP before projection into the shared space."
+        },
+        {
+          "label": "Audio representation",
+          "detail": "The release describes dMel spectrograms, while the website model card gives the broader description of discrete audio-token encoding."
+        },
+        {
+          "label": "Interleaved attention stack",
+          "detail": "Local and global attention layers are reported at a 5-to-1 ratio with 8 key-value heads."
+        },
+        {
+          "label": "Text output",
+          "detail": "The 66-layer decoder processes the shared representations autoregressively and emits text."
+        }
+      ],
+      "claim_ids": ["ink_003", "ink_006"],
+      "source_refs": ["source_inkling_model_card", "source_inkling_release"],
+      "interpretation": "Inkling uses modality-specific front ends, but their representations are projected into one decoder space rather than processed by three independent output systems.",
+      "limitations": [
+        "The two provider pages describe the image and audio front ends at different levels of specificity.",
+        "The sources do not provide enough implementation detail to reconstruct exact tensor shapes or training data flow."
+      ],
+      "alt_text": "Architecture layers show text tokens, image patches processed by a hierarchical MLP, and audio representations entering a shared hidden space, followed by interleaved local and global attention in a 66-layer autoregressive decoder that produces text.",
+      "fallback": "Text, image, and audio each use an input representation path. Those representations enter one shared decoder space, where local and global attention layers are interleaved and the 66-layer autoregressive model produces text."
+    },
+    {
+      "id": "visual_inkling_benchmark_snapshot",
+      "after_block_id": "ink_evidence",
+      "after_paragraph_id": "ink_evidence_p1",
+      "type": "RESULT_COMPARISON",
+      "title": "The benchmark snapshot spans non-equivalent tasks",
+      "question": "What does the provider report at effort 0.99?",
+      "items": [
+        {"label": "Humanity's Last Exam · no tools", "detail": "Vendor-reported percent; not directly comparable with the other benchmark families.", "value": 29.7},
+        {"label": "SWE-bench Verified", "detail": "Vendor-reported coding benchmark percent.", "value": 77.6},
+        {"label": "IFBench", "detail": "Vendor-reported instruction-following percent.", "value": 79.8},
+        {"label": "MMMU Pro Standard 10", "detail": "Vendor-reported multimodal benchmark percent.", "value": 73.5},
+        {"label": "VoiceBench", "detail": "Vendor-reported audio benchmark percent with a formatting instruction.", "value": 91.4},
+        {"label": "StrongREJECT", "detail": "Vendor-reported safety benchmark percent.", "value": 98.6}
+      ],
+      "claim_ids": ["ink_007", "ink_011"],
+      "source_refs": ["source_inkling_model_card", "source_inkling_release"],
+      "interpretation": "The main table is broad coverage evidence, not a single composite score. Each number belongs to a different benchmark definition and evaluation setup.",
+      "limitations": [
+        "The values are vendor-published and should not be read as a common scale.",
+        "The table does not identify evaluated checkpoint precision, and some provider surfaces disagree on other values."
+      ],
+      "alt_text": "Result constellation of selected vendor-reported effort 0.99 scores: 29.7 on Humanity's Last Exam without tools, 77.6 SWE-bench Verified, 79.8 IFBench, 73.5 MMMU Pro Standard 10, 91.4 VoiceBench, and 98.6 StrongREJECT. These benchmarks are not one common scale.",
+      "fallback": "At effort 0.99, the provider reports 29.7 on Humanity's Last Exam without tools, 77.6 on SWE-bench Verified, 79.8 on IFBench, 73.5 on MMMU Pro Standard 10, 91.4 on VoiceBench, and 98.6 on StrongREJECT. The benchmark families are not directly comparable."
+    },
+    {
+      "id": "visual_inkling_context_boundary",
+      "after_block_id": "ink_limitations",
+      "after_paragraph_id": "ink_limitations_p2",
+      "type": "PARALLEL_VIEW",
+      "title": "Supported context is not demonstrated accuracy",
+      "question": "Which long-context statements are established, and which remain open?",
+      "items": [
+        {
+          "label": "Provider capacity claim",
+          "detail": "The content-addressed provider pages advertise support for a context window up to one million tokens."
+        },
+        {
+          "label": "Hosted access options",
+          "detail": "The cited Tinker access surface exposes 64K and 256K context options rather than a one-million-token option."
+        },
+        {
+          "label": "Accuracy boundary",
+          "detail": "The cited sources do not establish useful accuracy across every position of a one-million-token prompt."
+        },
+        {
+          "label": "Checkpoint boundary",
+          "detail": "The sources also do not establish BF16 and NVFP4 quality parity or unchanged safety after downstream fine-tuning."
+        }
+      ],
+      "claim_ids": ["ink_003", "ink_012"],
+      "source_refs": ["source_inkling_model_card", "source_inkling_release", "source_inkling_hf_bf16", "source_inkling_hf_nvfp4"],
+      "interpretation": "A declared maximum capacity, a hosted service limit, and measured long-context accuracy are three different claims. Only the first two are directly described by the cited provider surfaces.",
+      "limitations": [
+        "This boundary view does not add a new long-context evaluation.",
+        "Hosted options and model capability may change after the content-addressed retrieval date."
+      ],
+      "alt_text": "Four lanes distinguish the provider's one-million-token capacity statement, hosted 64K and 256K options, the absence of demonstrated accuracy throughout one million tokens, and the absence of BF16-versus-NVFP4 quality parity evidence.",
+      "fallback": "The provider advertises up to one million tokens, while the cited hosted options expose 64K and 256K. Neither statement demonstrates useful accuracy across the full million-token window, and the sources do not establish BF16 and NVFP4 quality parity."
+    },
+    {
+      "id": "visual_inkling_source_provenance",
+      "after_block_id": "ink_review",
+      "after_paragraph_id": "ink_review_p2",
+      "type": "EVIDENCE_MATRIX",
+      "title": "Reproducibility depends on fixed source identities",
+      "question": "Which Inkling sources can be revisited exactly?",
+      "items": [
+        {
+          "label": "Provider website snapshot",
+          "detail": "The exact model-card, release-page, and Acceptable Use Policy HTML retrieved on 2026-07-18 is fixed by SHA-256 and byte count; the live pages can still change."
+        },
+        {
+          "label": "BF16 checkpoint card",
+          "detail": "The initial release is pinned to its immutable repository commit rather than a moving branch."
+        },
+        {
+          "label": "NVFP4 checkpoint card",
+          "detail": "The quantized release is pinned to a separate initial commit with its own hardware and numeric-mode statements."
+        },
+        {
+          "label": "Unresolved disagreement",
+          "detail": "The fixed website and initial checkpoint cards disagree on values including GDPVal-AA and MMMU Pro; source identity preserves the conflict but does not resolve it."
+        }
+      ],
+      "claim_ids": ["ink_001", "ink_009", "ink_011"],
+      "source_refs": ["source_inkling_model_card", "source_inkling_release", "source_inkling_hf_bf16", "source_inkling_hf_nvfp4", "source_inkling_aup"],
+      "interpretation": "Content hashes and commit pins make each cited surface reproducible. They do not make contradictory vendor values agree; they make the disagreement auditable.",
+      "limitations": [
+        "The matrix does not infer which disagreeing value the provider intended as canonical.",
+        "Later live-page revisions require new hashes and a new editorial review."
+      ],
+      "alt_text": "Evidence matrix distinguishes content-addressed provider HTML, pinned BF16 and NVFP4 checkpoint cards, and an unresolved disagreement between those fixed sources. Hashes preserve the exact evidence but do not decide which conflicting value is canonical.",
+      "fallback": "The website HTML is fixed by retrieval hash and byte count, while BF16 and NVFP4 checkpoint cards are fixed by separate initial commits. Those source identities make disagreements reproducible but do not resolve which value is canonical."
+    },
+    {
       "id": "visual_inkling_moe_routing",
       "after_block_id": "ink_mechanism",
+      "after_paragraph_id": "ink_mechanism_p1",
       "type": "PARTITION_TREE",
       "title": "One token activates only part of Inkling",
       "question": "How can Inkling store 975 billion parameters while using 41 billion on one token path?",
@@ -448,6 +614,7 @@
     {
       "id": "visual_inkling_checkpoint_hardware",
       "after_block_id": "ink_example",
+      "after_paragraph_id": "ink_example_p1",
       "type": "METHOD_COMPARISON",
       "title": "BF16 and NVFP4 require different deployment plans",
       "question": "What changes when a local deployment chooses the BF16 or NVFP4 checkpoint?",
@@ -490,6 +657,7 @@
     {
       "id": "visual_inkling_evidence_boundaries",
       "after_block_id": "ink_evidence",
+      "after_paragraph_id": "ink_evidence_p3",
       "type": "EVIDENCE_MATRIX",
       "title": "Inkling's claims come from non-equivalent evidence surfaces",
       "question": "Which source and checkpoint does each major Inkling claim actually describe?",

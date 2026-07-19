@@ -378,8 +378,44 @@
   ],
   "visuals": [
     {
+      "id": "visual_robottt_history_memory",
+      "after_block_id": "rttt_why",
+      "after_paragraph_id": "rttt_why_p2",
+      "type": "PARALLEL_VIEW",
+      "title": "Long robot history can be stored as tokens or changing state",
+      "question": "What grows as a robot acts for thousands of timesteps?",
+      "items": [
+        {
+          "label": "Full-history attention",
+          "detail": "Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."
+        },
+        {
+          "label": "RoboTTT recurrent state",
+          "detail": "Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."
+        },
+        {
+          "label": "Information objective",
+          "detail": "The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."
+        },
+        {
+          "label": "Unmeasured boundary",
+          "detail": "The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."
+        }
+      ],
+      "claim_ids": ["rttt_core", "rttt_memory_interpretation", "rttt_latency_limit"],
+      "source_refs": ["rttt_architecture_source", "rttt_limits_source"],
+      "interpretation": "RoboTTT changes the representation of history: rather than expose every old frame as an attention token, it carries an updated parameter state whose size does not grow with the rollout length.",
+      "limitations": [
+        "Fixed-size state can forget information; the paper's results do not prove perfect retention.",
+        "The visual distinguishes scaling mechanisms and does not claim lower measured latency on every deployment."
+      ],
+      "alt_text": "Parallel lanes compare full-history attention, where the visible token context grows over time, with RoboTTT, where current observations update fast-weight MLP state that is carried forward. A boundary notes that the paper does not report a universal deployment-latency win.",
+      "fallback": "Full-history attention keeps adding prior observations to the visible token sequence. RoboTTT instead updates a fast-weight state and carries those weights forward. This keeps state size from growing with rollout length, but the paper does not establish lower latency in every deployment."
+    },
+    {
       "id": "visual_robottt_fast_weight_cycle",
       "after_block_id": "rttt_mechanism",
+      "after_paragraph_id": "rttt_mechanism_p3",
       "type": "CONTROL_LOOP",
       "title": "How robot history becomes fast-weight state",
       "question": "How does RoboTTT condition on a long visuomotor history without attending over the full history at every step?",
@@ -428,6 +464,7 @@
     {
       "id": "visual_robottt_training_timeline",
       "after_block_id": "rttt_change",
+      "after_paragraph_id": "rttt_change_p2",
       "type": "TIMELINE",
       "title": "Long-sequence training without full-history gradients",
       "question": "How do sequence action forcing and truncated backpropagation keep long-context training tractable?",
@@ -471,6 +508,7 @@
     {
       "id": "visual_robottt_masked_context",
       "after_block_id": "rttt_example",
+      "after_paragraph_id": "rttt_example_p2",
       "type": "TIMELINE",
       "title": "A human demonstration becomes context, not an action target",
       "question": "How can demonstration frames influence later robot actions when they contain no robot action labels?",
@@ -517,6 +555,7 @@
     {
       "id": "visual_robottt_completion_results",
       "after_block_id": "rttt_evidence",
+      "after_paragraph_id": "rttt_evidence_p3",
       "type": "DOT_PLOT",
       "title": "Completion improves in two distinct evaluations",
       "question": "How large are the reported main-task and context-scaling differences, and which values must not be treated as one experiment?",

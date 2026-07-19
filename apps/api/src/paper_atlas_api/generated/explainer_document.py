@@ -182,6 +182,7 @@ class Visual(BaseModel):
     )
     id: Identifier
     after_block_id: Identifier
+    after_paragraph_id: Identifier
     type: Type1
     title: Annotated[str, Field(max_length=300, min_length=1)]
     question: Annotated[str, Field(max_length=300, min_length=1)]

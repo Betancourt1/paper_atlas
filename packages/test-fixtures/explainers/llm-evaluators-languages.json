@@ -274,8 +274,79 @@
   ],
   "visuals": [
     {
+      "id": "language_visual_evaluation_modes",
+      "after_block_id": "language_why",
+      "after_paragraph_id": "language_why_p2",
+      "type": "METHOD_COMPARISON",
+      "title": "Ranking and threshold decisions ask different questions",
+      "question": "What information does each evaluation mode preserve?",
+      "items": [
+        {
+          "label": "Pairwise accuracy",
+          "detail": "Checks whether a preferred response ranks above a rejected response within a language; a shared score offset can cancel out."
+        },
+        {
+          "label": "Pointwise thresholding",
+          "detail": "Compares absolute scores with one cutoff; a language-conditioned offset can change how many responses are accepted."
+        },
+        {
+          "label": "Scalar reward use",
+          "detail": "Reinforcement learning consumes the score magnitude itself, so cross-language shifts matter even without an explicit gate."
+        }
+      ],
+      "claim_ids": ["language_claim_pairwise_blind", "language_claim_gap"],
+      "source_refs": ["language_source_intro", "language_source_thresholds"],
+      "interpretation": "A judge can preserve within-language order while assigning language groups different absolute score baselines. Ranking accuracy alone therefore cannot validate threshold or reward-scale behavior.",
+      "limitations": [
+        "The comparison identifies an evaluation blind spot; it does not establish why a particular evaluator shifts scores.",
+        "Production systems may use additional calibration or policies not tested in the paper."
+      ],
+      "alt_text": "Method comparison: pairwise accuracy checks order and can hide a shared language score offset; pointwise thresholding uses absolute scores and can change acceptance; scalar reward use also depends on score magnitude.",
+      "fallback": "Pairwise accuracy checks whether one response ranks above another, so a shared language offset can cancel. A global threshold and scalar reinforcement-learning reward use absolute score magnitude, so the same offset can change decisions."
+    },
+    {
+      "id": "language_visual_study_design",
+      "after_block_id": "language_change",
+      "after_paragraph_id": "language_change_p2",
+      "type": "OPERATION_DIAGRAM",
+      "title": "The study follows score shifts from translation to decisions",
+      "question": "Which analysis stages connect language to threshold outcomes?",
+      "items": [
+        {
+          "label": "Align content across 23 languages",
+          "detail": "Professionally translated and human-validated versions keep semantic content comparable across language conditions."
+        },
+        {
+          "label": "Measure pointwise score distributions",
+          "detail": "Four prompted judges and four reward models are evaluated for mean-score differences, not only pairwise ordering."
+        },
+        {
+          "label": "Compare with language prevalence",
+          "detail": "Language-level scores are related to Common Crawl prevalence as a resource proxy."
+        },
+        {
+          "label": "Apply shared thresholds",
+          "detail": "One global cutoff converts shifted score distributions into language-specific acceptance rates."
+        },
+        {
+          "label": "Test uncertainty and residual language effects",
+          "detail": "Negative log-likelihood and token-free uncertainty proxies enter nested analyses that retain a separate language term."
+        }
+      ],
+      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_gap", "language_claim_additional_judges", "language_claim_language_after_nll"],
+      "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_uncertainty", "language_source_regressions"],
+      "interpretation": "The contribution is a chain of aligned-content, score-distribution, resource, threshold, and regression analyses. No single stage alone establishes a causal mechanism.",
+      "limitations": [
+        "Common Crawl prevalence is a resource proxy rather than a randomized exposure.",
+        "The nested regressions preserve a residual language effect but do not prove language identity itself is causal."
+      ],
+      "alt_text": "Five-stage operation path: align content across 23 languages, measure pointwise score distributions for eight core evaluators, compare scores with Common Crawl prevalence, apply global thresholds, and test uncertainty proxies plus residual language effects.",
+      "fallback": "The study aligns content across 23 languages, measures pointwise score distributions for eight core evaluators, relates scores to Common Crawl prevalence, applies shared thresholds, and uses uncertainty proxies and nested regressions to test what remains."
+    },
+    {
       "id": "language_visual_pairwise_threshold",
       "after_block_id": "language_mechanism",
+      "after_paragraph_id": "language_mechanism_p2",
       "type": "PARALLEL_VIEW",
       "title": "The same score offset is invisible to ranking but visible to a threshold",
       "question": "How can an evaluator rank responses correctly yet make different accept-or-reject decisions across languages?",
@@ -308,6 +379,7 @@
     {
       "id": "language_visual_score_decomposition",
       "after_block_id": "language_mechanism",
+      "after_paragraph_id": "language_mechanism_p3",
       "type": "OPERATION_DIAGRAM",
       "title": "The regressions separate uncertainty from a residual language effect",
       "question": "What does the paper test after finding that uncertainty and evaluator scores move together?",
@@ -347,6 +419,7 @@
     {
       "id": "language_visual_threshold_failures",
       "after_block_id": "language_example",
+      "after_paragraph_id": "language_example_p2",
       "type": "PARALLEL_VIEW",
       "title": "Two examples expose different threshold failure modes",
       "question": "What do the English-Ukrainian comparison and the code-switch construction each demonstrate?",
@@ -406,6 +479,7 @@
     {
       "id": "language_visual_evidence_matrix",
       "after_block_id": "language_evidence",
+      "after_paragraph_id": "language_evidence_p3",
       "type": "EVIDENCE_MATRIX",
       "title": "The evidence spans several non-equivalent comparisons",
       "question": "Which measurements support the language-shift finding, and which conditions belong to each number?",

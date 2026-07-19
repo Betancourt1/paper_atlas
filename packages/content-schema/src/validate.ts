@@ -106,10 +106,24 @@ export function getExplainerIntegrityErrors(
   }
 
   for (const visual of explainer.visuals) {
-    if (!blockIds.has(visual.after_block_id)) {
+    const placementBlock = explainer.blocks.find(
+      (block) => block.id === visual.after_block_id,
+    );
+    if (!placementBlock) {
       errors.push(
         `visual ${visual.id} references unknown placement block ${visual.after_block_id}`,
       );
+    } else {
+      const paragraphIds = new Set(
+        placementBlock.paragraphs.map(
+          (_, index) => `${placementBlock.id}_p${index + 1}`,
+        ),
+      );
+      if (!paragraphIds.has(visual.after_paragraph_id)) {
+        errors.push(
+          `visual ${visual.id} references unknown placement paragraph ${visual.after_paragraph_id}`,
+        );
+      }
     }
     reportUnknownIds(errors, `visual ${visual.id} claim`, visual.claim_ids, claimIds);
     reportUnknownIds(errors, `visual ${visual.id} source`, visual.source_refs, sourceIds);

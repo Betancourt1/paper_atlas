@@ -96,6 +96,7 @@ export interface SourceRef {
 export interface Visual {
   id: Identifier;
   after_block_id: Identifier;
+  after_paragraph_id: Identifier;
   type:
     | "PIPELINE_FLOW"
     | "ARCHITECTURE_STEPPER"

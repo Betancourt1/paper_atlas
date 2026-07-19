@@ -260,6 +260,7 @@
     {
       "id": "propaganda_visual_comments_vs_ads",
       "after_block_id": "propaganda_change",
+      "after_paragraph_id": "propaganda_change_p2",
       "type": "PARALLEL_VIEW",
       "title": "Visible web content does not follow one extraction path",
       "question": "Why did public comments remain plausible poison carriers while programmatic advertisements did not in the tested crawl path?",
@@ -288,6 +289,7 @@
     {
       "id": "propaganda_visual_halflife_flow",
       "after_block_id": "propaganda_mechanism",
+      "after_paragraph_id": "propaganda_mechanism_p3",
       "type": "OPERATION_DIAGRAM",
       "title": "HalfLife multiplies three conditional inclusion gates",
       "question": "Which measured conditions contribute to the document-level inclusion estimate?",
@@ -333,6 +335,7 @@
     {
       "id": "propaganda_visual_model_effects",
       "after_block_id": "propaganda_evidence",
+      "after_paragraph_id": "propaganda_evidence_p3",
       "type": "RESULT_COMPARISON",
       "title": "Clean supervised fine-tuning attenuates the controlled preference shift",
       "question": "What range of preference shifts did the controlled 0.1% poison condition produce before and after supervised fine-tuning?",
@@ -378,41 +381,6 @@
       ],
       "alt_text": "Result comparison showing a controlled 0.1% poison condition shifting five base models by 18.6 to 20.7 percentage points and post-SFT models by 0.9 to 7.4 points; no-label post-SFT shifts are 0.1 for 709M and 0.3 for 1.3B.",
       "fallback": "At a 0.1% poison-token rate, five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity. After clean supervised fine-tuning, shifts range from 0.9 to 7.4 points. Under the no-label format, the post-SFT 709M and 1.3B shifts are 0.1 and 0.3 points. The endpoints summarize different model conditions and do not establish a live attack."
-    },
-    {
-      "id": "propaganda_visual_evidence_boundaries",
-      "after_block_id": "propaganda_limitations",
-      "type": "EVIDENCE_MATRIX",
-      "title": "The paper tests four different evidence boundaries",
-      "question": "Which parts of the poisoning argument are sampled, simulated, controlled, or not established?",
-      "items": [
-        {
-          "label": "Sampled open-web prevalence",
-          "detail": "Comment signatures were observed on 3.4% of 181,857 pages from one Common Crawl sample; practical posting access was not verified for every detected interface."
-        },
-        {
-          "label": "Sandboxed extraction and curation",
-          "detail": "Replacement comments were tested in sandboxed copies and passed through Resiliparse plus one Dolma 3-style curation path."
-        },
-        {
-          "label": "Controlled model influence",
-          "detail": "Separately constructed poison mixtures shifted synthetic entity preferences in OLMo-3-like models from 65M to 1.3B parameters."
-        },
-        {
-          "label": "Not established in production",
-          "detail": "The study did not inject live comments into a production corpus or demonstrate compromise of a deployed or frontier-scale model."
-        }
-      ],
-      "claim_ids": ["propaganda_claim_central", "propaganda_claim_inclusion", "propaganda_claim_model_shift", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_models", "propaganda_source_limitations"],
-      "interpretation": "The central risk assessment combines evidence from different settings. The sampled and sandboxed inclusion estimate and the controlled model experiment jointly support plausibility, but they do not become an observed live attack when placed next to one another.",
-      "limitations": [
-        "The matrix classifies the evidence already reported in the explainer; it does not estimate a probability of production compromise.",
-        "Common Crawl and the Dolma 3-style path are proxies whose behavior may differ from proprietary collection and curation systems.",
-        "The model experiment uses synthetic preferences and smaller models, so its effect sizes cannot be transferred to frontier systems."
-      ],
-      "alt_text": "Evidence matrix separating observed comment-interface prevalence in one Common Crawl sample, sandboxed extraction and curation, a separate controlled model-pretraining experiment, and the unestablished claim of live production-model poisoning.",
-      "fallback": "Sampled evidence: comment signatures on one Common Crawl sample. Sandboxed evidence: simulated replacement comments passed through one extraction and curation path. Controlled evidence: synthetic poison mixtures shifted preferences in models from 65M to 1.3B parameters. Not established: live comment poisoning of a deployed or frontier-scale model."
     }
   ],
   "glossary": [

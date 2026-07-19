@@ -305,6 +305,7 @@
       "required": [
         "id",
         "after_block_id",
+        "after_paragraph_id",
         "type",
         "title",
         "question",
@@ -321,6 +322,9 @@
           "$ref": "#/$defs/identifier"
         },
         "after_block_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "after_paragraph_id": {
           "$ref": "#/$defs/identifier"
         },
         "type": {

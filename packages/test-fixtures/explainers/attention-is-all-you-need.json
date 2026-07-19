@@ -384,8 +384,141 @@
   ],
   "visuals": [
     {
+      "id": "visual_attention_path_length",
+      "after_block_id": "attn_why",
+      "after_paragraph_id": "attn_why_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "Long-range information takes different routes",
+      "question": "How many sequential handoffs connect distant positions?",
+      "items": [
+        {
+          "label": "Recurrent route",
+          "detail": "A distant dependency travels through a chain of hidden states, so the number of sequential handoffs grows with position distance."
+        },
+        {
+          "label": "Convolutional route",
+          "detail": "Positions can be computed in parallel, but distant positions still require a path whose length grows with their separation."
+        },
+        {
+          "label": "Self-attention route",
+          "detail": "Within one self-attention layer, any position can directly exchange information with every available position through one attention operation."
+        }
+      ],
+      "claim_ids": ["attn_001", "attn_002"],
+      "source_refs": ["source_attention_arxiv_v7"],
+      "interpretation": "The architectural motivation is path length: recurrence imposes a position-by-position chain, convolution shortens that chain, and global self-attention provides a direct within-layer route between positions.",
+      "limitations": [
+        "The routes describe sequential computational path length, not measured wall-clock latency on every device.",
+        "The self-attention route does not imply fully parallel autoregressive generation."
+      ],
+      "alt_text": "Three parallel lanes compare recurrent, convolutional, and self-attention routes between distant sequence positions. Recurrence uses a growing chain, convolution uses a shorter but distance-dependent path, and self-attention connects available positions within one layer.",
+      "fallback": "Recurrence connects distant positions through a chain that grows with distance. Convolution can compute positions in parallel but still uses a distance-dependent path. Global self-attention allows direct exchange between available positions within one layer."
+    },
+    {
+      "id": "visual_attention_stack",
+      "after_block_id": "attn_mechanism",
+      "after_paragraph_id": "attn_mechanism_p1",
+      "type": "ARCHITECTURE_STEPPER",
+      "title": "Attention replaces position mixing, not the whole layer",
+      "question": "Which operations remain around self-attention in the Transformer stack?",
+      "items": [
+        {
+          "label": "Token and position representations",
+          "detail": "Learned token vectors receive sinusoidal position encodings before entering the stack."
+        },
+        {
+          "label": "Multi-head self-attention",
+          "detail": "Each position retrieves information from available positions through several learned attention heads."
+        },
+        {
+          "label": "Residual path and layer normalization",
+          "detail": "A residual connection and normalization surround the attention sublayer."
+        },
+        {
+          "label": "Position-wise feed-forward network",
+          "detail": "The same two-layer feed-forward transformation is applied independently at every position."
+        },
+        {
+          "label": "Residual path and layer normalization",
+          "detail": "A second residual and normalization stage completes one encoder layer; the base encoder repeats this layer 6 times."
+        }
+      ],
+      "claim_ids": ["attn_002", "attn_003", "attn_006"],
+      "source_refs": ["source_attention_arxiv_v7"],
+      "interpretation": "The key substitution concerns how positions exchange information. Embeddings, positional information, feed-forward transformations, residual paths, and normalization remain essential parts of the repeated layer.",
+      "limitations": [
+        "The stack shows one encoder layer and states the 6-layer repetition; it does not reproduce the paper's architecture figure.",
+        "Decoder masking and encoder-decoder attention are shown in the adjacent encoder-decoder visual."
+      ],
+      "alt_text": "Layered architecture view: token and position representations enter multi-head self-attention, then a residual and normalization stage, then a position-wise feed-forward network, then another residual and normalization stage. The base encoder repeats this layer six times.",
+      "fallback": "A Transformer encoder layer contains multi-head self-attention, a position-wise feed-forward network, two residual connections, and two normalization stages. Token embeddings and sinusoidal positions enter the stack, and the base encoder repeats the layer six times."
+    },
+    {
+      "id": "visual_attention_training_conditions",
+      "after_block_id": "attn_evidence",
+      "after_paragraph_id": "attn_evidence_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "The two translation runs use different data scales",
+      "question": "What training conditions sit behind the headline translation results?",
+      "items": [
+        {
+          "label": "English–German corpus",
+          "detail": "About 4.5 million sentence pairs with a shared 37,000-token byte-pair vocabulary."
+        },
+        {
+          "label": "English–French corpus",
+          "detail": "About 36 million sentence pairs with a 32,000-token word-piece vocabulary."
+        },
+        {
+          "label": "Base training run",
+          "detail": "100,000 steps, reported as about 12 hours on one machine with 8 NVIDIA P100 GPUs."
+        },
+        {
+          "label": "Big training run",
+          "detail": "300,000 steps, reported as about 3.5 days on the same stated hardware setup."
+        }
+      ],
+      "claim_ids": ["attn_007"],
+      "source_refs": ["source_attention_arxiv_v7"],
+      "interpretation": "The result table combines tasks and model runs built on substantially different corpus sizes, vocabularies, step counts, and training durations.",
+      "limitations": [
+        "The view reports the paper's stated conditions and does not normalize compute across the two language pairs.",
+        "The durations are not repeated-run estimates and should not be treated as current hardware benchmarks."
+      ],
+      "alt_text": "Four lanes list the English-German corpus of 4.5 million pairs and 37,000-token vocabulary, the English-French corpus of 36 million pairs and 32,000-token vocabulary, the 100,000-step 12-hour base run, and the 300,000-step 3.5-day big run on eight P100 GPUs.",
+      "fallback": "English-German uses about 4.5 million pairs and a 37,000-token vocabulary; English-French uses about 36 million pairs and a 32,000-token vocabulary. On eight P100 GPUs, the base model reports 100,000 steps in 12 hours and the big model 300,000 steps in 3.5 days."
+    },
+    {
+      "id": "visual_attention_complexity_boundary",
+      "after_block_id": "attn_limitations",
+      "after_paragraph_id": "attn_limitations_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "Global attention trades path length for quadratic pairings",
+      "question": "What changes when attention is restricted for long sequences?",
+      "items": [
+        {
+          "label": "Full self-attention",
+          "detail": "Every position can compare with every position: O(n²d) work per layer and a constant within-layer maximum path length."
+        },
+        {
+          "label": "Restricted attention proposal",
+          "detail": "Limiting each position to a neighborhood can reduce pairings, but the paper notes that the maximum path grows to O(n/r)."
+        }
+      ],
+      "claim_ids": ["attn_006", "attn_012"],
+      "source_refs": ["source_attention_arxiv_v7"],
+      "interpretation": "The same all-to-all connectivity that shortens paths also creates quadratic sequence-length cost. Restricting attention changes both the amount of comparison and the path-length property.",
+      "limitations": [
+        "The paper presents restricted attention as future work rather than evaluating a complete long-context system.",
+        "Asymptotic expressions do not establish a universal wall-clock crossover on every architecture or device."
+      ],
+      "alt_text": "Parallel comparison: full self-attention uses all pairwise position comparisons with O(n squared times d) cost and constant within-layer path length; restricted attention reduces pairings but increases maximum path length to O(n divided by r).",
+      "fallback": "Full self-attention directly compares all positions, giving O(n squared times d) work and short paths. Restricting attention can reduce comparisons but increases the maximum path length to O(n divided by r)."
+    },
+    {
       "id": "visual_attention_prediction_sequence",
       "after_block_id": "attn_mechanism",
+      "after_paragraph_id": "attn_mechanism_p3",
       "type": "PARALLEL_VIEW",
       "title": "The encoder and decoder do different attention work",
       "question": "How do the source sequence, known target prefix, and autoregressive output interact?",
@@ -429,6 +562,7 @@
     {
       "id": "visual_attention_scaled_dot_product",
       "after_block_id": "attn_mechanism",
+      "after_paragraph_id": "attn_mechanism_p2",
       "type": "OPERATION_DIAGRAM",
       "title": "Scaled dot-product attention is a sequence of four operations",
       "question": "How do queries, keys, and values become an attention output?",
@@ -473,6 +607,7 @@
     {
       "id": "visual_attention_bleu_source_conflict",
       "after_block_id": "attn_evidence",
+      "after_paragraph_id": "attn_evidence_p2",
       "type": "EVIDENCE_MATRIX",
       "title": "The English-French BLEU value depends on the source location",
       "question": "Which primary source reports 41.8, 41.0, or 41.1 BLEU?",
@@ -518,6 +653,7 @@
     {
       "id": "visual_attention_ablation_dot_plot",
       "after_block_id": "attn_evidence",
+      "after_paragraph_id": "attn_evidence_p3",
       "type": "DOT_PLOT",
       "title": "The reported ablations cluster within one BLEU point",
       "question": "How do head count and learned positional embeddings compare with the base configuration on newstest2013?",

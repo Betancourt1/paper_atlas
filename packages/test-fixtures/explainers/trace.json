@@ -258,8 +258,67 @@
   ],
   "visuals": [
     {
+      "id": "trace_visual_outcome_blindness",
+      "after_block_id": "trace_why",
+      "after_paragraph_id": "trace_why_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "One failed rollout can contain unequal decisions",
+      "question": "What can outcome-only credit see at the turn level?",
+      "items": [
+        {
+          "label": "Outcome-only signal",
+          "detail": "The final failed answer attaches one poor trajectory-level advantage to every action, including useful searches and redundant detours."
+        },
+        {
+          "label": "Turn-local signal",
+          "detail": "A local estimate can distinguish an interaction that improves gold-answer readiness from one that adds nothing or moves away from the answer."
+        },
+        {
+          "label": "Shared terminal boundary",
+          "detail": "Local progress does not redefine the final result: an incorrect submitted answer remains a failed outcome."
+        }
+      ],
+      "claim_ids": ["trace_claim_outcome_blind", "trace_claim_credit", "trace_claim_outcome_anchor"],
+      "source_refs": ["trace_source_intro", "trace_source_method"],
+      "interpretation": "The central problem is not whether the trajectory succeeded; it is whether that one outcome should be copied onto every decision inside a long, mixed-quality trajectory.",
+      "limitations": [
+        "The comparison describes the reward-assignment problem and does not establish that every local score is causally correct.",
+        "TRACE still requires a known gold answer and preserves terminal outcome credit."
+      ],
+      "alt_text": "Parallel lanes compare outcome-only credit, which assigns one failed trajectory signal to every action, with turn-local credit, which can distinguish progress, neutral turns, and regression while preserving the failed final outcome.",
+      "fallback": "Outcome-only training gives every action in a failed rollout the same poor trajectory signal. Turn-local credit can distinguish useful, neutral, and harmful interactions, but the wrong final answer remains a failure."
+    },
+    {
+      "id": "trace_visual_credit_assignment_change",
+      "after_block_id": "trace_change",
+      "after_paragraph_id": "trace_change_p1",
+      "type": "METHOD_COMPARISON",
+      "title": "TRACE changes the policy signal, not the search system",
+      "question": "What differs in the controlled comparison?",
+      "items": [
+        {
+          "label": "Held fixed",
+          "detail": "Backbone, browser actions, training data, final verifier, and evaluation interface remain shared across the controlled runs."
+        },
+        {
+          "label": "Changed by TRACE",
+          "detail": "At tool-call boundaries, a frozen initial-policy probe measures changes in gold-answer predictability and contributes a trajectory-local policy-gradient signal."
+        }
+      ],
+      "claim_ids": ["trace_claim_credit", "trace_claim_controlled_setup"],
+      "source_refs": ["trace_source_method", "trace_source_experiments"],
+      "interpretation": "The attribution target is deliberately narrow: TRACE changes credit construction while the surrounding search harness and terminal correctness check are controlled.",
+      "limitations": [
+        "Holding the listed components fixed does not prove that the frozen-model probability proxy is causally faithful.",
+        "The controlled setup covers the paper's search domain and two related Qwen3 backbones."
+      ],
+      "alt_text": "Method comparison. Held fixed: model family, browser actions, training data, final verifier, and evaluation interface. Changed by TRACE: a frozen model probes each tool-boundary prefix and the change in gold-answer predictability contributes local credit.",
+      "fallback": "TRACE keeps the backbone, browser, data, terminal verifier, and evaluation interface fixed. It changes the policy signal by probing each tool-boundary prefix with a frozen model and rewarding changes in known-answer predictability."
+    },
+    {
       "id": "trace_visual_credit_flow",
       "after_block_id": "trace_mechanism",
+      "after_paragraph_id": "trace_mechanism_p3",
       "type": "OPERATION_DIAGRAM",
       "title": "TRACE compares adjacent trajectory states",
       "question": "Where does local turn credit come from, and how does final correctness remain in the objective?",
@@ -304,6 +363,7 @@
     {
       "id": "trace_visual_worked_trajectory",
       "after_block_id": "trace_example",
+      "after_paragraph_id": "trace_example_p2",
       "type": "TIMELINE",
       "title": "One failed rollout can contain both progress and regression",
       "question": "How can TRACE distinguish helpful and harmful interactions before an incorrect final answer?",
@@ -339,6 +399,7 @@
     {
       "id": "trace_visual_main_results",
       "after_block_id": "trace_evidence",
+      "after_paragraph_id": "trace_evidence_p2",
       "type": "DOT_PLOT",
       "title": "TRACE improves both reported model scales",
       "question": "How do the reported base, GRPO, and TRACE scores compare?",
@@ -398,6 +459,7 @@
     {
       "id": "trace_visual_credit_ablation",
       "after_block_id": "trace_evidence",
+      "after_paragraph_id": "trace_evidence_p3",
       "type": "DOT_PLOT",
       "title": "The reported credit-design ablation is directional",
       "question": "How did the tested credit formulations compare in the one 4B BrowseComp-Plus ablation?",

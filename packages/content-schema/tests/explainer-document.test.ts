@@ -63,6 +63,7 @@ const validExplainer = {
     {
       id: "visual_flow",
       after_block_id: "mechanism",
+      after_paragraph_id: "mechanism_p1",
       type: "PIPELINE_FLOW",
       title: "Test flow",
       question: "How does the test flow work?",
@@ -116,6 +117,16 @@ describe("ExplainerDocument schema", () => {
     expect(validateExplainerDocument(invalid)).toBe(false);
     expect(() => parseExplainerDocument(invalid)).toThrow(
       "visual visual_flow references unknown placement block missing_block",
+    );
+  });
+
+  it("rejects a visual placed after an unknown paragraph", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.visuals[0].after_paragraph_id = "mechanism_p9";
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "visual visual_flow references unknown placement paragraph mechanism_p9",
     );
   });
 

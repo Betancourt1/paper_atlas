@@ -435,8 +435,32 @@
   ],
   "visuals": [
     {
+      "id": "visual_searchos_skill_ablation",
+      "after_block_id": "sos_evidence",
+      "after_paragraph_id": "sos_evidence_p3",
+      "type": "DOT_PLOT",
+      "title": "Removing all skill layers lowers both reported F1 measures",
+      "question": "What changes in the joint hierarchical-skill ablation?",
+      "items": [
+        {"label": "Item F1 · all skills removed", "detail": "Reported Max@3 joint-removal condition.", "value": 78.3},
+        {"label": "Item F1 · skills enabled", "detail": "Complete hierarchical skill system.", "value": 80.3},
+        {"label": "Row F1 · all skills removed", "detail": "Reported Max@3 joint-removal condition.", "value": 53.1},
+        {"label": "Row F1 · skills enabled", "detail": "Complete hierarchical skill system.", "value": 56.5}
+      ],
+      "claim_ids": ["sos_skills", "sos_skill_ablation"],
+      "source_refs": ["sos_ablations_source"],
+      "interpretation": "The complete skill hierarchy is associated with a 2.0-point item-F1 gain and a 3.4-point row-F1 gain in the reported joint-removal ablation.",
+      "limitations": [
+        "All skill layers are removed together, so the comparison does not isolate orchestrator, strategy, or access skills.",
+        "The result is an ablation within SearchOS and not a matched cost comparison against every external baseline."
+      ],
+      "alt_text": "Dot plot of SearchOS skill ablation. Item F1 is 78.3 with all skill layers removed and 80.3 with skills enabled. Row F1 is 53.1 without the layers and 56.5 with them.",
+      "fallback": "In the joint skill-layer removal, item F1 falls from 80.3 to 78.3 and row F1 falls from 56.5 to 53.1. Because all layers are removed together, the result does not identify which layer supplies the benefit."
+    },
+    {
       "id": "visual_searchos_schema_completion",
       "after_block_id": "sos_change",
+      "after_paragraph_id": "sos_change_p2",
       "type": "PARALLEL_VIEW",
       "title": "From an open request to inspectable missing cells",
       "question": "What becomes explicit when a natural-language search request is represented as relational schema completion?",
@@ -479,6 +503,7 @@
     {
       "id": "visual_searchos_control_loop",
       "after_block_id": "sos_mechanism",
+      "after_paragraph_id": "sos_mechanism_p3",
       "type": "CONTROL_LOOP",
       "title": "The SearchOS evidence-and-control loop",
       "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",
@@ -536,6 +561,7 @@
     {
       "id": "visual_searchos_benchmark_results",
       "after_block_id": "sos_evidence",
+      "after_paragraph_id": "sos_evidence_p1",
       "type": "DOT_PLOT",
       "title": "SearchOS leads the reported comparison metrics",
       "question": "How large are the reported SearchOS gains over the strongest baseline on the highlighted WideSearch and GISA metrics?",
@@ -592,6 +618,7 @@
     {
       "id": "visual_searchos_dispatch_comparison",
       "after_block_id": "sos_evidence",
+      "after_paragraph_id": "sos_evidence_p2",
       "type": "METHOD_COMPARISON",
       "title": "Batch waiting versus continuous dispatch",
       "question": "What changes when released execution slots receive ready work immediately instead of waiting for a synchronized batch?",

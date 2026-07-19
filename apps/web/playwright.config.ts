@@ -12,7 +12,7 @@ export default defineConfig({
   },
   webServer: {
     command:
-      "pnpm --dir=../.. exec turbo run build --filter=@paper-atlas/web && pnpm exec next start --hostname 127.0.0.1 --port 3100",
+      "PAPER_ATLAS_E2E=1 pnpm exec next dev --hostname 127.0.0.1 --port 3100",
     url: "http://127.0.0.1:3100",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -72,10 +72,14 @@ export default async function PaperPage({ params }: PaperPageProps) {
   const sourcesById = new Map(
     explainer.source_refs.map((source) => [source.id, source]),
   );
-  const visualsByBlockId = new Map<string, typeof explainer.visuals>();
+  const visualsByParagraphId = new Map<string, typeof explainer.visuals>();
   for (const visual of explainer.visuals) {
-    const placedVisuals = visualsByBlockId.get(visual.after_block_id) ?? [];
-    visualsByBlockId.set(visual.after_block_id, [...placedVisuals, visual]);
+    const placedVisuals =
+      visualsByParagraphId.get(visual.after_paragraph_id) ?? [];
+    visualsByParagraphId.set(visual.after_paragraph_id, [
+      ...placedVisuals,
+      visual,
+    ]);
   }
 
   return (
@@ -122,14 +126,8 @@ export default async function PaperPage({ params }: PaperPageProps) {
                 block={block}
                 claimsById={claimsById}
                 sourcesById={sourcesById}
+                visualsByParagraphId={visualsByParagraphId}
               />
-              {visualsByBlockId.get(block.id)?.map((visual) => (
-                <ExplainerVisual
-                  key={visual.id}
-                  visual={visual}
-                  sourcesById={sourcesById}
-                />
-              ))}
             </div>
           ))}
         </div>
@@ -183,10 +181,12 @@ function ExplainerBlock({
   block,
   claimsById,
   sourcesById,
+  visualsByParagraphId,
 }: {
   block: Block;
   claimsById: Map<string, Claim>;
   sourcesById: Map<string, SourceRef>;
+  visualsByParagraphId: Map<string, ExplainerDocument["visuals"]>;
 }) {
   return (
     <section
@@ -205,9 +205,21 @@ function ExplainerBlock({
 
       <div className="explainer-block__body">
         <h2 id={`${block.id}-title`}>{block.question}</h2>
-        {block.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+        {block.paragraphs.map((paragraph, index) => {
+          const paragraphId = `${block.id}_p${index + 1}`;
+          return (
+            <div className="explainer-paragraph" id={paragraphId} key={paragraphId}>
+              <p>{paragraph}</p>
+              {visualsByParagraphId.get(paragraphId)?.map((visual) => (
+                <ExplainerVisual
+                  key={visual.id}
+                  visual={visual}
+                  sourcesById={sourcesById}
+                />
+              ))}
+            </div>
+          );
+        })}
 
         <div className="block-evidence" aria-label="Claims and evidence for this section">
           {block.claim_ids.map((claimId) => {

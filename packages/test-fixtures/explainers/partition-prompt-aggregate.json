@@ -361,8 +361,44 @@
   ],
   "visuals": [
     {
+      "id": "visual_ppa_prompt_aggregation_gap",
+      "after_block_id": "ppa_why",
+      "after_paragraph_id": "ppa_why_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "A direct prompt and a reconstructed aggregate can disagree",
+      "question": "Which two estimates should represent the same population quantity?",
+      "items": [
+        {
+          "label": "Direct macro prompt",
+          "detail": "Ask the model for the population-level probability in one prompt and treat that answer as the aggregate estimate."
+        },
+        {
+          "label": "Partitioned micro prompts",
+          "detail": "Ask the same probability within disjoint subgroups and elicit each subgroup's population share."
+        },
+        {
+          "label": "Weighted reconstruction",
+          "detail": "Multiply each subgroup probability by its normalized population share and sum the products."
+        },
+        {
+          "label": "Consistency question",
+          "detail": "If the conditions are equivalent, compare the direct macro answer with the reconstructed aggregate instead of assuming they agree."
+        }
+      ],
+      "claim_ids": ["ppa_core", "ppa_partition", "ppa_reconstruction"],
+      "source_refs": ["ppa_method"],
+      "interpretation": "The framework exposes two routes to one conditional quantity: a direct population prompt and an aggregation of subgroup prompts. Their disagreement is the phenomenon to measure, not a decorative restatement of the prompt.",
+      "limitations": [
+        "The illustration states the framework's equivalence relation and does not assume either route is automatically correct.",
+        "Actual alignment still requires a reference dataset such as ACS."
+      ],
+      "alt_text": "Parallel lanes show a direct population-level prompt and a partitioned route that elicits subgroup probabilities and population shares, combines them as a weighted sum, and compares the reconstructed aggregate with the direct answer.",
+      "fallback": "One route asks directly for a population probability. The other asks for subgroup probabilities and population shares, computes their weighted sum, and compares that reconstruction with the direct answer."
+    },
+    {
       "id": "visual_ppa_partition_tree",
       "after_block_id": "ppa_mechanism",
+      "after_paragraph_id": "ppa_mechanism_p2",
       "type": "PARTITION_TREE",
       "title": "One population, several equivalent estimates",
       "question": "Why should the direct root estimate agree with every weighted reconstruction from a valid partition?",
@@ -409,7 +445,8 @@
     },
     {
       "id": "visual_ppa_consistency_checks",
-      "after_block_id": "ppa_mechanism",
+      "after_block_id": "ppa_change",
+      "after_paragraph_id": "ppa_change_p2",
       "type": "METHOD_COMPARISON",
       "title": "Two ways equivalent conditions can disagree",
       "question": "What different failure does each self-consistency check expose?",
@@ -449,6 +486,7 @@
     {
       "id": "visual_ppa_evidence_scope",
       "after_block_id": "ppa_evidence",
+      "after_paragraph_id": "ppa_evidence_p3",
       "type": "EVIDENCE_MATRIX",
       "title": "What each evaluation can establish",
       "question": "Which findings concern external alignment, internal consistency, or only reference-free operation?",

@@ -117,6 +117,19 @@ test("every digest paper exposes explanation, caveats, and provenance", async ({
     const figures = page.locator("figure.explainer-visual");
     const figureCount = await figures.count();
     expect(figureCount).toBeGreaterThanOrEqual(3);
+    const visualTypes = await figures.evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute("data-visual-type")),
+    );
+    expect(new Set(visualTypes).size).toBeGreaterThanOrEqual(3);
+    expect(
+      await figures.evaluateAll((elements) =>
+        elements.every((element) => {
+          const paragraph = element.closest(".explainer-paragraph");
+          return Boolean(paragraph?.id && element.getAttribute("aria-labelledby"));
+        }),
+      ),
+    ).toBe(true);
+    await expect(page.locator(".explainer-visual__items, .explainer-plot")).toHaveCount(0);
     await expect(
       page.getByText("What this illustration does not establish"),
     ).toHaveCount(figureCount);

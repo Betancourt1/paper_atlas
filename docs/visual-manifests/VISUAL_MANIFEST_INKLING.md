@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
 - Manifest revision: `2`
 - Engineer status: `COMPLETE`
-- Implementer status: `PENDING`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `19 / 19` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -244,13 +244,13 @@ Path("ink_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_why_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_why_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_why_p2`
@@ -482,13 +482,13 @@ Path("ink_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_why_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_why_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_change_p1`
@@ -743,16 +743,16 @@ Path("ink_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_total_vs_active` after `ink_change_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_change_p2`
 
@@ -1005,13 +1005,13 @@ Path("ink_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_change_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_change_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_mechanism_p1`
@@ -1256,16 +1256,16 @@ Path("ink_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_moe_routing` after `ink_mechanism_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_mechanism_p2`
 
@@ -1509,16 +1509,16 @@ Path("ink_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_multimodal_stack` after `ink_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ink_mechanism_p2`, `ink_mechanism_p3`
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_mechanism_p3`
 
@@ -1764,16 +1764,16 @@ Path("ink_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_multimodal_stack` after `ink_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ink_mechanism_p2`, `ink_mechanism_p3`
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_example_p1`
 
@@ -2029,16 +2029,16 @@ Path("ink_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_checkpoint_hardware` after `ink_example_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_example_p2`
 
@@ -2278,13 +2278,13 @@ Path("ink_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_example_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_example_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_evidence_p1`
@@ -2537,16 +2537,16 @@ Path("ink_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_benchmark_snapshot` after `ink_evidence_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_evidence_p2`
 
@@ -2788,13 +2788,13 @@ Path("ink_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_evidence_p2` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_evidence_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_evidence_p3`
@@ -3036,16 +3036,16 @@ Path("ink_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `C`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_evidence_boundaries` after `ink_evidence_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_limitations_p1`
 
@@ -3308,13 +3308,13 @@ Path("ink_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_limitations_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_limitations_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_limitations_p2`
@@ -3561,16 +3561,16 @@ Path("ink_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_context_boundary` after `ink_limitations_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_limitations_p3`
 
@@ -3827,13 +3827,13 @@ Path("ink_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_limitations_p3` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_limitations_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_limitations_p4`
@@ -4094,13 +4094,13 @@ Path("ink_limitations_p4_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_limitations_p4` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_limitations_p4`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_review_p1`
@@ -4364,13 +4364,13 @@ Path("ink_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_review_p1` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_review_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 ## `ink_review_p2`
@@ -4635,16 +4635,16 @@ Path("ink_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 ### Implementation record
 
-- Status: `PENDING`
-- Selected treatment: `NONE`
-- Selection rationale:
-- Delivery medium: `NONE`
-- Visual ID and placement:
-- Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
-- Evidence deviations: `NONE`
+- Status: `IMPLEMENTED`
+- Selected treatment: `B`
+- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Delivery medium: `CSS + semantic HTML`
+- Visual ID and placement: `visual_inkling_source_provenance` after `ink_review_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/inkling.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
+- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
+- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
+- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
 
 ## `ink_review_p3`
 
@@ -4901,13 +4901,13 @@ Path("ink_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale:
+- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ink_review_p3` without a figure.
 - Delivery medium: `NONE`
-- Visual ID and placement:
+- Visual ID and placement: `NONE`; prose remains at `#ink_review_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files:
-- Accessibility and fallback verification:
-- Desktop and mobile verification:
+- Changed files: `NONE`
+- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
+- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
 - Evidence deviations: `NONE`
 
 
