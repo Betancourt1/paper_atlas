@@ -435,219 +435,525 @@
   ],
   "visuals": [
     {
-      "id": "visual_searchos_skill_ablation",
-      "after_block_id": "sos_evidence",
-      "after_paragraph_id": "sos_evidence_p3",
-      "type": "DOT_PLOT",
-      "title": "Removing all skill layers lowers both reported F1 measures",
-      "question": "What changes in the joint hierarchical-skill ablation?",
-      "items": [
-        {"label": "Item F1 · all skills removed", "detail": "Reported Max@3 joint-removal condition.", "value": 78.3},
-        {"label": "Item F1 · skills enabled", "detail": "Complete hierarchical skill system.", "value": 80.3},
-        {"label": "Row F1 · all skills removed", "detail": "Reported Max@3 joint-removal condition.", "value": 53.1},
-        {"label": "Row F1 · skills enabled", "detail": "Complete hierarchical skill system.", "value": 56.5}
-      ],
-      "claim_ids": ["sos_skills", "sos_skill_ablation"],
-      "source_refs": ["sos_ablations_source"],
-      "interpretation": "The complete skill hierarchy is associated with a 2.0-point item-F1 gain and a 3.4-point row-F1 gain in the reported joint-removal ablation.",
-      "limitations": [
-        "All skill layers are removed together, so the comparison does not isolate orchestrator, strategy, or access skills.",
-        "The result is an ablation within SearchOS and not a matched cost comparison against every external baseline."
-      ],
-      "alt_text": "Dot plot of SearchOS skill ablation. Item F1 is 78.3 with all skill layers removed and 80.3 with skills enabled. Row F1 is 53.1 without the layers and 56.5 with them.",
-      "fallback": "In the joint skill-layer removal, item F1 falls from 80.3 to 78.3 and row F1 falls from 56.5 to 53.1. Because all layers are removed together, the result does not identify which layer supplies the benefit."
-    },
-    {
-      "id": "visual_searchos_schema_completion",
+      "id": "visual_searchos_schema_topology",
       "after_block_id": "sos_change",
-      "after_paragraph_id": "sos_change_p2",
-      "type": "PARALLEL_VIEW",
-      "title": "From an open request to inspectable missing cells",
-      "question": "What becomes explicit when a natural-language search request is represented as relational schema completion?",
+      "after_paragraph_id": "sos_change_p1",
+      "type": "PARTITION_TREE",
+      "title": "A research request becomes inspectable table state",
+      "question": "How does an open request turn into cells with bound citations?",
       "items": [
         {
           "label": "Natural-language request",
-          "detail": "The user asks for entities, attributes, comparisons, and supporting sources without yet defining a durable search state."
+          "detail": "The user names entities, attributes, comparisons, and source expectations.",
+          "group": "Input",
+          "node_id": "request"
         },
         {
-          "label": "Related tables",
-          "detail": "Rows represent entities, columns represent requested attributes, and relations connect the tables needed for the answer."
+          "label": "Related table schema",
+          "detail": "Rows represent entities, columns represent attributes, and relations connect required tables.",
+          "group": "Structured plan",
+          "node_id": "schema",
+          "input_ids": [
+            "request"
+          ]
         },
         {
-          "label": "Materialized coverage",
-          "detail": "Each known cell has an explicit status such as missing, filled, uncertain, unreachable, or conflicting."
+          "label": "Row and attribute identities",
+          "detail": "Every answer target receives an explicit coordinate.",
+          "group": "Structured plan",
+          "node_id": "coordinates",
+          "input_ids": [
+            "schema"
+          ]
         },
         {
-          "label": "Citation binding",
-          "detail": "A populated value is associated with its source URL and an anchored supporting excerpt rather than only appearing in conversation history."
+          "label": "Materialized cell state",
+          "detail": "Each coordinate is missing, filled, uncertain, unreachable, or conflicting.",
+          "value_label": "5 explicit states",
+          "group": "Inspectable state",
+          "node_id": "cell_state",
+          "input_ids": [
+            "coordinates"
+          ]
+        },
+        {
+          "label": "Populated value",
+          "detail": "An accepted finding fills the intended row and attribute.",
+          "group": "Inspectable state",
+          "node_id": "value",
+          "input_ids": [
+            "cell_state"
+          ]
+        },
+        {
+          "label": "Source URL",
+          "detail": "The value keeps the source location that produced it.",
+          "group": "Citation binding",
+          "node_id": "source_url",
+          "input_ids": [
+            "value"
+          ]
+        },
+        {
+          "label": "Anchored supporting span",
+          "detail": "A cited excerpt ties the value to observed page text rather than conversation memory.",
+          "group": "Citation binding",
+          "node_id": "anchored_span",
+          "input_ids": [
+            "value"
+          ]
+        },
+        {
+          "label": "Inspectable cell record",
+          "detail": "Value, status, URL, excerpt, and provenance remain queryable together.",
+          "group": "Output",
+          "node_id": "cell_record",
+          "input_ids": [
+            "value",
+            "source_url",
+            "anchored_span"
+          ]
         }
       ],
       "claim_ids": [
         "sos_schema",
-        "sos_citation_truth",
-        "sos_schema_fit_inference"
+        "sos_socm"
       ],
       "source_refs": [
-        "sos_formulation_source",
-        "sos_results_source"
+        "sos_formulation_source"
       ],
-      "interpretation": "The representation change turns vague remaining work into addressable cells and keeps provenance next to each accepted value. It gives the scheduler a shared target outside any one agent's conversation.",
+      "interpretation": "Schema coordinates turn vague research gaps into inspectable cells whose accepted values remain bound to evidence.",
       "limitations": [
-        "A source URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true.",
-        "Coverage of materialized rows cannot prove exhaustive discovery in an open-set task.",
-        "Structured benchmark formats may particularly suit this relational representation."
+        "A bound URL and excerpt preserve provenance but do not independently prove that a value is true."
       ],
-      "alt_text": "Parallel view of a natural-language request becoming related entity-attribute tables, explicit cell coverage states, and value-to-citation bindings.",
-      "fallback": "SearchOS converts a natural-language request into related tables whose rows are entities and columns are requested attributes. Every known cell receives a coverage status, and each accepted value is associated with a source URL and anchored excerpt. This makes missing work and provenance explicit, although it does not prove exhaustive discovery or factual truth."
+      "alt_text": "A research request becomes inspectable table state. Natural-language request; Related table schema; Row and attribute identities; Materialized cell state: 5 explicit states; Populated value; Source URL; Anchored supporting span; Inspectable cell record.",
+      "fallback": "Schema coordinates turn vague research gaps into inspectable cells whose accepted values remain bound to evidence. Natural-language request; Related table schema; Row and attribute identities; Materialized cell state: 5 explicit states; Populated value; Source URL; Anchored supporting span; Inspectable cell record."
+    },
+    {
+      "id": "visual_searchos_actor_ownership",
+      "after_block_id": "sos_change",
+      "after_paragraph_id": "sos_change_p2",
+      "type": "PARTITION_TREE",
+      "title": "Actors coordinate through owned shared records",
+      "question": "Who mutates, browses, and reads each part of SearchOS state?",
+      "items": [
+        {
+          "label": "Orchestrator",
+          "detail": "Owns schema mutation, task mutation, and global coordination.",
+          "group": "Actors",
+          "node_id": "orchestrator"
+        },
+        {
+          "label": "Explore and search agents",
+          "detail": "Browse under scoped assignments and return candidate findings or failed attempts.",
+          "group": "Actors",
+          "node_id": "search_agents"
+        },
+        {
+          "label": "Writer",
+          "detail": "Reads accumulated structured state to synthesize the answer; it does not own search-task mutation.",
+          "group": "Actors",
+          "node_id": "writer"
+        },
+        {
+          "label": "Frontier Task",
+          "detail": "Dependency-aware task records are mutated by the orchestrator and consumed by search workers.",
+          "group": "Shared records",
+          "node_id": "frontier",
+          "input_ids": [
+            "orchestrator"
+          ]
+        },
+        {
+          "label": "Evidence Graph",
+          "detail": "Accepted atomic findings are written through evidence middleware and read by workers and writer.",
+          "group": "Shared records",
+          "node_id": "evidence_graph",
+          "input_ids": [
+            "search_agents"
+          ]
+        },
+        {
+          "label": "Coverage Map",
+          "detail": "Materialized cell status guides scheduling and synthesis.",
+          "group": "Shared records",
+          "node_id": "coverage",
+          "input_ids": [
+            "orchestrator",
+            "search_agents"
+          ]
+        },
+        {
+          "label": "Failure Memory",
+          "detail": "Rejected claims, inaccessible sources, and failed queries prevent duplicated dead ends.",
+          "group": "Shared records",
+          "node_id": "failures",
+          "input_ids": [
+            "search_agents"
+          ]
+        },
+        {
+          "label": "Structured handoff",
+          "detail": "The writer reads Evidence Graph and Coverage Map after coordination; actors do not rely on free-form peer conversation.",
+          "group": "Synthesis",
+          "node_id": "synthesis",
+          "input_ids": [
+            "writer",
+            "evidence_graph",
+            "coverage",
+            "failures"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "sos_schema",
+        "sos_socm"
+      ],
+      "source_refs": [
+        "sos_formulation_source"
+      ],
+      "interpretation": "The orchestrator owns global mutations, search agents own browsing attempts, and the writer reads shared records for synthesis.",
+      "limitations": [
+        "The ownership topology describes the paper's V1 design rather than every possible multi-agent implementation."
+      ],
+      "alt_text": "Actors coordinate through owned shared records. Orchestrator; Explore and search agents; Writer; Frontier Task; Evidence Graph; Coverage Map; Failure Memory; Structured handoff.",
+      "fallback": "The orchestrator owns global mutations, search agents own browsing attempts, and the writer reads shared records for synthesis. Orchestrator; Explore and search agents; Writer; Frontier Task; Evidence Graph; Coverage Map; Failure Memory; Structured handoff."
     },
     {
       "id": "visual_searchos_control_loop",
       "after_block_id": "sos_mechanism",
       "after_paragraph_id": "sos_mechanism_p3",
       "type": "CONTROL_LOOP",
-      "title": "The SearchOS evidence-and-control loop",
-      "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",
+      "title": "Four stores, one evidence gate, and sensors drive continuous dispatch",
+      "question": "How does SearchOS turn a ready gap into grounded state and the next transition?",
       "items": [
         {
-          "label": "Frontier Task schedules a gap",
-          "detail": "Dependency-aware task state selects a ready unresolved schema cell and continuously assigns available execution slots."
+          "label": "Frontier Task schedules a ready cell",
+          "detail": "Dependency-aware work and available execution slots determine the next scoped job."
         },
         {
           "label": "Context middleware projects state",
-          "detail": "The worker receives its assignment, relevant evidence and coverage, prior failures, and selected skills instead of the full global history."
+          "detail": "The worker receives relevant evidence, coverage, failures, and selected skills rather than full global history."
         },
         {
-          "label": "Worker searches",
-          "detail": "An explore or search agent browses under that scoped context and returns candidate findings or a failed attempt."
+          "label": "Search agent returns a candidate",
+          "detail": "The browse or explore role may return a finding or a failed attempt."
         },
         {
-          "label": "Evidence middleware gates",
-          "detail": "A candidate is accepted only when it binds to the intended schema cell and anchors to an observed source span; rejection can return corrective guidance."
+          "label": "Evidence middleware gates the claim",
+          "detail": "Acceptance requires schema-cell binding and an anchor to an observed source span."
         },
         {
-          "label": "Shared stores update",
-          "detail": "Accepted evidence updates the Evidence Graph and Coverage Map atomically, while task outcomes and failed attempts update Frontier Task and Failure Memory."
+          "label": "Evidence Graph and Coverage Map update atomically",
+          "detail": "Accepted finding provenance and materialized cell status change together."
         },
         {
-          "label": "Sensors choose the next transition",
-          "detail": "Coverage growth, evidence growth, and budgets can trigger continuation, backfill, correction, drain-only mode, branch termination, or synthesis."
+          "label": "Failure Memory records rejected paths",
+          "detail": "Failures, inaccessible sources, rejected claims, and corrective guidance remain reusable."
+        },
+        {
+          "label": "Sensors measure grounded progress",
+          "detail": "Coverage growth, evidence growth, iteration, search, and time budgets choose continue, backfill, correction, drain, or stop."
+        },
+        {
+          "label": "Continuous dispatch fills released slots",
+          "detail": "Ready unresolved gaps are assigned immediately instead of waiting for a synchronized batch."
         }
       ],
       "claim_ids": [
         "sos_socm",
         "sos_middleware",
-        "sos_scheduler",
-        "sos_skills",
-        "sos_citation_truth",
-        "sos_middleware_causality"
+        "sos_scheduler"
       ],
       "source_refs": [
         "sos_formulation_source",
-        "sos_middleware_source",
-        "sos_ablations_source"
+        "sos_middleware_source"
       ],
-      "interpretation": "The stores and middleware form a feedback loop rather than a one-way pipeline. Browsing does not automatically become evidence: accepted or rejected observations change shared state, and sensors use that new state to schedule, redirect, stop, or synthesize.",
+      "interpretation": "The four stores are connected by an evidence gate, progress sensors, and a scheduler that continuously releases ready work.",
       "limitations": [
-        "An anchored excerpt and URL preserve provenance but do not independently establish that the extracted value is true.",
-        "Relational schemas may not represent every open-ended information-seeking task equally well.",
-        "Coverage measures known materialized rows and cannot prove exhaustive discovery in open-set tasks.",
-        "The paper does not independently ablate middleware's contribution to the main benchmark scores.",
-        "The diagram omits the internal structure and maintenance cost of the 280-skill library.",
-        "This is an original Paper Atlas composition based on the cited paper, not a reproduction of a source figure; the CC BY 4.0 paper is attributed through the source references."
+        "Representative middleware interventions are not a controlled removal study for every loop component."
       ],
-      "alt_text": "Feedback loop connecting Frontier Task scheduling, role-scoped context, worker search, an evidence acceptance gate, atomic Evidence Graph and Coverage Map updates, Failure Memory, and progress sensors that return work to scheduling or stop it.",
-      "fallback": "Frontier Task schedules a ready unresolved cell. Context middleware gives the worker relevant shared state, failures, and skills. After search, evidence middleware accepts a candidate only when it binds to the cell and an anchored source span. Accepted evidence updates the Evidence Graph and Coverage Map together, while failures update task and failure records. Sensors inspect progress and budgets, then continue, correct, backfill, stop, or allow synthesis."
+      "alt_text": "Four stores, one evidence gate, and sensors drive continuous dispatch. Frontier Task schedules a ready cell; Context middleware projects state; Search agent returns a candidate; Evidence middleware gates the claim; Evidence Graph and Coverage Map update atomically; Failure Memory records rejected paths; Sensors measure grounded progress; Continuous dispatch fills released slots.",
+      "fallback": "The four stores are connected by an evidence gate, progress sensors, and a scheduler that continuously releases ready work. Frontier Task schedules a ready cell; Context middleware projects state; Search agent returns a candidate; Evidence middleware gates the claim; Evidence Graph and Coverage Map update atomically; Failure Memory records rejected paths; Sensors measure grounded progress; Continuous dispatch fills released slots."
+    },
+    {
+      "id": "visual_searchos_missing_cell",
+      "after_block_id": "sos_example",
+      "after_paragraph_id": "sos_example_p2",
+      "type": "OPERATION_DIAGRAM",
+      "title": "One missing cell becomes grounded—or redirects",
+      "question": "What must happen before a visited page can fill a table cell?",
+      "items": [
+        {
+          "label": "Mark the cell missing",
+          "detail": "Coverage Map identifies a known company row and an unresolved attribute.",
+          "group": "Task state"
+        },
+        {
+          "label": "Create or select scoped work",
+          "detail": "Frontier Task binds the job to the exact row and attribute.",
+          "group": "Task state"
+        },
+        {
+          "label": "Dispatch with relevant context",
+          "detail": "An available agent receives failure records and source-access skills.",
+          "group": "Search"
+        },
+        {
+          "label": "Browse a candidate page",
+          "detail": "A URL visit alone is evidence acquisition, not truth or cell completion.",
+          "group": "Search",
+          "role": "BOUNDARY"
+        },
+        {
+          "label": "Bind candidate value",
+          "detail": "Evidence middleware checks the intended row and attribute.",
+          "group": "Evidence gate"
+        },
+        {
+          "label": "Anchor the observed span",
+          "detail": "The candidate must point to supporting text actually observed on the page.",
+          "group": "Evidence gate"
+        },
+        {
+          "label": "Update evidence and coverage atomically",
+          "detail": "Accepted provenance and cell state commit together.",
+          "group": "State update"
+        },
+        {
+          "label": "Continue, redirect, or stop",
+          "detail": "If repeated work adds no evidence or coverage, sensors change or end the branch.",
+          "group": "Control"
+        }
+      ],
+      "claim_ids": [
+        "sos_schema",
+        "sos_middleware",
+        "sos_scheduler",
+        "sos_skills"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "interpretation": "The worked path distinguishes visiting a URL from satisfying the schema-and-anchor evidence gate.",
+      "limitations": [
+        "Anchored evidence supports provenance but still requires source-quality and contradiction review."
+      ],
+      "alt_text": "One missing cell becomes grounded—or redirects. Mark the cell missing; Create or select scoped work; Dispatch with relevant context; Browse a candidate page; Bind candidate value; Anchor the observed span; Update evidence and coverage atomically; Continue, redirect, or stop.",
+      "fallback": "The worked path distinguishes visiting a URL from satisfying the schema-and-anchor evidence gate. Mark the cell missing; Create or select scoped work; Dispatch with relevant context; Browse a candidate page; Bind candidate value; Anchor the observed span; Update evidence and coverage atomically; Continue, redirect, or stop."
     },
     {
       "id": "visual_searchos_benchmark_results",
       "after_block_id": "sos_evidence",
       "after_paragraph_id": "sos_evidence_p1",
       "type": "DOT_PLOT",
-      "title": "SearchOS leads the reported comparison metrics",
-      "question": "How large are the reported SearchOS gains over the strongest baseline on the highlighted WideSearch and GISA metrics?",
+      "title": "System–baseline pairs stay inside their own metric panels",
+      "question": "How large is each reported gain without mixing WideSearch and GISA scales?",
       "items": [
         {
-          "label": "WideSearch item F1 · strongest baseline",
+          "label": "Strongest baseline",
+          "detail": "WideSearch item F1.",
           "value": 76,
-          "detail": "Strongest reported baseline value for item F1."
+          "value_label": "76.0",
+          "group": "WideSearch item F1 · domain 74–82",
+          "domain_min": 74,
+          "domain_max": 82
         },
         {
-          "label": "WideSearch item F1 · SearchOS",
+          "label": "SearchOS",
+          "detail": "WideSearch item F1.",
           "value": 80.3,
-          "detail": "SearchOS value for item F1."
+          "value_label": "80.3",
+          "group": "WideSearch item F1 · domain 74–82",
+          "domain_min": 74,
+          "domain_max": 82
         },
         {
-          "label": "WideSearch row F1 · strongest baseline",
+          "label": "Strongest baseline",
+          "detail": "WideSearch row F1.",
           "value": 54.5,
-          "detail": "Strongest reported baseline value for row F1."
+          "value_label": "54.5",
+          "group": "WideSearch row F1 · domain 52–58",
+          "domain_min": 52,
+          "domain_max": 58
         },
         {
-          "label": "WideSearch row F1 · SearchOS",
+          "label": "SearchOS",
+          "detail": "WideSearch row F1.",
           "value": 56.5,
-          "detail": "SearchOS value for row F1."
+          "value_label": "56.5",
+          "group": "WideSearch row F1 · domain 52–58",
+          "domain_min": 52,
+          "domain_max": 58
         },
         {
-          "label": "GISA set F1 · strongest baseline",
+          "label": "Strongest baseline",
+          "detail": "GISA set F1.",
           "value": 63.1,
-          "detail": "Strongest reported baseline value for set F1."
+          "value_label": "63.1",
+          "group": "GISA set F1 · domain 60–79",
+          "domain_min": 60,
+          "domain_max": 79
         },
         {
-          "label": "GISA set F1 · SearchOS",
+          "label": "SearchOS",
+          "detail": "GISA set F1.",
           "value": 76.5,
-          "detail": "SearchOS value for set F1."
+          "value_label": "76.5",
+          "group": "GISA set F1 · domain 60–79",
+          "domain_min": 60,
+          "domain_max": 79
         }
       ],
       "claim_ids": [
         "sos_main_results",
-        "sos_budget_fairness",
-        "sos_generality"
+        "sos_schedule_ablation",
+        "sos_skill_ablation"
       ],
       "source_refs": [
         "sos_results_source",
-        "sos_scope_source"
+        "sos_ablations_source"
       ],
-      "interpretation": "SearchOS leads the strongest reported baseline on each highlighted metric, with the largest displayed gap on GISA set F1. The comparison evaluates the complete system and does not identify which component causes the gain.",
+      "interpretation": "Each local panel compares SearchOS with the strongest reported baseline only on the same benchmark metric.",
       "limitations": [
-        "The paper reports the best of three runs for each case rather than means and variance.",
-        "Matched end-to-end budgets are not documented in enough detail to settle cost fairness for every baseline.",
-        "The evaluation uses one model configuration and does not establish the same gains across other backbones or task families."
+        "Local axes disclose within-metric differences and must not be compared by mark length across panels."
       ],
-      "alt_text": "Three paired dot comparisons: WideSearch item F1 is 76.0 for the strongest baseline and 80.3 for SearchOS; WideSearch row F1 is 54.5 and 56.5; GISA set F1 is 63.1 and 76.5.",
-      "fallback": "On WideSearch, the strongest baseline and SearchOS score 76.0 and 80.3 item F1, and 54.5 and 56.5 row F1. On GISA, they score 63.1 and 76.5 set F1. These are complete-system, best-of-three comparisons under one model configuration."
+      "alt_text": "System–baseline pairs stay inside their own metric panels. Strongest baseline: 76.0; SearchOS: 80.3; Strongest baseline: 54.5; SearchOS: 56.5; Strongest baseline: 63.1; SearchOS: 76.5.",
+      "fallback": "Each local panel compares SearchOS with the strongest reported baseline only on the same benchmark metric. Strongest baseline: 76.0; SearchOS: 80.3; Strongest baseline: 54.5; SearchOS: 56.5; Strongest baseline: 63.1; SearchOS: 76.5."
     },
     {
-      "id": "visual_searchos_dispatch_comparison",
+      "id": "visual_searchos_dispatch_conditions",
       "after_block_id": "sos_evidence",
       "after_paragraph_id": "sos_evidence_p2",
-      "type": "METHOD_COMPARISON",
-      "title": "Batch waiting versus continuous dispatch",
-      "question": "What changes when released execution slots receive ready work immediately instead of waiting for a synchronized batch?",
+      "type": "EVIDENCE_MATRIX",
+      "title": "Batch and continuous dispatch share one paired subset",
+      "question": "How do runtime, utilization, and item F1 change on the same 10 cases?",
       "items": [
         {
-          "label": "Batch scheduling",
-          "detail": "A new batch waits for the current synchronized group to finish. On the 10-case subset, average runtime is 629.13 seconds, slot utilization is 34.6%, and item F1 is 79.66."
+          "label": "Batch · runtime",
+          "detail": "Average runtime on the paired 10-case WideSearch subset.",
+          "value": 629.13,
+          "value_label": "629.13 s",
+          "group": "Batch"
         },
         {
-          "label": "Continuous dispatch",
-          "detail": "Each released slot immediately receives a ready unresolved gap. On the same subset, average runtime is 476.34 seconds, slot utilization is 41.7%, and item F1 is 86.75."
+          "label": "Continuous · runtime",
+          "detail": "Average runtime on the same subset.",
+          "value": 476.34,
+          "value_label": "476.34 s",
+          "group": "Continuous"
+        },
+        {
+          "label": "Batch · slot utilization",
+          "detail": "Execution-slot utilization on the paired subset.",
+          "value": 34.6,
+          "value_label": "34.6%",
+          "group": "Batch"
+        },
+        {
+          "label": "Continuous · slot utilization",
+          "detail": "Execution-slot utilization on the paired subset.",
+          "value": 41.7,
+          "value_label": "41.7%",
+          "group": "Continuous"
+        },
+        {
+          "label": "Batch · item F1",
+          "detail": "Answer quality on the paired subset.",
+          "value": 79.66,
+          "value_label": "79.66",
+          "group": "Batch"
+        },
+        {
+          "label": "Continuous · item F1",
+          "detail": "Answer quality on the paired subset.",
+          "value": 86.75,
+          "value_label": "86.75",
+          "group": "Continuous"
+        },
+        {
+          "label": "Experiment boundary",
+          "detail": "This is a 10-case scheduling study rather than the main benchmark table.",
+          "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
-        "sos_scheduler",
-        "sos_schedule_ablation"
+        "sos_main_results",
+        "sos_schedule_ablation",
+        "sos_skill_ablation"
       ],
       "source_refs": [
-        "sos_formulation_source",
+        "sos_results_source",
         "sos_ablations_source"
       ],
-      "interpretation": "Continuous dispatch reduces idle waiting in the paired subset and is associated there with lower runtime, higher slot utilization, and higher item F1. The experiment supports this scheduling comparison, not every component of SearchOS.",
+      "interpretation": "Continuous dispatch is faster, uses slots more, and scores higher on the same small paired subset.",
       "limitations": [
-        "The scheduling study covers 10 WideSearch cases and is not the main benchmark evaluation.",
-        "The comparison does not isolate middleware, schema planning, or skills.",
-        "Subset item F1 values should not replace the main WideSearch benchmark values."
+        "The subset result should not be substituted for the main benchmark comparison."
       ],
-      "alt_text": "Side-by-side comparison: batch scheduling waits for synchronized completion and reports 629.13 seconds, 34.6 percent utilization, and 79.66 item F1; continuous dispatch refills released slots and reports 476.34 seconds, 41.7 percent utilization, and 86.75 item F1 on the same 10-case subset.",
-      "fallback": "In the 10-case scheduling subset, batch scheduling waits for a synchronized group to finish and reports 629.13 seconds average runtime, 34.6% slot utilization, and 79.66 item F1. Continuous dispatch immediately refills released slots and reports 476.34 seconds, 41.7% utilization, and 86.75 item F1. This subset comparison does not isolate the other SearchOS components."
+      "alt_text": "Batch and continuous dispatch share one paired subset. Batch · runtime: 629.13 s; Continuous · runtime: 476.34 s; Batch · slot utilization: 34.6%; Continuous · slot utilization: 41.7%; Batch · item F1: 79.66; Continuous · item F1: 86.75; Experiment boundary.",
+      "fallback": "Continuous dispatch is faster, uses slots more, and scores higher on the same small paired subset. Batch · runtime: 629.13 s; Continuous · runtime: 476.34 s; Batch · slot utilization: 34.6%; Continuous · slot utilization: 41.7%; Batch · item F1: 79.66; Continuous · item F1: 86.75; Experiment boundary."
+    },
+    {
+      "id": "visual_searchos_skill_ablation",
+      "after_block_id": "sos_evidence",
+      "after_paragraph_id": "sos_evidence_p3",
+      "type": "DOT_PLOT",
+      "title": "Joint skill removal produces small, metric-specific deltas",
+      "question": "How much does each F1 metric change when all skill layers are removed together?",
+      "items": [
+        {
+          "label": "All skills removed",
+          "detail": "Joint-removal item F1.",
+          "value": 78.3,
+          "value_label": "78.3",
+          "group": "Item F1 · domain 77.5–80.5",
+          "domain_min": 77.5,
+          "domain_max": 80.5
+        },
+        {
+          "label": "Skills enabled",
+          "detail": "Complete hierarchical skill system item F1.",
+          "value": 80.3,
+          "value_label": "80.3",
+          "group": "Item F1 · domain 77.5–80.5",
+          "domain_min": 77.5,
+          "domain_max": 80.5
+        },
+        {
+          "label": "All skills removed",
+          "detail": "Joint-removal row F1.",
+          "value": 53.1,
+          "value_label": "53.1",
+          "group": "Row F1 · domain 52.5–57.0",
+          "domain_min": 52.5,
+          "domain_max": 57
+        },
+        {
+          "label": "Skills enabled",
+          "detail": "Complete hierarchical skill system row F1.",
+          "value": 56.5,
+          "value_label": "56.5",
+          "group": "Row F1 · domain 52.5–57.0",
+          "domain_min": 52.5,
+          "domain_max": 57
+        }
+      ],
+      "claim_ids": [
+        "sos_main_results",
+        "sos_schedule_ablation",
+        "sos_skill_ablation"
+      ],
+      "source_refs": [
+        "sos_results_source",
+        "sos_ablations_source"
+      ],
+      "interpretation": "Metric-specific local domains reveal the joint-removal differences without implying a zero-based magnitude.",
+      "limitations": [
+        "The experiment removes all hierarchical skill layers together and cannot isolate which layer causes the benefit."
+      ],
+      "alt_text": "Joint skill removal produces small, metric-specific deltas. All skills removed: 78.3; Skills enabled: 80.3; All skills removed: 53.1; Skills enabled: 56.5.",
+      "fallback": "Metric-specific local domains reveal the joint-removal differences without implying a zero-based magnitude. All skills removed: 78.3; Skills enabled: 80.3; All skills removed: 53.1; Skills enabled: 56.5."
     }
   ],
   "glossary": [
@@ -699,6 +1005,7 @@
     "Centered the explanation on explicit shared state, evidence gating, and the scheduler control loop.",
     "Kept main benchmark results separate from scheduling and skill subset ablations.",
     "Marked citation truth, middleware causality, baseline budget fairness, structured-benchmark fit, and cross-model generality with explicit epistemic labels.",
-    "Verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition."
+    "Verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

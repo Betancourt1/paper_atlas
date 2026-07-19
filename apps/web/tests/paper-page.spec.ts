@@ -53,7 +53,7 @@ test("reviewed digest entry opens as a source-backed explainer @visual", async (
   ).toBeVisible();
   await expect(
     page.getByRole("heading", {
-      name: "TRACE compares adjacent trajectory states",
+      name: "Adjacent prefix values produce local credit",
     }),
   ).toBeVisible();
   await expect(

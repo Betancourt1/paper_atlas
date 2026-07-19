@@ -158,6 +158,14 @@ class Limitation(RootModel[str]):
     root: Annotated[str, Field(max_length=500, min_length=1)]
 
 
+class Role(StrEnum):
+    MEASURED = 'MEASURED'
+    DERIVED = 'DERIVED'
+    DISPUTED = 'DISPUTED'
+    BOUNDARY = 'BOUNDARY'
+    AGGREGATE = 'AGGREGATE'
+
+
 class VisualItem(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -165,6 +173,14 @@ class VisualItem(BaseModel):
     label: Annotated[str, Field(max_length=160, min_length=1)]
     detail: Annotated[str, Field(max_length=500, min_length=1)]
     value: float | None = None
+    value_end: float | None = None
+    value_label: Annotated[str | None, Field(max_length=80, min_length=1)] = None
+    group: Annotated[str | None, Field(max_length=120, min_length=1)] = None
+    role: Role | None = None
+    domain_min: float | None = None
+    domain_max: float | None = None
+    node_id: Identifier | None = None
+    input_ids: ReferenceList | None = None
 
 
 class GlossaryTerm(BaseModel):

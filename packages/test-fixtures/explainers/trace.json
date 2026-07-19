@@ -11,9 +11,30 @@
   },
   "editorial_status": "REVIEWED",
   "reading_paths": {
-    "FIVE_MIN": ["trace_why", "trace_mechanism", "trace_evidence", "trace_limitations"],
-    "TWENTY_MIN": ["trace_why", "trace_change", "trace_mechanism", "trace_example", "trace_evidence", "trace_limitations", "trace_review"],
-    "DEEP": ["trace_why", "trace_change", "trace_mechanism", "trace_example", "trace_evidence", "trace_limitations", "trace_review"]
+    "FIVE_MIN": [
+      "trace_why",
+      "trace_mechanism",
+      "trace_evidence",
+      "trace_limitations"
+    ],
+    "TWENTY_MIN": [
+      "trace_why",
+      "trace_change",
+      "trace_mechanism",
+      "trace_example",
+      "trace_evidence",
+      "trace_limitations",
+      "trace_review"
+    ],
+    "DEEP": [
+      "trace_why",
+      "trace_change",
+      "trace_mechanism",
+      "trace_example",
+      "trace_evidence",
+      "trace_limitations",
+      "trace_review"
+    ]
   },
   "tldr": [
     "A final success or failure score cannot identify which of many tool calls helped, did nothing, or sent an agent off course.",
@@ -30,9 +51,19 @@
         "A search agent may make dozens of dependent decisions before answering. A failed trajectory can contain useful searches and document openings before one late mistake, while a successful trajectory can contain redundant actions. An outcome-only objective attaches the same trajectory-level advantage to every action, so it cannot say which interaction changed the agent's prospects.",
         "Process supervision can provide finer feedback, but commonly needs step labels, an LLM judge, a learned critic, or repeated rollouts. TRACE asks whether a known correct answer can supply a denser signal without adding those components."
       ],
-      "claim_ids": ["trace_claim_outcome_blind", "trace_claim_credit"],
-      "source_refs": ["trace_source_intro", "trace_source_method"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_outcome_blind",
+        "trace_claim_credit"
+      ],
+      "source_refs": [
+        "trace_source_intro",
+        "trace_source_method"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_change",
@@ -42,9 +73,19 @@
         "TRACE leaves final-answer verification in place but adds a trajectory-local signal at tool-call boundaries. Instead of treating every action in a rollout alike, it rewards an interaction when the following transcript makes the gold answer more predictable to a frozen reference model and penalizes it when predictability falls.",
         "This is a change to credit assignment, not a new browser, backbone, training corpus, or final verifier. In the controlled comparisons, those parts are held fixed so the main variable is how the policy-gradient signal is constructed."
       ],
-      "claim_ids": ["trace_claim_credit", "trace_claim_outcome_anchor", "trace_claim_controlled_setup"],
-      "source_refs": ["trace_source_method", "trace_source_experiments"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_credit",
+        "trace_claim_outcome_anchor",
+        "trace_claim_controlled_setup"
+      ],
+      "source_refs": [
+        "trace_source_method",
+        "trace_source_experiments"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_mechanism",
@@ -55,9 +96,20 @@
         "The raw answer score is converted into a log-ratio value representing relative closure of the initial answer-likelihood gap. The difference between adjacent values is the one-step temporal-difference credit. Positive change means the new interaction made the answer easier to predict; zero means no measured progress; negative change means the prefix moved away from the answer.",
         "One-step credits telescope, so inserting redundant intermediate steps cannot increase their endpoint sum. The reported objective also uses a short look-ahead for delayed effects and combines local credit with the standard GRPO outcome advantage. The exact telescoping guarantee belongs to the one-step component, not the full propagated signal."
       ],
-      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_telescope", "trace_claim_outcome_anchor"],
-      "source_refs": ["trace_source_method"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_prefix_probe",
+        "trace_claim_td",
+        "trace_claim_telescope",
+        "trace_claim_outcome_anchor"
+      ],
+      "source_refs": [
+        "trace_source_method"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_example",
@@ -67,9 +119,19 @@
         "Consider a trajectory that searches for a relevant source, opens a page containing decisive evidence, then follows an unrelated branch and submits the wrong final answer. Outcome-only training gives the whole failed rollout a poor signal. TRACE instead compares the frozen reference model's gold-answer readiness after each tool observation.",
         "The useful search and page opening can receive positive local credit if they make the gold answer more predictable. The unrelated branch can receive near-zero or negative credit. The final wrong answer still contributes a negative outcome signal, so local progress does not redefine failure as success. This example illustrates the paper's reward construction; it is not a separately reported quantitative experiment."
       ],
-      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_outcome_anchor"],
-      "source_refs": ["trace_source_intro", "trace_source_method"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_prefix_probe",
+        "trace_claim_td",
+        "trace_claim_outcome_anchor"
+      ],
+      "source_refs": [
+        "trace_source_intro",
+        "trace_source_method"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_evidence",
@@ -80,9 +142,21 @@
         "On closed-web BrowseComp-Plus, TRACE moves the 4B base from 7.2 to 35.6 and the 30B-A3B base from 8.4 to 42.6. Relative to outcome-only GRPO, its unweighted four-benchmark average is 34.0 versus 29.5 for 4B and 38.1 versus 32.5 for 30B-A3B.",
         "In one 4B BrowseComp-Plus ablation, GRPO scores 30.0, raw log-probability delta 32.4, remaining-gap normalization 34.6, and log-ratio credit 35.5. The learning curves also rise earlier for TRACE, but the ablations are single runs, so small differences are directional rather than variance-adjusted conclusions."
       ],
-      "claim_ids": ["trace_claim_controlled_setup", "trace_claim_browsecomp_gain", "trace_claim_grpo_gain", "trace_claim_ablation"],
-      "source_refs": ["trace_source_experiments", "trace_source_results"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_controlled_setup",
+        "trace_claim_browsecomp_gain",
+        "trace_claim_grpo_gain",
+        "trace_claim_ablation"
+      ],
+      "source_refs": [
+        "trace_source_experiments",
+        "trace_source_results"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_limitations",
@@ -92,9 +166,19 @@
         "The experiments cover long-horizon search with short answers that can be compared with known ground truth. The authors explicitly leave open whether gold-output probability is a reliable progress proxy for a code patch, a long structured response, or an underspecified assistant task.",
         "Only two related Qwen3 backbones and one interaction domain are evaluated. A higher frozen-model probability is evidence about that model's readiness to emit the answer, not proof that the preceding tool call was causally necessary. External-agent numbers also use different systems and training pipelines, so they are context rather than controlled comparisons."
       ],
-      "claim_ids": ["trace_claim_scope", "trace_claim_proxy_not_causal"],
-      "source_refs": ["trace_source_results", "trace_source_limitations"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_scope",
+        "trace_claim_proxy_not_causal"
+      ],
+      "source_refs": [
+        "trace_source_results",
+        "trace_source_limitations"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "trace_review",
@@ -104,9 +188,21 @@
         "The controlled result supports a narrow conclusion: in the authors' search setup, adding their reference-model-based turn credit to outcome training improves both tested backbones and several related benchmarks. The mechanism is attractive because it avoids a separately trained critic and keeps final correctness in the objective.",
         "The paper does not establish a general solution to agent credit assignment. The proxy depends on a known answer, the central ablations lack replicated uncertainty estimates, and transfer is demonstrated only across search benchmarks. Applying TRACE to coding or open-ended agents would require new progress targets and new evidence."
       ],
-      "claim_ids": ["trace_claim_credit", "trace_claim_grpo_gain", "trace_claim_scope", "trace_claim_proxy_not_causal"],
-      "source_refs": ["trace_source_method", "trace_source_results", "trace_source_limitations"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "trace_claim_credit",
+        "trace_claim_grpo_gain",
+        "trace_claim_scope",
+        "trace_claim_proxy_not_causal"
+      ],
+      "source_refs": [
+        "trace_source_method",
+        "trace_source_results",
+        "trace_source_limitations"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     }
   ],
   "claims": [
@@ -116,7 +212,9 @@
       "epistemic_status": "AUTHORS_INTERPRETATION",
       "importance": "CORE",
       "confidence": 0.98,
-      "source_refs": ["trace_source_intro"],
+      "source_refs": [
+        "trace_source_intro"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -125,7 +223,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_method"],
+      "source_refs": [
+        "trace_source_method"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -134,7 +234,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_method"],
+      "source_refs": [
+        "trace_source_method"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -143,7 +245,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_method"],
+      "source_refs": [
+        "trace_source_method"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -152,7 +256,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["trace_source_method"],
+      "source_refs": [
+        "trace_source_method"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -161,7 +267,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_method"],
+      "source_refs": [
+        "trace_source_method"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -170,7 +278,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 0.99,
-      "source_refs": ["trace_source_experiments"],
+      "source_refs": [
+        "trace_source_experiments"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -179,7 +289,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_results"],
+      "source_refs": [
+        "trace_source_results"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -188,7 +300,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["trace_source_results"],
+      "source_refs": [
+        "trace_source_results"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -197,7 +311,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["trace_source_results"],
+      "source_refs": [
+        "trace_source_results"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -206,7 +322,9 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 1,
-      "source_refs": ["trace_source_limitations"],
+      "source_refs": [
+        "trace_source_limitations"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -215,7 +333,10 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 0.96,
-      "source_refs": ["trace_source_method", "trace_source_limitations"],
+      "source_refs": [
+        "trace_source_method",
+        "trace_source_limitations"
+      ],
       "verification_status": "VERIFIED"
     }
   ],
@@ -258,275 +379,490 @@
   ],
   "visuals": [
     {
-      "id": "trace_visual_outcome_blindness",
+      "id": "trace_visual_outcome_routes",
       "after_block_id": "trace_why",
       "after_paragraph_id": "trace_why_p1",
       "type": "PARALLEL_VIEW",
-      "title": "One failed rollout can contain unequal decisions",
-      "question": "What can outcome-only credit see at the turn level?",
+      "title": "One trajectory-level outcome hides unequal tool decisions",
+      "question": "What signal reaches useful and wasteful actions under two credit views?",
       "items": [
         {
-          "label": "Outcome-only signal",
-          "detail": "The final failed answer attaches one poor trajectory-level advantage to every action, including useful searches and redundant detours."
+          "label": "Useful search",
+          "detail": "A step that improves answer readiness receives the same final failed-trajectory advantage as every other action.",
+          "group": "Outcome-only route"
         },
         {
-          "label": "Turn-local signal",
-          "detail": "A local estimate can distinguish an interaction that improves gold-answer readiness from one that adds nothing or moves away from the answer."
+          "label": "Redundant detour",
+          "detail": "A step that adds nothing receives that same trajectory-level advantage.",
+          "group": "Outcome-only route"
+        },
+        {
+          "label": "Useful search",
+          "detail": "Turn-local credit can be positive when the next transcript makes the gold answer more predictable.",
+          "group": "Turn-local route"
+        },
+        {
+          "label": "Redundant or harmful detour",
+          "detail": "Turn-local credit can be zero or negative when measured readiness stalls or falls.",
+          "group": "Turn-local route"
         },
         {
           "label": "Shared terminal boundary",
-          "detail": "Local progress does not redefine the final result: an incorrect submitted answer remains a failed outcome."
+          "detail": "An incorrect submitted answer remains a failed outcome under both routes.",
+          "group": "Final outcome",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["trace_claim_outcome_blind", "trace_claim_credit", "trace_claim_outcome_anchor"],
-      "source_refs": ["trace_source_intro", "trace_source_method"],
-      "interpretation": "The central problem is not whether the trajectory succeeded; it is whether that one outcome should be copied onto every decision inside a long, mixed-quality trajectory.",
-      "limitations": [
-        "The comparison describes the reward-assignment problem and does not establish that every local score is causally correct.",
-        "TRACE still requires a known gold answer and preserves terminal outcome credit."
+      "claim_ids": [
+        "trace_claim_outcome_blind",
+        "trace_claim_credit"
       ],
-      "alt_text": "Parallel lanes compare outcome-only credit, which assigns one failed trajectory signal to every action, with turn-local credit, which can distinguish progress, neutral turns, and regression while preserving the failed final outcome.",
-      "fallback": "Outcome-only training gives every action in a failed rollout the same poor trajectory signal. Turn-local credit can distinguish useful, neutral, and harmful interactions, but the wrong final answer remains a failure."
+      "source_refs": [
+        "trace_source_intro",
+        "trace_source_method"
+      ],
+      "interpretation": "Outcome-only training collapses unequal decisions into one signal; TRACE adds local differentiation without redefining final correctness.",
+      "limitations": [
+        "Local credit measures frozen-model answer readiness, not causal necessity of a tool action."
+      ],
+      "alt_text": "One trajectory-level outcome hides unequal tool decisions. Useful search; Redundant detour; Useful search; Redundant or harmful detour; Shared terminal boundary.",
+      "fallback": "Outcome-only training collapses unequal decisions into one signal; TRACE adds local differentiation without redefining final correctness. Useful search; Redundant detour; Useful search; Redundant or harmful detour; Shared terminal boundary."
     },
     {
       "id": "trace_visual_credit_assignment_change",
       "after_block_id": "trace_change",
       "after_paragraph_id": "trace_change_p1",
-      "type": "METHOD_COMPARISON",
-      "title": "TRACE changes the policy signal, not the search system",
-      "question": "What differs in the controlled comparison?",
+      "type": "PARALLEL_VIEW",
+      "title": "TRACE changes the policy signal while retaining final verification",
+      "question": "What stays fixed and what changes at tool-call boundaries?",
       "items": [
         {
-          "label": "Held fixed",
-          "detail": "Backbone, browser actions, training data, final verifier, and evaluation interface remain shared across the controlled runs."
+          "label": "Final-answer verifier",
+          "detail": "Terminal correctness remains in the outcome objective.",
+          "group": "Held fixed"
         },
         {
-          "label": "Changed by TRACE",
-          "detail": "At tool-call boundaries, a frozen initial-policy probe measures changes in gold-answer predictability and contributes a trajectory-local policy-gradient signal."
+          "label": "Browser, backbone, and corpus",
+          "detail": "The controlled comparisons share search actions, model backbone, and training data.",
+          "group": "Held fixed"
+        },
+        {
+          "label": "Frozen initial-policy probe",
+          "detail": "Every post-tool prefix is scored for gold-answer predictability.",
+          "group": "Added by TRACE"
+        },
+        {
+          "label": "Trajectory-local credit",
+          "detail": "Predictability increases or decreases contribute a local policy-gradient signal.",
+          "group": "Added by TRACE"
+        },
+        {
+          "label": "Credit-assignment boundary",
+          "detail": "TRACE is not a new browser, search system, reward model, or final correctness definition.",
+          "group": "Scope",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["trace_claim_credit", "trace_claim_controlled_setup"],
-      "source_refs": ["trace_source_method", "trace_source_experiments"],
-      "interpretation": "The attribution target is deliberately narrow: TRACE changes credit construction while the surrounding search harness and terminal correctness check are controlled.",
-      "limitations": [
-        "Holding the listed components fixed does not prove that the frozen-model probability proxy is causally faithful.",
-        "The controlled setup covers the paper's search domain and two related Qwen3 backbones."
+      "claim_ids": [
+        "trace_claim_credit",
+        "trace_claim_outcome_anchor",
+        "trace_claim_controlled_setup"
       ],
-      "alt_text": "Method comparison. Held fixed: model family, browser actions, training data, final verifier, and evaluation interface. Changed by TRACE: a frozen model probes each tool-boundary prefix and the change in gold-answer predictability contributes local credit.",
-      "fallback": "TRACE keeps the backbone, browser, data, terminal verifier, and evaluation interface fixed. It changes the policy signal by probing each tool-boundary prefix with a frozen model and rewarding changes in known-answer predictability."
+      "source_refs": [
+        "trace_source_method",
+        "trace_source_experiments"
+      ],
+      "interpretation": "The controlled variable is credit assignment: a local frozen-probe signal is added while terminal verification stays active.",
+      "limitations": [
+        "This figure explains the cited paper's reported mechanism or evidence; it does not extend the claim beyond the stated conditions."
+      ],
+      "alt_text": "TRACE changes the policy signal while retaining final verification. Final-answer verifier; Browser, backbone, and corpus; Frozen initial-policy probe; Trajectory-local credit; Credit-assignment boundary.",
+      "fallback": "The controlled variable is credit assignment: a local frozen-probe signal is added while terminal verification stays active. Final-answer verifier; Browser, backbone, and corpus; Frozen initial-policy probe; Trajectory-local credit; Credit-assignment boundary."
     },
     {
       "id": "trace_visual_credit_flow",
       "after_block_id": "trace_mechanism",
       "after_paragraph_id": "trace_mechanism_p3",
       "type": "OPERATION_DIAGRAM",
-      "title": "TRACE compares adjacent trajectory states",
-      "question": "Where does local turn credit come from, and how does final correctness remain in the objective?",
+      "title": "Adjacent prefix values produce local credit",
+      "question": "How does TRACE move from tool observations to a policy-gradient signal?",
       "items": [
         {
-          "label": "State after each tool observation",
-          "detail": "Split the rollout at tool boundaries so each prefix records what the agent has seen up to that interaction."
+          "label": "Split at tool boundaries",
+          "detail": "Every action and returned observation defines the next transcript prefix."
         },
         {
-          "label": "Probe every prefix with one frozen model",
-          "detail": "A frozen copy of the initial policy scores the average log-probability of the same known gold answer from every prefix."
+          "label": "Probe gold-answer probability",
+          "detail": "One frozen copy of the initial policy computes average gold-answer log-probability for every prefix."
         },
         {
-          "label": "Convert each score into a state value",
-          "detail": "The log-ratio value represents how much of the initial answer-likelihood gap the current prefix has closed."
+          "label": "Normalize remaining gap",
+          "detail": "A log-ratio value measures relative closure of the initial answer-likelihood gap."
         },
         {
           "label": "Subtract adjacent values",
-          "detail": "The change from one prefix value to the next is the one-step temporal-difference credit: positive, zero, or negative measured progress."
+          "detail": "The one-step temporal-difference credit is positive, zero, or negative measured progress."
         },
         {
-          "label": "Propagate some delayed effects",
-          "detail": "The reported objective adds a short look-ahead, while the exact telescoping guarantee remains specific to the one-step credits."
+          "label": "Preserve telescoping boundary",
+          "detail": "One-step credits telescope, so redundant inserted states cannot raise their endpoint sum."
         },
         {
-          "label": "Join local credit with the outcome advantage",
-          "detail": "Local credit is combined with GRPO's final-answer advantage, so a helpful intermediate step does not redefine an incorrect final answer as success."
+          "label": "Propagate short delayed effects",
+          "detail": "The reported objective adds look-ahead beyond the exact one-step guarantee."
+        },
+        {
+          "label": "Combine with GRPO outcome advantage",
+          "detail": "Local credit joins terminal correctness rather than replacing it."
+        },
+        {
+          "label": "Update the policy",
+          "detail": "The combined signal changes action probabilities under the shared training harness."
         }
       ],
-      "claim_ids": ["trace_claim_credit", "trace_claim_prefix_probe", "trace_claim_td", "trace_claim_telescope", "trace_claim_outcome_anchor", "trace_claim_scope", "trace_claim_proxy_not_causal"],
-      "source_refs": ["trace_source_method", "trace_source_limitations"],
-      "interpretation": "TRACE treats the rollout as a sequence of measurable states. Adjacent changes in a frozen model's readiness to produce the known answer supply local credit, while verified final correctness remains a separate global training anchor.",
-      "limitations": [
-        "Answer predictability is a proxy for progress, not a causal measurement of the tool call's contribution.",
-        "The method assumes a compact known gold answer and is not validated for long, structured, or open-ended outputs.",
-        "The exact one-step telescoping property does not apply unchanged to the look-ahead and terminal-fill components.",
-        "The diagram shows the operation and its relationships, not measured state values from a reported trajectory."
+      "claim_ids": [
+        "trace_claim_prefix_probe",
+        "trace_claim_td",
+        "trace_claim_telescope",
+        "trace_claim_outcome_anchor"
       ],
-      "alt_text": "Operation diagram in which each tool observation creates a trajectory prefix, one frozen model scores the known answer from every prefix, adjacent log-ratio state values produce one-step credit, a short look-ahead propagates delayed effects, and local credit joins the final-answer advantage.",
-      "fallback": "After every tool observation, TRACE creates a trajectory prefix. A frozen copy of the initial policy scores the same known answer from each prefix and converts that score into relative closure of the initial likelihood gap. The difference between adjacent values supplies one-step local credit; a short look-ahead handles some delayed effects. Local credit is then combined with the final-answer advantage. Only the one-step component has the exact telescoping guarantee, and answer predictability is not a causal measure of a tool call."
+      "source_refs": [
+        "trace_source_method"
+      ],
+      "interpretation": "TRACE derives local credit from adjacent normalized prefix values, adds limited propagation, and anchors the signal to final outcome advantage.",
+      "limitations": [
+        "The exact telescoping guarantee applies to the one-step component, not the full propagated objective."
+      ],
+      "alt_text": "Adjacent prefix values produce local credit. Split at tool boundaries; Probe gold-answer probability; Normalize remaining gap; Subtract adjacent values; Preserve telescoping boundary; Propagate short delayed effects; Combine with GRPO outcome advantage; Update the policy.",
+      "fallback": "TRACE derives local credit from adjacent normalized prefix values, adds limited propagation, and anchors the signal to final outcome advantage. Split at tool boundaries; Probe gold-answer probability; Normalize remaining gap; Subtract adjacent values; Preserve telescoping boundary; Propagate short delayed effects; Combine with GRPO outcome advantage; Update the policy."
     },
     {
       "id": "trace_visual_worked_trajectory",
       "after_block_id": "trace_example",
       "after_paragraph_id": "trace_example_p2",
       "type": "TIMELINE",
-      "title": "One failed rollout can contain both progress and regression",
-      "question": "How can TRACE distinguish helpful and harmful interactions before an incorrect final answer?",
+      "title": "A failed rollout can contain progress and regression",
+      "question": "How can local credit distinguish turns while the final answer remains wrong?",
       "items": [
         {
-          "label": "Search for a relevant source",
-          "detail": "This interaction can receive positive local credit if the resulting observation makes the known answer more predictable."
+          "label": "Search relevant source",
+          "detail": "Can receive positive local credit if the observation increases gold-answer predictability."
         },
         {
-          "label": "Open a page with decisive evidence",
-          "detail": "The next prefix can receive additional positive credit when the evidence further closes the measured answer-likelihood gap."
+          "label": "Open decisive page",
+          "detail": "Can add further positive credit when the evidence closes more of the measured gap."
         },
         {
-          "label": "Follow an unrelated branch",
-          "detail": "The interaction can receive near-zero or negative local credit when it adds no measured progress or moves the prefix away from the answer."
+          "label": "Follow unrelated branch",
+          "detail": "Can receive near-zero or negative credit when readiness stalls or falls."
         },
         {
-          "label": "Submit the wrong final answer",
-          "detail": "The terminal outcome remains negative even though earlier turns may have received positive local credit."
+          "label": "Submit wrong answer",
+          "detail": "The terminal outcome remains negative."
+        },
+        {
+          "label": "Outcome-only comparison",
+          "detail": "The conventional objective would attach one poor trajectory-level advantage to every preceding action."
+        },
+        {
+          "label": "Example boundary",
+          "detail": "This illustrates the reward construction and is not a separate quantitative experiment.",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["trace_claim_prefix_probe", "trace_claim_td", "trace_claim_outcome_anchor"],
-      "source_refs": ["trace_source_intro", "trace_source_method"],
-      "interpretation": "Local credit changes the responsibility assigned to intermediate interactions; it does not change the verified outcome of the whole rollout.",
-      "limitations": [
-        "This is an explanatory trajectory constructed from the paper's reward definition, not a separately reported quantitative experiment.",
-        "The signs are conditional: an interaction receives credit only when the frozen reference score changes in the stated direction.",
-        "No numeric state values or credit magnitudes are claimed."
+      "claim_ids": [
+        "trace_claim_prefix_probe",
+        "trace_claim_td",
+        "trace_claim_outcome_anchor"
       ],
-      "alt_text": "Four-event trajectory: a relevant search and decisive page can receive positive local credit, an unrelated branch can receive zero or negative credit, and the wrong final answer still receives a negative outcome signal.",
-      "fallback": "A relevant search can increase the frozen model's readiness to produce the answer, and opening decisive evidence can increase it again. An unrelated branch can add no progress or reduce readiness. If the agent finally answers incorrectly, the terminal outcome remains negative. The sequence is illustrative and supplies no measured credit values."
+      "source_refs": [
+        "trace_source_intro",
+        "trace_source_method"
+      ],
+      "interpretation": "Local turn credit differentiates useful and harmful interactions while the wrong final submission remains failure.",
+      "limitations": [
+        "The example is schematic and supplies no invented credit magnitudes."
+      ],
+      "alt_text": "A failed rollout can contain progress and regression. Search relevant source; Open decisive page; Follow unrelated branch; Submit wrong answer; Outcome-only comparison; Example boundary.",
+      "fallback": "Local turn credit differentiates useful and harmful interactions while the wrong final submission remains failure. Search relevant source; Open decisive page; Follow unrelated branch; Submit wrong answer; Outcome-only comparison; Example boundary."
+    },
+    {
+      "id": "trace_visual_training_conditions",
+      "after_block_id": "trace_evidence",
+      "after_paragraph_id": "trace_evidence_p1",
+      "type": "EVIDENCE_MATRIX",
+      "title": "The controlled comparison shares one ReAct training harness",
+      "question": "Which backbones, data, algorithms, tools, and outcomes are held together?",
+      "items": [
+        {
+          "label": "Qwen3-4B-Thinking-2507",
+          "detail": "First tested backbone in the shared ReAct-style search harness.",
+          "value_label": "4B backbone"
+        },
+        {
+          "label": "Qwen3-30B-A3B-Thinking-2507",
+          "detail": "Second tested related backbone.",
+          "value_label": "30B-A3B backbone"
+        },
+        {
+          "label": "Offline OpenResearcher corpus",
+          "detail": "Training questions come from the same offline source.",
+          "value_label": "Shared corpus"
+        },
+        {
+          "label": "Trajectory budget",
+          "detail": "Each rollout allows up to sixty tool turns.",
+          "value": 60,
+          "value_label": "≤60 tool turns"
+        },
+        {
+          "label": "Controlled algorithms",
+          "detail": "GRPO, GSPO, GiGRPO, and TRACE are run under the comparison harness.",
+          "value": 4,
+          "value_label": "4 algorithms"
+        },
+        {
+          "label": "Browser actions",
+          "detail": "Available browser interactions are shared across controlled runs.",
+          "value_label": "Held fixed"
+        },
+        {
+          "label": "Terminal reward",
+          "detail": "Final-answer verification and outcome reward are shared.",
+          "value_label": "Held fixed"
+        },
+        {
+          "label": "Evaluation interface",
+          "detail": "The final evaluation surface is shared across runs.",
+          "value_label": "Held fixed"
+        }
+      ],
+      "claim_ids": [
+        "trace_claim_controlled_setup",
+        "trace_claim_browsecomp_gain",
+        "trace_claim_grpo_gain",
+        "trace_claim_ablation"
+      ],
+      "source_refs": [
+        "trace_source_experiments",
+        "trace_source_results"
+      ],
+      "interpretation": "Two related backbones and four algorithms share data, tool budget, browser actions, terminal reward, and evaluation interface.",
+      "limitations": [
+        "The matrix records controlled conditions but does not add replicated uncertainty to the reported results."
+      ],
+      "alt_text": "The controlled comparison shares one ReAct training harness. Qwen3-4B-Thinking-2507: 4B backbone; Qwen3-30B-A3B-Thinking-2507: 30B-A3B backbone; Offline OpenResearcher corpus: Shared corpus; Trajectory budget: ≤60 tool turns; Controlled algorithms: 4 algorithms; Browser actions: Held fixed; Terminal reward: Held fixed; Evaluation interface: Held fixed.",
+      "fallback": "Two related backbones and four algorithms share data, tool budget, browser actions, terminal reward, and evaluation interface. Qwen3-4B-Thinking-2507: 4B backbone; Qwen3-30B-A3B-Thinking-2507: 30B-A3B backbone; Offline OpenResearcher corpus: Shared corpus; Trajectory budget: ≤60 tool turns; Controlled algorithms: 4 algorithms; Browser actions: Held fixed; Terminal reward: Held fixed; Evaluation interface: Held fixed."
     },
     {
       "id": "trace_visual_main_results",
       "after_block_id": "trace_evidence",
       "after_paragraph_id": "trace_evidence_p2",
       "type": "DOT_PLOT",
-      "title": "TRACE improves both reported model scales",
-      "question": "How do the reported base, GRPO, and TRACE scores compare?",
+      "title": "Base-to-TRACE and GRPO-to-TRACE results use separate panels",
+      "question": "How large are improvements within each disclosed comparison?",
       "items": [
         {
-          "label": "BrowseComp-Plus · Qwen3-4B base",
-          "detail": "Score before the reported TRACE training setup.",
-          "value": 7.2
+          "label": "Qwen3-4B base",
+          "detail": "Closed-web BrowseComp-Plus.",
+          "value": 7.2,
+          "value_label": "7.2",
+          "group": "BrowseComp-Plus · domain 0–45",
+          "domain_min": 0,
+          "domain_max": 45
         },
         {
-          "label": "BrowseComp-Plus · Qwen3-4B TRACE",
-          "detail": "Reported TRACE score for Qwen3-4B.",
-          "value": 35.6
+          "label": "Qwen3-4B TRACE",
+          "detail": "Closed-web BrowseComp-Plus.",
+          "value": 35.6,
+          "value_label": "35.6",
+          "group": "BrowseComp-Plus · domain 0–45",
+          "domain_min": 0,
+          "domain_max": 45
         },
         {
-          "label": "BrowseComp-Plus · Qwen3-30B-A3B base",
-          "detail": "Score before the reported TRACE training setup.",
-          "value": 8.4
+          "label": "Qwen3-30B-A3B base",
+          "detail": "Closed-web BrowseComp-Plus.",
+          "value": 8.4,
+          "value_label": "8.4",
+          "group": "BrowseComp-Plus · domain 0–45",
+          "domain_min": 0,
+          "domain_max": 45
         },
         {
-          "label": "BrowseComp-Plus · Qwen3-30B-A3B TRACE",
-          "detail": "Reported TRACE score for Qwen3-30B-A3B.",
-          "value": 42.6
+          "label": "Qwen3-30B-A3B TRACE",
+          "detail": "Closed-web BrowseComp-Plus.",
+          "value": 42.6,
+          "value_label": "42.6",
+          "group": "BrowseComp-Plus · domain 0–45",
+          "domain_min": 0,
+          "domain_max": 45
         },
         {
-          "label": "Four-benchmark average · Qwen3-4B GRPO",
-          "detail": "Unweighted average for the outcome-only GRPO comparison.",
-          "value": 29.5
+          "label": "Qwen3-4B GRPO",
+          "detail": "Unweighted average across four search benchmarks.",
+          "value": 29.5,
+          "value_label": "29.5",
+          "group": "Four-benchmark average · domain 27–40",
+          "domain_min": 27,
+          "domain_max": 40
         },
         {
-          "label": "Four-benchmark average · Qwen3-4B TRACE",
-          "detail": "Unweighted average for TRACE under the controlled comparison.",
-          "value": 34
+          "label": "Qwen3-4B TRACE",
+          "detail": "Unweighted average across the same four benchmarks.",
+          "value": 34,
+          "value_label": "34.0",
+          "group": "Four-benchmark average · domain 27–40",
+          "domain_min": 27,
+          "domain_max": 40
         },
         {
-          "label": "Four-benchmark average · Qwen3-30B-A3B GRPO",
-          "detail": "Unweighted average for the outcome-only GRPO comparison.",
-          "value": 32.5
+          "label": "Qwen3-30B-A3B GRPO",
+          "detail": "Unweighted average across four search benchmarks.",
+          "value": 32.5,
+          "value_label": "32.5",
+          "group": "Four-benchmark average · domain 27–40",
+          "domain_min": 27,
+          "domain_max": 40
         },
         {
-          "label": "Four-benchmark average · Qwen3-30B-A3B TRACE",
-          "detail": "Unweighted average for TRACE under the controlled comparison.",
-          "value": 38.1
+          "label": "Qwen3-30B-A3B TRACE",
+          "detail": "Unweighted average across the same four benchmarks.",
+          "value": 38.1,
+          "value_label": "38.1",
+          "group": "Four-benchmark average · domain 27–40",
+          "domain_min": 27,
+          "domain_max": 40
         }
       ],
-      "claim_ids": ["trace_claim_controlled_setup", "trace_claim_browsecomp_gain", "trace_claim_grpo_gain"],
-      "source_refs": ["trace_source_experiments", "trace_source_results"],
-      "interpretation": "TRACE shows a large reported gain from the base checkpoints on BrowseComp-Plus and a smaller but consistent advantage over outcome-only GRPO in the unweighted four-benchmark average at both tested scales.",
-      "limitations": [
-        "BrowseComp-Plus scores and four-benchmark averages are separate result slices and should only be compared within their labeled groups.",
-        "The plot covers two related Qwen3 backbones in one search-agent setup, not general agent performance.",
-        "The fixture does not provide repeated-run uncertainty intervals for these points."
+      "claim_ids": [
+        "trace_claim_controlled_setup",
+        "trace_claim_browsecomp_gain",
+        "trace_claim_grpo_gain",
+        "trace_claim_ablation"
       ],
-      "alt_text": "Dot plot with BrowseComp-Plus base and TRACE scores of 7.2 and 35.6 for Qwen3-4B and 8.4 and 42.6 for Qwen3-30B-A3B, plus four-benchmark GRPO and TRACE averages of 29.5 and 34.0 for 4B and 32.5 and 38.1 for 30B-A3B.",
-      "fallback": "BrowseComp-Plus: Qwen3-4B rises from a 7.2 base score to 35.6 with TRACE; Qwen3-30B-A3B rises from 8.4 to 42.6. Unweighted four-benchmark averages: Qwen3-4B scores 29.5 with GRPO and 34.0 with TRACE; Qwen3-30B-A3B scores 32.5 with GRPO and 38.1 with TRACE. These are separate labeled comparisons without uncertainty intervals."
+      "source_refs": [
+        "trace_source_experiments",
+        "trace_source_results"
+      ],
+      "interpretation": "Separate panels preserve the base-model BrowseComp-Plus comparison and the outcome-only GRPO four-benchmark average.",
+      "limitations": [
+        "The panels use different comparison baselines and should not be read as one eight-point ranking."
+      ],
+      "alt_text": "Base-to-TRACE and GRPO-to-TRACE results use separate panels. Qwen3-4B base: 7.2; Qwen3-4B TRACE: 35.6; Qwen3-30B-A3B base: 8.4; Qwen3-30B-A3B TRACE: 42.6; Qwen3-4B GRPO: 29.5; Qwen3-4B TRACE: 34.0; Qwen3-30B-A3B GRPO: 32.5; Qwen3-30B-A3B TRACE: 38.1.",
+      "fallback": "Separate panels preserve the base-model BrowseComp-Plus comparison and the outcome-only GRPO four-benchmark average. Qwen3-4B base: 7.2; Qwen3-4B TRACE: 35.6; Qwen3-30B-A3B base: 8.4; Qwen3-30B-A3B TRACE: 42.6; Qwen3-4B GRPO: 29.5; Qwen3-4B TRACE: 34.0; Qwen3-30B-A3B GRPO: 32.5; Qwen3-30B-A3B TRACE: 38.1."
     },
     {
       "id": "trace_visual_credit_ablation",
       "after_block_id": "trace_evidence",
       "after_paragraph_id": "trace_evidence_p3",
       "type": "DOT_PLOT",
-      "title": "The reported credit-design ablation is directional",
-      "question": "How did the tested credit formulations compare in the one 4B BrowseComp-Plus ablation?",
+      "title": "Credit-design scores share one local ablation domain",
+      "question": "Which local-credit formulation performs best in the single-run comparison?",
       "items": [
         {
           "label": "Outcome-only GRPO",
-          "detail": "Reported score in the ablation comparison.",
-          "value": 30
+          "detail": "4B BrowseComp-Plus ablation.",
+          "value": 30,
+          "value_label": "30.0",
+          "group": "4B ablation · domain 29.5–36.0",
+          "domain_min": 29.5,
+          "domain_max": 36
         },
         {
           "label": "Raw log-probability delta",
-          "detail": "Local credit from the unnormalized score change.",
-          "value": 32.4
+          "detail": "Unnormalized local score change.",
+          "value": 32.4,
+          "value_label": "32.4",
+          "group": "4B ablation · domain 29.5–36.0",
+          "domain_min": 29.5,
+          "domain_max": 36
         },
         {
           "label": "Remaining-gap normalization",
           "detail": "Credit normalized by the remaining answer-likelihood gap.",
-          "value": 34.6
+          "value": 34.6,
+          "value_label": "34.6",
+          "group": "4B ablation · domain 29.5–36.0",
+          "domain_min": 29.5,
+          "domain_max": 36
         },
         {
           "label": "Log-ratio credit",
-          "detail": "The paper's selected log-ratio formulation.",
-          "value": 35.5
+          "detail": "The paper's selected formulation.",
+          "value": 35.5,
+          "value_label": "35.5",
+          "group": "4B ablation · domain 29.5–36.0",
+          "domain_min": 29.5,
+          "domain_max": 36
+        },
+        {
+          "label": "Earlier learning",
+          "detail": "The reported learning curves rise earlier for TRACE; this is qualitative and deliberately outside the numeric ablation axis.",
+          "group": "Qualitative observation · no numeric axis",
+          "role": "MEASURED"
         }
       ],
-      "claim_ids": ["trace_claim_ablation"],
-      "source_refs": ["trace_source_results"],
-      "interpretation": "All three local-credit variants exceed outcome-only GRPO in this reported run, with the selected log-ratio formulation highest among the tested options.",
-      "limitations": [
-        "The ablation values come from single runs and have no repeated-run uncertainty estimates.",
-        "Small differences between credit variants are directional rather than variance-adjusted conclusions.",
-        "The comparison covers one Qwen3-4B BrowseComp-Plus ablation setting."
+      "claim_ids": [
+        "trace_claim_controlled_setup",
+        "trace_claim_browsecomp_gain",
+        "trace_claim_grpo_gain",
+        "trace_claim_ablation"
       ],
-      "alt_text": "Dot plot of one Qwen3-4B BrowseComp-Plus ablation: GRPO 30.0, raw log-probability delta 32.4, remaining-gap normalization 34.6, and log-ratio credit 35.5.",
-      "fallback": "In one Qwen3-4B BrowseComp-Plus ablation, GRPO scores 30.0, raw log-probability delta 32.4, remaining-gap normalization 34.6, and log-ratio credit 35.5. The runs have no uncertainty intervals, so small differences are directional."
+      "source_refs": [
+        "trace_source_experiments",
+        "trace_source_results"
+      ],
+      "interpretation": "The disclosed local domain makes small score differences legible while the earlier-learning observation remains separate from numeric points.",
+      "limitations": [
+        "The central ablations are single runs, so small differences are directional rather than variance-adjusted conclusions."
+      ],
+      "alt_text": "Credit-design scores share one local ablation domain. Outcome-only GRPO: 30.0; Raw log-probability delta: 32.4; Remaining-gap normalization: 34.6; Log-ratio credit: 35.5; Earlier learning.",
+      "fallback": "The disclosed local domain makes small score differences legible while the earlier-learning observation remains separate from numeric points. Outcome-only GRPO: 30.0; Raw log-probability delta: 32.4; Remaining-gap normalization: 34.6; Log-ratio credit: 35.5; Earlier learning."
     }
   ],
   "glossary": [
     {
       "term": "Credit assignment",
       "definition": "Determining which decisions in a trajectory should receive responsibility for a later outcome.",
-      "source_refs": ["trace_source_intro"]
+      "source_refs": [
+        "trace_source_intro"
+      ]
     },
     {
       "term": "Tool-call boundary",
       "definition": "The point after an agent action and its environment observation, used by TRACE to define a trajectory state.",
-      "source_refs": ["trace_source_method"]
+      "source_refs": [
+        "trace_source_method"
+      ]
     },
     {
       "term": "Temporal-difference credit",
       "definition": "A local signal computed from the change in estimated value between adjacent states.",
-      "source_refs": ["trace_source_method"]
+      "source_refs": [
+        "trace_source_method"
+      ]
     },
     {
       "term": "Frozen reference model",
       "definition": "An unchanged copy of the initial policy used to measure gold-answer predictability at each prefix.",
-      "source_refs": ["trace_source_method"]
+      "source_refs": [
+        "trace_source_method"
+      ]
     },
     {
       "term": "GRPO",
       "definition": "Group Relative Policy Optimization, an outcome-based reinforcement-learning method used as TRACE's training base and comparison.",
-      "source_refs": ["trace_source_method", "trace_source_experiments"]
+      "source_refs": [
+        "trace_source_method",
+        "trace_source_experiments"
+      ]
     }
   ],
   "revision_notes": [
     "Initial evidence-backed explainer fixture for arXiv:2607.13988v1.",
     "Mechanism is presented before results; single-run ablations and short-answer scope are explicit.",
-    "Editorial review and human publication approval remain required."
+    "Editorial review and human publication approval remain required.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

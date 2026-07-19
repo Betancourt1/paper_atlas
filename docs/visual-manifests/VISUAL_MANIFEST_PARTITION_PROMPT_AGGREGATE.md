@@ -274,14 +274,14 @@ Path("ppa_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Direct population estimate and weighted subgroup reconstruction converging on one target — Convergence topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_prompt_aggregation_gap` after `ppa_why_p1`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_ppa_prompt_convergence` after `ppa_why_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_why_p2`
 
@@ -503,14 +503,14 @@ Path("ppa_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ppa_why_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#ppa_why_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `ppa_change_p1`
 
@@ -748,14 +748,14 @@ Path("ppa_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “External alignment, split consistency, and order consistency — Relationship-specific parallel view” treatment because the implemented method comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_consistency_checks` after `ppa_change_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_ppa_three_checks` after `ppa_change_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `ppa_change_p1`, `ppa_change_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_change_p2`
 
@@ -993,14 +993,14 @@ Path("ppa_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “External alignment, split consistency, and order consistency — Relationship-specific parallel view” treatment because the implemented method comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_consistency_checks` after `ppa_change_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_ppa_three_checks` after `ppa_change_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `ppa_change_p1`, `ppa_change_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_mechanism_p1`
 
@@ -1258,14 +1258,14 @@ Path("ppa_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Multilevel exhaustive partition with weighted reconstruction back to the root — True parent-child hierarchy” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_partition_tree` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`, `ppa_mechanism_p3`, `ppa_example_p1`, `ppa_example_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_partition_hierarchy` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_mechanism_p2`
 
@@ -1523,14 +1523,14 @@ Path("ppa_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Multilevel exhaustive partition with weighted reconstruction back to the root — True parent-child hierarchy” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_partition_tree` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`, `ppa_mechanism_p3`, `ppa_example_p1`, `ppa_example_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_partition_hierarchy` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_mechanism_p3`
 
@@ -1754,14 +1754,14 @@ Path("ppa_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Immediate-child split consistency versus condition-order invariance — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_partition_tree` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`, `ppa_mechanism_p3`, `ppa_example_p1`, `ppa_example_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_consistency_invariances` after `ppa_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_example_p1`
 
@@ -2007,14 +2007,14 @@ Path("ppa_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “ACS age partition, complement, employment subgroups, and symbolic weighted reconstruction — True parent-child hierarchy” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_partition_tree` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`, `ppa_mechanism_p3`, `ppa_example_p1`, `ppa_example_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_acs_example` after `ppa_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ppa_example_p1`, `ppa_example_p2`
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_example_p2`
 
@@ -2260,14 +2260,14 @@ Path("ppa_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “ACS age partition, complement, employment subgroups, and symbolic weighted reconstruction — True parent-child hierarchy” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_partition_tree` after `ppa_mechanism_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_mechanism_p1`, `ppa_mechanism_p2`, `ppa_mechanism_p3`, `ppa_example_p1`, `ppa_example_p2`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_acs_example` after `ppa_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `ppa_example_p1`, `ppa_example_p2`
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_evidence_p1`
 
@@ -2496,14 +2496,14 @@ Path("ppa_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Qualitative reconstruction-error pattern across partition depth — Tested-versus-unestablished panels” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_evidence_scope` after `ppa_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_evidence_p1`, `ppa_evidence_p2`, `ppa_evidence_p3`, `ppa_limitations_p1`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_depth_tradeoff` after `ppa_evidence_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_evidence_p2`
 
@@ -2727,15 +2727,15 @@ Path("ppa_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “Reference-free consistency results separated by task and tolerance — Experiment small multiples” treatment because the implemented result comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_evidence_scope` after `ppa_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_evidence_p1`, `ppa_evidence_p2`, `ppa_evidence_p3`, `ppa_limitations_p1`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_ppa_consistency_results` after `ppa_evidence_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `ppa_evidence_p3`
 
@@ -2954,16 +2954,16 @@ Path("ppa_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_evidence_scope` after `ppa_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_evidence_p1`, `ppa_evidence_p2`, `ppa_evidence_p3`, `ppa_limitations_p1`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `ppa_limitations_p1`
 
@@ -3190,16 +3190,16 @@ Path("ppa_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
-- Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_ppa_evidence_scope` after `ppa_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `ppa_evidence_p1`, `ppa_evidence_p2`, `ppa_evidence_p3`, `ppa_limitations_p1`
-- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `ppa_limitations_p2`
 
@@ -3428,14 +3428,14 @@ Path("ppa_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ppa_limitations_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#ppa_limitations_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `ppa_review_p1`
 
@@ -3650,14 +3650,14 @@ Path("ppa_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ppa_review_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#ppa_review_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `ppa_review_p2`
 
@@ -3886,12 +3886,12 @@ Path("ppa_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `ppa_review_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#ppa_review_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_PARTITION_PROMPT_AGGREGATE.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 

@@ -237,14 +237,14 @@ Path("sos_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_why_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_why_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_why_p2`
 
@@ -466,14 +466,14 @@ Path("sos_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8"
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_why_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_why_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_change_p1`
 
@@ -705,14 +705,14 @@ Path("sos_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Request-to-table schema, cell state, and citation binding — Component topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_schema_completion` after `sos_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_change_p1`, `sos_change_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_searchos_schema_topology` after `sos_change_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_change_p2`
 
@@ -944,14 +944,14 @@ Path("sos_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Orchestrator, browse agents, writer, and shared-record ownership — Component topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_schema_completion` after `sos_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_change_p1`, `sos_change_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_searchos_actor_ownership` after `sos_change_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_mechanism_p1`
 
@@ -1251,14 +1251,14 @@ Path("sos_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`, `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_mechanism_p2`
 
@@ -1558,14 +1558,14 @@ Path("sos_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`, `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_mechanism_p3`
 
@@ -1865,14 +1865,14 @@ Path("sos_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Four stores, evidence gate, progress sensor, and continuous dispatch loop — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`, `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_example_p1`
 
@@ -2119,14 +2119,14 @@ Path("sos_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`, `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_searchos_missing_cell` after `sos_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `sos_example_p1`, `sos_example_p2`
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_example_p2`
 
@@ -2373,14 +2373,14 @@ Path("sos_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “One missing table cell through tasking, evidence anchoring, atomic update, and stop/redirection — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_control_loop` after `sos_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`, `sos_mechanism_p3`, `sos_example_p1`, `sos_example_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_searchos_missing_cell` after `sos_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `sos_example_p1`, `sos_example_p2`
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_evidence_p1`
 
@@ -2640,14 +2640,14 @@ Path("sos_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “WideSearch and GISA system-baseline pairs in separate metric panels — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_searchos_benchmark_results` after `sos_evidence_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_evidence_p2`
 
@@ -2866,14 +2866,14 @@ Path("sos_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Batch versus continuous dispatch across runtime, utilization, and item F1 — Condition matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_searchos_dispatch_comparison` after `sos_evidence_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_searchos_dispatch_conditions` after `sos_evidence_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_evidence_p3`
 
@@ -3113,14 +3113,14 @@ Path("sos_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Joint skill-removal deltas with metric-specific local domains — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_searchos_skill_ablation` after `sos_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `sos_limitations_p1`
 
@@ -3349,14 +3349,14 @@ Path("sos_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_limitations_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_limitations_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_limitations_p2`
 
@@ -3585,14 +3585,14 @@ Path("sos_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_limitations_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_limitations_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_limitations_p3`
 
@@ -3807,14 +3807,14 @@ Path("sos_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_limitations_p3` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_limitations_p3`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_review_p1`
 
@@ -4043,14 +4043,14 @@ Path("sos_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_review_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_review_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `sos_review_p2`
 
@@ -4286,12 +4286,12 @@ Path("sos_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `sos_review_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#sos_review_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_SEARCHOS_V1.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 

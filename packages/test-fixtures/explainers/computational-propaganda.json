@@ -11,9 +11,30 @@
   },
   "editorial_status": "REVIEWED",
   "reading_paths": {
-    "FIVE_MIN": ["propaganda_why", "propaganda_mechanism", "propaganda_evidence", "propaganda_limitations"],
-    "TWENTY_MIN": ["propaganda_why", "propaganda_change", "propaganda_mechanism", "propaganda_example", "propaganda_evidence", "propaganda_limitations", "propaganda_review"],
-    "DEEP": ["propaganda_why", "propaganda_change", "propaganda_mechanism", "propaganda_example", "propaganda_evidence", "propaganda_limitations", "propaganda_review"]
+    "FIVE_MIN": [
+      "propaganda_why",
+      "propaganda_mechanism",
+      "propaganda_evidence",
+      "propaganda_limitations"
+    ],
+    "TWENTY_MIN": [
+      "propaganda_why",
+      "propaganda_change",
+      "propaganda_mechanism",
+      "propaganda_example",
+      "propaganda_evidence",
+      "propaganda_limitations",
+      "propaganda_review"
+    ],
+    "DEEP": [
+      "propaganda_why",
+      "propaganda_change",
+      "propaganda_mechanism",
+      "propaganda_example",
+      "propaganda_evidence",
+      "propaganda_limitations",
+      "propaganda_review"
+    ]
   },
   "tldr": [
     "Posting malicious text on the web is not enough to poison a model: the text must also be crawled, extracted, retained by curation, and influential during training.",
@@ -30,9 +51,19 @@
         "Pretraining corpora contain more web text than people can inspect. That scale creates room for malicious content, but an online post does not automatically become training data. Crawlers may miss it, text extraction may remove it, and quality or language filters may discard the document.",
         "Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline. This paper studies an indirect attacker who can use ordinary public interfaces but does not know which pages will be crawled and cannot access the training data, code, infrastructure, or model weights."
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_production_notshown"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_halflife"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_change",
@@ -42,9 +73,18 @@
         "HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model. It asks whether a relevant page accepts third-party content, whether that fragment appears in extracted plaintext, and whether the resulting document survives the victim's curation pipeline.",
         "That decomposition can reject superficially plausible vectors. In the tested DOM-based crawl path, programmatic advertisements did not appear in extracted plaintext, while public comments often did. The result is specific to the tested collection architecture rather than a claim about every possible crawler."
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_ads"],
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_ads"
+      ],
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_mechanism",
@@ -55,9 +95,23 @@
         "The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements, then combines the stages into a document-level inclusion estimate. This keeps three different denominators visible: prevalence among sampled pages, extraction survival among simulated injections, and curation survival among captured documents.",
         "Corpus inclusion is still only an intermediate outcome. The authors separately train models with controlled poison mixtures and ask whether held-out completions favor an attacker-selected entity. That second experiment tests model influence without claiming a live web-to-model attack."
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_model_shift"],
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_models"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_model_shift"
+      ],
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion",
+        "propaganda_source_models"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_example",
@@ -67,9 +121,20 @@
         "Start with a page identified as having a comment interface. In a sandboxed copy, the researchers replace an existing comment with a question-and-answer poison fragment averaging 37.5 words. Resiliparse converts the HTML to plaintext; 71.9% of those simulated injections remain visible after this extraction step.",
         "The resulting documents then pass through Dolma 3-style heuristic, English-language, quality, and deduplication filters. The combined curation survival among captured injections is 5.5%. Together with the measured 3.4% page prevalence and 71.9% extraction survival, Section 4.4 reports a 0.13% document inclusion estimate, consistent with the rounded stage product. The v1 Introduction instead says 0.15%, without reconciling the difference. This is a probabilistic model assembled from controlled stages, not an observed live poisoning campaign."
       ],
-      "claim_ids": ["propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_evidence",
@@ -80,9 +145,25 @@
         "For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token rates of 0.001%, 0.01%, or 0.1%. At the 0.1% rate, the five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity relative to same-size clean controls.",
         "Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points. Q/A and no-label formats still affect every tested base-model scale, but the no-label effect falls to 0.1 and 0.3 points after SFT for the 709M and 1.3B models."
       ],
-      "claim_ids": ["propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion", "propaganda_claim_model_shift", "propaganda_claim_sft", "propaganda_claim_formats"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_models"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion",
+        "propaganda_claim_model_shift",
+        "propaganda_claim_sft",
+        "propaganda_claim_formats"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion",
+        "propaganda_source_models"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_limitations",
@@ -92,9 +173,21 @@
         "Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline. Proprietary crawlers may differ in scope, rendering, frequency, extraction, and filtering. Static HTML signatures may also overestimate practical posting access when server-side moderation or anti-bot controls are present.",
         "The authors avoid live injection and validate the vector in sandboxes. The behavioral experiments use synthetic entity preferences and models no larger than 1.3B parameters. The paper therefore does not show that a deployed model was poisoned through comments, that either the Section 4.4 value of 0.13% or the Introduction value of 0.15% is a universal inclusion rate, or that the same effects persist in frontier-scale systems."
       ],
-      "claim_ids": ["propaganda_claim_inclusion", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_limitations"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_inclusion",
+        "propaganda_claim_scope_pipeline",
+        "propaganda_claim_production_notshown"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion",
+        "propaganda_source_limitations"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "propaganda_review",
@@ -104,9 +197,24 @@
         "The paper supports treating third-party page fragments as a real data-provenance concern. Its strongest contribution is methodological: a poisoning vector should be evaluated through the complete collection and curation path rather than from posting access alone. The negative advertisement result reinforces that point.",
         "The phrase 'can be poisoned at scale' should remain bounded by the threat model. Inclusion is estimated from a sampled, sandboxed, open pipeline, and v1 itself disagrees between the Introduction's 0.15% and Section 4.4's stage-derived 0.13%. Model influence is shown in a separate controlled experiment. Connecting those stages into a reliable live attack against a production system remains unestablished."
       ],
-      "claim_ids": ["propaganda_claim_central", "propaganda_claim_halflife", "propaganda_claim_inclusion", "propaganda_claim_ads", "propaganda_claim_scope_pipeline", "propaganda_claim_production_notshown"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion", "propaganda_source_limitations"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "propaganda_claim_central",
+        "propaganda_claim_halflife",
+        "propaganda_claim_inclusion",
+        "propaganda_claim_ads",
+        "propaganda_claim_scope_pipeline",
+        "propaganda_claim_production_notshown"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion",
+        "propaganda_source_limitations"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     }
   ],
   "claims": [
@@ -116,7 +224,11 @@
       "epistemic_status": "EXPLAINER_INFERENCE",
       "importance": "CORE",
       "confidence": 0.95,
-      "source_refs": ["propaganda_source_inclusion", "propaganda_source_models", "propaganda_source_limitations"],
+      "source_refs": [
+        "propaganda_source_inclusion",
+        "propaganda_source_models",
+        "propaganda_source_limitations"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -125,7 +237,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_halflife"],
+      "source_refs": [
+        "propaganda_source_halflife"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -134,7 +248,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": [
+        "propaganda_source_inclusion"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -143,7 +259,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": [
+        "propaganda_source_inclusion"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -152,7 +270,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": [
+        "propaganda_source_inclusion"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -161,7 +281,10 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion"],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -170,7 +293,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["propaganda_source_models"],
+      "source_refs": [
+        "propaganda_source_models"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -179,7 +304,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 0.99,
-      "source_refs": ["propaganda_source_models"],
+      "source_refs": [
+        "propaganda_source_models"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -188,7 +315,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["propaganda_source_models"],
+      "source_refs": [
+        "propaganda_source_models"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -197,7 +326,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 0.99,
-      "source_refs": ["propaganda_source_inclusion"],
+      "source_refs": [
+        "propaganda_source_inclusion"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -206,7 +337,11 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 1,
-      "source_refs": ["propaganda_source_threat", "propaganda_source_inclusion", "propaganda_source_limitations"],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion",
+        "propaganda_source_limitations"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -215,7 +350,9 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 1,
-      "source_refs": ["propaganda_source_limitations"],
+      "source_refs": [
+        "propaganda_source_limitations"
+      ],
       "verification_status": "VERIFIED"
     }
   ],
@@ -258,162 +395,447 @@
   ],
   "visuals": [
     {
+      "id": "propaganda_visual_inclusion_questions",
+      "after_block_id": "propaganda_change",
+      "after_paragraph_id": "propaganda_change_p1",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Posting access is only the first inclusion question",
+      "question": "Which conditional gates stand between a post and curated training text?",
+      "items": [
+        {
+          "label": "Public posting interface",
+          "detail": "A relevant page must first permit third-party content."
+        },
+        {
+          "label": "S1 · page is injectable",
+          "detail": "Measure page prevalence under the public-interface definition."
+        },
+        {
+          "label": "S2 · fragment survives extraction",
+          "detail": "Ask whether the crawler and plaintext extractor retain the posted content."
+        },
+        {
+          "label": "S3 · document survives curation",
+          "detail": "Ask whether heuristic, language, quality, and deduplication filters keep the document."
+        },
+        {
+          "label": "Conditional inclusion estimate",
+          "detail": "Only the complete chain estimates document-level corpus inclusion.",
+          "role": "DERIVED"
+        }
+      ],
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_ads"
+      ],
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion"
+      ],
+      "interpretation": "HalfLife replaces posting access with three explicit conditional inclusion questions.",
+      "limitations": [
+        "This flow describes the tested open collection path, not every possible production crawler."
+      ],
+      "alt_text": "Posting access is only the first inclusion question. Public posting interface; S1 · page is injectable; S2 · fragment survives extraction; S3 · document survives curation; Conditional inclusion estimate.",
+      "fallback": "HalfLife replaces posting access with three explicit conditional inclusion questions. Public posting interface; S1 · page is injectable; S2 · fragment survives extraction; S3 · document survives curation; Conditional inclusion estimate."
+    },
+    {
       "id": "propaganda_visual_comments_vs_ads",
       "after_block_id": "propaganda_change",
       "after_paragraph_id": "propaganda_change_p2",
       "type": "PARALLEL_VIEW",
-      "title": "Visible web content does not follow one extraction path",
-      "question": "Why did public comments remain plausible poison carriers while programmatic advertisements did not in the tested crawl path?",
+      "title": "Visible comments and advertisements follow different extraction paths",
+      "question": "Which third-party fragments reached plaintext in the tested collector?",
       "items": [
         {
-          "label": "Public comment lane",
-          "detail": "The researchers replaced existing comments in sandboxed pages; 71.9% of those simulated fragments remained visible after Resiliparse converted the HTML to plaintext.",
-          "value": 71.9
+          "label": "Public comments",
+          "detail": "Sandboxed replacement comments often remained visible after Resiliparse converted HTML to plaintext.",
+          "value": 71.9,
+          "value_label": "71.9% survived",
+          "group": "Observed extraction path",
+          "role": "MEASURED"
         },
         {
-          "label": "Programmatic advertisement lane",
-          "detail": "Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path, so visible ad placement alone did not establish corpus inclusion."
+          "label": "Programmatic advertisements",
+          "detail": "Advertisement content did not appear in extracted plaintext in the tested DOM-based collection path.",
+          "group": "Observed extraction path",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Architecture boundary",
+          "detail": "The contrast is specific to the tested collection architecture, not a universal claim about crawlers.",
+          "group": "Scope",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_extraction", "propaganda_claim_ads"],
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion"],
-      "interpretation": "The relevant question is not only whether content appears to a visitor, but whether the tested crawler and extractor preserve that fragment in the representation passed to curation.",
-      "limitations": [
-        "The two lanes summarize results from the paper's tested DOM-based collection architecture; they are not universal properties of comments or advertisements.",
-        "The 71.9% comment value is conditional on sandboxed simulated replacements, not on all web pages or all attempted live posts.",
-        "The negative advertisement result does not rule out other crawler, rendering, or injection paths."
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_ads"
       ],
-      "alt_text": "Parallel comparison: 71.9% of sandboxed replacement comments survived HTML-to-plaintext extraction, while programmatic advertisement content did not appear in plaintext in the tested DOM-based crawl path.",
-      "fallback": "In sandboxed replacements, 71.9% of injected comment fragments survived the tested HTML-to-plaintext extraction. Programmatic advertisement content did not appear in extracted plaintext in that DOM-based path. The contrast is specific to the tested collection architecture and does not generalize to every crawler."
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion"
+      ],
+      "interpretation": "Posting visibility alone does not establish inclusion: the tested extractor retained comments but not programmatic advertisements.",
+      "limitations": [
+        "The negative advertisement result does not cover every rendering or collection architecture."
+      ],
+      "alt_text": "Visible comments and advertisements follow different extraction paths. Public comments: 71.9% survived; Programmatic advertisements; Architecture boundary.",
+      "fallback": "Posting visibility alone does not establish inclusion: the tested extractor retained comments but not programmatic advertisements. Public comments: 71.9% survived; Programmatic advertisements; Architecture boundary."
     },
     {
       "id": "propaganda_visual_halflife_flow",
       "after_block_id": "propaganda_mechanism",
       "after_paragraph_id": "propaganda_mechanism_p3",
       "type": "OPERATION_DIAGRAM",
-      "title": "HalfLife multiplies three conditional inclusion gates",
-      "question": "Which measured conditions contribute to the document-level inclusion estimate?",
+      "title": "Three measured gates feed an estimate; model influence is separate",
+      "question": "How do the inclusion and influence experiments connect without becoming one live attack?",
       "items": [
         {
-          "label": "S1 · Page prevalence",
-          "detail": "Comment-platform signatures appeared on 3.4% of 181,857 sampled Common Crawl pages. This denominator is the sampled page population.",
-          "value": 3.4
+          "label": "S1 · page prevalence",
+          "detail": "3.4% among 181,857 sampled Common Crawl pages; denominator is all sampled pages.",
+          "value": 3.4,
+          "value_label": "3.4% of 181,857",
+          "group": "Inclusion model",
+          "role": "MEASURED"
         },
         {
-          "label": "S2 · Extraction survival",
-          "detail": "Among sandboxed simulated comment replacements, 71.9% remained in extracted plaintext. This denominator is the simulated-injection set.",
-          "value": 71.9
+          "label": "S2 · extraction survival",
+          "detail": "71.9% among sandboxed simulated comment replacements; denominator is simulated injections.",
+          "value": 71.9,
+          "value_label": "71.9%",
+          "group": "Inclusion model",
+          "role": "MEASURED"
         },
         {
-          "label": "S3 · Curation survival",
-          "detail": "Among captured injected-comment documents, 5.5% survived the combined Dolma 3-style heuristic, language, quality, and deduplication path.",
-          "value": 5.5
+          "label": "S3 · curation survival",
+          "detail": "5.5% among captured injected-comment documents after combined filtering.",
+          "value": 5.5,
+          "value_label": "5.5%",
+          "group": "Inclusion model",
+          "role": "MEASURED"
         },
         {
-          "label": "Section 4.4 and rounded product",
-          "detail": "Multiplying the rounded conditional stages gives about 0.13%, matching the document-level estimate reported in Section 4.4.",
-          "value": 0.13
+          "label": "Document inclusion estimate",
+          "detail": "The conditional stages combine into the Section 4.4 document-level estimate.",
+          "value": 0.13,
+          "value_label": "≈0.13%",
+          "group": "Inclusion model",
+          "role": "DERIVED"
         },
         {
-          "label": "Conflicting Introduction summary",
-          "detail": "The v1 Introduction instead states 0.15% and does not reconcile that number with Section 4.4 or the rounded stage product.",
-          "value": 0.15
+          "label": "Controlled poison mixtures",
+          "detail": "Separately pretrain same-size clean and poisoned models at disclosed poison token rates.",
+          "value_label": "0.001% · 0.01% · 0.1%",
+          "group": "Model-influence experiment"
+        },
+        {
+          "label": "Held-out preference shift",
+          "detail": "Compare whether completions favor the attacker-selected synthetic entity.",
+          "group": "Model-influence experiment",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Clean supervised fine-tuning",
+          "detail": "Measure how much of the controlled preference shift remains after clean SFT.",
+          "group": "Model-influence experiment",
+          "role": "MEASURED"
+        },
+        {
+          "label": "No live end-to-end attack",
+          "detail": "The paper does not join the sampled inclusion estimate and controlled model training into an observed production poisoning campaign.",
+          "group": "Boundary",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["propaganda_claim_halflife", "propaganda_claim_comments", "propaganda_claim_extraction", "propaganda_claim_curation", "propaganda_claim_inclusion"],
-      "source_refs": ["propaganda_source_threat", "propaganda_source_halflife", "propaganda_source_inclusion"],
-      "interpretation": "Posting access is insufficient. HalfLife estimates whether a relevant page exists, whether a simulated fragment survives extraction, and whether the resulting captured document survives one curation path, while preserving the source's unresolved 0.13% versus 0.15% discrepancy.",
-      "limitations": [
-        "The stage percentages use different conditional denominators and are not independent population rates drawn from one sample.",
-        "The v1 paper contains an unresolved numerical discrepancy: 0.15% in the Introduction versus approximately 0.13% in Section 4.4 and the rounded stage product.",
-        "The inclusion estimate combines sandboxed injection with one Common Crawl sample and one open curation pipeline.",
-        "Document inclusion remains an intermediate estimate; this operation diagram does not depict or establish a live end-to-end poisoning attack."
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_model_shift"
       ],
-      "alt_text": "Conditional operation with three denominators: comment signatures on 3.4% of 181,857 sampled pages, extraction survival for 71.9% of sandboxed simulated comments, and curation survival for 5.5% of captured injected-comment documents. Their rounded product and Section 4.4 give about 0.13%, while the Introduction states an unreconciled 0.15%.",
-      "fallback": "HalfLife uses three conditional stages. Comment signatures appeared on 3.4% of 181,857 sampled pages. Among sandboxed replacement comments, 71.9% survived extraction. Among captured injected-comment documents, 5.5% survived the combined curation path. The rounded product is about 0.13%, matching Section 4.4; the Introduction separately states 0.15% without reconciliation. The stages do not constitute a live end-to-end attack."
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion",
+        "propaganda_source_models"
+      ],
+      "interpretation": "HalfLife keeps the three inclusion denominators visible and evaluates model influence in a separate controlled branch.",
+      "limitations": [
+        "The two branches do not demonstrate a live web-to-production-model attack."
+      ],
+      "alt_text": "Three measured gates feed an estimate; model influence is separate. S1 · page prevalence: 3.4% of 181,857; S2 · extraction survival: 71.9%; S3 · curation survival: 5.5%; Document inclusion estimate: ≈0.13%; Controlled poison mixtures: 0.001% · 0.01% · 0.1%; Held-out preference shift; Clean supervised fine-tuning; No live end-to-end attack.",
+      "fallback": "HalfLife keeps the three inclusion denominators visible and evaluates model influence in a separate controlled branch. S1 · page prevalence: 3.4% of 181,857; S2 · extraction survival: 71.9%; S3 · curation survival: 5.5%; Document inclusion estimate: ≈0.13%; Controlled poison mixtures: 0.001% · 0.01% · 0.1%; Held-out preference shift; Clean supervised fine-tuning; No live end-to-end attack."
+    },
+    {
+      "id": "propaganda_visual_worked_inclusion",
+      "after_block_id": "propaganda_example",
+      "after_paragraph_id": "propaganda_example_p2",
+      "type": "OPERATION_DIAGRAM",
+      "title": "A sandboxed comment passes measured gates",
+      "question": "How does the worked comment example become a rounded inclusion estimate?",
+      "items": [
+        {
+          "label": "Replace an existing comment",
+          "detail": "The sandboxed question-and-answer poison fragment averages 37.5 words.",
+          "value": 37.5,
+          "value_label": "37.5 words",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Extract HTML to plaintext",
+          "detail": "Resiliparse preserves 71.9% of simulated replacements.",
+          "value": 71.9,
+          "value_label": "71.9%",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Run curation filters",
+          "detail": "Dolma 3-style heuristic, language, quality, and deduplication filters retain 5.5% of captured injections.",
+          "value": 5.5,
+          "value_label": "5.5%",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Use sampled page prevalence",
+          "detail": "Comment signatures appear on 3.4% of sampled pages.",
+          "value": 3.4,
+          "value_label": "3.4%",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Multiply rounded gates",
+          "detail": "Section 4.4 reports the derived document inclusion estimate.",
+          "value": 0.13,
+          "value_label": "≈0.13%",
+          "role": "DERIVED"
+        },
+        {
+          "label": "Preserve the conflicting summary",
+          "detail": "The v1 Introduction states an unreconciled alternative.",
+          "value": 0.15,
+          "value_label": "0.15%",
+          "role": "DISPUTED"
+        },
+        {
+          "label": "Keep the campaign boundary",
+          "detail": "These controlled stages form a probabilistic model, not an observed live poisoning campaign.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion"
+      ],
+      "interpretation": "The worked path separates measured stage values, the rounded derived product, the disputed introduction value, and the non-live boundary.",
+      "limitations": [
+        "The rounded stage product and Section 4.4 estimate are not a universal inclusion rate."
+      ],
+      "alt_text": "A sandboxed comment passes measured gates. Replace an existing comment: 37.5 words; Extract HTML to plaintext: 71.9%; Run curation filters: 5.5%; Use sampled page prevalence: 3.4%; Multiply rounded gates: ≈0.13%; Preserve the conflicting summary: 0.15%; Keep the campaign boundary.",
+      "fallback": "The worked path separates measured stage values, the rounded derived product, the disputed introduction value, and the non-live boundary. Replace an existing comment: 37.5 words; Extract HTML to plaintext: 71.9%; Run curation filters: 5.5%; Use sampled page prevalence: 3.4%; Multiply rounded gates: ≈0.13%; Preserve the conflicting summary: 0.15%; Keep the campaign boundary."
+    },
+    {
+      "id": "propaganda_visual_inclusion_evidence",
+      "after_block_id": "propaganda_evidence",
+      "after_paragraph_id": "propaganda_evidence_p1",
+      "type": "DOT_PLOT",
+      "title": "Measured gates, derived product, and disputed value are different evidence",
+      "question": "What was measured and what was calculated or internally disputed?",
+      "items": [
+        {
+          "label": "Page prevalence",
+          "detail": "Measured among 181,857 sampled pages.",
+          "value": 3.4,
+          "value_label": "3.4%",
+          "group": "Measured S1 · domain 0–5%",
+          "role": "MEASURED",
+          "domain_min": 0,
+          "domain_max": 5
+        },
+        {
+          "label": "Extraction survival",
+          "detail": "Measured among sandboxed simulated replacements.",
+          "value": 71.9,
+          "value_label": "71.9%",
+          "group": "Measured S2 · domain 65–75%",
+          "role": "MEASURED",
+          "domain_min": 65,
+          "domain_max": 75
+        },
+        {
+          "label": "Curation survival",
+          "detail": "Measured among captured injected-comment documents.",
+          "value": 5.5,
+          "value_label": "5.5%",
+          "group": "Measured S3 · domain 0–7%",
+          "role": "MEASURED",
+          "domain_min": 0,
+          "domain_max": 7
+        },
+        {
+          "label": "Section 4.4 estimate",
+          "detail": "Derived from the rounded conditional gates.",
+          "value": 0.13,
+          "value_label": "≈0.13%",
+          "group": "Inclusion estimates · domain 0.10–0.16%",
+          "role": "DERIVED",
+          "domain_min": 0.1,
+          "domain_max": 0.16
+        },
+        {
+          "label": "Introduction summary",
+          "detail": "Unreconciled internal alternative in v1.",
+          "value": 0.15,
+          "value_label": "0.15%",
+          "group": "Inclusion estimates · domain 0.10–0.16%",
+          "role": "DISPUTED",
+          "domain_min": 0.1,
+          "domain_max": 0.16
+        }
+      ],
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion",
+        "propaganda_claim_model_shift",
+        "propaganda_claim_sft",
+        "propaganda_claim_formats"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion",
+        "propaganda_source_models"
+      ],
+      "interpretation": "Separate disclosed domains prevent conditional percentages from reading as one comparable scale while preserving epistemic roles.",
+      "limitations": [
+        "The local axes support within-panel reading only; they must not be compared by mark length across panels."
+      ],
+      "alt_text": "Measured gates, derived product, and disputed value are different evidence. Page prevalence: 3.4%; Extraction survival: 71.9%; Curation survival: 5.5%; Section 4.4 estimate: ≈0.13%; Introduction summary: 0.15%.",
+      "fallback": "Separate disclosed domains prevent conditional percentages from reading as one comparable scale while preserving epistemic roles. Page prevalence: 3.4%; Extraction survival: 71.9%; Curation survival: 5.5%; Section 4.4 estimate: ≈0.13%; Introduction summary: 0.15%."
     },
     {
       "id": "propaganda_visual_model_effects",
       "after_block_id": "propaganda_evidence",
       "after_paragraph_id": "propaganda_evidence_p3",
-      "type": "RESULT_COMPARISON",
-      "title": "Clean supervised fine-tuning attenuates the controlled preference shift",
-      "question": "What range of preference shifts did the controlled 0.1% poison condition produce before and after supervised fine-tuning?",
+      "type": "DOT_PLOT",
+      "title": "Controlled preference shifts attenuate after clean SFT",
+      "question": "How do effect ranges change across experimental conditions?",
       "items": [
         {
-          "label": "Base-model shift · lower end",
-          "detail": "Lower endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales.",
-          "value": 18.6
+          "label": "Five base-model scales",
+          "detail": "At 0.1% poison across models from 65M to 1.3B parameters.",
+          "value": 18.6,
+          "value_end": 20.7,
+          "value_label": "18.6–20.7 pp",
+          "group": "Base models · domain 17–22 pp",
+          "role": "MEASURED",
+          "domain_min": 17,
+          "domain_max": 22
         },
         {
-          "label": "Base-model shift · upper end",
-          "detail": "Upper endpoint of the 18.6–20.7 percentage-point range across the five tested base-model scales.",
-          "value": 20.7
+          "label": "Post-SFT range",
+          "detail": "Remaining shift after clean supervised fine-tuning at 0.1% poison.",
+          "value": 0.9,
+          "value_end": 7.4,
+          "value_label": "0.9–7.4 pp",
+          "group": "After clean SFT · domain 0–8 pp",
+          "role": "MEASURED",
+          "domain_min": 0,
+          "domain_max": 8
         },
         {
-          "label": "Post-SFT shift · lower end",
-          "detail": "Lower endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning.",
-          "value": 0.9
+          "label": "No-label · 709M",
+          "detail": "Remaining no-label-format shift after clean SFT.",
+          "value": 0.1,
+          "value_label": "0.1 pp",
+          "group": "No-label after SFT · domain 0–0.5 pp",
+          "role": "MEASURED",
+          "domain_min": 0,
+          "domain_max": 0.5
         },
         {
-          "label": "Post-SFT shift · upper end",
-          "detail": "Upper endpoint of the 0.9–7.4 percentage-point range after clean supervised fine-tuning.",
-          "value": 7.4
-        },
-        {
-          "label": "No-label post-SFT · 709M",
-          "detail": "Reported remaining shift for the 709M model under the no-label poison format.",
-          "value": 0.1
-        },
-        {
-          "label": "No-label post-SFT · 1.3B",
-          "detail": "Reported remaining shift for the 1.3B model under the no-label poison format.",
-          "value": 0.3
+          "label": "No-label · 1.3B",
+          "detail": "Remaining no-label-format shift after clean SFT.",
+          "value": 0.3,
+          "value_label": "0.3 pp",
+          "group": "No-label after SFT · domain 0–0.5 pp",
+          "role": "MEASURED",
+          "domain_min": 0,
+          "domain_max": 0.5
         }
       ],
-      "claim_ids": ["propaganda_claim_model_shift", "propaganda_claim_sft", "propaganda_claim_formats"],
-      "source_refs": ["propaganda_source_models"],
-      "interpretation": "The controlled poison mixture shifts every tested base-model scale at the reported 0.1% rate, while clean supervised fine-tuning reduces the measured effect substantially and unevenly rather than guaranteeing removal.",
-      "limitations": [
-        "The range endpoints summarize five model scales; lower and upper endpoints are not presented as a matched before-and-after pair for one model.",
-        "The no-label values apply only to the identified 709M and 1.3B post-SFT conditions.",
-        "These are controlled synthetic entity-preference experiments on models up to 1.3B parameters, not observations from a live web-to-model attack."
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion",
+        "propaganda_claim_model_shift",
+        "propaganda_claim_sft",
+        "propaganda_claim_formats"
       ],
-      "alt_text": "Result comparison showing a controlled 0.1% poison condition shifting five base models by 18.6 to 20.7 percentage points and post-SFT models by 0.9 to 7.4 points; no-label post-SFT shifts are 0.1 for 709M and 0.3 for 1.3B.",
-      "fallback": "At a 0.1% poison-token rate, five base models shift 18.6 to 20.7 percentage points toward the poison-favored entity. After clean supervised fine-tuning, shifts range from 0.9 to 7.4 points. Under the no-label format, the post-SFT 709M and 1.3B shifts are 0.1 and 0.3 points. The endpoints summarize different model conditions and do not establish a live attack."
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion",
+        "propaganda_source_models"
+      ],
+      "interpretation": "The result is a set of condition-specific ranges and points, not a single effect size or a frontier-model claim.",
+      "limitations": [
+        "These controlled synthetic-entity results do not establish the same effect at frontier scale or through a live corpus attack."
+      ],
+      "alt_text": "Controlled preference shifts attenuate after clean SFT. Five base-model scales: 18.6–20.7 pp; Post-SFT range: 0.9–7.4 pp; No-label · 709M: 0.1 pp; No-label · 1.3B: 0.3 pp.",
+      "fallback": "The result is a set of condition-specific ranges and points, not a single effect size or a frontier-model claim. Five base-model scales: 18.6–20.7 pp; Post-SFT range: 0.9–7.4 pp; No-label · 709M: 0.1 pp; No-label · 1.3B: 0.3 pp."
     }
   ],
   "glossary": [
     {
       "term": "Pretraining-data poisoning",
       "definition": "Adding adversarial examples to data consumed before a model's task-specific or instruction tuning.",
-      "source_refs": ["propaganda_source_threat"]
+      "source_refs": [
+        "propaganda_source_threat"
+      ]
     },
     {
       "term": "HalfLife",
       "definition": "The paper's analysis for estimating whether an injected fragment reaches a final training corpus through multiple conditional stages.",
-      "source_refs": ["propaganda_source_halflife"]
+      "source_refs": [
+        "propaganda_source_halflife"
+      ]
     },
     {
       "term": "WARC",
       "definition": "A web-archive file format used by Common Crawl to store fetched web content.",
-      "source_refs": ["propaganda_source_inclusion"]
+      "source_refs": [
+        "propaganda_source_inclusion"
+      ]
     },
     {
       "term": "Curation survival",
       "definition": "The probability that an extracted document remains after heuristic, language, quality, and deduplication filters.",
-      "source_refs": ["propaganda_source_halflife", "propaganda_source_inclusion"]
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion"
+      ]
     },
     {
       "term": "Token poison rate",
       "definition": "The fraction of pretraining tokens drawn from the controlled poison examples in the model experiment.",
-      "source_refs": ["propaganda_source_models"]
+      "source_refs": [
+        "propaganda_source_models"
+      ]
     }
   ],
   "revision_notes": [
     "Initial evidence-backed explainer fixture for arXiv:2607.15267v1.",
     "The inclusion analysis and controlled model-effect experiment remain explicitly separate.",
     "Exposed the unresolved v1 discrepancy between the Introduction's 0.15% inclusion summary and Section 4.4's stage-derived approximately 0.13% value.",
-    "Editorial review and human publication approval remain required."
+    "Editorial review and human publication approval remain required.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

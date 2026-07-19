@@ -139,6 +139,57 @@ describe("ExplainerDocument schema", () => {
       "FIVE_MIN reading path omits HOW_IT_WORKS",
     );
   });
+
+  it("accepts grouped, bounded values and visual-local relationships", () => {
+    const grouped = structuredClone(validExplainer);
+    grouped.visuals[0].items = [
+      {
+        label: "Measured input",
+        detail: "A disclosed source value.",
+        value: 52.5,
+        value_end: 53.5,
+        value_label: "52.5–53.5%",
+        group: "Measured results",
+        role: "MEASURED",
+        domain_min: 50,
+        domain_max: 55,
+        node_id: "measured_input",
+      },
+      {
+        label: "Weighted merge",
+        detail: "The input is aggregated with an explicit weight.",
+        group: "Aggregation",
+        role: "DERIVED",
+        node_id: "weighted_merge",
+        input_ids: ["measured_input"],
+      },
+    ];
+
+    expect(validateExplainerDocument(grouped)).toBe(true);
+  });
+
+  it("rejects incomplete numeric domains and dangling visual inputs", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.visuals[0].items = [
+      {
+        label: "Input",
+        detail: "An incomplete plot definition.",
+        value: 1,
+        domain_min: 0,
+        node_id: "input",
+      },
+      {
+        label: "Output",
+        detail: "A relationship to an absent node.",
+        input_ids: ["missing_node"],
+      },
+    ];
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "must declare both domain bounds",
+    );
+  });
 });
 
 function validPathIncludes(depth: "FIVE_MIN" | "TWENTY_MIN", blockId: string): boolean {

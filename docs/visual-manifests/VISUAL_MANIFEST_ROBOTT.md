@@ -251,14 +251,14 @@ Path("rttt_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_history_memory` after `rttt_why_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_why_p1`, `rttt_why_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_why_p2`
 
@@ -495,14 +495,14 @@ Path("rttt_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Growing observation history versus fixed-size fast-weight state — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_history_memory` after `rttt_why_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_why_p1`, `rttt_why_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_change_p1`
 
@@ -740,14 +740,14 @@ Path("rttt_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Observation projection, fast-weight gradient update, query retrieval, and current action — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_training_timeline` after `rttt_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_change_p1`, `rttt_change_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_robottt_current_action` after `rttt_change_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_change_p2`
 
@@ -979,14 +979,14 @@ Path("rttt_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Per-chunk noise, carried fast weights, and detached TBPTT boundaries — Training timeline” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_training_timeline` after `rttt_change_p2`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_change_p1`, `rttt_change_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_mechanism_p1`
 
@@ -1262,14 +1262,14 @@ Path("rttt_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_mechanism_p2`
 
@@ -1545,14 +1545,14 @@ Path("rttt_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_mechanism_p3`
 
@@ -1828,14 +1828,14 @@ Path("rttt_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “RoboTTT within-timestep architecture and across-timestep recurrent update — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_fast_weight_cycle` after `rttt_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`, `rttt_mechanism_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_example_p1`
 
@@ -2079,14 +2079,14 @@ Path("rttt_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Human demonstration as masked context for a reset robot trajectory — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_masked_context` after `rttt_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_example_p1`, `rttt_example_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_example_p2`
 
@@ -2330,14 +2330,14 @@ Path("rttt_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Human demonstration as masked context for a reset robot trajectory — Worked sequence” treatment because the implemented timeline directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_robottt_masked_context` after `rttt_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `rttt_example_p1`, `rttt_example_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_evidence_p1`
 
@@ -2590,15 +2590,15 @@ Path("rttt_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “Main-task average completion and per-task full-success counts — Experiment small multiples” treatment because the implemented result comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_completion_results` after `rttt_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_evidence_p1`, `rttt_evidence_p2`, `rttt_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_robottt_main_results` after `rttt_evidence_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_evidence_p2`
 
@@ -2852,14 +2852,14 @@ Path("rttt_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Context-scaling study separated from main-result DAgger conditions — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_completion_results` after `rttt_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_evidence_p1`, `rttt_evidence_p2`, `rttt_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_robottt_context_scaling` after `rttt_evidence_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_evidence_p3`
 
@@ -3099,14 +3099,14 @@ Path("rttt_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Perturbation recovery and DAgger improvement as separate comparisons — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_robottt_completion_results` after `rttt_evidence_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `rttt_evidence_p1`, `rttt_evidence_p2`, `rttt_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_robottt_recovery_and_dagger` after `rttt_evidence_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/robott.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `rttt_limitations_p1`
 
@@ -3335,14 +3335,14 @@ Path("rttt_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `rttt_limitations_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#rttt_limitations_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `rttt_limitations_p2`
 
@@ -3585,14 +3585,14 @@ Path("rttt_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `rttt_limitations_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#rttt_limitations_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `rttt_review_p1`
 
@@ -3814,14 +3814,14 @@ Path("rttt_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `rttt_review_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#rttt_review_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `rttt_review_p2`
 
@@ -4057,12 +4057,12 @@ Path("rttt_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `rttt_review_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#rttt_review_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ROBOTT.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 

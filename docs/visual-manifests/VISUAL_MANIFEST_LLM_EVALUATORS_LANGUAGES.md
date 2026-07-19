@@ -254,14 +254,14 @@ Path("language_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Pairwise ordering, pointwise thresholds, and scalar rewards — Relationship-specific parallel view” treatment because the implemented method comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_evaluation_modes` after `language_why_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_why_p1`, `language_why_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_why_p2`
 
@@ -499,14 +499,14 @@ Path("language_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Pairwise ordering, pointwise thresholds, and scalar rewards — Relationship-specific parallel view” treatment because the implemented method comparison directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_evaluation_modes` after `language_why_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_why_p1`, `language_why_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_change_p1`
 
@@ -768,14 +768,14 @@ Path("language_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Aligned multilingual study design and calibration analyses — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_study_design` after `language_change_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_change_p1`, `language_change_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_change_p2`
 
@@ -1037,14 +1037,14 @@ Path("language_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Aligned multilingual study design and calibration analyses — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_study_design` after `language_change_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_change_p1`, `language_change_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_mechanism_p1`
 
@@ -1280,14 +1280,14 @@ Path("language_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encod
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Within-language ranking versus cross-language threshold decisions — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_pairwise_threshold` after `language_mechanism_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_mechanism_p1`, `language_mechanism_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_mechanism_p2`
 
@@ -1523,14 +1523,14 @@ Path("language_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encod
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Within-language ranking versus cross-language threshold decisions — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_pairwise_threshold` after `language_mechanism_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_mechanism_p1`, `language_mechanism_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_mechanism_p3`
 
@@ -1769,15 +1769,15 @@ Path("language_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encod
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “Additive score terms separated from the nested-regression test — Model-versus-test panels” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_score_decomposition` after `language_mechanism_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_example_p1`
 
@@ -2035,15 +2035,15 @@ Path("language_example_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “English-Ukrainian threshold gap and code-switch routing as two bounded examples — Bounded example panels” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `language_visual_threshold_failures` after `language_example_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `language_visual_threshold_examples` after `language_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_example_p1`, `language_example_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_example_p2`
 
@@ -2301,15 +2301,15 @@ Path("language_example_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “English-Ukrainian threshold gap and code-switch routing as two bounded examples — Bounded example panels” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `language_visual_threshold_failures` after `language_example_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `language_visual_threshold_examples` after `language_example_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_example_p1`, `language_example_p2`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_evidence_p1`
 
@@ -2577,14 +2577,14 @@ Path("language_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encodi
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Language-effect evidence with explicit reported-value and condition columns — Visible evidence matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_evidence_matrix` after `language_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_evidence_p1`, `language_evidence_p2`, `language_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_evidence_p2`
 
@@ -2852,14 +2852,14 @@ Path("language_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encodi
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Language-effect evidence with explicit reported-value and condition columns — Visible evidence matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_evidence_matrix` after `language_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_evidence_p1`, `language_evidence_p2`, `language_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_evidence_p3`
 
@@ -3127,14 +3127,14 @@ Path("language_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encodi
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Language-effect evidence with explicit reported-value and condition columns — Visible evidence matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `language_visual_evidence_matrix` after `language_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: `language_evidence_p1`, `language_evidence_p2`, `language_evidence_p3`
-- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `language_limitations_p1`
 
@@ -3356,14 +3356,14 @@ Path("language_limitations_p1_treatment_c.svg").write_text("\n".join(parts), enc
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `language_limitations_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#language_limitations_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_LLM_EVALUATORS_LANGUAGES.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `language_limitations_p2`
 
@@ -3592,14 +3592,14 @@ Path("language_limitations_p2_treatment_c.svg").write_text("\n".join(parts), enc
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `language_limitations_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#language_limitations_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_LLM_EVALUATORS_LANGUAGES.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `language_review_p1`
 
@@ -3821,14 +3821,14 @@ Path("language_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `language_review_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#language_review_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_LLM_EVALUATORS_LANGUAGES.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `language_review_p2`
 
@@ -4064,12 +4064,12 @@ Path("language_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `language_review_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#language_review_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_LLM_EVALUATORS_LANGUAGES.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 

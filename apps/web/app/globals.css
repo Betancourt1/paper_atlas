@@ -543,24 +543,43 @@ summary:focus-visible {
 }
 
 .dot-plot {
-  --plot-label-width: minmax(150px, 0.38fr);
   display: grid;
-  gap: 18px;
+  gap: 28px;
   padding: 24px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
 }
 
+.dot-plot__panel {
+  display: grid;
+  gap: 14px;
+}
+
+.dot-plot__panel + .dot-plot__panel {
+  padding-top: 26px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.dot-plot__panel > h4,
+.result-groups > section > h4,
+.parallel-view__panel > h4,
+.partition-tree__level > h4 {
+  margin: 0;
+  color: var(--evidence);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .dot-plot__axis,
 .dot-plot__row {
   display: grid;
-  grid-template-columns: var(--plot-label-width) minmax(220px, 1fr);
+  grid-template-columns: minmax(150px, 0.38fr) minmax(220px, 1fr) auto;
   gap: 8px 24px;
 }
 
 .dot-plot__axis {
-  grid-column: 1 / -1;
-  grid-template-columns: var(--plot-label-width) minmax(220px, 1fr);
   color: var(--ink-muted);
   font-size: 0.7rem;
   font-variant-numeric: tabular-nums;
@@ -572,11 +591,12 @@ summary:focus-visible {
 }
 
 .dot-plot__axis span:first-of-type {
+  grid-column: 2;
   justify-self: start;
 }
 
 .dot-plot__axis span:last-of-type {
-  grid-column: 2;
+  grid-column: 3;
   justify-self: end;
 }
 
@@ -591,8 +611,16 @@ summary:focus-visible {
 }
 
 .dot-plot__row > p:last-child {
-  grid-column: 2;
+  grid-column: 2 / -1;
   color: var(--ink-muted);
+}
+
+.dot-plot__row > strong {
+  align-self: center;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .dot-plot__track {
@@ -612,14 +640,44 @@ summary:focus-visible {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
-  color: var(--ink);
-  font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
-  font-weight: 750;
-  line-height: 1;
-  text-indent: 18px;
-  white-space: nowrap;
   transform: translateX(-50%);
+}
+
+.dot-plot__range {
+  position: absolute;
+  bottom: -3px;
+  min-width: 2px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.dot-plot__note {
+  padding: 14px 16px;
+  border-inline-start: 3px solid var(--evidence);
+  background: var(--surface-subtle);
+}
+
+.dot-plot__note strong,
+.dot-plot__note p {
+  margin: 0;
+}
+
+.dot-plot__note p {
+  margin-top: 5px;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.result-groups {
+  display: grid;
+  gap: 28px;
+}
+
+.result-groups > section {
+  display: grid;
+  gap: 12px;
 }
 
 .result-constellation {
@@ -706,6 +764,14 @@ summary:focus-visible {
   width: 34%;
 }
 
+.evidence-matrix__value {
+  color: var(--accent);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
 .method-comparison {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -721,7 +787,7 @@ summary:focus-visible {
 }
 
 .method-comparison section > p:first-child,
-.parallel-view section > span,
+.parallel-view article > span,
 .architecture-layers li > span {
   color: var(--evidence);
   font-size: 0.66rem;
@@ -881,22 +947,37 @@ summary:focus-visible {
 }
 
 .partition-tree {
+  display: grid;
+  gap: 28px;
   text-align: center;
 }
 
-.partition-tree__root {
-  width: min(100%, 420px);
-  margin: 0 auto;
-  padding: 18px;
-  border-block: 1px solid var(--line-strong);
+.partition-tree__level {
+  position: relative;
 }
 
-.partition-tree__root span,
-.partition-tree ol span {
-  color: var(--evidence);
-  font-size: 0.66rem;
-  font-weight: 700;
-  text-transform: uppercase;
+.partition-tree__level + .partition-tree__level::before {
+  display: block;
+  width: 1px;
+  height: 28px;
+  margin: -28px auto 0;
+  background: var(--line-strong);
+  content: "";
+}
+
+.partition-tree ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partition-tree ol li {
+  position: relative;
+  padding: 18px;
+  border: 1px solid var(--line-strong);
 }
 
 .partition-tree p,
@@ -904,55 +985,35 @@ summary:focus-visible {
   margin: 0;
 }
 
-.partition-tree__root p,
+.partition-tree ol li > span {
+  display: block;
+  margin: -32px auto 12px;
+  color: var(--evidence);
+  font-size: 1rem;
+}
+
 .partition-tree ol li > p:first-of-type {
-  margin-top: 6px;
-  font-weight: 700;
+  font-weight: 750;
 }
 
 .partition-tree strong {
   display: block;
   margin-top: 6px;
   color: var(--accent);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
 }
 
-.partition-tree__trunk {
-  width: 1px;
-  height: 34px;
-  margin: 0 auto;
-  background: var(--line-strong);
-}
-
-.partition-tree ol {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 18px;
-  margin: 0;
-  padding: 24px 0 0;
-  border-top: 1px solid var(--line-strong);
-  list-style: none;
-}
-
-.partition-tree ol li {
-  position: relative;
-  padding: 0 12px;
-}
-
-.partition-tree ol li::before {
-  position: absolute;
-  inset: -24px 50% auto;
-  width: 1px;
-  height: 18px;
-  background: var(--line-strong);
-  content: "";
-}
-
-.partition-tree ol li > p:last-child {
+.partition-tree ol li > p:last-child,
+.partition-tree__inputs {
   margin-top: 7px;
   color: var(--ink-muted);
   font-size: 0.74rem;
   line-height: 1.4;
+}
+
+.partition-tree__inputs {
+  color: var(--evidence);
+  font-weight: 700;
 }
 
 .visual-timeline {
@@ -994,16 +1055,27 @@ summary:focus-visible {
 
 .parallel-view {
   display: grid;
-  gap: 18px;
+  gap: 26px;
 }
 
-.parallel-view section {
+.parallel-view__panel {
+  display: grid;
+  gap: 12px;
+}
+
+.parallel-view__panel > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.parallel-view article {
   position: relative;
   padding: 18px 18px 18px 30px;
-  border-block: 1px solid var(--line);
+  border: 1px solid var(--line);
 }
 
-.parallel-view section::before {
+.parallel-view article::before {
   position: absolute;
   inset: 0 auto 0 0;
   width: 4px;
@@ -1011,17 +1083,17 @@ summary:focus-visible {
   content: "";
 }
 
-.parallel-view section:nth-child(even)::before {
+.parallel-view article:nth-child(even)::before {
   background: var(--evidence);
 }
 
-.parallel-view h4,
+.parallel-view h5,
 .parallel-view p,
 .parallel-view strong {
   margin: 0;
 }
 
-.parallel-view h4 {
+.parallel-view h5 {
   margin-top: 6px;
   font-size: 0.92rem;
 }
@@ -1038,6 +1110,36 @@ summary:focus-visible {
   color: var(--ink-muted);
   font-size: 0.78rem;
   line-height: 1.45;
+}
+
+.parallel-view__aggregate {
+  grid-column: 1 / -1;
+  background: var(--surface-subtle);
+}
+
+.visual-item__group {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--evidence);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.visual-item__role {
+  display: inline-flex;
+  margin-inline-start: 8px;
+  padding: 2px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--evidence);
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  vertical-align: 0.12em;
 }
 
 .architecture-layers {
@@ -1422,7 +1524,6 @@ summary:focus-visible {
   }
 
   .dot-plot {
-    --plot-label-width: 1fr;
     padding: 18px 14px;
   }
 
@@ -1437,8 +1538,13 @@ summary:focus-visible {
   }
 
   .dot-plot__row > p:last-child,
-  .dot-plot__track {
+  .dot-plot__track,
+  .dot-plot__row > strong {
     grid-column: 1;
+  }
+
+  .dot-plot__row > strong {
+    grid-row: 3;
   }
 
   .result-constellation,

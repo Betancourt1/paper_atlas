@@ -410,6 +410,35 @@
         },
         "value": {
           "type": "number"
+        },
+        "value_end": {
+          "type": "number"
+        },
+        "value_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "group": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": ["MEASURED", "DERIVED", "DISPUTED", "BOUNDARY", "AGGREGATE"]
+        },
+        "domain_min": {
+          "type": "number"
+        },
+        "domain_max": {
+          "type": "number"
+        },
+        "node_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "input_ids": {
+          "$ref": "#/$defs/referenceList"
         }
       }
     },

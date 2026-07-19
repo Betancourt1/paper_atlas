@@ -244,15 +244,15 @@ Path("attn_why_p1_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `C`
+- Selection rationale: Selected the approved “Recurrent, convolutional, and self-attention path length — Position-to-position trace” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_path_length` after `attn_why_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment C is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_why_p2`
 
@@ -474,14 +474,14 @@ Path("attn_why_p2_treatment_c.svg").write_text("\n".join(parts), encoding="utf-8
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_why_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_why_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `attn_change_p1`
 
@@ -706,14 +706,14 @@ Path("attn_change_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Encoder self-attention, masked decoder self-attention, and cross-attention routing — Component topology” treatment because the implemented partition tree directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_stack` after `attn_mechanism_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_change_p1`, `attn_change_p2`, `attn_mechanism_p1`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_routing` after `attn_change_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_change_p2`
 
@@ -945,15 +945,15 @@ Path("attn_change_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `B`
+- Selection rationale: Selected the approved “Constant attention path and the non-attention components that remain — Architecture cross-section” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_stack` after `attn_mechanism_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_change_p1`, `attn_change_p2`, `attn_mechanism_p1`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_retained_components` after `attn_change_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment B is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_mechanism_p1`
 
@@ -1185,15 +1185,15 @@ Path("attn_mechanism_p1_treatment_c.svg").write_text("\n".join(parts), encoding=
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `B`
+- Selection rationale: Selected the approved “One repeated Transformer encoder layer — Architecture cross-section” treatment because the implemented architecture stepper directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_stack` after `attn_mechanism_p1`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_change_p1`, `attn_change_p2`, `attn_mechanism_p1`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_encoder_layer` after `attn_mechanism_p1`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment B is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_mechanism_p2`
 
@@ -1431,14 +1431,14 @@ Path("attn_mechanism_p2_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Scaled dot-product attention and multi-head recombination — Operation flow” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_scaled_dot_product` after `attn_mechanism_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_mechanism_p3`
 
@@ -1694,14 +1694,14 @@ Path("attn_mechanism_p3_treatment_c.svg").write_text("\n".join(parts), encoding=
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Masked decoding, cross-attention, projection, and autoregressive repetition — Control or recurrence loop” treatment because the implemented control loop directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_prediction_sequence` after `attn_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_mechanism_p3`, `attn_example_p1`, `attn_example_p2`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_generation_loop` after `attn_mechanism_p3`; this record is served by that purpose-built figure.
+- Shared paragraph scope: NONE
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_example_p1`
 
@@ -1942,14 +1942,14 @@ Path("attn_example_p1_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “One decoder position through mask, scaling, cross-attention, and next-token choice — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_prediction_sequence` after `attn_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_mechanism_p3`, `attn_example_p1`, `attn_example_p2`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_worked_decoder` after `attn_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `attn_example_p1`, `attn_example_p2`
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_example_p2`
 
@@ -2190,14 +2190,14 @@ Path("attn_example_p2_treatment_c.svg").write_text("\n".join(parts), encoding="u
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “One decoder position through mask, scaling, cross-attention, and next-token choice — Worked sequence” treatment because the implemented operation diagram directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_prediction_sequence` after `attn_mechanism_p3`; this record is served by that purpose-built figure.
-- Shared paragraph scope: `attn_mechanism_p3`, `attn_example_p1`, `attn_example_p2`
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Visual ID and placement: `visual_attention_worked_decoder` after `attn_example_p2`; this record is served by that purpose-built figure.
+- Shared paragraph scope: `attn_example_p1`, `attn_example_p2`
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_evidence_p1`
 
@@ -2429,14 +2429,14 @@ Path("attn_evidence_p1_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Translation corpus and training-run conditions — Condition matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_training_conditions` after `attn_evidence_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_evidence_p2`
 
@@ -2675,15 +2675,15 @@ Path("attn_evidence_p2_treatment_c.svg").write_text("\n".join(parts), encoding="
 ### Implementation record
 
 - Status: `IMPLEMENTED`
-- Selected treatment: `B`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selected treatment: `A`
+- Selection rationale: Selected the approved “English-French BLEU values by exact primary-source location — Source-by-value matrix” treatment because the implemented evidence matrix directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_bleu_source_conflict` after `attn_evidence_p2`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_attention_bleu_sources` after `attn_evidence_p2`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_evidence_p3`
 
@@ -2944,14 +2944,14 @@ Path("attn_evidence_p3_treatment_c.svg").write_text("\n".join(parts), encoding="
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “Translation ablations and parsing results on separate disclosed domains — Grouped disclosed-domain plot” treatment because the implemented dot plot directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
-- Visual ID and placement: `visual_attention_ablation_dot_plot` after `attn_evidence_p3`; this record is served by that purpose-built figure.
+- Visual ID and placement: `visual_attention_ablation_domains` after `attn_evidence_p3`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_limitations_p1`
 
@@ -3178,14 +3178,14 @@ Path("attn_limitations_p1_treatment_c.svg").write_text("\n".join(parts), encodin
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Selected the approved relationship that directly answers this paragraph's explanatory job; the shared visual uses the same evidence and complete adjacent scope recorded here.
+- Selection rationale: Selected the approved “All-to-all cost versus maximum path length — Relationship-specific parallel view” treatment because the implemented parallel view directly encodes this paragraph's explanatory job and its stated evidence boundaries.
 - Delivery medium: `CSS + semantic HTML`
 - Visual ID and placement: `visual_attention_complexity_boundary` after `attn_limitations_p1`; this record is served by that purpose-built figure.
 - Shared paragraph scope: NONE
-- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/page.tsx`, and `apps/web/app/globals.css`
-- Accessibility and fallback verification: Figure has a programmatic title and description, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on motion or pointer input.
-- Desktop and mobile verification: Verified in Playwright on 1440-pixel desktop and iPhone 13 mobile viewports; figures remain paragraph-adjacent, preserve reading order, and introduce no horizontal page overflow.
-- Evidence deviations: `NONE`; web-native CSS and semantic HTML preserve the selected treatment's evidence, labels, topology, and stated boundaries.
+- Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`, `packages/content-schema/schema/explainer-document.schema.json`, `packages/content-schema/src/validate.ts`, generated TypeScript/Python models, `apps/web/app/papers/[id]/explainer-visual.tsx`, and `apps/web/app/globals.css`.
+- Accessibility and fallback verification: Figure has a programmatic title and description, visible selectable labels and values, explicit alt text, equivalent fallback prose, source links, limitations, and a semantic static body; no meaning depends on color, motion, or pointer input.
+- Desktop and mobile verification: Verified by the full eight-paper Playwright traversal at a 1440-pixel desktop viewport and the iPhone 13 mobile viewport; every figure stayed paragraph-adjacent, preserved DOM reading order, and introduced no horizontal page overflow.
+- Evidence deviations: Delivery translation: selected Treatment A is rendered as typed semantic HTML/CSS rather than its literal TikZ, Mermaid, or Python-generated asset; the approved paragraph scope, placement, labels, values, grouping, and evidence boundaries are retained.
 
 ## `attn_limitations_p2`
 
@@ -3421,14 +3421,14 @@ Path("attn_limitations_p2_treatment_c.svg").write_text("\n".join(parts), encodin
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_limitations_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_limitations_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `attn_limitations_p3`
 
@@ -3657,14 +3657,14 @@ Path("attn_limitations_p3_treatment_c.svg").write_text("\n".join(parts), encodin
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_limitations_p3` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_limitations_p3`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `attn_review_p1`
 
@@ -3900,14 +3900,14 @@ Path("attn_review_p1_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_review_p1` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_review_p1`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `attn_review_p2`
 
@@ -4143,14 +4143,14 @@ Path("attn_review_p2_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_review_p2` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_review_p2`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 
 ## `attn_review_p3`
 
@@ -4379,12 +4379,12 @@ Path("attn_review_p3_treatment_c.svg").write_text("\n".join(parts), encoding="ut
 
 - Status: `NOT_NEEDED`
 - Selected treatment: `NONE`
-- Selection rationale: The engineer marked this paragraph prose-only, so the implementation intentionally leaves `attn_review_p3` without a figure.
+- Selection rationale: Revision 3's paragraph-level removal test keeps this paragraph prose-only; no figure would reduce the reader's reconstruction burden enough to justify added visual complexity.
 - Delivery medium: `NONE`
-- Visual ID and placement: `NONE`; prose remains at `#attn_review_p3`.
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: The paragraph remains semantic text and does not rely on visual or motion-only information.
-- Desktop and mobile verification: Verified in Playwright on desktop and mobile; no figure is attached to this prose-only paragraph.
-- Evidence deviations: `NONE`
+- Visual ID and placement: `NONE`; no figure is attached to this paragraph.
+- Shared paragraph scope: NONE
+- Changed files: `docs/visual-manifests/VISUAL_MANIFEST_ATTENTION_IS_ALL_YOU_NEED.md` records the prose-only decision; no fixture visual serves this paragraph.
+- Accessibility and fallback verification: The paragraph remains semantic selectable text with its existing claim and source links; no visual-only information or motion is introduced.
+- Desktop and mobile verification: No paragraph-local figure exists; the existing prose remains in normal document order at both viewports.
+- Evidence deviations: Not applicable: revision 3 explicitly classifies this paragraph as prose-only.
 

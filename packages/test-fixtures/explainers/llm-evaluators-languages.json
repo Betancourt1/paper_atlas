@@ -11,9 +11,30 @@
   },
   "editorial_status": "REVIEWED",
   "reading_paths": {
-    "FIVE_MIN": ["language_why", "language_mechanism", "language_evidence", "language_limitations"],
-    "TWENTY_MIN": ["language_why", "language_change", "language_mechanism", "language_example", "language_evidence", "language_limitations", "language_review"],
-    "DEEP": ["language_why", "language_change", "language_mechanism", "language_example", "language_evidence", "language_limitations", "language_review"]
+    "FIVE_MIN": [
+      "language_why",
+      "language_mechanism",
+      "language_evidence",
+      "language_limitations"
+    ],
+    "TWENTY_MIN": [
+      "language_why",
+      "language_change",
+      "language_mechanism",
+      "language_example",
+      "language_evidence",
+      "language_limitations",
+      "language_review"
+    ],
+    "DEEP": [
+      "language_why",
+      "language_change",
+      "language_mechanism",
+      "language_example",
+      "language_evidence",
+      "language_limitations",
+      "language_review"
+    ]
   },
   "tldr": [
     "Pairwise accuracy checks which response ranks higher, not whether absolute scores use the same scale across languages.",
@@ -30,9 +51,19 @@
         "Pairwise accuracy asks whether an evaluator ranks a preferred response above a rejected one. If every score in one language shifts upward by a similar amount, the preferred response can still rank first, so pairwise accuracy remains unchanged.",
         "Many real uses depend on absolute scores instead: a safety gate accepts content above a threshold, and reinforcement learning consumes scalar rewards. Those uses assume that the same numerical score has comparable meaning across languages. The paper tests that assumption directly."
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_gap"],
-      "source_refs": ["language_source_intro", "language_source_thresholds"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_gap"
+      ],
+      "source_refs": [
+        "language_source_intro",
+        "language_source_thresholds"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_change",
@@ -42,9 +73,20 @@
         "The study keeps semantic content aligned across 23 professionally translated and human-validated language versions, then examines pointwise score distributions rather than ranking accuracy alone. It tests four prompted judges and four trained reward models across Chat, Chat-Hard, Safety, and Reasoning data.",
         "The authors also connect score shifts to Common Crawl language prevalence, test two additional large judges, measure threshold outcomes, and decompose scores into uncertainty-related and language-related components. This turns multilingual evaluator validation from one ranking metric into a calibration problem."
       ],
-      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_additional_judges"],
-      "source_refs": ["language_source_intro", "language_source_effects", "language_source_thresholds"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_effect",
+        "language_claim_resource",
+        "language_claim_additional_judges"
+      ],
+      "source_refs": [
+        "language_source_intro",
+        "language_source_effects",
+        "language_source_thresholds"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_mechanism",
@@ -55,9 +97,21 @@
         "A global threshold exposes the mismatch: languages receiving higher baseline scores accept more responses even when their pairwise accuracy looks similar. The paper models a score as semantic content plus an uncertainty modifier, a language-specific baseline, and noise.",
         "Summed response negative log-likelihood serves as one uncertainty proxy, with attribute-head disagreement, predictive variance, and semantic entropy as alternatives. Nested regressions then test whether language identity still predicts scores after uncertainty is included; within-language regressions test whether item difficulty alone can explain the pattern."
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_uncertainty", "language_claim_language_after_nll"],
-      "source_refs": ["language_source_uncertainty", "language_source_regressions", "language_source_calibration"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_uncertainty",
+        "language_claim_language_after_nll"
+      ],
+      "source_refs": [
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_calibration"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_example",
@@ -67,9 +121,20 @@
         "For Skywork-LLaMA-8B, the paper rounds English to 93% pairwise accuracy and 23% acceptance, and Ukrainian to 87% pairwise accuracy and 67% acceptance. It calls this a 44-percentage-point difference. That worked example appears to subtract rounded display values; it is distinct from the aggregate maximum of 43.0 points reported across reward-model and benchmark combinations.",
         "The paper also wraps Hindi Safety content in an English frame. An off-the-shelf language identifier labels 44% of these code-switched prompts as English, causing the more lenient English threshold to be applied to content scored against the higher Hindi reference. Acceptance rises from the calibrated 50% to 75%. This is a constructed demonstration of the attack surface, not evidence of exploitation in a production system."
       ],
-      "claim_ids": ["language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_code_switch", "language_claim_production_notshown"],
-      "source_refs": ["language_source_intro", "language_source_thresholds"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_gap",
+        "language_claim_english_ukrainian_rounding",
+        "language_claim_code_switch",
+        "language_claim_production_notshown"
+      ],
+      "source_refs": [
+        "language_source_intro",
+        "language_source_thresholds"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_evidence",
@@ -80,9 +145,29 @@
         "Under one global median threshold, the aggregate reward-model analysis reports a maximum acceptance gap of 43.0 percentage points. Separately, the Skywork-LLaMA-8B English/Ukrainian example reports rounded acceptance rates of 23% and 67% and describes them as a 44-point gap; the apparent one-point difference reflects the source's rounded example rather than a second aggregate maximum. Even within observations above 95% pairwise accuracy, acceptance can differ by 34.0 points. GPT-4.1-mini shows gaps of 19.6 and 14.0 points on Safety and Chat-Hard; Qwen3-32B-thinking shows 32.7 and 29.7 points.",
         "Uncertainty measures correlate positively with score at the language level, but nested regressions retain significant language effects after controlling for negative log-likelihood. A per-language mean-offset correction reduces the average acceptance gap from 33.4 to 11.6 points, or 60.9%, without eliminating differences in distribution shape or language-item interaction."
       ],
-      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_high_accuracy_gap", "language_claim_additional_judges", "language_claim_uncertainty", "language_claim_language_after_nll", "language_claim_calibration"],
-      "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_uncertainty", "language_source_regressions", "language_source_calibration"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_effect",
+        "language_claim_resource",
+        "language_claim_gap",
+        "language_claim_english_ukrainian_rounding",
+        "language_claim_high_accuracy_gap",
+        "language_claim_additional_judges",
+        "language_claim_uncertainty",
+        "language_claim_language_after_nll",
+        "language_claim_calibration"
+      ],
+      "source_refs": [
+        "language_source_effects",
+        "language_source_thresholds",
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_calibration"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_limitations",
@@ -92,9 +177,20 @@
         "The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judgments. Common Crawl prevalence is only a proxy for model training exposure and can be entangled with script, language family, tokenizer behavior, and undocumented data sources.",
         "The uncertainty-score association does not establish uncertainty as the cause of the shift. The safety consequences are thresholded benchmark implications rather than observed failures in deployed safety systems. The additional large-judge tests cover only two benchmark splits, and production systems may use different thresholds or combine multiple signals."
       ],
-      "claim_ids": ["language_claim_cause_notshown", "language_claim_production_notshown"],
-      "source_refs": ["language_source_uncertainty", "language_source_regressions", "language_source_thresholds"],
-      "reading_depths": ["FIVE_MIN", "TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_cause_notshown",
+        "language_claim_production_notshown"
+      ],
+      "source_refs": [
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_thresholds"
+      ],
+      "reading_depths": [
+        "FIVE_MIN",
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     },
     {
       "id": "language_review",
@@ -104,9 +200,20 @@
         "The strongest result is a measurement warning: high pairwise accuracy does not certify that raw evaluator scores are comparable across languages. Systems using absolute thresholds or scalar rewards should test pointwise score consistency and downstream decision rates explicitly.",
         "Per-language centering is a useful diagnostic and partial mitigation, not a full solution. It requires language identification, leaves an average 11.6-point acceptance gap in the reported analysis, and cannot remove language-item interactions. The paper motivates language-aware training and calibration, but does not establish which intervention will generalize to deployment."
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_calibration", "language_claim_cause_notshown", "language_claim_production_notshown"],
-      "source_refs": ["language_source_thresholds", "language_source_calibration"],
-      "reading_depths": ["TWENTY_MIN", "DEEP"]
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_calibration",
+        "language_claim_cause_notshown",
+        "language_claim_production_notshown"
+      ],
+      "source_refs": [
+        "language_source_thresholds",
+        "language_source_calibration"
+      ],
+      "reading_depths": [
+        "TWENTY_MIN",
+        "DEEP"
+      ]
     }
   ],
   "claims": [
@@ -116,7 +223,9 @@
       "epistemic_status": "AUTHORS_INTERPRETATION",
       "importance": "CORE",
       "confidence": 0.99,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -125,7 +234,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["language_source_effects"],
+      "source_refs": [
+        "language_source_effects"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -134,7 +245,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["language_source_effects"],
+      "source_refs": [
+        "language_source_effects"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -143,7 +256,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -152,7 +267,9 @@
       "epistemic_status": "EXPLAINER_INFERENCE",
       "importance": "CAVEAT",
       "confidence": 0.99,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -161,7 +278,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -170,7 +289,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 1,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -179,7 +300,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 0.99,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -188,7 +311,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "SUPPORTING",
       "confidence": 0.99,
-      "source_refs": ["language_source_uncertainty"],
+      "source_refs": [
+        "language_source_uncertainty"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -197,7 +322,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["language_source_regressions"],
+      "source_refs": [
+        "language_source_regressions"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -206,7 +333,9 @@
       "epistemic_status": "OBSERVED",
       "importance": "CORE",
       "confidence": 1,
-      "source_refs": ["language_source_calibration"],
+      "source_refs": [
+        "language_source_calibration"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -215,7 +344,11 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 0.98,
-      "source_refs": ["language_source_intro", "language_source_uncertainty", "language_source_regressions"],
+      "source_refs": [
+        "language_source_intro",
+        "language_source_uncertainty",
+        "language_source_regressions"
+      ],
       "verification_status": "VERIFIED"
     },
     {
@@ -224,7 +357,9 @@
       "epistemic_status": "NOT_ESTABLISHED",
       "importance": "CAVEAT",
       "confidence": 1,
-      "source_refs": ["language_source_thresholds"],
+      "source_refs": [
+        "language_source_thresholds"
+      ],
       "verification_status": "VERIFIED"
     }
   ],
@@ -278,295 +413,447 @@
       "after_block_id": "language_why",
       "after_paragraph_id": "language_why_p2",
       "type": "METHOD_COMPARISON",
-      "title": "Ranking and threshold decisions ask different questions",
-      "question": "What information does each evaluation mode preserve?",
+      "title": "Ranking and absolute-score decisions preserve different information",
+      "question": "Why can pairwise accuracy miss multilingual decision shifts?",
       "items": [
         {
-          "label": "Pairwise accuracy",
-          "detail": "Checks whether a preferred response ranks above a rejected response within a language; a shared score offset can cancel out."
+          "label": "Pairwise ordering",
+          "detail": "A shared language-conditioned offset cancels when preferred and rejected responses are compared within one language.",
+          "group": "Ranking question"
         },
         {
-          "label": "Pointwise thresholding",
-          "detail": "Compares absolute scores with one cutoff; a language-conditioned offset can change how many responses are accepted."
+          "label": "Pointwise threshold",
+          "detail": "One global cutoff acts on absolute scores, so an offset changes the proportion accepted.",
+          "group": "Decision question"
         },
         {
-          "label": "Scalar reward use",
-          "detail": "Reinforcement learning consumes the score magnitude itself, so cross-language shifts matter even without an explicit gate."
+          "label": "Scalar reward",
+          "detail": "Reinforcement learning consumes score magnitude itself, so cross-language baselines matter without an explicit gate.",
+          "group": "Optimization question"
+        },
+        {
+          "label": "Validation boundary",
+          "detail": "High pairwise accuracy does not certify a shared absolute score scale across languages.",
+          "group": "Conclusion",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_gap"],
-      "source_refs": ["language_source_intro", "language_source_thresholds"],
-      "interpretation": "A judge can preserve within-language order while assigning language groups different absolute score baselines. Ranking accuracy alone therefore cannot validate threshold or reward-scale behavior.",
-      "limitations": [
-        "The comparison identifies an evaluation blind spot; it does not establish why a particular evaluator shifts scores.",
-        "Production systems may use additional calibration or policies not tested in the paper."
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_gap"
       ],
-      "alt_text": "Method comparison: pairwise accuracy checks order and can hide a shared language score offset; pointwise thresholding uses absolute scores and can change acceptance; scalar reward use also depends on score magnitude.",
-      "fallback": "Pairwise accuracy checks whether one response ranks above another, so a shared language offset can cancel. A global threshold and scalar reinforcement-learning reward use absolute score magnitude, so the same offset can change decisions."
+      "source_refs": [
+        "language_source_intro",
+        "language_source_thresholds"
+      ],
+      "interpretation": "Pairwise, threshold, and scalar-reward uses test different evaluator properties.",
+      "limitations": [
+        "The comparison identifies a measurement blind spot; it does not identify the cause of a specific language shift."
+      ],
+      "alt_text": "Ranking and absolute-score decisions preserve different information. Pairwise ordering; Pointwise threshold; Scalar reward; Validation boundary.",
+      "fallback": "Pairwise, threshold, and scalar-reward uses test different evaluator properties. Pairwise ordering; Pointwise threshold; Scalar reward; Validation boundary."
     },
     {
       "id": "language_visual_study_design",
       "after_block_id": "language_change",
       "after_paragraph_id": "language_change_p2",
       "type": "OPERATION_DIAGRAM",
-      "title": "The study follows score shifts from translation to decisions",
-      "question": "Which analysis stages connect language to threshold outcomes?",
+      "title": "The study follows aligned content from scores to calibration",
+      "question": "Which benchmark families, evaluators, and analyses define the study?",
       "items": [
         {
-          "label": "Align content across 23 languages",
-          "detail": "Professionally translated and human-validated versions keep semantic content comparable across language conditions."
+          "label": "Align 23 language versions",
+          "detail": "Professionally translated and human-validated versions hold semantic content comparable.",
+          "value": 23,
+          "value_label": "23 languages",
+          "group": "Design"
         },
         {
-          "label": "Measure pointwise score distributions",
-          "detail": "Four prompted judges and four reward models are evaluated for mean-score differences, not only pairwise ordering."
+          "label": "Cover four benchmark families",
+          "detail": "Chat, Chat-Hard, Safety, and Reasoning are analyzed rather than collapsed.",
+          "value": 4,
+          "value_label": "4 data families",
+          "group": "Design"
         },
         {
-          "label": "Compare with language prevalence",
-          "detail": "Language-level scores are related to Common Crawl prevalence as a resource proxy."
+          "label": "Measure eight core evaluators",
+          "detail": "Four prompted judges and four trained reward models are tested for pointwise mean-score differences.",
+          "value": 8,
+          "value_label": "4 + 4 evaluators",
+          "group": "Evaluation"
+        },
+        {
+          "label": "Relate scores to prevalence",
+          "detail": "Common Crawl language prevalence is used as a resource proxy.",
+          "group": "Analysis"
         },
         {
           "label": "Apply shared thresholds",
-          "detail": "One global cutoff converts shifted score distributions into language-specific acceptance rates."
+          "detail": "Global cutoffs translate shifted score distributions into acceptance rates.",
+          "group": "Analysis"
         },
         {
-          "label": "Test uncertainty and residual language effects",
-          "detail": "Negative log-likelihood and token-free uncertainty proxies enter nested analyses that retain a separate language term."
+          "label": "Test additional judges",
+          "detail": "Two larger prompted judges are evaluated on selected benchmark splits.",
+          "value": 2,
+          "value_label": "2 additional judges",
+          "group": "Analysis"
+        },
+        {
+          "label": "Separate uncertainty and language terms",
+          "detail": "Nested regressions test residual language effects after uncertainty proxies are included.",
+          "group": "Analysis"
+        },
+        {
+          "label": "Causal boundary",
+          "detail": "Aligned comparisons and regressions reveal associations, not a randomized cause.",
+          "group": "Boundary",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_gap", "language_claim_additional_judges", "language_claim_language_after_nll"],
-      "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_uncertainty", "language_source_regressions"],
-      "interpretation": "The contribution is a chain of aligned-content, score-distribution, resource, threshold, and regression analyses. No single stage alone establishes a causal mechanism.",
-      "limitations": [
-        "Common Crawl prevalence is a resource proxy rather than a randomized exposure.",
-        "The nested regressions preserve a residual language effect but do not prove language identity itself is causal."
+      "claim_ids": [
+        "language_claim_effect",
+        "language_claim_resource",
+        "language_claim_additional_judges"
       ],
-      "alt_text": "Five-stage operation path: align content across 23 languages, measure pointwise score distributions for eight core evaluators, compare scores with Common Crawl prevalence, apply global thresholds, and test uncertainty proxies plus residual language effects.",
-      "fallback": "The study aligns content across 23 languages, measures pointwise score distributions for eight core evaluators, relates scores to Common Crawl prevalence, applies shared thresholds, and uses uncertainty proxies and nested regressions to test what remains."
+      "source_refs": [
+        "language_source_intro",
+        "language_source_effects",
+        "language_source_thresholds"
+      ],
+      "interpretation": "The contribution joins aligned multilingual data, multiple evaluator types, threshold outcomes, and non-causal calibration analyses.",
+      "limitations": [
+        "Common Crawl prevalence is a proxy, and the nested regressions do not establish language identity as a cause."
+      ],
+      "alt_text": "The study follows aligned content from scores to calibration. Align 23 language versions: 23 languages; Cover four benchmark families: 4 data families; Measure eight core evaluators: 4 + 4 evaluators; Relate scores to prevalence; Apply shared thresholds; Test additional judges: 2 additional judges; Separate uncertainty and language terms; Causal boundary.",
+      "fallback": "The contribution joins aligned multilingual data, multiple evaluator types, threshold outcomes, and non-causal calibration analyses. Align 23 language versions: 23 languages; Cover four benchmark families: 4 data families; Measure eight core evaluators: 4 + 4 evaluators; Relate scores to prevalence; Apply shared thresholds; Test additional judges: 2 additional judges; Separate uncertainty and language terms; Causal boundary."
     },
     {
       "id": "language_visual_pairwise_threshold",
       "after_block_id": "language_mechanism",
       "after_paragraph_id": "language_mechanism_p2",
       "type": "PARALLEL_VIEW",
-      "title": "The same score offset is invisible to ranking but visible to a threshold",
-      "question": "How can an evaluator rank responses correctly yet make different accept-or-reject decisions across languages?",
+      "title": "One offset can preserve order and change acceptance",
+      "question": "Where does a language-conditioned baseline cancel, and where does it remain?",
       "items": [
         {
-          "label": "Within-language pairwise view",
-          "detail": "Adding the same language-conditioned offset to a preferred and rejected response leaves their ordering unchanged because the shared offset cancels in the comparison."
+          "label": "Preferred and rejected scores both shift",
+          "detail": "Within one language, adding the same baseline preserves their ordering.",
+          "group": "Within-language pairwise comparison"
         },
         {
-          "label": "Across-language pointwise view",
-          "detail": "The same offset moves the absolute score scale for that language, so equal raw scores no longer necessarily carry comparable meaning across languages."
+          "label": "Offset cancels",
+          "detail": "Pairwise accuracy can remain high because only the score difference determines rank.",
+          "group": "Within-language pairwise comparison",
+          "role": "AGGREGATE"
         },
         {
-          "label": "One shared decision threshold",
-          "detail": "When the shifted score distributions meet one global cutoff, different proportions can cross the line even while pairwise ranking accuracy remains high."
+          "label": "Absolute score scale shifts",
+          "detail": "Across languages, raw scores no longer necessarily have comparable meaning.",
+          "group": "Cross-language pointwise comparison"
+        },
+        {
+          "label": "One global threshold",
+          "detail": "The same cutoff can accept different proportions from shifted distributions.",
+          "group": "Cross-language pointwise comparison",
+          "role": "AGGREGATE"
+        },
+        {
+          "label": "Additive score model",
+          "detail": "Semantic content, uncertainty modifier, language baseline, and noise summarize the paper's non-causal decomposition.",
+          "group": "Model boundary",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["language_claim_pairwise_blind", "language_claim_gap"],
-      "source_refs": ["language_source_thresholds"],
-      "interpretation": "Pairwise ranking and pointwise calibration test different properties. A language-wide shift can preserve the first while changing the decisions produced by the second.",
-      "limitations": [
-        "This is a schematic comparison and assigns no invented score coordinates, distribution shapes, or threshold values.",
-        "The study uses aligned translated benchmark items; naturally authored or culturally specific conversations may behave differently.",
-        "A global median threshold is an analytical rule in the study, not evidence that production systems use the same policy.",
-        "The comparison describes a statistical blind spot and does not establish the cause of the language-conditioned shifts."
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_uncertainty",
+        "language_claim_language_after_nll"
       ],
-      "alt_text": "Parallel comparison: a language-conditioned offset added to both responses cancels in a within-language ranking, but it shifts that language's absolute score scale and changes how many responses cross one shared threshold.",
-      "fallback": "Within one language, adding the same baseline offset to both responses preserves which response ranks higher. Across languages, the offset shifts absolute scores onto different baselines. Applying one global threshold to those shifted scales can therefore produce different acceptance rates even when pairwise accuracy remains high."
+      "source_refs": [
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_calibration"
+      ],
+      "interpretation": "A shared offset is algebraically invisible to within-language rank but visible to absolute-score decisions.",
+      "limitations": [
+        "No invented score coordinates or production threshold policy are implied by the schematic."
+      ],
+      "alt_text": "One offset can preserve order and change acceptance. Preferred and rejected scores both shift; Offset cancels; Absolute score scale shifts; One global threshold; Additive score model.",
+      "fallback": "A shared offset is algebraically invisible to within-language rank but visible to absolute-score decisions. Preferred and rejected scores both shift; Offset cancels; Absolute score scale shifts; One global threshold; Additive score model."
     },
     {
       "id": "language_visual_score_decomposition",
       "after_block_id": "language_mechanism",
       "after_paragraph_id": "language_mechanism_p3",
-      "type": "OPERATION_DIAGRAM",
-      "title": "The regressions separate uncertainty from a residual language effect",
-      "question": "What does the paper test after finding that uncertainty and evaluator scores move together?",
+      "type": "PARALLEL_VIEW",
+      "title": "The additive score model and nested test answer different questions",
+      "question": "What belongs to the schematic model, and what belongs to the statistical test?",
       "items": [
         {
-          "label": "Semantic content contribution",
-          "detail": "Aligned translated items are intended to hold response meaning comparable while the analysis examines score variation across languages."
+          "label": "Semantic content",
+          "detail": "Aligned translated items aim to keep response meaning comparable.",
+          "group": "Additive score terms"
         },
         {
-          "label": "Uncertainty-related contribution",
-          "detail": "Summed response negative log-likelihood is the main uncertainty proxy, with attribute-head disagreement, predictive variance, and semantic entropy as alternatives."
+          "label": "Uncertainty modifier",
+          "detail": "Summed response negative log-likelihood is primary; head disagreement, predictive variance, and semantic entropy are alternatives.",
+          "group": "Additive score terms"
         },
         {
           "label": "Language-conditioned baseline",
-          "detail": "The model allows a language-specific score component that can shift the absolute scale without changing within-language ordering."
+          "detail": "A language-specific component can shift absolute scores without changing within-language order.",
+          "group": "Additive score terms"
         },
         {
           "label": "Noise and unexplained variation",
-          "detail": "Remaining variation is not assigned a causal interpretation by the score decomposition."
+          "detail": "Remaining variation is not assigned a causal interpretation.",
+          "group": "Additive score terms",
+          "role": "BOUNDARY"
         },
         {
-          "label": "Nested-regression test",
-          "detail": "Language identity adds significant predictive power in every evaluated reward-model regression after negative log-likelihood is included."
+          "label": "Nested regression",
+          "detail": "Language identity is added after negative log-likelihood to test additional predictive power.",
+          "group": "Statistical test"
+        },
+        {
+          "label": "Within-language regression",
+          "detail": "Item difficulty is tested as an alternative explanation within each language.",
+          "group": "Statistical test"
+        },
+        {
+          "label": "Result",
+          "detail": "Language remains significant in every evaluated reward-model regression after negative log-likelihood is included.",
+          "group": "Statistical test",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Causal boundary",
+          "detail": "Significance does not identify whether prevalence, script, tokenization, family, or another factor caused the effect.",
+          "group": "Interpretation",
+          "role": "BOUNDARY"
         }
       ],
-      "claim_ids": ["language_claim_uncertainty", "language_claim_language_after_nll", "language_claim_cause_notshown"],
-      "source_refs": ["language_source_uncertainty", "language_source_regressions"],
-      "interpretation": "Uncertainty proxies explain part of the observed score variation, but the nested regressions retain a statistically significant language contribution. That residual association narrows explanations; it does not identify a causal mechanism.",
-      "limitations": [
-        "The components summarize the paper's statistical model and should not be read as known causal parts of an evaluator.",
-        "Negative log-likelihood and the token-free alternatives are proxies rather than direct measurements of one latent uncertainty quantity.",
-        "Significant added predictive power for language does not identify whether data prevalence, script, tokenization, language family, or another factor caused the effect."
+      "claim_ids": [
+        "language_claim_pairwise_blind",
+        "language_claim_uncertainty",
+        "language_claim_language_after_nll"
       ],
-      "alt_text": "Operation diagram decomposing evaluator score variation into semantic content, uncertainty-related contribution, language-conditioned baseline, and noise, followed by a nested-regression test in which language remains significant after negative log-likelihood is included.",
-      "fallback": "The paper models evaluator scores using semantic content, an uncertainty-related component, a language-specific baseline, and noise. It first measures positive associations between uncertainty proxies and scores, then adds language identity in nested regressions. Language contributes significant predictive power after negative log-likelihood is included in every evaluated reward-model regression, but the association is not causal evidence."
+      "source_refs": [
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_calibration"
+      ],
+      "interpretation": "The score terms are a non-causal schematic; the nested regression is a separate test of residual predictive association.",
+      "limitations": [
+        "Uncertainty measures are proxies, and statistically significant language terms do not identify a mechanism."
+      ],
+      "alt_text": "The additive score model and nested test answer different questions. Semantic content; Uncertainty modifier; Language-conditioned baseline; Noise and unexplained variation; Nested regression; Within-language regression; Result; Causal boundary.",
+      "fallback": "The score terms are a non-causal schematic; the nested regression is a separate test of residual predictive association. Semantic content; Uncertainty modifier; Language-conditioned baseline; Noise and unexplained variation; Nested regression; Within-language regression; Result; Causal boundary."
     },
     {
-      "id": "language_visual_threshold_failures",
+      "id": "language_visual_threshold_examples",
       "after_block_id": "language_example",
       "after_paragraph_id": "language_example_p2",
       "type": "PARALLEL_VIEW",
-      "title": "Two examples expose different threshold failure modes",
-      "question": "What do the English-Ukrainian comparison and the code-switch construction each demonstrate?",
+      "title": "Two bounded examples expose different threshold failures",
+      "question": "What does each example demonstrate without merging its denominator or conclusion?",
       "items": [
         {
-          "label": "English pairwise accuracy",
-          "detail": "Rounded Skywork-LLaMA-8B pairwise accuracy in the worked example.",
-          "value": 93
+          "label": "English",
+          "detail": "Rounded Skywork-LLaMA-8B pairwise accuracy and acceptance under the shared threshold.",
+          "value_label": "93% pairwise · 23% accepted",
+          "group": "English–Ukrainian worked example"
         },
         {
-          "label": "Ukrainian pairwise accuracy",
-          "detail": "Rounded Skywork-LLaMA-8B pairwise accuracy in the worked example.",
-          "value": 87
+          "label": "Ukrainian",
+          "detail": "Rounded pairwise accuracy remains similar while acceptance is much higher.",
+          "value_label": "87% pairwise · 67% accepted",
+          "group": "English–Ukrainian worked example"
         },
         {
-          "label": "English acceptance",
-          "detail": "Rounded acceptance rate under the shared threshold in the worked example.",
-          "value": 23
+          "label": "Rounded worked gap",
+          "detail": "The source describes the 23-to-67 display difference as 44 percentage points.",
+          "value": 44,
+          "value_label": "44 pp",
+          "group": "English–Ukrainian worked example",
+          "role": "AGGREGATE"
         },
         {
-          "label": "Ukrainian acceptance",
-          "detail": "Rounded acceptance rate under the shared threshold; the paper calls the 23-to-67 difference 44 points.",
-          "value": 67
-        },
-        {
-          "label": "Separate aggregate maximum",
-          "detail": "Maximum acceptance gap in the aggregate reward-model analysis, not the rounded English-Ukrainian worked example.",
-          "value": 43
-        },
-        {
-          "label": "Code-switched prompts labeled English",
-          "detail": "Share of English-wrapped Hindi prompts assigned the English language label by the off-the-shelf identifier.",
-          "value": 44
+          "label": "Language-ID route",
+          "detail": "Off-the-shelf identification assigns English to English-wrapped Hindi prompts.",
+          "value": 44,
+          "value_label": "44% labeled English",
+          "group": "Constructed code-switch example"
         },
         {
           "label": "Hindi-calibrated acceptance",
-          "detail": "Acceptance rate under the calibrated Hindi reference in the constructed test.",
-          "value": 50
+          "detail": "Acceptance under the calibrated Hindi reference.",
+          "value": 50,
+          "value_label": "50%",
+          "group": "Constructed code-switch example"
         },
         {
-          "label": "Acceptance with English threshold",
-          "detail": "Acceptance rate after the more lenient English threshold is applied in the constructed test.",
-          "value": 75
+          "label": "English-threshold acceptance",
+          "detail": "The more lenient English threshold is applied after routing.",
+          "value": 75,
+          "value_label": "75%",
+          "group": "Constructed code-switch example"
+        },
+        {
+          "label": "Production boundary",
+          "detail": "This is a constructed benchmark demonstration, not observed exploitation of a deployed system.",
+          "group": "Constructed code-switch example",
+          "role": "BOUNDARY"
+        },
+        {
+          "label": "Separate aggregate maximum",
+          "detail": "Across reward-model and benchmark combinations, the distinct aggregate maximum is 43.0 points.",
+          "value": 43,
+          "value_label": "43.0 pp",
+          "group": "Aggregate analysis · separate from examples",
+          "role": "AGGREGATE"
         }
       ],
-      "claim_ids": ["language_claim_gap", "language_claim_english_ukrainian_rounding", "language_claim_code_switch", "language_claim_production_notshown"],
-      "source_refs": ["language_source_thresholds"],
-      "interpretation": "The first comparison shows that similar pairwise accuracy can coexist with very different acceptance rates. The second shows how language identification can route code-switched content to a different calibrated threshold.",
-      "limitations": [
-        "The English-Ukrainian values are rounded display values; their paper-described 44-point difference is distinct from the 43.0-point aggregate maximum.",
-        "The code-switch result is a constructed benchmark demonstration, not observed exploitation of a deployed safety system.",
-        "The acceptance values depend on the study's thresholding choices and should not be treated as universal production rates."
+      "claim_ids": [
+        "language_claim_gap",
+        "language_claim_english_ukrainian_rounding",
+        "language_claim_code_switch",
+        "language_claim_production_notshown"
       ],
-      "alt_text": "Parallel threshold examples: English and Ukrainian pairwise accuracies are 93% and 87%, but acceptance rates are 23% and 67%; this rounded 44-point example is distinct from the 43-point aggregate maximum. Separately, 44% of English-wrapped Hindi prompts are labeled English, and applying the English threshold raises acceptance from 50% to 75%.",
-      "fallback": "Skywork-LLaMA-8B has rounded pairwise accuracies of 93% for English and 87% for Ukrainian, while rounded acceptance rates are 23% and 67%. The paper calls that worked-example difference 44 points; the aggregate maximum is separately 43.0 points. In the constructed code-switch test, 44% of English-wrapped Hindi prompts are labeled English, and applying the English threshold raises acceptance from 50% to 75%. Neither example is a measured production bypass."
+      "source_refs": [
+        "language_source_intro",
+        "language_source_thresholds"
+      ],
+      "interpretation": "Bounded panels keep the rounded English–Ukrainian example, code-switch routing demonstration, and separate aggregate maximum from being conflated.",
+      "limitations": [
+        "All acceptance rates depend on the study's analytical thresholds and are not universal production rates."
+      ],
+      "alt_text": "Two bounded examples expose different threshold failures. English: 93% pairwise · 23% accepted; Ukrainian: 87% pairwise · 67% accepted; Rounded worked gap: 44 pp; Language-ID route: 44% labeled English; Hindi-calibrated acceptance: 50%; English-threshold acceptance: 75%; Production boundary; Separate aggregate maximum: 43.0 pp.",
+      "fallback": "Bounded panels keep the rounded English–Ukrainian example, code-switch routing demonstration, and separate aggregate maximum from being conflated. English: 93% pairwise · 23% accepted; Ukrainian: 87% pairwise · 67% accepted; Rounded worked gap: 44 pp; Language-ID route: 44% labeled English; Hindi-calibrated acceptance: 50%; English-threshold acceptance: 75%; Production boundary; Separate aggregate maximum: 43.0 pp."
     },
     {
       "id": "language_visual_evidence_matrix",
       "after_block_id": "language_evidence",
       "after_paragraph_id": "language_evidence_p3",
       "type": "EVIDENCE_MATRIX",
-      "title": "The evidence spans several non-equivalent comparisons",
-      "question": "Which measurements support the language-shift finding, and which conditions belong to each number?",
+      "title": "Every multilingual result keeps its value and condition visible",
+      "question": "Which measurements support the language-shift and calibration findings?",
       "items": [
         {
-          "label": "Core evaluators with significant language effects",
-          "detail": "All four prompted judges and four trained reward models show significant mean-score differences across languages.",
-          "value": 8
+          "label": "Core evaluator language effects",
+          "detail": "One-way ANOVA finds significant mean-score differences for four prompted judges and four reward models.",
+          "value": 8,
+          "value_label": "8 of 8 evaluators"
         },
         {
-          "label": "Resource-score Pearson correlation",
-          "detail": "Aggregated reward-model mean score versus Common Crawl language prevalence.",
-          "value": -0.58
+          "label": "Resource-score correlations",
+          "detail": "Aggregated reward-model mean score versus Common Crawl prevalence.",
+          "value_label": "Pearson −0.58 · Spearman −0.81"
         },
         {
-          "label": "Resource-score Spearman correlation",
-          "detail": "Rank correlation for the same aggregated reward-model language-level relationship.",
-          "value": -0.81
+          "label": "Aggregate maximum acceptance gap",
+          "detail": "Across reward-model and benchmark combinations under one global median threshold.",
+          "value": 43,
+          "value_label": "43.0 pp"
+        },
+        {
+          "label": "Rounded English–Ukrainian example",
+          "detail": "Display values 23% and 67%; source describes a 44-point difference, separate from the aggregate maximum.",
+          "value": 44,
+          "value_label": "23% → 67% · 44 pp"
         },
         {
           "label": "Gap above 95% pairwise accuracy",
-          "detail": "Maximum acceptance-rate difference among observations whose pairwise accuracy exceeds 95%.",
-          "value": 34
+          "detail": "Maximum acceptance difference among observations exceeding 95% pairwise accuracy.",
+          "value": 34,
+          "value_label": "34.0 pp"
         },
         {
-          "label": "GPT-4.1-mini threshold gaps",
-          "detail": "Safety and Chat-Hard gaps are 19.6 and 14.0 percentage points, respectively."
+          "label": "GPT-4.1-mini gaps",
+          "detail": "Safety and Chat-Hard, respectively.",
+          "value_label": "19.6 pp · 14.0 pp"
         },
         {
-          "label": "Qwen3-32B-thinking threshold gaps",
-          "detail": "Safety and Chat-Hard gaps are 32.7 and 29.7 percentage points, respectively."
+          "label": "Qwen3-32B-thinking gaps",
+          "detail": "Safety and Chat-Hard, respectively.",
+          "value_label": "32.7 pp · 29.7 pp"
         },
         {
-          "label": "Average gap before mean-offset correction",
-          "detail": "Average acceptance gap before per-language centering.",
-          "value": 33.4
-        },
-        {
-          "label": "Average residual gap after correction",
-          "detail": "Average acceptance gap after per-language mean offsets, a reported 60.9% reduction.",
-          "value": 11.6
+          "label": "Mean-offset correction",
+          "detail": "Average gap before and after centering; reported reduction is 60.9%.",
+          "value_label": "33.4 → 11.6 pp · −60.9%"
         }
       ],
-      "claim_ids": ["language_claim_effect", "language_claim_resource", "language_claim_high_accuracy_gap", "language_claim_additional_judges", "language_claim_language_after_nll", "language_claim_calibration"],
-      "source_refs": ["language_source_effects", "language_source_thresholds", "language_source_regressions", "language_source_calibration"],
-      "interpretation": "The study finds language effects across all core evaluators, reproduces nontrivial threshold gaps in additional judges, and shows that simple mean-offset correction reduces but does not eliminate the decision disparity.",
-      "limitations": [
-        "The rows summarize different evaluators, benchmark subsets, metrics, and aggregation levels; they must not be read as one common ranked series.",
-        "The negative resource-score correlations use Common Crawl prevalence as a proxy for training exposure and do not establish causality.",
-        "Mean-offset correction cannot remove distribution-shape differences or language-item interactions and requires a language label.",
-        "The evaluation data are translated benchmark items rather than naturally authored multilingual conversations."
+      "claim_ids": [
+        "language_claim_effect",
+        "language_claim_resource",
+        "language_claim_gap",
+        "language_claim_english_ukrainian_rounding",
+        "language_claim_high_accuracy_gap",
+        "language_claim_additional_judges",
+        "language_claim_uncertainty",
+        "language_claim_language_after_nll",
+        "language_claim_calibration"
       ],
-      "alt_text": "Evidence matrix: all eight core evaluators show significant language effects; resource-score correlations are Pearson minus 0.58 and Spearman minus 0.81; acceptance gaps reach 34 points even above 95% pairwise accuracy; additional judges show dataset-specific gaps; and mean-offset correction reduces the average gap from 33.4 to 11.6 points.",
-      "fallback": "All eight core evaluators show significant mean-score differences across languages. Aggregated reward-model scores correlate with Common Crawl prevalence at Pearson -0.58 and Spearman -0.81. Acceptance differences reach 34.0 points among observations above 95% pairwise accuracy. GPT-4.1-mini gaps are 19.6 and 14.0 points on Safety and Chat-Hard; Qwen3-32B-thinking gaps are 32.7 and 29.7. Per-language mean offsets reduce the average gap from 33.4 to 11.6 points, or 60.9%, without eliminating it. These rows describe different conditions and are not one ranked scale."
+      "source_refs": [
+        "language_source_effects",
+        "language_source_thresholds",
+        "language_source_uncertainty",
+        "language_source_regressions",
+        "language_source_calibration"
+      ],
+      "interpretation": "The matrix exposes every numeric result while retaining evaluator, benchmark, aggregation, and correction conditions.",
+      "limitations": [
+        "Rows use non-equivalent metrics and conditions and must not be interpreted as one ranked series."
+      ],
+      "alt_text": "Every multilingual result keeps its value and condition visible. Core evaluator language effects: 8 of 8 evaluators; Resource-score correlations: Pearson −0.58 · Spearman −0.81; Aggregate maximum acceptance gap: 43.0 pp; Rounded English–Ukrainian example: 23% → 67% · 44 pp; Gap above 95% pairwise accuracy: 34.0 pp; GPT-4.1-mini gaps: 19.6 pp · 14.0 pp; Qwen3-32B-thinking gaps: 32.7 pp · 29.7 pp; Mean-offset correction: 33.4 → 11.6 pp · −60.9%.",
+      "fallback": "The matrix exposes every numeric result while retaining evaluator, benchmark, aggregation, and correction conditions. Core evaluator language effects: 8 of 8 evaluators; Resource-score correlations: Pearson −0.58 · Spearman −0.81; Aggregate maximum acceptance gap: 43.0 pp; Rounded English–Ukrainian example: 23% → 67% · 44 pp; Gap above 95% pairwise accuracy: 34.0 pp; GPT-4.1-mini gaps: 19.6 pp · 14.0 pp; Qwen3-32B-thinking gaps: 32.7 pp · 29.7 pp; Mean-offset correction: 33.4 → 11.6 pp · −60.9%."
     }
   ],
   "glossary": [
     {
       "term": "Pairwise accuracy",
       "definition": "The fraction of examples where an evaluator ranks the human-preferred response above the rejected response.",
-      "source_refs": ["language_source_intro", "language_source_thresholds"]
+      "source_refs": [
+        "language_source_intro",
+        "language_source_thresholds"
+      ]
     },
     {
       "term": "Pointwise score",
       "definition": "An absolute scalar or rubric rating assigned to one response rather than a relative ordering between two responses.",
-      "source_refs": ["language_source_intro"]
+      "source_refs": [
+        "language_source_intro"
+      ]
     },
     {
       "term": "Global threshold",
       "definition": "One score cutoff applied across every language to turn evaluator scores into accept-or-reject decisions.",
-      "source_refs": ["language_source_thresholds"]
+      "source_refs": [
+        "language_source_thresholds"
+      ]
     },
     {
       "term": "Negative log-likelihood",
       "definition": "A measure of how surprising a response is to a model; the paper uses the summed value as one uncertainty proxy.",
-      "source_refs": ["language_source_uncertainty"]
+      "source_refs": [
+        "language_source_uncertainty"
+      ]
     },
     {
       "term": "Language-conditioned offset",
       "definition": "A language-specific baseline shift in scores that can cancel in pairwise comparisons but alter absolute-threshold decisions.",
-      "source_refs": ["language_source_calibration"]
+      "source_refs": [
+        "language_source_calibration"
+      ]
     }
   ],
   "revision_notes": [
     "Initial evidence-backed explainer fixture for arXiv:2607.14480v1.",
     "Pairwise ranking, pointwise calibration, uncertainty correlation, and causal uncertainty remain separated.",
     "Distinguished the 43.0-point aggregate maximum from the paper's 44-point English/Ukrainian example based on rounded 23% and 67% display values.",
-    "Editorial review and human publication approval remain required."
+    "Editorial review and human publication approval remain required.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

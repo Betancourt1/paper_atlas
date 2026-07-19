@@ -127,6 +127,46 @@ export function getExplainerIntegrityErrors(
     }
     reportUnknownIds(errors, `visual ${visual.id} claim`, visual.claim_ids, claimIds);
     reportUnknownIds(errors, `visual ${visual.id} source`, visual.source_refs, sourceIds);
+
+    const nodeIds = visual.items.flatMap((item) =>
+      item.node_id === undefined ? [] : [item.node_id],
+    );
+    reportDuplicateIds(errors, `visual ${visual.id} node`, nodeIds);
+    const knownNodeIds = new Set(nodeIds);
+    for (const item of visual.items) {
+      if (item.input_ids !== undefined) {
+        reportUnknownIds(
+          errors,
+          `visual ${visual.id} item ${item.label} input`,
+          item.input_ids,
+          knownNodeIds,
+        );
+      }
+      if (
+        (item.domain_min === undefined) !== (item.domain_max === undefined)
+      ) {
+        errors.push(
+          `visual ${visual.id} item ${item.label} must declare both domain bounds`,
+        );
+      } else if (
+        item.domain_min !== undefined &&
+        item.domain_max !== undefined &&
+        item.domain_min >= item.domain_max
+      ) {
+        errors.push(
+          `visual ${visual.id} item ${item.label} has a non-increasing domain`,
+        );
+      }
+      if (
+        item.value !== undefined &&
+        item.value_end !== undefined &&
+        item.value > item.value_end
+      ) {
+        errors.push(
+          `visual ${visual.id} item ${item.label} has a reversed value interval`,
+        );
+      }
+    }
   }
 
   for (const term of explainer.glossary) {

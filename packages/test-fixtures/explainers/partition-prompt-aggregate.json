@@ -361,173 +361,506 @@
   ],
   "visuals": [
     {
-      "id": "visual_ppa_prompt_aggregation_gap",
+      "id": "visual_ppa_prompt_convergence",
       "after_block_id": "ppa_why",
       "after_paragraph_id": "ppa_why_p1",
-      "type": "PARALLEL_VIEW",
-      "title": "A direct prompt and a reconstructed aggregate can disagree",
-      "question": "Which two estimates should represent the same population quantity?",
+      "type": "PARTITION_TREE",
+      "title": "Direct and weighted routes estimate one population target",
+      "question": "Why should a macro prompt agree with a complete subgroup reconstruction?",
       "items": [
         {
-          "label": "Direct macro prompt",
-          "detail": "Ask the model for the population-level probability in one prompt and treat that answer as the aggregate estimate."
+          "label": "Base population",
+          "detail": "Both routes refer to the same target conditional distribution.",
+          "group": "Target",
+          "node_id": "population"
         },
         {
-          "label": "Partitioned micro prompts",
-          "detail": "Ask the same probability within disjoint subgroups and elicit each subgroup's population share."
+          "label": "Direct macro estimate",
+          "detail": "One prompt asks for the population-level probability p(root).",
+          "group": "Estimation routes",
+          "node_id": "direct_estimate",
+          "input_ids": [
+            "population"
+          ]
+        },
+        {
+          "label": "Complete subgroup partition",
+          "detail": "Disjoint subgroup prompts cover the full population.",
+          "group": "Estimation routes",
+          "node_id": "partition",
+          "input_ids": [
+            "population"
+          ]
+        },
+        {
+          "label": "Subgroup probabilities",
+          "detail": "The model estimates the target quantity within every subgroup.",
+          "group": "Partition inputs",
+          "node_id": "subgroup_probabilities",
+          "input_ids": [
+            "partition"
+          ]
+        },
+        {
+          "label": "Normalized population shares",
+          "detail": "Each subgroup estimate receives its population weight.",
+          "group": "Partition inputs",
+          "node_id": "population_shares",
+          "input_ids": [
+            "partition"
+          ]
         },
         {
           "label": "Weighted reconstruction",
-          "detail": "Multiply each subgroup probability by its normalized population share and sum the products."
+          "detail": "Compute Σg w_g p_g across the complete partition.",
+          "value_label": "Σ w_g p_g",
+          "group": "Convergence",
+          "node_id": "reconstruction",
+          "input_ids": [
+            "subgroup_probabilities",
+            "population_shares"
+          ]
         },
         {
-          "label": "Consistency question",
-          "detail": "If the conditions are equivalent, compare the direct macro answer with the reconstructed aggregate instead of assuming they agree."
+          "label": "Consistency comparison",
+          "detail": "Compare the direct estimate with the weighted reconstruction because both claim the same population target.",
+          "value_label": "p(root) ?= Σ w_g p_g",
+          "group": "Consistency target",
+          "node_id": "consistency",
+          "input_ids": [
+            "direct_estimate",
+            "reconstruction"
+          ]
         }
       ],
-      "claim_ids": ["ppa_core", "ppa_partition", "ppa_reconstruction"],
-      "source_refs": ["ppa_method"],
-      "interpretation": "The framework exposes two routes to one conditional quantity: a direct population prompt and an aggregation of subgroup prompts. Their disagreement is the phenomenon to measure, not a decorative restatement of the prompt.",
-      "limitations": [
-        "The illustration states the framework's equivalence relation and does not assume either route is automatically correct.",
-        "Actual alignment still requires a reference dataset such as ACS."
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_core"
       ],
-      "alt_text": "Parallel lanes show a direct population-level prompt and a partitioned route that elicits subgroup probabilities and population shares, combines them as a weighted sum, and compares the reconstructed aggregate with the direct answer.",
-      "fallback": "One route asks directly for a population probability. The other asks for subgroup probabilities and population shares, computes their weighted sum, and compares that reconstruction with the direct answer."
+      "source_refs": [
+        "ppa_method"
+      ],
+      "interpretation": "A direct population prompt and a normalized weighted subgroup reconstruction are two routes to one quantity.",
+      "limitations": [
+        "Agreement is necessary for self-consistency but does not establish that either estimate matches reality."
+      ],
+      "alt_text": "Direct and weighted routes estimate one population target. Base population; Direct macro estimate; Complete subgroup partition; Subgroup probabilities; Normalized population shares; Weighted reconstruction: Σ w_g p_g; Consistency comparison: p(root) ?= Σ w_g p_g.",
+      "fallback": "A direct population prompt and a normalized weighted subgroup reconstruction are two routes to one quantity. Base population; Direct macro estimate; Complete subgroup partition; Subgroup probabilities; Normalized population shares; Weighted reconstruction: Σ w_g p_g; Consistency comparison: p(root) ?= Σ w_g p_g."
     },
     {
-      "id": "visual_ppa_partition_tree",
+      "id": "visual_ppa_three_checks",
+      "after_block_id": "ppa_change",
+      "after_paragraph_id": "ppa_change_p2",
+      "type": "METHOD_COMPARISON",
+      "title": "Alignment and two consistency tests ask different questions",
+      "question": "Which reference or invariance does each check use?",
+      "items": [
+        {
+          "label": "External alignment",
+          "detail": "Compare an estimate with a trusted reference such as ACS when one exists.",
+          "group": "External reference required"
+        },
+        {
+          "label": "Split consistency",
+          "detail": "Compare a node's direct estimate with the prior-weighted aggregate of its immediate children.",
+          "group": "Reference-free composition"
+        },
+        {
+          "label": "Order consistency",
+          "detail": "Compare the same subgroup estimate when equivalent conditions are verbalized in another order.",
+          "group": "Reference-free invariance"
+        },
+        {
+          "label": "Macro fallacy",
+          "detail": "In the ACS study, direct population prompting is often less accurate than explicit subgroup elicitation and recombination.",
+          "group": "Observed alignment pattern",
+          "role": "MEASURED"
+        }
+      ],
+      "claim_ids": [
+        "ppa_reconstruction",
+        "ppa_macro"
+      ],
+      "source_refs": [
+        "ppa_method",
+        "ppa_macro_results"
+      ],
+      "interpretation": "Alignment measures accuracy against data, while split and order consistency test distinct internal probability requirements.",
+      "limitations": [
+        "Passing either consistency check does not imply external accuracy, and the ACS macro-fallacy pattern is not universal."
+      ],
+      "alt_text": "Alignment and two consistency tests ask different questions. External alignment; Split consistency; Order consistency; Macro fallacy.",
+      "fallback": "Alignment measures accuracy against data, while split and order consistency test distinct internal probability requirements. External alignment; Split consistency; Order consistency; Macro fallacy."
+    },
+    {
+      "id": "visual_ppa_partition_hierarchy",
       "after_block_id": "ppa_mechanism",
       "after_paragraph_id": "ppa_mechanism_p2",
       "type": "PARTITION_TREE",
-      "title": "One population, several equivalent estimates",
-      "question": "Why should the direct root estimate agree with every weighted reconstruction from a valid partition?",
+      "title": "Every complete level reconstructs the root",
+      "question": "How does an exhaustive binary hierarchy return to one weighted estimate?",
       "items": [
         {
           "label": "Root population",
-          "detail": "A direct prompt asks for the target probability over the complete base population. Call this estimate p(root)."
+          "detail": "A direct prompt estimates p(root) for the complete base population.",
+          "group": "Depth 0 · direct estimate",
+          "node_id": "root_population"
         },
         {
-          "label": "First binary split",
-          "detail": "One attribute divides the root into two mutually exclusive children whose population shares sum to one."
+          "label": "Attribute A",
+          "detail": "One branch of the first mutually exclusive binary split.",
+          "group": "Depth 1 · exhaustive split",
+          "node_id": "attribute_a",
+          "input_ids": [
+            "root_population"
+          ]
         },
         {
-          "label": "Finer partition",
-          "detail": "A second attribute can split both children again. Every node at this depth still belongs to one complete partition of the original population."
+          "label": "Not attribute A",
+          "detail": "The complementary branch completes the first partition.",
+          "group": "Depth 1 · exhaustive split",
+          "node_id": "not_attribute_a",
+          "input_ids": [
+            "root_population"
+          ]
         },
         {
-          "label": "Weighted reconstruction",
-          "detail": "For one level, multiply every subgroup estimate by its normalized population share and sum the products."
+          "label": "A ∩ B",
+          "detail": "A second binary attribute refines the first branch.",
+          "group": "Depth 2 · exhaustive split",
+          "node_id": "a_b",
+          "input_ids": [
+            "attribute_a"
+          ]
         },
         {
-          "label": "Consistency requirement",
-          "detail": "The root estimate and each level's weighted reconstruction refer to the same quantity, so a coherent conditional estimator should make them agree."
+          "label": "A ∩ not B",
+          "detail": "Complementary refinement under the first branch.",
+          "group": "Depth 2 · exhaustive split",
+          "node_id": "a_not_b",
+          "input_ids": [
+            "attribute_a"
+          ]
+        },
+        {
+          "label": "not A ∩ B",
+          "detail": "Second-level refinement under the complement branch.",
+          "group": "Depth 2 · exhaustive split",
+          "node_id": "not_a_b",
+          "input_ids": [
+            "not_attribute_a"
+          ]
+        },
+        {
+          "label": "not A ∩ not B",
+          "detail": "Complementary refinement completes depth two.",
+          "group": "Depth 2 · exhaustive split",
+          "node_id": "not_a_not_b",
+          "input_ids": [
+            "not_attribute_a"
+          ]
+        },
+        {
+          "label": "Normalized weighted merge",
+          "detail": "At each level, elicit population shares 50 times in the ACS prior protocol, normalize and average them, then compute Σg w_g p_g and compare with p(root).",
+          "value": 50,
+          "value_label": "50 prior elicitations · Σ w_g p_g",
+          "group": "Reconstruction to root",
+          "node_id": "weighted_merge",
+          "input_ids": [
+            "a_b",
+            "a_not_b",
+            "not_a_b",
+            "not_a_not_b"
+          ]
+        }
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_reconstruction"
+      ],
+      "source_refs": [
+        "ppa_method"
+      ],
+      "interpretation": "The hierarchy is exhaustive at every depth, and normalized subgroup shares weight every leaf back into the same root quantity.",
+      "limitations": [
+        "The symbolic tree does not invent subgroup estimates or ACS values; self-consistency remains distinct from accuracy."
+      ],
+      "alt_text": "Every complete level reconstructs the root. Root population; Attribute A; Not attribute A; A ∩ B; A ∩ not B; not A ∩ B; not A ∩ not B; Normalized weighted merge: 50 prior elicitations · Σ w_g p_g.",
+      "fallback": "The hierarchy is exhaustive at every depth, and normalized subgroup shares weight every leaf back into the same root quantity. Root population; Attribute A; Not attribute A; A ∩ B; A ∩ not B; not A ∩ B; not A ∩ not B; Normalized weighted merge: 50 prior elicitations · Σ w_g p_g."
+    },
+    {
+      "id": "visual_ppa_consistency_invariances",
+      "after_block_id": "ppa_mechanism",
+      "after_paragraph_id": "ppa_mechanism_p3",
+      "type": "PARALLEL_VIEW",
+      "title": "Two consistency checks preserve different invariances",
+      "question": "What changes in each comparison, and what must stay equal?",
+      "items": [
+        {
+          "label": "Parent estimate",
+          "detail": "Direct estimate for one node.",
+          "group": "Split consistency"
+        },
+        {
+          "label": "Immediate-child reconstruction",
+          "detail": "Prior-weighted sum of that node's two children must match the parent.",
+          "value_label": "p(parent) ?= Σchildren w p",
+          "group": "Split consistency",
+          "role": "AGGREGATE"
+        },
+        {
+          "label": "Condition order A then B",
+          "detail": "One verbal description of a fixed subgroup.",
+          "group": "Order consistency"
+        },
+        {
+          "label": "Condition order B then A",
+          "detail": "An equivalent ordering must preserve the subgroup estimate.",
+          "value_label": "p(A,B) ?= p(B,A)",
+          "group": "Order consistency",
+          "role": "AGGREGATE"
+        }
+      ],
+      "claim_ids": [
+        "ppa_partition",
+        "ppa_reconstruction"
+      ],
+      "source_refs": [
+        "ppa_method"
+      ],
+      "interpretation": "Split consistency tests probabilistic composition; order consistency tests invariance to equivalent condition ordering.",
+      "limitations": [
+        "This figure explains the cited paper's reported mechanism or evidence; it does not extend the claim beyond the stated conditions."
+      ],
+      "alt_text": "Two consistency checks preserve different invariances. Parent estimate; Immediate-child reconstruction: p(parent) ?= Σchildren w p; Condition order A then B; Condition order B then A: p(A,B) ?= p(B,A).",
+      "fallback": "Split consistency tests probabilistic composition; order consistency tests invariance to equivalent condition ordering. Parent estimate; Immediate-child reconstruction: p(parent) ?= Σchildren w p; Condition order A then B; Condition order B then A: p(A,B) ?= p(B,A)."
+    },
+    {
+      "id": "visual_ppa_acs_example",
+      "after_block_id": "ppa_example",
+      "after_paragraph_id": "ppa_example_p2",
+      "type": "PARTITION_TREE",
+      "title": "The ACS example reconstructs income probability from age and employment leaves",
+      "question": "How do named subgroups produce a symbolic population estimate?",
+      "items": [
+        {
+          "label": "United States population",
+          "detail": "Direct prompt asks for the probability of earning above the selected threshold.",
+          "group": "Root target",
+          "node_id": "us_population"
+        },
+        {
+          "label": "Age 31–68",
+          "detail": "First named age branch.",
+          "group": "Age partition",
+          "node_id": "age_31_68",
+          "input_ids": [
+            "us_population"
+          ]
+        },
+        {
+          "label": "Age outside 31–68",
+          "detail": "Complement branch makes the age split exhaustive.",
+          "group": "Age partition",
+          "node_id": "age_complement",
+          "input_ids": [
+            "us_population"
+          ]
+        },
+        {
+          "label": "31–68 and employed",
+          "detail": "Employment refines the first age group.",
+          "group": "Employment leaves",
+          "node_id": "age_in_employed",
+          "input_ids": [
+            "age_31_68"
+          ]
+        },
+        {
+          "label": "31–68 and not employed",
+          "detail": "Complementary employment leaf.",
+          "group": "Employment leaves",
+          "node_id": "age_in_not_employed",
+          "input_ids": [
+            "age_31_68"
+          ]
+        },
+        {
+          "label": "Outside 31–68 and employed",
+          "detail": "Employment refines the complementary age group.",
+          "group": "Employment leaves",
+          "node_id": "age_out_employed",
+          "input_ids": [
+            "age_complement"
+          ]
+        },
+        {
+          "label": "Outside 31–68 and not employed",
+          "detail": "Final complement completes the four-leaf partition.",
+          "group": "Employment leaves",
+          "node_id": "age_out_not_employed",
+          "input_ids": [
+            "age_complement"
+          ]
+        },
+        {
+          "label": "Symbolic weighted reconstruction",
+          "detail": "For every leaf g, multiply income probability p_g by normalized share w_g, sum Σg w_g p_g, compare with the root for consistency, then compare each route with ACS separately for alignment.",
+          "value_label": "Σg w_g p_g",
+          "group": "Weighted merge and checks",
+          "node_id": "acs_merge",
+          "input_ids": [
+            "age_in_employed",
+            "age_in_not_employed",
+            "age_out_employed",
+            "age_out_not_employed"
+          ]
         }
       ],
       "claim_ids": [
         "ppa_partition",
         "ppa_reconstruction",
-        "ppa_acs_protocol"
+        "ppa_macro"
       ],
       "source_refs": [
         "ppa_method",
-        "ppa_protocol"
+        "ppa_macro_results"
       ],
-      "interpretation": "The tree is not a sequence of different prediction targets. Its root and every complete level are alternative decompositions of the same population quantity. Disagreement between the direct root estimate and a correctly weighted level therefore exposes a failure of probabilistic composition.",
+      "interpretation": "The example keeps the age complement, all employment leaves, the weighted formula, and the separate consistency/alignment comparisons visible.",
       "limitations": [
-        "The relationship holds only for mutually exclusive and collectively exhaustive partitions with normalized subgroup shares.",
-        "Self-consistency does not establish that any estimate is accurate.",
-        "The tree is symbolic and does not encode subgroup sizes or measured ACS results.",
-        "This is an original static composition because the paper's CC BY-NC-ND 4.0 license does not permit an adapted source figure."
+        "The figure is symbolic and does not invent population shares, income probabilities, or an ACS outcome."
       ],
-      "alt_text": "Partition tree with a root population, two successive binary splits, and a weighted sum of one complete level returning to the same root quantity.",
-      "fallback": "A direct prompt estimates the target for the root population. Binary attributes split that population into mutually exclusive, exhaustive subgroups. At any complete level, multiply each subgroup estimate by its normalized population share and sum the products. That reconstruction and the direct root estimate describe the same population quantity and should agree for a self-consistent estimator."
+      "alt_text": "The ACS example reconstructs income probability from age and employment leaves. United States population; Age 31–68; Age outside 31–68; 31–68 and employed; 31–68 and not employed; Outside 31–68 and employed; Outside 31–68 and not employed; Symbolic weighted reconstruction: Σg w_g p_g.",
+      "fallback": "The example keeps the age complement, all employment leaves, the weighted formula, and the separate consistency/alignment comparisons visible. United States population; Age 31–68; Age outside 31–68; 31–68 and employed; 31–68 and not employed; Outside 31–68 and employed; Outside 31–68 and not employed; Symbolic weighted reconstruction: Σg w_g p_g."
     },
     {
-      "id": "visual_ppa_consistency_checks",
-      "after_block_id": "ppa_change",
-      "after_paragraph_id": "ppa_change_p2",
-      "type": "METHOD_COMPARISON",
-      "title": "Two ways equivalent conditions can disagree",
-      "question": "What different failure does each self-consistency check expose?",
-      "items": [
-        {
-          "label": "Split consistency",
-          "detail": "Compare a node's direct estimate with the prior-weighted aggregate of its immediate children. A mismatch means the estimate does not compose across a valid split."
-        },
-        {
-          "label": "Order consistency",
-          "detail": "Describe the same subgroup with equivalent conditions in a different order. A mismatch means the estimate depends on wording order rather than the conditioned population."
-        },
-        {
-          "label": "Alignment",
-          "detail": "When an external reference such as ACS exists, compare an estimate with that reference. Alignment is separate from both internal consistency checks."
-        }
-      ],
-      "claim_ids": [
-        "ppa_core",
-        "ppa_partition",
-        "ppa_acs_consistency",
-        "ppa_wvs_consistency"
-      ],
-      "source_refs": [
-        "ppa_method",
-        "ppa_consistency_results"
-      ],
-      "interpretation": "Split consistency tests whether estimates compose across a partition, while order consistency tests whether equivalent verbalizations preserve an estimate. Neither check requires a ground-truth distribution; alignment does.",
-      "limitations": [
-        "Passing either consistency check is necessary for coherent conditional estimation but is not evidence of accuracy.",
-        "Reported scores depend on the paper's chosen tolerance and prompting protocol.",
-        "The comparison describes the tests and does not reproduce per-model results."
-      ],
-      "alt_text": "Three-column comparison of split consistency, order consistency, and external alignment, emphasizing that the first two are reference-free checks of different invariances.",
-      "fallback": "Split consistency compares a parent estimate with the weighted estimates of its children. Order consistency compares estimates for the same subgroup when equivalent conditions are reordered. Alignment instead compares an estimate with external reference data."
-    },
-    {
-      "id": "visual_ppa_evidence_scope",
+      "id": "visual_ppa_depth_tradeoff",
       "after_block_id": "ppa_evidence",
-      "after_paragraph_id": "ppa_evidence_p3",
-      "type": "EVIDENCE_MATRIX",
-      "title": "What each evaluation can establish",
-      "question": "Which findings concern external alignment, internal consistency, or only reference-free operation?",
+      "after_paragraph_id": "ppa_evidence_p1",
+      "type": "PARALLEL_VIEW",
+      "title": "Deeper reconstruction helps, then its average gain declines",
+      "question": "What pattern is reported, and what conclusion remains unestablished?",
       "items": [
         {
-          "label": "ACS alignment",
-          "detail": "Reconstructed income estimates are often closer to ACS data than direct prompts, but the gain is not monotonic as partitions become finer."
+          "label": "Direct population prompt",
+          "detail": "Baseline alignment error in the ACS income analysis.",
+          "group": "Compared routes"
         },
         {
-          "label": "ACS consistency",
-          "detail": "At tolerance 0.02, the displayed split-consistency scores range from 0 to 0.33 across the four frontier models and two prediction targets."
+          "label": "Reconstructed aggregate",
+          "detail": "Generally reduces alignment error relative to direct prompting.",
+          "group": "Compared routes",
+          "role": "MEASURED"
         },
         {
-          "label": "WVS consistency",
-          "detail": "Across five questions in Canada and Indonesia, no reported model is uniformly self-consistent across questions, countries, and checks."
+          "label": "Early depth gain",
+          "detail": "Average reconstruction gain is positive as subgroup conditionals initially improve.",
+          "group": "Reported qualitative pattern",
+          "role": "MEASURED"
         },
         {
-          "label": "Synthetic tasks",
-          "detail": "Tennis and fantasy forecasting show that the reference-free checks can expose inconsistency when no external target distribution is defined."
+          "label": "Later decline",
+          "detail": "The average gain eventually falls as increasingly specific subgroup shares become harder to estimate.",
+          "group": "Reported qualitative pattern",
+          "role": "MEASURED"
+        },
+        {
+          "label": "No monotonic guarantee",
+          "detail": "The source does not establish that every finer partition improves alignment.",
+          "group": "Boundary",
+          "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
         "ppa_macro",
         "ppa_error_tradeoff",
+        "ppa_micro_to_macro",
         "ppa_acs_consistency",
-        "ppa_wvs_consistency",
-        "ppa_generalization"
+        "ppa_wvs_consistency"
       ],
       "source_refs": [
         "ppa_macro_results",
-        "ppa_consistency_results",
-        "ppa_discussion"
+        "ppa_consistency_results"
       ],
-      "interpretation": "The evidence has different scopes: ACS supports both an alignment comparison and consistency checks, WVS supports consistency findings, and the synthetic tasks demonstrate reference-free use. These results should not be collapsed into a universal accuracy claim.",
+      "interpretation": "The evidence supports a qualitative depth trade-off, not a monotonic decomposition rule.",
       "limitations": [
-        "The matrix summarizes reported ranges and conclusions rather than every model-by-task value.",
-        "The macro-fallacy alignment finding is primarily supported by ACS.",
-        "Synthetic inconsistency does not establish real-world forecasting accuracy."
+        "No unreported coordinates are inferred from Figure 3, and the pattern is primarily an ACS finding."
       ],
-      "alt_text": "Evidence matrix distinguishing ACS alignment and consistency results, WVS consistency findings, and synthetic reference-free checks.",
-      "fallback": "ACS provides an external reference and shows that subgroup reconstruction often improves alignment, though not monotonically, while displayed split-consistency scores range from 0 to 0.33 at tolerance 0.02. WVS shows no uniformly consistent model across the selected questions and countries. Synthetic tasks show that the checks can operate without an external target but do not establish forecasting accuracy."
+      "alt_text": "Deeper reconstruction helps, then its average gain declines. Direct population prompt; Reconstructed aggregate; Early depth gain; Later decline; No monotonic guarantee.",
+      "fallback": "The evidence supports a qualitative depth trade-off, not a monotonic decomposition rule. Direct population prompt; Reconstructed aggregate; Early depth gain; Later decline; No monotonic guarantee."
+    },
+    {
+      "id": "visual_ppa_consistency_results",
+      "after_block_id": "ppa_evidence",
+      "after_paragraph_id": "ppa_evidence_p2",
+      "type": "RESULT_COMPARISON",
+      "title": "Reference-free failures appear across three task families",
+      "question": "Which values and conclusions belong to each evaluation?",
+      "items": [
+        {
+          "label": "Displayed frontier models",
+          "detail": "Two-attribute ACS tasks include four displayed models.",
+          "value": 4,
+          "value_label": "4 models",
+          "group": "ACS · tolerance 0.02"
+        },
+        {
+          "label": "Split-consistency range",
+          "detail": "Reported scores across the displayed models and two prediction targets.",
+          "value": 0,
+          "value_end": 0.33,
+          "value_label": "0–0.33",
+          "group": "ACS · tolerance 0.02"
+        },
+        {
+          "label": "World Values Survey questions",
+          "detail": "Five questions are evaluated in Canada and Indonesia.",
+          "value": 5,
+          "value_label": "5 questions · 2 countries",
+          "group": "WVS"
+        },
+        {
+          "label": "Uniform consistency",
+          "detail": "No reported model is uniformly consistent across the selected questions, countries, and checks.",
+          "value_label": "None",
+          "group": "WVS",
+          "role": "MEASURED"
+        },
+        {
+          "label": "Tennis forecasting",
+          "detail": "Reference-free checks expose inconsistency without an external target distribution.",
+          "group": "Synthetic tasks"
+        },
+        {
+          "label": "Fantasy forecasting",
+          "detail": "A second synthetic family demonstrates the same reference-free operation.",
+          "group": "Synthetic tasks"
+        },
+        {
+          "label": "Forecasting boundary",
+          "detail": "Detecting inconsistency does not establish real-world forecasting accuracy.",
+          "group": "Synthetic tasks",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "ppa_macro",
+        "ppa_error_tradeoff",
+        "ppa_micro_to_macro",
+        "ppa_acs_consistency",
+        "ppa_wvs_consistency"
+      ],
+      "source_refs": [
+        "ppa_macro_results",
+        "ppa_consistency_results"
+      ],
+      "interpretation": "ACS supplies a disclosed tolerance and score range; WVS and synthetic tasks establish different qualitative consistency findings.",
+      "limitations": [
+        "The task-family panels are not one scale and do not reproduce unreported per-model values."
+      ],
+      "alt_text": "Reference-free failures appear across three task families. Displayed frontier models: 4 models; Split-consistency range: 0–0.33; World Values Survey questions: 5 questions · 2 countries; Uniform consistency: None; Tennis forecasting; Fantasy forecasting; Forecasting boundary.",
+      "fallback": "ACS supplies a disclosed tolerance and score range; WVS and synthetic tasks establish different qualitative consistency findings. Displayed frontier models: 4 models; Split-consistency range: 0–0.33; World Values Survey questions: 5 questions · 2 countries; Uniform consistency: None; Tennis forecasting; Fantasy forecasting; Forecasting boundary."
     }
   ],
   "glossary": [
@@ -571,6 +904,7 @@
     "Initial explainer draft based on arXiv:2607.15277v1.",
     "Kept the macro-fallacy claim scoped to the ACS alignment experiments.",
     "Marked broader accuracy and internal-knowledge conclusions as not established.",
-    "Uses an original static mechanism diagram because the source license is CC BY-NC-ND 4.0."
+    "Uses an original static mechanism diagram because the source license is CC BY-NC-ND 4.0.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

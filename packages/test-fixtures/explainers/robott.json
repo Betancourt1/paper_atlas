@@ -382,156 +382,227 @@
       "after_block_id": "rttt_why",
       "after_paragraph_id": "rttt_why_p2",
       "type": "PARALLEL_VIEW",
-      "title": "Long robot history can be stored as tokens or changing state",
-      "question": "What grows as a robot acts for thousands of timesteps?",
+      "title": "Robot history can grow as tokens or persist as fixed-size state",
+      "question": "What changes as a rollout lasts thousands of timesteps?",
       "items": [
         {
-          "label": "Full-history attention",
-          "detail": "Keep an ever-growing sequence of prior observations available as attention tokens, increasing the context each new prediction must revisit."
+          "label": "Ever-growing observation tokens",
+          "detail": "Full-history attention keeps prior frames available, so each new prediction revisits a longer context.",
+          "group": "Full-history attention"
         },
         {
-          "label": "RoboTTT recurrent state",
-          "detail": "Use current-step projected keys and values to update fast-weight MLPs, then carry those changed weights into the next timestep."
+          "label": "Fixed-size fast weights",
+          "detail": "RoboTTT updates a small neural network and carries its changed parameters into the next timestep.",
+          "group": "RoboTTT recurrent state"
         },
         {
-          "label": "Information objective",
-          "detail": "The learned state is intended to retain task-relevant history such as completed stages, failures, and observations that later become occluded."
+          "label": "Retention objective",
+          "detail": "The state is intended to retain completed stages, failed actions, and observations that later become occluded.",
+          "group": "RoboTTT recurrent state"
         },
         {
-          "label": "Unmeasured boundary",
-          "detail": "The paper reports task completion but not an empirical deployment-latency comparison proving the recurrent design is always faster."
-        }
-      ],
-      "claim_ids": ["rttt_core", "rttt_memory_interpretation", "rttt_latency_limit"],
-      "source_refs": ["rttt_architecture_source", "rttt_limits_source"],
-      "interpretation": "RoboTTT changes the representation of history: rather than expose every old frame as an attention token, it carries an updated parameter state whose size does not grow with the rollout length.",
-      "limitations": [
-        "Fixed-size state can forget information; the paper's results do not prove perfect retention.",
-        "The visual distinguishes scaling mechanisms and does not claim lower measured latency on every deployment."
-      ],
-      "alt_text": "Parallel lanes compare full-history attention, where the visible token context grows over time, with RoboTTT, where current observations update fast-weight MLP state that is carried forward. A boundary notes that the paper does not report a universal deployment-latency win.",
-      "fallback": "Full-history attention keeps adding prior observations to the visible token sequence. RoboTTT instead updates a fast-weight state and carries those weights forward. This keeps state size from growing with rollout length, but the paper does not establish lower latency in every deployment."
-    },
-    {
-      "id": "visual_robottt_fast_weight_cycle",
-      "after_block_id": "rttt_mechanism",
-      "after_paragraph_id": "rttt_mechanism_p3",
-      "type": "CONTROL_LOOP",
-      "title": "How robot history becomes fast-weight state",
-      "question": "How does RoboTTT condition on a long visuomotor history without attending over the full history at every step?",
-      "items": [
-        {
-          "label": "Encode the current timestep",
-          "detail": "The VLM encodes the current image and language context; the action head receives register, proprioception, and noised action tokens."
-        },
-        {
-          "label": "Attend within the timestep",
-          "detail": "Self- and cross-attention combine current-step information. Vision-language tokens are represented across time through the smaller register-token set."
-        },
-        {
-          "label": "Form the inner objective",
-          "detail": "Projected keys and values from the current-step representation define the learned inner loss for the TTT layer."
-        },
-        {
-          "label": "Update fast weights",
-          "detail": "Gradient descent on the inner loss changes a two-layer MLP from its incoming state at this timestep to its updated state."
-        },
-        {
-          "label": "Query and gate the memory",
-          "detail": "The updated MLP processes the query, and a learned tanh gate adds its contribution to the attention pathway."
-        },
-        {
-          "label": "Act and carry state",
-          "detail": "The DiT predicts the next action chunk, while the updated fast weights return as the recurrent state for the next observation."
+          "label": "Latency boundary",
+          "detail": "The paper reports completion but no direct deployment-latency table proving universal speed superiority.",
+          "group": "Unmeasured",
+          "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
+        "rttt_core",
         "rttt_architecture"
       ],
       "source_refs": [
         "rttt_architecture_source"
       ],
-      "interpretation": "Attention combines information within the current timestep. The TTT layer then changes a small MLP's parameters and carries those parameters into the next timestep, so the recurrent state remains fixed in size even as the processed history grows.",
+      "interpretation": "RoboTTT changes history from a growing visible token sequence into recurrent fast-weight state with fixed size.",
       "limitations": [
-        "The architecture is demonstrated only with the GR00T N1.7 backbone.",
-        "The diagram shows constant-size recurrent state, not a measured latency comparison with competing policies.",
-        "Fast weights begin from the learned initialization at each rollout; the visual does not imply permanent cross-rollout memory.",
-        "This is an original Paper Atlas composition based on the cited paper, not a reproduction of a source figure; the CC BY 4.0 paper is attributed through the source references."
+        "Fixed-size state can forget, and constant-size memory does not establish lower absolute latency."
       ],
-      "alt_text": "Recurrent control loop: encode the current robot timestep, attend within it, form a key-value inner objective, update an MLP's fast weights, query and gate that memory, then predict an action and carry the updated weights to the next timestep.",
-      "fallback": "At each timestep, RoboTTT encodes the current observation and processes it with attention. Projected keys and values define an inner loss that updates a two-layer MLP's fast weights. The updated MLP processes the query and contributes through a learned gate to the action prediction. After producing an action chunk, RoboTTT carries those fast weights into the next timestep."
+      "alt_text": "Robot history can grow as tokens or persist as fixed-size state. Ever-growing observation tokens; Fixed-size fast weights; Retention objective; Latency boundary.",
+      "fallback": "RoboTTT changes history from a growing visible token sequence into recurrent fast-weight state with fixed size. Ever-growing observation tokens; Fixed-size fast weights; Retention objective; Latency boundary."
+    },
+    {
+      "id": "visual_robottt_current_action",
+      "after_block_id": "rttt_change",
+      "after_paragraph_id": "rttt_change_p1",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Current observations update memory before action retrieval",
+      "question": "How do fast weights replace full-history attention for one action?",
+      "items": [
+        {
+          "label": "Project current observation",
+          "detail": "Current-step representation supplies projected keys, values, and a query."
+        },
+        {
+          "label": "Form the learned inner loss",
+          "detail": "Keys and values define the timestep-local training objective for the fast-weight network."
+        },
+        {
+          "label": "Update fast weights",
+          "detail": "Gradient descent changes the small neural network's parameters at this timestep."
+        },
+        {
+          "label": "Retrieve with the query",
+          "detail": "The updated network processes the current query to recover contextual information."
+        },
+        {
+          "label": "Gate into the action path",
+          "detail": "A learned tanh gate adds retrieved context to the attention pathway."
+        },
+        {
+          "label": "Predict the current action",
+          "detail": "The action head uses the updated contextual state to denoise the next action chunk."
+        }
+      ],
+      "claim_ids": [
+        "rttt_architecture",
+        "rttt_training"
+      ],
+      "source_refs": [
+        "rttt_architecture_source"
+      ],
+      "interpretation": "Observation projection, inner-gradient update, query retrieval, and action prediction form one current-step path.",
+      "limitations": [
+        "The diagram does not claim that fast weights preserve the complete prior observation history."
+      ],
+      "alt_text": "Current observations update memory before action retrieval. Project current observation; Form the learned inner loss; Update fast weights; Retrieve with the query; Gate into the action path; Predict the current action.",
+      "fallback": "Observation projection, inner-gradient update, query retrieval, and action prediction form one current-step path. Project current observation; Form the learned inner loss; Update fast weights; Retrieve with the query; Gate into the action path; Predict the current action."
     },
     {
       "id": "visual_robottt_training_timeline",
       "after_block_id": "rttt_change",
       "after_paragraph_id": "rttt_change_p2",
       "type": "TIMELINE",
-      "title": "Long-sequence training without full-history gradients",
-      "question": "How do sequence action forcing and truncated backpropagation keep long-context training tractable?",
+      "title": "Noise changes per chunk while state crosses detached boundaries",
+      "question": "How do sequence action forcing and TBPTT train long recurrent context?",
       "items": [
         {
-          "label": "Action chunks in a segment",
-          "detail": "The training sequence is divided into TBPTT segments rather than backpropagating through the complete rollout at once."
+          "label": "Segment action chunks",
+          "detail": "A long training sequence is divided into TBPTT segments."
         },
         {
-          "label": "Independent noise levels",
-          "detail": "Sequence action forcing samples a different flow-matching noise level for every action chunk in the sequence."
+          "label": "Sample independent noise",
+          "detail": "Every action chunk receives its own flow-matching noise level."
         },
         {
-          "label": "Gradients within the segment",
-          "detail": "Fast-weight updates and action losses backpropagate through the current segment."
+          "label": "Backpropagate within segment",
+          "detail": "Action losses and fast-weight updates retain gradients inside the current segment."
         },
         {
-          "label": "Detached boundary",
-          "detail": "At the segment boundary, the fast-weight state continues forward but its gradient history is stopped."
+          "label": "Detach gradient history",
+          "detail": "At the boundary, the computation graph stops."
         },
         {
-          "label": "Next segment",
-          "detail": "Training resumes from the carried state, so memory use depends on segment length rather than total context length."
+          "label": "Carry fast-weight state",
+          "detail": "The updated weights themselves continue into the next segment."
+        },
+        {
+          "label": "Resume next segment",
+          "detail": "Training memory depends on segment length, while recurrent state spans the longer sequence."
         }
       ],
       "claim_ids": [
+        "rttt_architecture",
         "rttt_training"
       ],
       "source_refs": [
         "rttt_architecture_source"
       ],
-      "interpretation": "The policy experiences a continuous recurrent state across segments, but optimization only retains the computation graph within each segment. Independent action-chunk noise avoids forcing a whole sequence to share one denoising level.",
+      "interpretation": "TBPTT truncates gradients without resetting the recurrent fast-weight state, and action noise is sampled per chunk.",
       "limitations": [
-        "Detaching gradients limits the optimization horizon even though fast-weight state continues across the sequence.",
-        "The timeline explains memory scaling and does not report training time or compute cost.",
-        "It does not depict DAgger Distillation or masked human-video context."
+        "Detachment limits the optimization horizon and does not report training compute or wall-clock cost."
       ],
-      "alt_text": "Training timeline showing action chunks with independent noise levels, gradients flowing within one TBPTT segment, fast-weight state crossing a detached boundary, and optimization continuing in the next segment.",
-      "fallback": "RoboTTT divides a long sequence into TBPTT segments. Every action chunk receives an independently sampled flow-matching noise level. Gradients flow within the current segment. At a boundary, the fast-weight state is carried into the next segment while its gradient history is detached, so training memory depends on segment length rather than the entire sequence."
+      "alt_text": "Noise changes per chunk while state crosses detached boundaries. Segment action chunks; Sample independent noise; Backpropagate within segment; Detach gradient history; Carry fast-weight state; Resume next segment.",
+      "fallback": "TBPTT truncates gradients without resetting the recurrent fast-weight state, and action noise is sampled per chunk. Segment action chunks; Sample independent noise; Backpropagate within segment; Detach gradient history; Carry fast-weight state; Resume next segment."
+    },
+    {
+      "id": "visual_robottt_fast_weight_cycle",
+      "after_block_id": "rttt_mechanism",
+      "after_paragraph_id": "rttt_mechanism_p3",
+      "type": "CONTROL_LOOP",
+      "title": "Within-timestep attention feeds an across-timestep state loop",
+      "question": "How does RoboTTT join current observation processing with recurrent fast weights?",
+      "items": [
+        {
+          "label": "Encode current observation",
+          "detail": "The GR00T N1.7 VLM encodes image and language; the DiT receives register, proprioception, and noised action tokens."
+        },
+        {
+          "label": "Attend within timestep",
+          "detail": "Self- and cross-attention combine current-step information; register tokens carry the smaller cross-time representation."
+        },
+        {
+          "label": "Project keys, values, and query",
+          "detail": "The timestep representation supplies the learned inner objective and retrieval input."
+        },
+        {
+          "label": "Gradient-update two-layer MLP",
+          "detail": "Fast weights change from incoming to updated state."
+        },
+        {
+          "label": "Query and tanh-gate memory",
+          "detail": "The updated MLP result is added back into the attention pathway."
+        },
+        {
+          "label": "Denoise action chunk",
+          "detail": "The Diffusion Transformer predicts the next robot action."
+        },
+        {
+          "label": "Carry state across timestep",
+          "detail": "Updated fast weights become recurrent state; they cross TBPTT boundaries while gradients detach."
+        },
+        {
+          "label": "Reset at rollout boundary",
+          "detail": "A new rollout starts from learned initialization rather than retaining permanent deployment memory."
+        }
+      ],
+      "claim_ids": [
+        "rttt_architecture",
+        "rttt_training"
+      ],
+      "source_refs": [
+        "rttt_architecture_source",
+        "rttt_training_source"
+      ],
+      "interpretation": "Attention operates within a timestep, while gradient-updated fast weights form the fixed-size recurrent state across timesteps.",
+      "limitations": [
+        "The mechanism is evaluated on one backbone and does not establish universal latency or permanent cross-rollout memory."
+      ],
+      "alt_text": "Within-timestep attention feeds an across-timestep state loop. Encode current observation; Attend within timestep; Project keys, values, and query; Gradient-update two-layer MLP; Query and tanh-gate memory; Denoise action chunk; Carry state across timestep; Reset at rollout boundary.",
+      "fallback": "Attention operates within a timestep, while gradient-updated fast weights form the fixed-size recurrent state across timesteps. Encode current observation; Attend within timestep; Project keys, values, and query; Gradient-update two-layer MLP; Query and tanh-gate memory; Denoise action chunk; Carry state across timestep; Reset at rollout boundary."
     },
     {
       "id": "visual_robottt_masked_context",
       "after_block_id": "rttt_example",
       "after_paragraph_id": "rttt_example_p2",
       "type": "TIMELINE",
-      "title": "A human demonstration becomes context, not an action target",
-      "question": "How can demonstration frames influence later robot actions when they contain no robot action labels?",
+      "title": "A human demonstration updates context without becoming an action target",
+      "question": "How does demonstration state condition a reset robot trajectory?",
       "items": [
         {
-          "label": "Human demonstration",
-          "detail": "A person assembles an unseen Circuit configuration while the robot remains idle."
+          "label": "Human assembles unseen Circuit configuration",
+          "detail": "The robot remains idle while demonstration frames arrive."
         },
         {
-          "label": "Context update, loss masked",
-          "detail": "The demonstration frames update fast weights, but their flow-matching loss is masked because they do not contain robot action targets."
+          "label": "Update fast weights",
+          "detail": "Human frames alter recurrent state."
         },
         {
-          "label": "Scene reset",
-          "detail": "The scene is reset before the robot receives the same generic instruction used across configurations."
+          "label": "Mask flow-matching loss",
+          "detail": "The context has no robot action targets and is not supervised as an action trajectory."
         },
         {
-          "label": "Robot trajectory",
-          "detail": "Action loss is computed on the robot trajectory while conditioning on the fast-weight state produced by the human video."
+          "label": "Reset the scene",
+          "detail": "The robot then receives the same generic instruction used across configurations."
         },
         {
-          "label": "Bounded result",
-          "detail": "RoboTTT completes 6 of 10 unseen Circuit configurations; GDN completes 0 of 10."
+          "label": "Compute robot action loss",
+          "detail": "The robot trajectory is trained while conditioning on demonstration-produced fast weights."
+        },
+        {
+          "label": "Bounded evaluation",
+          "detail": "RoboTTT completes 6 of 10 unseen configurations; GDN completes 0 of 10.",
+          "value_label": "6/10 vs 0/10"
         }
       ],
       "claim_ids": [
@@ -541,73 +612,203 @@
       ],
       "source_refs": [
         "rttt_training_source",
-        "rttt_results_source"
+        "rttt_results_source",
+        "rttt_limits_source"
       ],
-      "interpretation": "Loss masking separates context from supervision: human frames may alter the recurrent state without being treated as robot actions to imitate directly. The later robot trajectory supplies the action targets.",
+      "interpretation": "Loss masking lets the human video update context without being treated as direct action supervision.",
       "limitations": [
-        "The result concerns unseen configurations within the Circuit task, not arbitrary unseen-task imitation.",
-        "The diagram does not show what information the fast weights retain from the video.",
-        "The evaluation contains 10 one-shot configurations."
+        "The result is configuration-level generalization within Circuit, not arbitrary unseen-task imitation."
       ],
-      "alt_text": "Timeline from human Circuit demonstration to masked context update, scene reset, robot action supervision, and a 6-of-10 RoboTTT result compared with 0-of-10 for GDN.",
-      "fallback": "A human first demonstrates an unseen Circuit configuration. Those frames update RoboTTT's fast weights, but their action loss is masked because they contain no robot actions. After the scene reset, the robot acts under the generic instruction while conditioning on that state, and only its trajectory supplies action targets. RoboTTT completes 6 of 10 configurations and GDN completes none."
+      "alt_text": "A human demonstration updates context without becoming an action target. Human assembles unseen Circuit configuration; Update fast weights; Mask flow-matching loss; Reset the scene; Compute robot action loss; Bounded evaluation: 6/10 vs 0/10.",
+      "fallback": "Loss masking lets the human video update context without being treated as direct action supervision. Human assembles unseen Circuit configuration; Update fast weights; Mask flow-matching loss; Reset the scene; Compute robot action loss; Bounded evaluation: 6/10 vs 0/10."
     },
     {
-      "id": "visual_robottt_completion_results",
+      "id": "visual_robottt_main_results",
       "after_block_id": "rttt_evidence",
-      "after_paragraph_id": "rttt_evidence_p3",
-      "type": "DOT_PLOT",
-      "title": "Completion improves in two distinct evaluations",
-      "question": "How large are the reported main-task and context-scaling differences, and which values must not be treated as one experiment?",
+      "after_paragraph_id": "rttt_evidence_p1",
+      "type": "RESULT_COMPARISON",
+      "title": "Main averages and per-task full successes answer different questions",
+      "question": "What improves on average, and where does RoboTTT complete every rubric stage?",
       "items": [
         {
-          "label": "Main tasks · single-step GR00T N1.7",
+          "label": "Single-step GR00T N1.7",
+          "detail": "Average rubric-based completion across Pup Go Car, Circuit, and Gear Bot.",
           "value": 42,
-          "detail": "Average rubric-based completion score across Pup Go Car, Circuit, and Gear Bot."
+          "value_label": "42%",
+          "group": "Three-task average completion"
         },
         {
-          "label": "Main tasks · GDN",
+          "label": "GDN",
+          "detail": "Average rubric-based completion across the same tasks.",
           "value": 56,
-          "detail": "Average rubric-based completion score across the same three tasks."
+          "value_label": "56%",
+          "group": "Three-task average completion"
         },
         {
-          "label": "Main tasks · RoboTTT",
+          "label": "RoboTTT",
+          "detail": "Average rubric-based completion across the same tasks.",
           "value": 79,
-          "detail": "Average rubric-based completion score across the same three tasks."
+          "value_label": "79%",
+          "group": "Three-task average completion"
         },
         {
-          "label": "Scaling study · 1K pretraining context",
-          "value": 43.9,
-          "detail": "Average completion before the DAgger training used for Pup Go Car in the main result."
+          "label": "Pup Go Car · RoboTTT",
+          "detail": "Trials with full task success.",
+          "value": 9,
+          "value_label": "9/20",
+          "group": "Per-task full success"
         },
         {
-          "label": "Scaling study · one-history-frame baseline",
-          "value": 45.6,
-          "detail": "Average completion in the context-scaling study."
+          "label": "Circuit · RoboTTT",
+          "detail": "Trials with full task success.",
+          "value": 13,
+          "value_label": "13/20",
+          "group": "Per-task full success"
         },
         {
-          "label": "Scaling study · 8K pretraining context",
-          "value": 71.5,
-          "detail": "Average completion at the longest reported pretraining context in this study."
+          "label": "Gear Bot · RoboTTT",
+          "detail": "Trials with full task success at the longest setting.",
+          "value": 2,
+          "value_label": "2/10",
+          "group": "Per-task full success"
+        },
+        {
+          "label": "Gear Bot · baselines",
+          "detail": "Neither baseline fully completes Gear Bot in the reported trials.",
+          "value": 0,
+          "value_label": "0 full successes",
+          "group": "Per-task full success",
+          "role": "MEASURED"
         }
       ],
       "claim_ids": [
         "rttt_main_result",
         "rttt_scaling",
-        "rttt_generality"
+        "rttt_perturbation",
+        "rttt_dagger"
       ],
       "source_refs": [
-        "rttt_results_source",
-        "rttt_limits_source"
+        "rttt_results_source"
       ],
-      "interpretation": "RoboTTT leads the two short-context baselines in the main task comparison, and completion rises between the 1K and 8K endpoints in the separate context-scaling study. The two groups share a percentage scale but not the same training condition.",
+      "interpretation": "The average completion metric and full-success trial counts are related but distinct result surfaces.",
       "limitations": [
-        "The main and scaling values come from different experimental conditions and must not be combined into one trend.",
-        "Only source-backed values already present in the explainer are plotted; no intermediate scaling points are interpolated.",
-        "Trials number 20 per main task, or 10 for the longest settings, and the paper reports no confidence intervals."
+        "Trial counts are 20 per task or 10 for the longest setting, and no confidence intervals are reported."
       ],
-      "alt_text": "Two grouped dot plots: main-task completion is 42 percent for single-step GR00T N1.7, 56 percent for GDN, and 79 percent for RoboTTT; the separate scaling study reports 43.9 percent at 1K context, 45.6 percent for a one-history-frame baseline, and 71.5 percent at 8K context.",
-      "fallback": "In the main task comparison, average completion is 42% for single-step GR00T N1.7, 56% for GDN, and 79% for RoboTTT. In a separate pre-DAgger context-scaling study, completion is 43.9% at 1K pretraining context, 45.6% for the one-history-frame baseline, and 71.5% at 8K. These values should not be treated as one experimental condition."
+      "alt_text": "Main averages and per-task full successes answer different questions. Single-step GR00T N1.7: 42%; GDN: 56%; RoboTTT: 79%; Pup Go Car · RoboTTT: 9/20; Circuit · RoboTTT: 13/20; Gear Bot · RoboTTT: 2/10; Gear Bot · baselines: 0 full successes.",
+      "fallback": "The average completion metric and full-success trial counts are related but distinct result surfaces. Single-step GR00T N1.7: 42%; GDN: 56%; RoboTTT: 79%; Pup Go Car · RoboTTT: 9/20; Circuit · RoboTTT: 13/20; Gear Bot · RoboTTT: 2/10; Gear Bot · baselines: 0 full successes."
+    },
+    {
+      "id": "visual_robottt_context_scaling",
+      "after_block_id": "rttt_evidence",
+      "after_paragraph_id": "rttt_evidence_p2",
+      "type": "DOT_PLOT",
+      "title": "The context-scaling comparison is pre-DAgger",
+      "question": "How does completion change within the separate context-scaling study?",
+      "items": [
+        {
+          "label": "1K pretraining context",
+          "detail": "Average completion before the DAgger training used in the main Pup Go Car result.",
+          "value": 43.9,
+          "value_label": "43.9%",
+          "group": "Pre-DAgger scaling · domain 40–75%",
+          "domain_min": 40,
+          "domain_max": 75
+        },
+        {
+          "label": "One-history-frame baseline",
+          "detail": "Baseline within the same context-scaling study.",
+          "value": 45.6,
+          "value_label": "45.6%",
+          "group": "Pre-DAgger scaling · domain 40–75%",
+          "domain_min": 40,
+          "domain_max": 75
+        },
+        {
+          "label": "8K pretraining context",
+          "detail": "Longest reported pretraining context in this study.",
+          "value": 71.5,
+          "value_label": "71.5%",
+          "group": "Pre-DAgger scaling · domain 40–75%",
+          "domain_min": 40,
+          "domain_max": 75
+        }
+      ],
+      "claim_ids": [
+        "rttt_main_result",
+        "rttt_scaling",
+        "rttt_perturbation",
+        "rttt_dagger"
+      ],
+      "source_refs": [
+        "rttt_results_source"
+      ],
+      "interpretation": "Completion rises between 1K and 8K in the separate pre-DAgger study; these points are not the main-result training condition.",
+      "limitations": [
+        "The figure does not interpolate missing context lengths or merge these values with the DAgger-trained main result."
+      ],
+      "alt_text": "The context-scaling comparison is pre-DAgger. 1K pretraining context: 43.9%; One-history-frame baseline: 45.6%; 8K pretraining context: 71.5%.",
+      "fallback": "Completion rises between 1K and 8K in the separate pre-DAgger study; these points are not the main-result training condition. 1K pretraining context: 43.9%; One-history-frame baseline: 45.6%; 8K pretraining context: 71.5%."
+    },
+    {
+      "id": "visual_robottt_recovery_and_dagger",
+      "after_block_id": "rttt_evidence",
+      "after_paragraph_id": "rttt_evidence_p3",
+      "type": "DOT_PLOT",
+      "title": "Perturbation recovery and DAgger gains are separate comparisons",
+      "question": "Which recovery counts support RoboTTT specifically, and which result is shared with GDN?",
+      "items": [
+        {
+          "label": "RoboTTT · roof recovery",
+          "detail": "Successful recovery trials.",
+          "value": 15,
+          "value_label": "15/20",
+          "group": "Perturbation recovery · domain 0–20 trials",
+          "domain_min": 0,
+          "domain_max": 20
+        },
+        {
+          "label": "RoboTTT · tire recovery",
+          "detail": "Successful recovery trials.",
+          "value": 18,
+          "value_label": "18/20",
+          "group": "Perturbation recovery · domain 0–20 trials",
+          "domain_min": 0,
+          "domain_max": 20
+        },
+        {
+          "label": "GDN · tire recovery",
+          "detail": "The recurrent baseline reaches the same tire-recovery count.",
+          "value": 18,
+          "value_label": "18/20",
+          "group": "Perturbation recovery · domain 0–20 trials",
+          "domain_min": 0,
+          "domain_max": 20
+        },
+        {
+          "label": "Two sequence models",
+          "detail": "Average improvement from the same DAgger correction dataset.",
+          "value": 33,
+          "value_label": "+33% average",
+          "group": "DAgger Distillation · domain 0–40%",
+          "domain_min": 0,
+          "domain_max": 40
+        }
+      ],
+      "claim_ids": [
+        "rttt_main_result",
+        "rttt_scaling",
+        "rttt_perturbation",
+        "rttt_dagger"
+      ],
+      "source_refs": [
+        "rttt_results_source"
+      ],
+      "interpretation": "Tire recovery supports long-context conditioning but does not isolate gradient-updated fast weights because GDN matches it; DAgger is a separate shared-data comparison.",
+      "limitations": [
+        "The panels have different denominators and should not be compared by mark length across local axes."
+      ],
+      "alt_text": "Perturbation recovery and DAgger gains are separate comparisons. RoboTTT · roof recovery: 15/20; RoboTTT · tire recovery: 18/20; GDN · tire recovery: 18/20; Two sequence models: +33% average.",
+      "fallback": "Tire recovery supports long-context conditioning but does not isolate gradient-updated fast weights because GDN matches it; DAgger is a separate shared-data comparison. RoboTTT · roof recovery: 15/20; RoboTTT · tire recovery: 18/20; GDN · tire recovery: 18/20; Two sequence models: +33% average."
     }
   ],
   "glossary": [
@@ -652,6 +853,7 @@
     "Separated the recurrent fast-weight mechanism from task-specific context-learning procedures.",
     "Preserved the different experimental conditions for the context-scaling and main DAgger results.",
     "Marked absolute latency and cross-backbone generality as not established.",
-    "Added the Figure 12 TTT-Linear component ablation and verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition."
+    "Added the Figure 12 TTT-Linear component ablation and verified the source paper's CC BY 4.0 license; the explainer visual is an attributed original composition.",
+    "Visual revision 3: paragraph-scoped figures now encode the manifest-selected topology, conditions, values, and evidence boundaries."
   ]
 }

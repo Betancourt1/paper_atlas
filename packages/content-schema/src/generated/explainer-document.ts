@@ -137,6 +137,14 @@ export interface VisualItem {
   label: string;
   detail: string;
   value?: number;
+  value_end?: number;
+  value_label?: string;
+  group?: string;
+  role?: "MEASURED" | "DERIVED" | "DISPUTED" | "BOUNDARY" | "AGGREGATE";
+  domain_min?: number;
+  domain_max?: number;
+  node_id?: Identifier;
+  input_ids?: ReferenceList;
 }
 export interface GlossaryTerm {
   term: string;
