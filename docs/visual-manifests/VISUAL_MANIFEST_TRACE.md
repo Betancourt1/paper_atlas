@@ -5,7 +5,7 @@
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
 - Manifest revision: `18`
 - Engineer status: `COMPLETE`
-- Implementer status: `REWORK_REQUIRED`
+- Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -248,16 +248,16 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `REWORK_REQUIRED`
+- Status: `IMPLEMENTED`
 - Selected treatment: `A`
 - Selection rationale: Treatment A remains evidence-correct. Revision 18 retains the approved intact source-coordinate Strips 1 and 2 and extends only Strip 3 to the final inspected plot bounds so no axis label, minus-signed tick, or Step title is clipped.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`; `apps/web/public/paper-assets/trace/mobile/`; `apps/web/app/papers/[id]/explainer-svg.tsx`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `PENDING` — verify every strip preserves complete original-coordinate connectors and boxes, precise alt text and provenance, and clean 32 px neutral outer margin.
-- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and the three mobile strips are readable, spatially continuous, contained, and scrollbar-free.
-- Evidence deviations: `REVISION_17_STRIP_3_REJECTED` — replace only the clipped trajectory strip with the final inspected bounds; retain Strips 1 and 2 and do not alter the complete desktop original.
+- Accessibility and fallback verification: `VERIFIED` — all three strips preserve complete original-coordinate connectors, boxes, axes, minus-signed ticks, labels, and the Step title; strip-specific alt text and provenance remain explicit, with a clean 32 px neutral outer margin.
+- Desktop and mobile verification: `VERIFIED` — the complete desktop original remains unchanged; at 1440 × 1000 and 390 × 844 the three mobile strips are readable, spatially continuous, contained, and scrollbar-free.
+- Evidence deviations: `NONE` — revision 18 uses only source-coordinate crops and neutral outer margins; source pixels and relationships remain unscaled and unaltered.
 
 ## `trace_change_p2`
 

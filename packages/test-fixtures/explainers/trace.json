@@ -421,23 +421,23 @@
         ],
         "mobile_images": [
           {
-            "path": "/paper-assets/trace/mobile/figure-1-success-padded.png",
-            "alt_text": "Padded original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete successful orange branch ending in Answer: Dublin."
+            "path": "/paper-assets/trace/mobile/figure-1-question-prefix-strip.png",
+            "alt_text": "Original-coordinate strip from TRACE Figure 1 showing the complete Moonlit River question, its connector, and the shared Search and Open prefix."
           },
           {
-            "path": "/paper-assets/trace/mobile/figure-1-failure-padded.png",
-            "alt_text": "Padded original-pixel composite of the complete Moonlit River question, shared Search and Open prefix, and complete failed blue branch ending in Answer: Lisbon."
+            "path": "/paper-assets/trace/mobile/figure-1-branches-strip.png",
+            "alt_text": "Original-coordinate strip from TRACE Figure 1 showing the complete fork into the successful Dublin branch and failed Lisbon branch."
           },
           {
-            "path": "/paper-assets/trace/mobile/figure-1-trajectory-plot.png",
-            "alt_text": "Complete original right-side trajectory plot showing the shared prefix followed by diverging positive and negative log-probability trajectories."
+            "path": "/paper-assets/trace/mobile/figure-1-trajectory-strip.png",
+            "alt_text": "Complete original-coordinate TRACE Figure 1 trajectory plot with axes, minus-signed ticks, Step title, and diverging positive and negative log-probability trajectories."
           }
         ],
         "locator": "Figure 1, PDF page 2",
         "attribution": "Tao et al., TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents (arXiv:2607.13988v1).",
         "license_label": "CC BY 4.0",
         "license_url": "https://creativecommons.org/licenses/by/4.0/",
-        "modifications": "Desktop keeps the complete 200-DPI raster. Mobile vertically centers original-pixel rows: question x=0..2125, y=0..165; shared prefix x=560..1500, y=145..550; success x=0..880, y=520..1175; or failure x=1150..2130, y=520..1175. Each row has 32 px neutral padding. The trajectory plot is unchanged. Source pixels remain unscaled and unaltered; no redraw, interpolation, clipping, or source-derived blank strip is included."
+        "modifications": "Desktop keeps the complete 200-DPI raster. Mobile uses intact source-coordinate strips: question and prefix x=0..2130, y=0..550; branches x=0..2130, y=540..1179; trajectory plot x=2200..3199, y=80..1199. The first two overlap by 11 source pixels to preserve connector continuity. Each crop has 32 px neutral outer margin. Source pixels and relationships remain unscaled and unaltered; no redraw, interpolation, clipping, or internal recomposition is included."
       }
     },
     {
