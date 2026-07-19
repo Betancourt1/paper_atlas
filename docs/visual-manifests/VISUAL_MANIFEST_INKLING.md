@@ -3,7 +3,7 @@
 - Paper ID: `paper_inkling`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
-- Manifest revision: `6`
+- Manifest revision: `7`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `19 / 19` prose paragraphs
@@ -15,7 +15,7 @@
   - `source_inkling_hf_nvfp4` — Thinking Machines Lab: Inkling NVFP4 initial weight release; Immutable initial Model release commit 93a182fb0376affeaeecfa4658c37a0fe9e5fa9e; README sections 1, 3, 5-7 and NVFP4 weight files
   - `source_inkling_aup` — Thinking Machines Lab: Model Acceptable Use Policy (mutable; retrieved 2026-07-18); Retrieved 2026-07-18; official HTML SHA-256 c62535263733dbeabb838ff881850928a878bc5c539ce1401a59a237bbf5c2e7 (25,968 bytes). Page states last updated July 15, 2026; introduction, restrictions, disclosure, updates. Live URL remains mutable.
 
-Revision 6 independently reassesses all 19 paragraphs under the four-form hard ban. It proposes 1 paper-specific visuals and keeps 18 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
+Revision 7 audits every paragraph against the original paper figures before custom ideation. Reusable direct matches require the source asset; restricted, misleading, or forbidden originals are explicitly adapted or left prose-only. Implementation must be redone from this manifest.
 
 ## `ink_why_p1`
 
@@ -25,6 +25,9 @@ Revision 6 independently reassesses all 19 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchmark. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -49,6 +52,9 @@ Revision 6 independently reassesses all 19 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: That positioning matters because the provider explicitly says Inkling is not the strongest model overall. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -73,6 +79,9 @@ Revision 6 independently reassesses all 19 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: Inkling combines a large sparse model with native text, image, and audio input and makes the weights available in original and quantized forms. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Method distinction and scope.
 
@@ -97,6 +106,9 @@ Revision 6 independently reassesses all 19 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: The release also exposes an effort control intended to trade generated tokens for performance. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Method distinction and scope.
 
@@ -121,6 +133,9 @@ Revision 6 independently reassesses all 19 paragraphs under the four-form hard b
 - Visual needed: `YES`
 - Complexity warrant: Sparse hierarchy and many-to-many routing: each token selects 6 of 256 routed experts while 2 shared experts are always active, and their outputs recombine.
 - Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The distinction between 975B total parameters, a 41B active path, routed experts, and shared experts is structurally easy to collapse. A routing topology makes active versus inactive capacity visible.
 - Explanatory job: Sparse mixture-of-experts routing hierarchy.
 
@@ -345,13 +360,13 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains the prior implementer selection, but rework must use its aggregate 6-selected/250-inactive pool topology or a faithful 256-cell field; an unlabeled 30-mark sample is not acceptable.
+- Selection rationale: Treatment A is the approved revision-7 treatment already implemented as the preserved custom SVG; its evidence encoding and accessible fallback remain unchanged.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_inkling_sparse_routing_field` — rendered immediately after `ink_mechanism_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
-- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
-- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Changed files: `packages/test-fixtures/explainers/inkling.json`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — the preserved custom SVG retains its specific alt text, limitations, and static fallback.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `ink_mechanism_p2`
@@ -362,6 +377,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: The release says local and global attention layers are interleaved at a 5-to-1 ratio with 8 key-value heads. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -386,6 +404,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: The provider reports pretraining on 45 trillion tokens across text, images, audio, and video, followed by synthetic supervised fine-tuning and large-scale reinforcement learning. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -410,6 +431,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The worked example is short enough to follow in prose: Start by choosing a checkpoint, not by reading the phrase open weights as a hardware promise. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
 - Explanatory job: Worked example.
 
@@ -434,6 +458,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The worked example is short enough to follow in prose: The quantized option reduces memory requirements, but the release does not identify the precision behind the main benchmark table or provide a BF16-versus-NVFP4 quality comparison. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
 - Explanatory job: Worked example.
 
@@ -458,6 +485,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The benchmark values are percentages but not one measurement scale: HLE, SWE-bench, IFBench, MMMU, VoiceBench, and StrongREJECT have different tasks, graders, chance levels, and ceilings. A shared axis would manufacture cross-benchmark comparability; separate panels or cards would be forbidden repeated metric displays. The source also reports no uncertainty here, so prose is the trustworthy comparison boundary.
 - Explanatory job: Evaluation evidence.
 
@@ -482,6 +512,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph already reports the bounded evidence directly: The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 256K tokens. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
 - Explanatory job: Evaluation evidence.
 
@@ -506,6 +539,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph already reports the bounded evidence directly: The effort-sweep chart supports the narrower provider interpretation that performance can be traded against generated tokens. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
 - Explanatory job: Evaluation evidence.
 
@@ -530,6 +566,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, reproduce demographic or cultural biases, and perform unevenly across languages and subject domains. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -554,6 +593,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The one-million-token statement describes supported capacity, not demonstrated accuracy throughout that window. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -578,6 +620,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Training disclosure remains high level. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -602,6 +647,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The model card, release page, and Acceptable Use Policy remain mutable live pages, but the exact official HTML retrieved on 2026-07-18 is content-addressed with SHA-256 and byte counts in the source records. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -626,6 +674,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The release supports a strong descriptive conclusion: Inkling is a very large sparse multimodal model with downloadable checkpoints and broad vendor-reported evaluation coverage. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
@@ -650,6 +701,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Source boundaries are part of the evidence. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
@@ -674,6 +728,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The provider labels the model Apache 2.0, but its linked Model Acceptable Use Policy says that accessing or using the model materials is also conditioned on that policy. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 

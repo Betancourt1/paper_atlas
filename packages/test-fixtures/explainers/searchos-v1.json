@@ -435,101 +435,156 @@
   ],
   "visuals": [
     {
-      "id": "visual_searchos_socm_state_graph",
+      "id": "visual_searchos_source_figure_2",
       "after_block_id": "sos_mechanism",
-      "after_paragraph_id": "sos_mechanism_p1",
-      "delivery_medium": "SVG",
-      "type": "PARTITION_TREE",
-      "title": "SOCM links four typed stores around schema cells",
-      "question": "How do tasks, evidence, coverage, and failures constrain one another without free-form conversation?",
+      "after_paragraph_id": "sos_mechanism_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "SearchOS architecture and shared state",
+      "question": "How does a browser observation become shared, grounded progress?",
       "items": [
         {
-          "label": "Visual specification",
-          "detail": "Frontier tasks target missing schema cells; accepted evidence binds values to source spans; coverage reflects those bindings; and failure memory redirects or suppresses unsuccessful routes."
+          "label": "Original source figure",
+          "detail": "Figure 2, PDF page 4 from SearchOS-V1, reproduced beside the claim it supports."
         },
         {
           "label": "Evidence boundary",
-          "detail": "The graph is structural and does not report frequency or effect size.",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
           "role": "BOUNDARY"
         }
       ],
       "claim_ids": [
         "sos_socm",
-        "sos_schema"
-      ],
-      "source_refs": [
-        "sos_formulation_source"
-      ],
-      "interpretation": "Frontier tasks target missing schema cells; accepted evidence binds values to source spans; coverage reflects those bindings; and failure memory redirects or suppresses unsuccessful routes.",
-      "limitations": [
-        "The graph is structural and does not report frequency or effect size."
-      ],
-      "alt_text": "Frontier tasks target missing schema cells; accepted evidence binds values to source spans; coverage reflects those bindings; and failure memory redirects or suppresses unsuccessful routes.",
-      "fallback": "Frontier tasks target missing schema cells; accepted evidence binds values to source spans; coverage reflects those bindings; and failure memory redirects or suppresses unsuccessful routes. The graph is structural and does not report frequency or effect size."
-    },
-    {
-      "id": "visual_searchos_evidence_gate",
-      "after_block_id": "sos_mechanism",
-      "after_paragraph_id": "sos_mechanism_p2",
-      "delivery_medium": "SVG",
-      "type": "OPERATION_DIAGRAM",
-      "title": "Evidence commits only when two conditions hold",
-      "question": "Why is neither a page visit nor an extracted value sufficient to fill a schema cell?",
-      "items": [
-        {
-          "label": "Visual specification",
-          "detail": "Schema binding and anchored source-span checks form a conjunction gate; only a passing pair atomically updates both Evidence Graph and Coverage Map, while each failure records a distinct rejection."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "The diagram specifies acceptance logic, not measured extraction accuracy.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
-        "sos_middleware"
-      ],
-      "source_refs": [
-        "sos_middleware_source"
-      ],
-      "interpretation": "Schema binding and anchored source-span checks form a conjunction gate; only a passing pair atomically updates both Evidence Graph and Coverage Map, while each failure records a distinct rejection.",
-      "limitations": [
-        "The diagram specifies acceptance logic, not measured extraction accuracy."
-      ],
-      "alt_text": "Schema binding and anchored source-span checks form a conjunction gate; only a passing pair atomically updates both Evidence Graph and Coverage Map, while each failure records a distinct rejection.",
-      "fallback": "Schema binding and anchored source-span checks form a conjunction gate; only a passing pair atomically updates both Evidence Graph and Coverage Map, while each failure records a distinct rejection. The diagram specifies acceptance logic, not measured extraction accuracy."
-    },
-    {
-      "id": "visual_searchos_sensor_policy_dispatch",
-      "after_block_id": "sos_mechanism",
-      "after_paragraph_id": "sos_mechanism_p3",
-      "delivery_medium": "SVG",
-      "type": "CONTROL_LOOP",
-      "title": "Progress sensors and budgets drive asynchronous dispatch",
-      "question": "How do progress, remaining budget, ready gaps, and free slots determine the controller action?",
-      "items": [
-        {
-          "label": "Visual specification",
-        "detail": "Coverage and evidence deltas combine with remaining budgets to select continue, backfill, correction, drain-only, or stop; independently, slot release and a ready unresolved gap meet at a dispatch-eligibility conjunction that leads to a distinct dispatch state."
-        },
-        {
-          "label": "Evidence boundary",
-          "detail": "Policy boundaries and the illustrated schedule are qualitative, not benchmark traces.",
-          "role": "BOUNDARY"
-        }
-      ],
-      "claim_ids": [
+        "sos_middleware",
         "sos_scheduler"
       ],
       "source_refs": [
+        "sos_formulation_source",
         "sos_middleware_source"
       ],
-      "interpretation": "Coverage and evidence deltas combine with remaining budgets to select continue, backfill, correction, drain-only, or stop; independently, slot release and a ready unresolved gap meet at a dispatch-eligibility conjunction that leads to a distinct dispatch state.",
+      "interpretation": "This is the authors' original figure 2, pdf page 4, placed here because it directly performs the paragraph's explanatory job.",
       "limitations": [
-        "Policy boundaries and the illustrated schedule are qualitative, not benchmark traces."
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Coverage delta, evidence delta, and remaining budgets enter a policy state with five outcomes. Separately, slot released and ready unresolved gap both enter an AND gate whose only outgoing edge reaches the distinct dispatch ready gap state, not correction.",
-      "fallback": "Coverage and evidence deltas combine with remaining budgets to select continue, backfill, correction, drain-only, or stop; independently, slot release and a ready unresolved gap meet at a dispatch-eligibility conjunction that leads to a distinct dispatch state. Policy boundaries and the illustrated schedule are qualitative, not benchmark traces."
+      "alt_text": "Original Figure 2 showing SearchOS agents, orchestrator, SOCM shared state, middleware, tools, skills, and report-writing path.",
+      "fallback": "SearchOS architecture and shared state. Original Figure 2 showing SearchOS agents, orchestrator, SOCM shared state, middleware, tools, skills, and report-writing path.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/searchos/figure-2.png",
+            "alt_text": "Original Figure 2 showing SearchOS agents, orchestrator, SOCM shared state, middleware, tools, skills, and report-writing path."
+          }
+        ],
+        "locator": "Figure 2, PDF page 4",
+        "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_searchos_source_figures_2_5",
+      "after_block_id": "sos_mechanism",
+      "after_paragraph_id": "sos_mechanism_p3",
+      "delivery_medium": "source asset",
+      "type": "PARALLEL_VIEW",
+      "title": "Architecture and middleware interventions",
+      "question": "How does a browser observation become shared, grounded progress?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figures 2 and 5, PDF pages 4 and 12-13 from SearchOS-V1, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "sos_socm",
+        "sos_middleware",
+        "sos_scheduler"
+      ],
+      "source_refs": [
+        "sos_formulation_source",
+        "sos_middleware_source"
+      ],
+      "interpretation": "This is the authors' original figures 2 and 5, pdf pages 4 and 12-13, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 2 showing SearchOS architecture and dispatch relationships. Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
+      "fallback": "Architecture and middleware interventions. Original Figure 2 showing SearchOS architecture and dispatch relationships. Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/searchos/figure-2.png",
+            "alt_text": "Original Figure 2 showing SearchOS architecture and dispatch relationships."
+          },
+          {
+            "path": "/paper-assets/searchos/figure-5.png",
+            "alt_text": "Original Figure 5 showing coverage and entity-discovery trajectories before and after middleware interventions."
+          }
+        ],
+        "locator": "Figures 2 and 5, PDF pages 4 and 12-13",
+        "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_searchos_source_figure_5_limit",
+      "after_block_id": "sos_limitations",
+      "after_paragraph_id": "sos_limitations_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Three intervention case studies",
+      "question": "What does the evaluation leave unresolved?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 5, PDF pages 12-13 from SearchOS-V1, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "sos_citation_truth",
+        "sos_budget_fairness",
+        "sos_middleware_causality",
+        "sos_schema_fit_inference",
+        "sos_generality"
+      ],
+      "source_refs": [
+        "sos_middleware_source",
+        "sos_results_source",
+        "sos_ablations_source",
+        "sos_scope_source"
+      ],
+      "interpretation": "This is the authors' original figure 5, pdf pages 12-13, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 5 showing three selected middleware-governance trajectories and their intervention points.",
+      "fallback": "Three intervention case studies. Original Figure 5 showing three selected middleware-governance trajectories and their intervention points.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/searchos/figure-5.png",
+            "alt_text": "Original Figure 5 showing three selected middleware-governance trajectories and their intervention points."
+          }
+        ],
+        "locator": "Figure 5, PDF pages 12-13",
+        "attribution": "Zhang et al., SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration (arXiv:2607.15257v1).",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
     }
   ],
   "glossary": [

@@ -3,7 +3,7 @@
 - Paper ID: `paper_partition_prompt_aggregate`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
-- Manifest revision: `6`
+- Manifest revision: `7`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -15,7 +15,7 @@
   - `ppa_discussion` — Partition, Prompt, Aggregate v1 — discussion and limitations; Section 7 and Limitations, PDF pages 18–19
   - `ppa_protocol` — Partition, Prompt, Aggregate v1 — ACS prior elicitation details; Appendix E.2, PDF pages 34–35
 
-Revision 6 independently reassesses all 16 paragraphs under the four-form hard ban. It proposes 1 paper-specific visuals and keeps 15 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
+Revision 7 audits every paragraph against the original paper figures before custom ideation. Reusable direct matches require the source asset; restricted, misleading, or forbidden originals are explicitly adapted or left prose-only. Implementation must be redone from this manifest.
 
 ## `ppa_why_p1`
 
@@ -25,7 +25,10 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph makes one bounded distinction in plain language: Many uses of in-context learning treat a prompt as a condition and the model's answer as an estimate of the corresponding conditional distribution. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -49,6 +52,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: A model can give locally plausible answers while violating this requirement. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -73,7 +79,10 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph makes one bounded distinction in plain language: The framework separates alignment from self-consistency. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -97,6 +106,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: The paper turns this idea into split-consistency and order-consistency scores. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Method distinction and scope.
 
@@ -121,7 +133,10 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: A binary conditioning tree is a genuine hierarchy, but the adjacent selected factor graph already supplies the reconstruction relationship that readers would otherwise need to rebuild. A second figure here would introduce arbitrary attributes or subgroup values absent from the paragraph, or duplicate Treatment A's generic partition topology without adding evidence. Prose defines the complete-partition invariant; the next visual explains how it is used.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -145,7 +160,10 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `YES`
 - Complexity warrant: Hierarchical partition and weighted aggregation: every depth is a complete partition with distinct subgroup priors, yet all depths should reconstruct the same root quantity.
 - Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
-- Decision rationale: The reader otherwise has to reconstruct how normalized priors, subgroup conditionals, and tree depth jointly determine one aggregate and why cross-depth disagreement is inconsistency.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: Reuse cannot supply the needed treatment under the recorded constraint; the existing independently warranted non-banned adaptation remains eligible for revision-7 implementation. The reader otherwise has to reconstruct how normalized priors, subgroup conditionals, and tree depth jointly determine one aggregate and why cross-depth disagreement is inconsistency.
 - Explanatory job: Hierarchical weighted reconstruction and cross-depth invariance.
 
 ### Treatment A — Weighted binary partition tree
@@ -373,13 +391,13 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `C`
-- Selection rationale: Treatment C remains the prior implementer selection. Rework must preserve its factor-graph semantics: every prior and its conditional estimate independently enter the same multiplication operator before contributions reach the sum.
+- Selection rationale: Treatment C is the approved revision-7 treatment already implemented as the preserved custom SVG; its evidence encoding and accessible fallback remain unchanged.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_ppa_weighted_reconstruction_graph` — rendered immediately after `ppa_mechanism_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
-- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
-- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Changed files: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — the preserved custom SVG retains its specific alt text, limitations, and static fallback.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `ppa_mechanism_p3`
@@ -390,7 +408,10 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph's bounded operation is already explicit: Split consistency checks a node against the weighted sum of its immediate children. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 10, PDF page 29, `ppa_protocol`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -414,7 +435,10 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The worked example is short enough to follow in prose: Consider the probability that a person in the United States earns above a chosen threshold. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -438,7 +462,10 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The worked example is short enough to follow in prose: The model estimates the income probability and population share for each subgroup. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 1, PDF page 2, `ppa_method`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -462,7 +489,10 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: Gain versus partition depth is a meaningful changing relationship, but the fixture paragraph gives only the qualitative rise-then-decline pattern and no depth-specific values, intervals, or model series. Redrawing a curve would invent its shape and turning point; reusing the source figure is not licensed or specified here. Prose accurately states the supported trade-off without synthetic geometry.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 3, PDF pages 8-9, `ppa_macro_results`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -486,7 +516,10 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: ACS scores, WVS question/country outcomes, and synthetic tasks could support comparative structure, but this paragraph exposes only an ACS range of 0–0.33 and qualitative non-uniformity elsewhere. A common scale would mix different checks and tolerances; separate model/country panels would be forbidden repeated one-axis displays. Prose preserves the cross-domain conclusion without fabricating missing cells.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 6, PDF pages 15-16, `ppa_consistency_results`
+- License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
+- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -510,6 +543,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph already reports the bounded evidence directly: A one-prompt micro-to-macro instruction often improves ACS estimates, but its effect is less systematic and more model-dependent than explicit aggregation. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
 - Explanatory job: Evaluation evidence.
 
@@ -534,6 +570,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The macro-fallacy alignment analysis relies primarily on ACS data. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -558,6 +597,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Self-consistency is only a necessary condition for faithful conditional inference. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -582,6 +624,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The strongest contribution is a simple, reference-free test of whether conditional estimates compose. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
@@ -606,6 +651,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The macro fallacy is more bounded: it is a repeated empirical pattern in the ACS analysis, not a universal rule that decomposition always improves an answer. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 

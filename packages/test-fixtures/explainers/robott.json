@@ -378,21 +378,71 @@
   ],
   "visuals": [
     {
-      "id": "visual_robottt_fast_weight_architecture",
-      "after_block_id": "rttt_mechanism",
-      "after_paragraph_id": "rttt_mechanism_p2",
-      "delivery_medium": "SVG",
-      "type": "CONTROL_LOOP",
-      "title": "RoboTTT updates fast weights inside inference",
-      "question": "Where do activation flow, inner-loss gradients, recurrent state, and the gated attention path meet?",
+      "id": "visual_robott_source_figure_2_change",
+      "after_block_id": "rttt_change",
+      "after_paragraph_id": "rttt_change_p2",
+      "delivery_medium": "source asset",
+      "type": "PARALLEL_VIEW",
+      "title": "Fast-weight architecture and truncated training",
+      "question": "What is different from adding more history frames?",
       "items": [
         {
-          "label": "Visual specification",
-        "detail": "Keys and values define an inner loss whose gradient produces W_t+1; the query uses the updated MLP while a parallel attention path joins through a learned gate before action denoising, and an explicit recurrent edge carries W_t+1 into the next timestep as W_t."
+          "label": "Original source figure",
+          "detail": "Figures 2 and 4, PDF pages 4-5 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
         },
         {
           "label": "Evidence boundary",
-          "detail": "The topology does not imply unreported magnitudes for the gate, gradient, or path contributions.",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "rttt_architecture",
+        "rttt_training"
+      ],
+      "source_refs": [
+        "rttt_architecture_source"
+      ],
+      "interpretation": "This is the authors' original figures 2 and 4, pdf pages 4-5, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates. Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence.",
+      "fallback": "Fast-weight architecture and truncated training. Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates. Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/robott/figure-2.png",
+            "alt_text": "Original Figure 2 showing RoboTTT architecture, sequence training, and inference-time fast-weight updates."
+          },
+          {
+            "path": "/paper-assets/robott/figure-4.png",
+            "alt_text": "Original Figure 4 showing truncated backpropagation boundaries while fast weights carry across the full sequence."
+          }
+        ],
+        "locator": "Figures 2 and 4, PDF pages 4-5",
+        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_robott_source_figure_2_mechanism",
+      "after_block_id": "rttt_mechanism",
+      "after_paragraph_id": "rttt_mechanism_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "RoboTTT architecture and inference updates",
+      "question": "How does one observation change the policy's memory?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 2, PDF page 4 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
           "role": "BOUNDARY"
         }
       ],
@@ -404,12 +454,172 @@
         "rttt_architecture_source",
         "rttt_training_source"
       ],
-      "interpretation": "Keys and values define an inner loss whose gradient produces W_t+1; the query uses the updated MLP while a parallel attention path joins through a learned gate before action denoising, and an explicit recurrent edge carries W_t+1 into the next timestep as W_t.",
+      "interpretation": "This is the authors' original figure 2, pdf page 4, placed here because it directly performs the paragraph's explanatory job.",
       "limitations": [
-        "The topology does not imply unreported magnitudes for the gate, gradient, or path contributions."
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
       ],
-      "alt_text": "Keys and values feed an inner loss whose gradient updates fast weights to W_t+1. The query passes through that updated MLP in parallel with attention, both merge through a gate before action denoising, and W_t+1 reaches a distinct next-timestep state labeled W_t receives W_t+1.",
-      "fallback": "Keys and values define an inner loss whose gradient produces W_t+1; the query uses the updated MLP while a parallel attention path joins through a learned gate before action denoising, and an explicit recurrent edge carries W_t+1 into the next timestep as W_t. The topology does not imply unreported magnitudes for the gate, gradient, or path contributions."
+      "alt_text": "Original Figure 2 showing attention within timesteps, TTT across timesteps, and fast weights updated and propagated during inference.",
+      "fallback": "RoboTTT architecture and inference updates. Original Figure 2 showing attention within timesteps, TTT across timesteps, and fast weights updated and propagated during inference.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/robott/figure-2.png",
+            "alt_text": "Original Figure 2 showing attention within timesteps, TTT across timesteps, and fast weights updated and propagated during inference."
+          }
+        ],
+        "locator": "Figure 2, PDF page 4",
+        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_robott_source_figures_2_4_mechanism",
+      "after_block_id": "rttt_mechanism",
+      "after_paragraph_id": "rttt_mechanism_p3",
+      "delivery_medium": "source asset",
+      "type": "PARALLEL_VIEW",
+      "title": "Sequence training preserves inference-time state",
+      "question": "How does one observation change the policy's memory?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figures 2 and 4, PDF pages 4-5 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "rttt_architecture",
+        "rttt_training"
+      ],
+      "source_refs": [
+        "rttt_architecture_source",
+        "rttt_training_source"
+      ],
+      "interpretation": "This is the authors' original figures 2 and 4, pdf pages 4-5, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 2 showing the model's training and inference paths. Original Figure 4 showing gradient truncation while fast weights persist across segments.",
+      "fallback": "Sequence training preserves inference-time state. Original Figure 2 showing the model's training and inference paths. Original Figure 4 showing gradient truncation while fast weights persist across segments.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/robott/figure-2.png",
+            "alt_text": "Original Figure 2 showing the model's training and inference paths."
+          },
+          {
+            "path": "/paper-assets/robott/figure-4.png",
+            "alt_text": "Original Figure 4 showing gradient truncation while fast weights persist across segments."
+          }
+        ],
+        "locator": "Figures 2 and 4, PDF pages 4-5",
+        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_robott_source_figure_7",
+      "after_block_id": "rttt_evidence",
+      "after_paragraph_id": "rttt_evidence_p1",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Main task-completion results",
+      "question": "What results support long-context robot policies?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 7, PDF page 7 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "rttt_main_result",
+        "rttt_scaling",
+        "rttt_perturbation",
+        "rttt_dagger"
+      ],
+      "source_refs": [
+        "rttt_results_source"
+      ],
+      "interpretation": "This is the authors' original figure 7, pdf page 7, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 7 comparing normalized task-completion scores across RoboTTT and baselines on three assembly tasks.",
+      "fallback": "Main task-completion results. Original Figure 7 comparing normalized task-completion scores across RoboTTT and baselines on three assembly tasks.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/robott/figure-7.png",
+            "alt_text": "Original Figure 7 comparing normalized task-completion scores across RoboTTT and baselines on three assembly tasks."
+          }
+        ],
+        "locator": "Figure 7, PDF page 7",
+        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
+    },
+    {
+      "id": "visual_robott_source_figure_8",
+      "after_block_id": "rttt_evidence",
+      "after_paragraph_id": "rttt_evidence_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Performance scales with pretraining context",
+      "question": "What results support long-context robot policies?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 8, PDF page 8 from RoboTTT: Context Scaling for Robot Policies, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "rttt_main_result",
+        "rttt_scaling",
+        "rttt_perturbation",
+        "rttt_dagger"
+      ],
+      "source_refs": [
+        "rttt_results_source"
+      ],
+      "interpretation": "This is the authors' original figure 8, pdf page 8, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original Figure 8 plotting closed-loop performance against pretraining context length for RoboTTT and GDN, with short-context baselines.",
+      "fallback": "Performance scales with pretraining context. Original Figure 8 plotting closed-loop performance against pretraining context length for RoboTTT and GDN, with short-context baselines.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/robott/figure-8.png",
+            "alt_text": "Original Figure 8 plotting closed-loop performance against pretraining context length for RoboTTT and GDN, with short-context baselines."
+          }
+        ],
+        "locator": "Figure 8, PDF page 8",
+        "attribution": "Jiang et al., RoboTTT: Context Scaling for Robot Policies (arXiv:2607.15275v1); the source PDF also carries an NVIDIA copyright notice.",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Rasterized from the author-supplied PDF at 200 DPI; no content edits."
+      }
     }
   ],
   "glossary": [

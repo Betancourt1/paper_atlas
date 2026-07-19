@@ -395,6 +395,102 @@
   ],
   "visuals": [
     {
+      "id": "propaganda_visual_source_figure_7",
+      "after_block_id": "propaganda_change",
+      "after_paragraph_id": "propaganda_change_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Required upstream injection volume",
+      "question": "What does HalfLife add to poisoning analysis?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 7, PDF page 18 from Pretraining Data Can Be Poisoned through Computational Propaganda, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "propaganda_claim_halflife",
+        "propaganda_claim_ads"
+      ],
+      "source_refs": [
+        "propaganda_source_halflife",
+        "propaganda_source_inclusion"
+      ],
+      "interpretation": "This is the authors' original figure 7, pdf page 18, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original log-log chart relating end-to-end inclusion probability to the number of webpages an attacker must poison for several target corpus counts.",
+      "fallback": "Required upstream injection volume. Original log-log chart relating end-to-end inclusion probability to the number of webpages an attacker must poison for several target corpus counts.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/computational-propaganda/figure-7.png",
+            "alt_text": "Original log-log chart relating end-to-end inclusion probability to the number of webpages an attacker must poison for several target corpus counts."
+          }
+        ],
+        "locator": "Figure 7, PDF page 18",
+        "attribution": "Graf et al., Pretraining Data Can Be Poisoned through Computational Propaganda (arXiv:2607.15267v1).",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "None; original author-supplied PNG."
+      }
+    },
+    {
+      "id": "propaganda_visual_source_figure_3",
+      "after_block_id": "propaganda_example",
+      "after_paragraph_id": "propaganda_example_p1",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "Injected comments survive scraping and extraction",
+      "question": "What happens to a simulated poisoned comment in the reported pipeline?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 3, PDF page 14 from Pretraining Data Can Be Poisoned through Computational Propaganda, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "propaganda_claim_comments",
+        "propaganda_claim_extraction",
+        "propaganda_claim_curation",
+        "propaganda_claim_inclusion"
+      ],
+      "source_refs": [
+        "propaganda_source_threat",
+        "propaganda_source_inclusion"
+      ],
+      "interpretation": "This is the authors' original figure 3, pdf page 14, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "Original two-panel Figure 3 comparing an injected WordPress comment in HTML with the same comment in Resiliparse text extraction, followed by the authors' complete caption.",
+      "fallback": "Injected comments survive scraping and extraction. Original two-panel Figure 3 comparing an injected WordPress comment in HTML with the same comment in Resiliparse text extraction, followed by the authors' complete caption.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/computational-propaganda/figure-3.png",
+            "alt_text": "Original two-panel Figure 3 comparing an injected WordPress comment in HTML with the same comment in Resiliparse text extraction, followed by the authors' complete caption."
+          }
+        ],
+        "locator": "Figure 3, PDF page 14",
+        "attribution": "Graf et al., Pretraining Data Can Be Poisoned through Computational Propaganda (arXiv:2607.15267v1).",
+        "license_label": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "modifications": "Cropped intact from the official PDF page at 200 DPI; no content edits within Figure 3."
+      }
+    },
+    {
       "id": "propaganda_visual_halflife_tree",
       "after_block_id": "propaganda_example",
       "after_paragraph_id": "propaganda_example_p2",

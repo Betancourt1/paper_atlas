@@ -3,7 +3,7 @@
 - Paper ID: `paper_computational_propaganda`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Manifest revision: `6`
+- Manifest revision: `7`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -15,7 +15,7 @@
   - `propaganda_source_models` — Computational Propaganda v1 model experiments; Pages 6–7, Sections 5.1–5.3, Tables 1–2
   - `propaganda_source_limitations` — Computational Propaganda v1 discussion and limitations; Pages 8–9, Sections 7.1–7.3
 
-Revision 6 independently reassesses all 16 paragraphs under the four-form hard ban. It proposes 1 paper-specific visuals and keeps 15 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
+Revision 7 audits every paragraph against the original paper figures before custom ideation. Reusable direct matches require the source asset; restricted, misleading, or forbidden originals are explicitly adapted or left prose-only. Implementation must be redone from this manifest.
 
 ## `propaganda_why_p1`
 
@@ -25,6 +25,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: Pretraining corpora contain more web text than people can inspect. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -49,6 +52,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -73,6 +79,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Method distinction and scope.
 
@@ -94,23 +103,187 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Location: `propaganda_change`, paragraph 2
 - Text anchor: "That decomposition can reject superficially plausible vectors. In the tested DOM-based crawl path, programmatic"
 - Claims and sources: `propaganda_claim_halflife`, `propaganda_claim_ads`, `propaganda_source_halflife`, `propaganda_source_inclusion`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph makes one bounded distinction in plain language: That decomposition can reject superficially plausible vectors. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — poisoning impact across model conditions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 7, PDF page 18, `propaganda_source_models`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Method distinction and scope.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
+  focus["Reading focus: poisoning impact across model conditions"]
+  locator["Source locator: Figure 7, PDF page 18, propaganda_source_models"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("poisoning impact across model conditions")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/computational-propaganda/figure-7.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 7, PDF page 18, propaganda_source_models"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("poisoning impact across model conditions")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 7, PDF page 18, `propaganda_source_models`. It preserves the original source asset and may annotate only poisoning impact across model conditions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-7.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-7.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-7.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("poisoning impact across model conditions")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `propaganda_visual_source_figure_7` — rendered immediately after `propaganda_change_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/public/paper-assets/computational-propaganda/figure-7.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `propaganda_mechanism_p1`
@@ -121,6 +294,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: HalfLife defines three gates. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -145,6 +321,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements, then combines the stages into a document-level inclusion estimate. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -169,6 +348,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: Corpus inclusion is still only an intermediate outcome. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -190,23 +372,187 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Location: `propaganda_example`, paragraph 1
 - Text anchor: "Start with a page identified as having a comment interface. In a sandboxed copy,"
 - Claims and sources: `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`, `propaganda_source_threat`, `propaganda_source_inclusion`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The worked example is short enough to follow in prose: Start with a page identified as having a comment interface. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — stage-specific inclusion evidence on a shared quantitative frame; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 3, PDF page 14, `propaganda_source_inclusion`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Worked example.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-3.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-3.png", label: "Original paper figure" }
+  focus["Reading focus: stage-specific inclusion evidence on a shared quantitative frame"]
+  locator["Source locator: Figure 3, PDF page 14, propaganda_source_inclusion"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-3.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("stage-specific inclusion evidence on a shared quantitative frame")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-3.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-3.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/computational-propaganda/figure-3.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-3.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/computational-propaganda/figure-3.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/computational-propaganda/figure-3.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 3, PDF page 14, propaganda_source_inclusion"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-3.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("stage-specific inclusion evidence on a shared quantitative frame")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/computational-propaganda/figure-3.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/computational-propaganda/figure-3.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/computational-propaganda/figure-3.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("stage-specific inclusion evidence on a shared quantitative frame")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `propaganda_visual_source_figure_3` — rendered immediately after `propaganda_example_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/public/paper-assets/computational-propaganda/figure-3.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `propaganda_example_p2`
@@ -217,6 +563,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `YES`
 - Complexity warrant: Conditional probability structure with changing denominators, rejection branches, and an unresolved source discrepancy between the stage product and Introduction summary.
 - Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The inclusion estimate is easy to misread as three percentages over one denominator. A branching or nested representation keeps each conditional population and the 0.13% versus 0.15% discrepancy visible.
 - Explanatory job: Conditional-denominator decomposition, attrition, and provenance disagreement.
 
@@ -433,13 +782,13 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The branching survival tree preserves every changing denominator, rejected complement, and the 0.13% versus 0.15% provenance discrepancy.
+- Selection rationale: Treatment A is the approved revision-7 treatment already implemented as the preserved custom SVG; its evidence encoding and accessible fallback remain unchanged.
 - Delivery medium: `SVG`
 - Visual ID and placement: `propaganda_visual_halflife_tree` — rendered immediately after `propaganda_example_p2`.
 - Shared paragraph scope: `NONE`
-- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
-- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
-- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — the preserved custom SVG retains its specific alt text, limitations, and static fallback.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `propaganda_evidence_p1`
@@ -450,6 +799,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph already reports the bounded evidence directly: The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
 - Explanatory job: Evaluation evidence.
 
@@ -474,6 +826,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: Model scale, poison rate, and preference shift define a genuine multivariate surface, but this paragraph exposes only the three rate settings, the model-size range, and the 18.6–20.7-point band at 0.1%, not the model-by-rate observations needed to draw that surface. A plot would interpolate or invent missing cells; the honest visible values would collapse to a model/rate inventory. Prose is the evidence-complete form.
 - Explanatory job: Evaluation evidence.
 
@@ -498,6 +853,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: A pre/post-SFT chart across model scales and poison formats would be meaningful, but the paragraph gives only the post-SFT range plus two no-label points at 709M and 1.3B; it does not expose the matched model-level base and post-SFT values. Connecting unmatched ranges or repeating partial model tracks would imply comparisons the paragraph cannot support. Prose keeps the partial evidence and attenuation claim bounded.
 - Explanatory job: Evaluation evidence.
 
@@ -522,6 +880,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -546,6 +907,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The authors avoid live injection and validate the vector in sandboxes. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -570,6 +934,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The paper supports treating third-party page fragments as a real data-provenance concern. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
@@ -594,6 +961,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The phrase 'can be poisoned at scale' should remain bounded by the threat model. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 

@@ -384,17 +384,112 @@
   ],
   "visuals": [
     {
+      "id": "visual_attention_source_figure_1_change",
+      "after_block_id": "attn_change",
+      "after_paragraph_id": "attn_change_p2",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "The original Transformer encoder-decoder architecture",
+      "question": "What did the Transformer change in the encoder-decoder pattern?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 1, PDF page 3 from Attention Is All You Need, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "attn_002",
+        "attn_003",
+        "attn_006",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "interpretation": "This is the authors' original figure 1, pdf page 3, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "The original Transformer architecture: a six-layer encoder at left and masked six-layer decoder at right, with self-attention, encoder-decoder attention, feed-forward sublayers, residual connections, normalization, embeddings, positional encodings, and output softmax.",
+      "fallback": "The original Transformer encoder-decoder architecture. The original Transformer architecture: a six-layer encoder at left and masked six-layer decoder at right, with self-attention, encoder-decoder attention, feed-forward sublayers, residual connections, normalization, embeddings, positional encodings, and output softmax.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/attention/figure-1.png",
+            "alt_text": "The original Transformer architecture: a six-layer encoder at left and masked six-layer decoder at right, with self-attention, encoder-decoder attention, feed-forward sublayers, residual connections, normalization, embeddings, positional encodings, and output softmax."
+          }
+        ],
+        "locator": "Figure 1, PDF page 3",
+        "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
+        "license_label": "Author-granted scholarly and journalistic figure reuse",
+        "license_url": "https://arxiv.org/pdf/1706.03762v7",
+        "modifications": "None; original author-supplied PNG."
+      }
+    },
+    {
+      "id": "visual_attention_source_figure_1_mechanism",
+      "after_block_id": "attn_mechanism",
+      "after_paragraph_id": "attn_mechanism_p1",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "The original Transformer layer architecture",
+      "question": "How does one Transformer prediction work?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 1, PDF page 3 from Attention Is All You Need, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "attn_003",
+        "attn_004",
+        "attn_005"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_v7"
+      ],
+      "interpretation": "This is the authors' original figure 1, pdf page 3, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "The original Transformer architecture showing the encoder and decoder stacks and the sublayers within each repeated layer.",
+      "fallback": "The original Transformer layer architecture. The original Transformer architecture showing the encoder and decoder stacks and the sublayers within each repeated layer.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/attention/figure-1.png",
+            "alt_text": "The original Transformer architecture showing the encoder and decoder stacks and the sublayers within each repeated layer."
+          }
+        ],
+        "locator": "Figure 1, PDF page 3",
+        "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
+        "license_label": "Author-granted scholarly and journalistic figure reuse",
+        "license_url": "https://arxiv.org/pdf/1706.03762v7",
+        "modifications": "None; original author-supplied PNG."
+      }
+    },
+    {
       "id": "visual_attention_query_key_field",
       "after_block_id": "attn_mechanism",
       "after_paragraph_id": "attn_mechanism_p2",
-      "delivery_medium": "SVG",
+      "delivery_medium": "source asset",
       "type": "OPERATION_DIAGRAM",
       "title": "Every query relates to every key before values mix",
       "question": "How do queries, keys, values, and eight parallel heads form one attention output?",
       "items": [
         {
           "label": "Visual specification",
-        "detail": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output."
+          "detail": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output."
         },
         {
           "label": "Evidence boundary",
@@ -414,13 +509,30 @@
         "The marks show topology, not measured attention weights or learned head semantics."
       ],
       "alt_text": "Detailed head 1 contains exactly one query q_i branching to three explicit key-value pairs whose weighted values converge only on z_i^(1). That output and distinct z_i^(2) through z_i^(8) nodes form an eight-way fan into Concat, followed by W_O and the multi-head output.",
-      "fallback": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output. The marks show topology, not measured attention weights or learned head semantics."
+      "fallback": "In detailed head 1, one query q_i scores every visible key k_j; paired weighted values sum only to z_i^(1). That output and seven distinct outputs from heads 2 through 8 fan into Concat, then W_O produces the multi-head output. The marks show topology, not measured attention weights or learned head semantics.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/attention/figure-2-scaled-dot-product.png",
+            "alt_text": "Original left panel of Figure 2: queries and keys enter a matrix multiplication, are scaled and optionally masked, pass through softmax, and weight the values."
+          },
+          {
+            "path": "/paper-assets/attention/figure-2-multi-head.png",
+            "alt_text": "Original right panel of Figure 2: projected queries, keys, and values enter parallel scaled dot-product attention heads whose outputs are concatenated and projected."
+          }
+        ],
+        "locator": "Figure 2, PDF page 4",
+        "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
+        "license_label": "Author-granted scholarly and journalistic figure reuse",
+        "license_url": "https://arxiv.org/pdf/1706.03762v7",
+        "modifications": "None; both panels are original author-supplied PNGs."
+      }
     },
     {
       "id": "visual_attention_decoder_dependencies",
       "after_block_id": "attn_mechanism",
       "after_paragraph_id": "attn_mechanism_p3",
-      "delivery_medium": "SVG",
+      "delivery_medium": "source asset",
       "type": "OPERATION_DIAGRAM",
       "title": "The decoder combines permitted prefix and source dependencies",
       "question": "Which target and source positions may influence the current prediction?",
@@ -447,7 +559,72 @@
         "The dependency map does not specify a decoding search algorithm or learned attention magnitudes."
       ],
       "alt_text": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state.",
-      "fallback": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state. The dependency map does not specify a decoding search algorithm or learned attention magnitudes."
+      "fallback": "The current target position can attend to known prefix positions and every encoded source position, while future target positions are blocked; the selected token extends the next decoder state. The dependency map does not specify a decoding search algorithm or learned attention magnitudes.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/attention/figure-1.png",
+            "alt_text": "The original Transformer architecture, including masked decoder self-attention, encoder-decoder attention, and the final linear and softmax output path."
+          }
+        ],
+        "locator": "Figure 1, PDF page 3",
+        "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
+        "license_label": "Author-granted scholarly and journalistic figure reuse",
+        "license_url": "https://arxiv.org/pdf/1706.03762v7",
+        "modifications": "None; original author-supplied PNG."
+      }
+    },
+    {
+      "id": "visual_attention_source_figure_1_review",
+      "after_block_id": "attn_review",
+      "after_paragraph_id": "attn_review_p1",
+      "delivery_medium": "source asset",
+      "type": "OPERATION_DIAGRAM",
+      "title": "What remained around attention",
+      "question": "How should the title and historical claim be read?",
+      "items": [
+        {
+          "label": "Original source figure",
+          "detail": "Figure 1, PDF page 3 from Attention Is All You Need, reproduced beside the claim it supports."
+        },
+        {
+          "label": "Evidence boundary",
+          "detail": "Interpret the figure only within the evidence and scope stated in the adjacent explainer text.",
+          "role": "BOUNDARY"
+        }
+      ],
+      "claim_ids": [
+        "attn_001",
+        "attn_008",
+        "attn_011",
+        "attn_012"
+      ],
+      "source_refs": [
+        "source_attention_arxiv_record",
+        "source_attention_arxiv_v7",
+        "source_attention_neurips_paper",
+        "source_attention_neurips_landing",
+        "source_attention_arxiv_license"
+      ],
+      "interpretation": "This is the authors' original figure 1, pdf page 3, placed here because it directly performs the paragraph's explanatory job.",
+      "limitations": [
+        "The source figure retains the paper's own aggregation, labels, and experimental scope; adjacent prose states the applicable caveats."
+      ],
+      "alt_text": "The original architecture shows attention alongside feed-forward layers, residual paths, normalization, embeddings, positional encodings, and autoregressive output machinery.",
+      "fallback": "What remained around attention. The original architecture shows attention alongside feed-forward layers, residual paths, normalization, embeddings, positional encodings, and autoregressive output machinery.",
+      "source_asset": {
+        "images": [
+          {
+            "path": "/paper-assets/attention/figure-1.png",
+            "alt_text": "The original architecture shows attention alongside feed-forward layers, residual paths, normalization, embeddings, positional encodings, and autoregressive output machinery."
+          }
+        ],
+        "locator": "Figure 1, PDF page 3",
+        "attribution": "Vaswani et al., Attention Is All You Need (arXiv:1706.03762v7).",
+        "license_label": "Author-granted scholarly and journalistic figure reuse",
+        "license_url": "https://arxiv.org/pdf/1706.03762v7",
+        "modifications": "None; original author-supplied PNG."
+      }
     }
   ],
   "glossary": [

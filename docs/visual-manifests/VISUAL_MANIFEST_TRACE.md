@@ -3,7 +3,7 @@
 - Paper ID: `paper_trace`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
-- Manifest revision: `6`
+- Manifest revision: `7`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `16 / 16` prose paragraphs
@@ -15,30 +15,194 @@
   - `trace_source_results` — TRACE v1 results and ablations; Pages 8–10, Sections 4.2–4.4, Tables 1–2, Figures 3–5
   - `trace_source_limitations` — TRACE v1 limitations; Page 12, Section 6
 
-Revision 6 independently reassesses all 16 paragraphs under the four-form hard ban. It proposes 1 paper-specific visuals and keeps 15 paragraphs prose-only. Revision-5 selections and SVG implementations are not accepted guidance; implementation must be redone from this manifest.
+Revision 7 audits every paragraph against the original paper figures before custom ideation. Reusable direct matches require the source asset; restricted, misleading, or forbidden originals are explicitly adapted or left prose-only. Implementation must be redone from this manifest.
 
 ## `trace_why_p1`
 
 - Location: `trace_why`, paragraph 1
 - Text anchor: "A search agent may make dozens of dependent decisions before answering. A failed trajectory"
 - Claims and sources: `trace_claim_outcome_blind`, `trace_claim_credit`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph makes one bounded distinction in plain language: A search agent may make dozens of dependent decisions before answering. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — turn-level credit assignment problem and competing reward scopes; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Motivation and problem framing.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  focus["Reading focus: turn-level credit assignment problem and competing reward scopes"]
+  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("turn-level credit assignment problem and competing reward scopes")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("turn-level credit assignment problem and competing reward scopes")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("turn-level credit assignment problem and competing reward scopes")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `trace_visual_source_figure_1_why` — rendered immediately after `trace_why_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_why_p2`
@@ -49,6 +213,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: Process supervision can provide finer feedback, but commonly needs step labels, an LLM judge, a learned critic, or repeated rollouts. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Motivation and problem framing.
 
@@ -70,23 +237,187 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Location: `trace_change`, paragraph 1
 - Text anchor: "TRACE leaves final-answer verification in place but adds a trajectory-local signal at tool-call boundaries."
 - Claims and sources: `trace_claim_credit`, `trace_claim_outcome_anchor`, `trace_claim_controlled_setup`, `trace_source_method`, `trace_source_experiments`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The paragraph makes one bounded distinction in plain language: TRACE leaves final-answer verification in place but adds a trajectory-local signal at tool-call boundaries. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — contrast between outcome-only and turn-level reward assignment; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Method distinction and scope.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  focus["Reading focus: contrast between outcome-only and turn-level reward assignment"]
+  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("contrast between outcome-only and turn-level reward assignment")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("contrast between outcome-only and turn-level reward assignment")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("contrast between outcome-only and turn-level reward assignment")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_change_p2`
@@ -97,6 +428,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph makes one bounded distinction in plain language: This is a change to credit assignment, not a new browser, backbone, training corpus, or final verifier. A visual would repeat that statement as a stock chain, list, or set of cards rather than reduce genuine mental reconstruction.
 - Explanatory job: Method distinction and scope.
 
@@ -121,6 +455,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: TRACE first splits a rollout after each tool action and returned observation. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -145,6 +482,9 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph's bounded operation is already explicit: The raw answer score is converted into a log-ratio value representing relative closure of the initial answer-likelihood gap. Its supported visual form would be a single sequence or inventory of components, both forbidden, and the evidence does not justify extra branching, scale, or state topology.
 - Explanatory job: Mechanism explanation.
 
@@ -169,7 +509,10 @@ Revision 6 independently reassesses all 16 paragraphs under the four-form hard b
 - Visual needed: `YES`
 - Complexity warrant: Multi-scale credit dependency graph: adjacent temporal differences telescope, short look-ahead adds skip dependencies, and a global outcome advantage anchors every local signal.
 - Forbidden-structure audit: `PASS` — each treatment uses branching, a dependency matrix, feedback, shared-scale geometry, or a state topology; none is a single interchangeable chain, item-plus-metric list, repeated same-metric cards, or repeated one-axis dot panels.
-- Decision rationale: A simple trajectory line would be forbidden and incomplete. The actual argument depends on overlapping local, propagated, and terminal edges whose scopes differ.
+- Source-figure audit: `ADAPT_REQUIRED`
+- Original figure locator: Figure 2, PDF page 4, `trace_source_method`
+- License and reuse status: `PERMITTED` — The TRACE paper is CC BY 4.0, but the matching original is unsuitable because its dominant topology is a forbidden single chain.
+- Decision rationale: Reuse cannot supply the needed treatment under the recorded constraint; the existing independently warranted non-banned adaptation remains eligible for revision-7 implementation. A simple trajectory line would be forbidden and incomplete. The actual argument depends on overlapping local, propagated, and terminal edges whose scopes differ.
 - Explanatory job: Credit-dependency topology and telescoping boundary.
 
 ### Treatment A — Local, look-ahead, and outcome credit DAG
@@ -408,13 +751,13 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: The DAG distinguishes adjacent telescoping edges, short look-ahead skip edges, and the separately broadcast outcome anchor.
+- Selection rationale: Treatment A is the approved revision-7 treatment already implemented as the preserved custom SVG; its evidence encoding and accessible fallback remain unchanged.
 - Delivery medium: `SVG`
 - Visual ID and placement: `trace_visual_credit_dependency_dag` — rendered immediately after `trace_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `apps/web/app/papers/[id]/explainer-visual.tsx`, `apps/web/app/papers/[id]/explainer-svg.tsx`, `apps/web/app/globals.css`, the paper fixture, and this manifest
-- Accessibility and fallback verification: VERIFIED — the figure uses a unique SVG title and description, equivalent prose, evidence links, limitations, and a motion-free reading order.
-- Desktop and mobile verification: VERIFIED — desktop preserves the full responsive canvas; below 720 px the SVG retains a 680 px width inside a keyboard-focusable horizontal scroller that stays within the viewport and creates no document-level overflow.
+- Changed files: `packages/test-fixtures/explainers/trace.json`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — the preserved custom SVG retains its specific alt text, limitations, and static fallback.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_example_p1`
@@ -422,23 +765,187 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Location: `trace_example`, paragraph 1
 - Text anchor: "Consider a trajectory that searches for a relevant source, opens a page containing decisive"
 - Claims and sources: `trace_claim_prefix_probe`, `trace_claim_td`, `trace_claim_outcome_anchor`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The worked example is short enough to follow in prose: Consider a trajectory that searches for a relevant source, opens a page containing decisive evidence, then follows an unrelated branch and submits the wrong final answer. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — worked trajectory with locally different turn contributions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Worked example.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  focus["Reading focus: worked trajectory with locally different turn contributions"]
+  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
+- Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_example_p2`
@@ -446,23 +953,187 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Location: `trace_example`, paragraph 2
 - Text anchor: "The useful search and page opening can receive positive local credit if they make"
 - Claims and sources: `trace_claim_prefix_probe`, `trace_claim_td`, `trace_claim_outcome_anchor`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The worked example is short enough to follow in prose: The useful search and page opening can receive positive local credit if they make the gold answer more predictable. Rendering the same ordered actions would create a forbidden single chain; no additional quantitative or spatial relation is supported here.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — worked trajectory with locally different turn contributions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Worked example.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  focus["Reading focus: worked trajectory with locally different turn contributions"]
+  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("worked trajectory with locally different turn contributions")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
-- Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
+- Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_evidence_p1`
@@ -473,6 +1144,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: The paragraph already reports the bounded evidence directly: The authors train Qwen3-4B-Thinking-2507 and Qwen3-30B-A3B-Thinking-2507 in the same ReAct-style search harness. The available values do not add a supported distribution, uncertainty interval, or joint structure; an honest graphic would reduce to an item-plus-metric list, repeated metric marks, or decorative comparison. Prose is clearer.
 - Explanatory job: Evaluation evidence.
 
@@ -497,6 +1171,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: Base-to-TRACE changes for two backbones and GRPO-to-TRACE four-benchmark averages are quantitative, but they refer to different comparison baselines and scopes. One slope chart would imply exchangeability; separate backbone/comparator tracks would be repeated one-axis panels, and no uncertainty is reported. Prose keeps the controlled BrowseComp-Plus gains distinct from unweighted cross-benchmark averages.
 - Explanatory job: Evaluation evidence.
 
@@ -518,23 +1195,187 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Location: `trace_evidence`, paragraph 3
 - Text anchor: "In one 4B BrowseComp-Plus ablation, GRPO scores 30.0, raw log-probability delta 32.4, remaining-gap normalization"
 - Claims and sources: `trace_claim_controlled_setup`, `trace_claim_browsecomp_gain`, `trace_claim_grpo_gain`, `trace_claim_ablation`, `trace_source_experiments`, `trace_source_results`
-- Visual needed: `NO`
-- Complexity warrant: NONE — prose is sufficient.
-- Forbidden-structure audit: `NO_VISUAL`
-- Decision rationale: The four ablation values share one BrowseComp-Plus scale, but they are a single run with no variance and the learning-curve timing is only qualitative in this paragraph. A four-mark ranking would be an item-plus-metric list and would visually overstate the small 34.6-versus-35.5 difference; adding a curve would invent coordinates. Prose keeps the comparison explicitly directional rather than uncertainty-adjusted.
+- Visual needed: `YES`
+- Complexity warrant: Non-trivial source-figure relationship — learning dynamics and ablation evidence on aligned experimental axes; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Forbidden-structure audit: `PASS`
+- Source-figure audit: `USE_ORIGINAL`
+- Original figure locator: Figures 3-4, PDF pages 8-10, `trace_source_results`
+- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
+- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Evaluation evidence.
+
+### Treatment A — Full original with focus frame
+
+- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
+- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
+- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \draw[orange!80!black,line width=1.6pt]
+        ([xshift=4mm,yshift=-4mm]source.north west)
+        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
+  focus["Reading focus: learning dynamics and ablation evidence on aligned experimental axes"]
+  locator["Source locator: Figures 3-4, PDF pages 8-10, trace_source_results"]
+  source --- focus
+  source --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
+                       fill=False, linewidth=2, edgecolor="#d97706"))
+ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.axis("off")
+fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment B — Original detail with context inset
+
+- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
+- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
+- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \begin{scope}
+    \clip (-5,-2.3) rectangle (2.5,2.3);
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \end{scope}
+  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figures-3-4.png}};
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figures-3-4.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figures-3-4.png", label: "Complete original context" }
+  locator["Detail remains located within Figures 3-4, PDF pages 8-10, trace_source_results"]
+  source --- detail
+  source --- context
+  detail --- locator
+  context --- locator
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+height, width = source.shape[:2]
+detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
+ax.imshow(detail)
+inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
+inset.imshow(source)
+inset.set_title("Complete original", fontsize=8)
+inset.axis("off")
+ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.axis("off")
+fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
+```
+
+### Treatment C — Original with numbered reading key
+
+- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
+- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
+- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Primary delivery medium: `source asset`
+- Recommended web medium: `source asset`
+- Mobile, accessibility, and motion behavior: Scale the original proportionally; provide the original caption, locator, attribution, and an equivalent text explanation. On narrow screens, place the reading key below the figure. No motion.
+
+#### TikZ
+```tex
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{graphicx}
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
+    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
+  }
+\end{tikzpicture}
+\end{document}
+```
+
+#### Mermaid
+```mermaid
+flowchart TB
+  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
+  callout1["1: locate the evidence-bearing marks"]
+  callout2["2: follow the paper-specific relation"]
+  callout3["3: retain the source limitation"]
+  source --- callout1
+  source --- callout2
+  source --- callout3
+```
+
+#### Python
+```python
+from pathlib import Path
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.imshow(source)
+for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
+    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
+                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
+ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.axis("off")
+fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
+```
 
 ### Implementation record
 
-- Status: `NOT_NEEDED`
-- Selected treatment: `NONE`
-- Selection rationale: `NO_VISUAL` — prose is the approved treatment.
-- Delivery medium: `NONE`
-- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Status: `IMPLEMENTED`
+- Selected treatment: `A`
+- Selection rationale: Treatment A uses the complete original source figure or figure set with exact provenance and no redraw; repeated placements reuse the same author-supplied assets.
+- Delivery medium: `source asset`
+- Visual ID and placement: `trace_visual_source_figures_3_4` — rendered immediately after `trace_evidence_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `NONE`
-- Accessibility and fallback verification: `NO_VISUAL`
-- Desktop and mobile verification: `NO_VISUAL`
+- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-3.png`, `apps/web/public/paper-assets/trace/figure-4.png`
+- Accessibility and fallback verification: `VERIFIED IN FIXTURE` — every image has specific alt text; the visual retains equivalent fallback text, exact locator, attribution, license, and modification metadata.
+- Desktop and mobile verification: `PENDING SITE INTEGRATION` — renderer and responsive browser QA are owned by `site_maintainer`.
 - Evidence deviations: `NONE`
 
 ## `trace_limitations_p1`
@@ -545,6 +1386,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The experiments cover long-horizon search with short answers that can be compared with known ground truth. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -569,6 +1413,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: Only two related Qwen3 backbones and one interaction domain are evaluated. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Evidence boundary and limitation.
 
@@ -593,6 +1440,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The controlled result supports a narrow conclusion: in the authors' search setup, adding their reference-model-based turn credit to outcome training improves both tested backbones and several related benchmarks. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
@@ -617,6 +1467,9 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Visual needed: `NO`
 - Complexity warrant: NONE — prose is sufficient.
 - Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The paper's figures were checked; none directly performs this paragraph's explanatory job.
 - Decision rationale: This paragraph is a claim boundary rather than a reconstructive structure: The paper does not establish a general solution to agent credit assignment. Keeping the qualifiers in prose avoids inventing causal links or turning heterogeneous caveats into interchangeable cards or a stock list.
 - Explanatory job: Critical interpretation and claim boundary.
 
