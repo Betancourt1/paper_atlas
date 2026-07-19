@@ -3,7 +3,7 @@
 - Paper ID: `paper_searchos_v1`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
-- Manifest revision: `14`
+- Manifest revision: `15`
 - Engineer status: `COMPLETE`
 - Implementer status: `COMPLETE`
 - Paragraph coverage: `17 / 17` prose paragraphs
@@ -173,7 +173,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace only the SOCM asset from revision 14. Use the inspected 2548 × 1648 Figure 2 source bounds x=19..1884 and y=1206..1642 (1866 × 437 px): y=1206 starts below the neighboring Search Tool Middleware Harness dashed bottom, includes the complete SOCM dashed top at approximately y=1208 and dashed bottom at approximately y=1641, and x=1884 includes the entire rounded right edge of Failure Memory. Do not include the upper neighboring dashed boundary or any Search Agent Skills fragment. Add 24 px of neutral canvas padding on every side after cropping, producing a 1914 × 485 derived asset; the padding is layout only and source pixels remain unscaled and unaltered. Keep the already approved complete Context Middleware and Search Agent Skills crops as the other two stacked blocks. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -222,7 +222,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace only the SOCM asset from revision 14. Use the inspected 2548 × 1648 Figure 2 source bounds x=19..1884 and y=1206..1642 (1866 × 437 px): y=1206 starts below the neighboring Search Tool Middleware Harness dashed bottom, includes the complete SOCM dashed top at approximately y=1208 and dashed bottom at approximately y=1641, and x=1884 includes the entire rounded right edge of Failure Memory. Do not include the upper neighboring dashed boundary or any Search Agent Skills fragment. Add 24 px of neutral canvas padding on every side after cropping, producing a 1914 × 485 derived asset; the padding is layout only and source pixels remain unscaled and unaltered. Keep the already approved complete Context Middleware and Search Agent Skills crops as the other two stacked blocks. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -282,7 +282,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the failed composite with exactly three clean, complete source-pixel crops from the 2548 × 1648 original Figure 2: (1) Context Middleware box, bounds x=46..637 and y=884..1159 (592 × 276 px); (2) complete Search-Oriented Context Management region, bounds x=18..1835 and y=1167..1639 (1818 × 473 px); (3) complete Search Agent Skills region, bounds x=1928..2523 and y=817..1618 (596 × 802 px). Stack them in that order as independent full-width blocks. Modification record: crop and vertical assembly only; exclude the middleware title, Sensor and Evidence Extraction neighbors, Toolset, dashed column boundary, adjacent modules, and all severed connector fragments. Do not redraw, relabel, resample, or include partial neighbors. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace only the SOCM asset from revision 14. Use the inspected 2548 × 1648 Figure 2 source bounds x=19..1884 and y=1206..1642 (1866 × 437 px): y=1206 starts below the neighboring Search Tool Middleware Harness dashed bottom, includes the complete SOCM dashed top at approximately y=1208 and dashed bottom at approximately y=1641, and x=1884 includes the entire rounded right edge of Failure Memory. Do not include the upper neighboring dashed boundary or any Search Agent Skills fragment. Add 24 px of neutral canvas padding on every side after cropping, producing a 1914 × 485 derived asset; the padding is layout only and source pixels remain unscaled and unaltered. Keep the already approved complete Context Middleware and Search Agent Skills crops as the other two stacked blocks. Retain crop-specific alt text, max-width: 100%, height: auto, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -331,14 +331,14 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Status: `IMPLEMENTED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A is implemented with the exact revision-14 source-pixel bounds: the complete Context Middleware box, complete Search-Oriented Context Management region, and complete Search Agent Skills region are independent mobile blocks; rejected revision-13 composites were removed.
+- Selection rationale: Treatment A remains evidence-correct, but revision 15 requires the inspected bounds and neutral padding specified above; reject every revision-14 derived asset whose source stroke touches an edge or includes a neighboring boundary.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`; `apps/web/public/paper-assets/searchos/mobile/`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/app/globals.css`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — each clean crop has block-specific alt text, exact source-pixel bounds and modifications, and unchanged locator, attribution, license, fallback, and complete desktop original.
-- Desktop and mobile verification: `VERIFIED` — source inspection and Playwright at 1440 × 1000 and 390 × 844 confirm the three mobile blocks are complete, fragment-free, contained, and scrollbar-free while desktop retains full Figure 2.
-- Evidence deviations: `NONE` — rejected revision-13 assets were removed; the complete desktop original was not altered.
+- Accessibility and fallback verification: `PENDING` — verify complete outer borders, clean neutral padding on every derived edge, precise alt text and provenance, and no clipped or neighboring fragment.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that desktop remains complete and every padded mobile block is legible, clean-edged, contained, and scrollbar-free.
+- Evidence deviations: `REVISION_14_REJECTED` — replace the edge-clipped derived assets; do not alter the complete desktop originals.
 
 ## `sos_mechanism_p3`
 
