@@ -147,6 +147,9 @@ description is not an explainer summary.
 - `scripts/check-agent-harness.py` validates the configuration through the
   project's locked Python environment and is part of
   `make check`.
+- `scripts/check-visual-manifests.py` verifies exact fixture paragraph coverage,
+  the three-treatment/code contract, implementation state, and rejects
+  ellipsized diagram copy.
 - Schema validation, source-reference coverage, content evaluations, and the
   human editorial console remain product milestones; this repository harness
   must not claim they are implemented before they exist.
@@ -157,6 +160,7 @@ Run:
 
 ```bash
 make harness-check
+make visual-manifest-check
 make check
 ```
 
