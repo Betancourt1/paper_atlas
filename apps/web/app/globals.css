@@ -633,6 +633,15 @@ summary:focus-visible {
   border-color: var(--line-strong);
 }
 
+.explainer-visual--partition-tree .explainer-visual__items li:nth-child(4):nth-last-child(2) {
+  grid-column: 1 / -1;
+}
+
+.explainer-visual--architecture-stepper .explainer-visual__items li:nth-child(3n)::after,
+.explainer-visual--operation-diagram .explainer-visual__items li:nth-child(3n)::after {
+  display: none;
+}
+
 .explainer-visual--partition-tree .explainer-visual__items li:last-child {
   background: var(--surface);
 }
@@ -1094,7 +1103,8 @@ summary:focus-visible {
   }
 
   .explainer-visual--partition-tree .explainer-visual__items li:first-child,
-  .explainer-visual--partition-tree .explainer-visual__items li:last-child {
+  .explainer-visual--partition-tree .explainer-visual__items li:last-child,
+  .explainer-visual--partition-tree .explainer-visual__items li:nth-child(4):nth-last-child(2) {
     grid-column: auto;
   }
 

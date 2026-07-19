@@ -113,6 +113,21 @@ test("every digest paper exposes explanation, caveats, and provenance", async ({
       page.getByRole("heading", { name: "Sources and exact locators" }),
     ).toBeVisible();
     await expect(page.getByText("Published", { exact: true })).toHaveCount(0);
+
+    const figures = page.locator("figure.explainer-visual");
+    const figureCount = await figures.count();
+    expect(figureCount).toBeGreaterThanOrEqual(3);
+    await expect(
+      page.getByText("What this illustration does not establish"),
+    ).toHaveCount(figureCount);
+    await expect(
+      page.getByLabel("Evidence for this illustration"),
+    ).toHaveCount(figureCount);
+
+    const hasHorizontalOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+    expect(hasHorizontalOverflow).toBe(false);
   }
 });
 

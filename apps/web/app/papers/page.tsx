@@ -20,7 +20,7 @@ export default function PapersPage() {
         <h1>Research digest</h1>
         <p>
           Eight source-backed explainers with mechanism, evidence, limitations,
-          and a paper-specific visual. These are reviewed drafts awaiting human
+          and paper-specific visuals. These are reviewed drafts awaiting human
           publication approval.
         </p>
       </header>
