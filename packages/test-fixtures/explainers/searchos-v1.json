@@ -434,6 +434,7 @@
   "visuals": [
     {
       "id": "visual_searchos_control_loop",
+      "after_block_id": "sos_mechanism",
       "type": "PIPELINE_FLOW",
       "title": "The SearchOS evidence-and-control loop",
       "question": "How does SearchOS turn browsing activity into shared, grounded progress rather than more conversation history?",

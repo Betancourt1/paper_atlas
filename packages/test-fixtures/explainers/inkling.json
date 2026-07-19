@@ -406,6 +406,7 @@
   "visuals": [
     {
       "id": "visual_inkling_evidence_boundaries",
+      "after_block_id": "ink_mechanism",
       "type": "EVIDENCE_MATRIX",
       "title": "What does each Inkling number actually describe?",
       "question": "Which facts describe the model design, an access surface, a downloadable checkpoint, or a different evaluation checkpoint?",

@@ -62,6 +62,7 @@ const validExplainer = {
   visuals: [
     {
       id: "visual_flow",
+      after_block_id: "mechanism",
       type: "PIPELINE_FLOW",
       title: "Test flow",
       question: "How does the test flow work?",
@@ -105,6 +106,16 @@ describe("ExplainerDocument schema", () => {
     expect(validateExplainerDocument(invalid)).toBe(false);
     expect(() => parseExplainerDocument(invalid)).toThrow(
       "block why claim references unknown id missing_claim",
+    );
+  });
+
+  it("rejects a visual placed after an unknown block", () => {
+    const invalid = structuredClone(validExplainer);
+    invalid.visuals[0].after_block_id = "missing_block";
+
+    expect(validateExplainerDocument(invalid)).toBe(false);
+    expect(() => parseExplainerDocument(invalid)).toThrow(
+      "visual visual_flow references unknown placement block missing_block",
     );
   });
 

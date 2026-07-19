@@ -95,7 +95,19 @@ export interface SourceRef {
 }
 export interface Visual {
   id: Identifier;
-  type: "PIPELINE_FLOW" | "ARCHITECTURE_STEPPER" | "RESULT_COMPARISON" | "EVIDENCE_MATRIX" | "METHOD_COMPARISON";
+  after_block_id: Identifier;
+  type:
+    | "PIPELINE_FLOW"
+    | "ARCHITECTURE_STEPPER"
+    | "RESULT_COMPARISON"
+    | "EVIDENCE_MATRIX"
+    | "METHOD_COMPARISON"
+    | "CONTROL_LOOP"
+    | "PARTITION_TREE"
+    | "TIMELINE"
+    | "DOT_PLOT"
+    | "PARALLEL_VIEW"
+    | "OPERATION_DIAGRAM";
   title: string;
   question: string;
   /**

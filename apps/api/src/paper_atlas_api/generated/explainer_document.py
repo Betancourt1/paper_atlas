@@ -146,6 +146,12 @@ class Type1(StrEnum):
     RESULT_COMPARISON = 'RESULT_COMPARISON'
     EVIDENCE_MATRIX = 'EVIDENCE_MATRIX'
     METHOD_COMPARISON = 'METHOD_COMPARISON'
+    CONTROL_LOOP = 'CONTROL_LOOP'
+    PARTITION_TREE = 'PARTITION_TREE'
+    TIMELINE = 'TIMELINE'
+    DOT_PLOT = 'DOT_PLOT'
+    PARALLEL_VIEW = 'PARALLEL_VIEW'
+    OPERATION_DIAGRAM = 'OPERATION_DIAGRAM'
 
 
 class Limitation(RootModel[str]):
@@ -175,6 +181,7 @@ class Visual(BaseModel):
         extra='forbid',
     )
     id: Identifier
+    after_block_id: Identifier
     type: Type1
     title: Annotated[str, Field(max_length=300, min_length=1)]
     question: Annotated[str, Field(max_length=300, min_length=1)]

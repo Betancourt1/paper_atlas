@@ -535,7 +535,7 @@ summary:focus-visible {
 }
 
 .explainer-visual--pipeline-flow .explainer-visual__items {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .explainer-visual__items li {
@@ -551,7 +551,9 @@ summary:focus-visible {
 }
 
 .explainer-visual--pipeline-flow .explainer-visual__items li:not(:last-child)::after,
-.explainer-visual--architecture-stepper .explainer-visual__items li:not(:last-child)::after {
+.explainer-visual--architecture-stepper .explainer-visual__items li:not(:last-child)::after,
+.explainer-visual--operation-diagram .explainer-visual__items li:not(:last-child)::after,
+.explainer-visual--timeline .explainer-visual__items li:not(:last-child)::after {
   position: absolute;
   z-index: 1;
   inset-block-start: 50%;
@@ -566,6 +568,132 @@ summary:focus-visible {
   font-size: 0.8rem;
   line-height: 18px;
   text-align: center;
+}
+
+.explainer-visual--evidence-matrix .explainer-visual__items {
+  grid-template-columns: 1fr;
+}
+
+.explainer-visual--evidence-matrix .explainer-visual__items li {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.34fr) 1fr;
+  gap: 22px;
+  min-height: 0;
+  border-inline-end: 1px solid var(--line);
+}
+
+.explainer-visual--evidence-matrix .explainer-visual__item-label {
+  margin: 0 !important;
+}
+
+.explainer-visual--method-comparison .explainer-visual__items,
+.explainer-visual--parallel-view .explainer-visual__items {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.explainer-visual--control-loop .explainer-visual__items {
+  position: relative;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-bottom: 42px;
+  border: 1px solid var(--line-strong);
+}
+
+.explainer-visual--control-loop .explainer-visual__items::after {
+  position: absolute;
+  inset: auto 20px 13px;
+  color: var(--evidence);
+  content: "↶ Feedback returns to the next unresolved gap";
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.explainer-visual--control-loop .explainer-visual__items li {
+  min-height: 150px;
+}
+
+.explainer-visual--partition-tree .explainer-visual__items {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  border: 0;
+}
+
+.explainer-visual--partition-tree .explainer-visual__items li {
+  min-height: 0;
+  border: 1px solid var(--line);
+}
+
+.explainer-visual--partition-tree .explainer-visual__items li:first-child,
+.explainer-visual--partition-tree .explainer-visual__items li:last-child {
+  grid-column: 1 / -1;
+  width: min(100%, 560px);
+  margin-inline: auto;
+  border-color: var(--line-strong);
+}
+
+.explainer-visual--partition-tree .explainer-visual__items li:last-child {
+  background: var(--surface);
+}
+
+.explainer-visual--timeline .explainer-visual__items {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.explainer-plot {
+  display: grid;
+  gap: 18px;
+  margin-top: 34px;
+  padding: 24px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.explainer-plot__row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.34fr) 1fr;
+  gap: 8px 22px;
+  align-items: center;
+}
+
+.explainer-plot__row > p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.explainer-plot__row > p:first-child {
+  font-weight: 700;
+}
+
+.explainer-plot__row > p:last-child {
+  grid-column: 2;
+  color: var(--ink-muted);
+}
+
+.explainer-plot__measure {
+  position: relative;
+  min-height: 34px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.explainer-plot__measure span {
+  display: block;
+  min-width: 2px;
+  height: 26px;
+  background: var(--accent);
+  opacity: 0.76;
+}
+
+.explainer-plot__measure strong {
+  position: absolute;
+  inset: 3px 8px auto auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.explainer-plot__note {
+  color: var(--ink-muted);
 }
 
 .explainer-visual__items p {
@@ -619,6 +747,29 @@ summary:focus-visible {
 
 .explainer-visual__limits li + li {
   margin-top: 6px;
+}
+
+.explainer-visual__evidence {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.explainer-visual__evidence > p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  margin: 0;
+  font-size: 0.76rem;
+}
+
+.explainer-visual__evidence > p:first-child {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.explainer-visual__evidence > p + p {
+  margin-top: 7px;
 }
 
 .claim-ledger,
@@ -927,8 +1078,32 @@ summary:focus-visible {
   }
 
   .explainer-visual--pipeline-flow .explainer-visual__items li:not(:last-child)::after,
-  .explainer-visual--architecture-stepper .explainer-visual__items li:not(:last-child)::after {
+  .explainer-visual--architecture-stepper .explainer-visual__items li:not(:last-child)::after,
+  .explainer-visual--operation-diagram .explainer-visual__items li:not(:last-child)::after,
+  .explainer-visual--timeline .explainer-visual__items li:not(:last-child)::after {
     display: none;
+  }
+
+  .explainer-visual--evidence-matrix .explainer-visual__items li,
+  .explainer-visual--method-comparison .explainer-visual__items,
+  .explainer-visual--parallel-view .explainer-visual__items,
+  .explainer-visual--control-loop .explainer-visual__items,
+  .explainer-visual--partition-tree .explainer-visual__items,
+  .explainer-plot__row {
+    grid-template-columns: 1fr;
+  }
+
+  .explainer-visual--partition-tree .explainer-visual__items li:first-child,
+  .explainer-visual--partition-tree .explainer-visual__items li:last-child {
+    grid-column: auto;
+  }
+
+  .explainer-plot {
+    padding: 18px 14px;
+  }
+
+  .explainer-plot__row > p:last-child {
+    grid-column: 1;
   }
 
   .claim-ledger,

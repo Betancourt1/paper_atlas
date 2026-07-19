@@ -259,6 +259,7 @@
   "visuals": [
     {
       "id": "trace_visual_credit_flow",
+      "after_block_id": "trace_mechanism",
       "type": "PIPELINE_FLOW",
       "title": "How TRACE turns a tool interaction into training credit",
       "question": "How does TRACE decide whether one tool call helped a long-horizon agent?",

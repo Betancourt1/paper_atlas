@@ -385,6 +385,7 @@
   "visuals": [
     {
       "id": "visual_attention_prediction_sequence",
+      "after_block_id": "attn_mechanism",
       "type": "ARCHITECTURE_STEPPER",
       "title": "From a source sequence to one next token",
       "question": "What does the original Transformer compute before it predicts the next target token?",

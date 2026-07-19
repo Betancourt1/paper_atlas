@@ -106,6 +106,11 @@ export function getExplainerIntegrityErrors(
   }
 
   for (const visual of explainer.visuals) {
+    if (!blockIds.has(visual.after_block_id)) {
+      errors.push(
+        `visual ${visual.id} references unknown placement block ${visual.after_block_id}`,
+      );
+    }
     reportUnknownIds(errors, `visual ${visual.id} claim`, visual.claim_ids, claimIds);
     reportUnknownIds(errors, `visual ${visual.id} source`, visual.source_refs, sourceIds);
   }

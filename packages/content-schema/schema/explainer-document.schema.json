@@ -304,6 +304,7 @@
       "additionalProperties": false,
       "required": [
         "id",
+        "after_block_id",
         "type",
         "title",
         "question",
@@ -319,6 +320,9 @@
         "id": {
           "$ref": "#/$defs/identifier"
         },
+        "after_block_id": {
+          "$ref": "#/$defs/identifier"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -326,7 +330,13 @@
             "ARCHITECTURE_STEPPER",
             "RESULT_COMPARISON",
             "EVIDENCE_MATRIX",
-            "METHOD_COMPARISON"
+            "METHOD_COMPARISON",
+            "CONTROL_LOOP",
+            "PARTITION_TREE",
+            "TIMELINE",
+            "DOT_PLOT",
+            "PARALLEL_VIEW",
+            "OPERATION_DIAGRAM"
           ]
         },
         "title": {

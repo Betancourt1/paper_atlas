@@ -378,6 +378,7 @@
   "visuals": [
     {
       "id": "visual_robottt_fast_weight_cycle",
+      "after_block_id": "rttt_mechanism",
       "type": "ARCHITECTURE_STEPPER",
       "title": "How robot history becomes fast-weight state",
       "question": "How does RoboTTT condition on a long visuomotor history without attending over the full history at every step?",

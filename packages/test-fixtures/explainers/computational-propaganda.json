@@ -259,6 +259,7 @@
   "visuals": [
     {
       "id": "propaganda_visual_halflife_flow",
+      "after_block_id": "propaganda_mechanism",
       "type": "PIPELINE_FLOW",
       "title": "HalfLife follows poison through the data pipeline",
       "question": "What must happen between posting a malicious comment and changing a trained model?",

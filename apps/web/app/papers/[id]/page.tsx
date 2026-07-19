@@ -72,7 +72,11 @@ export default async function PaperPage({ params }: PaperPageProps) {
   const sourcesById = new Map(
     explainer.source_refs.map((source) => [source.id, source]),
   );
-  const primaryVisual = explainer.visuals[0];
+  const visualsByBlockId = new Map<string, typeof explainer.visuals>();
+  for (const visual of explainer.visuals) {
+    const placedVisuals = visualsByBlockId.get(visual.after_block_id) ?? [];
+    visualsByBlockId.set(visual.after_block_id, [...placedVisuals, visual]);
+  }
 
   return (
     <main id="main-content" className="paper-page">
@@ -119,9 +123,13 @@ export default async function PaperPage({ params }: PaperPageProps) {
                 claimsById={claimsById}
                 sourcesById={sourcesById}
               />
-              {block.type === "HOW_IT_WORKS" && primaryVisual ? (
-                <ExplainerVisual visual={primaryVisual} />
-              ) : null}
+              {visualsByBlockId.get(block.id)?.map((visual) => (
+                <ExplainerVisual
+                  key={visual.id}
+                  visual={visual}
+                  sourcesById={sourcesById}
+                />
+              ))}
             </div>
           ))}
         </div>
@@ -253,7 +261,7 @@ function ClaimLedger({
       </p>
       <ol>
         {explainer.claims.map((claim) => (
-          <li key={claim.id}>
+          <li id={`claim-${claim.id}`} key={claim.id}>
             <div>
               <span data-epistemic-status={claim.epistemic_status}>
                 {epistemicLabels[claim.epistemic_status]}

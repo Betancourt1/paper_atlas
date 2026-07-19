@@ -364,6 +364,7 @@
   "visuals": [
     {
       "id": "visual_ppa_partition_flow",
+      "after_block_id": "ppa_mechanism",
       "type": "PIPELINE_FLOW",
       "title": "From one population estimate to a consistency test",
       "question": "How does partitioning the same population reveal statistically inconsistent model estimates?",

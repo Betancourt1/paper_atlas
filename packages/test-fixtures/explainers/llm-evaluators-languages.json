@@ -275,6 +275,7 @@
   "visuals": [
     {
       "id": "language_visual_pairwise_threshold",
+      "after_block_id": "language_mechanism",
       "type": "METHOD_COMPARISON",
       "title": "The bias that pairwise accuracy cannot see",
       "question": "How can an evaluator rank responses correctly yet make different accept-or-reject decisions across languages?",
