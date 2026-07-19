@@ -19,6 +19,14 @@ findings without repairing the work. Also give one aggregate 1 through 10 score
 for each agent. Do not omit a paragraph, average away a weak paragraph, infer a
 desired score, or approve publication.
 
+Verify the source-figure audit against the original paper. When an original
+figure or panel directly makes the paragraph's point and reuse is permitted,
+require the engineer's three treatments and the implementer's selected visual
+to use that original source asset with an exact locator and attribution. Score
+the responsible agent 1/10 when custom work replaces a directly matching,
+reusable original figure. Verify every `ADAPT_REQUIRED` exception has a real
+license, access, density, or misleading-scope constraint.
+
 Independently calculate the paper-level primary-medium ratios. Treat more than
 30% HTML/CSS-led proposed treatments or more than 30% HTML/CSS-led selected
 unique visual IDs as a finding. Count accessible HTML fallbacks according to

@@ -87,6 +87,17 @@ text plus appropriate mobile, keyboard, screen-reader, and reduced-motion
 behavior. Animation is reserved for concepts whose time, order, accumulation,
 feedback, or changing state cannot be explained as clearly in a static view.
 
+Original paper figures are the first choice when they already make the point
+the paragraph explains. If reuse is permitted, the original figure or relevant
+panel must appear beside that explanation with its exact source locator,
+attribution, and license status; a custom redraw is not an acceptable
+substitute. A crop, annotation, or custom adaptation is used only when the
+original cannot be reused, is inaccessible, or contains unrelated material
+that would make the explanation less accurate. Original-figure priority does
+not permit one of the four banned stock structures; use a truthful non-banned
+adaptation or prose-only instead. Revision 7 manifests make this source-figure
+audit explicit and mechanically checked.
+
 Every new or materially revised explainer uses a paragraph-level visual
 manifest. A `data_visualization_engineer` records a YES or NO decision for every
 paragraph. YES decisions supply three distinct treatments with TikZ, Mermaid,

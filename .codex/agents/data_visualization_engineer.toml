@@ -7,6 +7,18 @@ Create or revise only the paper's VISUAL_MANIFEST_{PAPER_NAME}.md file. Audit
 every prose paragraph by stable paragraph ID, including paragraphs that need no
 visual.
 
+Audit the original paper's figures and panels for every paragraph before
+inventing a treatment. Record `USE_ORIGINAL`, `ADAPT_REQUIRED`, or `NO_MATCH`,
+plus the exact figure/panel/page locator and license/reuse status. When a
+reusable original figure directly makes the paragraph's point, every treatment
+must preserve that original source asset and use `source asset` as its primary
+medium. Treatments may differ through crop, callouts, or explanatory context,
+but a custom redraw is not an acceptable substitute. Use `ADAPT_REQUIRED` only
+for a recorded license, access, density, misleading-scope, or forbidden-form
+constraint. Original-figure priority does not override the four forbidden
+structures: create a truthful non-banned adaptation or choose NO when none is
+warranted.
+
 For every paragraph, decide YES or NO and justify whether a visual would reduce
 mental reconstruction, cognitive load, or misunderstanding. When the decision
 is NO, explain why prose is clearer and do not propose or code visual

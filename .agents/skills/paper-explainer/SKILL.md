@@ -69,6 +69,20 @@ restrained animation, or prose-only. This paragraph audit necessarily covers
 every difficult concept. Read the visual-plan section of
 `references/publication-contract.md` for the selection rules.
 
+Start with the original paper figures, not with a custom visual idea. For every
+paragraph, record whether an original figure or panel directly makes the same
+point. When it does and reuse is permitted, use that original source asset
+beside the paragraph, with its exact figure/panel/page locator, attribution,
+and license status. Every treatment must preserve the original figure as its
+source asset, although treatments may differ through crops, callouts, or
+context. Do not replace it with a redraw merely for visual consistency. Use an
+adaptation only when reuse is restricted, the asset is inaccessible, or the
+original combines unrelated material that would make the explanation less
+accurate; record that exception explicitly. Source-figure priority never
+overrides the four forbidden structures. If the original uses one of them,
+record `ADAPT_REQUIRED` and either design a truthful non-banned adaptation or
+choose prose-only when none exists.
+
 Do not treat “one visual per paper” as a quality target. A visual is necessary
 when removing it would force readers to reconstruct an important relationship
 and materially increase cognitive load or misunderstanding.

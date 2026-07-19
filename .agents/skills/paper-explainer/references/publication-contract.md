@@ -46,7 +46,10 @@ The approved draft receives one versioned
 `VISUAL_MANIFEST_{PAPER_NAME}.md`. The `data_visualization_engineer` audits
 every stable prose paragraph, not only difficult concepts or planned figures.
 For each paragraph it records a YES or NO visual decision, its evidence-backed
-rationale, a complexity warrant, and a forbidden-structure audit. A YES
+rationale, a complexity warrant, a source-figure audit, and a
+forbidden-structure audit. The source-figure audit identifies the exact
+figure/panel/page locator and reuse status whenever the original paper already
+makes the paragraph's point. A YES
 decision receives three distinct acceptable treatments and complete minimal
 TikZ, Mermaid, and Python generation code for each treatment. A NO decision
 receives no visual treatments or code: it records why prose is the correct
@@ -91,6 +94,21 @@ Each difficult concept receives one explicit decision:
 - create a static illustration;
 - create a restrained explanatory animation;
 - use prose because no visual adds understanding.
+
+Before choosing among these forms, inspect the original paper's figures and
+panels. If one directly makes the point being explained and reuse is permitted,
+the original figure is mandatory at that paragraph. All proposed treatments
+must preserve it as the source asset, while crops, callouts, or surrounding
+context may differ. Record the exact figure/panel/page locator, attribution,
+and license status. Do not redraw a reusable original merely to match the site
+style. Record `ADAPT_REQUIRED` only when reuse is restricted, the asset is
+inaccessible, or the original combines unrelated material that would make the
+explanation misleading. Record `NO_MATCH` only after checking the paper's
+figures and finding none that directly answers the pedagogical question.
+Original-figure priority does not override the forbidden stock structures. If
+the directly matching original uses one, record `ADAPT_REQUIRED`; proceed with
+a truthful non-banned adaptation only when it remains warranted, otherwise
+choose prose-only.
 
 Do not use a fixed visual quota. The decision unit is the difficult concept,
 not the paper. A visual is necessary when removing it would force the reader to
@@ -150,8 +168,10 @@ Match the form to the explanatory need:
 | Change between representations | Transformation map with explicit correspondences and losses |
 
 Use a source figure when it already answers the pedagogical question and its
-license permits reuse. Create a custom static illustration when the source
-figure is too dense, combines unrelated claims, or assumes expert context. Use
+license permits reuse. Create a custom static illustration when no source
+figure answers the question, or an explicitly attributed adaptation when the
+source figure cannot be reused, is inaccessible, is too dense, combines
+unrelated claims, or assumes expert context. Use
 an interactive artifact only when controls expose a meaningful comparison or
 state. Use animation only when time, order, accumulation, feedback, or changing
 state cannot be communicated as clearly in a static view.
@@ -171,6 +191,7 @@ For every proposed visual, record:
 - why this form is better than prose or a simpler visual;
 - data, labels, controls, default state, and limitations;
 - attribution and license constraints;
+- the source-figure audit, exact locator, and reason for any adaptation;
 - static fallback and alt-text intent;
 - keyboard, screen-reader, mobile, and reduced-motion behavior as applicable.
 

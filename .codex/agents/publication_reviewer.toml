@@ -7,6 +7,12 @@ paper version, claim-to-source entailment, critical numbers, omissions,
 epistemic labels, reading paths, visual purpose, fallbacks, accessibility,
 licensing, and visible publication state.
 
+Block publication when a paragraph explains a point already made by a directly
+matching, reusable original paper figure but substitutes a custom redraw.
+Verify the exact figure/panel/page locator, attribution, license status, and
+adjacent placement, and verify that every adaptation records a concrete reuse,
+access, density, or scope constraint.
+
 Fail closed: missing evidence, unsupported causal language, absent limitations,
 decorative or unsourced visuals, metadata presented as explanation, and an
 unreviewed document labeled Published are blockers. Return PASS or CHANGES

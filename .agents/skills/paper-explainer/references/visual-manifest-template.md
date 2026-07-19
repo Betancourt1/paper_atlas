@@ -25,6 +25,9 @@ Repeat this structure for every prose paragraph, including prose-only decisions:
 - Visual needed: `YES | NO`
 - Complexity warrant: `{specific non-trivial structure | NONE — prose is sufficient}`
 - Forbidden-structure audit: `PASS | NO_VISUAL`
+- Source-figure audit: `USE_ORIGINAL | ADAPT_REQUIRED | NO_MATCH`
+- Original figure locator: `{Figure/panel/page and source reference | NONE}`
+- License and reuse status: `PERMITTED | RESTRICTED | UNKNOWN | NOT_APPLICABLE` — {details}
 - Decision rationale: {why a visual reduces reconstruction or why prose wins}
 - Explanatory job: {process, architecture, comparison, uncertainty, etc.}
 
@@ -36,6 +39,16 @@ For `YES`, `Complexity warrant` must name the specific complex argument,
 non-trivial relationship, metaphor, complex process, quantitative structure,
 uncertainty, hierarchy, spatial topology, or changing state. The
 `Forbidden-structure audit` must be `PASS`, and the three treatments follow.
+When `Source-figure audit` is `USE_ORIGINAL`, the exact original figure is
+mandatory in all three treatments and the selected implementation. Each
+treatment uses `source asset` as its primary medium and may differ through
+crop, callouts, or surrounding explanatory context. `ADAPT_REQUIRED` requires
+an exact locator and a concrete reuse, access, density, or scope reason.
+`NO_MATCH` means the paper's original figures were checked and none directly
+answers the pedagogical question.
+`ADAPT_REQUIRED` may accompany NO when the original is unusable and no truthful
+non-banned adaptation would improve the prose; the decision rationale must say
+so.
 
 ### Treatment A — {distinct concept}
 

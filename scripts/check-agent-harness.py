@@ -66,6 +66,9 @@ def check_agents() -> None:
         ]
     )
     qa = str(load_toml(AGENT_DIR / "visual_qa.toml")["developer_instructions"])
+    implementer = str(
+        load_toml(AGENT_DIR / "visual_implementer.toml")["developer_instructions"]
+    )
     for phrase in (
         "one interchangeable element leading to the next",
         "repeated one-dimensional dot tracks",
@@ -78,6 +81,27 @@ def check_agents() -> None:
         "repeated one-dimensional dot tracks",
         "score the engineer 1/10",
         "score the implementer 1/10",
+    ):
+        if phrase not in qa:
+            fail(f"visual QA must retain {phrase!r}")
+    for phrase in (
+        "Audit the original paper's figures",
+        "must preserve that original source asset",
+        "exact figure/panel/page locator",
+    ):
+        if phrase not in engineer:
+            fail(f"data visualization engineer must retain {phrase!r}")
+    for phrase in (
+        "source-figure audit is `USE_ORIGINAL`",
+        "Do not redraw",
+        "source asset",
+    ):
+        if phrase not in implementer:
+            fail(f"visual implementer must retain {phrase!r}")
+    for phrase in (
+        "Verify the source-figure audit",
+        "responsible agent 1/10",
+        "reusable original figure",
     ):
         if phrase not in qa:
             fail(f"visual QA must retain {phrase!r}")
@@ -106,6 +130,9 @@ def check_skill() -> None:
         "TikZ, Mermaid, and Python",
         "SVG, CSS, and JavaScript",
         "substituting labels",
+        "Start with the original paper figures",
+        "exact figure/panel/page locator",
+        "Do not replace it with a redraw",
     )
     for phrase in required_phrases:
         if phrase not in text:
@@ -131,6 +158,8 @@ def check_routing_docs() -> None:
         "There is no one-visual-per-paper quota",
         "paragraph-level visual",
         "does not accept four stock visual structures",
+        "Original paper figures are the first choice",
+        "source-figure",
     )
     for phrase in required_readme_phrases:
         if phrase not in readme:

@@ -13,4 +13,8 @@ limitations, open questions, and atomic claims. Every substantive or numerical
 claim needs precise SourceRef-ready evidence and a label distinguishing direct
 observation, author interpretation, and analyst inference. Reject or narrow
 claims that the available source does not support. Never approve publication.
+Inventory the original paper's figures and panels with exact figure, panel,
+page, source, caption, and license/reuse status. Map each figure to the atomic
+claims and mechanisms it directly supports so downstream agents can reuse the
+original illustration when explaining that point.
 """

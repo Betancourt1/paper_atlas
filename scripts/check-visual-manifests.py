@@ -13,6 +13,7 @@ PARAGRAPH_HEADING = re.compile(r"(?m)^## `([^`]+)`$")
 MEDIA_CAP_PERCENT = 30
 MEDIA_CAP_REVISION = 5
 STOCK_FORM_REVISION = 6
+SOURCE_FIGURE_REVISION = 7
 PRIMARY_MEDIA = {"HTML/CSS", "SVG", "JavaScript", "source asset", "generated asset"}
 
 
@@ -200,6 +201,54 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
             if stock_audit != "NO_VISUAL":
                 fail(f"{paragraph_id} is NO and must use forbidden audit NO_VISUAL")
 
+    source_figure_audit: str | None = None
+    if revision >= SOURCE_FIGURE_REVISION:
+        for field in (
+            "- Source-figure audit:",
+            "- Original figure locator:",
+            "- License and reuse status:",
+        ):
+            require_once(record, field, paragraph_id)
+        audit_value = implementation_field(
+            record, "Source-figure audit", paragraph_id
+        ).strip()
+        audit_match = re.match(
+            r"`(USE_ORIGINAL|ADAPT_REQUIRED|NO_MATCH)`", audit_value
+        )
+        if audit_match is None:
+            fail(f"{paragraph_id} has an invalid source-figure audit")
+        source_figure_audit = audit_match.group(1)
+        locator = implementation_field(
+            record, "Original figure locator", paragraph_id
+        ).strip()
+        reuse_value = implementation_field(
+            record, "License and reuse status", paragraph_id
+        ).strip()
+        reuse_match = re.match(
+            r"`(PERMITTED|RESTRICTED|UNKNOWN|NOT_APPLICABLE)`", reuse_value
+        )
+        if reuse_match is None:
+            fail(f"{paragraph_id} has an invalid license and reuse status")
+        reuse_status = reuse_match.group(1)
+        if source_figure_audit in {"USE_ORIGINAL", "ADAPT_REQUIRED"}:
+            if locator.startswith("`NONE`"):
+                fail(
+                    f"{paragraph_id} must identify the original figure locator"
+                )
+            if reuse_status == "NOT_APPLICABLE":
+                fail(f"{paragraph_id} must record a real reuse status")
+        if source_figure_audit == "USE_ORIGINAL" and decision != "YES":
+            fail(f"{paragraph_id} uses an original figure and must be YES")
+        if source_figure_audit == "USE_ORIGINAL" and reuse_status != "PERMITTED":
+            fail(
+                f"{paragraph_id} uses an original figure without permitted reuse"
+            )
+        if source_figure_audit == "NO_MATCH":
+            if not locator.startswith("`NONE`"):
+                fail(f"{paragraph_id} is NO_MATCH but names an original figure")
+            if reuse_status != "NOT_APPLICABLE":
+                fail(f"{paragraph_id} is NO_MATCH and must use NOT_APPLICABLE")
+
     if decision == "NO" and status != "NOT_NEEDED":
         fail(f"{paragraph_id} is NO and must be NOT_NEEDED")
     selected = implementation_field(record, "Selected treatment", paragraph_id)
@@ -235,6 +284,17 @@ def check_record(record: str, paragraph_id: str, revision: int) -> dict[str, obj
             check_treatment(record, paragraph_id, label, revision)
             for label in ("A", "B", "C")
         ]
+
+    if source_figure_audit == "USE_ORIGINAL":
+        if any(medium != "source asset" for medium in proposal_media):
+            fail(
+                f"{paragraph_id} must keep the reusable original figure as the "
+                "source asset for every treatment"
+            )
+        if delivery_medium != "source asset":
+            fail(
+                f"{paragraph_id} must select the original figure as a source asset"
+            )
 
     return {
         "decision": decision,

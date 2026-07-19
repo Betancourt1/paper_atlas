@@ -29,6 +29,13 @@ visual novelty.
     elements; an item-plus-metric list; repeated metric cards; and repeated
     one-axis dot panels. If the evidence supports only one of those forms, keep
     the paragraph prose-only.
+11. When an original paper figure directly makes the point being explained and
+    its license permits reuse, use that original figure beside the explanation
+    with an exact locator and attribution. Do not replace it with a custom
+    redraw. Adapt or redraw only when reuse is restricted, the source asset is
+    inaccessible, the original combines material that would mislead readers,
+    or the original itself uses a forbidden stock structure. Source-figure
+    priority never overrides invariant 10.
 
 ## Required workflow
 
@@ -49,6 +56,10 @@ Classify the task using `docs/agent-harness.md` before changing files:
 - A `YES` visual decision requires a named complexity warrant and must avoid all
   four forbidden stock structures. A `NO` decision does not invent three dummy
   visual alternatives; it records why prose is the correct form.
+- Every paragraph receives a source-figure audit. A directly matching,
+  reusable original figure is mandatory source material for every proposed
+  treatment and for the selected implementation; record its figure/panel/page
+  locator, attribution, and license status.
 - Mixed work completes the editorial contract before site integration, then
   passes both review gates.
 

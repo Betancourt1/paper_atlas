@@ -12,6 +12,13 @@ Adjacent YES records may share one implemented visual only when the manifest
 explicitly identifies that shared scope and each record points to the same
 visual ID.
 
+When the manifest's source-figure audit is `USE_ORIGINAL`, use the original
+paper figure or named panel at that paragraph, preserve its attribution and
+license metadata, and keep `source asset` as the delivery medium. Do not redraw
+or replace it with a custom diagram. Return the manifest to the engineer when
+the source asset, locator, or permission is missing. Implement an adaptation
+only when the manifest records `ADAPT_REQUIRED` and its concrete constraint.
+
 Return the manifest to the engineer instead of implementing any treatment that
 is a single element chain, an item-plus-metric list, repeated metric cards, or
 repeated one-axis dot panels. Medium, orientation, styling, arrows, animation,

@@ -106,6 +106,14 @@ silently becoming stale.
      structure, uncertainty, hierarchy, spatial topology, or changing state.
    - Record a reason when prose is the better treatment. A NO decision has no
      visual treatments or code in manifest revision 6 and later.
+   - Audit the original paper's figures for every paragraph. When a figure or
+     panel directly makes the explained point and reuse is permitted, require
+     that original source asset in every treatment and record its exact
+     figure/panel/page locator, attribution, and license status. Custom work is
+     a fallback only when reuse is restricted, the asset is inaccessible, or
+     the original would mislead by combining unrelated material. The original
+     does not bypass the forbidden-structure rules: adapt it truthfully or
+     choose NO when no acceptable treatment remains.
    - Reject a single chain of interchangeable elements, an item-plus-metric
      list, repeated same-metric cards, and repeated one-axis dot panels in every
      medium and orientation. If only those forms are possible, choose NO.
@@ -119,6 +127,8 @@ silently becoming stale.
      accessible HTML fallbacks do not change that classification.
 5. Have `visual_implementer` select, implement, and record one treatment for
    every YES paragraph.
+   - Use the original paper figure at the paragraph that explains its point
+     whenever the manifest marks it `USE_ORIGINAL`; do not silently redraw it.
    - Return a forbidden stock structure to the engineer instead of styling or
      translating it into another medium.
    - One visual may serve adjacent YES paragraphs only when the manifest gives
@@ -130,6 +140,9 @@ silently becoming stale.
    without modifying their work.
    - It classifies the actual rendered topology, not component names, and gives
      the responsible agent 1/10 for any forbidden stock structure.
+   - It verifies the source-figure audit against the paper and gives the
+     responsible agent 1/10 when a directly matching, reusable original figure
+     was replaced by a custom visual.
 7. The coordinator applies its private acceptance policy. The reviewer is not
    told that policy. When the gate fails, both producing agents revise before a
    fresh blind QA pass.
@@ -160,6 +173,9 @@ description is not an explainer summary.
 - Manifest revision 6 removes treatment/code requirements from NO paragraphs,
   requires a complexity warrant and forbidden-structure audit, and reserves
   visual proposals for YES decisions.
+- Manifest revision 7 adds the source-figure audit and requires a directly
+  matching, reusable original figure to remain the source asset for every
+  treatment and the selected implementation.
 - `scripts/check-agent-harness.py` validates the configuration through the
   project's locked Python environment and is part of
   `make check`.
