@@ -3,9 +3,9 @@
 - Paper ID: `paper_llm_evaluators_languages`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/llm-evaluators-languages.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -29,7 +29,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Pairwise accuracy asks whether an evaluator ranks a preferred response above a rejected one.". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -56,7 +56,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Many real uses depend on absolute scores instead: a safety gate accepts content above". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -93,7 +93,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 1 at its paper-defined panel boundary and stack the complete LLM-as-a-Judge distribution panel above the complete Reward Models distribution panel. Preserve every language tick, mean-score axis, uncertainty mark, and the Hindi, Farsi, and English reference lines inside the relevant crop. Modification record: two original-pixel panel crops, vertically recomposed and labeled (a) and (b); no redraw, omitted marks, or changed scale. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -142,7 +142,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 1 at its paper-defined panel boundary and stack the complete LLM-as-a-Judge distribution panel above the complete Reward Models distribution panel. Preserve every language tick, mean-score axis, uncertainty mark, and the Hindi, Farsi, and English reference lines inside the relevant crop. Modification record: two original-pixel panel crops, vertically recomposed and labeled (a) and (b); no redraw, omitted marks, or changed scale. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -202,7 +202,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 4, `language_source_effects`. It preserves the original source asset and may annotate only cross-language evaluator accuracy distribution; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 1 at its paper-defined panel boundary and stack the complete LLM-as-a-Judge distribution panel above the complete Reward Models distribution panel. Preserve every language tick, mean-score axis, uncertainty mark, and the Hindi, Farsi, and English reference lines inside the relevant crop. Modification record: two original-pixel panel crops, vertically recomposed and labeled (a) and (b); no redraw, omitted marks, or changed scale. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -249,15 +249,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the two original language-distribution panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_1` — rendered immediately after `language_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `language_change_p2`
@@ -281,7 +281,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 3 at its paper-defined panel boundary and stack the LLM-as-a-Judge scatter panel above the Reward scatter panel. Each crop retains its complete axes, language points, background bands, correlation annotation, and legend or reference labels. Modification record: two original-pixel panel crops in vertical order; no redraw, relabeling, point removal, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -330,7 +330,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 3 at its paper-defined panel boundary and stack the LLM-as-a-Judge scatter panel above the Reward scatter panel. Each crop retains its complete axes, language points, background bands, correlation annotation, and legend or reference labels. Modification record: two original-pixel panel crops in vertical order; no redraw, relabeling, point removal, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -390,7 +390,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 5, `language_source_effects`. It preserves the original source asset and may annotate only interaction between evaluator, language, and judgment outcome; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 3 at its paper-defined panel boundary and stack the LLM-as-a-Judge scatter panel above the Reward scatter panel. Each crop retains its complete axes, language points, background bands, correlation annotation, and legend or reference labels. Modification record: two original-pixel panel crops in vertical order; no redraw, relabeling, point removal, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -437,15 +437,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the two original language-scatter panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figure_3` — rendered immediately after `language_change_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-3.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p1`
@@ -459,7 +459,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Suppose an evaluator adds a language-conditioned baseline to every response score. Within one language,". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Score-translation invariance and threshold decision geometry.
 
 ### Implementation record
@@ -496,7 +496,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 4 into its two paper-defined evaluator panels and stack LLM-as-a-Judge above Reward Models. Keep the full Pairwise Accuracy and Acceptance Rate axes, 30/50/70% guides, resource-level marks, benchmark shapes, and highlighted pairwise-validated region in each crop. Modification record: two original-pixel panel crops, vertically recomposed; no redraw, omitted observations, or altered thresholds. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -545,7 +545,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 4 into its two paper-defined evaluator panels and stack LLM-as-a-Judge above Reward Models. Keep the full Pairwise Accuracy and Acceptance Rate axes, 30/50/70% guides, resource-level marks, benchmark shapes, and highlighted pairwise-validated region in each crop. Modification record: two original-pixel panel crops, vertically recomposed; no redraw, omitted observations, or altered thresholds. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -605,7 +605,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 6, `language_source_thresholds`. It preserves the original source asset and may annotate only Figure 4 visibly shows scatter-plot panels of pairwise accuracy versus acceptance rate, with points representing languages for each evaluator model; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 4 into its two paper-defined evaluator panels and stack LLM-as-a-Judge above Reward Models. Keep the full Pairwise Accuracy and Acceptance Rate axes, 30/50/70% guides, resource-level marks, benchmark shapes, and highlighted pairwise-validated region in each crop. Modification record: two original-pixel panel crops, vertically recomposed; no redraw, omitted observations, or altered thresholds. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -652,15 +652,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the two original acceptance-versus-accuracy panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_ranking_acceptance_graph` — rendered immediately after `language_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `language_mechanism_p3`
@@ -684,7 +684,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 5 at its explicit panel boundary and stack panel (a), the language-level uncertainty relationship, above panel (b), the item-level relationship. Preserve each complete axis pair, regression line and band, correlation annotation, and legend; do not merge the two analytical levels. Modification record: two original-pixel panel crops in source order, with no redraw, filtering, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -733,7 +733,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 5 at its explicit panel boundary and stack panel (a), the language-level uncertainty relationship, above panel (b), the item-level relationship. Preserve each complete axis pair, regression line and band, correlation annotation, and legend; do not merge the two analytical levels. Modification record: two original-pixel panel crops in source order, with no redraw, filtering, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -793,7 +793,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF page 8, `language_source_uncertainty`. It preserves the original source asset and may annotate only uncertainty proxy and evaluator-score relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, split original Figure 5 at its explicit panel boundary and stack panel (a), the language-level uncertainty relationship, above panel (b), the item-level relationship. Preserve each complete axis pair, regression line and band, correlation annotation, and legend; do not merge the two analytical levels. Modification record: two original-pixel panel crops in source order, with no redraw, filtering, or scale change. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -840,15 +840,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the original language-level and item-level uncertainty panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `language_visual_source_figures_5_7_mechanism` — rendered immediately after `language_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/llm-evaluators-languages.json`, `apps/web/public/paper-assets/llm-evaluators-languages/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `language_example_p1`
@@ -862,7 +862,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "For Skywork-LLaMA-8B, the paper rounds English to 93% pairwise accuracy and 23% acceptance, and". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -916,7 +916,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_change_p1` and `language_change_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "All eight core evaluators show statistically significant differences in mean scores across languages by". The original figure is already assigned at `language_change_p1` and `language_change_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -943,7 +943,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Under one global median threshold, the aggregate reward-model analysis reports a maximum acceptance gap". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -970,7 +970,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Uncertainty measures correlate positively with score at the language level, but nested regressions retain". The original figure is already assigned at `language_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -1051,7 +1051,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `language_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "The strongest result is a measurement warning: high pairwise accuracy does not certify that". The original figure is already assigned at `language_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record

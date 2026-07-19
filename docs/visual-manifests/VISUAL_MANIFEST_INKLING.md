@@ -3,9 +3,9 @@
 - Paper ID: `paper_inkling`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/inkling.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `19 / 19` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -146,7 +146,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Claim `ink_002`; `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. Expert identities and routing probabilities are not reported. Aggregate pool nodes preserve the exact 6-of-256 count without presenting a sampled set of marks as the full field.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop routing field. Stack four relationship-preserving bands: token and router; the labeled 256-routed-expert pool split into 6 selected and 250 inactive; the separate 2-shared-experts always-active bypass; and the convergence of selected routed output plus shared output into the combined expert result. End the inactive branch before convergence. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve exact counts, semantic fallback, and reading order with no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -221,7 +221,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claim `ink_002`; `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. The source reports the counts but not expert identities or routing probabilities, so the six marked cell locations are illustrative occupancy positions, not identified experts. Every grid-capable specification draws all 256 routed cells.
 - Primary delivery medium: `generated asset`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop routing field. Stack four relationship-preserving bands: token and router; the labeled 256-routed-expert pool split into 6 selected and 250 inactive; the separate 2-shared-experts always-active bypass; and the convergence of selected routed output plus shared output into the combined expert result. End the inactive branch before convergence. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve exact counts, semantic fallback, and reading order with no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -290,7 +290,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claim `ink_002`; `source_inkling_model_card`, `source_inkling_release`, `source_inkling_hf_bf16`. The diagram is structural and does not imply unreported magnitudes.
 - Primary delivery medium: `JavaScript`
 - Recommended web medium: `JavaScript`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop routing field. Stack four relationship-preserving bands: token and router; the labeled 256-routed-expert pool split into 6 selected and 250 inactive; the separate 2-shared-experts always-active bypass; and the convergence of selected routed output plus shared output into the combined expert result. End the inactive branch before convergence. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve exact counts, semantic fallback, and reading order with no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -358,15 +358,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to reflow routing, inactive capacity, shared experts, and convergence into four bands while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_inkling_sparse_routing_field` — rendered immediately after `ink_mechanism_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/inkling.json`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `ink_mechanism_p2`

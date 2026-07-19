@@ -3,9 +3,9 @@
 - Paper ID: `paper_robott`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -81,7 +81,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `rttt_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "RoboTTT does not keep the complete history available for attention. It uses fast weights". The original figure is already assigned at `rttt_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -108,7 +108,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `rttt_mechanism_p2` and `rttt_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "The paper combines this state mechanism with two training ideas. Sequence action forcing samples". The original figure is already assigned at `rttt_mechanism_p2` and `rttt_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -135,7 +135,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `rttt_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "RoboTTT is instantiated on GR00T N1.7. Its vision-language model encodes the current observation, and". The original figure is already assigned at `rttt_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -172,7 +172,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into two vertically stacked semantic source-pixel crops: RoboTTT Sequence Training, including state/action encoders, self/cross attention, TTT layer, and sequence flow-matching loss; then RoboTTT Inference, including both action chunks, propagated fast weights, and the shared legend strip. Duplicate the original legend pixels below the training crop so both blocks decode independently. Modification record: training/inference panel crops plus duplicated original legend strip; no redraw, relabeling, or changed connectors. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -221,7 +221,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into two vertically stacked semantic source-pixel crops: RoboTTT Sequence Training, including state/action encoders, self/cross attention, TTT layer, and sequence flow-matching loss; then RoboTTT Inference, including both action chunks, propagated fast weights, and the shared legend strip. Duplicate the original legend pixels below the training crop so both blocks decode independently. Modification record: training/inference panel crops plus duplicated original legend strip; no redraw, relabeling, or changed connectors. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -281,7 +281,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into two vertically stacked semantic source-pixel crops: RoboTTT Sequence Training, including state/action encoders, self/cross attention, TTT layer, and sequence flow-matching loss; then RoboTTT Inference, including both action chunks, propagated fast weights, and the shared legend strip. Duplicate the original legend pixels below the training crop so both blocks decode independently. Modification record: training/inference panel crops plus duplicated original legend strip; no redraw, relabeling, or changed connectors. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -328,15 +328,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack original training and inference architecture crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_2_mechanism` — rendered immediately after `rttt_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p3`
@@ -360,7 +360,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 4 as two vertically stacked source-pixel crops: the complete Input Sequence and TBPTT segment row, including Gradient Flow and Stop Gradient boundaries; then the complete TTT Fast Weights Update row, including Carry and Detach links. Preserve a small overlap at the section boundary so segment alignment remains visible. Modification record: two semantic row crops with overlap only; no redraw or changed labels. Use max-width: 100%, height: auto, row-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -409,7 +409,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 4 as two vertically stacked source-pixel crops: the complete Input Sequence and TBPTT segment row, including Gradient Flow and Stop Gradient boundaries; then the complete TTT Fast Weights Update row, including Carry and Detach links. Preserve a small overlap at the section boundary so segment alignment remains visible. Modification record: two semantic row crops with overlap only; no redraw or changed labels. Use max-width: 100%, height: auto, row-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -469,7 +469,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 4 as two vertically stacked source-pixel crops: the complete Input Sequence and TBPTT segment row, including Gradient Flow and Stop Gradient boundaries; then the complete TTT Fast Weights Update row, including Carry and Detach links. Preserve a small overlap at the section boundary so segment alignment remains visible. Modification record: two semantic row crops with overlap only; no redraw or changed labels. Use max-width: 100%, height: auto, row-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -516,15 +516,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the original TBPTT and fast-weight-update rows while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figures_2_4_mechanism` — rendered immediately after `rttt_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `rttt_example_p1`
@@ -602,7 +602,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 7 into two stacked source-pixel task-group crops on the same y scale: Average plus Pup Go Car; then Circuit plus Gear Bot. Include the original Task Completion Score axis in both crops and the original method legend above the stack so bar colors and magnitudes remain comparable. Modification record: two task-group crops, with the original y-axis strip duplicated beside the second group and no redrawn bars, changed scale, or omitted methods. Use max-width: 100%, height: auto, group-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -651,7 +651,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 7 into two stacked source-pixel task-group crops on the same y scale: Average plus Pup Go Car; then Circuit plus Gear Bot. Include the original Task Completion Score axis in both crops and the original method legend above the stack so bar colors and magnitudes remain comparable. Modification record: two task-group crops, with the original y-axis strip duplicated beside the second group and no redrawn bars, changed scale, or omitted methods. Use max-width: 100%, height: auto, group-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -711,7 +711,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 7, PDF page 7, `rttt_results_source`. It preserves the original source asset and may annotate only real-robot evaluation on the paper's shared experimental frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 7 into two stacked source-pixel task-group crops on the same y scale: Average plus Pup Go Car; then Circuit plus Gear Bot. Include the original Task Completion Score axis in both crops and the original method legend above the stack so bar colors and magnitudes remain comparable. Modification record: two task-group crops, with the original y-axis strip duplicated beside the second group and no redrawn bars, changed scale, or omitted methods. Use max-width: 100%, height: auto, group-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -758,15 +758,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack two same-scale task-group crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_7` — rendered immediately after `rttt_evidence_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-7.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `rttt_evidence_p2`
@@ -790,7 +790,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 8 into two vertically stacked, overlapping source-pixel context ranges on the same y scale: 128 through 1K, then 1K through 8K. Retain the RoboTTT and GDN legend and both Single-Step and Short Context reference lines in each range; the shared 1K point makes continuity explicit. Modification record: two x-range crops with duplicated original y-axis, legend, and reference-line strips; no redrawn data, interpolation, or scale change. Use max-width: 100%, height: auto, range-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -839,7 +839,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 8 into two vertically stacked, overlapping source-pixel context ranges on the same y scale: 128 through 1K, then 1K through 8K. Retain the RoboTTT and GDN legend and both Single-Step and Short Context reference lines in each range; the shared 1K point makes continuity explicit. Modification record: two x-range crops with duplicated original y-axis, legend, and reference-line strips; no redrawn data, interpolation, or scale change. Use max-width: 100%, height: auto, range-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -899,7 +899,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 8, PDF page 8, `rttt_results_source`. It preserves the original source asset and may annotate only context-length ablation and outcome relation; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 8 into two vertically stacked, overlapping source-pixel context ranges on the same y scale: 128 through 1K, then 1K through 8K. Retain the RoboTTT and GDN legend and both Single-Step and Short Context reference lines in each range; the shared 1K point makes continuity explicit. Modification record: two x-range crops with duplicated original y-axis, legend, and reference-line strips; no redrawn data, interpolation, or scale change. Use max-width: 100%, height: auto, range-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -946,15 +946,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack overlapping same-scale context-range crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_8` — rendered immediately after `rttt_evidence_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-8.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `rttt_evidence_p3`

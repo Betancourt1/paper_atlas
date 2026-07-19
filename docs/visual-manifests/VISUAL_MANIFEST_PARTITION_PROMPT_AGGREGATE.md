@@ -3,9 +3,9 @@
 - Paper ID: `paper_partition_prompt_aggregate`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/partition-prompt-aggregate.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -28,7 +28,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "Many uses of in-context learning treat a prompt as a condition and the model's" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -82,7 +82,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "The framework separates alignment from self-consistency. Alignment asks whether an estimate matches external reference" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -136,7 +136,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "Start with a base population at the root. Each binary attribute splits every node" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -173,7 +173,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. The diagram is structural and does not imply unreported magnitudes.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop hierarchy. Stack four full-width sections: the direct root estimate q; the depth-1 binary partition with both weighted contributions and its D1 sum; the depth-2 four-leaf partition with all weights and its D2 sum; and a final comparator q = D1 = D2. Repeat only the root reference needed to read each depth independently; preserve branch widths and contribution labels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -261,7 +261,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. Values are illustrative because the paragraph states the protocol rather than one numerical ACS reconstruction.
 - Primary delivery medium: `generated asset`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop hierarchy. Stack four full-width sections: the direct root estimate q; the depth-1 binary partition with both weighted contributions and its D1 sum; the depth-2 four-leaf partition with all weights and its D2 sum; and a final comparator q = D1 = D2. Repeat only the root reference needed to read each depth independently; preserve branch widths and contribution labels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -305,7 +305,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"), format="svg")
 - Evidence and limitations: Claims `ppa_partition`, `ppa_reconstruction`, `ppa_acs_protocol`; `ppa_method`, `ppa_protocol`. Symbols explain the reported identity and protocol; they are not empirical ACS values.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop hierarchy. Stack four full-width sections: the direct root estimate q; the depth-1 binary partition with both weighted contributions and its D1 sum; the depth-2 four-leaf partition with all weights and its D2 sum; and a final comparator q = D1 = D2. Repeat only the root reference needed to read each depth independently; preserve branch widths and contribution labels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -341,15 +341,15 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to reflow root, depth-1, depth-2, and equality comparison into four sections while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `SVG`
 - Visual ID and placement: `visual_ppa_weighted_reconstruction_graph` — rendered immediately after `ppa_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `apps/web/app/papers/[id]/explainer-svg.tsx`; `packages/test-fixtures/explainers/partition-prompt-aggregate.json`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `ppa_mechanism_p3`
@@ -363,7 +363,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 10, PDF page 29, `ppa_protocol`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "Split consistency checks a node against the weighted sum of its immediate children. Order" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -390,7 +390,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "Consider the probability that a person in the United States earns above a chosen" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -417,7 +417,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 1, PDF page 2, `ppa_method`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "The model estimates the income probability and population share for each subgroup. The explainer" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -444,7 +444,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 3, PDF pages 8-9, `ppa_macro_results`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "In the ACS income experiment, Figure 3 reports that reconstructed aggregate estimates generally reduce" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record
@@ -471,7 +471,7 @@ ax.set_axis_off(); fig.savefig(Path("visual.svg"),format="svg")
 - Source-figure audit: `ADAPT_REQUIRED`
 - Original figure locator: Figure 6, PDF pages 15-16, `ppa_consistency_results`
 - License and reuse status: `RESTRICTED` — The paper is CC BY-NC-ND; Paper Atlas noncommercial status is unconfirmed, and modified or cropped reuse is not permitted.
-- Decision rationale: The original directly touches this point, but the recorded reuse restriction prevents the source treatment, and no independently warranted non-banned adaptation would improve on the prose.
+- Decision rationale: The restricted original touches this paragraph-specific point — "The reference-free checks also reveal failures. In the two-attribute ACS tasks, the reported split-consistency" — but cannot be reused or modified under the recorded terms. This paragraph supplies no independent non-banned topology or quantitative structure for an adaptation, so a redraw would invent relationships rather than reduce reconstruction.
 - Explanatory job: Evaluation evidence.
 
 ### Implementation record

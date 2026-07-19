@@ -3,9 +3,9 @@
 - Paper ID: `paper_computational_propaganda`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -227,7 +227,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, render Figure 3 as two vertically stacked source-pixel panel crops following the papers own boundaries: panel (a), injected comment in static and rendered HTML; then panel (b), Resiliparse extraction output. Keep each panel heading and complete code/text box; place the original caption and locator below the stack. Modification record: panel-boundary crops only, with no content removal inside either panel, no redraw, and no changed text. Each crop uses max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -276,7 +276,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, render Figure 3 as two vertically stacked source-pixel panel crops following the papers own boundaries: panel (a), injected comment in static and rendered HTML; then panel (b), Resiliparse extraction output. Keep each panel heading and complete code/text box; place the original caption and locator below the stack. Modification record: panel-boundary crops only, with no content removal inside either panel, no redraw, and no changed text. Each crop uses max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -336,7 +336,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 14, `propaganda_source_inclusion`. It preserves the original source asset and may annotate only stage-specific inclusion evidence on a shared quantitative frame; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, render Figure 3 as two vertically stacked source-pixel panel crops following the papers own boundaries: panel (a), injected comment in static and rendered HTML; then panel (b), Resiliparse extraction output. Keep each panel heading and complete code/text box; place the original caption and locator below the stack. Modification record: panel-boundary crops only, with no content removal inside either panel, no redraw, and no changed text. Each crop uses max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -383,15 +383,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the original injected-HTML and extraction-output panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `propaganda_visual_source_figure_3` — rendered immediately after `propaganda_example_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`, `apps/web/public/paper-assets/computational-propaganda/figure-3.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `propaganda_example_p2`
@@ -415,7 +415,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Claims `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`; `propaganda_source_threat`, `propaganda_source_inclusion`. The diagram is structural and does not imply unreported magnitudes.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop tree. Stack three full-width gate modules in reading order. Each module places its incoming denominator above a two-way retained/rejected branch, then carries only the retained population into the next module. Put the approximately 0.13% surviving leaf and the conflicting 0.15% Introduction claim in a final comparison block. Use a mobile viewBox sized to the stacked layout, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback, expose every branch and denominator in reading order, and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -496,7 +496,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claims `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`; `propaganda_source_threat`, `propaganda_source_inclusion`. Areas use rounded reported rates, so the terminal area is approximate and must not imply an observed live campaign.
 - Primary delivery medium: `generated asset`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop tree. Stack three full-width gate modules in reading order. Each module places its incoming denominator above a two-way retained/rejected branch, then carries only the retained population into the next module. Put the approximately 0.13% surviving leaf and the conflicting 0.15% Introduction claim in a final comparison block. Use a mobile viewBox sized to the stacked layout, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback, expose every branch and denominator in reading order, and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -567,7 +567,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claims `propaganda_claim_comments`, `propaganda_claim_extraction`, `propaganda_claim_curation`, `propaganda_claim_inclusion`; `propaganda_source_threat`, `propaganda_source_inclusion`. Only the marked point is reported evidence; all other surface states are arithmetic counterfactuals and must be labeled as such.
 - Primary delivery medium: `JavaScript`
 - Recommended web medium: `JavaScript`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop tree. Stack three full-width gate modules in reading order. Each module places its incoming denominator above a two-way retained/rejected branch, then carries only the retained population into the next module. Put the approximately 0.13% surviving leaf and the conflicting 0.15% Introduction claim in a final comparison block. Use a mobile viewBox sized to the stacked layout, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback, expose every branch and denominator in reading order, and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -619,15 +619,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to reflow the three conditional gates into stacked branch modules while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `SVG`
 - Visual ID and placement: `propaganda_visual_halflife_tree` — rendered immediately after `propaganda_example_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/computational-propaganda.json`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `propaganda_evidence_p1`

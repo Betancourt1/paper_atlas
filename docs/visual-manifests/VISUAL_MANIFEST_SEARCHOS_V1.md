@@ -3,9 +3,9 @@
 - Paper ID: `paper_searchos_v1`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `17 / 17` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -136,7 +136,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `sos_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Evidence". The original figure is already assigned at `sos_mechanism_p2` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Shared-state architecture and provenance topology.
 
 ### Implementation record
@@ -173,7 +173,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -222,7 +222,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -282,7 +282,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 2 into three vertically stacked semantic source-pixel crops: the top request-to-orchestrator-to-final-output band; the Search Tool Middleware Harness band with context, sensor, and evidence middleware; and the Search-Oriented Context Management plus Search Agent Skills band. Preserve a narrow connector overlap between neighboring bands and keep every store or skill inside its named boundary. Modification record: three architecture-zone crops with connector overlap only; no redraw, reordered module, or changed label. Use max-width: 100%, height: auto, zone-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -329,15 +329,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack three connected architecture-zone crops while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `sos_mechanism_p3`
@@ -361,7 +361,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, separate original Figure 5 into its three paper-defined intervention panels and stack them vertically: (a) early intervention ws_zh_034, (b) mid-run intervention ws_zh_014, and (c) late intervention ws_en_015. Each panel crop must include both Coverage and Total entities subplots, its detected-gap annotation, cumulative-tool-call axis, and intervention line. Modification record: three intact original-pixel panel crops following the papers panel boundaries; no arbitrary slicing, redraw, altered scale, or combined axes. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -410,7 +410,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, separate original Figure 5 into its three paper-defined intervention panels and stack them vertically: (a) early intervention ws_zh_034, (b) mid-run intervention ws_zh_014, and (c) late intervention ws_en_015. Each panel crop must include both Coverage and Total entities subplots, its detected-gap annotation, cumulative-tool-call axis, and intervention line. Modification record: three intact original-pixel panel crops following the papers panel boundaries; no arbitrary slicing, redraw, altered scale, or combined axes. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -470,7 +470,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, separate original Figure 5 into its three paper-defined intervention panels and stack them vertically: (a) early intervention ws_zh_034, (b) mid-run intervention ws_zh_014, and (c) late intervention ws_en_015. Each panel crop must include both Coverage and Total entities subplots, its detected-gap annotation, cumulative-tool-call axis, and intervention line. Modification record: three intact original-pixel panel crops following the papers panel boundaries; no arbitrary slicing, redraw, altered scale, or combined axes. Use max-width: 100%, height: auto, panel-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -517,15 +517,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the three complete intervention panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figures_2_5` — rendered immediately after `sos_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `sos_example_p1`
@@ -701,7 +701,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `sos_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "A URL and anchored excerpt preserve provenance but do not independently prove that the". The original figure is already assigned at `sos_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Evidence boundary and limitation.
 
 ### Implementation record

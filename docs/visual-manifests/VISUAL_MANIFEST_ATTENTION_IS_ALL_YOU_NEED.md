@@ -3,9 +3,9 @@
 - Paper ID: `paper_attention_is_all_you_need`
 - Exact paper version: `v7`
 - Explainer fixture: `packages/test-fixtures/explainers/attention-is-all-you-need.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `18 / 18` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -82,7 +82,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `attn_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "The Transformer keeps an encoder-decoder structure but changes the operation used to exchange information". The original figure is already assigned at `attn_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -109,7 +109,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `attn_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "This shortens the maximum path between positions to a constant number of sequential operations". The original figure is already assigned at `attn_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Method distinction and scope.
 
 ### Implementation record
@@ -136,7 +136,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `attn_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Tokens first become learned vectors, and sinusoidal position encodings are added so the model". The original figure is already assigned at `attn_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Mechanism explanation.
 
 ### Implementation record
@@ -173,7 +173,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, stack the two paper-defined Figure 2 panels vertically as separate full-width source images: Scaled Dot-Product Attention first, Multi-Head Attention second. Preserve each complete panel, its native aspect ratio, and all source pixels with max-width: 100% and height: auto. Modification record: layout-only separation of the two already extracted original panels; no crop, redraw, relabeling, or pixel alteration. Keep panel-specific alt text and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -222,7 +222,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, stack the two paper-defined Figure 2 panels vertically as separate full-width source images: Scaled Dot-Product Attention first, Multi-Head Attention second. Preserve each complete panel, its native aspect ratio, and all source pixels with max-width: 100% and height: auto. Modification record: layout-only separation of the two already extracted original panels; no crop, redraw, relabeling, or pixel alteration. Keep panel-specific alt text and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -282,7 +282,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 2, PDF page 4, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 2 visibly shows a Scaled Dot-Product Attention block with Q, K, and V entering MatMul, Scale, optional Mask, SoftMax, and a final MatMul, beside a Multi-Head Attention block with linear projections, parallel attention heads, concatenation, and a final linear layer; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, stack the two paper-defined Figure 2 panels vertically as separate full-width source images: Scaled Dot-Product Attention first, Multi-Head Attention second. Preserve each complete panel, its native aspect ratio, and all source pixels with max-width: 100% and height: auto. Modification record: layout-only separation of the two already extracted original panels; no crop, redraw, relabeling, or pixel alteration. Keep panel-specific alt text and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -329,15 +329,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the two original Figure 2 panels while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_query_key_field` — rendered immediately after `attn_mechanism_p2`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `attn_mechanism_p3`
@@ -361,7 +361,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the full Figure 1 rendering with two vertically stacked semantic source-pixel crops: the encoder column including Inputs, positional encoding, all encoder blocks, and its residual path; then the decoder column including shifted Outputs, masking, encoder-decoder attention, and output probabilities. Preserve a narrow overlap around the encoder-to-decoder cross-attention connector in both crops so the dependency is not severed. Modification record: two labeled crops from the original figure, with duplicated overlap only; no redraw, resampling, or changed labels. Each crop uses max-width: 100%, height: auto, legible alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -410,7 +410,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the full Figure 1 rendering with two vertically stacked semantic source-pixel crops: the encoder column including Inputs, positional encoding, all encoder blocks, and its residual path; then the decoder column including shifted Outputs, masking, encoder-decoder attention, and output probabilities. Preserve a narrow overlap around the encoder-to-decoder cross-attention connector in both crops so the dependency is not severed. Modification record: two labeled crops from the original figure, with duplicated overlap only; no redraw, resampling, or changed labels. Each crop uses max-width: 100%, height: auto, legible alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -470,7 +470,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 3, `source_attention_arxiv_v7`. It preserves the original source asset and may annotate only Figure 1 visibly shows stacked encoder and decoder blocks, residual Add & Norm paths, feed-forward blocks, masked decoder multi-head attention, and encoder-decoder multi-head attention; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the full Figure 1 rendering with two vertically stacked semantic source-pixel crops: the encoder column including Inputs, positional encoding, all encoder blocks, and its residual path; then the decoder column including shifted Outputs, masking, encoder-decoder attention, and output probabilities. Preserve a narrow overlap around the encoder-to-decoder cross-attention connector in both crops so the dependency is not severed. Modification record: two labeled crops from the original figure, with duplicated overlap only; no redraw, resampling, or changed labels. Each crop uses max-width: 100%, height: auto, legible alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -517,15 +517,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack semantic encoder and decoder crops with connector overlap while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_attention_decoder_dependencies` — rendered immediately after `attn_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/attention-is-all-you-need.json`; `apps/web/app/papers/[id]/explainer-visual.tsx`; `apps/web/lib/explainer-visual.test.tsx`; `apps/web/tests/paper-page.spec.ts`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `attn_example_p1`
@@ -755,7 +755,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `attn_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "The durable contribution is narrower and clearer than the title: the paper shows that". The original figure is already assigned at `attn_mechanism_p3` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Critical interpretation and claim boundary.
 
 ### Implementation record

@@ -3,9 +3,9 @@
 - Paper ID: `paper_trace`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
-- Manifest revision: `12`
+- Manifest revision: `13`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `REWORK_REQUIRED`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -28,7 +28,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "A search agent may make dozens of dependent decisions before answering. A failed trajectory". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Motivation and problem framing.
 
 ### Implementation record
@@ -92,7 +92,7 @@ Revision 11 corrects source-pixel semantics, removes a mismatched source figure,
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -141,7 +141,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -201,7 +201,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only contrast between outcome-only and turn-level reward assignment; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, recompose original Figure 1 into two vertically stacked semantic source-pixel crops that preserve the comparison: the shared question and initial search plus the successful orange branch ending in Answer: Dublin; then the same shared question and initial search plus the failed blue branch ending in Answer: Lisbon. Keep the check and cross outcome marks inside their branches. Modification record: two branch crops with the original shared question/root pixels duplicated for context; no redraw, relabeling, or changed outcome. Use max-width: 100%, height: auto, branch-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -248,15 +248,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack the successful and failed branch crops with shared context while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figure_1_change` — rendered immediately after `trace_change_p1`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `trace_change_p2`
@@ -361,7 +361,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Claims `trace_claim_td`, `trace_claim_telescope`, `trace_claim_outcome_anchor`; `trace_source_method`, Equations 4–12 and Algorithm 1. The diagram is structural and does not imply unreported magnitudes.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop DAG. Stack three dependency layers over the same ordered V0-V3 prefix set: local adjacent differences with explicit telescoping cancellations; short-look-ahead skip dependencies; and the global verified-outcome anchor broadcasting to affected turns. Separate the layers with headings but preserve shared prefix identities and an edge-class legend so the result remains one multi-scale dependency argument, not three one-axis panels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -440,7 +440,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claims `trace_claim_td`, `trace_claim_telescope`, `trace_claim_outcome_anchor`; `trace_source_method`, Equations 4–12 and Algorithm 1. Binary cells show dependency scope, not credit magnitude or sign.
 - Primary delivery medium: `generated asset`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop DAG. Stack three dependency layers over the same ordered V0-V3 prefix set: local adjacent differences with explicit telescoping cancellations; short-look-ahead skip dependencies; and the global verified-outcome anchor broadcasting to affected turns. Separate the layers with headings but preserve shared prefix identities and an edge-class legend so the result remains one multi-scale dependency argument, not three one-axis panels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -527,7 +527,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Claims `trace_claim_td`, `trace_claim_telescope`, `trace_claim_outcome_anchor`; `trace_source_method`, Equations 4–12 and Algorithm 1. The cancellation identity applies exactly to one-step credit, not to the complete propagated objective.
 - Primary delivery medium: `SVG`
 - Recommended web medium: `SVG`
-- Mobile, accessibility, and motion behavior: Fit the complete visualization inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve all labels and relationships at a legible size by using a responsive SVG `viewBox`, `max-width: 100%`, `height: auto`, and content-specific stacking or reflow on narrow screens. Provide a semantic description of every relation and value. If no responsive composition remains legible, reconsider the `YES` decision rather than allow scrolling. Keyboard focus must follow the stated reading order. If interactive, expose the same state in text, support pause/reset, and honor reduced motion; otherwise use no motion.
+- Mobile, accessibility, and motion behavior: Use a distinct narrow SVG composition rather than scaling the desktop DAG. Stack three dependency layers over the same ordered V0-V3 prefix set: local adjacent differences with explicit telescoping cancellations; short-look-ahead skip dependencies; and the global verified-outcome anchor broadcasting to affected turns. Separate the layers with headings but preserve shared prefix identities and an edge-class legend so the result remains one multi-scale dependency argument, not three one-axis panels. Use a mobile viewBox, at least 16 CSS px labels, max-width: 100%, and height: auto. Preserve the semantic fallback and use no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -588,15 +588,15 @@ fig.savefig(Path('visual.svg'), format='svg')
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to reflow local, skip, and outcome dependencies into three linked layers while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `SVG`
 - Visual ID and placement: `trace_visual_credit_dependency_dag` — rendered immediately after `trace_mechanism_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `trace_example_p1`
@@ -610,7 +610,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "Consider a trajectory that searches for a relevant source, opens a page containing decisive". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -637,7 +637,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Source-figure audit: `NO_MATCH`
 - Original figure locator: `NONE`
 - License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
-- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
+- Decision rationale: This paragraph states "The useful search and page opening can receive positive local credit if they make". The original figure is already assigned at `trace_change_p1` to explain its full mechanism; repeating it here would not expose a new dependency, comparison, or uncertainty specific to this paragraph, so prose carries the narrower claim more precisely.
 - Explanatory job: Worked example.
 
 ### Implementation record
@@ -728,7 +728,7 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the combined shrink-to-fit group with three vertically stacked source-pixel blocks: original Figure 3 panels (a)-(b), 4B train and eval, as one crop; Figure 3 panels (c)-(d), 30B train and eval, as a second crop; and complete original Figure 4 Tool Calling Trend Comparison as the third block. Each Figure 3 crop retains the TRACE/GRPO legend, axes, and train-versus-eval headings; Figure 4 retains both series and full axes. Modification record: Figure 3 is split only between its paper-defined panel pairs, while Figure 4 remains uncropped; no redraw, changed scale, or omitted trace. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -777,7 +777,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the combined shrink-to-fit group with three vertically stacked source-pixel blocks: original Figure 3 panels (a)-(b), 4B train and eval, as one crop; Figure 3 panels (c)-(d), 30B train and eval, as a second crop; and complete original Figure 4 Tool Calling Trend Comparison as the third block. Each Figure 3 crop retains the TRACE/GRPO legend, axes, and train-versus-eval headings; Figure 4 retains both series and full axes. Modification record: Figure 3 is split only between its paper-defined panel pairs, while Figure 4 remains uncropped; no redraw, changed scale, or omitted trace. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -837,7 +837,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 - Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and render each source asset entirely inside its available container at desktop and mobile widths with no internal or page-level scrollbar. Preserve aspect ratio and source pixels using `max-width: 100%` and `height: auto`; when a multi-image set would make labels or relationships illegible, stack its images vertically or use a permitted panel or crop rather than squeezing or scrolling. Preserve the original caption, exact locator, attribution, license, equivalent text explanation, and legible relationships. If no permitted crop or reflow keeps the source legible, reconsider the `YES` decision instead of adding overflow. No motion.
+- Mobile, accessibility, and motion behavior: At widths up to 640 px, replace the combined shrink-to-fit group with three vertically stacked source-pixel blocks: original Figure 3 panels (a)-(b), 4B train and eval, as one crop; Figure 3 panels (c)-(d), 30B train and eval, as a second crop; and complete original Figure 4 Tool Calling Trend Comparison as the third block. Each Figure 3 crop retains the TRACE/GRPO legend, axes, and train-versus-eval headings; Figure 4 retains both series and full axes. Modification record: Figure 3 is split only between its paper-defined panel pairs, while Figure 4 remains uncropped; no redraw, changed scale, or omitted trace. Use max-width: 100%, height: auto, block-specific alt text, and no motion or scrollbar.
 
 #### TikZ
 ```tex
@@ -884,15 +884,15 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
+- Status: `REWORK_REQUIRED`
 - Selected treatment: `A`
-- Selection rationale: Treatment A remains evidence-correct and is now rendered responsively in full, with its aspect ratio, source fidelity, evidence encoding, and accessible fallback preserved without internal or page-level scrolling.
+- Selection rationale: The selected treatment remains evidence-correct, but revision 13 requires the implementer to stack two Figure 3 panel-pair crops and complete Figure 4 while preserving source fidelity, provenance, legibility, and scrollbar-free containment.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figures_3_4` — rendered immediately after `trace_evidence_p3`.
 - Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-3.png`
-- Accessibility and fallback verification: `VERIFIED` — Specific alt text, semantic fallback, source provenance where applicable, and the complete evidence encoding remain available without scroll-only instructions or focus behavior.
-- Desktop and mobile verification: `VERIFIED` — At 1440 × 1000 and 390 × 844, the complete visual is bounded to its container with preserved aspect ratio, no internal scrollbar, and no document overflow; multi-image source sets reflow within the available width.
+- Accessibility and fallback verification: `PENDING` — verify the paragraph-specific crop or mobile reflow, retained labels and relationships, source modifications, specific alt text, semantic fallback, locator, attribution, and license.
+- Desktop and mobile verification: `PENDING` — verify at 1440 × 1000 and 390 × 844 that every complete desktop visual and every specified mobile crop or reflow fits without internal or page-level scrollbars and remains legible.
 - Evidence deviations: `NONE`
 
 ## `trace_limitations_p1`
