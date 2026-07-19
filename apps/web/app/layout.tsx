@@ -4,6 +4,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import type { ReactNode } from "react";
 
 import { ThemeToggle } from "./theme-toggle";
@@ -37,10 +38,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body>
+        <Script id="paper-atlas-theme" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
