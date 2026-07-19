@@ -3,9 +3,9 @@
 - Paper ID: `paper_robott`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/robott.json`
-- Manifest revision: `9`
+- Manifest revision: `10`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -14,7 +14,7 @@
   - `rttt_results_source` — RoboTTT v1 — real-robot evaluation and ablations; Section 4, Tables 1–3, Figures 7–12, PDF pages 7–11
   - `rttt_limits_source` — RoboTTT v1 — limitations, deployment, and evaluation details; Section 6 and Appendices A–B, PDF pages 12 and 20–22
 
-Revision 9 requires intrinsic-width inspection for every reused original on desktop and mobile. Source figures remain unmodified inside keyboard-accessible, figure-local horizontal viewports; multi-image sets may not be compressed into equal-width columns.
+Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
 
 ## `rttt_why_p1`
 
@@ -75,187 +75,26 @@ Revision 9 requires intrinsic-width inspection for every reused original on desk
 - Location: `rttt_change`, paragraph 1
 - Text anchor: "RoboTTT does not keep the complete history available for attention. It uses fast weights"
 - Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — RoboTTT architecture and long-context fast-weight update topology; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 2, PDF page 4, `rttt_architecture_source`
-- License and reuse status: `PERMITTED` — The arXiv v1 record identifies CC BY 4.0, while the PDF also carries an NVIDIA copyright notice; use the arXiv-licensed asset and preserve both the attribution and this recorded notice conflict.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `rttt_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Method distinction and scope.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  focus["Reading focus: RoboTTT architecture and long-context fast-weight update topology"]
-  locator["Source locator: Figure 2, PDF page 4, rttt_architecture_source"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("RoboTTT architecture and long-context fast-weight update topology")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/robott/figure-2.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/robott/figure-2.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/robott/figure-2.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 2, PDF page 4, rttt_architecture_source"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("RoboTTT architecture and long-context fast-weight update topology")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture and long-context fast-weight update topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("RoboTTT architecture and long-context fast-weight update topology")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `visual_robott_source_figure_2_change` — rendered immediately after `rttt_change_p2`.
-- Shared paragraph scope: `rttt_change_p1`, `rttt_change_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`, `apps/web/public/paper-assets/robott/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `rttt_change_p2`
@@ -263,187 +102,26 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Location: `rttt_change`, paragraph 2
 - Text anchor: "The paper combines this state mechanism with two training ideas. Sequence action forcing samples"
 - Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — RoboTTT architecture, context scaling, and truncated-backpropagation boundary; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`
-- License and reuse status: `PERMITTED` — The arXiv v1 record identifies CC BY 4.0, while the PDF also carries an NVIDIA copyright notice; use the arXiv-licensed asset and preserve both the attribution and this recorded notice conflict.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `rttt_mechanism_p2` and `rttt_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Method distinction and scope.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
-  focus["Reading focus: RoboTTT architecture, context scaling, and truncated-backpropagation boundary"]
-  locator["Source locator: Figures 2 and 4, PDF pages 4-5, rttt_architecture_source"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("RoboTTT architecture, context scaling, and truncated-backpropagation boundary")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/robott/figures-2-4.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/robott/figures-2-4.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/robott/figures-2-4.png", label: "Complete original context" }
-  locator["Detail remains located within Figures 2 and 4, PDF pages 4-5, rttt_architecture_source"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("RoboTTT architecture, context scaling, and truncated-backpropagation boundary")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only RoboTTT architecture, context scaling, and truncated-backpropagation boundary; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("RoboTTT architecture, context scaling, and truncated-backpropagation boundary")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `visual_robott_source_figure_2_change` — rendered immediately after `rttt_change_p2`.
-- Shared paragraph scope: `rttt_change_p1`, `rttt_change_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`, `apps/web/public/paper-assets/robott/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p1`
@@ -451,187 +129,26 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Location: `rttt_mechanism`, paragraph 1
 - Text anchor: "RoboTTT is instantiated on GR00T N1.7. Its vision-language model encodes the current observation, and"
 - Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`, `rttt_training_source`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — policy, context, and fast-weight update dependencies; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 2, PDF page 4, `rttt_architecture_source`
-- License and reuse status: `PERMITTED` — The arXiv v1 record identifies CC BY 4.0, while the PDF also carries an NVIDIA copyright notice; use the arXiv-licensed asset and preserve both the attribution and this recorded notice conflict.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `rttt_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Mechanism explanation.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  focus["Reading focus: policy, context, and fast-weight update dependencies"]
-  locator["Source locator: Figure 2, PDF page 4, rttt_architecture_source"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("policy, context, and fast-weight update dependencies")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/robott/figure-2.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/robott/figure-2.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/robott/figure-2.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 2, PDF page 4, rttt_architecture_source"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("policy, context, and fast-weight update dependencies")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `rttt_architecture_source`. It preserves the original source asset and may annotate only policy, context, and fast-weight update dependencies; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-2.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/robott/figure-2.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("policy, context, and fast-weight update dependencies")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `visual_robott_source_figure_2_mechanism` — rendered immediately after `rttt_mechanism_p2`.
-- Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `rttt_mechanism_p2`
@@ -816,7 +333,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figure_2_mechanism` — rendered immediately after `rttt_mechanism_p2`.
-- Shared paragraph scope: `rttt_mechanism_p1`, `rttt_mechanism_p2`
+- Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`
 - Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
 - Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
@@ -828,10 +345,10 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Text anchor: "The updated weights become the next timestep's recurrent state. During sequence training, gradients flow"
 - Claims and sources: `rttt_architecture`, `rttt_training`, `rttt_architecture_source`, `rttt_training_source`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — fast-weight recurrence together with the TBPTT training boundary; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — TBPTT boundary that carries fast-weight state while truncating gradients; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`
+- Original figure locator: Figure 4, PDF page 5, `rttt_architecture_source`
 - License and reuse status: `PERMITTED` — The arXiv v1 record identifies CC BY 4.0, while the PDF also carries an NVIDIA copyright notice; use the arXiv-licensed asset and preserve both the attribution and this recorded notice conflict.
 - Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Mechanism explanation.
@@ -840,7 +357,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -851,7 +368,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-4.png}};
   \draw[orange!80!black,line width=1.6pt]
         ([xshift=4mm,yshift=-4mm]source.north west)
         rectangle ([xshift=-4mm,yshift=4mm]source.south east);
@@ -862,9 +379,9 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
-  focus["Reading focus: fast-weight recurrence together with the TBPTT training boundary"]
-  locator["Source locator: Figures 2 and 4, PDF pages 4-5, rttt_architecture_source"]
+  source@{ img: "/paper-assets/robott/figure-4.png", label: "Original paper figure" }
+  focus["Reading focus: TBPTT boundary that carries fast-weight state while truncating gradients"]
+  locator["Source locator: Figure 4, PDF page 5, rttt_architecture_source"]
   source --- focus
   source --- locator
 ```
@@ -875,12 +392,12 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-4.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("fast-weight recurrence together with the TBPTT training boundary")
+ax.set_title("TBPTT boundary that carries fast-weight state while truncating gradients")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
@@ -889,7 +406,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -900,13 +417,13 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-4.png}};
   \begin{scope}
     \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/robott/figure-4.png}};
   \end{scope}
   \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/robott/figures-2-4.png}};
+       {\includegraphics[width=3.1cm]{/paper-assets/robott/figure-4.png}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -914,10 +431,10 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/robott/figures-2-4.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/robott/figures-2-4.png", label: "Complete original context" }
-  locator["Detail remains located within Figures 2 and 4, PDF pages 4-5, rttt_architecture_source"]
+  source@{ img: "/paper-assets/robott/figure-4.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/robott/figure-4.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/robott/figure-4.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 4, PDF page 5, rttt_architecture_source"]
   source --- detail
   source --- context
   detail --- locator
@@ -930,7 +447,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-4.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 height, width = source.shape[:2]
@@ -940,7 +457,7 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("fast-weight recurrence together with the TBPTT training boundary")
+ax.set_title("TBPTT boundary that carries fast-weight state while truncating gradients")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
@@ -949,7 +466,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figures 2 and 4, PDF pages 4-5, `rttt_architecture_source`. It preserves the original source asset and may annotate only fast-weight recurrence together with the TBPTT training boundary; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 4, PDF page 5, `rttt_architecture_source`. It preserves the original source asset and may annotate only TBPTT boundary that carries fast-weight state while truncating gradients; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -960,7 +477,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figures-2-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/robott/figure-4.png}};
   \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
     \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
   }
@@ -971,7 +488,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/robott/figures-2-4.png", label: "Original paper figure" }
+  source@{ img: "/paper-assets/robott/figure-4.png", label: "Original paper figure" }
   callout1["1: locate the evidence-bearing marks"]
   callout2["2: follow the paper-specific relation"]
   callout3["3: retain the source limitation"]
@@ -986,29 +503,29 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/robott/figures-2-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/robott/figure-4.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("fast-weight recurrence together with the TBPTT training boundary")
+ax.set_title("TBPTT boundary that carries fast-weight state while truncating gradients")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: Reimplementation must use the one exact original selected by revision 10; the previous multi-image set is rejected.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_robott_source_figures_2_4_mechanism` — rendered immediately after `rttt_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/robott.json`, `apps/web/public/paper-assets/robott/figure-2.png`, `apps/web/public/paper-assets/robott/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING`
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected multi-image placement and preserve only the exact selected original.
 
 ## `rttt_example_p1`
 

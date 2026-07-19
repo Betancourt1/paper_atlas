@@ -3,9 +3,9 @@
 - Paper ID: `paper_trace`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/trace.json`
-- Manifest revision: `9`
+- Manifest revision: `10`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `16 / 16` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -15,194 +15,33 @@
   - `trace_source_results` — TRACE v1 results and ablations; Pages 8–10, Sections 4.2–4.4, Tables 1–2, Figures 3–5
   - `trace_source_limitations` — TRACE v1 limitations; Page 12, Section 6
 
-Revision 9 requires intrinsic-width inspection for every reused original on desktop and mobile. Source figures remain unmodified inside keyboard-accessible, figure-local horizontal viewports; multi-image sets may not be compressed into equal-width columns.
+Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
 
 ## `trace_why_p1`
 
 - Location: `trace_why`, paragraph 1
 - Text anchor: "A search agent may make dozens of dependent decisions before answering. A failed trajectory"
 - Claims and sources: `trace_claim_outcome_blind`, `trace_claim_credit`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — turn-level credit assignment problem and competing reward scopes; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Motivation and problem framing.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  focus["Reading focus: turn-level credit assignment problem and competing reward scopes"]
-  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("turn-level credit assignment problem and competing reward scopes")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("turn-level credit assignment problem and competing reward scopes")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only turn-level credit assignment problem and competing reward scopes; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("turn-level credit assignment problem and competing reward scopes")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `trace_visual_source_figure_1_why` — rendered immediately after `trace_why_p1`.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `trace_why_p2`
@@ -765,187 +604,26 @@ fig.savefig(Path('visual.svg'), format='svg')
 - Location: `trace_example`, paragraph 1
 - Text anchor: "Consider a trajectory that searches for a relevant source, opens a page containing decisive"
 - Claims and sources: `trace_claim_prefix_probe`, `trace_claim_td`, `trace_claim_outcome_anchor`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — worked trajectory with locally different turn contributions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Worked example.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  focus["Reading focus: worked trajectory with locally different turn contributions"]
-  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
-- Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `trace_example_p2`
@@ -953,187 +631,26 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Location: `trace_example`, paragraph 2
 - Text anchor: "The useful search and page opening can receive positive local credit if they make"
 - Claims and sources: `trace_claim_prefix_probe`, `trace_claim_td`, `trace_claim_outcome_anchor`, `trace_source_intro`, `trace_source_method`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — worked trajectory with locally different turn contributions; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 1, PDF page 2, `trace_source_intro`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `trace_change_p1`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Worked example.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  focus["Reading focus: worked trajectory with locally different turn contributions"]
-  locator["Source locator: Figure 1, PDF page 2, trace_source_intro"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-1.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/trace/figure-1.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/trace/figure-1.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 1, PDF page 2, trace_source_intro"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 1, PDF page 2, `trace_source_intro`. It preserves the original source asset and may annotate only worked trajectory with locally different turn contributions; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-1.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/trace/figure-1.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-1.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("worked trajectory with locally different turn contributions")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `trace_visual_source_figure_1_example` — rendered immediately after `trace_example_p2`.
-- Shared paragraph scope: `trace_example_p1`, `trace_example_p2`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-1.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `trace_evidence_p1`
@@ -1196,10 +713,10 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Text anchor: "In one 4B BrowseComp-Plus ablation, GRPO scores 30.0, raw log-probability delta 32.4, remaining-gap normalization"
 - Claims and sources: `trace_claim_controlled_setup`, `trace_claim_browsecomp_gain`, `trace_claim_grpo_gain`, `trace_claim_ablation`, `trace_source_experiments`, `trace_source_results`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — learning dynamics and ablation evidence on aligned experimental axes; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — four-panel learning dynamics for TRACE and outcome-reward baselines; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figures 3-4, PDF pages 8-10, `trace_source_results`
+- Original figure locator: Figure 3, PDF page 9, `trace_source_results`
 - License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
 - Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Evaluation evidence.
@@ -1208,7 +725,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -1219,7 +736,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-3.png}};
   \draw[orange!80!black,line width=1.6pt]
         ([xshift=4mm,yshift=-4mm]source.north west)
         rectangle ([xshift=-4mm,yshift=4mm]source.south east);
@@ -1230,9 +747,9 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
-  focus["Reading focus: learning dynamics and ablation evidence on aligned experimental axes"]
-  locator["Source locator: Figures 3-4, PDF pages 8-10, trace_source_results"]
+  source@{ img: "/paper-assets/trace/figure-3.png", label: "Original paper figure" }
+  focus["Reading focus: four-panel learning dynamics for TRACE and outcome-reward baselines"]
+  locator["Source locator: Figure 3, PDF pages 8-10, trace_source_results"]
   source --- focus
   source --- locator
 ```
@@ -1243,12 +760,12 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-3.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.set_title("four-panel learning dynamics for TRACE and outcome-reward baselines")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
@@ -1257,7 +774,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -1268,13 +785,13 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-3.png}};
   \begin{scope}
     \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/trace/figure-3.png}};
   \end{scope}
   \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/trace/figures-3-4.png}};
+       {\includegraphics[width=3.1cm]{/paper-assets/trace/figure-3.png}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -1282,10 +799,10 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/trace/figures-3-4.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/trace/figures-3-4.png", label: "Complete original context" }
-  locator["Detail remains located within Figures 3-4, PDF pages 8-10, trace_source_results"]
+  source@{ img: "/paper-assets/trace/figure-3.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/trace/figure-3.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/trace/figure-3.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 3, PDF pages 8-10, trace_source_results"]
   source --- detail
   source --- context
   detail --- locator
@@ -1298,7 +815,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-3.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 height, width = source.shape[:2]
@@ -1308,7 +825,7 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.set_title("four-panel learning dynamics for TRACE and outcome-reward baselines")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
@@ -1317,7 +834,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figures 3-4, PDF pages 8-10, `trace_source_results`. It preserves the original source asset and may annotate only learning dynamics and ablation evidence on aligned experimental axes; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 3, PDF page 9, `trace_source_results`. It preserves the original source asset and may annotate only four-panel learning dynamics for TRACE and outcome-reward baselines; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -1328,7 +845,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figures-3-4.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/trace/figure-3.png}};
   \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
     \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
   }
@@ -1339,7 +856,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/trace/figures-3-4.png", label: "Original paper figure" }
+  source@{ img: "/paper-assets/trace/figure-3.png", label: "Original paper figure" }
   callout1["1: locate the evidence-bearing marks"]
   callout2["2: follow the paper-specific relation"]
   callout3["3: retain the source limitation"]
@@ -1354,29 +871,29 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/trace/figures-3-4.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/trace/figure-3.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("learning dynamics and ablation evidence on aligned experimental axes")
+ax.set_title("four-panel learning dynamics for TRACE and outcome-reward baselines")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: Reimplementation must use the one exact original selected by revision 10; the previous multi-image set is rejected.
 - Delivery medium: `source asset`
 - Visual ID and placement: `trace_visual_source_figures_3_4` — rendered immediately after `trace_evidence_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/trace.json`, `apps/web/public/paper-assets/trace/figure-3.png`, `apps/web/public/paper-assets/trace/figure-4.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING`
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected multi-image placement and preserve only the exact selected original.
 
 ## `trace_limitations_p1`
 

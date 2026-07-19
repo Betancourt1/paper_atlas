@@ -3,9 +3,9 @@
 - Paper ID: `paper_searchos_v1`
 - Exact paper version: `v1`
 - Explainer fixture: `packages/test-fixtures/explainers/searchos-v1.json`
-- Manifest revision: `9`
+- Manifest revision: `10`
 - Engineer status: `COMPLETE`
-- Implementer status: `COMPLETE`
+- Implementer status: `PENDING`
 - Paragraph coverage: `17 / 17` prose paragraphs
 - Paragraph-ID derivation: `{block.id}_p{1-based index in block.paragraphs}`; each fixture paragraph appears exactly once.
 - Evidence sources:
@@ -15,7 +15,7 @@
   - `sos_ablations_source` — SearchOS-V1 — scheduling, middleware, and skill analyses; Section 5, Tables 4–6 and Figures 5–6, PDF pages 12–13
   - `sos_scope_source` — SearchOS-V1 — declared scope and future work; Scope note in Section 3.4 and Section 7, PDF pages 9 and 15
 
-Revision 9 requires intrinsic-width inspection for every reused original on desktop and mobile. Source figures remain unmodified inside keyboard-accessible, figure-local horizontal viewports; multi-image sets may not be compressed into equal-width columns.
+Revision 10 scopes source reuse to distinct reconstructive questions. A reusable original is shown once for each genuinely complex explanatory job; later mentions remain prose unless they pose a new question. Multi-image strips are rejected when one exact original suffices.
 
 ## `sos_why_p1`
 
@@ -130,187 +130,26 @@ Revision 9 requires intrinsic-width inspection for every reused original on desk
 - Location: `sos_mechanism`, paragraph 1
 - Text anchor: "Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Evidence"
 - Claims and sources: `sos_socm`, `sos_middleware`, `sos_scheduler`, `sos_formulation_source`, `sos_middleware_source`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — SearchOS relational state, memory, and role topology; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 2, PDF page 4, `sos_formulation_source`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `sos_mechanism_p2`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Shared-state architecture and provenance topology.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-2.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-2.png", label: "Original paper figure" }
-  focus["Reading focus: SearchOS relational state, memory, and role topology"]
-  locator["Source locator: Figure 2, PDF page 4, sos_formulation_source"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("SearchOS relational state, memory, and role topology")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-2.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-2.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/searchos-v1/figure-2.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-2.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/searchos-v1/figure-2.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/searchos-v1/figure-2.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 2, PDF page 4, sos_formulation_source"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("SearchOS relational state, memory, and role topology")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 2, PDF page 4, `sos_formulation_source`. It preserves the original source asset and may annotate only SearchOS relational state, memory, and role topology; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-2.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-2.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-2.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("SearchOS relational state, memory, and role topology")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
+- Shared paragraph scope: `NONE`
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `sos_mechanism_p2`
@@ -495,7 +334,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figure_2` — rendered immediately after `sos_mechanism_p2`.
-- Shared paragraph scope: `sos_mechanism_p1`, `sos_mechanism_p2`
+- Shared paragraph scope: `NONE`
 - Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`
 - Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
 - Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
@@ -507,10 +346,10 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Text anchor: "Sensor middleware measures changes in grounded coverage and evidence count, along with iteration, search,"
 - Claims and sources: `sos_socm`, `sos_middleware`, `sos_scheduler`, `sos_formulation_source`, `sos_middleware_source`
 - Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — orchestration state together with sensor-policy intervention evidence; prose would force readers to reconstruct the figure's linked components or quantitative structure.
+- Complexity warrant: Non-trivial source-figure relationship — sensor-policy intervention evidence; prose would force readers to reconstruct the figure's linked components or quantitative structure.
 - Forbidden-structure audit: `PASS`
 - Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figures 2 and 5, PDF pages 4 and 12-13, `sos_formulation_source` and `sos_ablations_source`
+- Original figure locator: Figure 5, PDF pages 12-13, `sos_ablations_source`
 - License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
 - Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
 - Explanatory job: Coverage-aware controller state machine and asynchronous scheduling.
@@ -519,7 +358,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
 - Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figures 2 and 5, PDF pages 4 and 12-13, `sos_formulation_source` and `sos_ablations_source`. It preserves the original source asset and may annotate only orchestration state together with sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -530,7 +369,7 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figures-2-5.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
   \draw[orange!80!black,line width=1.6pt]
         ([xshift=4mm,yshift=-4mm]source.north west)
         rectangle ([xshift=-4mm,yshift=4mm]source.south east);
@@ -541,9 +380,9 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figures-2-5.png", label: "Original paper figure" }
-  focus["Reading focus: orchestration state together with sensor-policy intervention evidence"]
-  locator["Source locator: Figures 2 and 5, PDF pages 4 and 12-13, sos_formulation_source and sos_ablations_source"]
+  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
+  focus["Reading focus: sensor-policy intervention evidence"]
+  locator["Source locator: Figure 5, PDF pages 12-13, sos_ablations_source"]
   source --- focus
   source --- locator
 ```
@@ -554,12 +393,12 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figures-2-5.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
                        fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("orchestration state together with sensor-policy intervention evidence")
+ax.set_title("sensor-policy intervention evidence")
 ax.axis("off")
 fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 ```
@@ -568,7 +407,7 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
 - Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figures 2 and 5, PDF pages 4 and 12-13, `sos_formulation_source` and `sos_ablations_source`. It preserves the original source asset and may annotate only orchestration state together with sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -579,13 +418,13 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figures-2-5.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
   \begin{scope}
     \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figures-2-5.png}};
+    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
   \end{scope}
   \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/searchos-v1/figures-2-5.png}};
+       {\includegraphics[width=3.1cm]{/paper-assets/searchos-v1/figure-5.png}};
 \end{tikzpicture}
 \end{document}
 ```
@@ -593,10 +432,10 @@ fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figures-2-5.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/searchos-v1/figures-2-5.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/searchos-v1/figures-2-5.png", label: "Complete original context" }
-  locator["Detail remains located within Figures 2 and 5, PDF pages 4 and 12-13, sos_formulation_source and sos_ablations_source"]
+  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
+  detail@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Legible source detail" }
+  context@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Complete original context" }
+  locator["Detail remains located within Figure 5, PDF pages 12-13, sos_ablations_source"]
   source --- detail
   source --- context
   detail --- locator
@@ -609,7 +448,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figures-2-5.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 height, width = source.shape[:2]
@@ -619,7 +458,7 @@ inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
 inset.imshow(source)
 inset.set_title("Complete original", fontsize=8)
 inset.axis("off")
-ax.set_title("orchestration state together with sensor-policy intervention evidence")
+ax.set_title("sensor-policy intervention evidence")
 ax.axis("off")
 fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 ```
@@ -628,7 +467,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 
 - Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
 - Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figures 2 and 5, PDF pages 4 and 12-13, `sos_formulation_source` and `sos_ablations_source`. It preserves the original source asset and may annotate only orchestration state together with sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
+- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only sensor-policy intervention evidence; callouts add no new quantities, topology, or causal claims.
 - Primary delivery medium: `source asset`
 - Recommended web medium: `source asset`
 - Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
@@ -639,7 +478,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 \usepackage{graphicx}
 \begin{document}
 \begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figures-2-5.png}};
+  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
   \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
     \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
   }
@@ -650,7 +489,7 @@ fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
 #### Mermaid
 ```mermaid
 flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figures-2-5.png", label: "Original paper figure" }
+  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
   callout1["1: locate the evidence-bearing marks"]
   callout2["2: follow the paper-specific relation"]
   callout3["3: retain the source limitation"]
@@ -665,29 +504,29 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figures-2-5.png"))
+source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
 fig, ax = plt.subplots(figsize=(12, 7))
 ax.imshow(source)
 for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
     ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
                 color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("orchestration state together with sensor-policy intervention evidence")
+ax.set_title("sensor-policy intervention evidence")
 ax.axis("off")
 fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 ```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
+- Status: `REWORK_REQUIRED`
+- Selected treatment: `NONE`
+- Selection rationale: Reimplementation must use the one exact original selected by revision 10; the previous multi-image set is rejected.
 - Delivery medium: `source asset`
 - Visual ID and placement: `visual_searchos_source_figures_2_5` — rendered immediately after `sos_mechanism_p3`.
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-2.png`, `apps/web/public/paper-assets/searchos/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
-- Evidence deviations: `NONE`
+- Changed files: `NONE` — pending visual implementer rework.
+- Accessibility and fallback verification: `PENDING`
+- Desktop and mobile verification: `PENDING`
+- Evidence deviations: `REWORK_REQUIRED` — remove the rejected multi-image placement and preserve only the exact selected original.
 
 ## `sos_example_p1`
 
@@ -856,187 +695,26 @@ fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
 - Location: `sos_limitations`, paragraph 2
 - Text anchor: "A URL and anchored excerpt preserve provenance but do not independently prove that the"
 - Claims and sources: `sos_citation_truth`, `sos_budget_fairness`, `sos_middleware_causality`, `sos_schema_fit_inference`, `sos_generality`, `sos_middleware_source`, `sos_results_source`, `sos_ablations_source`, `sos_scope_source`
-- Visual needed: `YES`
-- Complexity warrant: Non-trivial source-figure relationship — where sensor intervention affects the measured system; prose would force readers to reconstruct the figure's linked components or quantitative structure.
-- Forbidden-structure audit: `PASS`
-- Source-figure audit: `USE_ORIGINAL`
-- Original figure locator: Figure 5, PDF pages 12-13, `sos_ablations_source`
-- License and reuse status: `PERMITTED` — The paper's arXiv record identifies CC BY 4.0; preserve the authors, original caption, locator, and license link.
-- Decision rationale: The original figure directly performs this paragraph's explanatory job. Displaying it materially reduces reconstruction, while replacing it with a custom redraw would discard evidence-bearing structure and violate the source-first rule.
+- Visual needed: `NO`
+- Complexity warrant: NONE — prose is sufficient.
+- Forbidden-structure audit: `NO_VISUAL`
+- Source-figure audit: `NO_MATCH`
+- Original figure locator: `NONE`
+- License and reuse status: `NOT_APPLICABLE` — The figures were checked; no additional original answers a distinct paragraph-specific reconstructive question after the retained placement.
+- Decision rationale: The related original is already used once at `sos_mechanism_p3`, where it performs the complex explanatory job. Repeating the full figure here would add scrolling and visual repetition without reducing a new reconstruction burden; this paragraph remains clearer as prose.
 - Explanatory job: Evidence boundary and limitation.
-
-### Treatment A — Full original with focus frame
-
-- Teaching purpose: Preserve the complete source figure and add one focus frame around the portion that answers this paragraph.
-- Encoding and reading order: Read the untouched original first; the focus frame identifies the relevant region without suppressing its surrounding context.
-- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only where sensor intervention affects the measured system; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
-  \draw[orange!80!black,line width=1.6pt]
-        ([xshift=4mm,yshift=-4mm]source.north west)
-        rectangle ([xshift=-4mm,yshift=4mm]source.south east);
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
-  focus["Reading focus: where sensor intervention affects the measured system"]
-  locator["Source locator: Figure 5, PDF pages 12-13, sos_ablations_source"]
-  source --- focus
-  source --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-ax.add_patch(Rectangle((0.04, 0.04), 0.92, 0.92, transform=ax.transAxes,
-                       fill=False, linewidth=2, edgecolor="#d97706"))
-ax.set_title("where sensor intervention affects the measured system")
-ax.axis("off")
-fig.savefig("source-treatment-a.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment B — Original detail with context inset
-
-- Teaching purpose: Show a legible detail while retaining the complete original as a context inset.
-- Encoding and reading order: Read the enlarged source detail first, then use the inset to recover its exact position in the unmodified original.
-- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only where sensor intervention affects the measured system; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
-  \begin{scope}
-    \clip (-5,-2.3) rectangle (2.5,2.3);
-    \node[inner sep=0] at (-1.25,0) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
-  \end{scope}
-  \node[anchor=south east,draw,fill=white,inner sep=1pt] at (source.south east)
-       {\includegraphics[width=3.1cm]{/paper-assets/searchos-v1/figure-5.png}};
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
-  detail@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Legible source detail" }
-  context@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Complete original context" }
-  locator["Detail remains located within Figure 5, PDF pages 12-13, sos_ablations_source"]
-  source --- detail
-  source --- context
-  detail --- locator
-  context --- locator
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-height, width = source.shape[:2]
-detail = source[height // 5: 4 * height // 5, width // 5: 4 * width // 5]
-ax.imshow(detail)
-inset = ax.inset_axes([0.70, 0.04, 0.27, 0.27])
-inset.imshow(source)
-inset.set_title("Complete original", fontsize=8)
-inset.axis("off")
-ax.set_title("where sensor intervention affects the measured system")
-ax.axis("off")
-fig.savefig("source-treatment-b.png", bbox_inches="tight", dpi=180)
-```
-
-### Treatment C — Original with numbered reading key
-
-- Teaching purpose: Keep the complete source figure and overlay a small numbered key that explains its paper-specific relationships.
-- Encoding and reading order: Read the source figure in its own order; numbered callouts identify the evidence-bearing marks without redrawing them.
-- Evidence and limitations: Uses Figure 5, PDF pages 12-13, `sos_ablations_source`. It preserves the original source asset and may annotate only where sensor intervention affects the measured system; callouts add no new quantities, topology, or causal claims.
-- Primary delivery medium: `source asset`
-- Recommended web medium: `source asset`
-- Mobile, accessibility, and motion behavior: Keep every source file unmodified and present each source asset at a readable intrinsic width inside a simple horizontally inspectable viewport at both desktop and mobile widths. Make every viewport keyboard-focusable with a visible focus indicator and support horizontal inspection by arrow keys; show the visible hint: “Scroll or use arrow keys to inspect the original figure.” Never shrink a multi-image set into equal-width columns; keep each original readable within the figure-local inspection region. Contain all horizontal overflow inside the figure viewport so the page itself never scrolls sideways. Preserve the original caption, exact locator, attribution, license, and equivalent text explanation. No motion.
-
-#### TikZ
-```tex
-\documentclass[tikz,border=4pt]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\begin{tikzpicture}
-  \node[inner sep=0] (source) {\includegraphics[width=12cm]{/paper-assets/searchos-v1/figure-5.png}};
-  \foreach \number/\position in {1/{source.north west},2/{source.east},3/{source.south west}} {
-    \node[circle,fill=orange!80!black,text=white,inner sep=2pt] at \position {\number};
-  }
-\end{tikzpicture}
-\end{document}
-```
-
-#### Mermaid
-```mermaid
-flowchart TB
-  source@{ img: "/paper-assets/searchos-v1/figure-5.png", label: "Original paper figure" }
-  callout1["1: locate the evidence-bearing marks"]
-  callout2["2: follow the paper-specific relation"]
-  callout3["3: retain the source limitation"]
-  source --- callout1
-  source --- callout2
-  source --- callout3
-```
-
-#### Python
-```python
-from pathlib import Path
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
-source = plt.imread(Path("apps/web/public/paper-assets/searchos-v1/figure-5.png"))
-fig, ax = plt.subplots(figsize=(12, 7))
-ax.imshow(source)
-for number, position in enumerate(((0.08, 0.90), (0.90, 0.52), (0.08, 0.10)), 1):
-    ax.annotate(str(number), position, xycoords="axes fraction", ha="center", va="center",
-                color="white", bbox={"boxstyle": "circle", "facecolor": "#d97706"})
-ax.set_title("where sensor intervention affects the measured system")
-ax.axis("off")
-fig.savefig("source-treatment-c.png", bbox_inches="tight", dpi=180)
-```
 
 ### Implementation record
 
-- Status: `IMPLEMENTED`
-- Selected treatment: `A`
-- Selection rationale: Treatment A keeps the complete original source figure or figure set unmodified at readable intrinsic scale inside the revision-9 focusable horizontal inspection viewport at desktop and mobile widths; multi-image sets are never normalized into equal-width columns, and exact provenance plus repeated asset reuse are preserved.
-- Delivery medium: `source asset`
-- Visual ID and placement: `visual_searchos_source_figure_5_limit` — rendered immediately after `sos_limitations_p2`.
+- Status: `NOT_NEEDED`
+- Selected treatment: `NONE`
+- Selection rationale: `NO_VISUAL` — the retained source placement already establishes the relationship.
+- Delivery medium: `NONE`
+- Visual ID and placement: `NONE` — `NO_VISUAL`
 - Shared paragraph scope: `NONE`
-- Changed files: `packages/test-fixtures/explainers/searchos-v1.json`, `apps/web/public/paper-assets/searchos/figure-5.png`
-- Accessibility and fallback verification: `VERIFIED IN COMPONENT AND BROWSER` — every image retains specific alt text; the focusable viewport exposes native arrow-key scrolling and a visible inspection instruction at desktop and mobile widths; exact locator, attribution, license, modification metadata, and fallback remain present.
-- Desktop and mobile verification: `VERIFIED` — Playwright at 1440 × 1000 and 390 × 844 confirms intrinsic-width images without equal-width grid normalization, contained figure-only overflow, focus indication, ArrowRight scrolling, the visible inspection hint, and no document-level horizontal overflow.
+- Changed files: `NONE`
+- Accessibility and fallback verification: `NO_VISUAL`
+- Desktop and mobile verification: `NO_VISUAL`
 - Evidence deviations: `NONE`
 
 ## `sos_limitations_p3`
