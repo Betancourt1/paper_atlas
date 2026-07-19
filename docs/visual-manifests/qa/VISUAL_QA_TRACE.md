@@ -1,24 +1,40 @@
-# Blind visual QA — TRACE — revision 13
+# Blind VISUAL_QA — TRACE: Turn-level Reward Assignment via Credit Estimation for Long-Horizon Agents
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `trace_why_p1` | 9 | 10 | Outcome-only credit ambiguity is motivation; Figure 1 later supplies the concrete contrast. |
-| `trace_why_p2` | 9 | 10 | Alternative supervision requirements are a categorical list and would become stock cards. |
-| `trace_change_p1` | 10 | 3 | Figure 1 is the correct original and desktop is complete, but both mobile branch crops truncate the shared question/search text; the failure asset is mostly blank and shows clipped fragments of both branches instead of a complete failure path. The claimed semantic branch composites are not delivered. |
-| `trace_change_p2` | 9 | 10 | Credit assignment versus browser/backbone/verifier scope is a clear textual boundary. |
-| `trace_mechanism_p1` | 9 | 10 | Prefix scoring and frozen reference are prerequisites, not a separate visual job. |
-| `trace_mechanism_p2` | 9 | 10 | Log-ratio and adjacent difference are explained before the dependency graphic. |
-| `trace_mechanism_p3` | 10 | 10 | The custom DAG warrants itself through adjacent telescoping edges, skip dependencies, and a distinct global outcome broadcast. Mobile reflows all three scopes with legible labels. |
-| `trace_example_p1` | 9 | 10 | The hypothetical failed trajectory is already the narrative basis of Figure 1. |
-| `trace_example_p2` | 9 | 10 | Positive/zero/negative credit plus terminal failure is an explanatory example, not a measured second figure. |
-| `trace_evidence_p1` | 9 | 10 | Shared harness and controlled variables are exact prose. |
-| `trace_evidence_p2` | 9 | 10 | Benchmark gains are a small result list without a directly matching current source figure. |
-| `trace_evidence_p3` | 10 | 10 | Figures 3 and 4 directly show learning dynamics and tool-calling trends. Desktop is complete; mobile splits Figure 3 at paper-defined model-panel pairs and keeps Figure 4 complete. |
-| `trace_limitations_p1` | 9 | 10 | Known-answer and output-form boundaries are categorical limitations. |
-| `trace_limitations_p2` | 9 | 10 | Backbone/domain scope and causal-proxy caveats are prose boundaries. |
-| `trace_review_p1` | 9 | 10 | The conclusion is already grounded by mechanism and evidence visuals. |
-| `trace_review_p2` | 9 | 10 | Generalization limits and required new progress targets are appropriately prose-only. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `REWORK_REQUIRED`
+- Paragraph coverage: `16 / 16`; every paragraph scored twice.
+- Mean score: `8.78 / 10`
+- Minimum score: `3 / 10`
+- Selected-media mix: `2 source asset, 1 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.19**. Implementation average: **9.56**. Combined average: **9.38**. Minimum: engineer **9**, implementation **3**.
+## Paragraph scores
 
-Finding: containment, aspect-ratio, provenance, desktop completeness, the custom SVG, and Figures 3–4 pass. Figure 1 mobile source fidelity does not: the crops are geometrically contained but semantically incomplete and visibly clipped, so they fail the meaningful paper-defined-panel requirement. The custom DAG is not a forbidden chain because its three edge scopes and exact-telescoping subset are the explanatory content. HTML/CSS-led share: **0/3 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `trace_why_p1` | 9/10 — Prose-only is appropriate for “A search agent may make dozens of dependent decisions before answering. A failed trajectory can contain useful searche”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_why_p2` | 9/10 — Prose-only is appropriate for “Process supervision can provide finer feedback, but commonly needs step labels, an LLM judge, a learned critic, or rep”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_change_p1` | 8/10 — Figure 1 directly supports the successful-versus-failed trajectory contrast and the fixture preserves locator, attribution, CC BY provenance, and a complete desktop original. | 3/10 — FAIL: the 390 px failure composite clips the question at the left and clips the first shared Search/Open prefix box at the top. The plot block is complete and legible, and the viewport does not scroll, but the composite is not source-complete. |
+| `trace_change_p2` | 9/10 — Prose-only is appropriate for “This is a change to credit assignment, not a new browser, backbone, training corpus, or final verifier. In the control”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_mechanism_p1` | 9/10 — Prose-only is appropriate for “TRACE first splits a rollout after each tool action and returned observation. For every resulting prefix, a frozen cop”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_mechanism_p2` | 9/10 — Prose-only is appropriate for “The raw answer score is converted into a log-ratio value representing relative closure of the initial answer-likelihoo”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_mechanism_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_mechanism_p3` | 9/10 — TRACE combines local, look-ahead, and outcome credit scopes has a paragraph-specific complexity warrant and uses SVG evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep trace_visual_credit_dependency_dag inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `trace_example_p1` | 9/10 — Prose-only is appropriate for “Consider a trajectory that searches for a relevant source, opens a page containing decisive evidence, then follows an ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_example_p2` | 9/10 — Prose-only is appropriate for “The useful search and page opening can receive positive local credit if they make the gold answer more predictable. Th”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_evidence_p1` | 9/10 — Prose-only is appropriate for “The authors train Qwen3-4B-Thinking-2507 and Qwen3-30B-A3B-Thinking-2507 in the same ReAct-style search harness. The t”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_evidence_p2` | 9/10 — Prose-only is appropriate for “On closed-web BrowseComp-Plus, TRACE moves the 4B base from 7.2 to 35.6 and the 30B-A3B base from 8.4 to 42.6. Relativ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_evidence_p3` | 9/10 — Learning dynamics has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep trace_visual_source_figures_3_4 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `trace_limitations_p1` | 9/10 — Prose-only is appropriate for “The experiments cover long-horizon search with short answers that can be compared with known ground truth. The authors”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_limitations_p2` | 9/10 — Prose-only is appropriate for “Only two related Qwen3 backbones and one interaction domain are evaluated. A higher frozen-model probability is eviden”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_review_p1` | 9/10 — Prose-only is appropriate for “The controlled result supports a narrow conclusion: in the authors' search setup, adding their reference-model-based t”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `trace_review_p2` | 9/10 — Prose-only is appropriate for “The paper does not establish a general solution to agent credit assignment. The proxy depends on a known answer, the c”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after trace_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- `trace_change_p1`: regenerate the failure composite with the full question and full shared Search/Open prefix before the failure branch; preserve the complete trajectory plot.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

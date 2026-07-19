@@ -1,24 +1,40 @@
-# Blind visual QA — Partition, Prompt, Aggregate — revision 13
+# Blind VISUAL_QA — Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `ppa_why_p1` | 9 | 10 | Conditional estimates versus aggregate behavior is motivation; the later hierarchy supplies the necessary reconstruction. |
-| `ppa_why_p2` | 9 | 10 | Reference-free consistency is one conceptual distinction and needs no generic diagram. |
-| `ppa_change_p1` | 9 | 10 | Partitioning and recombination are fully visualized at the mechanism placement. |
-| `ppa_change_p2` | 9 | 10 | Consistency versus alignment is a bounded two-part definition best retained in prose. |
-| `ppa_mechanism_p1` | 9 | 10 | The direct estimate and split setup are prerequisites for the next paragraph's complete hierarchy. |
-| `ppa_mechanism_p2` | 10 | 10 | The custom visual warrants itself through two complete partition depths, distinct weighted leaves, two aggregation operators, and the invariant `q = D1 = D2`; mobile preserves all levels and labels. |
-| `ppa_mechanism_p3` | 9 | 10 | Split and order consistency are additional verbal checks without sufficient evidence for another visual. |
-| `ppa_example_p1` | 9 | 10 | The age/employment example maps directly onto the preceding abstract hierarchy; duplication is unnecessary. |
-| `ppa_example_p2` | 9 | 10 | Multiplication, summation, and comparison have already been visualized. |
-| `ppa_evidence_p1` | 9 | 10 | The depth trade-off is reported without a reusable exact figure in the current implementation; an invented curve would overstate it. |
-| `ppa_evidence_p2` | 9 | 10 | Cross-task consistency scores are heterogeneous and would become repeated metric panels. |
-| `ppa_evidence_p3` | 9 | 10 | The one-prompt effect is explicitly less systematic, so prose is the honest treatment. |
-| `ppa_limitations_p1` | 9 | 10 | Split dependence and harder fine-grained priors are scope limitations. |
-| `ppa_limitations_p2` | 9 | 10 | Internal coherence versus truth is a conceptual boundary, not a new diagram. |
-| `ppa_review_p1` | 9 | 10 | The synthesis is already supported by the hierarchy visual. |
-| `ppa_review_p2` | 9 | 10 | The non-universality of the macro fallacy is correctly retained as prose. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `PASS`
+- Paragraph coverage: `16 / 16`; every paragraph scored twice.
+- Mean score: `9.00 / 10`
+- Minimum score: `9 / 10`
+- Selected-media mix: `0 source asset, 1 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.06**. Implementation average: **10.00**. Combined average: **9.53**. Minimum: engineer **9**, implementation **10**.
+## Paragraph scores
 
-The SVG is a real two-depth hierarchy rather than a single chain or repeated metric card. Desktop and mobile viewBoxes contain every node and edge, mobile text is legible, aspect ratio is preserved, and no internal/page scrollbar or clipping was found. HTML/CSS-led share: **0/1 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `ppa_why_p1` | 9/10 — Prose-only is appropriate for “Many uses of in-context learning treat a prompt as a condition and the model's answer as an estimate of the correspond”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_why_p2` | 9/10 — Prose-only is appropriate for “A model can give locally plausible answers while violating this requirement. Two statistically equivalent prompts can ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_change_p1` | 9/10 — Prose-only is appropriate for “The framework separates alignment from self-consistency. Alignment asks whether an estimate matches external reference”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_change_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_change_p2` | 9/10 — Prose-only is appropriate for “The paper turns this idea into split-consistency and order-consistency scores. It also identifies the macro fallacy: i”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_mechanism_p1` | 9/10 — Prose-only is appropriate for “Start with a base population at the root. Each binary attribute splits every node at a level into two non-overlapping ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_mechanism_p2` | 9/10 — Weighted subgroup estimates reconstruct one root quantity has a paragraph-specific complexity warrant and uses SVG evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_ppa_weighted_reconstruction_graph inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `ppa_mechanism_p3` | 9/10 — Prose-only is appropriate for “Split consistency checks a node against the weighted sum of its immediate children. Order consistency asks whether the”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_mechanism_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_example_p1` | 9/10 — Prose-only is appropriate for “Consider the probability that a person in the United States earns above a chosen threshold. One prompt asks for the pr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_example_p2` | 9/10 — Prose-only is appropriate for “The model estimates the income probability and population share for each subgroup. The explainer then multiplies each ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_evidence_p1` | 9/10 — Prose-only is appropriate for “In the ACS income experiment, Figure 3 reports that reconstructed aggregate estimates generally reduce alignment error”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_evidence_p2` | 9/10 — Prose-only is appropriate for “The reference-free checks also reveal failures. In the two-attribute ACS tasks, the reported split-consistency scores ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_evidence_p3` | 9/10 — Prose-only is appropriate for “A one-prompt micro-to-macro instruction often improves ACS estimates, but its effect is less systematic and more model”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_limitations_p1` | 9/10 — Prose-only is appropriate for “The macro-fallacy alignment analysis relies primarily on ACS data. Its magnitude depends on the chosen demographic spl”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_limitations_p2` | 9/10 — Prose-only is appropriate for “Self-consistency is only a necessary condition for faithful conditional inference. A model can be internally coherent ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_review_p1` | 9/10 — Prose-only is appropriate for “The strongest contribution is a simple, reference-free test of whether conditional estimates compose. It exposes a fai”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ppa_review_p2` | 9/10 — Prose-only is appropriate for “The macro fallacy is more bounded: it is a repeated empirical pattern in the ACS analysis, not a universal rule that d”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ppa_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- No blocking visual finding. All selected visuals fit without scrolling or clipping, remain legible at both viewports, preserve aspect/source fidelity and provenance, and the prose-only decisions avoid unnecessary or forbidden visual forms.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

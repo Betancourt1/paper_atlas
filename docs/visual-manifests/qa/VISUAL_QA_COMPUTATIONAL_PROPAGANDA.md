@@ -1,24 +1,40 @@
-# Blind visual QA — Computational Propaganda — revision 13
+# Blind VISUAL_QA — Pretraining Data Can Be Poisoned through Computational Propaganda
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `propaganda_why_p1` | 9 | 10 | Crawl, extraction, and filtering uncertainty is motivation; visualizing it here would pre-empt the later conditional model. |
-| `propaganda_why_p2` | 9 | 10 | The indirect-attacker boundary is explicit prose and has no additional paper figure that performs a distinct job. |
-| `propaganda_change_p1` | 9 | 10 | The three gates are fully visualized at the worked estimate, avoiding a duplicate generic pipeline. |
-| `propaganda_change_p2` | 9 | 10 | Ads-versus-comments is a bounded tested-path qualification; a two-item comparison would be stock. |
-| `propaganda_mechanism_p1` | 9 | 10 | S1/S2/S3 definitions are readable and later gain their conditional denominator structure. |
-| `propaganda_mechanism_p2` | 9 | 10 | Three denominators are explained explicitly; the selected tree later supplies the needed reconstruction. |
-| `propaganda_mechanism_p3` | 9 | 10 | Inclusion versus influence is a scope boundary, not evidence for another flow diagram. |
-| `propaganda_example_p1` | 10 | 10 | Original Figure 3 directly shows the injected HTML and extracted text. Desktop is complete; mobile crops exactly the paper's two labeled panels with all content retained. |
-| `propaganda_example_p2` | 10 | 10 | The custom tree warrants itself through conditional denominators, rejection complements, the 0.13% product, and 0.15% discrepancy; mobile reflows the same branching logic with legible labels. |
-| `propaganda_evidence_p1` | 9 | 10 | Repeating the same three rates would duplicate the immediately preceding visual. |
-| `propaganda_evidence_p2` | 9 | 10 | Parameter scales and shifts are a metric list without a common explanatory geometry. |
-| `propaganda_evidence_p3` | 9 | 10 | Post-SFT ranges and format caveats remain clearer as prose than repeated metric cards. |
-| `propaganda_limitations_p1` | 9 | 10 | Proxy-pipeline limitations are categorical and do not warrant invented architecture. |
-| `propaganda_limitations_p2` | 9 | 10 | The non-live, synthetic, sub-frontier scope is a textual boundary. |
-| `propaganda_review_p1` | 9 | 10 | The methodological synthesis is already supported by the two placed visuals. |
-| `propaganda_review_p2` | 9 | 10 | Threat-model bounds and the unresolved value discrepancy are already explicit. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `PASS`
+- Paragraph coverage: `16 / 16`; every paragraph scored twice.
+- Mean score: `9.00 / 10`
+- Minimum score: `9 / 10`
+- Selected-media mix: `1 source asset, 1 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.13**. Implementation average: **10.00**. Combined average: **9.56**. Minimum: engineer **9**, implementation **10**.
+## Paragraph scores
 
-Focused inspection confirms complete desktop source fidelity, meaningful mobile panel crops, explicit provenance and modifications, legible 19px mobile SVG source text, preserved aspect ratios, and no internal/page scrollbars or clipping. The tree is not a single interchangeable chain: rejection complements and changing denominators are essential. HTML/CSS-led share: **0/2 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `propaganda_why_p1` | 9/10 — Prose-only is appropriate for “Pretraining corpora contain more web text than people can inspect. That scale creates room for malicious content, but ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_why_p2` | 9/10 — Prose-only is appropriate for “Earlier demonstrations often targeted known sources or assumed access to the victim's data pipeline. This paper studie”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_change_p1` | 9/10 — Prose-only is appropriate for “HalfLife replaces the binary question 'can content be posted?' with an end-to-end inclusion model. It asks whether a r”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_change_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_change_p2` | 9/10 — Prose-only is appropriate for “That decomposition can reject superficially plausible vectors. In the tested DOM-based crawl path, programmatic advert”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_mechanism_p1` | 9/10 — Prose-only is appropriate for “HalfLife defines three gates. S1 measures whether a page is injectable through a public discussion interface. S2 measu”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_mechanism_p2` | 9/10 — Prose-only is appropriate for “The paper estimates the conditional probability at each gate using sampled crawl data and sandboxed replacements, then”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_mechanism_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_mechanism_p3` | 9/10 — Prose-only is appropriate for “Corpus inclusion is still only an intermediate outcome. The authors separately train models with controlled poison mix”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_mechanism_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_example_p1` | 9/10 — Injected comments survive scraping and extraction has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep propaganda_visual_source_figure_3 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `propaganda_example_p2` | 9/10 — HalfLife inclusion changes denominator at every gate has a paragraph-specific complexity warrant and uses SVG evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep propaganda_visual_halflife_tree inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `propaganda_evidence_p1` | 9/10 — Prose-only is appropriate for “The inclusion analysis scans 181,857 pages from 200 WARC files in Common Crawl CC-MAIN-2025-51. Comment signatures app”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_evidence_p2` | 9/10 — Prose-only is appropriate for “For model effects, the authors pretrain OLMo-3-like models from 65M to 1.3B parameters with controlled poison token ra”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_evidence_p3` | 9/10 — Prose-only is appropriate for “Clean supervised fine-tuning reduces the measured effect: at 0.1% poison, post-SFT shifts range from 0.9 to 7.4 points”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_limitations_p1` | 9/10 — Prose-only is appropriate for “Common Crawl is a proxy for production collection, and the tested curation path is one open Dolma 3-style pipeline. Pr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_limitations_p2` | 9/10 — Prose-only is appropriate for “The authors avoid live injection and validate the vector in sandboxes. The behavioral experiments use synthetic entity”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_review_p1` | 9/10 — Prose-only is appropriate for “The paper supports treating third-party page fragments as a real data-provenance concern. Its strongest contribution i”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `propaganda_review_p2` | 9/10 — Prose-only is appropriate for “The phrase 'can be poisoned at scale' should remain bounded by the threat model. Inclusion is estimated from a sampled”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after propaganda_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- No blocking visual finding. All selected visuals fit without scrolling or clipping, remain legible at both viewports, preserve aspect/source fidelity and provenance, and the prose-only decisions avoid unnecessary or forbidden visual forms.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

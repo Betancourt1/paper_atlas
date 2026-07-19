@@ -1,25 +1,41 @@
-# Blind visual QA — SearchOS-V1 — revision 13
+# Blind VISUAL_QA — SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `sos_why_p1` | 9 | 10 | Entity/attribute completion and provenance are motivation; the later architecture supplies structure. |
-| `sos_why_p2` | 9 | 10 | Buried evidence, duplicate work, and idle slots are failure modes, not a warranted metric panel. |
-| `sos_change_p1` | 9 | 10 | Rows, columns, citation matrix, and missing cells are explained and later visible in Figure 2. |
-| `sos_change_p2` | 9 | 10 | Global versus local coordination is fully covered by the original architecture placement. |
-| `sos_mechanism_p1` | 9 | 10 | The four stores are visible in Figure 2 at the next paragraph; no duplicate cards are introduced. |
-| `sos_mechanism_p2` | 10 | 3 | Figure 2 is the right source choice and desktop is complete, but the mobile `context-skills` composite is not faithful: it contains severed neighboring modules, clipped labels, and connector fragments between stacked sections. This is an arbitrary-looking slice, not a clean semantic reflow. |
-| `sos_mechanism_p3` | 10 | 10 | Figure 5 directly shows early, mid-run, and late interventions. Mobile uses the three complete paper-defined panels with axes, intervention lines, annotations, and entity plots intact. |
-| `sos_example_p1` | 9 | 10 | Missing-cell dispatch is a worked example of relationships already visible in Figure 2. |
-| `sos_example_p2` | 9 | 10 | Evidence acceptance and branch stopping reuse the preceding architecture/intervention visuals. |
-| `sos_evidence_p1` | 9 | 10 | Benchmark values are heterogeneous table/list metrics and correctly remain prose. |
-| `sos_evidence_p2` | 9 | 10 | The paired scheduler study is a small metric set without an implemented source figure. |
-| `sos_evidence_p3` | 9 | 10 | Joint skill removal does not isolate layers; a visual would imply unsupported attribution. |
-| `sos_limitations_p1` | 9 | 10 | Model, best-of-three, variance, and budget caveats are exact prose. |
-| `sos_limitations_p2` | 9 | 10 | Citation provenance versus truth is a conceptual boundary. |
-| `sos_limitations_p3` | 9 | 10 | Future-work categories do not warrant a roadmap visual. |
-| `sos_review_p1` | 9 | 10 | The synthesis is already covered by the two source figures. |
-| `sos_review_p2` | 9 | 10 | Component-level causal attribution is explicitly unavailable and should remain prose. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `REWORK_REQUIRED`
+- Paragraph coverage: `17 / 17`; every paragraph scored twice.
+- Mean score: `8.82 / 10`
+- Minimum score: `4 / 10`
+- Selected-media mix: `2 source asset, 0 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.12**. Implementation average: **9.59**. Combined average: **9.35**. Minimum: engineer **9**, implementation **3**.
+## Paragraph scores
 
-Finding: automated containment passes, desktop originals are complete, and Figure 5's mobile panels are sound. However, no-scroll containment is not enough for Figure 2: the very tall mobile composite visibly truncates module boundaries and labels while carrying unrelated fragments from adjacent regions. Provenance is present and image aspect ratios are preserved, but source fidelity/completeness fails for that mobile implementation. HTML/CSS-led share: **0/2 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `sos_why_p1` | 9/10 — Prose-only is appropriate for “A long-horizon research task requires more than issuing good queries. The system must remember which entities and attr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_why_p2` | 9/10 — Prose-only is appropriate for “Conventional agents often keep this state in growing conversation histories. As evidence becomes buried, workers can d”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_change_p1` | 9/10 — Prose-only is appropriate for “SearchOS converts a natural-language request into one or more related tables. Rows represent entities, columns represe”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_change_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_change_p2` | 9/10 — Prose-only is appropriate for “The system then separates global coordination from local search. An orchestrator owns schema and task mutation, explor”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_mechanism_p1` | 9/10 — Prose-only is appropriate for “Search-Oriented Context Management contains four linked stores. Frontier Task tracks dependency-aware work. The Eviden”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_mechanism_p2` | 8/10 — The original Figure 2 is the right evidence for context projection and shared SearchOS state, with locator, attribution, license, and crop modifications exposed. | 4/10 — FAIL: the 390 px source inspection shows a severed dashed neighbor above the SOCM crop and the right edge of Failure Memory is cut; the container itself does not scroll, but source content is clipped. |
+| `sos_mechanism_p3` | 9/10 — Middleware intervention trajectories has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_searchos_source_figures_2_5 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `sos_example_p1` | 9/10 — Prose-only is appropriate for “Suppose a comparison request has a known company row but no verified value for one attribute. The Coverage Map marks t”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_example_p2` | 9/10 — Prose-only is appropriate for “A page visit alone does not fill the cell. Evidence middleware must extract a candidate value, bind it to the correct ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_evidence_p1` | 9/10 — Prose-only is appropriate for “On WideSearch, SearchOS reports 80.3 item F1 and 56.5 row F1, compared with 76.0 and 54.5 for the strongest baseline o”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_evidence_p2` | 9/10 — Prose-only is appropriate for “A paired scheduling study on 10 WideSearch cases reports that continuous dispatch reduces average runtime from 629.13 ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_evidence_p3` | 9/10 — Prose-only is appropriate for “A joint removal of all hierarchical skill layers lowers item F1 from 80.3 to 78.3 and row F1 from 56.5 to 53.1. The sa”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_limitations_p1` | 9/10 — Prose-only is appropriate for “The main evaluation uses GLM-5 for agent roles, Qwen3.5-35B-A3B for evidence extraction, and reports the best of three”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_limitations_p2` | 9/10 — Prose-only is appropriate for “A URL and anchored excerpt preserve provenance but do not independently prove that the extracted value is true. Citati”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_limitations_p3` | 9/10 — Prose-only is appropriate for “The authors scope V1 to externalized search state and leave large-scale skill synthesis, broader domains, multimodal s”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_limitations_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_review_p1` | 9/10 — Prose-only is appropriate for “The paper provides bounded engineering evidence for making research state explicit. The schema, evidence gate, progres”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `sos_review_p2` | 9/10 — Prose-only is appropriate for “The main benchmark comparison evaluates the complete system, so it cannot assign the overall gain to middleware, cover”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after sos_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- `sos_mechanism_p2`: rebuild the SOCM mobile crop so the complete four-store region is present, with no dashed neighboring fragment and no cut right edge.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

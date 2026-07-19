@@ -1,24 +1,40 @@
-# Blind visual QA — LLM Evaluators across Languages — revision 13
+# Blind VISUAL_QA — LLM Evaluators are Biased across Languages
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `language_why_p1` | 9 | 10 | Pairwise accuracy versus absolute scoring is motivation; the later Figure 4 supplies the actual relation. |
-| `language_why_p2` | 9 | 10 | Language-dependent scoring consequences are clear prose before evidence is introduced. |
-| `language_change_p1` | 10 | 9 | Figure 1 directly shows score distributions across 23 languages for both evaluator families; mobile splits at the two paper-defined panels with all marks retained. |
-| `language_change_p2` | 10 | 9 | Figure 3 directly tests resource-level explanation; mobile retains complete axes, points, annotations, and script legend in the two model-family panels. |
-| `language_mechanism_p1` | 9 | 10 | Pairwise and threshold definitions are linear prose; no extra diagram is needed. |
-| `language_mechanism_p2` | 10 | 9 | Figure 4 is the exact accuracy-versus-acceptance relation; mobile uses complete paper-defined evaluator panels, though dense labels are merely adequate at phone width. |
-| `language_mechanism_p3` | 10 | 9 | Figure 5 directly contrasts language-level and item-level uncertainty relations; both complete paper panels and scales survive mobile splitting. |
-| `language_example_p1` | 9 | 10 | The same-preference/different-threshold example is a compact verbal counterexample. |
-| `language_example_p2` | 9 | 10 | The threshold consequence follows directly and needs no duplicate plot. |
-| `language_evidence_p1` | 9 | 10 | Reported score gaps are already embodied in the placed distribution figure. |
-| `language_evidence_p2` | 9 | 10 | Cross-model resource correlations are already shown by Figure 3; repetition would not add a job. |
-| `language_evidence_p3` | 9 | 10 | Uncertainty results are already shown by Figure 5. |
-| `language_limitations_p1` | 9 | 10 | Dataset and language-coverage caveats are categorical scope limits. |
-| `language_limitations_p2` | 9 | 10 | Score shifts and downstream preference are appropriately distinguished in prose. |
-| `language_review_p1` | 9 | 10 | The synthesis is supported by the four evidence-bearing source figures. |
-| `language_review_p2` | 9 | 10 | The bounded causal interpretation is a textual limitation. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `PASS`
+- Paragraph coverage: `16 / 16`; every paragraph scored twice.
+- Mean score: `9.00 / 10`
+- Minimum score: `9 / 10`
+- Selected-media mix: `4 source asset, 0 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.25**. Implementation average: **9.75**. Combined average: **9.50**. Minimum: engineer **9**, implementation **9**.
+## Paragraph scores
 
-All four desktop visuals use complete originals. Every mobile asset follows a paper-defined model or analysis panel, not an arbitrary slice; axes, reference lines, uncertainty marks, legends, and annotations are retained. Provenance and modifications are explicit, natural aspect ratios hold, and automated/rendered checks show no scrollbar or clipping. Density makes some phone labels only adequately legible, hence implementation 9. HTML/CSS-led share: **0/4 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `language_why_p1` | 9/10 — Prose-only is appropriate for “Pairwise accuracy asks whether an evaluator ranks a preferred response above a rejected one. If every score in one lan”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_why_p2` | 9/10 — Prose-only is appropriate for “Many real uses depend on absolute scores instead: a safety gate accepts content above a threshold, and reinforcement l”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_change_p1` | 9/10 — Scoring distributions differ by language has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep language_visual_source_figure_1 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `language_change_p2` | 9/10 — Resource level does not explain the full pattern has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep language_visual_source_figure_3 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `language_mechanism_p1` | 9/10 — Prose-only is appropriate for “Suppose an evaluator adds a language-conditioned baseline to every response score. Within one language, that shared of”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_mechanism_p2` | 9/10 — Pairwise accuracy and acceptance rate by language has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep language_visual_ranking_acceptance_graph inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `language_mechanism_p3` | 9/10 — Uncertainty and reward scores has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep language_visual_source_figures_5_7_mechanism inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `language_example_p1` | 9/10 — Prose-only is appropriate for “For Skywork-LLaMA-8B, the paper rounds English to 93% pairwise accuracy and 23% acceptance, and Ukrainian to 87% pairw”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_example_p2` | 9/10 — Prose-only is appropriate for “The paper also wraps Hindi Safety content in an English frame. An off-the-shelf language identifier labels 44% of thes”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_evidence_p1` | 9/10 — Prose-only is appropriate for “All eight core evaluators show statistically significant differences in mean scores across languages by one-way ANOVA.”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_evidence_p2` | 9/10 — Prose-only is appropriate for “Under one global median threshold, the aggregate reward-model analysis reports a maximum acceptance gap of 43.0 percen”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_evidence_p3` | 9/10 — Prose-only is appropriate for “Uncertainty measures correlate positively with score at the language level, but nested regressions retain significant ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_limitations_p1` | 9/10 — Prose-only is appropriate for “The data are translated benchmark items, not naturally authored multilingual conversations or culturally specific judg”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_limitations_p2` | 9/10 — Prose-only is appropriate for “The uncertainty-score association does not establish uncertainty as the cause of the shift. The safety consequences ar”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_review_p1` | 9/10 — Prose-only is appropriate for “The strongest result is a measurement warning: high pairwise accuracy does not certify that raw evaluator scores are c”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `language_review_p2` | 9/10 — Prose-only is appropriate for “Per-language centering is a useful diagnostic and partial mitigation, not a full solution. It requires language identi”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after language_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- No blocking visual finding. All selected visuals fit without scrolling or clipping, remain legible at both viewports, preserve aspect/source fidelity and provenance, and the prose-only decisions avoid unnecessary or forbidden visual forms.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

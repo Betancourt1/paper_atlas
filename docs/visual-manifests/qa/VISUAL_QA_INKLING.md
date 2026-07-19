@@ -1,27 +1,43 @@
-# Blind visual QA — Inkling — revision 13
+# Blind VISUAL_QA — Inkling: Reading the Model Card Across Checkpoints and Claims
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `ink_why_p1` | 9 | 10 | Intended-use breadth is a categorical list and would become forbidden cards. |
-| `ink_why_p2` | 9 | 10 | Provider positioning is one qualification, not a spatial relation. |
-| `ink_change_p1` | 9 | 10 | Sparse capacity is visualized at the mechanism paragraph where the routing numbers are explained. |
-| `ink_change_p2` | 9 | 10 | Effort control is a bounded product claim without source data sufficient for a new plot. |
-| `ink_mechanism_p1` | 10 | 10 | The partition/routing warrant is specific: 6 selected of 256, 250 inactive, 2 shared, recombining into a 41B active path. Mobile reflows all branches with legible labels. |
-| `ink_mechanism_p2` | 9 | 10 | Attention ratio and multimodal encoders lack a directly reusable figure and would invite an invented generic pipeline. |
-| `ink_mechanism_p3` | 9 | 10 | Training stages and disclosure boundary are prose facts, not a warranted chain. |
-| `ink_example_p1` | 9 | 10 | Hardware requirements are an item-plus-metric list and correctly remain prose. |
-| `ink_example_p2` | 9 | 10 | Quantization uncertainty is an absent comparison, so inventing a chart would overstate evidence. |
-| `ink_evidence_p1` | 9 | 10 | Cross-family vendor benchmarks lack a common scale; metric cards or bars would mislead. |
-| `ink_evidence_p2` | 9 | 10 | Harness qualifications are provenance prose. |
-| `ink_evidence_p3` | 9 | 10 | Effort sweep is described with checkpoint caveats; no current reusable source asset is claimed. |
-| `ink_limitations_p1` | 9 | 10 | Risk categories are not a relational visual. |
-| `ink_limitations_p2` | 9 | 10 | Context-capacity and quantization caveats are independent boundaries. |
-| `ink_limitations_p3` | 9 | 10 | Missing dataset disclosure is not positive visual evidence. |
-| `ink_limitations_p4` | 9 | 10 | Content-addressed provenance is textual and exact. |
-| `ink_review_p1` | 9 | 10 | The synthesis is already grounded by prose and the routing visual. |
-| `ink_review_p2` | 9 | 10 | Snapshot disagreements and hashes should remain searchable prose. |
-| `ink_review_p3` | 9 | 10 | License-versus-policy conditioning is legal provenance, not a diagram. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `PASS`
+- Paragraph coverage: `19 / 19`; every paragraph scored twice.
+- Mean score: `9.00 / 10`
+- Minimum score: `9 / 10`
+- Selected-media mix: `0 source asset, 1 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.05**. Implementation average: **10.00**. Combined average: **9.53**. Minimum: engineer **9**, implementation **10**.
+## Paragraph scores
 
-The custom SVG keeps the inactive branch distinct from the selected/shared recombination, avoiding a forbidden single chain. Desktop and mobile fit their viewBoxes, mobile labels render legibly, aspect ratio is preserved, and no internal/page scrollbar or clipping was found. HTML/CSS-led share: **0/1 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `ink_why_p1` | 9/10 — Prose-only is appropriate for “The release frames Inkling as a broad base model for customization rather than a model optimized to lead every benchma”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_why_p2` | 9/10 — Prose-only is appropriate for “That positioning matters because the provider explicitly says Inkling is not the strongest model overall. The proposed”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_change_p1` | 9/10 — Prose-only is appropriate for “Inkling combines a large sparse model with native text, image, and audio input and makes the weights available in orig”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_change_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_change_p2` | 9/10 — Prose-only is appropriate for “The release also exposes an effort control intended to trade generated tokens for performance. This is a product and t”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_mechanism_p1` | 9/10 — One token activates sparse routed capacity plus shared experts has a paragraph-specific complexity warrant and uses SVG evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_inkling_sparse_routing_field inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `ink_mechanism_p2` | 9/10 — Prose-only is appropriate for “The release says local and global attention layers are interleaved at a 5-to-1 ratio with 8 key-value heads. Images an”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_mechanism_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_mechanism_p3` | 9/10 — Prose-only is appropriate for “The provider reports pretraining on 45 trillion tokens across text, images, audio, and video, followed by synthetic su”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_mechanism_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_example_p1` | 9/10 — Prose-only is appropriate for “Start by choosing a checkpoint, not by reading the phrase open weights as a hardware promise. In the content-addressed”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_example_p2` | 9/10 — Prose-only is appropriate for “The quantized option reduces memory requirements, but the release does not identify the precision behind the main benc”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_evidence_p1` | 9/10 — Prose-only is appropriate for “In the content-addressed provider-page retrievals from 2026-07-18, the main benchmark table reports Inkling at effort ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_evidence_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_evidence_p2` | 9/10 — Prose-only is appropriate for “The release states that the benchmark runs use temperature 1.0 and that coding evaluations allow trajectories up to 25”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_evidence_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_evidence_p3` | 9/10 — Prose-only is appropriate for “The effort-sweep chart supports the narrower provider interpretation that performance can be traded against generated ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_limitations_p1` | 9/10 — Prose-only is appropriate for “The provider says Inkling can hallucinate, fail to follow instructions, degrade in long multi-turn conversations, repr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_limitations_p2` | 9/10 — Prose-only is appropriate for “The one-million-token statement describes supported capacity, not demonstrated accuracy throughout that window. Tinker”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_limitations_p3` | 9/10 — Prose-only is appropriate for “Training disclosure remains high level. The sources give broad categories and a 45-trillion-token release claim but no”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_limitations_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_limitations_p4` | 9/10 — Prose-only is appropriate for “The model card, release page, and Acceptable Use Policy remain mutable live pages, but the exact official HTML retriev”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_limitations_p4; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_review_p1` | 9/10 — Prose-only is appropriate for “The release supports a strong descriptive conclusion: Inkling is a very large sparse multimodal model with downloadabl”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_review_p2` | 9/10 — Prose-only is appropriate for “Source boundaries are part of the evidence. The content-addressed website snapshot and initial checkpoint cards disagr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `ink_review_p3` | 9/10 — Prose-only is appropriate for “The provider labels the model Apache 2.0, but its linked Model Acceptable Use Policy says that accessing or using the ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after ink_review_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- No blocking visual finding. All selected visuals fit without scrolling or clipping, remain legible at both viewports, preserve aspect/source fidelity and provenance, and the prose-only decisions avoid unnecessary or forbidden visual forms.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+

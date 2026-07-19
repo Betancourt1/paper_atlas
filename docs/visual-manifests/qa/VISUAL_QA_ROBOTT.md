@@ -1,24 +1,40 @@
-# Blind visual QA — RoboTTT — revision 13
+# Blind VISUAL_QA — RoboTTT: Context Scaling for Robot Policies
 
-| Paragraph | Engineer | Implementation | Paragraph-specific evidence |
-|---|---:|---:|---|
-| `rttt_why_p1` | 9 | 10 | Long-horizon memory need is motivation; a frame-history strip would be a stock chain. |
-| `rttt_why_p2` | 9 | 10 | Growing attention cost versus compact state is a bounded trade-off. |
-| `rttt_change_p1` | 9 | 10 | Fast-weight updating is shown in the later complete architecture figure. |
-| `rttt_change_p2` | 9 | 10 | Action forcing and TBPTT are fully shown at the training-state paragraph. |
-| `rttt_mechanism_p1` | 9 | 10 | Backbone and within/across-timestep roles are context for Figure 2, not a separate visual job. |
-| `rttt_mechanism_p2` | 10 | 10 | Original Figure 2 directly shows training and inference dependencies; desktop is complete and mobile splits at the paper-defined training/inference panels. |
-| `rttt_mechanism_p3` | 10 | 9 | Figure 4 directly shows TBPTT gradient stopping with fast-weight carry. Mobile separates the paper's input/TBPTT and fast-weight bands meaningfully, though the cross-band relation requires reading two images. |
-| `rttt_example_p1` | 9 | 10 | Human demonstration and masked action loss are a worked narrative, not a separate topology. |
-| `rttt_example_p2` | 9 | 10 | Reset, generic instruction, and 6/10 result are explicit prose. |
-| `rttt_evidence_p1` | 10 | 9 | Figure 7 directly compares all task groups. Desktop is complete; mobile retains the original legend and two paper-defined task-group crops with an axis strip, but separation modestly increases lookup cost. |
-| `rttt_evidence_p2` | 10 | 9 | Figure 8 directly shows context scaling. Desktop is complete; mobile uses meaningful overlapping x-ranges and duplicates the 1K point and original y-axis for continuity. |
-| `rttt_evidence_p3` | 9 | 10 | Perturbation and DAgger numbers would be an item-plus-metric list and correctly stay prose-only. |
-| `rttt_limitations_p1` | 9 | 10 | Costs, objective, backbone, setup, and task-family scope are categorical limitations. |
-| `rttt_limitations_p2` | 9 | 10 | Trial counts, missing intervals, and absent latency comparison should remain exact prose. |
-| `rttt_review_p1` | 9 | 10 | The mechanism/result synthesis is already covered by four originals. |
-| `rttt_review_p2` | 9 | 10 | Missing generalization and latency evidence is a prose boundary. |
+- Review basis: current explainer fixture, non-QA manifest, selected assets, renderer/CSS, and rendered desktop 1440 x 1000 plus mobile 390 x 844 behavior.
+- Verdict: `PASS`
+- Paragraph coverage: `16 / 16`; every paragraph scored twice.
+- Mean score: `9.00 / 10`
+- Minimum score: `9 / 10`
+- Selected-media mix: `4 source asset, 0 SVG, 0 HTML/CSS`; HTML/CSS share `0.0%`.
+- Global checks: no page-level or visual-container scrollbar at either viewport; selected custom visuals avoid all four forbidden stock structures; source assets expose locator, attribution, license, modifications, and equivalent text.
 
-Engineer average: **9.25**. Implementation average: **9.81**. Combined average: **9.53**. Minimum: engineer **9**, implementation **9**.
+## Paragraph scores
 
-All desktop figures are complete originals. Mobile crops use paper-defined training/inference, TBPTT/fast-weight, task-group, and x-range structures rather than arbitrary slices; axes, legends, and source pixels remain identifiable. Provenance and modification disclosure are complete. Natural aspect ratios hold and focused checks show no clipping or internal/page scrollbars. HTML/CSS-led share: **0/4 (0%)**.
+| Paragraph | Pass A — explanatory decision and evidence | Pass B — rendered fit, fidelity, accessibility, and provenance |
+|---|---|---|
+| `rttt_why_p1` | 9/10 — Prose-only is appropriate for “A robot acting for minutes must remember which stages it has completed, what actions failed, and what was previously v”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_why_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_why_p2` | 9/10 — Prose-only is appropriate for “Full attention over an ever-growing history makes each new prediction more expensive. A compact recurrent state avoids”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_why_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_change_p1` | 9/10 — Prose-only is appropriate for “RoboTTT does not keep the complete history available for attention. It uses fast weights as recurrent state: a small n”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_change_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_change_p2` | 9/10 — Prose-only is appropriate for “The paper combines this state mechanism with two training ideas. Sequence action forcing samples a different flow-matc”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_change_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_mechanism_p1` | 9/10 — Prose-only is appropriate for “RoboTTT is instantiated on GR00T N1.7. Its vision-language model encodes the current observation, and its Diffusion Tr”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_mechanism_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_mechanism_p2` | 9/10 — RoboTTT architecture and inference updates has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_robott_source_figure_2_mechanism inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `rttt_mechanism_p3` | 9/10 — Sequence training preserves inference-time state has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_robott_source_figures_2_4_mechanism inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `rttt_example_p1` | 9/10 — Prose-only is appropriate for “For the Circuit task, a human first assembles an unseen component configuration while the robot remains idle. The demo”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_example_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_example_p2` | 9/10 — Prose-only is appropriate for “After the scene is reset, the robot receives the same generic instruction used for every configuration. Its action los”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_example_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_evidence_p1` | 9/10 — Main task-completion results has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_robott_source_figure_7 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `rttt_evidence_p2` | 9/10 — Performance scales with pretraining context has a paragraph-specific complexity warrant and uses source asset evidence that answers this paragraph rather than a repeated card, one-axis panel series, item-plus-metric list, or interchangeable chain. | 9/10 — Desktop and 390 px rendering keep visual_robott_source_figure_8 inside its container with no internal or page-level scrollbar; labels remain readable, aspect ratio is preserved, and provenance/fallback fields remain visible. |
+| `rttt_evidence_p3` | 9/10 — Prose-only is appropriate for “RoboTTT recovers from roof and tire perturbations in 15 of 20 and 18 of 20 trials. GDN also reaches 18 of 20 on tire r”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_evidence_p3; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_limitations_p1` | 9/10 — Prose-only is appropriate for “The authors note that longer-context training costs more, the TTT objective is not designed specifically for robotics,”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_limitations_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_limitations_p2` | 9/10 — Prose-only is appropriate for “Trial counts are 20 per task, or 10 for the longest settings, without reported confidence intervals. The paper argues ”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_limitations_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_review_p1` | 9/10 — Prose-only is appropriate for “The mechanism is well matched to the problem: recurrent fast weights provide a fixed-size state, while the scaling cur”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_review_p1; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+| `rttt_review_p2` | 9/10 — Prose-only is appropriate for “The evidence is not yet a broad demonstration of robot-foundation-model scaling. A second backbone, different embodime”: the paragraph states a bounded claim and does not require readers to reconstruct a multivariate relationship. | 9/10 — No visual is emitted after rttt_review_p2; this avoids inventing a forbidden stock structure and creates no visual clipping, source-fidelity, provenance, or scrollbar risk. |
+
+## Findings
+
+- No blocking visual finding. All selected visuals fit without scrolling or clipping, remain legible at both viewports, preserve aspect/source fidelity and provenance, and the prose-only decisions avoid unnecessary or forbidden visual forms.
+
+## Focused verification
+
+- `pnpm --filter @paper-atlas/web test:visual`: PASS, 6 tests across desktop and mobile Chromium.
+- Direct source-pixel inspection was used in addition to DOM overflow assertions; a non-scrolling container was not treated as proof that crop content was complete.
+
