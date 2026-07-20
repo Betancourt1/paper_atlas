@@ -96,7 +96,13 @@ test("paper navigation, theme, and repository link work across viewports", async
     await page.keyboard.press("Enter");
     await expect(page).toHaveURL(/#claim-ledger$/);
     await expect(claimLedgerMarker).toHaveAttribute("aria-current", "location");
-    await expect(page.getByRole("heading", { name: "Claim ledger" })).toBeVisible();
+    await expect
+      .poll(() =>
+        page
+          .locator("#claim-ledger")
+          .evaluate((element) => Math.abs(element.getBoundingClientRect().top)),
+      )
+      .toBeLessThan(40);
 
     await page.locator("#short-version").evaluate((element) => {
       element.scrollIntoView({ block: "start" });

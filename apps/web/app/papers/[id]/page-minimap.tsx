@@ -23,13 +23,15 @@ export function PageMinimap({ items }: { items: PageMinimapItem[] }) {
           queueMicrotask(() => setActiveId(currentId));
         }
       }}
-      onClickEach={(event, scrollToSection) => {
+      onClickEach={(event) => {
         const nextId = event.currentTarget.hash.slice(1);
-        if (nextId) {
-          setActiveId(nextId);
-          window.history.pushState(null, "", `#${nextId}`);
+        const target = document.getElementById(nextId);
+        if (!nextId || !target) {
+          return;
         }
-        scrollToSection();
+        setActiveId(nextId);
+        window.history.pushState(null, "", `#${nextId}`);
+        target.scrollIntoView({ behavior: "auto", block: "start" });
       }}
     >
       <nav className="page-minimap" aria-label="Document minimap">

@@ -40,6 +40,9 @@
    full page and focused rail in combined reference/implementation images.
 3. Verified exact marker geometry, keyboard behavior, desktop sticky behavior,
    and the mobile hidden state in Playwright.
+4. Production QA exposed a third-party scroll-container misclassification. The
+   click handler now uses native `scrollIntoView`, and the regression asserts
+   the selected section reaches the viewport origin.
 
 ## Final result
 
