@@ -43,6 +43,9 @@ importers:
       react-dom:
         specifier: 19.2.7
         version: 19.2.7(react@19.2.7)
+      react-scrollspy-navigation:
+        specifier: 2.1.1
+        version: 2.1.1
     devDependencies:
       '@playwright/test':
         specifier: 1.61.1
@@ -1939,6 +1942,9 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-scrollspy-navigation@2.1.1:
+    resolution: {integrity: sha512-f/WQMkjda8BAFk96pt4phTVzd8+Ms65wLAPHn/3NSbAzWXb0zdsqtQ81vxhuZ3pZlS/GJCxNcujzzD4/nOukKQ==}
 
   react@19.2.7:
     resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
@@ -4211,6 +4217,8 @@ snapshots:
       scheduler: 0.27.0
 
   react-is@16.13.1: {}
+
+  react-scrollspy-navigation@2.1.1: {}
 
   react@19.2.7: {}
 

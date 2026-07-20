@@ -57,21 +57,95 @@ const revision18MobileAssets: Record<string, Array<[string, number, number]>> = 
 test("paper navigation, theme, and repository link work across viewports", async ({ page }) => {
   await page.goto("/papers/paper_trace");
 
-  const pageIndex = page.getByRole("navigation", { name: "On this page" });
-  await expect(pageIndex).toBeVisible();
-  await expect(
-    pageIndex.getByRole("link", { name: "Short version" }),
-  ).toBeVisible();
-  await expect(
-    pageIndex.getByRole("link", { name: "Claim ledger" }),
-  ).toBeVisible();
+  const minimap = page.locator('nav[aria-label="Document minimap"]');
+  const markers = minimap.locator("a");
+  const markerLabels = [
+    "Short version",
+    "Why it exists",
+    "What changes",
+    "How it works",
+    "Worked example",
+    "Evidence",
+    "Limitations",
+    "Critical review",
+    "Claim ledger",
+    "Glossary",
+    "Sources",
+  ];
 
-  await pageIndex.getByRole("link", { name: "Claim ledger" }).click();
-  await expect(page).toHaveURL(/#claim-ledger$/);
-  await expect(page.getByRole("heading", { name: "Claim ledger" })).toBeVisible();
+  await expect(page.getByText("On this page", { exact: true })).toHaveCount(0);
+  await expect(markers).toHaveCount(markerLabels.length);
+  for (const label of markerLabels) {
+    const marker = minimap.locator(`a[aria-label="${label}"]`);
+    await expect(marker).toHaveAttribute("title", label);
+  }
 
-  const mobile = page.viewportSize()!.width < 1000;
-  await expect(pageIndex).toHaveCSS("position", mobile ? "static" : "sticky");
+  const mobile = page.viewportSize()!.width <= 720;
+  if (mobile) {
+    await expect(minimap).toBeHidden();
+  } else {
+    await expect(minimap).toBeVisible();
+    await expect(minimap).toHaveCSS("position", "sticky");
+    await expect(
+      minimap.getByRole("link", { name: "Short version" }),
+    ).toHaveAttribute("aria-current", "location");
+
+    const claimLedgerMarker = minimap.getByRole("link", { name: "Claim ledger" });
+    await claimLedgerMarker.focus();
+    await expect(claimLedgerMarker).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/#claim-ledger$/);
+    await expect(claimLedgerMarker).toHaveAttribute("aria-current", "location");
+    await expect(page.getByRole("heading", { name: "Claim ledger" })).toBeVisible();
+
+    await page.locator("#short-version").evaluate((element) => {
+      element.scrollIntoView({ block: "start" });
+    });
+    await expect(
+      minimap.getByRole("link", { name: "Short version" }),
+    ).toHaveAttribute("aria-current", "location");
+    await expect.poll(() =>
+      minimap
+        .getByRole("link", { name: "Short version" })
+        .evaluate((element) => getComputedStyle(element, "::after").width),
+    ).toBe("56px");
+
+    const geometry = await minimap.evaluate((element) => {
+      const nav = element as HTMLElement;
+      const layout = nav.closest(".paper-explainer__layout") as HTMLElement;
+      const navRect = nav.getBoundingClientRect();
+      const layoutRect = layout.getBoundingClientRect();
+      const styles = getComputedStyle(nav);
+      const links = [...nav.querySelectorAll<HTMLAnchorElement>("a")];
+      const markerWidth = (label: string) => {
+        const link = links.find((candidate) => candidate.title === label)!;
+        return getComputedStyle(link, "::after").width;
+      };
+      return {
+        background: styles.backgroundColor,
+        border: styles.borderTopWidth,
+        height: navRect.height,
+        linkHeight: links[0].getBoundingClientRect().height,
+        rightInset: layoutRect.right - navRect.right,
+        sectionWidth: markerWidth("Why it exists"),
+        primaryWidth: markerWidth("Sources"),
+        activeWidth: markerWidth("Short version"),
+        width: navRect.width,
+      };
+    });
+    expect(geometry).toEqual({
+      background: "rgba(0, 0, 0, 0)",
+      border: "0px",
+      height: markerLabels.length * 24,
+      linkHeight: 24,
+      rightInset: 0,
+      sectionWidth: "16px",
+      primaryWidth: "28px",
+      activeWidth: "56px",
+      width: 72,
+    });
+  }
+
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,

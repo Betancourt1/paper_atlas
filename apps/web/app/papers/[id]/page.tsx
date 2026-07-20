@@ -16,6 +16,10 @@ import {
   listPapers,
 } from "../../../lib/papers";
 import { ExplainerVisual } from "./explainer-visual";
+import {
+  PageMinimap,
+  type PageMinimapItem,
+} from "./page-minimap";
 
 type PaperPageProps = {
   params: Promise<{ id: string }>;
@@ -81,6 +85,17 @@ export default async function PaperPage({ params }: PaperPageProps) {
       visual,
     ]);
   }
+  const minimapItems: PageMinimapItem[] = [
+    { id: "short-version", label: "Short version", tier: "primary" },
+    ...explainer.blocks.map((block) => ({
+      id: block.id,
+      label: blockLabels[block.type],
+      tier: "section" as const,
+    })),
+    { id: "claim-ledger", label: "Claim ledger", tier: "primary" },
+    { id: "glossary", label: "Glossary", tier: "primary" },
+    { id: "references", label: "Sources", tier: "primary" },
+  ];
 
   return (
     <main id="main-content" className="paper-page">
@@ -88,7 +103,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
         <PaperHeader paper={paper} explainer={explainer} />
 
         <div className="paper-explainer__layout">
-          <ExplainerPageIndex explainer={explainer} />
+          <PageMinimap items={minimapItems} />
 
           <div className="paper-explainer__content">
             <nav className="reading-guide" aria-labelledby="reading-guide-title">
@@ -147,33 +162,6 @@ export default async function PaperPage({ params }: PaperPageProps) {
         </div>
       </article>
     </main>
-  );
-}
-
-function ExplainerPageIndex({ explainer }: { explainer: ExplainerDocument }) {
-  return (
-    <nav className="explainer-page-index" aria-labelledby="page-index-title">
-      <p id="page-index-title">On this page</p>
-      <ol>
-        <li>
-          <a href="#short-version">Short version</a>
-        </li>
-        {explainer.blocks.map((block) => (
-          <li key={block.id}>
-            <a href={`#${block.id}`}>{blockLabels[block.type]}</a>
-          </li>
-        ))}
-        <li>
-          <a href="#claim-ledger">Claim ledger</a>
-        </li>
-        <li>
-          <a href="#glossary">Glossary</a>
-        </li>
-        <li>
-          <a href="#references">Sources</a>
-        </li>
-      </ol>
-    </nav>
   );
 }
 

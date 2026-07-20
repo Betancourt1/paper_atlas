@@ -324,8 +324,8 @@ summary:focus-visible {
 
 .paper-explainer__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 240px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 16px;
   align-items: start;
   margin-top: 72px;
 }
@@ -336,53 +336,55 @@ summary:focus-visible {
   grid-row: 1;
 }
 
-.explainer-page-index {
+.page-minimap {
   position: sticky;
   top: 24px;
   grid-column: 2;
   grid-row: 1;
-  max-height: calc(100vh - 48px);
-  padding: 20px;
-  overflow-y: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-subtle);
+  width: 72px;
+  justify-self: end;
 }
 
-.explainer-page-index > p {
-  margin: 0;
-  color: var(--ink-muted);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.explainer-page-index ol {
+.page-minimap ol {
   display: grid;
-  gap: 2px;
-  margin: 14px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.explainer-page-index a {
+.page-minimap__marker {
   display: flex;
   align-items: center;
-  min-height: 40px;
-  padding: 8px 10px;
-  border-radius: 4px;
-  color: var(--ink);
-  font-size: 0.875rem;
-  line-height: 1.25;
+  justify-content: flex-end;
+  width: 72px;
+  height: 24px;
   text-decoration: none;
+}
+
+.page-minimap__marker::after {
+  width: 16px;
+  height: 2px;
+  background: var(--line-strong);
+  content: "";
   transition-duration: 160ms;
-  transition-property: background-color, color;
+  transition-property: width, background-color;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-.explainer-page-index a:hover {
-  background: var(--surface);
+.page-minimap__marker--primary::after {
+  width: 28px;
+}
+
+.page-minimap__marker:hover::after,
+.page-minimap__marker:focus-visible::after {
+  width: 44px;
+  background: var(--ink-muted);
+}
+
+.page-minimap__marker.is-active::after,
+.page-minimap__marker[aria-current="location"]::after {
+  width: 56px;
+  background: var(--ink);
 }
 
 .paper-metadata {
@@ -1085,33 +1087,6 @@ summary:focus-visible {
 }
 
 @media (max-width: 1000px) {
-  .paper-explainer__layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
-  }
-
-  .paper-explainer__content {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .explainer-page-index {
-    position: static;
-    grid-column: 1;
-    grid-row: 1;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .explainer-page-index ol {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px 16px;
-  }
-
-  .explainer-page-index a {
-    min-height: 44px;
-  }
-
   .reading-guide ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1190,16 +1165,13 @@ summary:focus-visible {
   }
 
   .paper-explainer__layout {
-    gap: 38px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
     margin-top: 52px;
   }
 
-  .explainer-page-index {
-    padding: 18px;
-  }
-
-  .explainer-page-index ol {
-    grid-template-columns: 1fr;
+  .page-minimap {
+    display: none;
   }
 
   .paper-explainer__header {
@@ -1371,7 +1343,7 @@ summary:focus-visible {
 
   .theme-toggle,
   .theme-toggle__icon,
-  .explainer-page-index a {
+  .page-minimap__marker::after {
     transition-duration: 0.01ms !important;
   }
 }
